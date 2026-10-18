@@ -2,7 +2,7 @@
 
 **Date:** 2026-10-19 (Asia/Shanghai)
 **Decision:** **GO for human review of the M1-P0 protocol only. NO-GO for real M1-P0/P1 execution or M2.**
-**Topic branch:** `codex/m1-r-runtime`; final pushed commit SHA to be recorded after publishing this evidence package.
+**Topic branch:** `codex/m1-r-runtime`; M1-R implementation commit: `e46523cf1f2e9442eaaa7d890691db66506391ec`. The pushed branch also contains the final evidence-package update.
 
 ## Gate-by-gate decision
 

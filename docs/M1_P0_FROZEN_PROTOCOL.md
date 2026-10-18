@@ -1,7 +1,7 @@
 # M1-P0 Frozen Protocol — Review Candidate Only
 
 **Protocol version:** `m1-p0-frozen-v1`
-**Implementation:** M1-R offline runtime at commit to be recorded in the M1-R evidence package.
+**Implementation commit:** `e46523cf1f2e9442eaaa7d890691db66506391ec` (offline M1-R runtime and frozen artifacts).
 **Execution status:** **NO-GO** until a separate user approval fixes the model/version, runtime, real-model sampling/context settings, and call/cost budget. No real-model call has been made or is enabled by the shipped CLI.
 
 ## Freeze boundary

@@ -8,7 +8,7 @@
 - Accepted M0.1 source base: `516232de54e129fd818a3a4d82e128ca23fa4b3a`.
 - Inspected `origin/main` at `190ea3cb4e5803bea3fede9a0eddbf8e4d57fe51`; M1-R starts from the accepted M0.1 branch commit, which is ahead of that base.
 - Environment: Python 3.12.4, pytest 9.1.1, Windows 11 build 10.0.26200, AMD64; project runtime uses the Python standard library. Saved environment file: [`environment.txt`](../runs/m1_r/evidence/environment.txt).
-- The generated run manifest records source snapshot SHA256 `7585c760c95d1e3730786c5a76039208f5af14e40009f9fc49530367807e5dda`; source files and individual digests are in `runs/m1_r/mock-canary-final/manifest.json`. The manifest records base commit `516232d…` and a dirty worktree because the runtime was under review when run artifacts were generated. The final topic-branch commit is recorded in the M1-R decision after commit/push.
+- The generated run manifest records source snapshot SHA256 `7585c760c95d1e3730786c5a76039208f5af14e40009f9fc49530367807e5dda`; source files and individual digests are in `runs/m1_r/mock-canary-final/manifest.json`. The manifest records base commit `516232d…` and a dirty worktree because the runtime was under review when run artifacts were generated. The exact source/config/prompt/test snapshot was committed as `e46523cf1f2e9442eaaa7d890691db66506391ec`; the pushed topic branch includes this commit and the evidence-package update.
 
 ## Executed checks
 
