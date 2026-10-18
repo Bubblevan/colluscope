@@ -75,9 +75,24 @@ The malformed ballot is recorded both as an unsealed B action with its exact req
 
 ## Reproduction
 
-From the repository root in PowerShell:
+Run these commands from a checkout of the `codex/m1-r-runtime` topic branch. The `main` checkout at M0.1 commit `190ea3c` has only the `m0` and `verify` CLI commands, so `m1r` is not available there. In this workspace, enter the independent M1-R checkout with:
 
 ```powershell
+Set-Location D:\MyLab\colluscope\reference\m01-independent
+```
+
+For a fresh checkout instead:
+
+```powershell
+git clone --branch codex/m1-r-runtime https://github.com/Bubblevan/colluscope.git colluscope-m1-r
+Set-Location .\colluscope-m1-r
+```
+
+Confirm the branch and repository root before running the commands:
+
+```powershell
+git branch --show-current
+git rev-parse --show-toplevel
 $env:PYTHONPATH = 'src'
 python -m pytest -q
 python -m colluscope m1r --config configs/m1-r-offline.toml --out runs/m1_r/reproduction-run
