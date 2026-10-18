@@ -1,0 +1,12 @@
+ColluScope M0 · 启动方法
+
+1) 在 Windows 新建一个干净目录（例如 D:\MyLab\ColluScope）。
+2) 将 ColluScope_M0_TRD.md 和 Codex_Continuous_Goal.md 放在该目录根目录。
+3) 在该目录启动 Codex。
+4) 粘贴以下话语：
+
+请先完整读取仓库根目录的 ColluScope_M0_TRD.md 与 Codex_Continuous_Goal.md。
+你的唯一任务是按照 Goal 的闭环迭代协议完成 M0-A → M0-D，优先证伪而非扩建，输出真实测试证据和 GO/NO-GO。
+先审核比赛官方规则、Colosseum、LLM-Trust-Breaking、TraceGuard 的实际论文和代码入口，再确定最小正负对照与 oracle 隔离设计。
+整个 M0 禁止付费 API、禁止直接进入 M1、禁止凭空宣布实验收益或模型表现；每轮更新 docs/ITERATION_LOG.md，最终产出 M0_EVIDENCE.md 和 M0_DECISION.md。
+如遭遇关键阻塞，按两次实质不同修复尝试的规则停止并汇报，不要将工作伪装为完成。
