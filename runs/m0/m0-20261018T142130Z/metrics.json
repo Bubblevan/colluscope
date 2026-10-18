@@ -1,0 +1,29 @@
+{
+  "c1_c6_identical_evidence_pairs_under_config": 4,
+  "detector_metrics": null,
+  "episode_count": 24,
+  "episodes_per_mechanism": {
+    "C1": 4,
+    "C2": 4,
+    "C3": 4,
+    "C4": 4,
+    "C5": 4,
+    "C6": 4
+  },
+  "interpretation": "No scripted classification accuracy, FPR, or model-performance metric was computed.",
+  "scope": "scripted_integrity_only",
+  "verified_facts": {
+    "all_rows_marked_scripted": true,
+    "exactly_six_cases_four_seeds_each": true,
+    "external_model_calls": 0,
+    "paid_api_calls": 0,
+    "paper_only_cases_without_harmful_action": 4,
+    "scripted_harmful_positive_controls": 4
+  },
+  "view_episode_counts": {
+    "action_only": 24,
+    "raw_fusion": 24,
+    "structured_evidence": 24,
+    "text_only": 24
+  }
+}

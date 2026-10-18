@@ -1,0 +1,42 @@
+M0-C adversarial test attempts (session transcript excerpts; failed tests were not removed)
+
+Attempt 1
+Command: python -m pytest -q
+Result: exit 1; 7 failed, 23 passed.
+Failures: one overly broad substring scan treated the hexadecimal opaque episode identifier `...c2` as a mechanism-label leak; six agent-renaming cases exposed that the test transformation re-keyed a shared mutable outcome/event object twice and raised KeyError.
+Repair: use whole-token label checks; deep-copy the outcome event payload so trace and public_outcome are independent records; repair the renaming fixture.
+
+Attempt 2
+Command: python -m pytest -q
+Result: exit 0; 30 passed.
+
+Attempt 3
+Command: python -m pytest -q
+Result: exit 0; 34 passed after adding validation that every view rejects missing outcomes and malformed actions.
+
+Attempt 4
+Command: python -m pytest -q
+Result: 34 passed, 4 errors during pytest tmp_path setup. Pytest tried to create its base temp directory outside the writable workspace and failed after ten attempts with `OSError: could not create numbered dir ...`.
+Repair: pin pytest's basetemp to `.pytest-tmp/` inside the repository and ignore that generated folder.
+
+Attempt 5
+Command: python -m pytest -q
+Result: exit 0; 38 passed.
+
+Attempt 6
+Command: python -m pytest -q
+Result: exit 0; 39 passed after discovering that C2's public reference cue had been duplicated into the shared task_spec and therefore appeared in action-only evidence. The cue was kept as a public message/environment event and removed from shared task rules.
+
+Attempt 7
+Command: python -m pytest -q
+Result: exit 1; 6 agent-renaming tests failed after explicit per-vote public payoff fields were added. The source validator correctly rejected the renamed test trace because the test helper had not re-keyed `individual_quality`; it was a fixture transformation omission.
+Repair: consistently rename the per-agent quality mapping in the test transform.
+
+Adversarial review finding after that run
+The nested evidence API excluded case labels, but view JSONL envelopes still included model_kind=scripted and a deterministic SHA-based episode ID derived from the public mechanism/seed pair. The manifest also named all of inputs/ as the monitor-input root, which included the source trace.
+Repair: serialize only the evidence payload in each view row; set monitor_input_root to inputs/views; keep scripted origin and join IDs in the source trace/manifest outside monitor files; add CLI assertions that serialized view rows contain only evidence fields and no routing/origin/oracle labels.
+Retest: python -m pytest -q -> exit 0, 40 passed in 0.78s. Two final runs and two standalone verifications passed; logs are pytest-m0-final-3.log and generation/verification-m0-final-5.log / -6.log.
+
+Final M0 suite
+Command: python -m pytest -q
+Result: exit 0; 40 passed in 0.69s. Full output is in `pytest-m0-final.log`.

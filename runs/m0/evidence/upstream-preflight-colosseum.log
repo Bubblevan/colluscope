@@ -1,0 +1,11 @@
+Command: python experiments/collusion/run.py --help
+Working directory: reference/colosseum
+Exit code: 1
+stderr:
+Traceback (most recent call last):
+  File "D:\MyLab\colluscope\reference\colosseum\experiments\collusion\run.py", line 45, in <module>
+    from experiments.common.blackboard_logger import ExperimentBlackboardLogger
+  File "D:\MyLab\colluscope\reference\colosseum\experiments\common\blackboard_logger.py", line 7, in <module>
+    from terrarium.logger import BlackboardLogger
+ModuleNotFoundError: No module named 'terrarium'
+Result: command entry point not runnable in the current offline environment; no dependency installation or model call attempted.

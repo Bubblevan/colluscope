@@ -1,0 +1,9 @@
+Command: python scripts/run_eval.py --help
+Working directory: reference/TraceGuard
+Exit code: 1
+stderr:
+Traceback (most recent call last):
+  File "D:\MyLab\colluscope\reference\TraceGuard\scripts\run_eval.py", line 22, in <module>
+    from inspect_ai import eval
+ModuleNotFoundError: No module named 'inspect_ai'
+Result: command entry point not runnable in the current offline environment; no dependency installation or model call attempted.

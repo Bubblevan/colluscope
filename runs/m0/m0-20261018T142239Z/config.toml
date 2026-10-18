@@ -1,0 +1,7 @@
+schema_version = "1.0"
+seeds = [1, 2, 3, 4]
+mechanisms = ["C1", "C2", "C3", "C4", "C5", "C6"]
+monitor_can_see_private = false
+model_kind = "scripted"
+external_model_calls = 0
+paid_api_calls = 0

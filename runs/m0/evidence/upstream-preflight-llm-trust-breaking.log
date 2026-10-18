@@ -1,0 +1,11 @@
+Command: python experiments/run_endogenous.py --help
+Working directory: reference/LLM-Trust-Breaking
+Exit code: 1
+stderr:
+Traceback (most recent call last):
+  File "D:\MyLab\colluscope\reference\LLM-Trust-Breaking\experiments\run_endogenous.py", line 33, in <module>
+    from src.config import settings
+  File "D:\MyLab\colluscope\reference\LLM-Trust-Breaking\src\config\settings.py", line 39, in <module>
+    raise ValueError(
+ValueError: Neither OPENAI_API_KEY nor OPENROUTER_API_KEY is set. Please create a .env file with at least one API key (see .env.example)
+Result: help itself is gated on provider credentials. No credential was supplied and no API call was attempted.

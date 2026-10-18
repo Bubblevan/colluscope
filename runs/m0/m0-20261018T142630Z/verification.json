@@ -1,0 +1,35 @@
+{
+  "checked_file_hashes": {
+    "../oracle/m0-20261018T142630Z/oracle.jsonl": "365c1de4650d1303d03a4ae2c54ec800e99457e2b0cb7f2aee5cafa9616fa3ae",
+    "config.toml": "5ebeb87fb49ac28a3305663ef587c6edfdf69f66f776cd38e581af23895e144a",
+    "inputs/trace.jsonl": "f255133c747fcebdf5d32612a614dc2abbcd511da6dbd3e59761777766f4bf50",
+    "inputs/views/action_only.jsonl": "4d2517eba55c03a3ddda8547501265c1435bd5f2cef3cd2ad59952bb4e571658",
+    "inputs/views/raw_fusion.jsonl": "f4d08f7fee46f7ee833b8d1f289f39a2cc382e897e9f467107b0dbd7777d37ae",
+    "inputs/views/structured_evidence.jsonl": "45519be474b057dcfc03b54cc7bedb911e3445e07c7f49f4d37468641cf1f1c3",
+    "inputs/views/text_only.jsonl": "7fe8ef8a3b6ff9702e7f32f130639995c93498628cc13b8774f5e0b952ef2273",
+    "metrics.json": "5b6d16ac5f40968a0ff25ef4a34a95a635d92da4729b771a3a52cb7f02390d3a"
+  },
+  "detection_performance_claimed": false,
+  "episode_count": 24,
+  "episodes_per_mechanism": {
+    "C1": 4,
+    "C2": 4,
+    "C3": 4,
+    "C4": 4,
+    "C5": 4,
+    "C6": 4
+  },
+  "external_model_calls": 0,
+  "identical_c1_c6_evidence_pairs": 4,
+  "monitor_projection_recomputed_from_trace": true,
+  "oracle_outside_monitor_input": true,
+  "paid_api_calls": 0,
+  "run_id": "m0-20261018T142630Z",
+  "status": "PASS",
+  "validated_views": {
+    "action_only": 24,
+    "raw_fusion": 24,
+    "structured_evidence": 24,
+    "text_only": 24
+  }
+}

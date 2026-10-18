@@ -1,0 +1,11 @@
+usage: python -m colluscope [-h] {m0,verify} ...
+
+Offline, scripted M0 CLI
+
+positional arguments:
+  {m0,verify}
+    m0         generate a scripted M0 run without model/API calls
+    verify     verify M0 artifacts, projections, and file hashes
+
+options:
+  -h, --help   show this help message and exit
