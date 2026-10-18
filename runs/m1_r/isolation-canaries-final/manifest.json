@@ -1,0 +1,46 @@
+{
+  "cases": [
+    "chat_routing_voluntary_disclosure_auditor_allowed",
+    "chat_routing_voluntary_disclosure_public_only",
+    "no_chat_isolation",
+    "invalid_duplicate_task_ballot",
+    "persistent_timeout_preserved",
+    "sent_message_not_delivered_after_incomplete_pair",
+    "one_bounded_transient_retry",
+    "synthetic_target_reward_arithmetic",
+    "public_incentive_is_task_rule_not_collusion_label",
+    "zero_budget_rejects_without_call"
+  ],
+  "external_model_calls": 0,
+  "git": {
+    "commit": "516232de54e129fd818a3a4d82e128ca23fa4b3a",
+    "working_tree_clean": false
+  },
+  "paid_api_calls": 0,
+  "platform": "Windows-11-10.0.26200-SP0",
+  "purpose": "offline_adversarial_runtime_canaries",
+  "python_version": "3.12.4",
+  "schema_version": "1.0",
+  "sha256": {
+    "canary_cases.jsonl": "f80f6d1a947edf438776795b67102ae335a00be8aa48cf441fede575c3cf8cd5",
+    "summary.jsonl": "226da2272ed8ac789ad712718cc01019b3cd893044a2df156f0dd5e0daf2873f"
+  },
+  "source_snapshot": {
+    "files": {
+      "configs/m1-pilot-draft.toml": "856691bee335b3890b171ce4d5e74fe327570b22e67140e7dafee329815d5e82",
+      "configs/m1-r-offline.toml": "57178d86457ccc77c5db775c843a225ecc785e4c3c21a3bd3ee94a464c6a4948",
+      "prompts/m1-p0/ballot.schema.json": "0bb4b7e14beda8b88fd955148f4bd485f922ab2fb329c9ad1e7ce38b9339c406",
+      "prompts/m1-p0/ballot.txt": "e90e7af9e5d69920b40d9a6963ba962ba5bf87be87b7a02caf2d84e08138691f",
+      "prompts/m1-p0/communication.schema.json": "8c0c6744aa14c7e12578183782120949e3d65242d15ba6edf8b76a223d51b63f",
+      "prompts/m1-p0/message.txt": "cbaee84de5002352e634a458bdb8bd6b183e1862d91e1a153fcaeac1a1d10e32",
+      "prompts/m1-p0/system.txt": "6dc1d0daaf2625e0f326f20ac854c190bc748e71ed8401b330dc79e90e86cf70",
+      "pyproject.toml": "1c1ec44fcda8df79a4227de1940bc539fb88f5e688ddc5babe572ed4514c577d",
+      "src/colluscope/cli.py": "f2a0e015568970a58433c5da2ca6c599b4b0ac7fe4ee3f3e1767b31d4c9f9b19",
+      "src/colluscope/m1_runtime.py": "60d56dd1e635d6f780ad4469dcadf8113c8f0b60d1288c92d8cf2842e7f745fd",
+      "src/colluscope/views.py": "e2585f4ae395818c03299909ed3a576893e1719d506a4292e835175ca5d161a7",
+      "src/colluscope/world.py": "7810c50b588d3851b1c92695a447691ecfa1ab2dde09cfc8aa82a534a7b49e28",
+      "tests/test_m1_runtime.py": "ba1d9006299aa266e3331ca4109da2711879251455c386a08bbe14026c839e16"
+    },
+    "sha256": "7585c760c95d1e3730786c5a76039208f5af14e40009f9fc49530367807e5dda"
+  }
+}

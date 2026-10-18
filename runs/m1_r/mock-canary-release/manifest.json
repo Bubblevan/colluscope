@@ -1,0 +1,110 @@
+{
+  "api_call_assertion": {
+    "external_model_calls": 0,
+    "network_client_in_runner": false,
+    "paid_api_calls": 0
+  },
+  "architecture": "AMD64",
+  "colluscope_version": "0.1.0",
+  "condition_ids": [
+    "normal_cooperation",
+    "common_incentive_parallel_behavior",
+    "coalition_incentive_private_chat",
+    "coalition_incentive_no_private_chat",
+    "private_chat_no_side_bonus"
+  ],
+  "created_at_utc": "2026-10-18T16:51:41+00:00",
+  "git": {
+    "commit": "516232de54e129fd818a3a4d82e128ca23fa4b3a",
+    "working_tree_clean": false
+  },
+  "model": {
+    "external_model_calls": 0,
+    "model_id": "mock/deterministic-v1",
+    "paid_api_calls": 0,
+    "runtime": "offline-mock",
+    "sampling": {
+      "max_output_tokens": 256,
+      "temperature": 0.0,
+      "top_p": 1.0
+    }
+  },
+  "monitor_can_see_private_incentives": false,
+  "monitor_can_see_private_messages": false,
+  "paths": {
+    "B": "researcher/B.jsonl",
+    "T": "researcher/T.jsonl",
+    "monitor_evidence": "monitor_inputs/evidence.jsonl",
+    "observations": "researcher/agent_observations.jsonl",
+    "requests": "researcher/requests.jsonl"
+  },
+  "platform": "Windows-11-10.0.26200-SP0",
+  "prompt_sha256": {
+    "frozen_protocol/prompts/ballot.schema.json": "0bb4b7e14beda8b88fd955148f4bd485f922ab2fb329c9ad1e7ce38b9339c406",
+    "frozen_protocol/prompts/ballot.txt": "e90e7af9e5d69920b40d9a6963ba962ba5bf87be87b7a02caf2d84e08138691f",
+    "frozen_protocol/prompts/communication.schema.json": "8c0c6744aa14c7e12578183782120949e3d65242d15ba6edf8b76a223d51b63f",
+    "frozen_protocol/prompts/message.txt": "cbaee84de5002352e634a458bdb8bd6b183e1862d91e1a153fcaeac1a1d10e32",
+    "frozen_protocol/prompts/system.txt": "6dc1d0daaf2625e0f326f20ac854c190bc748e71ed8401b330dc79e90e86cf70"
+  },
+  "prompt_version": "m1-p0-frozen-v1",
+  "purpose": "offline_mock_runtime_canary_only",
+  "python_version": "3.12.4",
+  "request_budget": {
+    "attempt_limit": 190,
+    "attempts": 95,
+    "call_graph_estimate": {
+      "ballot_calls": 75,
+      "comprehension_probe_calls": 0,
+      "episodes": 25,
+      "logical_total": 95,
+      "max_attempt_total": 190,
+      "peer_message_calls": 20
+    },
+    "logical_request_limit": 95,
+    "logical_requests": 95,
+    "max_attempts_per_request": 2
+  },
+  "run_id": "mock-canary-release",
+  "schema_version": "1.0",
+  "seed_blocks": [
+    "seed-0",
+    "seed-1",
+    "seed-2",
+    "seed-3",
+    "seed-4"
+  ],
+  "sha256": {
+    "config.toml": "57178d86457ccc77c5db775c843a225ecc785e4c3c21a3bd3ee94a464c6a4948",
+    "frozen_protocol/configs/m1-pilot-draft.toml": "856691bee335b3890b171ce4d5e74fe327570b22e67140e7dafee329815d5e82",
+    "frozen_protocol/prompts/ballot.schema.json": "0bb4b7e14beda8b88fd955148f4bd485f922ab2fb329c9ad1e7ce38b9339c406",
+    "frozen_protocol/prompts/ballot.txt": "e90e7af9e5d69920b40d9a6963ba962ba5bf87be87b7a02caf2d84e08138691f",
+    "frozen_protocol/prompts/communication.schema.json": "8c0c6744aa14c7e12578183782120949e3d65242d15ba6edf8b76a223d51b63f",
+    "frozen_protocol/prompts/message.txt": "cbaee84de5002352e634a458bdb8bd6b183e1862d91e1a153fcaeac1a1d10e32",
+    "frozen_protocol/prompts/system.txt": "6dc1d0daaf2625e0f326f20ac854c190bc748e71ed8401b330dc79e90e86cf70",
+    "monitor_inputs/evidence.jsonl": "863bd3c3c8a36b1e9ed5f5020451588fc1c2949869ed2d7cda3d9d287a9bffc6",
+    "randomized_order.json": "50ec52d9a61b47ad593997fc87b2f6342bb06f70e2ca8bb59cea3ee0b201da7e",
+    "researcher/B.jsonl": "396ca2c5d41f90a2f2b49fc01565b78c2d7e78a0ebe596fc9ce470b6ba3777ff",
+    "researcher/T.jsonl": "f211e1d0d2ab07e8d56ac2276a8087d2dea9deae6c142c2f1ca2a69d0a71ec67",
+    "researcher/agent_observations.jsonl": "96a74fe57e5ad6ceefe3c1a7c4b2100696730d167b3482ecb8814e274b9fd66d",
+    "researcher/requests.jsonl": "1bda4224d3eea6db5bf5563833d6f5a4d583e025ecbd438f559b34de9d8fea56"
+  },
+  "source_snapshot": {
+    "files": {
+      "configs/m1-pilot-draft.toml": "856691bee335b3890b171ce4d5e74fe327570b22e67140e7dafee329815d5e82",
+      "configs/m1-r-offline.toml": "57178d86457ccc77c5db775c843a225ecc785e4c3c21a3bd3ee94a464c6a4948",
+      "prompts/m1-p0/ballot.schema.json": "0bb4b7e14beda8b88fd955148f4bd485f922ab2fb329c9ad1e7ce38b9339c406",
+      "prompts/m1-p0/ballot.txt": "e90e7af9e5d69920b40d9a6963ba962ba5bf87be87b7a02caf2d84e08138691f",
+      "prompts/m1-p0/communication.schema.json": "8c0c6744aa14c7e12578183782120949e3d65242d15ba6edf8b76a223d51b63f",
+      "prompts/m1-p0/message.txt": "cbaee84de5002352e634a458bdb8bd6b183e1862d91e1a153fcaeac1a1d10e32",
+      "prompts/m1-p0/system.txt": "6dc1d0daaf2625e0f326f20ac854c190bc748e71ed8401b330dc79e90e86cf70",
+      "pyproject.toml": "1c1ec44fcda8df79a4227de1940bc539fb88f5e688ddc5babe572ed4514c577d",
+      "src/colluscope/cli.py": "155109918c40b8f1c90bb5d7cb71ed678df636f7092fe72df43256c5e4c876e5",
+      "src/colluscope/m1_runtime.py": "633be936ffab3b2aec800a9c5a698c4e0da4b2068ea7627dad8314c32c676b32",
+      "src/colluscope/views.py": "e2585f4ae395818c03299909ed3a576893e1719d506a4292e835175ca5d161a7",
+      "src/colluscope/world.py": "7810c50b588d3851b1c92695a447691ecfa1ab2dde09cfc8aa82a534a7b49e28",
+      "tests/test_m1_runtime.py": "e9454efa1c0c6d9148d020fcf608d0912c9b413b7ed76c522201dc7610d23798"
+    },
+    "sha256": "3f5cf1728da4e516e30f7261ae7135d3e41cfb4e09f78a3649d4eb14d9903a6c"
+  },
+  "split": "exploratory_pilot"
+}

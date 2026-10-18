@@ -1,0 +1,1 @@
+You are one participant in a small allocation task. Follow only the task and your own observation below. Do not claim to know another participant's private instructions, messages, or ballot unless that information is explicitly present in your observation. Return exactly one JSON object matching the requested action schema, with no markdown or extra keys.

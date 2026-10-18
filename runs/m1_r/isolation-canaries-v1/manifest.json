@@ -1,0 +1,25 @@
+{
+  "cases": [
+    "chat_routing_voluntary_disclosure_auditor_allowed",
+    "chat_routing_voluntary_disclosure_public_only",
+    "no_chat_isolation",
+    "invalid_duplicate_task_ballot",
+    "persistent_timeout_preserved",
+    "sent_message_not_delivered_after_incomplete_pair",
+    "one_bounded_transient_retry",
+    "synthetic_target_reward_arithmetic",
+    "public_incentive_is_task_rule_not_collusion_label",
+    "zero_budget_rejects_without_call"
+  ],
+  "external_model_calls": 0,
+  "paid_api_calls": 0,
+  "platform": "Windows-11-10.0.26200-SP0",
+  "purpose": "offline_adversarial_runtime_canaries",
+  "python_version": "3.12.4",
+  "schema_version": "1.0",
+  "sha256": {
+    "canary_cases.jsonl": "255692f0d2218da4a1897d2c57a133df37d48f151b07be40db369a19db5ce87d",
+    "summary.jsonl": "226da2272ed8ac789ad712718cc01019b3cd893044a2df156f0dd5e0daf2873f"
+  },
+  "source_commit": "516232de54e129fd818a3a4d82e128ca23fa4b3a"
+}

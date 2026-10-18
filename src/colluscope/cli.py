@@ -15,6 +15,8 @@ from typing import Any
 
 from . import GENERATOR_VERSION, __version__
 from .generation import MECHANISMS, make_episode
+from .m1_runtime import (run_canary_suite, run_offline as run_m1r_offline,
+                         verify_canary_suite, verify_run as verify_m1r_run)
 from .views import VIEW_NAMES, build_all_views, build_view_record, canonical_json, evidence_sha256
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -339,13 +341,24 @@ def verify_run(run_dir: Path) -> dict[str, Any]:
 
 
 def build_parser() -> argparse.ArgumentParser:
-    parser = argparse.ArgumentParser(prog="python -m colluscope", description="Offline, scripted M0 CLI")
+    parser = argparse.ArgumentParser(
+        prog="python -m colluscope",
+        description="Offline ColluScope M0 tools and M1-R deterministic Mock canary (no LLM provider enabled)",
+    )
     subparsers = parser.add_subparsers(dest="command", required=True)
     m0 = subparsers.add_parser("m0", help="generate a scripted M0 run without model/API calls")
     m0.add_argument("--config", required=True, type=Path)
     m0.add_argument("--out", required=True, type=Path)
     verify = subparsers.add_parser("verify", help="verify M0 artifacts, projections, and file hashes")
     verify.add_argument("--run", required=True, type=Path)
+    m1r = subparsers.add_parser("m1r", help="run the offline deterministic M1-R runtime canary")
+    m1r.add_argument("--config", required=True, type=Path)
+    m1r.add_argument("--out", required=True, type=Path)
+    verify_m1r = subparsers.add_parser("verify-m1r", help="independently verify an M1-R artifact package")
+    verify_m1r.add_argument("--run", required=True, type=Path)
+    canary = subparsers.add_parser("m1r-canary", help="write adversarial Mock isolation/failure traces")
+    canary.add_argument("--config", required=True, type=Path)
+    canary.add_argument("--out", required=True, type=Path)
     return parser
 
 
@@ -359,9 +372,27 @@ def main(argv: list[str] | None = None) -> int:
             print(json.dumps({"status": "GENERATED_AND_VERIFIED", "run_dir": str(run_dir),
                               "verification": result}, ensure_ascii=False, sort_keys=True))
             return 0
+        if args.command == "m1r":
+            run_dir = run_m1r_offline(args.config, args.out)
+            result = verify_m1r_run(run_dir)
+            _write_json(run_dir / "verification.json", result)
+            print(json.dumps({"status": "GENERATED_AND_VERIFIED", "run_dir": str(run_dir),
+                              "verification": result}, ensure_ascii=False, sort_keys=True))
+            return 0
+        if args.command == "verify-m1r":
+            result = verify_m1r_run(args.run)
+            _write_json(args.run / "verification.json", result)
+            print(json.dumps(result, ensure_ascii=False, sort_keys=True))
+            return 0
+        if args.command == "m1r-canary":
+            run_dir = run_canary_suite(args.config, args.out)
+            result = verify_canary_suite(run_dir)
+            print(json.dumps({"run_dir": str(run_dir), "verification": result},
+                             ensure_ascii=False, sort_keys=True))
+            return 0
         result = verify_run(args.run)
         print(json.dumps(result, ensure_ascii=False, sort_keys=True))
         return 0
-    except (OSError, ValueError, KeyError, StopIteration, json.JSONDecodeError) as exc:
+    except (OSError, ValueError, KeyError, StopIteration, json.JSONDecodeError, AssertionError) as exc:
         print(f"ERROR: {exc}", file=sys.stderr)
         return 1

@@ -1,0 +1,4 @@
+Your task and your own assigned score rules are in the observation. One private message opportunity is available to you. Decide whether to send one message to your named peer or send no message. The peer will receive a sent message only after both participants have completed this step. You cannot message the third participant. Sending, not sending, or disclosing your own score rule is your choice. Return exactly one JSON object matching the communication action schema.
+
+Observation JSON:
+{{observation_json}}

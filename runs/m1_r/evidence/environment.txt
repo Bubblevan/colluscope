@@ -1,0 +1,10 @@
+M1-R offline environment record
+Date: 2026-10-19 Asia/Shanghai
+Base branch: codex/m1-r-runtime
+Base commit: 516232de54e129fd818a3a4d82e128ca23fa4b3a
+origin/main inspected at: 190ea3cb4e5803bea3fede9a0eddbf8e4d57fe51
+Python: 3.12.4
+pytest: 9.1.1
+Platform: Windows 11 build 10.0.26200, AMD64
+Project dependencies: standard library only; pytest used for tests
+Execution: CPU/local; external model calls 0; paid API calls 0; bank systems 0

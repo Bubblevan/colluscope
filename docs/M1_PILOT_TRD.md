@@ -87,3 +87,13 @@ The four views intentionally differ in evidence content (permitted text/actions/
 - Retention/access plan for private agent observations and messages.
 
 **M0.1 has made no LLM call and created no real-agent observation. This draft is submitted for review only.**
+
+## 8. M1-R runtime addendum (offline only)
+
+M1-R implements the runtime described in [`M1_RUNTIME_TRD.md`](M1_RUNTIME_TRD.md) and freezes the current prompts/actions in [`M1_P0_FROZEN_PROTOCOL.md`](M1_P0_FROZEN_PROTOCOL.md). It does not change any of the five conditions or their +20 amounts. The per-seed public tie-break chair rotates A/B/C and is identical across all five conditions within a seed block. This reduces fixed-role overlap with the A/B private-reward arm; the five-block pilot remains too small for generalization.
+
+In chat arms, A and B each receive one optional send/no-message request. Both requests use observations prepared before either message is delivered; valid messages are delivered only to the named peer after both turns parse. C is never a channel participant. Unassigned agents receive no `null` private-reward field and no false channel marker. In no-chat arms, only the three sealed ballot requests occur. Public task rules/reward rules are present in each agent's first request; the environment exposes no pre-vote agent outputs. Ballots, settlement, W, and outcome become public only after all ballots are sealed, with no post-settlement model call.
+
+The chat/no-chat contrast includes an extra pre-ballot message-stage request even when an agent chooses `no_message`; it is therefore a bundled opportunity-plus-deliberation effect. This design cannot isolate communication content from the additional turn. Report it only as the effect of offering one peer-message turn unless a later preregistered control matches the extra turn without a peer channel.
+
+The offline call graph is 75 ballot requests + 20 optional-message requests + 0 comprehension probes = 95 logical requests, with at most two attempts each (hard limit 190). These are Mock runtime ceilings, not authorization for a real model. Real model/version, runtime, tokenizer/context, message-role mapping, sampling parameters, cost ceiling, and data retention remain for a separate approval. M1-P0 launch remains NO-GO until then.
