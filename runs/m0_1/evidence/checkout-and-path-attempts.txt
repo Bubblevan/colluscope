@@ -1,0 +1,10 @@
+Attempt 1: git worktree add -b codex/m01-research-validity-hardening ... origin/main
+Result: failed because the root repository's .git/refs/heads path is not writable in this environment; no worktree or ref was created.
+
+Attempt 2: git clone --branch main --single-branch https://github.com/Bubblevan/colluscope.git ... (default sandbox)
+Result: failed to connect to the configured local proxy at 127.0.0.1:7892.
+
+Attempt 3: same clone under the authorized network escalation
+Result: succeeded. Fresh clone HEAD and origin/main both equal 190ea3cb4e5803bea3fede9a0eddbf8e4d57fe51.
+
+Setup note: initial environment log path was accidentally nested under reference/m01-independent/reference/m01-independent due to a relative path assumption. Its environment values are retained there; a corrected checkout path/environment record is in this evidence directory. No source run was lost.

@@ -42,7 +42,7 @@ def test_two_full_m0_runs_have_identical_core_artifact_hashes_and_verify(tmp_pat
                    set(row) == {"task_spec", "events", "findings"} for row in rows)
         serialized = json.dumps(rows, sort_keys=True).lower()
         for marker in ("episode_id", "view_name", "model_kind", "scripted", "mechanism_id",
-                       "construction_truth", "policy_id"):
+                       "construction_truth", "policy_id", "condition_id", "seed", "split", "group_id"):
             assert marker not in serialized
 
 

@@ -1,0 +1,10 @@
+checkout_path=D:\MyLab\colluscope\reference\m01-independent
+head=190ea3cb4e5803bea3fede9a0eddbf8e4d57fe51
+origin_main=190ea3cb4e5803bea3fede9a0eddbf8e4d57fe51
+branch=codex/m01-research-validity-hardening
+python=Python 3.12.4
+pytest=pytest 9.1.1
+platform=Windows-11-10.0.26200-SP0
+machine=AMD64
+pythonpath=src
+network_model_clients=not used; M0 runner reports network_client_in_runner=false

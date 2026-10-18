@@ -1,0 +1,86 @@
+[
+  {
+    "file": "configs/m0.toml",
+    "expected": "5ebeb87fb49ac28a3305663ef587c6edfdf69f66f776cd38e581af23895e144a",
+    "actual": "5ebeb87fb49ac28a3305663ef587c6edfdf69f66f776cd38e581af23895e144a",
+    "match": true
+  },
+  {
+    "file": "pyproject.toml",
+    "expected": "1c1ec44fcda8df79a4227de1940bc539fb88f5e688ddc5babe572ed4514c577d",
+    "actual": "1c1ec44fcda8df79a4227de1940bc539fb88f5e688ddc5babe572ed4514c577d",
+    "match": true
+  },
+  {
+    "file": "src/colluscope/__init__.py",
+    "expected": "ebc48763a23f2a649354557ec7701b7fee787953c98d629c7d3d70c73af6f775",
+    "actual": "ebc48763a23f2a649354557ec7701b7fee787953c98d629c7d3d70c73af6f775",
+    "match": true
+  },
+  {
+    "file": "src/colluscope/__main__.py",
+    "expected": "935a1c1166b0c1ea35a82256345000bf2c73ded718d77773bc27a71ecce28f7d",
+    "actual": "935a1c1166b0c1ea35a82256345000bf2c73ded718d77773bc27a71ecce28f7d",
+    "match": true
+  },
+  {
+    "file": "src/colluscope/cli.py",
+    "expected": "130ab1f133438aad666ab40f4d69a695d639fe9681f9a221d9737e0182d58f1f",
+    "actual": "130ab1f133438aad666ab40f4d69a695d639fe9681f9a221d9737e0182d58f1f",
+    "match": true
+  },
+  {
+    "file": "src/colluscope/generation.py",
+    "expected": "06ed6a7c41345a20923a7636a774b5ee8561085e3fe107191dfb38e2c182d9b0",
+    "actual": "06ed6a7c41345a20923a7636a774b5ee8561085e3fe107191dfb38e2c182d9b0",
+    "match": true
+  },
+  {
+    "file": "src/colluscope/splitting.py",
+    "expected": "5a593811af6738845fda61279d6a32251a66cbed9cd7ac2a6525403d2d8a97cc",
+    "actual": "5a593811af6738845fda61279d6a32251a66cbed9cd7ac2a6525403d2d8a97cc",
+    "match": true
+  },
+  {
+    "file": "src/colluscope/views.py",
+    "expected": "e2585f4ae395818c03299909ed3a576893e1719d506a4292e835175ca5d161a7",
+    "actual": "e2585f4ae395818c03299909ed3a576893e1719d506a4292e835175ca5d161a7",
+    "match": true
+  },
+  {
+    "file": "src/colluscope/world.py",
+    "expected": "7810c50b588d3851b1c92695a447691ecfa1ab2dde09cfc8aa82a534a7b49e28",
+    "actual": "7810c50b588d3851b1c92695a447691ecfa1ab2dde09cfc8aa82a534a7b49e28",
+    "match": true
+  },
+  {
+    "file": "tests/test_cli.py",
+    "expected": "3cb58ad6ac9ac0084a5fa4a45d289d827712f7638fab54f98ad6894d50396423",
+    "actual": "3cb58ad6ac9ac0084a5fa4a45d289d827712f7638fab54f98ad6894d50396423",
+    "match": true
+  },
+  {
+    "file": "tests/test_generation.py",
+    "expected": "a08e84e7b6d02ff6d08845fba540cd0929d220b9e118009ccd7212c6bd062e84",
+    "actual": "a08e84e7b6d02ff6d08845fba540cd0929d220b9e118009ccd7212c6bd062e84",
+    "match": true
+  },
+  {
+    "file": "tests/test_m01_research_design.py",
+    "expected": "7423ad2b301ee626a747240f6abfdbc13a3479cafc30cf9b52208cba17aadada",
+    "actual": "7423ad2b301ee626a747240f6abfdbc13a3479cafc30cf9b52208cba17aadada",
+    "match": true
+  },
+  {
+    "file": "tests/test_views.py",
+    "expected": "18fc329fd104ab5a84db8d49eecc0a746992d5e567b353bba902b126eff60ddb",
+    "actual": "18fc329fd104ab5a84db8d49eecc0a746992d5e567b353bba902b126eff60ddb",
+    "match": true
+  },
+  {
+    "file": "tests/test_world.py",
+    "expected": "3860e3d6192d94087c496ca4a222a09b10f9d6bef9fe6b4bd254885c86f077e7",
+    "actual": "3860e3d6192d94087c496ca4a222a09b10f9d6bef9fe6b4bd254885c86f077e7",
+    "match": true
+  }
+]

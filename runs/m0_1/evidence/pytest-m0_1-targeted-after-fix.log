@@ -1,0 +1,25 @@
+........F.                                                               [100%]
+================================== FAILURES ===================================
+_ test_m1_four_view_protocol_controls_content_computation_cost_and_hidden_labels _
+
+    def test_m1_four_view_protocol_controls_content_computation_cost_and_hidden_labels():
+        # These assertions are counterexamples to a protocol that treats view
+        # differences as a pure format comparison or leaks hidden treatment IDs.
+        protocol = (ROOT / "docs" / "M1_PILOT_TRD.md").read_text(encoding="utf-8")
+        required_controls = (
+            "Within an episode, text-only gets permitted message/reference events",
+            "Structured findings are deterministic functions of the same raw-fusion events",
+            "structured layout without findings vs the same layout with findings",
+            "selected monitor's exact tokenizer",
+            "input/output tokens, latency, and actual price/cost per episode",
+            "condition IDs, seed, group ID",
+            "Public task rules that genuinely appear in the task remain admissible evidence",
+        )
+        for control in required_controls:
+>           assert control in protocol
+E           AssertionError: assert 'input/output tokens, latency, and actual price/cost per episode' in '# ColluScope M1 Pilot TRD �� Draft for User Review\n\n**Status:** Design proposal only; no model calls, model selectio...es.\n\n**M0.1 has made no LLM call and created no real-agent observation. This draft is submitted for review only.**\n'
+
+tests\test_m01_research_design.py:181: AssertionError
+=========================== short test summary info ===========================
+FAILED tests/test_m01_research_design.py::test_m1_four_view_protocol_controls_content_computation_cost_and_hidden_labels
+1 failed, 9 passed in 0.10s

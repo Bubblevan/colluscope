@@ -1,0 +1,144 @@
+{
+  "api_call_assertion": {
+    "external_model_calls": 0,
+    "network_client_in_runner": false,
+    "paid_api_calls": 0
+  },
+  "colluscope_version": "0.1.0",
+  "commands": [
+    [
+      "python",
+      "-m",
+      "colluscope",
+      "m0",
+      "--config",
+      "configs\\m0.toml",
+      "--out",
+      "runs\\m0_1\\neutralized-text-smoke"
+    ],
+    [
+      "python",
+      "-m",
+      "colluscope",
+      "verify",
+      "--run",
+      "D:\\MyLab\\colluscope\\reference\\m01-independent\\runs\\m0_1\\neutralized-text-smoke\\m0-20261018T144755Z"
+    ]
+  ],
+  "config": {
+    "file": "config.toml",
+    "sha256": "5ebeb87fb49ac28a3305663ef587c6edfdf69f66f776cd38e581af23895e144a",
+    "values": {
+      "external_model_calls": 0,
+      "mechanisms": [
+        "C1",
+        "C2",
+        "C3",
+        "C4",
+        "C5",
+        "C6"
+      ],
+      "model_kind": "scripted",
+      "monitor_can_see_private": false,
+      "paid_api_calls": 0,
+      "schema_version": "1.0",
+      "seeds": [
+        1,
+        2,
+        3,
+        4
+      ]
+    }
+  },
+  "created_at_utc": "2026-10-18T14:47:55+00:00",
+  "execution_environment": {
+    "cpu_only": true,
+    "network_client_in_runner": false,
+    "pythonpath": "src (source checkout)"
+  },
+  "generator_version": "allocation-audit-v0.1.0",
+  "git": {
+    "commit": "190ea3cb4e5803bea3fede9a0eddbf8e4d57fe51",
+    "working_tree_clean": false
+  },
+  "input_seeds": [
+    1,
+    2,
+    3,
+    4
+  ],
+  "mechanisms": [
+    "C1",
+    "C2",
+    "C3",
+    "C4",
+    "C5",
+    "C6"
+  ],
+  "model_kind": "scripted",
+  "monitor_can_see_private": false,
+  "paths": {
+    "metrics": "metrics.json",
+    "monitor_input_root": "inputs/views",
+    "oracle": "../oracle/m0-20261018T144755Z/oracle.jsonl",
+    "trace": "inputs/trace.jsonl",
+    "views": {
+      "action_only": "inputs/views/action_only.jsonl",
+      "raw_fusion": "inputs/views/raw_fusion.jsonl",
+      "structured_evidence": "inputs/views/structured_evidence.jsonl",
+      "text_only": "inputs/views/text_only.jsonl"
+    }
+  },
+  "project": "ColluScope M0",
+  "python_version": "3.12.4",
+  "run_id": "m0-20261018T144755Z",
+  "schema_version": "1.0",
+  "sha256": {
+    "../oracle/m0-20261018T144755Z/oracle.jsonl": "365c1de4650d1303d03a4ae2c54ec800e99457e2b0cb7f2aee5cafa9616fa3ae",
+    "config.toml": "5ebeb87fb49ac28a3305663ef587c6edfdf69f66f776cd38e581af23895e144a",
+    "inputs/trace.jsonl": "deb363db22edbd358ccf0e8d4ef30ea0e2eddd1b2c0fcaf934eb1b383ac632b9",
+    "inputs/views/action_only.jsonl": "4d2517eba55c03a3ddda8547501265c1435bd5f2cef3cd2ad59952bb4e571658",
+    "inputs/views/raw_fusion.jsonl": "9751b90d681c5da41b654cd67ec9e7240fe315fa60b91b4f0e42c8ea24f9f938",
+    "inputs/views/structured_evidence.jsonl": "5fbdc8277c1e9eb69b19a7df7f67da9866524615f6fe657e7ddb4ab7f35ffbe8",
+    "inputs/views/text_only.jsonl": "b48885eeb29047b7412a8ae2b26c3093ca457d72e051a136c7ce1a311eb297fa",
+    "metrics.json": "5b6d16ac5f40968a0ff25ef4a34a95a635d92da4729b771a3a52cb7f02390d3a"
+  },
+  "source_snapshot": {
+    "files": {
+      "configs/m0.toml": "5ebeb87fb49ac28a3305663ef587c6edfdf69f66f776cd38e581af23895e144a",
+      "pyproject.toml": "1c1ec44fcda8df79a4227de1940bc539fb88f5e688ddc5babe572ed4514c577d",
+      "src/colluscope/__init__.py": "ebc48763a23f2a649354557ec7701b7fee787953c98d629c7d3d70c73af6f775",
+      "src/colluscope/__main__.py": "935a1c1166b0c1ea35a82256345000bf2c73ded718d77773bc27a71ecce28f7d",
+      "src/colluscope/cli.py": "130ab1f133438aad666ab40f4d69a695d639fe9681f9a221d9737e0182d58f1f",
+      "src/colluscope/generation.py": "06ed6a7c41345a20923a7636a774b5ee8561085e3fe107191dfb38e2c182d9b0",
+      "src/colluscope/views.py": "e2585f4ae395818c03299909ed3a576893e1719d506a4292e835175ca5d161a7",
+      "src/colluscope/world.py": "7810c50b588d3851b1c92695a447691ecfa1ab2dde09cfc8aa82a534a7b49e28",
+      "tests/test_cli.py": "88dbd3fed98d72ea0cbaf42782397b09936db04f970017ff7688d4fd6582ff19",
+      "tests/test_generation.py": "a08e84e7b6d02ff6d08845fba540cd0929d220b9e118009ccd7212c6bd062e84",
+      "tests/test_m01_research_design.py": "c575b4b73a1929a0d8c8ae98d8502ce4434e98ef265ee02e311b474ee0a3e048",
+      "tests/test_views.py": "18fc329fd104ab5a84db8d49eecc0a746992d5e567b353bba902b126eff60ddb",
+      "tests/test_world.py": "3860e3d6192d94087c496ca4a222a09b10f9d6bef9fe6b4bd254885c86f077e7"
+    },
+    "sha256": "6d8ffa83482c19a7f2704b0cfd02f512a5e19a30cb9275851b9aa6d9adfdca21"
+  },
+  "upstream_snapshots": [
+    {
+      "commit": "b077fe7e2f10566e92156cc12e06ffb2aac54790",
+      "license": "not found at checked commit",
+      "name": "Colosseum",
+      "url": "https://github.com/umass-ai-safety/colosseum"
+    },
+    {
+      "commit": "fd11aca351e52c65c929e1a7d46d9f087f237adf",
+      "license": "not found at checked commit",
+      "name": "LLM-Trust-Breaking",
+      "url": "https://github.com/Jerick-1380/LLM-Trust-Breaking"
+    },
+    {
+      "commit": "0e2e8226d7ca98e0375ed3aa54f9a870a3794714",
+      "license": "MIT",
+      "name": "TraceGuard",
+      "url": "https://github.com/linhkid/TraceGuard"
+    }
+  ]
+}
