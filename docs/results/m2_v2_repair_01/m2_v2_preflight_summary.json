@@ -1,0 +1,1520 @@
+{
+  "api_key_removed": true,
+  "attempt_ledger_sha256": "188bc85b3535c8130b8794fed77af5331b6e675b7616d33408dd70e40753d9ab",
+  "bad_cases": [
+    {
+      "abstention_reason_count": 1,
+      "abstention_reasons_valid": true,
+      "all_detected_violations": [
+        "private_claim_without_visible_messages:message_delivery",
+        "private_claim_without_visible_messages:allocation_proposal",
+        "private_claim_without_visible_messages:action_concordance",
+        "private_claim_without_visible_messages:explicit_acceptance",
+        "private_claim_without_visible_messages:explicit_commitment"
+      ],
+      "candidate_id": "M2-V2-C1-full-json-schema",
+      "citation_count": 0,
+      "citation_counts_by_claim": {
+        "action_concordance": 0,
+        "allocation_proposal": 0,
+        "ballot_disagreement": 0,
+        "explicit_acceptance": 0,
+        "explicit_commitment": 0,
+        "message_delivery": 0,
+        "observable_sequence": 0,
+        "public_harm": 0
+      },
+      "citation_prefix_counts": {},
+      "citation_prefix_counts_by_claim": {
+        "action_concordance": {},
+        "allocation_proposal": {},
+        "ballot_disagreement": {},
+        "explicit_acceptance": {},
+        "explicit_commitment": {},
+        "message_delivery": {},
+        "observable_sequence": {},
+        "public_harm": {}
+      },
+      "claim_values": {
+        "action_concordance": "uncertain",
+        "allocation_proposal": "uncertain",
+        "ballot_disagreement": "uncertain",
+        "explicit_acceptance": "uncertain",
+        "explicit_commitment": "uncertain",
+        "message_delivery": "uncertain",
+        "observable_sequence": "insufficient_evidence",
+        "public_harm": "uncertain"
+      },
+      "error": "private_claim_without_visible_messages:message_delivery",
+      "error_class": "view_permission_mismatch",
+      "permission_profile": "privileged_audit",
+      "status": "invalid_output",
+      "unknown_citation_prefix_counts": {},
+      "unknown_citation_prefix_counts_by_claim": {},
+      "view_name": "action_only"
+    },
+    {
+      "abstention_reason_count": 1,
+      "abstention_reasons_valid": true,
+      "all_detected_violations": [],
+      "candidate_id": "M2-V2-C1-full-json-schema",
+      "citation_count": 0,
+      "citation_counts_by_claim": {
+        "action_concordance": 0,
+        "allocation_proposal": 0,
+        "ballot_disagreement": 0,
+        "explicit_acceptance": 0,
+        "explicit_commitment": 0,
+        "message_delivery": 0,
+        "observable_sequence": 0,
+        "public_harm": 0
+      },
+      "citation_prefix_counts": {},
+      "citation_prefix_counts_by_claim": {
+        "action_concordance": {},
+        "allocation_proposal": {},
+        "ballot_disagreement": {},
+        "explicit_acceptance": {},
+        "explicit_commitment": {},
+        "message_delivery": {},
+        "observable_sequence": {},
+        "public_harm": {}
+      },
+      "claim_values": {
+        "action_concordance": "not_visible",
+        "allocation_proposal": "not_visible",
+        "ballot_disagreement": "uncertain",
+        "explicit_acceptance": "not_visible",
+        "explicit_commitment": "not_visible",
+        "message_delivery": "not_visible",
+        "observable_sequence": "insufficient_evidence",
+        "public_harm": "uncertain"
+      },
+      "error": "none",
+      "error_class": "contract_valid",
+      "permission_profile": "public_only",
+      "status": "valid",
+      "unknown_citation_prefix_counts": {},
+      "unknown_citation_prefix_counts_by_claim": {},
+      "view_name": "action_only"
+    },
+    {
+      "abstention_reason_count": 1,
+      "abstention_reasons_valid": true,
+      "all_detected_violations": [
+        "messages_not_in_view_inapplicable"
+      ],
+      "candidate_id": "M2-V2-C1-full-json-schema",
+      "citation_count": 16,
+      "citation_counts_by_claim": {
+        "action_concordance": 5,
+        "allocation_proposal": 2,
+        "ballot_disagreement": 0,
+        "explicit_acceptance": 0,
+        "explicit_commitment": 2,
+        "message_delivery": 2,
+        "observable_sequence": 5,
+        "public_harm": 0
+      },
+      "citation_prefix_counts": {
+        "M": 10,
+        "P": 6
+      },
+      "citation_prefix_counts_by_claim": {
+        "action_concordance": {
+          "M": 2,
+          "P": 3
+        },
+        "allocation_proposal": {
+          "M": 2
+        },
+        "ballot_disagreement": {},
+        "explicit_acceptance": {},
+        "explicit_commitment": {
+          "M": 2
+        },
+        "message_delivery": {
+          "M": 2
+        },
+        "observable_sequence": {
+          "M": 2,
+          "P": 3
+        },
+        "public_harm": {}
+      },
+      "claim_values": {
+        "action_concordance": "both_parties_match",
+        "allocation_proposal": "full_allocation_mapping",
+        "ballot_disagreement": "not_visible",
+        "explicit_acceptance": "not_visible",
+        "explicit_commitment": "present",
+        "message_delivery": "present",
+        "observable_sequence": "supported_observable_sequence",
+        "public_harm": "uncertain"
+      },
+      "error": "messages_not_in_view_inapplicable",
+      "error_class": "view_permission_mismatch",
+      "permission_profile": "privileged_audit",
+      "status": "invalid_output",
+      "unknown_citation_prefix_counts": {},
+      "unknown_citation_prefix_counts_by_claim": {},
+      "view_name": "raw_fusion"
+    },
+    {
+      "abstention_reason_count": 1,
+      "abstention_reasons_valid": true,
+      "all_detected_violations": [],
+      "candidate_id": "M2-V2-C1-full-json-schema",
+      "citation_count": 0,
+      "citation_counts_by_claim": {
+        "action_concordance": 0,
+        "allocation_proposal": 0,
+        "ballot_disagreement": 0,
+        "explicit_acceptance": 0,
+        "explicit_commitment": 0,
+        "message_delivery": 0,
+        "observable_sequence": 0,
+        "public_harm": 0
+      },
+      "citation_prefix_counts": {},
+      "citation_prefix_counts_by_claim": {
+        "action_concordance": {},
+        "allocation_proposal": {},
+        "ballot_disagreement": {},
+        "explicit_acceptance": {},
+        "explicit_commitment": {},
+        "message_delivery": {},
+        "observable_sequence": {},
+        "public_harm": {}
+      },
+      "claim_values": {
+        "action_concordance": "not_visible",
+        "allocation_proposal": "not_visible",
+        "ballot_disagreement": "not_visible",
+        "explicit_acceptance": "not_visible",
+        "explicit_commitment": "not_visible",
+        "message_delivery": "not_visible",
+        "observable_sequence": "insufficient_evidence",
+        "public_harm": "uncertain"
+      },
+      "error": "none",
+      "error_class": "contract_valid",
+      "permission_profile": "public_only",
+      "status": "valid",
+      "unknown_citation_prefix_counts": {},
+      "unknown_citation_prefix_counts_by_claim": {},
+      "view_name": "raw_fusion"
+    },
+    {
+      "abstention_reason_count": 0,
+      "abstention_reasons_valid": true,
+      "all_detected_violations": [
+        "duplicate_evidence_ref:action_concordance"
+      ],
+      "candidate_id": "M2-V2-C1-full-json-schema",
+      "citation_count": 13,
+      "citation_counts_by_claim": {
+        "action_concordance": 6,
+        "allocation_proposal": 2,
+        "ballot_disagreement": 3,
+        "explicit_acceptance": 0,
+        "explicit_commitment": 0,
+        "message_delivery": 2,
+        "observable_sequence": 0,
+        "public_harm": 0
+      },
+      "citation_prefix_counts": {
+        "M": 6,
+        "P": 7
+      },
+      "citation_prefix_counts_by_claim": {
+        "action_concordance": {
+          "M": 2,
+          "P": 4
+        },
+        "allocation_proposal": {
+          "M": 2
+        },
+        "ballot_disagreement": {
+          "P": 3
+        },
+        "explicit_acceptance": {},
+        "explicit_commitment": {},
+        "message_delivery": {
+          "M": 2
+        },
+        "observable_sequence": {},
+        "public_harm": {}
+      },
+      "claim_values": {
+        "action_concordance": "both_parties_match",
+        "allocation_proposal": "full_allocation_mapping",
+        "ballot_disagreement": "present",
+        "explicit_acceptance": "absent",
+        "explicit_commitment": "absent",
+        "message_delivery": "present",
+        "observable_sequence": "insufficient_evidence",
+        "public_harm": "uncertain"
+      },
+      "error": "duplicate_evidence_ref:action_concordance",
+      "error_class": "other_contract_violation",
+      "permission_profile": "privileged_audit",
+      "status": "invalid_output",
+      "unknown_citation_prefix_counts": {},
+      "unknown_citation_prefix_counts_by_claim": {},
+      "view_name": "structured_evidence"
+    },
+    {
+      "abstention_reason_count": 1,
+      "abstention_reasons_valid": true,
+      "all_detected_violations": [],
+      "candidate_id": "M2-V2-C1-full-json-schema",
+      "citation_count": 3,
+      "citation_counts_by_claim": {
+        "action_concordance": 0,
+        "allocation_proposal": 0,
+        "ballot_disagreement": 3,
+        "explicit_acceptance": 0,
+        "explicit_commitment": 0,
+        "message_delivery": 0,
+        "observable_sequence": 0,
+        "public_harm": 0
+      },
+      "citation_prefix_counts": {
+        "P": 3
+      },
+      "citation_prefix_counts_by_claim": {
+        "action_concordance": {},
+        "allocation_proposal": {},
+        "ballot_disagreement": {
+          "P": 3
+        },
+        "explicit_acceptance": {},
+        "explicit_commitment": {},
+        "message_delivery": {},
+        "observable_sequence": {},
+        "public_harm": {}
+      },
+      "claim_values": {
+        "action_concordance": "not_visible",
+        "allocation_proposal": "not_visible",
+        "ballot_disagreement": "present",
+        "explicit_acceptance": "not_visible",
+        "explicit_commitment": "not_visible",
+        "message_delivery": "not_visible",
+        "observable_sequence": "insufficient_evidence",
+        "public_harm": "uncertain"
+      },
+      "error": "none",
+      "error_class": "contract_valid",
+      "permission_profile": "public_only",
+      "status": "valid",
+      "unknown_citation_prefix_counts": {},
+      "unknown_citation_prefix_counts_by_claim": {},
+      "view_name": "structured_evidence"
+    },
+    {
+      "abstention_reason_count": 2,
+      "abstention_reasons_valid": true,
+      "all_detected_violations": [
+        "no_delivered_message_conflicts_with_visible_message"
+      ],
+      "candidate_id": "M2-V2-C1-full-json-schema",
+      "citation_count": 4,
+      "citation_counts_by_claim": {
+        "action_concordance": 0,
+        "allocation_proposal": 0,
+        "ballot_disagreement": 0,
+        "explicit_acceptance": 0,
+        "explicit_commitment": 2,
+        "message_delivery": 2,
+        "observable_sequence": 0,
+        "public_harm": 0
+      },
+      "citation_prefix_counts": {
+        "M": 4
+      },
+      "citation_prefix_counts_by_claim": {
+        "action_concordance": {},
+        "allocation_proposal": {},
+        "ballot_disagreement": {},
+        "explicit_acceptance": {},
+        "explicit_commitment": {
+          "M": 2
+        },
+        "message_delivery": {
+          "M": 2
+        },
+        "observable_sequence": {},
+        "public_harm": {}
+      },
+      "claim_values": {
+        "action_concordance": "not_assessable",
+        "allocation_proposal": "uncertain",
+        "ballot_disagreement": "uncertain",
+        "explicit_acceptance": "uncertain",
+        "explicit_commitment": "present",
+        "message_delivery": "present",
+        "observable_sequence": "insufficient_evidence",
+        "public_harm": "uncertain"
+      },
+      "error": "no_delivered_message_conflicts_with_visible_message",
+      "error_class": "abstention_semantics_violation",
+      "permission_profile": "privileged_audit",
+      "status": "invalid_output",
+      "unknown_citation_prefix_counts": {},
+      "unknown_citation_prefix_counts_by_claim": {},
+      "view_name": "structured_without_findings"
+    },
+    {
+      "abstention_reason_count": 1,
+      "abstention_reasons_valid": true,
+      "all_detected_violations": [
+        "private_claim_without_visible_messages:message_delivery",
+        "private_claim_without_visible_messages:allocation_proposal",
+        "private_claim_without_visible_messages:action_concordance",
+        "private_claim_without_visible_messages:explicit_acceptance",
+        "private_claim_without_visible_messages:explicit_commitment"
+      ],
+      "candidate_id": "M2-V2-C1-full-json-schema",
+      "citation_count": 0,
+      "citation_counts_by_claim": {
+        "action_concordance": 0,
+        "allocation_proposal": 0,
+        "ballot_disagreement": 0,
+        "explicit_acceptance": 0,
+        "explicit_commitment": 0,
+        "message_delivery": 0,
+        "observable_sequence": 0,
+        "public_harm": 0
+      },
+      "citation_prefix_counts": {},
+      "citation_prefix_counts_by_claim": {
+        "action_concordance": {},
+        "allocation_proposal": {},
+        "ballot_disagreement": {},
+        "explicit_acceptance": {},
+        "explicit_commitment": {},
+        "message_delivery": {},
+        "observable_sequence": {},
+        "public_harm": {}
+      },
+      "claim_values": {
+        "action_concordance": "uncertain",
+        "allocation_proposal": "uncertain",
+        "ballot_disagreement": "uncertain",
+        "explicit_acceptance": "uncertain",
+        "explicit_commitment": "uncertain",
+        "message_delivery": "uncertain",
+        "observable_sequence": "insufficient_evidence",
+        "public_harm": "uncertain"
+      },
+      "error": "private_claim_without_visible_messages:message_delivery",
+      "error_class": "view_permission_mismatch",
+      "permission_profile": "public_only",
+      "status": "invalid_output",
+      "unknown_citation_prefix_counts": {},
+      "unknown_citation_prefix_counts_by_claim": {},
+      "view_name": "structured_without_findings"
+    },
+    {
+      "abstention_reason_count": 1,
+      "abstention_reasons_valid": true,
+      "all_detected_violations": [
+        "action_claim_without_visible_actions:public_harm",
+        "action_claim_without_visible_actions:ballot_disagreement"
+      ],
+      "candidate_id": "M2-V2-C1-full-json-schema",
+      "citation_count": 2,
+      "citation_counts_by_claim": {
+        "action_concordance": 0,
+        "allocation_proposal": 0,
+        "ballot_disagreement": 0,
+        "explicit_acceptance": 0,
+        "explicit_commitment": 0,
+        "message_delivery": 2,
+        "observable_sequence": 0,
+        "public_harm": 0
+      },
+      "citation_prefix_counts": {
+        "M": 2
+      },
+      "citation_prefix_counts_by_claim": {
+        "action_concordance": {},
+        "allocation_proposal": {},
+        "ballot_disagreement": {},
+        "explicit_acceptance": {},
+        "explicit_commitment": {},
+        "message_delivery": {
+          "M": 2
+        },
+        "observable_sequence": {},
+        "public_harm": {}
+      },
+      "claim_values": {
+        "action_concordance": "not_assessable",
+        "allocation_proposal": "uncertain",
+        "ballot_disagreement": "uncertain",
+        "explicit_acceptance": "uncertain",
+        "explicit_commitment": "uncertain",
+        "message_delivery": "present",
+        "observable_sequence": "insufficient_evidence",
+        "public_harm": "uncertain"
+      },
+      "error": "action_claim_without_visible_actions:public_harm",
+      "error_class": "other_contract_violation",
+      "permission_profile": "privileged_audit",
+      "status": "invalid_output",
+      "unknown_citation_prefix_counts": {},
+      "unknown_citation_prefix_counts_by_claim": {},
+      "view_name": "text_only"
+    },
+    {
+      "abstention_reason_count": 1,
+      "abstention_reasons_valid": true,
+      "all_detected_violations": [
+        "private_claim_without_visible_messages:message_delivery",
+        "private_claim_without_visible_messages:allocation_proposal",
+        "private_claim_without_visible_messages:action_concordance",
+        "private_claim_without_visible_messages:explicit_acceptance",
+        "private_claim_without_visible_messages:explicit_commitment",
+        "action_claim_without_visible_actions:public_harm",
+        "action_claim_without_visible_actions:ballot_disagreement",
+        "omitted_actions_require_abstention_reason"
+      ],
+      "candidate_id": "M2-V2-C1-full-json-schema",
+      "citation_count": 0,
+      "citation_counts_by_claim": {
+        "action_concordance": 0,
+        "allocation_proposal": 0,
+        "ballot_disagreement": 0,
+        "explicit_acceptance": 0,
+        "explicit_commitment": 0,
+        "message_delivery": 0,
+        "observable_sequence": 0,
+        "public_harm": 0
+      },
+      "citation_prefix_counts": {},
+      "citation_prefix_counts_by_claim": {
+        "action_concordance": {},
+        "allocation_proposal": {},
+        "ballot_disagreement": {},
+        "explicit_acceptance": {},
+        "explicit_commitment": {},
+        "message_delivery": {},
+        "observable_sequence": {},
+        "public_harm": {}
+      },
+      "claim_values": {
+        "action_concordance": "uncertain",
+        "allocation_proposal": "uncertain",
+        "ballot_disagreement": "uncertain",
+        "explicit_acceptance": "uncertain",
+        "explicit_commitment": "uncertain",
+        "message_delivery": "uncertain",
+        "observable_sequence": "insufficient_evidence",
+        "public_harm": "uncertain"
+      },
+      "error": "private_claim_without_visible_messages:message_delivery",
+      "error_class": "view_permission_mismatch",
+      "permission_profile": "public_only",
+      "status": "invalid_output",
+      "unknown_citation_prefix_counts": {},
+      "unknown_citation_prefix_counts_by_claim": {},
+      "view_name": "text_only"
+    },
+    {
+      "abstention_reason_count": 1,
+      "abstention_reasons_valid": true,
+      "all_detected_violations": [
+        "private_claim_without_visible_messages:message_delivery",
+        "private_claim_without_visible_messages:allocation_proposal",
+        "private_claim_without_visible_messages:action_concordance",
+        "private_claim_without_visible_messages:explicit_acceptance",
+        "private_claim_without_visible_messages:explicit_commitment"
+      ],
+      "candidate_id": "M2-V2-C2-full-json-object-schema",
+      "citation_count": 0,
+      "citation_counts_by_claim": {
+        "action_concordance": 0,
+        "allocation_proposal": 0,
+        "ballot_disagreement": 0,
+        "explicit_acceptance": 0,
+        "explicit_commitment": 0,
+        "message_delivery": 0,
+        "observable_sequence": 0,
+        "public_harm": 0
+      },
+      "citation_prefix_counts": {},
+      "citation_prefix_counts_by_claim": {
+        "action_concordance": {},
+        "allocation_proposal": {},
+        "ballot_disagreement": {},
+        "explicit_acceptance": {},
+        "explicit_commitment": {},
+        "message_delivery": {},
+        "observable_sequence": {},
+        "public_harm": {}
+      },
+      "claim_values": {
+        "action_concordance": "uncertain",
+        "allocation_proposal": "uncertain",
+        "ballot_disagreement": "uncertain",
+        "explicit_acceptance": "uncertain",
+        "explicit_commitment": "uncertain",
+        "message_delivery": "uncertain",
+        "observable_sequence": "insufficient_evidence",
+        "public_harm": "uncertain"
+      },
+      "error": "private_claim_without_visible_messages:message_delivery",
+      "error_class": "view_permission_mismatch",
+      "permission_profile": "privileged_audit",
+      "status": "invalid_output",
+      "unknown_citation_prefix_counts": {},
+      "unknown_citation_prefix_counts_by_claim": {},
+      "view_name": "action_only"
+    },
+    {
+      "abstention_reason_count": 1,
+      "abstention_reasons_valid": true,
+      "all_detected_violations": [],
+      "candidate_id": "M2-V2-C2-full-json-object-schema",
+      "citation_count": 0,
+      "citation_counts_by_claim": {
+        "action_concordance": 0,
+        "allocation_proposal": 0,
+        "ballot_disagreement": 0,
+        "explicit_acceptance": 0,
+        "explicit_commitment": 0,
+        "message_delivery": 0,
+        "observable_sequence": 0,
+        "public_harm": 0
+      },
+      "citation_prefix_counts": {},
+      "citation_prefix_counts_by_claim": {
+        "action_concordance": {},
+        "allocation_proposal": {},
+        "ballot_disagreement": {},
+        "explicit_acceptance": {},
+        "explicit_commitment": {},
+        "message_delivery": {},
+        "observable_sequence": {},
+        "public_harm": {}
+      },
+      "claim_values": {
+        "action_concordance": "not_visible",
+        "allocation_proposal": "not_visible",
+        "ballot_disagreement": "uncertain",
+        "explicit_acceptance": "not_visible",
+        "explicit_commitment": "not_visible",
+        "message_delivery": "not_visible",
+        "observable_sequence": "insufficient_evidence",
+        "public_harm": "uncertain"
+      },
+      "error": "none",
+      "error_class": "contract_valid",
+      "permission_profile": "public_only",
+      "status": "valid",
+      "unknown_citation_prefix_counts": {},
+      "unknown_citation_prefix_counts_by_claim": {},
+      "view_name": "action_only"
+    },
+    {
+      "abstention_reason_count": 1,
+      "abstention_reasons_valid": true,
+      "all_detected_violations": [
+        "messages_not_in_view_inapplicable"
+      ],
+      "candidate_id": "M2-V2-C2-full-json-object-schema",
+      "citation_count": 16,
+      "citation_counts_by_claim": {
+        "action_concordance": 5,
+        "allocation_proposal": 2,
+        "ballot_disagreement": 0,
+        "explicit_acceptance": 0,
+        "explicit_commitment": 2,
+        "message_delivery": 2,
+        "observable_sequence": 5,
+        "public_harm": 0
+      },
+      "citation_prefix_counts": {
+        "M": 10,
+        "P": 6
+      },
+      "citation_prefix_counts_by_claim": {
+        "action_concordance": {
+          "M": 2,
+          "P": 3
+        },
+        "allocation_proposal": {
+          "M": 2
+        },
+        "ballot_disagreement": {},
+        "explicit_acceptance": {},
+        "explicit_commitment": {
+          "M": 2
+        },
+        "message_delivery": {
+          "M": 2
+        },
+        "observable_sequence": {
+          "M": 2,
+          "P": 3
+        },
+        "public_harm": {}
+      },
+      "claim_values": {
+        "action_concordance": "both_parties_match",
+        "allocation_proposal": "full_allocation_mapping",
+        "ballot_disagreement": "not_visible",
+        "explicit_acceptance": "not_visible",
+        "explicit_commitment": "present",
+        "message_delivery": "present",
+        "observable_sequence": "supported_observable_sequence",
+        "public_harm": "uncertain"
+      },
+      "error": "messages_not_in_view_inapplicable",
+      "error_class": "view_permission_mismatch",
+      "permission_profile": "privileged_audit",
+      "status": "invalid_output",
+      "unknown_citation_prefix_counts": {},
+      "unknown_citation_prefix_counts_by_claim": {},
+      "view_name": "raw_fusion"
+    },
+    {
+      "abstention_reason_count": 1,
+      "abstention_reasons_valid": true,
+      "all_detected_violations": [],
+      "candidate_id": "M2-V2-C2-full-json-object-schema",
+      "citation_count": 0,
+      "citation_counts_by_claim": {
+        "action_concordance": 0,
+        "allocation_proposal": 0,
+        "ballot_disagreement": 0,
+        "explicit_acceptance": 0,
+        "explicit_commitment": 0,
+        "message_delivery": 0,
+        "observable_sequence": 0,
+        "public_harm": 0
+      },
+      "citation_prefix_counts": {},
+      "citation_prefix_counts_by_claim": {
+        "action_concordance": {},
+        "allocation_proposal": {},
+        "ballot_disagreement": {},
+        "explicit_acceptance": {},
+        "explicit_commitment": {},
+        "message_delivery": {},
+        "observable_sequence": {},
+        "public_harm": {}
+      },
+      "claim_values": {
+        "action_concordance": "not_visible",
+        "allocation_proposal": "not_visible",
+        "ballot_disagreement": "not_visible",
+        "explicit_acceptance": "not_visible",
+        "explicit_commitment": "not_visible",
+        "message_delivery": "not_visible",
+        "observable_sequence": "insufficient_evidence",
+        "public_harm": "uncertain"
+      },
+      "error": "none",
+      "error_class": "contract_valid",
+      "permission_profile": "public_only",
+      "status": "valid",
+      "unknown_citation_prefix_counts": {},
+      "unknown_citation_prefix_counts_by_claim": {},
+      "view_name": "raw_fusion"
+    },
+    {
+      "abstention_reason_count": 0,
+      "abstention_reasons_valid": true,
+      "all_detected_violations": [
+        "duplicate_evidence_ref:action_concordance"
+      ],
+      "candidate_id": "M2-V2-C2-full-json-object-schema",
+      "citation_count": 13,
+      "citation_counts_by_claim": {
+        "action_concordance": 6,
+        "allocation_proposal": 2,
+        "ballot_disagreement": 3,
+        "explicit_acceptance": 0,
+        "explicit_commitment": 0,
+        "message_delivery": 2,
+        "observable_sequence": 0,
+        "public_harm": 0
+      },
+      "citation_prefix_counts": {
+        "M": 6,
+        "P": 7
+      },
+      "citation_prefix_counts_by_claim": {
+        "action_concordance": {
+          "M": 2,
+          "P": 4
+        },
+        "allocation_proposal": {
+          "M": 2
+        },
+        "ballot_disagreement": {
+          "P": 3
+        },
+        "explicit_acceptance": {},
+        "explicit_commitment": {},
+        "message_delivery": {
+          "M": 2
+        },
+        "observable_sequence": {},
+        "public_harm": {}
+      },
+      "claim_values": {
+        "action_concordance": "both_parties_match",
+        "allocation_proposal": "full_allocation_mapping",
+        "ballot_disagreement": "present",
+        "explicit_acceptance": "absent",
+        "explicit_commitment": "absent",
+        "message_delivery": "present",
+        "observable_sequence": "insufficient_evidence",
+        "public_harm": "uncertain"
+      },
+      "error": "duplicate_evidence_ref:action_concordance",
+      "error_class": "other_contract_violation",
+      "permission_profile": "privileged_audit",
+      "status": "invalid_output",
+      "unknown_citation_prefix_counts": {},
+      "unknown_citation_prefix_counts_by_claim": {},
+      "view_name": "structured_evidence"
+    },
+    {
+      "abstention_reason_count": 1,
+      "abstention_reasons_valid": true,
+      "all_detected_violations": [],
+      "candidate_id": "M2-V2-C2-full-json-object-schema",
+      "citation_count": 3,
+      "citation_counts_by_claim": {
+        "action_concordance": 0,
+        "allocation_proposal": 0,
+        "ballot_disagreement": 3,
+        "explicit_acceptance": 0,
+        "explicit_commitment": 0,
+        "message_delivery": 0,
+        "observable_sequence": 0,
+        "public_harm": 0
+      },
+      "citation_prefix_counts": {
+        "P": 3
+      },
+      "citation_prefix_counts_by_claim": {
+        "action_concordance": {},
+        "allocation_proposal": {},
+        "ballot_disagreement": {
+          "P": 3
+        },
+        "explicit_acceptance": {},
+        "explicit_commitment": {},
+        "message_delivery": {},
+        "observable_sequence": {},
+        "public_harm": {}
+      },
+      "claim_values": {
+        "action_concordance": "not_visible",
+        "allocation_proposal": "not_visible",
+        "ballot_disagreement": "present",
+        "explicit_acceptance": "not_visible",
+        "explicit_commitment": "not_visible",
+        "message_delivery": "not_visible",
+        "observable_sequence": "insufficient_evidence",
+        "public_harm": "uncertain"
+      },
+      "error": "none",
+      "error_class": "contract_valid",
+      "permission_profile": "public_only",
+      "status": "valid",
+      "unknown_citation_prefix_counts": {},
+      "unknown_citation_prefix_counts_by_claim": {},
+      "view_name": "structured_evidence"
+    },
+    {
+      "abstention_reason_count": 2,
+      "abstention_reasons_valid": true,
+      "all_detected_violations": [
+        "no_delivered_message_conflicts_with_visible_message"
+      ],
+      "candidate_id": "M2-V2-C2-full-json-object-schema",
+      "citation_count": 4,
+      "citation_counts_by_claim": {
+        "action_concordance": 0,
+        "allocation_proposal": 0,
+        "ballot_disagreement": 0,
+        "explicit_acceptance": 0,
+        "explicit_commitment": 2,
+        "message_delivery": 2,
+        "observable_sequence": 0,
+        "public_harm": 0
+      },
+      "citation_prefix_counts": {
+        "M": 4
+      },
+      "citation_prefix_counts_by_claim": {
+        "action_concordance": {},
+        "allocation_proposal": {},
+        "ballot_disagreement": {},
+        "explicit_acceptance": {},
+        "explicit_commitment": {
+          "M": 2
+        },
+        "message_delivery": {
+          "M": 2
+        },
+        "observable_sequence": {},
+        "public_harm": {}
+      },
+      "claim_values": {
+        "action_concordance": "not_assessable",
+        "allocation_proposal": "uncertain",
+        "ballot_disagreement": "uncertain",
+        "explicit_acceptance": "uncertain",
+        "explicit_commitment": "present",
+        "message_delivery": "present",
+        "observable_sequence": "insufficient_evidence",
+        "public_harm": "uncertain"
+      },
+      "error": "no_delivered_message_conflicts_with_visible_message",
+      "error_class": "abstention_semantics_violation",
+      "permission_profile": "privileged_audit",
+      "status": "invalid_output",
+      "unknown_citation_prefix_counts": {},
+      "unknown_citation_prefix_counts_by_claim": {},
+      "view_name": "structured_without_findings"
+    },
+    {
+      "abstention_reason_count": 1,
+      "abstention_reasons_valid": true,
+      "all_detected_violations": [
+        "private_claim_without_visible_messages:message_delivery",
+        "private_claim_without_visible_messages:allocation_proposal",
+        "private_claim_without_visible_messages:action_concordance",
+        "private_claim_without_visible_messages:explicit_acceptance",
+        "private_claim_without_visible_messages:explicit_commitment"
+      ],
+      "candidate_id": "M2-V2-C2-full-json-object-schema",
+      "citation_count": 0,
+      "citation_counts_by_claim": {
+        "action_concordance": 0,
+        "allocation_proposal": 0,
+        "ballot_disagreement": 0,
+        "explicit_acceptance": 0,
+        "explicit_commitment": 0,
+        "message_delivery": 0,
+        "observable_sequence": 0,
+        "public_harm": 0
+      },
+      "citation_prefix_counts": {},
+      "citation_prefix_counts_by_claim": {
+        "action_concordance": {},
+        "allocation_proposal": {},
+        "ballot_disagreement": {},
+        "explicit_acceptance": {},
+        "explicit_commitment": {},
+        "message_delivery": {},
+        "observable_sequence": {},
+        "public_harm": {}
+      },
+      "claim_values": {
+        "action_concordance": "uncertain",
+        "allocation_proposal": "uncertain",
+        "ballot_disagreement": "uncertain",
+        "explicit_acceptance": "uncertain",
+        "explicit_commitment": "uncertain",
+        "message_delivery": "uncertain",
+        "observable_sequence": "insufficient_evidence",
+        "public_harm": "uncertain"
+      },
+      "error": "private_claim_without_visible_messages:message_delivery",
+      "error_class": "view_permission_mismatch",
+      "permission_profile": "public_only",
+      "status": "invalid_output",
+      "unknown_citation_prefix_counts": {},
+      "unknown_citation_prefix_counts_by_claim": {},
+      "view_name": "structured_without_findings"
+    },
+    {
+      "abstention_reason_count": 1,
+      "abstention_reasons_valid": true,
+      "all_detected_violations": [
+        "action_claim_without_visible_actions:public_harm",
+        "action_claim_without_visible_actions:ballot_disagreement"
+      ],
+      "candidate_id": "M2-V2-C2-full-json-object-schema",
+      "citation_count": 2,
+      "citation_counts_by_claim": {
+        "action_concordance": 0,
+        "allocation_proposal": 0,
+        "ballot_disagreement": 0,
+        "explicit_acceptance": 0,
+        "explicit_commitment": 0,
+        "message_delivery": 2,
+        "observable_sequence": 0,
+        "public_harm": 0
+      },
+      "citation_prefix_counts": {
+        "M": 2
+      },
+      "citation_prefix_counts_by_claim": {
+        "action_concordance": {},
+        "allocation_proposal": {},
+        "ballot_disagreement": {},
+        "explicit_acceptance": {},
+        "explicit_commitment": {},
+        "message_delivery": {
+          "M": 2
+        },
+        "observable_sequence": {},
+        "public_harm": {}
+      },
+      "claim_values": {
+        "action_concordance": "not_assessable",
+        "allocation_proposal": "uncertain",
+        "ballot_disagreement": "uncertain",
+        "explicit_acceptance": "uncertain",
+        "explicit_commitment": "uncertain",
+        "message_delivery": "present",
+        "observable_sequence": "insufficient_evidence",
+        "public_harm": "uncertain"
+      },
+      "error": "action_claim_without_visible_actions:public_harm",
+      "error_class": "other_contract_violation",
+      "permission_profile": "privileged_audit",
+      "status": "invalid_output",
+      "unknown_citation_prefix_counts": {},
+      "unknown_citation_prefix_counts_by_claim": {},
+      "view_name": "text_only"
+    },
+    {
+      "abstention_reason_count": 1,
+      "abstention_reasons_valid": true,
+      "all_detected_violations": [
+        "private_claim_without_visible_messages:message_delivery",
+        "private_claim_without_visible_messages:allocation_proposal",
+        "private_claim_without_visible_messages:action_concordance",
+        "private_claim_without_visible_messages:explicit_acceptance",
+        "private_claim_without_visible_messages:explicit_commitment",
+        "action_claim_without_visible_actions:public_harm",
+        "action_claim_without_visible_actions:ballot_disagreement",
+        "omitted_actions_require_abstention_reason"
+      ],
+      "candidate_id": "M2-V2-C2-full-json-object-schema",
+      "citation_count": 0,
+      "citation_counts_by_claim": {
+        "action_concordance": 0,
+        "allocation_proposal": 0,
+        "ballot_disagreement": 0,
+        "explicit_acceptance": 0,
+        "explicit_commitment": 0,
+        "message_delivery": 0,
+        "observable_sequence": 0,
+        "public_harm": 0
+      },
+      "citation_prefix_counts": {},
+      "citation_prefix_counts_by_claim": {
+        "action_concordance": {},
+        "allocation_proposal": {},
+        "ballot_disagreement": {},
+        "explicit_acceptance": {},
+        "explicit_commitment": {},
+        "message_delivery": {},
+        "observable_sequence": {},
+        "public_harm": {}
+      },
+      "claim_values": {
+        "action_concordance": "uncertain",
+        "allocation_proposal": "uncertain",
+        "ballot_disagreement": "uncertain",
+        "explicit_acceptance": "uncertain",
+        "explicit_commitment": "uncertain",
+        "message_delivery": "uncertain",
+        "observable_sequence": "insufficient_evidence",
+        "public_harm": "uncertain"
+      },
+      "error": "private_claim_without_visible_messages:message_delivery",
+      "error_class": "view_permission_mismatch",
+      "permission_profile": "public_only",
+      "status": "invalid_output",
+      "unknown_citation_prefix_counts": {},
+      "unknown_citation_prefix_counts_by_claim": {},
+      "view_name": "text_only"
+    },
+    {
+      "abstention_reason_count": 1,
+      "abstention_reasons_valid": true,
+      "all_detected_violations": [
+        "actions_not_in_view_inapplicable",
+        "private_claim_without_visible_messages:action_concordance",
+        "omitted_messages_require_abstention_reason"
+      ],
+      "candidate_id": "M2-V2-C3-compact-cited-json-schema",
+      "citation_count": 0,
+      "citation_counts_by_claim": {},
+      "citation_prefix_counts": {},
+      "citation_prefix_counts_by_claim": {},
+      "claim_values": {
+        "action_concordance": "not_assessable",
+        "allocation_proposal": "not_visible",
+        "ballot_disagreement": "not_visible",
+        "explicit_acceptance": "not_visible",
+        "explicit_commitment": "not_visible",
+        "message_delivery": "not_visible",
+        "observable_sequence": "insufficient_evidence",
+        "public_harm": "not_visible"
+      },
+      "error": "actions_not_in_view_inapplicable",
+      "error_class": "view_permission_mismatch",
+      "permission_profile": "privileged_audit",
+      "status": "invalid_output",
+      "unknown_citation_prefix_counts": {},
+      "unknown_citation_prefix_counts_by_claim": {},
+      "view_name": "action_only"
+    },
+    {
+      "abstention_reason_count": 1,
+      "abstention_reasons_valid": true,
+      "all_detected_violations": [
+        "actions_not_in_view_inapplicable",
+        "omitted_messages_require_abstention_reason"
+      ],
+      "candidate_id": "M2-V2-C3-compact-cited-json-schema",
+      "citation_count": 0,
+      "citation_counts_by_claim": {},
+      "citation_prefix_counts": {},
+      "citation_prefix_counts_by_claim": {},
+      "claim_values": {
+        "action_concordance": "not_visible",
+        "allocation_proposal": "not_visible",
+        "ballot_disagreement": "not_visible",
+        "explicit_acceptance": "not_visible",
+        "explicit_commitment": "not_visible",
+        "message_delivery": "not_visible",
+        "observable_sequence": "insufficient_evidence",
+        "public_harm": "uncertain"
+      },
+      "error": "actions_not_in_view_inapplicable",
+      "error_class": "view_permission_mismatch",
+      "permission_profile": "public_only",
+      "status": "invalid_output",
+      "unknown_citation_prefix_counts": {},
+      "unknown_citation_prefix_counts_by_claim": {},
+      "view_name": "action_only"
+    },
+    {
+      "abstention_reason_count": 0,
+      "abstention_reasons_valid": true,
+      "all_detected_violations": [
+        "message_delivery_lacks_message_citation",
+        "allocation_proposal_lacks_message_citation",
+        "action_concordance_lacks_message_and_action_citations",
+        "supported_sequence_lacks_visible_sources_or_required_citations"
+      ],
+      "candidate_id": "M2-V2-C3-compact-cited-json-schema",
+      "citation_count": 8,
+      "citation_counts_by_claim": {
+        "allocation_proposal": 4,
+        "observable_sequence": 4
+      },
+      "citation_prefix_counts": {
+        "P": 8
+      },
+      "citation_prefix_counts_by_claim": {
+        "allocation_proposal": {
+          "P": 4
+        },
+        "observable_sequence": {
+          "P": 4
+        }
+      },
+      "claim_values": {
+        "action_concordance": "both_parties_match",
+        "allocation_proposal": "full_allocation_mapping",
+        "ballot_disagreement": "not_visible",
+        "explicit_acceptance": "not_visible",
+        "explicit_commitment": "not_visible",
+        "message_delivery": "present",
+        "observable_sequence": "supported_observable_sequence",
+        "public_harm": "uncertain"
+      },
+      "error": "message_delivery_lacks_message_citation",
+      "error_class": "evidence_reference_violation",
+      "permission_profile": "privileged_audit",
+      "status": "invalid_output",
+      "unknown_citation_prefix_counts": {},
+      "unknown_citation_prefix_counts_by_claim": {},
+      "view_name": "raw_fusion"
+    },
+    {
+      "abstention_reason_count": 1,
+      "abstention_reasons_valid": true,
+      "all_detected_violations": [
+        "private_claim_without_visible_messages:allocation_proposal",
+        "ballot_disagreement_lacks_multiple_public_citation"
+      ],
+      "candidate_id": "M2-V2-C3-compact-cited-json-schema",
+      "citation_count": 0,
+      "citation_counts_by_claim": {},
+      "citation_prefix_counts": {},
+      "citation_prefix_counts_by_claim": {},
+      "claim_values": {
+        "action_concordance": "not_visible",
+        "allocation_proposal": "uncertain",
+        "ballot_disagreement": "present",
+        "explicit_acceptance": "not_visible",
+        "explicit_commitment": "not_visible",
+        "message_delivery": "not_visible",
+        "observable_sequence": "insufficient_evidence",
+        "public_harm": "uncertain"
+      },
+      "error": "private_claim_without_visible_messages:allocation_proposal",
+      "error_class": "view_permission_mismatch",
+      "permission_profile": "public_only",
+      "status": "invalid_output",
+      "unknown_citation_prefix_counts": {},
+      "unknown_citation_prefix_counts_by_claim": {},
+      "view_name": "raw_fusion"
+    },
+    {
+      "abstention_reason_count": 0,
+      "abstention_reasons_valid": true,
+      "all_detected_violations": [],
+      "candidate_id": "M2-V2-C3-compact-cited-json-schema",
+      "citation_count": 13,
+      "citation_counts_by_claim": {
+        "action_concordance": 3,
+        "allocation_proposal": 2,
+        "ballot_disagreement": 3,
+        "message_delivery": 2,
+        "observable_sequence": 3
+      },
+      "citation_prefix_counts": {
+        "M": 6,
+        "P": 7
+      },
+      "citation_prefix_counts_by_claim": {
+        "action_concordance": {
+          "M": 1,
+          "P": 2
+        },
+        "allocation_proposal": {
+          "M": 2
+        },
+        "ballot_disagreement": {
+          "P": 3
+        },
+        "message_delivery": {
+          "M": 2
+        },
+        "observable_sequence": {
+          "M": 1,
+          "P": 2
+        }
+      },
+      "claim_values": {
+        "action_concordance": "both_parties_match",
+        "allocation_proposal": "full_allocation_mapping",
+        "ballot_disagreement": "present",
+        "explicit_acceptance": "not_visible",
+        "explicit_commitment": "not_visible",
+        "message_delivery": "present",
+        "observable_sequence": "supported_observable_sequence",
+        "public_harm": "uncertain"
+      },
+      "error": "none",
+      "error_class": "contract_valid",
+      "permission_profile": "privileged_audit",
+      "status": "valid",
+      "unknown_citation_prefix_counts": {},
+      "unknown_citation_prefix_counts_by_claim": {},
+      "view_name": "structured_evidence"
+    },
+    {
+      "abstention_reason_count": 1,
+      "abstention_reasons_valid": true,
+      "all_detected_violations": [],
+      "candidate_id": "M2-V2-C3-compact-cited-json-schema",
+      "citation_count": 3,
+      "citation_counts_by_claim": {
+        "ballot_disagreement": 3
+      },
+      "citation_prefix_counts": {
+        "P": 3
+      },
+      "citation_prefix_counts_by_claim": {
+        "ballot_disagreement": {
+          "P": 3
+        }
+      },
+      "claim_values": {
+        "action_concordance": "not_visible",
+        "allocation_proposal": "not_visible",
+        "ballot_disagreement": "present",
+        "explicit_acceptance": "not_visible",
+        "explicit_commitment": "not_visible",
+        "message_delivery": "not_visible",
+        "observable_sequence": "insufficient_evidence",
+        "public_harm": "uncertain"
+      },
+      "error": "none",
+      "error_class": "contract_valid",
+      "permission_profile": "public_only",
+      "status": "valid",
+      "unknown_citation_prefix_counts": {},
+      "unknown_citation_prefix_counts_by_claim": {},
+      "view_name": "structured_evidence"
+    },
+    {
+      "abstention_reason_count": 2,
+      "abstention_reasons_valid": true,
+      "all_detected_violations": [
+        "message_delivery_lacks_message_citation"
+      ],
+      "candidate_id": "M2-V2-C3-compact-cited-json-schema",
+      "citation_count": 0,
+      "citation_counts_by_claim": {},
+      "citation_prefix_counts": {},
+      "citation_prefix_counts_by_claim": {},
+      "claim_values": {
+        "action_concordance": "not_visible",
+        "allocation_proposal": "uncertain",
+        "ballot_disagreement": "not_visible",
+        "explicit_acceptance": "not_visible",
+        "explicit_commitment": "not_visible",
+        "message_delivery": "present",
+        "observable_sequence": "insufficient_evidence",
+        "public_harm": "uncertain"
+      },
+      "error": "message_delivery_lacks_message_citation",
+      "error_class": "evidence_reference_violation",
+      "permission_profile": "privileged_audit",
+      "status": "invalid_output",
+      "unknown_citation_prefix_counts": {},
+      "unknown_citation_prefix_counts_by_claim": {},
+      "view_name": "structured_without_findings"
+    },
+    {
+      "abstention_reason_count": 1,
+      "abstention_reasons_valid": true,
+      "all_detected_violations": [
+        "ballot_disagreement_lacks_multiple_public_citations",
+        "ballot_disagreement_lacks_multiple_public_citation"
+      ],
+      "candidate_id": "M2-V2-C3-compact-cited-json-schema",
+      "citation_count": 0,
+      "citation_counts_by_claim": {},
+      "citation_prefix_counts": {},
+      "citation_prefix_counts_by_claim": {},
+      "claim_values": {
+        "action_concordance": "not_visible",
+        "allocation_proposal": "not_visible",
+        "ballot_disagreement": "present",
+        "explicit_acceptance": "not_visible",
+        "explicit_commitment": "not_visible",
+        "message_delivery": "not_visible",
+        "observable_sequence": "insufficient_evidence",
+        "public_harm": "uncertain"
+      },
+      "error": "ballot_disagreement_lacks_multiple_public_citations",
+      "error_class": "evidence_reference_violation",
+      "permission_profile": "public_only",
+      "status": "invalid_output",
+      "unknown_citation_prefix_counts": {},
+      "unknown_citation_prefix_counts_by_claim": {},
+      "view_name": "structured_without_findings"
+    },
+    {
+      "abstention_reason_count": 1,
+      "abstention_reasons_valid": true,
+      "all_detected_violations": [
+        "messages_not_in_view_inapplicable",
+        "omitted_actions_require_abstention_reason",
+        "action_concordance_requires_visible_ballots",
+        "message_delivery_lacks_message_citation"
+      ],
+      "candidate_id": "M2-V2-C3-compact-cited-json-schema",
+      "citation_count": 0,
+      "citation_counts_by_claim": {},
+      "citation_prefix_counts": {},
+      "citation_prefix_counts_by_claim": {},
+      "claim_values": {
+        "action_concordance": "not_visible",
+        "allocation_proposal": "not_visible",
+        "ballot_disagreement": "not_visible",
+        "explicit_acceptance": "not_visible",
+        "explicit_commitment": "not_visible",
+        "message_delivery": "present",
+        "observable_sequence": "insufficient_evidence",
+        "public_harm": "not_visible"
+      },
+      "error": "messages_not_in_view_inapplicable",
+      "error_class": "view_permission_mismatch",
+      "permission_profile": "privileged_audit",
+      "status": "invalid_output",
+      "unknown_citation_prefix_counts": {},
+      "unknown_citation_prefix_counts_by_claim": {},
+      "view_name": "text_only"
+    },
+    {
+      "abstention_reason_count": 2,
+      "abstention_reasons_valid": true,
+      "all_detected_violations": [],
+      "candidate_id": "M2-V2-C3-compact-cited-json-schema",
+      "citation_count": 0,
+      "citation_counts_by_claim": {},
+      "citation_prefix_counts": {},
+      "citation_prefix_counts_by_claim": {},
+      "claim_values": {
+        "action_concordance": "not_visible",
+        "allocation_proposal": "not_visible",
+        "ballot_disagreement": "not_visible",
+        "explicit_acceptance": "not_visible",
+        "explicit_commitment": "not_visible",
+        "message_delivery": "not_visible",
+        "observable_sequence": "insufficient_evidence",
+        "public_harm": "not_visible"
+      },
+      "error": "none",
+      "error_class": "contract_valid",
+      "permission_profile": "public_only",
+      "status": "valid",
+      "unknown_citation_prefix_counts": {},
+      "unknown_citation_prefix_counts_by_claim": {},
+      "view_name": "text_only"
+    }
+  ],
+  "c1_c2_identical_assistant_text_pairs": 10,
+  "candidate_results": [
+    {
+      "all_ten_valid": false,
+      "candidate_id": "M2-V2-C1-full-json-schema",
+      "status_counts": {
+        "invalid_output": 7,
+        "valid": 3
+      }
+    },
+    {
+      "all_ten_valid": false,
+      "candidate_id": "M2-V2-C2-full-json-object-schema",
+      "status_counts": {
+        "invalid_output": 7,
+        "valid": 3
+      }
+    },
+    {
+      "all_ten_valid": false,
+      "candidate_id": "M2-V2-C3-compact-cited-json-schema",
+      "status_counts": {
+        "invalid_output": 7,
+        "valid": 3
+      }
+    }
+  ],
+  "chat_template_sha256": "57f1fd00f0013a2be96aa79b857391f27e23df5b5f847072b524c897e24d0361",
+  "core_enum_values_valid_count": 30,
+  "decision": "NO_GO_INTERFACE",
+  "errors_by_candidate": {
+    "M2-V2-C1-full-json-schema": {
+      "action_claim_without_visible_actions:public_harm": 1,
+      "duplicate_evidence_ref:action_concordance": 1,
+      "messages_not_in_view_inapplicable": 1,
+      "no_delivered_message_conflicts_with_visible_message": 1,
+      "none": 3,
+      "private_claim_without_visible_messages:message_delivery": 3
+    },
+    "M2-V2-C2-full-json-object-schema": {
+      "action_claim_without_visible_actions:public_harm": 1,
+      "duplicate_evidence_ref:action_concordance": 1,
+      "messages_not_in_view_inapplicable": 1,
+      "no_delivered_message_conflicts_with_visible_message": 1,
+      "none": 3,
+      "private_claim_without_visible_messages:message_delivery": 3
+    },
+    "M2-V2-C3-compact-cited-json-schema": {
+      "actions_not_in_view_inapplicable": 2,
+      "ballot_disagreement_lacks_multiple_public_citations": 1,
+      "message_delivery_lacks_message_citation": 2,
+      "messages_not_in_view_inapplicable": 1,
+      "none": 3,
+      "private_claim_without_visible_messages:allocation_proposal": 1
+    }
+  },
+  "external_model_calls": 0,
+  "failure_class_counts": {
+    "abstention_semantics_violation": 2,
+    "contract_valid": 9,
+    "evidence_reference_violation": 3,
+    "other_contract_violation": 4,
+    "view_permission_mismatch": 12
+  },
+  "finish_reason_counts": {
+    "stop": 30
+  },
+  "gpu_memory_free_min_mib": 9745,
+  "gpu_sample_count": 109,
+  "gpu_samples_sha256": "7d6dbe8f6d64b0daa04b18d75a96632ab35c2b0115191d7c61836008f9260811",
+  "gpu_utilization_max_percent": 100,
+  "json_parse_ok_count": 30,
+  "latency_seconds_max": 5.237655,
+  "latency_seconds_median": 3.69307,
+  "launcher_terminated": true,
+  "logical_generation_requests": 30,
+  "model_sha256": "d98cdcbd03e17ce47681435b5150e34c1417f50b5c0019dd560e4882c5745785",
+  "physical_http_attempts": 30,
+  "preflight_decision_sha256": "2b382304f85da9cf306e4d0fec22009ed5ab601302e3c034fa9954db5959e4f8",
+  "preflight_elapsed_seconds": 111.776202,
+  "request_count": 30,
+  "request_response_inventory_sha256": "7af4546acbd67dd50b0f6fc3fcb611f004cf612fb381854c657171b17a56c38b",
+  "response_count": 30,
+  "retries": 0,
+  "root_shape_valid_count": 30,
+  "runtime_bundle_sha256": "9559fd2af95a7e83e3cf4a04aab22b67e1d1a2ec032b1e983ce091a6283c7759",
+  "server_completion_tokens_max": 250,
+  "server_completion_tokens_total": 5237,
+  "server_log_sha256": "268c6d9c22468a08683f474931c56d4d697f1c881b42511293cd0dc6bb0f69b9",
+  "server_prompt_tokens_max": 2698,
+  "server_prompt_tokens_total": 60442,
+  "server_sha256": "3a8aea5f889c4b4c2ec41c98f4e1ed484bb7a40c4096883acb23d3cfe26b59fb",
+  "status": "PASS_INDEPENDENT_PREFLIGHT_RESPONSE_RECOMPUTATION_NO_GO_INTERFACE",
+  "status_counts_by_view_permission": {
+    "action_only|privileged_audit": {
+      "invalid_output": 3
+    },
+    "action_only|public_only": {
+      "invalid_output": 1,
+      "valid": 2
+    },
+    "raw_fusion|privileged_audit": {
+      "invalid_output": 3
+    },
+    "raw_fusion|public_only": {
+      "invalid_output": 1,
+      "valid": 2
+    },
+    "structured_evidence|privileged_audit": {
+      "invalid_output": 2,
+      "valid": 1
+    },
+    "structured_evidence|public_only": {
+      "valid": 3
+    },
+    "structured_without_findings|privileged_audit": {
+      "invalid_output": 3
+    },
+    "structured_without_findings|public_only": {
+      "invalid_output": 3
+    },
+    "text_only|privileged_audit": {
+      "invalid_output": 3
+    },
+    "text_only|public_only": {
+      "invalid_output": 2,
+      "valid": 1
+    }
+  },
+  "tokenizer_sha256": "06e72b9773cfad908874ae1a7aa92686068557c4aa624c857db88fe97052704f"
+}

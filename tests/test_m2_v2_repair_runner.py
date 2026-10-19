@@ -29,6 +29,20 @@ def test_each_repair_has_a_versioned_candidate_registry_and_prompts():
     assert compact_prompt != runner.SYSTEM_COMPACT
 
 
+def test_repair_two_freezes_exact_visibility_rows_without_changing_candidate_gate():
+    registry, full_prompt, compact_prompt = repair.repair_paths(2)
+    value = json.loads(registry.read_text(encoding="utf-8"))
+    assert value["repair_iteration"] == 2
+    assert len(value["candidates"]) == 3
+    for path in (full_prompt, compact_prompt):
+        prompt = path.read_text(encoding="utf-8")
+        for required in (
+                "text_only` + `public_only", "text_only` + `privileged_audit",
+                "`action_only` + either permission", "fused views + `privileged_audit`",
+                "at most once", "finding_id", "source_event_ids"):
+            assert required in prompt
+
+
 def test_repair_loop_rejects_out_of_range_iterations():
     with pytest.raises(ValueError, match="between 1 and 3"):
         repair.repair_paths(4)

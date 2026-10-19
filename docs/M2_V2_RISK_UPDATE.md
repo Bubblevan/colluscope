@@ -7,3 +7,11 @@
 | RV-92 | Repair iterations may exceed the authorized call budget or formal inference may start before the compatibility gate is robust. | A runner now caps the sequence at three repairs, 30 HTTP attempts per repair, and 120 cumulative including the original 30. It requires prior `NO_GO_INTERFACE`, an independent no-call audit, and 10/10 strict valid outputs before formal preparation. | Preserve all attempts and assigned rows. Do not lower thresholds. Stop after repair 3 or any integrity, privacy, or budget violation. Held-out F2/F3 remains gated by F1 validity ≥95%. |
 
 This supplement does not rewrite the earlier risk-register records or the failed compatibility result.
+
+## Repair-01 result
+
+| ID | Risk | Evidence | Control |
+|---|---|---|---|
+| RV-93 | A prose visibility table may not reliably determine the per-field output values, even when JSON and enums are valid. | Repair-01 passed 3/10 in each candidate. The same invalid patterns remained for action-only privileged views, both text-only branches, an inapplicable omission reason, a falsely empty visible message stream, and duplicated claim references. | Repair-02 freezes a per-claim visibility row before content interpretation; retain strict field-by-field validation and the 10/10 gate. |
+
+Repair-01 used 30 local model requests and 30 HTTP attempts, with zero retries. Its independent raw-response audit passed integrity recomputation and recorded `NO_GO_INTERFACE`. No formal monitor evaluation was run.
