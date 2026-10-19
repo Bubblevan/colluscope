@@ -1,0 +1,61 @@
+{
+  "approval_id": "USER-APPROVED-8081-PREFLIGHT-2026-10-19",
+  "external_model_calls": 0,
+  "files": {
+    "approval-record.json": {
+      "sha256": "f80454f158f29a21beb7e845b08e6e88c5b01658150c49230c94d9f9295a8753",
+      "size_bytes": 251
+    },
+    "approved-config.toml": {
+      "sha256": "2210db1f9d2a9948bf2fbb4fafc3d630075345784b10599b556d99c1e77b5ee6",
+      "size_bytes": 3025
+    },
+    "environment.json": {
+      "sha256": "0437d79cde7a810e6079a9077d6a6a3196f215835fb0c5c505b60052de0a41b8",
+      "size_bytes": 11761
+    },
+    "failure.json": {
+      "sha256": "26ce605cdece5c4b4fd8d88d1d3fe3aa0fe2fded32b5026849173ddfabd34fc2",
+      "size_bytes": 366
+    },
+    "gpu-samples.jsonl": {
+      "sha256": "cf0d61cd8bd821bc91f91f66b4cd9f6f476b60c7265bdbdf0e124794b358efbb",
+      "size_bytes": 212727
+    },
+    "launch.json": {
+      "sha256": "e942e5ff204964b2e7468c27a34ca487abcaefc68bad58f1e68d6b4fcec6231c",
+      "size_bytes": 1241
+    },
+    "logs/llama-server.stderr.log": {
+      "sha256": "4f4f564bc09e13ebff9aeddc92323eb3fd3350139fb5dcdcbfaa9009385aa981",
+      "size_bytes": 1130
+    },
+    "logs/llama-server.stdout.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "preflight-inputs.json": {
+      "sha256": "8a6a3f2fb4b21e5832a9969c0166e9009655953ebdfd3a64f1435d8217eac02e",
+      "size_bytes": 14339
+    },
+    "readiness-polls.jsonl": {
+      "sha256": "05b893186c56c5c13d139f8d6ee0eaa46c37bef5e9b2edad32745513e721cf9a",
+      "size_bytes": 94200
+    },
+    "shutdown.json": {
+      "sha256": "e7af0aa1b75784b63f7d53cea3db93556635103332e73ea29edd996da2cf63d5",
+      "size_bytes": 65
+    },
+    "telemetry-summary.json": {
+      "sha256": "93bf135c300379e72a89ba2804901b607b68924430bdba87ff8d2347372b24f3",
+      "size_bytes": 338
+    },
+    "terminal-status.json": {
+      "sha256": "7a5f6dacd5a65f15b4320483b3251767a13f25c384df663b8609c512c8c55231",
+      "size_bytes": 640
+    }
+  },
+  "paid_api_calls": 0,
+  "purpose": "bounded_local_gguf_preflight_8081",
+  "research_episodes": 0
+}

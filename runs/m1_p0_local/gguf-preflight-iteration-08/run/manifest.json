@@ -1,0 +1,65 @@
+{
+  "approval_id": "USER-APPROVED-8081-PREFLIGHT-2026-10-19",
+  "external_model_calls": 0,
+  "files": {
+    "approval-record.json": {
+      "sha256": "a6ac9e5d1a86f24d486764592308cd0863d3176c0dbaa94d355d7484caf49407",
+      "size_bytes": 251
+    },
+    "approved-config.toml": {
+      "sha256": "2210db1f9d2a9948bf2fbb4fafc3d630075345784b10599b556d99c1e77b5ee6",
+      "size_bytes": 3025
+    },
+    "environment.json": {
+      "sha256": "d6bb102169a06d1725d2dd50e4a9daf2229abd93be9894109f46746eda4f9c36",
+      "size_bytes": 11761
+    },
+    "failure.json": {
+      "sha256": "8a1688328c8b0cdea1195b6194d7ca8ee08485441e8f2105a856f2feb9e0a03e",
+      "size_bytes": 233
+    },
+    "gpu-samples.jsonl": {
+      "sha256": "4d2ce7988fe9405756d654b70644d8df77d52ae259d74ed3da8b96ac08175eef",
+      "size_bytes": 20194
+    },
+    "launch.json": {
+      "sha256": "b89ee5f6a73bdf6f68cbd521435c0c78d0ea0a2e6f50ffba55f77b3d415b1672",
+      "size_bytes": 1241
+    },
+    "listener-owner-attestations.jsonl": {
+      "sha256": "b70f47bd7b92959b8e9ad02508aeef0b72cfdd45ea88faaa8603f07935bb1422",
+      "size_bytes": 598
+    },
+    "logs/llama-server.stderr.log": {
+      "sha256": "1e16076468ed736add18388b7d43e9f9c1de344452bfcbf041aa860bf888e459",
+      "size_bytes": 1130
+    },
+    "logs/llama-server.stdout.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "preflight-inputs.json": {
+      "sha256": "8a6a3f2fb4b21e5832a9969c0166e9009655953ebdfd3a64f1435d8217eac02e",
+      "size_bytes": 14339
+    },
+    "readiness-polls.jsonl": {
+      "sha256": "6bc577b708c4771f05ab2bb68e5955732806081c136e0fb77fe6cdfb6995cbfa",
+      "size_bytes": 175
+    },
+    "shutdown.json": {
+      "sha256": "f3c50e75a71e5254a1a6297c0acfec101ad23da8b78580b5dcc697e32bf87db5",
+      "size_bytes": 65
+    },
+    "telemetry-summary.json": {
+      "sha256": "bd2925b67d64aa519e4e97d926fcf93e0a67749cb11c7cbf773ef635fb090fe0",
+      "size_bytes": 336
+    },
+    "terminal-status.json": {
+      "sha256": "4e52d2eb10deeb42f3414d3280c8f996d8606eccfe123c913e511a5978cc8834",
+      "size_bytes": 507
+    }
+  },
+  "paid_api_calls": 0,
+  "purpose": "bounded_local_gguf_preflight_8081",
+  "research_episodes": 0
+}

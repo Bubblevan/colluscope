@@ -1,0 +1,1 @@
+{"at_utc": "2026-10-19T05:12:33.433564+00:00", "attempt": 1, "error": "PermissionError: [WinError 10013] 以一种访问权限不允许的方式做了一个访问套接字的尝试。", "expected_pid": 52756, "monotonic_ns": 115365578000000, "status": "tcp_access_denied"}

@@ -1,0 +1,9 @@
+{
+  "at_utc": "2026-10-19T04:56:33.411713+00:00",
+  "failure": {
+    "error": "llama-server did not bind the approved port within 180 seconds",
+    "type": "TimeoutError"
+  },
+  "process_pid": 45600,
+  "status": "FAIL"
+}

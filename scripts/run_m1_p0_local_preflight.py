@@ -18,6 +18,8 @@ import sys
 import threading
 import time
 import tomllib
+import urllib.error
+import urllib.request
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
@@ -64,8 +66,11 @@ def _write_jsonl(path: Path, value: dict[str, Any]) -> None:
 def _listener_snapshot(port: int) -> tuple[list[dict[str, Any]], str]:
     if os.name != "nt":
         raise RuntimeError("listener-owner attestation currently requires Windows")
+    if not isinstance(port, int) or isinstance(port, bool) or not 1 <= port <= 65535:
+        raise ValueError("listener query requires a valid TCP port")
     result = subprocess.run(["netstat.exe", "-ano", "-p", "tcp"],
-                            capture_output=True, text=True, timeout=10, check=False)
+                            capture_output=True, text=True, encoding="utf-8", errors="replace",
+                            timeout=10, check=False)
     if result.returncode != 0:
         raise RuntimeError(f"netstat listener query failed: {result.stderr.strip()}")
     rows: list[dict[str, Any]] = []
@@ -90,11 +95,74 @@ def _listener_snapshot(port: int) -> tuple[list[dict[str, Any]], str]:
             rows.append({"LocalAddress": normalized_address, "LocalPort": local_port,
                          "OwningProcess": owner_pid})
             matched_lines.append(line.strip())
-    return rows, "\n".join(matched_lines)
+    if rows:
+        return rows, "netstat: " + "\n".join(matched_lines)
+
+    # netstat.exe has intermittently omitted a live llama-server listener in
+    # this Windows session even though the kernel TCP table and a direct HTTP
+    # client could see it. Use the PowerShell TCP table as an independent,
+    # bounded fallback; the caller still checks the exact PID and image.
+    command = (
+        "$rows = @(Get-NetTCPConnection -LocalPort " + str(port) +
+        " -State Listen -ErrorAction Stop | "
+        "Select-Object LocalAddress,LocalPort,OwningProcess); "
+        "ConvertTo-Json -InputObject $rows -Compress"
+    )
+    fallback = subprocess.run(["powershell.exe", "-NoProfile", "-NonInteractive", "-Command", command],
+                              capture_output=True, text=True, encoding="utf-8", errors="replace",
+                              timeout=10, check=False)
+    diagnostics = "netstat: no matching listener"
+    if fallback.returncode != 0:
+        return [], diagnostics + "; powershell fallback failed: " + (fallback.stderr or "").strip()
+    try:
+        raw_rows = json.loads(fallback.stdout.strip() or "[]")
+    except json.JSONDecodeError as exc:
+        raise RuntimeError(f"PowerShell listener query returned malformed JSON: {exc}") from exc
+    if isinstance(raw_rows, dict):
+        raw_rows = [raw_rows]
+    if not isinstance(raw_rows, list):
+        raise RuntimeError("PowerShell listener query did not return a row list")
+    for item in raw_rows:
+        if not isinstance(item, dict):
+            raise RuntimeError("PowerShell listener query returned a malformed row")
+        try:
+            row = {"LocalAddress": str(item["LocalAddress"]),
+                   "LocalPort": int(item["LocalPort"]),
+                   "OwningProcess": int(item["OwningProcess"])}
+        except (KeyError, TypeError, ValueError) as exc:
+            raise RuntimeError(f"PowerShell listener query row is incomplete: {item!r}") from exc
+        if row["LocalPort"] == port:
+            rows.append(row)
+    return rows, diagnostics + "; powershell: " + fallback.stdout.strip()
 
 
 def _listener_rows(port: int) -> list[dict[str, Any]]:
     return _listener_snapshot(port)[0]
+
+
+def _wait_for_server_startup(process: subprocess.Popen[bytes], readiness_path: Path,
+                             settle_seconds: float = 15) -> None:
+    """Let llama-server finish local model initialization before any socket probe.
+
+    Runner parity experiments found that listener-table attestation followed by
+    HTTP works, while a client TCP probe before that attestation can receive
+    WinError 10013. The frozen model loads in about 4–6 seconds here; 15 seconds
+    gives startup margin without spawning repeated OS queries or connections.
+    """
+    if settle_seconds < 0:
+        raise ValueError("server startup settle time cannot be negative")
+    deadline = time.monotonic() + settle_seconds
+    while time.monotonic() < deadline:
+        if process.poll() is not None:
+            raise RuntimeError(f"llama-server exited during startup with code {process.returncode}")
+        time.sleep(min(0.25, max(0.0, deadline - time.monotonic())))
+    if process.poll() is not None:
+        raise RuntimeError(f"llama-server exited during startup with code {process.returncode}")
+    _write_jsonl(readiness_path, {"at_utc": datetime.now(timezone.utc).isoformat(),
+                                  "monotonic_ns": time.monotonic_ns(),
+                                  "expected_pid": process.pid,
+                                  "settle_seconds": settle_seconds,
+                                  "status": "startup_settle_elapsed_process_alive"})
 
 
 def _process_image(pid: int) -> str:
@@ -385,6 +453,7 @@ def execute(config_path: Path, runtime_config_path: Path, original_config_path: 
         process = subprocess.Popen(command, stdin=subprocess.DEVNULL, stdout=stdout_stream,
                                   stderr=stderr_stream, cwd=str(server_path.parent),
                                   creationflags=flags, close_fds=True)
+        sampler.set_phase("server_starting_model_load")
         launched_image = _process_image(process.pid)
         if launched_image.casefold() != str(server_path).casefold():
             raise RuntimeError(f"launched PID image mismatch: {launched_image}")
@@ -393,29 +462,37 @@ def execute(config_path: Path, runtime_config_path: Path, original_config_path: 
                     "created_at_utc": datetime.now(timezone.utc).isoformat(),
                     "port": PORT, "host": "127.0.0.1"})
 
-        deadline = time.monotonic() + 180
-        owner_rows: list[dict[str, Any]] = []
         readiness_path = out_dir / "readiness-polls.jsonl"
-        while time.monotonic() < deadline:
-            if process.poll() is not None:
-                raise RuntimeError(f"llama-server exited during startup with code {process.returncode}")
-            owner_rows, matching_netstat_lines = _listener_snapshot(PORT)
-            _write_jsonl(readiness_path, {"at_utc": datetime.now(timezone.utc).isoformat(),
-                                          "monotonic_ns": time.monotonic_ns(),
-                                          "expected_pid": process.pid, "listener_rows": owner_rows,
-                                          "netstat_matching_lines": matching_netstat_lines,
-                                          "process_exit_code": process.poll()})
-            if owner_rows:
-                break
-            time.sleep(0.5)
-        if not owner_rows:
-            raise TimeoutError("llama-server did not bind the approved port within 180 seconds")
+        _wait_for_server_startup(process, readiness_path, settle_seconds=15)
+        owner_rows, owner_diagnostics = _listener_snapshot(PORT)
+        _write_jsonl(out_dir / "listener-owner-attestations.jsonl", {
+            "at_utc": datetime.now(timezone.utc).isoformat(), "expected_pid": process.pid,
+            "listener_rows": owner_rows, "query_diagnostics": owner_diagnostics})
         if owner_rows != [{"LocalAddress": "127.0.0.1", "LocalPort": PORT,
                            "OwningProcess": process.pid}]:
             raise PermissionError(f"port ownership/address is not the launched loopback server: {owner_rows}")
         if _process_image(process.pid).casefold() != str(server_path).casefold():
             raise PermissionError("server PID image changed after startup")
-        sampler.set_phase("server_loaded_waiting_for_preflight")
+
+        health_url = f"http://127.0.0.1:{PORT}/health"
+        try:
+            opener = urllib.request.build_opener(urllib.request.ProxyHandler({}))
+            with opener.open(health_url, timeout=5) as response:
+                health_body = response.read(4097).decode("utf-8", errors="strict")
+                health_status = response.status
+            health_payload = json.loads(health_body)
+            if health_status != 200 or health_payload.get("status") != "ok":
+                raise RuntimeError("llama.cpp /health returned a non-ready response")
+            _write_json(out_dir / "server-health.json", {
+                "status": "PASS", "method": "GET", "url": health_url,
+                "http_status": health_status, "response_body": health_body,
+                "pid": process.pid, "pid_image": launched_image})
+        except Exception as exc:
+            _write_json(out_dir / "server-health.json", {
+                "status": "FAIL", "method": "GET", "url": health_url,
+                "error_type": type(exc).__name__, "error": str(exc), "pid": process.pid})
+            raise
+        sampler.set_phase("server_listening_waiting_for_preflight")
 
         def listener_guard() -> bool:
             if process is None or process.poll() is not None:

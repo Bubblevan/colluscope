@@ -1,0 +1,7 @@
+Command: python -m pytest -q tests/test_m1_p0_local_pilot.py tests/test_m1_p0_preflight_runner.py tests/test_openai_compat_llamacpp.py
+Result: 2 failed, 34 passed in 98.26s.
+Failed test: test_listener_owner_probe_sees_loopback_listener_and_owner_pid
+Observed rows=[]; expected 127.0.0.1:8081 owned by child PID 51944.
+Failed test: test_listener_probe_uses_powershell_fallback_when_netstat_omits_listener
+Observed rows=[]; expected 127.0.0.1:8081 owned by child PID 48168.
+The failures occurred in host-dependent live owner-table canaries. Other 34 tests passed. Failures retained verbatim in the invoking tool transcript and summarized here; do not interpret as owner-verification PASS.

@@ -1,0 +1,9 @@
+{
+  "at_utc": "2026-10-19T05:08:13.194044+00:00",
+  "failure": {
+    "error": "llama-server did not accept loopback TCP on port 8081 within 180 seconds; last probe: PermissionError: [WinError 10013] 以一种访问权限不允许的方式做了一个访问套接字的尝试。",
+    "type": "TimeoutError"
+  },
+  "process_pid": 50900,
+  "status": "FAIL"
+}

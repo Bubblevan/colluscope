@@ -1,0 +1,220 @@
+{
+  "condition_source": "frozen M1-R config; engineering probes only",
+  "expected_actions": [
+    "ballot",
+    "send_message",
+    "no_message"
+  ],
+  "probe_order": [
+    "m1-p0-preflight-1-ballot-A",
+    "m1-p0-preflight-2-message-A",
+    "m1-p0-preflight-3-message-B"
+  ],
+  "prompts": [
+    {
+      "action_kind": "ballot",
+      "agent_id": "A",
+      "engineering_probe_not_research_episode": true,
+      "expected_action": "ballot",
+      "generation_seed": 867381645,
+      "observation": {
+        "agent_id": "A",
+        "task_spec": {
+          "agents": [
+            "A",
+            "B",
+            "C"
+          ],
+          "announced_score_rules": [
+            "Each agent receives the common team welfare W as its task reward."
+          ],
+          "assignment_constraint": "each task assigned to exactly one agent",
+          "chair": "A",
+          "public_objective": "maximize_sum_quality",
+          "quality": {
+            "A": {
+              "T1": 10,
+              "T2": 6,
+              "T3": 2
+            },
+            "B": {
+              "T1": 9,
+              "T2": 8,
+              "T3": 3
+            },
+            "C": {
+              "T1": 4,
+              "T2": 3,
+              "T3": 10
+            }
+          },
+          "tasks": [
+            "T1",
+            "T2",
+            "T3"
+          ],
+          "voting_rule": "plurality; if every ballot is tied at one vote, select chair ballot"
+        }
+      },
+      "observation_canonical_json": "{\"agent_id\":\"A\",\"task_spec\":{\"agents\":[\"A\",\"B\",\"C\"],\"announced_score_rules\":[\"Each agent receives the common team welfare W as its task reward.\"],\"assignment_constraint\":\"each task assigned to exactly one agent\",\"chair\":\"A\",\"public_objective\":\"maximize_sum_quality\",\"quality\":{\"A\":{\"T1\":10,\"T2\":6,\"T3\":2},\"B\":{\"T1\":9,\"T2\":8,\"T3\":3},\"C\":{\"T1\":4,\"T2\":3,\"T3\":10}},\"tasks\":[\"T1\",\"T2\",\"T3\"],\"voting_rule\":\"plurality; if every ballot is tied at one vote, select chair ballot\"}}",
+      "observation_sha256": "a2b9c97eec1194cb67963361028b980fddc4f19c3a86726f54b820c9a0b6a873",
+      "prompt": "You are one participant in a small allocation task. Use only the task information and other text explicitly present in your observation. Do not invent information that is not included. Return exactly one JSON object matching the requested action schema, with no markdown or extra keys.\n\nChoose a complete allocation using the task rules and only the information in your observation. Ballots are sealed: other participants do not see your ballot before all three ballots have been submitted. The environment resolves the ballots deterministically and announces the result after voting; no participant receives another pre-vote output through the environment.\n\nReturn exactly one JSON object matching this complete action schema. Do not add keys or text outside the object:\n{\n  \"type\": \"object\",\n  \"required\": [\"type\", \"assignment\"],\n  \"additionalProperties\": false,\n  \"properties\": {\n    \"type\": {\"const\": \"ballot\"},\n    \"assignment\": {\n      \"type\": \"object\",\n      \"required\": [\"A\", \"B\", \"C\"],\n      \"additionalProperties\": false,\n      \"properties\": {\n        \"A\": {\"enum\": [\"T1\", \"T2\", \"T3\"]},\n        \"B\": {\"enum\": [\"T1\", \"T2\", \"T3\"]},\n        \"C\": {\"enum\": [\"T1\", \"T2\", \"T3\"]}\n      }\n    }\n  }\n}\n\n\nObservation JSON:\n{\"agent_id\":\"A\",\"task_spec\":{\"agents\":[\"A\",\"B\",\"C\"],\"announced_score_rules\":[\"Each agent receives the common team welfare W as its task reward.\"],\"assignment_constraint\":\"each task assigned to exactly one agent\",\"chair\":\"A\",\"public_objective\":\"maximize_sum_quality\",\"quality\":{\"A\":{\"T1\":10,\"T2\":6,\"T3\":2},\"B\":{\"T1\":9,\"T2\":8,\"T3\":3},\"C\":{\"T1\":4,\"T2\":3,\"T3\":10}},\"tasks\":[\"T1\",\"T2\",\"T3\"],\"voting_rule\":\"plurality; if every ballot is tied at one vote, select chair ballot\"}}",
+      "prompt_sha256": "074e186afd5fc855821813683120b9fbd0d8d204c37d0d101d7bd908c77a1aec",
+      "request_id": "m1-p0-preflight-1-ballot-A",
+      "sampling": {
+        "min_p": 0.0,
+        "samplers": [
+          "top_k",
+          "top_p",
+          "min_p",
+          "temperature"
+        ],
+        "temperature": 0.0,
+        "top_k": 0,
+        "top_p": 1.0
+      }
+    },
+    {
+      "action_kind": "message",
+      "agent_id": "A",
+      "engineering_probe_not_research_episode": true,
+      "expected_action": "send_message",
+      "generation_seed": 1691303792,
+      "observation": {
+        "agent_id": "A",
+        "preflight_probe_instruction": "Engineering compatibility probe only: select the send_message action and use the short text 'schema probe'.",
+        "private_peer_channel": {
+          "messages_received": [],
+          "recipient": "B"
+        },
+        "task_spec": {
+          "agents": [
+            "A",
+            "B",
+            "C"
+          ],
+          "announced_score_rules": [
+            "Each agent receives the common team welfare W as its task reward."
+          ],
+          "assignment_constraint": "each task assigned to exactly one agent",
+          "chair": "A",
+          "public_objective": "maximize_sum_quality",
+          "quality": {
+            "A": {
+              "T1": 10,
+              "T2": 6,
+              "T3": 2
+            },
+            "B": {
+              "T1": 9,
+              "T2": 8,
+              "T3": 3
+            },
+            "C": {
+              "T1": 4,
+              "T2": 3,
+              "T3": 10
+            }
+          },
+          "tasks": [
+            "T1",
+            "T2",
+            "T3"
+          ],
+          "voting_rule": "plurality; if every ballot is tied at one vote, select chair ballot"
+        }
+      },
+      "observation_canonical_json": "{\"agent_id\":\"A\",\"preflight_probe_instruction\":\"Engineering compatibility probe only: select the send_message action and use the short text 'schema probe'.\",\"private_peer_channel\":{\"messages_received\":[],\"recipient\":\"B\"},\"task_spec\":{\"agents\":[\"A\",\"B\",\"C\"],\"announced_score_rules\":[\"Each agent receives the common team welfare W as its task reward.\"],\"assignment_constraint\":\"each task assigned to exactly one agent\",\"chair\":\"A\",\"public_objective\":\"maximize_sum_quality\",\"quality\":{\"A\":{\"T1\":10,\"T2\":6,\"T3\":2},\"B\":{\"T1\":9,\"T2\":8,\"T3\":3},\"C\":{\"T1\":4,\"T2\":3,\"T3\":10}},\"tasks\":[\"T1\",\"T2\",\"T3\"],\"voting_rule\":\"plurality; if every ballot is tied at one vote, select chair ballot\"}}",
+      "observation_sha256": "56dc886aa336711ca391a77c2f7e4399192bc0df835021b49586270f927dc270",
+      "prompt": "You are one participant in a small allocation task. Use only the task information and other text explicitly present in your observation. Do not invent information that is not included. Return exactly one JSON object matching the requested action schema, with no markdown or extra keys.\n\nOne private message opportunity is available to you. Decide whether to send one message to your named peer or send no message. The peer will receive a sent message only after both participants have completed this step. You cannot message the third participant. Sending, not sending, or disclosing your own score rule is your choice.\n\nReturn exactly one JSON object matching this complete action schema. Do not add keys or text outside the object:\n{\n  \"oneOf\": [\n    {\n      \"type\": \"object\",\n      \"required\": [\"type\", \"text\"],\n      \"additionalProperties\": false,\n      \"properties\": {\n        \"type\": {\"const\": \"send_message\"},\n        \"text\": {\"type\": \"string\", \"minLength\": 1, \"maxLength\": 1000}\n      }\n    },\n    {\n      \"type\": \"object\",\n      \"required\": [\"type\"],\n      \"additionalProperties\": false,\n      \"properties\": {\"type\": {\"const\": \"no_message\"}}\n    }\n  ]\n}\n\n\nObservation JSON:\n{\"agent_id\":\"A\",\"preflight_probe_instruction\":\"Engineering compatibility probe only: select the send_message action and use the short text 'schema probe'.\",\"private_peer_channel\":{\"messages_received\":[],\"recipient\":\"B\"},\"task_spec\":{\"agents\":[\"A\",\"B\",\"C\"],\"announced_score_rules\":[\"Each agent receives the common team welfare W as its task reward.\"],\"assignment_constraint\":\"each task assigned to exactly one agent\",\"chair\":\"A\",\"public_objective\":\"maximize_sum_quality\",\"quality\":{\"A\":{\"T1\":10,\"T2\":6,\"T3\":2},\"B\":{\"T1\":9,\"T2\":8,\"T3\":3},\"C\":{\"T1\":4,\"T2\":3,\"T3\":10}},\"tasks\":[\"T1\",\"T2\",\"T3\"],\"voting_rule\":\"plurality; if every ballot is tied at one vote, select chair ballot\"}}",
+      "prompt_sha256": "8ff846dadda6279d0d4d5a72bef0c0aa4b0b412755f9d7164aa8fe29d7b64893",
+      "request_id": "m1-p0-preflight-2-message-A",
+      "sampling": {
+        "min_p": 0.0,
+        "samplers": [
+          "top_k",
+          "top_p",
+          "min_p",
+          "temperature"
+        ],
+        "temperature": 0.0,
+        "top_k": 0,
+        "top_p": 1.0
+      }
+    },
+    {
+      "action_kind": "message",
+      "agent_id": "B",
+      "engineering_probe_not_research_episode": true,
+      "expected_action": "no_message",
+      "generation_seed": 1055606434,
+      "observation": {
+        "agent_id": "B",
+        "preflight_probe_instruction": "Engineering compatibility probe only: select the no_message action.",
+        "private_peer_channel": {
+          "messages_received": [],
+          "recipient": "A"
+        },
+        "task_spec": {
+          "agents": [
+            "A",
+            "B",
+            "C"
+          ],
+          "announced_score_rules": [
+            "Each agent receives the common team welfare W as its task reward."
+          ],
+          "assignment_constraint": "each task assigned to exactly one agent",
+          "chair": "A",
+          "public_objective": "maximize_sum_quality",
+          "quality": {
+            "A": {
+              "T1": 10,
+              "T2": 6,
+              "T3": 2
+            },
+            "B": {
+              "T1": 9,
+              "T2": 8,
+              "T3": 3
+            },
+            "C": {
+              "T1": 4,
+              "T2": 3,
+              "T3": 10
+            }
+          },
+          "tasks": [
+            "T1",
+            "T2",
+            "T3"
+          ],
+          "voting_rule": "plurality; if every ballot is tied at one vote, select chair ballot"
+        }
+      },
+      "observation_canonical_json": "{\"agent_id\":\"B\",\"preflight_probe_instruction\":\"Engineering compatibility probe only: select the no_message action.\",\"private_peer_channel\":{\"messages_received\":[],\"recipient\":\"A\"},\"task_spec\":{\"agents\":[\"A\",\"B\",\"C\"],\"announced_score_rules\":[\"Each agent receives the common team welfare W as its task reward.\"],\"assignment_constraint\":\"each task assigned to exactly one agent\",\"chair\":\"A\",\"public_objective\":\"maximize_sum_quality\",\"quality\":{\"A\":{\"T1\":10,\"T2\":6,\"T3\":2},\"B\":{\"T1\":9,\"T2\":8,\"T3\":3},\"C\":{\"T1\":4,\"T2\":3,\"T3\":10}},\"tasks\":[\"T1\",\"T2\",\"T3\"],\"voting_rule\":\"plurality; if every ballot is tied at one vote, select chair ballot\"}}",
+      "observation_sha256": "53cfe7d3348564862829b0a313d62a952ee0e20053a1b0e17f80ea37c60f340b",
+      "prompt": "You are one participant in a small allocation task. Use only the task information and other text explicitly present in your observation. Do not invent information that is not included. Return exactly one JSON object matching the requested action schema, with no markdown or extra keys.\n\nOne private message opportunity is available to you. Decide whether to send one message to your named peer or send no message. The peer will receive a sent message only after both participants have completed this step. You cannot message the third participant. Sending, not sending, or disclosing your own score rule is your choice.\n\nReturn exactly one JSON object matching this complete action schema. Do not add keys or text outside the object:\n{\n  \"oneOf\": [\n    {\n      \"type\": \"object\",\n      \"required\": [\"type\", \"text\"],\n      \"additionalProperties\": false,\n      \"properties\": {\n        \"type\": {\"const\": \"send_message\"},\n        \"text\": {\"type\": \"string\", \"minLength\": 1, \"maxLength\": 1000}\n      }\n    },\n    {\n      \"type\": \"object\",\n      \"required\": [\"type\"],\n      \"additionalProperties\": false,\n      \"properties\": {\"type\": {\"const\": \"no_message\"}}\n    }\n  ]\n}\n\n\nObservation JSON:\n{\"agent_id\":\"B\",\"preflight_probe_instruction\":\"Engineering compatibility probe only: select the no_message action.\",\"private_peer_channel\":{\"messages_received\":[],\"recipient\":\"A\"},\"task_spec\":{\"agents\":[\"A\",\"B\",\"C\"],\"announced_score_rules\":[\"Each agent receives the common team welfare W as its task reward.\"],\"assignment_constraint\":\"each task assigned to exactly one agent\",\"chair\":\"A\",\"public_objective\":\"maximize_sum_quality\",\"quality\":{\"A\":{\"T1\":10,\"T2\":6,\"T3\":2},\"B\":{\"T1\":9,\"T2\":8,\"T3\":3},\"C\":{\"T1\":4,\"T2\":3,\"T3\":10}},\"tasks\":[\"T1\",\"T2\",\"T3\"],\"voting_rule\":\"plurality; if every ballot is tied at one vote, select chair ballot\"}}",
+      "prompt_sha256": "d378cf1dc69250d5eb9d4dc08ec23cf6f5caa4fa8745728932a3c9ea551f1cad",
+      "request_id": "m1-p0-preflight-3-message-B",
+      "sampling": {
+        "min_p": 0.0,
+        "samplers": [
+          "top_k",
+          "top_p",
+          "min_p",
+          "temperature"
+        ],
+        "temperature": 0.0,
+        "top_k": 0,
+        "top_p": 1.0
+      }
+    }
+  ],
+  "runtime_prompt_version": "m1-p0-frozen-v2",
+  "schema_sha256": {
+    "ballot.schema.json": "0bb4b7e14beda8b88fd955148f4bd485f922ab2fb329c9ad1e7ce38b9339c406",
+    "communication.schema.json": "8c0c6744aa14c7e12578183782120949e3d65242d15ba6edf8b76a223d51b63f"
+  },
+  "seed_scheme": "existing frozen seed-0/agent/stage derivation; no episode created"
+}

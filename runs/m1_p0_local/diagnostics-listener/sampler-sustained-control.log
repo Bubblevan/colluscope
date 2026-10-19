@@ -1,0 +1,30 @@
+pid 7604 poll None gpu_samples 138 gpu_success 138
+http health 200 0.0 {"status":"ok"}
+http props 200 0.0 {"default_generation_settings":{"params":{"seed":4294967295,"temperature":0.0,"dynatemp_range":0.0,"dynatemp_exponent":1.0,"top_k":0,"top_p":1.0,"min_p":0.0,"top_n_sigma":-1.0,"xtc_probability":0.0,"xtc_threshold":0.10000000149011612,"typical_p":1.0,"repeat_last_n":64,"repeat_penalty":1.0,"presence_penalty":0.0,"frequency_penalty":0.0,"dry_multiplier":0.0,"dry_base":1.75,"dry_allowed_length":2,"dry_penalty_last_n":-1,"mirostat":0,"mirostat_tau":5.0,"mirostat_eta":0.10000000149011612,"max_tokens"
+server_exit 1 stderr_tail 0.00.286.806 I cmn  common_param: common_params_print_info: verbosity = 3 (adjust with the `-lv N` CLI arg)
+
+0.00.291.050 I srv          init: The UI is disabled
+
+0.00.291.053 I srv          init: Use --ui/--no-ui (or deprecated --webui/--no-webui) to enable/disable
+
+0.00.291.151 W srv  llama_server: -----------------
+
+0.00.291.153 W srv  llama_server: CORS is set to allow all origins ('*') and no API key is set
+
+0.00.291.153 W srv  llama_server: this can be a security risk (cross-origin attacks)
+
+0.00.291.154 W srv  llama_server: more info: https://github.com/ggml-org/llama.cpp/pull/25655
+
+0.00.291.154 W srv  llama_server: -----------------
+
+0.00.295.766 I srv    load_model: loading model 'E:\Health-Copilot-Models\models\qwen3-8b\Qwen3-8B-Q4_K_M.gguf'
+
+0.00.440.294 W load: control-looking token: 128247 '</s>' was not control-type; this is probably a bug in the model. its type will be overridden
+
+0.03.662.014 I srv    load_model: initializing, n_slots = 1, n_ctx_slot = 4096, kv_unified = 'false'
+
+0.03.669.051 I srv  llama_server: model loaded
+
+0.03.669.097 I srv  llama_server: listening on http://127.0.0.1:8081
+
+

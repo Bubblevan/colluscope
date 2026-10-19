@@ -1,0 +1,36 @@
+pid 18032 poll None image C:\Users\bubblevan\AppData\Local\Microsoft\WinGet\Packages\ggml.llamacpp_Microsoft.Winget.Source_8wekyb3d8bbwe\llama-server.exe
+listener_snapshot ([{'LocalAddress': '127.0.0.1', 'LocalPort': 8081, 'OwningProcess': 18032}], 'TCP    127.0.0.1:8081         0.0.0.0:0              LISTENING       18032')
+raw_matching_lines ["'  TCP    127.0.0.1:8081         0.0.0.0:0              LISTENING       18032'"]
+tcp_connect PASS
+health_response b'HTTP/1.1 200 OK\r\nServer: llama.cpp\r\nAccess-Control-Allow-Origin: \r\nContent-Type: application/json; charset=utf-8\r\nContent-Length: 15\r\nConnection: close\r\n\r\n{"status":"ok"}'
+url_result http://127.0.0.1:8081/health 200 {"status":"ok"}
+url_result http://127.0.0.1:8081/props 200 {"default_generation_settings":{"params":{"seed":4294967295,"temperature":0.0,"dynatemp_range":0.0,"dynatemp_exponent":1.0,"top_k":0,"top_p":1.0,"min_p":0.0,"top_n_sigma":-1.0,"xtc_probability":0.0,"xtc_threshold":0.10000000149011612,"typical_p":1.0,"repeat_last_n":64,"repeat_penalty":1.0,"presence_penalty":0.0,"frequency_penalty":0.0,"dry_multiplier":0.0,"dry_base":1.75,"dry_allowed_length":2,"dry_penalty_last_n":-1,"mirostat":0,"mirostat_tau":5.0,"mirostat_eta":0.10000000149011612,"max_tokens":-1,"n_predict":-1,"n_keep":0,"n_discard":0,"ignore_eos":false,"stream":false,"n_probs":0,"min_keep":0,"chat_format":"Content-only","reasoning_format":"none","reasoning_in_content":false,"generation_prompt":"","samplers":["top_k","top_p","min_p","temperature"],"speculative.types":"none","timings_per_token":false,"post_sampling_probs":false,"backend_sampling":false,"lora":[]},"n_ctx":4096},"total_slots":1,"model_alias":"colluscope-qwen3-8b-q4km","model_ftype":"Q4_K - Medium","model_path":"E:\\Hea
+server_exit 1
+server_stderr_tail 0.00.306.590 I cmn  common_param: common_params_print_info: verbosity = 3 (adjust with the `-lv N` CLI arg)
+
+0.00.312.113 I srv          init: The UI is disabled
+
+0.00.312.116 I srv          init: Use --ui/--no-ui (or deprecated --webui/--no-webui) to enable/disable
+
+0.00.312.226 W srv  llama_server: -----------------
+
+0.00.312.229 W srv  llama_server: CORS is set to allow all origins ('*') and no API key is set
+
+0.00.312.229 W srv  llama_server: this can be a security risk (cross-origin attacks)
+
+0.00.312.230 W srv  llama_server: more info: https://github.com/ggml-org/llama.cpp/pull/25655
+
+0.00.312.230 W srv  llama_server: -----------------
+
+0.00.324.335 I srv    load_model: loading model 'E:\Health-Copilot-Models\models\qwen3-8b\Qwen3-8B-Q4_K_M.gguf'
+
+0.00.472.087 W load: control-looking token: 128247 '</s>' was not control-type; this is probably a bug in the model. its type will be overridden
+
+0.03.395.728 I srv    load_model: initializing, n_slots = 1, n_ctx_slot = 4096, kv_unified = 'false'
+
+0.03.402.913 I srv  llama_server: model loaded
+
+0.03.402.919 I srv  llama_server: listening on http://127.0.0.1:8081
+
+
+server_stdout_tail 

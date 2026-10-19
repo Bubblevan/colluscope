@@ -1,0 +1,6 @@
+child_pid 28952 child_poll None netstat_exit 0
+matching_line_repr '  TCP    127.0.0.1:8081         0.0.0.0:0              LISTENING       28952' fields ['TCP', '127.0.0.1:8081', '0.0.0.0:0', 'LISTENING', '28952']
+matching_line_repr '  TCP    127.0.0.1:8081         127.0.0.1:41942        TIME_WAIT       0' fields ['TCP', '127.0.0.1:8081', '127.0.0.1:41942', 'TIME_WAIT', '0']
+helper_result ([{'LocalAddress': '127.0.0.1', 'LocalPort': 8081, 'OwningProcess': 28952}], 'TCP    127.0.0.1:8081         0.0.0.0:0              LISTENING       28952')
+child_stdout 
+child_stderr 

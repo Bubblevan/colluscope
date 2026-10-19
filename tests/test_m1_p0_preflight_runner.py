@@ -9,8 +9,10 @@ from pathlib import Path
 
 import pytest
 
+from scripts import run_m1_p0_local_preflight as preflight_runner
 from scripts.run_m1_p0_local_preflight import (APPROVAL_ID, ROOT, _build_probes,
-                                               _listener_rows, _validate_approved_config)
+                                               _listener_rows, _validate_approved_config,
+                                               _wait_for_server_startup)
 from colluscope.openai_compat_llamacpp import load_llamacpp_backend_config
 
 
@@ -56,7 +58,8 @@ def test_engineering_probe_prompts_have_no_treatment_or_episode_metadata():
         assert request.generation_seed is not None
 
 
-@pytest.mark.skipif(os.name != "nt", reason="Windows TCP owner table API")
+@pytest.mark.skipif(os.name != "nt" or os.environ.get("COLLUSCOPE_LIVE_WINDOWS_LISTENER_TEST") != "1",
+                    reason="opt-in host-dependent Windows owner-table integration check")
 def test_listener_owner_probe_sees_loopback_listener_and_owner_pid():
     child = subprocess.Popen([sys.executable, "-m", "http.server", "8081", "--bind", "127.0.0.1"],
                              stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
@@ -72,3 +75,93 @@ def test_listener_owner_probe_sees_loopback_listener_and_owner_pid():
     finally:
         child.terminate()
         child.wait(timeout=10)
+
+
+@pytest.mark.skipif(os.name != "nt", reason="Windows TCP owner table parser")
+def test_listener_snapshot_parses_netstat_loopback_owner_row(monkeypatch):
+    original_run = preflight_runner.subprocess.run
+
+    def mocked_run(command, *args, **kwargs):
+        if isinstance(command, (list, tuple)) and command and command[0].lower() == "netstat.exe":
+            return subprocess.CompletedProcess(
+                command, 0,
+                "Active Connections\n  TCP    127.0.0.1:8081         0.0.0.0:0              LISTENING       43210\n",
+                "")
+        return original_run(command, *args, **kwargs)
+
+    monkeypatch.setattr(preflight_runner.subprocess, "run", mocked_run)
+    rows, diagnostics = preflight_runner._listener_snapshot(8081)
+    assert rows == [{"LocalAddress": "127.0.0.1", "LocalPort": 8081,
+                     "OwningProcess": 43210}]
+    assert diagnostics.startswith("netstat:")
+
+
+@pytest.mark.skipif(os.name != "nt", reason="Windows TCP owner table parser")
+def test_listener_probe_uses_powershell_fallback_when_netstat_omits_listener(monkeypatch):
+    owner_pid = 43210
+    original_run = preflight_runner.subprocess.run
+
+    def mocked_run(command, *args, **kwargs):
+        if isinstance(command, (list, tuple)) and command and command[0].lower() == "netstat.exe":
+            return subprocess.CompletedProcess(command, 0, "Active Connections\\n", "")
+        if isinstance(command, (list, tuple)) and command and command[0].lower() == "powershell.exe":
+            rows = [{"LocalAddress": "127.0.0.1", "LocalPort": 8081,
+                     "OwningProcess": owner_pid}]
+            return subprocess.CompletedProcess(command, 0, json.dumps(rows), "")
+        return original_run(command, *args, **kwargs)
+
+    monkeypatch.setattr(preflight_runner.subprocess, "run", mocked_run)
+    rows, diagnostics = preflight_runner._listener_snapshot(8081)
+    assert rows == [{"LocalAddress": "127.0.0.1", "LocalPort": 8081,
+                     "OwningProcess": owner_pid}]
+    assert "powershell:" in diagnostics
+
+
+@pytest.mark.skipif(os.name != "nt", reason="Windows listener-query subprocess behavior")
+def test_listener_probe_preserves_cim_failure_with_empty_stderr(monkeypatch):
+    original_run = preflight_runner.subprocess.run
+
+    def mocked_run(command, *args, **kwargs):
+        if isinstance(command, (list, tuple)) and command and command[0].lower() == "netstat.exe":
+            return subprocess.CompletedProcess(command, 0, "Active Connections\n", "")
+        if isinstance(command, (list, tuple)) and command and command[0].lower() == "powershell.exe":
+            return subprocess.CompletedProcess(command, 1, "", None)
+        return original_run(command, *args, **kwargs)
+
+    monkeypatch.setattr(preflight_runner.subprocess, "run", mocked_run)
+    rows, diagnostics = preflight_runner._listener_snapshot(8081)
+    assert rows == []
+    assert "powershell fallback failed" in diagnostics
+
+
+@pytest.mark.skipif(os.name != "nt", reason="Windows loopback readiness behavior")
+def test_startup_settle_wait_uses_no_socket_or_process_table_probes(tmp_path, monkeypatch):
+    child = subprocess.Popen([sys.executable, "-m", "http.server", "8081", "--bind", "127.0.0.1"],
+                             stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    try:
+        monkeypatch.setattr(preflight_runner, "_listener_snapshot",
+                            lambda _port: (_ for _ in ()).throw(AssertionError("table poll was called")))
+        monkeypatch.setattr(preflight_runner.socket, "create_connection",
+                            lambda *_args, **_kwargs: (_ for _ in ()).throw(
+                                AssertionError("socket probe ran before listener attestation")))
+        polls = tmp_path / "readiness.jsonl"
+        _wait_for_server_startup(child, polls, settle_seconds=0.05)
+        row = json.loads(polls.read_text(encoding="utf-8").splitlines()[-1])
+        assert row["status"] == "startup_settle_elapsed_process_alive"
+        assert row["expected_pid"] == child.pid
+    finally:
+        child.terminate()
+        child.wait(timeout=10)
+
+
+def test_readiness_wait_fails_immediately_for_exited_server(tmp_path):
+    class Exited:
+        pid = 12345
+        returncode = 7
+
+        @staticmethod
+        def poll():
+            return 7
+
+    with pytest.raises(RuntimeError, match="exited during startup"):
+        _wait_for_server_startup(Exited(), tmp_path / "readiness.jsonl", settle_seconds=5)

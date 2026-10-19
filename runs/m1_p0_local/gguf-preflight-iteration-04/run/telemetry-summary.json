@@ -1,0 +1,8 @@
+{
+  "at_least_one_completion_interval_sampled": false,
+  "completion_attempts": 0,
+  "completion_intervals_with_gpu_sample": [],
+  "gpu_samples_successful": 556,
+  "interpretation": "nvidia-smi process-level samples; a sample inside HTTP inference interval does not identify per-process VRAM attribution",
+  "sample_count": 556
+}

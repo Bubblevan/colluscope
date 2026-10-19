@@ -1,0 +1,32 @@
+pid 2904 listener [{'LocalAddress': '127.0.0.1', 'LocalPort': 8081, 'OwningProcess': 2904}] raw TCP    127.0.0.1:8081         0.0.0.0:0              LISTENING       2904
+http health 200 0.015 {"status":"ok"}
+http props 200 0.016 {"default_generation_settings":{"params":{"seed":4294967295,"temperature":0.0,"dynatemp_range":0.0,"dynatemp_exponent":1.0,"top_k":0,"top_p":1.0,"min_p":0.0,"top_n_sigma":-1.0,"xtc_probability":0.0,"xtc_threshold":0.10000000149011612,"typical_p":1.0,"repeat_last_n":64,"repeat_penalty":1.0,"presence_
+http health 200 0.016 {"status":"ok"}
+gpu_samples 17 gpu_success 17
+server_exit 1 stderr_tail 0.00.309.673 I cmn  common_param: common_params_print_info: verbosity = 3 (adjust with the `-lv N` CLI arg)
+
+0.00.315.009 I srv          init: The UI is disabled
+
+0.00.315.013 I srv          init: Use --ui/--no-ui (or deprecated --webui/--no-webui) to enable/disable
+
+0.00.315.126 W srv  llama_server: -----------------
+
+0.00.315.129 W srv  llama_server: CORS is set to allow all origins ('*') and no API key is set
+
+0.00.315.129 W srv  llama_server: this can be a security risk (cross-origin attacks)
+
+0.00.315.129 W srv  llama_server: more info: https://github.com/ggml-org/llama.cpp/pull/25655
+
+0.00.315.129 W srv  llama_server: -----------------
+
+0.00.325.111 I srv    load_model: loading model 'E:\Health-Copilot-Models\models\qwen3-8b\Qwen3-8B-Q4_K_M.gguf'
+
+0.00.470.208 W load: control-looking token: 128247 '</s>' was not control-type; this is probably a bug in the model. its type will be overridden
+
+0.04.003.420 I srv    load_model: initializing, n_slots = 1, n_ctx_slot = 4096, kv_unified = 'false'
+
+0.04.010.437 I srv  llama_server: model loaded
+
+0.04.010.443 I srv  llama_server: listening on http://127.0.0.1:8081
+
+

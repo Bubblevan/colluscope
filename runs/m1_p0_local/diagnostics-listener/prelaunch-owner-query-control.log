@@ -1,0 +1,6 @@
+prepared 3 tokenizer 06e72b9773cfad908874ae1a7aa92686068557c4aa624c857db88fe97052704f
+prelaunch_owner_query=completed
+pid 46932 image C:\Users\bubblevan\AppData\Local\Microsoft\WinGet\Packages\ggml.llamacpp_Microsoft.Winget.Source_8wekyb3d8bbwe\llama-server.exe
+after15 None listener ([{'LocalAddress': '127.0.0.1', 'LocalPort': 8081, 'OwningProcess': 46932}], 'netstat: TCP    127.0.0.1:8081         0.0.0.0:0              LISTENING       46932') gpu_samples 46
+health 200 b'{"status":"ok"}'
+exit 1

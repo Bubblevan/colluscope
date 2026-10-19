@@ -1,0 +1,3 @@
+pid 50100 poll None netstat ([{'LocalAddress': '127.0.0.1', 'LocalPort': 8081, 'OwningProcess': 50100}], 'TCP    127.0.0.1:8081         0.0.0.0:0              LISTENING       50100')
+powershell_query_exit 0 stdout '[{"LocalAddress":"127.0.0.1","LocalPort":8081,"OwningProcess":50100}]\n' stderr ''
+server_exit 1

@@ -406,6 +406,21 @@ def test_port_8081_requires_bounded_preflight_gate_and_listener_owner(tmp_path):
             LocalLlamaCppBackend(invalid, FakeCounter(invalid), FakeOpener([]))
 
 
+def test_port_8081_allows_only_explicit_preflight_gated_local_full_pilot():
+    launch = {**BASE.launch, "port": 8081}
+    settings = config_for(live=True, preflight=True,
+                          base_url="http://127.0.0.1:8081/v1", launch=launch)
+    backend = LocalLlamaCppBackend(settings, FakeCounter(settings), FakeOpener([]))
+    assert backend.config.model_calls_enabled is True
+    assert backend.config.preflight_enabled is True
+
+    invalid = config_for(live=True, preflight=False,
+                         preflight_approval_id="",
+                         base_url="http://127.0.0.1:8081/v1", launch=launch)
+    with pytest.raises(ValueError, match="launch settings"):
+        LocalLlamaCppBackend(invalid, FakeCounter(invalid), FakeOpener([]))
+
+
 def test_preflight_fails_closed_on_template_mismatch_and_records_raw_response(tmp_path):
     template = "frozen fake template"
     template_hash = hashlib.sha256(template.encode("utf-8")).hexdigest()

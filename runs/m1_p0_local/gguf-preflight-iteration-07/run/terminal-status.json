@@ -1,0 +1,18 @@
+{
+  "budget_maxima_enforced": {
+    "completion_attempts": 4,
+    "http_attempts": 12,
+    "logical_requests": 6
+  },
+  "completed_at_utc": "2026-10-19T05:12:34.086050+00:00",
+  "external_model_calls": 0,
+  "failure": {
+    "error": "loopback TCP access to llama-server port 8081 was denied: [WinError 10013] 以一种访问权限不允许的方式做了一个访问套接字的尝试。",
+    "type": "PermissionError"
+  },
+  "full_pilot_authorized": false,
+  "local_completion_attempts": 0,
+  "logical_preflight_http_requests": 0,
+  "m2_authorized": false,
+  "status": "FAIL"
+}

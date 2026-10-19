@@ -1,0 +1,9 @@
+{
+  "at_utc": "2026-10-19T05:12:33.441090+00:00",
+  "failure": {
+    "error": "loopback TCP access to llama-server port 8081 was denied: [WinError 10013] 以一种访问权限不允许的方式做了一个访问套接字的尝试。",
+    "type": "PermissionError"
+  },
+  "process_pid": 52756,
+  "status": "FAIL"
+}
