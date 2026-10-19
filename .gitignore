@@ -3,3 +3,5 @@ reference/*
 __pycache__/
 .pytest_cache/
 *.py[cod]
+# M1-100 local raw traces include private agent message text and request payloads.
+/runs/m1_100/
