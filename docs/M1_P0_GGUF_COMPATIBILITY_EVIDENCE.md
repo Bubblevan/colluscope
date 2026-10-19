@@ -49,3 +49,7 @@ No failing result was deleted. `initial-failures.md` preserves the observed unit
 ## Hard no-call boundary
 
 The static probe records `server_started=false`, `model_weights_loaded=false`, `generation_calls=0`, `network_requests=0`, and `paid_api_calls=0`. No credentials were queried. No preflight, real model call, 25-episode real pilot, or M2 detector comparison ran. The candidate config remains default-denied.
+
+## Bounded-preflight attempt 02: blocked before launch
+
+The user's 2026-10-19 request authorizes the frozen local compatibility preflight only. Before launch, port 8080 was found listening on `0.0.0.0` under PID 12152, `ApplicationWebServer.exe`, associated with service `NIApplicationWebServer`; its executable path and command line were unavailable. To avoid contacting or stopping an unrelated service, no HTTP request was sent and llama-server was not started. Model completions: 0. The model and launcher hashes were rechecked; a new metadata-only identity probe confirms the selected GGUF and 53-file server bundle remain unchanged. Full raw evidence and reproduction details are in `runs/m1_p0_local/gguf-preflight-iteration-02/`. This is a blocked attempt, not a failed model-compatibility result.

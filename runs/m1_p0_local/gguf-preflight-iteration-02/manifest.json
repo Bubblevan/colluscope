@@ -1,0 +1,44 @@
+{
+  "schema": "colluscope-artifact-manifest-v1",
+  "scope": "all files in this attempt directory except manifest.json itself",
+  "file_count": 7,
+  "files": [
+    {
+      "path": "README.md",
+      "size_bytes": 2299,
+      "sha256": "8fb5f3c54032ccd3dfdb8f5e4f534cdbf65c6cc4fc4365ccb71d174c7c845f87"
+    },
+    {
+      "path": "blocked-before-launch.json",
+      "size_bytes": 1602,
+      "sha256": "9bfbf2cc88e5903ec0c925343549df4c9b7349b06f260f9bf63851bf7b87a820"
+    },
+    {
+      "path": "gpu-before-launch.txt",
+      "size_bytes": 64,
+      "sha256": "6de8838aba988a79074ab1984b76b8f49a7c35cab2cfeef05a2e21c645dcf788"
+    },
+    {
+      "path": "llama-server-help-static.txt",
+      "size_bytes": 54415,
+      "sha256": "63c29d452942dd4abd76ba86819748af6cd0ec7ac33bab410769af46335392c2"
+    },
+    {
+      "path": "port-8080-owner-followup.txt",
+      "size_bytes": 317,
+      "sha256": "55381378433dac9dbab95f4f7eba9fa7b85e9f8e995230dba41229fead1cf097"
+    },
+    {
+      "path": "static-identity.json",
+      "size_bytes": 15332,
+      "sha256": "b8472a5858a08dc18af617f20edf62e19c760fc3690ca4258e4462c7e4723fce"
+    },
+    {
+      "path": "static-identity.log",
+      "size_bytes": 15332,
+      "sha256": "b8472a5858a08dc18af617f20edf62e19c760fc3690ca4258e4462c7e4723fce"
+    }
+  ],
+  "aggregate_sha256": "c49d29d77706c87d3343b07716f087f376cf78cbf1026223182f1fed44872401",
+  "aggregate_algorithm": "SHA256(UTF-8 JSON of files with sorted keys and compact separators)"
+}

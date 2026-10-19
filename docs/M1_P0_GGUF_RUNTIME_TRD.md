@@ -1,6 +1,6 @@
 # M1-P0 Local GGUF Runtime TRD
 
-**Status:** offline implementation complete; live preflight and research calls are not authorized.
+**Status:** offline implementation complete; bounded live preflight is authorized by the user's 2026-10-19 request but is blocked before launch by an unidentified process occupying the frozen port 8080. Full research calls remain unauthorized.
 **Candidate:** Qwen3-8B Q4_K_M GGUF through the installed local llama.cpp server.
 **Protocol basis:** the accepted `m1-p0-frozen-v2` prompts, schemas, five M1 conditions, and reward amounts remain unchanged.
 

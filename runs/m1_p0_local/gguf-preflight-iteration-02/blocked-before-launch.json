@@ -1,0 +1,28 @@
+{
+  "attempt_id": "M1-P0-GGUF-PREFLIGHT-02",
+  "observed_at": "2026-10-19",
+  "branch": "codex/m1-p0-local-qwen-integration",
+  "commit": "5ae58f43b8b41c0ecc5db8d20c7f4f478718d9a6",
+  "model_path": "E:\\Health-Copilot-Models\\models\\qwen3-8b\\Qwen3-8B-Q4_K_M.gguf",
+  "model_sha256": "d98cdcbd03e17ce47681435b5150e34c1417f50b5c0019dd560e4882c5745785",
+  "llama_server_path": "C:\\Users\\bubblevan\\AppData\\Local\\Microsoft\\WinGet\\Packages\\ggml.llamacpp_Microsoft.Winget.Source_8wekyb3d8bbwe\\llama-server.exe",
+  "llama_server_sha256": "3a8aea5f889c4b4c2ec41c98f4e1ed484bb7a40c4096883acb23d3cfe26b59fb",
+  "listener_8080": {
+    "address": "0.0.0.0",
+    "port": 8080,
+    "pid": 12152,
+    "process_name": "ApplicationWebServer.exe",
+    "executable_path": null,
+    "command_line": null,
+    "service_name": "NIApplicationWebServer"
+  },
+  "gpu_query": "NVIDIA GeForce RTX 4090 Laptop GPU, 16376 MiB, 15855 MiB, 11 %",
+  "server_started": false,
+  "model_weights_loaded": false,
+  "http_requests": 0,
+  "generation_attempts": 0,
+  "external_paid_calls": 0,
+  "status": "BLOCKED_BEFORE_LAUNCH",
+  "reason": "Frozen port 127.0.0.1:8080 is bound on 0.0.0.0 by PID 12152, ApplicationWebServer.exe, associated with the NIApplicationWebServer service; Windows did not expose executable path or command line. No HTTP request was sent and the process was not stopped.",
+  "next_action": "Obtain approval for a new frozen preflight port or have the operator stop/relocate this identified service and verify port 8080 is free, then rerun the exact bounded 6/12/4 preflight."
+}
