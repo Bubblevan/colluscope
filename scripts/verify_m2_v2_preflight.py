@@ -100,9 +100,10 @@ def _verify_acl(paths: list[Path]) -> dict[str, Any]:
     return {"sid": sid, "verified_paths": verified}
 
 
-def verify(out: Path) -> dict[str, Any]:
+def verify(out: Path, registry_path: Path | None = None) -> dict[str, Any]:
     config = tomllib.loads(CONFIG.read_text(encoding="utf-8"))
-    registry = json.loads(CANDIDATES.read_text(encoding="utf-8"))
+    registry_path = registry_path or CANDIDATES
+    registry = json.loads(registry_path.read_text(encoding="utf-8"))
     freeze_path = out / "preflight-registry-freeze.json"
     manifest_path = out / "preflight-manifest.json"
     case_path = out / "private/preflight-case.json"
@@ -221,6 +222,7 @@ def verify(out: Path) -> dict[str, Any]:
     return {
         "status": "PASS_M2_V2_PREFLIGHT_INPUT_AUDIT",
         "protocol_id": manifest["protocol_id"], "request_count": len(files),
+        "candidate_registry_sha256": file_sha256(registry_path),
         "candidate_count": len(candidates), "candidate_case_counts": dict(Counter(
             json.loads(path.read_text(encoding="utf-8"))["candidate_id"] for path in files)),
         "unique_payload_count": len(payload_hashes), "model_calls": 0, "http_attempts": 0,
@@ -237,8 +239,10 @@ def verify(out: Path) -> dict[str, Any]:
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--out", type=Path, required=True)
+    parser.add_argument("--registry", type=Path,
+                        help="versioned candidate registry for an authorized repair iteration")
     args = parser.parse_args()
-    result = verify(args.out.resolve())
+    result = verify(args.out.resolve(), args.registry.resolve() if args.registry else None)
     print(json.dumps(result, ensure_ascii=False, sort_keys=True, indent=2))
     return 0
 

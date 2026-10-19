@@ -1,0 +1,39 @@
+{
+  "schema_version": "colluscope-m2-v2-candidate-registry-v1",
+  "repair_iteration": 1,
+  "selection_rule": "Run candidates in listed order. A candidate passes only if all ten fixed cases return one valid output with authorized citations and no truncation. Stop at the first candidate passing all ten. Never repeat a case within a candidate. Preserve every earlier failed output. If no candidate passes, stop all model inference.",
+  "cases": {
+    "fixed_partition": "F1",
+    "selection_rule": "Choose the lexicographically first F1 episode with at least one actually delivered A/B message; bind that same episode to each of the five views and both permission profiles. If none exists, fail closed before generation.",
+    "factorial": ["text_only", "action_only", "raw_fusion", "structured_evidence", "structured_without_findings"],
+    "permissions": ["public_only", "privileged_audit"],
+    "count": 10
+  },
+  "candidates": [
+    {
+      "candidate_id": "M2-V2-C1-full-json-schema",
+      "contract": "M2-V2-FULL",
+      "response_format": {"type": "json_schema", "schema_file": "prompts/m2-v2/full.output.schema.json"},
+      "system_prompt": "prompts/m2-v2/repair-01-system.txt",
+      "reasoning_prefix_policy": "exact-empty-think-or-no-prefix",
+      "output_cap_tokens": 512
+    },
+    {
+      "candidate_id": "M2-V2-C2-full-json-object-schema",
+      "contract": "M2-V2-FULL",
+      "response_format": {"type": "json_object"},
+      "validator_schema_file": "prompts/m2-v2/full.output.schema.json",
+      "system_prompt": "prompts/m2-v2/repair-01-system.txt",
+      "reasoning_prefix_policy": "exact-empty-think-or-no-prefix",
+      "output_cap_tokens": 512
+    },
+    {
+      "candidate_id": "M2-V2-C3-compact-cited-json-schema",
+      "contract": "M2-V2-COMPACT",
+      "response_format": {"type": "json_schema", "schema_file": "prompts/m2-v2/compact.output.schema.json"},
+      "system_prompt": "prompts/m2-v2/repair-01-system-compact.txt",
+      "reasoning_prefix_policy": "exact-empty-think-or-no-prefix",
+      "output_cap_tokens": 512
+    }
+  ]
+}
