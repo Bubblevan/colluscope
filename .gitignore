@@ -11,3 +11,5 @@ __pycache__/
 /runs/m2/
 # M2-V2 local raw requests/responses and Privileged Audit projections are private.
 /runs/m2-v2/
+# M2-V3 offline response tables remain local research evidence; do not publish rows by default.
+/runs/m2-v3/
