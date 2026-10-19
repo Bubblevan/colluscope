@@ -10,6 +10,7 @@ from pathlib import Path
 from types import SimpleNamespace
 
 import pytest
+from colluscope.m1_runtime import BudgetExceeded
 
 from scripts.audit_m3_mechanism import (
     AuditFailure, _assert_only_selected_inbound_diff, _same_public_result, _settle,
@@ -85,6 +86,7 @@ def test_m3_environment_records_frozen_json_safe_tokenizer_metadata(tmp_path):
         "model_path": "model.gguf", "server_path": "llama-server.exe",
         "bundle": {"file_count": 4}, "listener": {"expected_pid": 1234},
         "model_probe": {"model_ids": ["frozen-model"]},
+        "effective_generation_http_attempt_ceiling": 190,
         "api_key_info": {"sha256": "d" * 64},
     }
     (tmp_path / "design-freeze.json").write_text(
@@ -102,6 +104,31 @@ def test_m3_environment_records_frozen_json_safe_tokenizer_metadata(tmp_path):
     assert recorded["tokenizer_metadata"] == metadata
     assert recorded["source_commit"] == "freeze"
     assert recorded["runtime_code_commit"] == "freeze"
+    assert recorded["call_budget"]["generation_http_attempts_max"] == 190
+    assert recorded["call_budget"]["backend_config_generation_http_attempts_safety_ceiling"] == 191
+
+
+def test_outer_m3_budget_reserves_all_but_one_generation_slot_after_identity_probe():
+    source = run_m3_mechanism.load_llamacpp_backend_config(
+        run_m3_mechanism.HISTORY / "full-pilot-config.toml")
+    full_ceiling = run_m3_mechanism.replace(
+        source, model_calls_enabled=True, preflight_enabled=False,
+        preflight_approval_id="",
+        full_pilot_approval_id=run_m3_mechanism.M3_MECHANISM_APPROVAL_ID,
+        max_logical_requests=96, max_total_attempts=191,
+    )
+    runtime = run_m3_mechanism.load_runtime_config(
+        run_m3_mechanism.HISTORY / "runtime-config.toml")
+    bound = full_ceiling.bind_runtime(runtime)
+    assert bound.max_total_attempts == 191
+
+    budget = run_m3_mechanism.RequestBudget(96, 190, 2)
+    for index in range(95):
+        request_id = f"request-{index}"
+        budget.reserve(request_id, 1)
+        budget.reserve(request_id, 2)
+    with pytest.raises(BudgetExceeded, match="total model-attempt hard limit"):
+        budget.reserve("request-95", 1)
 
 
 def test_metadata_only_resume_erratum_requires_unchanged_inputs_and_zero_generation():
@@ -139,12 +166,45 @@ def test_metadata_only_resume_erratum_requires_unchanged_inputs_and_zero_generat
         freeze, current_hashes, manifest, git, extra_source_change, evidence)
 
 
+def test_budget_erratum_can_extend_the_pre_generation_source_chain_once():
+    previous = {"authorized_source_commit": "source-v1", "source_branch": "codex/m3",
+                "authorized_runner_sha256": "c" * 64,
+                "authorized_input_sha256": {"scripts/run_m3_mechanism.py": "c" * 64,
+                                             "prompts/m1-p0-v2/ballot.txt": "b" * 64}}
+    current_hashes = {"scripts/run_m3_mechanism.py": "d" * 64,
+                      "prompts/m1-p0-v2/ballot.txt": "b" * 64}
+    allowed_paths = ["docs/M3_RUNTIME_BUDGET_ERRATA.json", "scripts/run_m3_mechanism.py"]
+    manifest = {"schema_version": "m3-runtime-budget-erratum-v1",
+                "base_source_commit": "source-v1", "base_runner_sha256": "c" * 64,
+                "authorized_runner_sha256": "d" * 64,
+                "allowed_changed_paths": allowed_paths,
+                "change_scope": "remaining_http_budget_reservation_only",
+                "model_facing_semantics_changed": False}
+    git = {"commit": "source-v2", "branch": "codex/m3"}
+    evidence = {"budget_validation_failure_seen": True, "assigned_groups": 12,
+                "group_assigned": 12, "group_started": 0, "group_terminal": 0,
+                "generation_logical_requests": 0, "generation_http_attempts": 0,
+                "identity_probe_http_attempts": 1, "identity_probe_terminal_count": 1,
+                "total_http_attempts": 1, "prior_server_shutdown_verified": True,
+                "api_key_removed": True, "identity_probe_model_id_matches": True}
+
+    assert run_m3_mechanism._resume_budget_erratum_eligible(
+        previous, current_hashes, manifest, git, allowed_paths, evidence)
+    with_generation = {**evidence, "generation_logical_requests": 1}
+    assert not run_m3_mechanism._resume_budget_erratum_eligible(
+        previous, current_hashes, manifest, git, allowed_paths, with_generation)
+    changed_prompt = {**current_hashes, "prompts/m1-p0-v2/ballot.txt": "e" * 64}
+    assert not run_m3_mechanism._resume_budget_erratum_eligible(
+        previous, changed_prompt, manifest, git, allowed_paths, evidence)
+
+
 def test_independent_audit_requires_original_runtime_hash_when_no_erratum(tmp_path):
     freeze = {"source_commit": "frozen-commit",
               "input_sha256": {"scripts/run_m3_mechanism.py": "a" * 64}}
     environment = {"runtime_code_commit": "frozen-commit",
                    "runtime_code_sha256": "a" * 64,
-                   "runtime_source_erratum_applied": False}
+                   "runtime_source_erratum_applied": False,
+                   "runtime_source_errata": []}
 
     assert _validate_runtime_code_provenance(tmp_path, freeze, environment)["status"] == \
         "PASS_ORIGINAL_FROZEN_SOURCE"
@@ -170,6 +230,18 @@ def test_frozen_m3_config_and_schedule_have_the_exact_local_budget():
     assert config["budget"]["identity_probe_http_attempts_per_server_launch"] == 1
     assert config["budget"]["external_api_calls"] == 0
     assert "configs/m3-mechanism-schedule.json" in hashes
+
+
+def test_budget_erratum_manifest_is_bound_to_exact_current_runner_hash():
+    repo_root = Path(__file__).resolve().parents[1]
+    manifest = json.loads((repo_root / "docs/M3_RUNTIME_BUDGET_ERRATA.json").read_text(encoding="utf-8"))
+    runner_hash = hashlib.sha256((repo_root / "scripts/run_m3_mechanism.py").read_bytes()).hexdigest()
+    assert manifest["schema_version"] == "m3-runtime-budget-erratum-v1"
+    assert manifest["authorized_runner_sha256"] == runner_hash
+    assert manifest["base_source_commit"] == "8410863074202e97a02ac98012f05d4e4650bfb3"
+    assert manifest["budget_rule"]["total_http_attempts_max"] == 192
+    assert manifest["budget_rule"]["effective_generation_ceiling_for_this_run"] == 190
+    assert manifest["allowed_changed_paths"] == sorted(manifest["allowed_changed_paths"])
 
 
 def test_runner_refuses_to_write_private_m3_data_outside_ignored_run_root(tmp_path):

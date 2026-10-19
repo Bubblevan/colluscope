@@ -1,0 +1,19 @@
+M3 budget/source-provenance regression-test failure excerpts (sanitized)
+Recorded: 2026-10-19T18:47:09Z. The test-run occurrence timestamps were not independently persisted.
+
+Failure 1
+Test: test_outer_m3_budget_reserves_all_but_one_generation_slot_after_identity_probe
+Exception: colluscope.m1_runtime.BudgetExceeded: logical request hard limit reached
+Cause: the fixture reserved 190 distinct request IDs, reaching the independent 96-logical-request ceiling before the intended HTTP-attempt ceiling. The fixture was corrected to use 95 request IDs with two attempts each; this does not alter the runtime budget.
+
+Failure 2
+Test: test_independent_audit_requires_original_runtime_hash_when_no_erratum
+Exception: scripts.audit_m3_mechanism.AuditFailure: run claims a source erratum but uses the original source commit
+Cause: the synthetic baseline environment fixture omitted the explicit empty runtime_source_errata list. The fixture now represents the no-erratum case explicitly.
+
+The initial output was 2 failed, 2 passed. After fixture corrections, the M3 independent-audit suite passed 21 tests and the full repository suite passed 339 tests with 1 opt-in Windows integration test skipped. No model inference was performed during these tests.
+
+Manifest-binding regression first run
+Test: test_budget_erratum_manifest_is_bound_to_exact_current_runner_hash
+Exception: NameError: name 'ROOT' is not defined
+Cause: the test used an undeclared repository-root helper. It now derives the root from its own __file__ path; no production code changed.

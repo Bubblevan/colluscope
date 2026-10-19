@@ -292,65 +292,96 @@ def _verify_history(run: Path) -> dict[str, str]:
 
 def _validate_runtime_code_provenance(run: Path, freeze: dict[str, Any],
                                       environment: dict[str, Any]) -> dict[str, Any]:
-    """Independently verify the source-only runtime erratum, if one was used."""
+    """Independently verify a frozen source and any pre-generation erratum chain."""
     base_commit = freeze.get("source_commit")
     runtime_commit = environment.get("runtime_code_commit", base_commit)
     runtime_sha256 = environment.get("runtime_code_sha256")
-    base_runner_sha256 = freeze.get("input_sha256", {}).get("scripts/run_m3_mechanism.py")
     auth_path = run / "resume-source-errata.jsonl"
     authorizations = _read_jsonl(auth_path) if auth_path.exists() else []
     if runtime_commit == base_commit:
-        _require(runtime_sha256 == base_runner_sha256,
+        _require(runtime_sha256 == freeze.get("input_sha256", {}).get("scripts/run_m3_mechanism.py"),
                  "runtime code hash differs from the original pre-generation freeze")
-        _require(not authorizations and environment.get("runtime_source_erratum_applied") is False,
+        _require(not authorizations and environment.get("runtime_source_erratum_applied") is False and
+                 environment.get("runtime_source_errata") == [],
                  "run claims a source erratum but uses the original source commit")
         return {"status": "PASS_ORIGINAL_FROZEN_SOURCE", "runtime_code_commit": runtime_commit,
                 "runtime_code_sha256": runtime_sha256}
-
-    manifest_path = ROOT / "docs/M3_RUNTIME_RESUME_ERRATA.json"
-    _require(manifest_path.is_file() and len(authorizations) == 1,
-             "runtime source changed without one exact, versioned resume erratum")
-    manifest_bytes = manifest_path.read_bytes()
-    manifest = json.loads(manifest_bytes)
-    manifest_sha256 = hashlib.sha256(manifest_bytes).hexdigest()
-    auth = authorizations[0]
-    _require(manifest.get("schema_version") == "m3-runtime-resume-erratum-v1" and
-             manifest.get("base_source_commit") == base_commit and
-             manifest.get("base_runner_sha256") == base_runner_sha256 and
-             manifest.get("authorized_runner_sha256") == runtime_sha256 and
-             auth.get("base_source_commit") == base_commit and
-             auth.get("authorized_source_commit") == runtime_commit and
-             auth.get("authorized_runner_sha256") == runtime_sha256 and
-             auth.get("manifest_sha256") == manifest_sha256 and
+    _require(1 <= len(authorizations) <= 2,
+             "runtime source changed without the bounded, versioned erratum chain")
+    expected_manifest_paths = ["docs/M3_RUNTIME_RESUME_ERRATA.json",
+                               "docs/M3_RUNTIME_BUDGET_ERRATA.json"]
+    previous_commit = base_commit
+    previous_hashes = freeze.get("input_sha256", {})
+    verified_chain = []
+    for index, auth in enumerate(authorizations):
+        manifest_path_rel = auth.get("manifest_path", expected_manifest_paths[index])
+        _require(manifest_path_rel == expected_manifest_paths[index],
+                 "runtime erratum manifest order/path differs from the preregistered chain")
+        manifest_path = ROOT / manifest_path_rel
+        _require(manifest_path.is_file(), "runtime erratum manifest is missing")
+        manifest_bytes = manifest_path.read_bytes()
+        manifest = json.loads(manifest_bytes)
+        manifest_sha256 = hashlib.sha256(manifest_bytes).hexdigest()
+        auth_commit = auth.get("authorized_source_commit")
+        current_hashes = auth.get("authorized_input_sha256", {})
+        expected_schema = ("m3-runtime-resume-erratum-v1" if index == 0 else
+                           "m3-runtime-budget-erratum-v1")
+        _require(manifest.get("schema_version") == expected_schema and
+                 manifest.get("base_source_commit") == previous_commit and
+                 manifest.get("base_runner_sha256") == previous_hashes.get("scripts/run_m3_mechanism.py") and
+                 manifest.get("authorized_runner_sha256") == current_hashes.get("scripts/run_m3_mechanism.py") and
+                 auth.get("base_source_commit") == previous_commit and
+                 auth.get("base_runner_sha256") == manifest.get("base_runner_sha256") and
+                 auth.get("authorized_runner_sha256") == manifest.get("authorized_runner_sha256") and
+                 auth.get("manifest_sha256") == manifest_sha256 and
+                 set(current_hashes) == set(previous_hashes) and
+                 [key for key in current_hashes
+                  if current_hashes[key] != previous_hashes.get(key)] == ["scripts/run_m3_mechanism.py"] and
+                 auth.get("changed_paths") == manifest.get("allowed_changed_paths"),
+                 "runtime erratum manifest, input hashes, source commit, and ledger disagree")
+        diff = subprocess.run(
+            ["git", "-C", str(ROOT), "diff", "--name-only", f"{previous_commit}..{auth_commit}"],
+            capture_output=True, text=True, check=False, timeout=15)
+        _require(diff.returncode == 0, "could not inspect a committed runtime-erratum diff")
+        changed_paths = sorted(line.replace("\\", "/") for line in diff.stdout.splitlines() if line.strip())
+        _require(changed_paths == manifest.get("allowed_changed_paths"),
+                 "committed runtime-erratum diff contains unapproved files")
+        ancestor = subprocess.run(
+            ["git", "-C", str(ROOT), "merge-base", "--is-ancestor", previous_commit, auth_commit],
+            capture_output=True, text=False, check=False, timeout=15)
+        _require(ancestor.returncode == 0, "runtime erratum commit is not a descendant of its prior freeze")
+        source = subprocess.run(
+            ["git", "-C", str(ROOT), "show", f"{auth_commit}:scripts/run_m3_mechanism.py"],
+            capture_output=True, check=False, timeout=15)
+        _require(source.returncode == 0 and hashlib.sha256(source.stdout).hexdigest() ==
+                 auth.get("authorized_runner_sha256"),
+                 "runtime erratum commit does not contain its hashed M3 runner")
+        pre_generation = auth.get("pre_generation_evidence", {})
+        _require(pre_generation.get("assigned_groups") == 12 and
+                 pre_generation.get("group_assigned") == 12 and
+                 pre_generation.get("group_started") == 0 and
+                 pre_generation.get("group_terminal") == 0 and
+                 pre_generation.get("generation_logical_requests") == 0 and
+                 pre_generation.get("generation_http_attempts") == 0 and
+                 pre_generation.get("identity_probe_http_attempts") == 1 and
+                 pre_generation.get("identity_probe_model_id_matches") is True,
+                 "runtime erratum was not authorized before every M3 generation")
+        required_failure = ("failure_signature_seen" if index == 0 else
+                            "budget_validation_failure_seen")
+        _require(pre_generation.get(required_failure) is True,
+                 "runtime erratum is missing its recorded falsifying failure")
+        verified_chain.append({"manifest_path": manifest_path_rel, "manifest_sha256": manifest_sha256,
+                               "base_source_commit": previous_commit,
+                               "authorized_source_commit": auth_commit,
+                               "authorized_runner_sha256": auth.get("authorized_runner_sha256"),
+                               "changed_paths": changed_paths})
+        previous_commit, previous_hashes = auth_commit, current_hashes
+    _require(runtime_commit == previous_commit and
+             runtime_sha256 == previous_hashes.get("scripts/run_m3_mechanism.py") and
              environment.get("runtime_source_erratum_applied") is True and
-             environment.get("runtime_source_erratum_sha256") == manifest_sha256,
-             "runtime erratum manifest, source commit, and run ledger disagree")
-    frozen_hashes = freeze.get("input_sha256", {})
-    current_hashes = auth.get("authorized_input_sha256", {})
-    _require(set(current_hashes) == set(frozen_hashes) and
-             [key for key in current_hashes if current_hashes[key] != frozen_hashes.get(key)] ==
-             ["scripts/run_m3_mechanism.py"],
-             "runtime erratum changed model-facing or frozen protocol input hashes")
-    _require(current_hashes.get("scripts/run_m3_mechanism.py") == runtime_sha256 and
-             auth.get("changed_paths") == manifest.get("allowed_changed_paths"),
-             "runtime erratum source hash or changed-file allowlist is inconsistent")
-    diff = subprocess.run(
-        ["git", "-C", str(ROOT), "diff", "--name-only",
-         f"{base_commit}..{runtime_commit}"],
-        capture_output=True, text=True, check=False, timeout=15)
-    _require(diff.returncode == 0, "could not inspect the committed source-erratum diff")
-    changed_paths = sorted(line.replace("\\", "/") for line in diff.stdout.splitlines() if line.strip())
-    _require(changed_paths == manifest.get("allowed_changed_paths"),
-             "committed source-erratum diff contains unapproved files")
-    ancestor = subprocess.run(
-        ["git", "-C", str(ROOT), "merge-base", "--is-ancestor", base_commit, runtime_commit],
-        capture_output=True, text=True, check=False, timeout=15)
-    _require(ancestor.returncode == 0, "runtime erratum commit is not a descendant of the freeze")
-    source = subprocess.run(
-        ["git", "-C", str(ROOT), "show", f"{runtime_commit}:scripts/run_m3_mechanism.py"],
-        capture_output=True, check=False, timeout=15)
-    _require(source.returncode == 0 and hashlib.sha256(source.stdout).hexdigest() == runtime_sha256,
-             "runtime source commit does not contain the hashed M3 runner")
+             environment.get("runtime_source_erratum_sha256") == authorizations[-1].get("manifest_sha256") and
+             environment.get("runtime_source_errata") == verified_chain,
+             "execution runtime source does not match the final authorized erratum")
     infra = _read_jsonl(run / "researcher/infrastructure-http-attempts.jsonl")
     probe_sources = [row for row in infra if row.get("runtime_code_commit") == runtime_commit and
                      row.get("runtime_code_sha256") == runtime_sha256 and
@@ -359,10 +390,18 @@ def _validate_runtime_code_provenance(run: Path, freeze: dict[str, Any],
                      row.get("model_ids") == ["colluscope-qwen3-8b-q4km"]]
     _require(bool(probe_sources),
              "no successful identity probe is tied to the authorized runtime code commit/hash")
-    return {"status": "PASS_VERSIONED_METADATA_ONLY_ERRATUM",
+    progress = _read_jsonl(run / "progress.jsonl")
+    request_starts = _read_jsonl(run / "researcher/request-attempt-starts.jsonl")
+    latest_authorization = datetime.fromisoformat(authorizations[-1]["at_utc"])
+    generation_times = [datetime.fromisoformat(row["at_utc"])
+                        for row in (*progress, *request_starts)
+                        if row.get("event") == "group_started" or
+                        row in request_starts]
+    _require(all(timestamp >= latest_authorization for timestamp in generation_times),
+             "a group or generation reservation predates the latest source authorization")
+    return {"status": "PASS_VERSIONED_RUNTIME_ERRATUM_CHAIN",
             "base_source_commit": base_commit, "runtime_code_commit": runtime_commit,
-            "runtime_code_sha256": runtime_sha256, "manifest_sha256": manifest_sha256,
-            "changed_paths": changed_paths}
+            "runtime_code_sha256": runtime_sha256, "errata_chain": verified_chain}
 
 
 def _privacy_scan(public_outputs: list[Path], private_messages: list[str]) -> dict[str, Any]:
@@ -577,6 +616,15 @@ def audit(run: Path, out: Path) -> dict[str, Any]:
         infrastructure_rows, launch_rows,
         generation_sessions,
         run_status.get("status") == "ALL_ASSIGNED_GROUPS_TERMINAL")
+    effective_generation_attempt_ceiling = min(
+        MAX_GENERATION_HTTP_ATTEMPTS, MAX_ALL_HTTP_ATTEMPTS - identity_probe_count)
+    frozen_call_budget = environment.get("call_budget", {})
+    _require(frozen_call_budget.get("generation_http_attempts_max") ==
+             effective_generation_attempt_ceiling and
+             frozen_call_budget.get("backend_config_generation_http_attempts_safety_ceiling") ==
+             MAX_GENERATION_HTTP_ATTEMPTS and
+             run_status.get("generation_attempt_budget") == effective_generation_attempt_ceiling,
+             "effective generation ceiling does not reserve every identity probe within the total budget")
     expected_model_id = tomllib.loads((ROOT / "configs/m3-mechanism.toml").read_text(encoding="utf-8"))[
         "model"]["id"]
     terminal_probe_by_session = {row.get("session_id"): row for row in infrastructure_rows

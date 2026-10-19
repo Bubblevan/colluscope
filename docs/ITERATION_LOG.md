@@ -720,6 +720,17 @@ Exact pytest failure transcripts and schedule-generation JSON are preserved unde
 - **DECIDE:** the corrected-source resume gate has passed its focused counterexamples and full-suite run. Proceed after exact allowlist/manifest verification, `git diff --check`, privacy scan, and a clean pushed commit. Then resume the same schedule and count all identity probes against the 192-attempt ceiling.
 - **REPORT / next action:** validate the exact manifest/path allowlist against the committed diff, commit and push, then continue. Any mismatch remains a hard NO-GO.
 
+## M3-RUN-03 — preserve the total HTTP ceiling after identity probes
+
+- **Date:** 2026-10-20 (Asia/Shanghai); still no M3 generation request.
+- **INSPECT — highest integrity risk:** after one already-recorded identity probe, the resume calculation reserved one additional `/models` call and correctly limited generations to 190; the lower 190 value was passed to a backend validator that only permits the frozen 191 ceiling. This blocked before a new server launch. Raising the total HTTP ceiling would be invalid.
+- **SPECIFY — falsifying counterexamples:** backend binding must accept the exact authorized `(96, 191)` safety ceiling; the outer request budget must still reject attempt 191 when only 190 generation attempts remain; the report must distinguish configured backend safety ceiling (191) from effective remaining ceiling (190); total generation attempts plus identity probes must remain at most 192.
+- **IMPLEMENT:** retain backend ceiling 191 and apply dynamic 190 in `RequestBudget` before every HTTP generation request. Environment/preflight records both ceilings; final run summary derives the effective remaining generation ceiling from actual identity-probe starts. Added a second versioned, exact source erratum link and an independent chain verifier. No call can bypass the outer reservation even if the backend's local ceiling is one request higher.
+- **RUN:** the first budget fixture correctly exposed the separate 96 logical-request cap before reaching the 190 attempt cap; it now uses 95 requests with two attempts each. The independent original-source fixture also now includes the required empty errata list. A manifest-hash test initially lacked a `ROOT` fixture and now derives it from `__file__`. These were test-only corrections. Focused M3 audit tests pass (**21 passed**), and the final full repository suite passes (**340 passed, 1 skipped**). The run remains assigned=12, started=0, terminal=0, logical generation=0, generation HTTP=0, identity HTTP=1, total HTTP=1.
+- **ADVERSARIAL REVIEW:** the prior successful identity probe is still counted; the next server session reserves one additional probe before deriving the effective generation budget. The previous server and temporary key were cleaned. Source lineage now has two pre-generation erratum links; both must independently pass exact hash, Git path, failure, and zero-generation checks.
+- **DECIDE:** the runner/auditor updates pass the full suite. Continue after the second erratum hash/path list matches the committed diff and the pushed source commit is clean. If the outer 190 ceiling cannot be enforced before every request, stop.
+- **REPORT / next action:** finalize and validate the second manifest, commit and push, then resume the same run directory. Do not reset or recreate assignments.
+
 ## M3-MECHANISM-FREEZE-05 — final full-suite result and run-path counterexample
 
 - **Date:** 2026-10-20 (Asia/Shanghai); no M3 model call or llama-server launch.

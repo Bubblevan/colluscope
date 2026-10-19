@@ -72,6 +72,7 @@ M1_CONFIG = ROOT / "configs/m1-100.toml"
 M3_CONFIG = ROOT / "configs/m3-mechanism.toml"
 PROMPT_DIR = ROOT / "prompts/m1-p0-v2"
 M3_RESUME_ERRATA = ROOT / "docs/M3_RUNTIME_RESUME_ERRATA.json"
+M3_BUDGET_ERRATA = ROOT / "docs/M3_RUNTIME_BUDGET_ERRATA.json"
 
 
 class UnsafeRuntimeError(RuntimeError):
@@ -177,6 +178,42 @@ def _resume_erratum_eligible(freeze: dict[str, Any], hashes: dict[str, str],
     )
 
 
+def _resume_budget_erratum_eligible(previous: dict[str, Any], hashes: dict[str, str],
+                                    manifest: dict[str, Any], git: dict[str, Any],
+                                    changed_paths: list[str], evidence: dict[str, Any]) -> bool:
+    input_key = "scripts/run_m3_mechanism.py"
+    previous_hashes = previous.get("authorized_input_sha256")
+    if not isinstance(previous_hashes, dict) or set(previous_hashes) != set(hashes):
+        return False
+    changed_hashes = [key for key in hashes if hashes[key] != previous_hashes.get(key)]
+    return bool(
+        manifest.get("schema_version") == "m3-runtime-budget-erratum-v1" and
+        manifest.get("base_source_commit") == previous.get("authorized_source_commit") and
+        manifest.get("base_runner_sha256") == previous.get("authorized_runner_sha256") and
+        manifest.get("authorized_runner_sha256") == hashes.get(input_key) and
+        manifest.get("authorized_runner_sha256") != manifest.get("base_runner_sha256") and
+        changed_hashes == [input_key] and
+        git.get("commit") != previous.get("authorized_source_commit") and
+        git.get("branch") == previous.get("source_branch") and
+        manifest.get("allowed_changed_paths") == changed_paths and
+        manifest.get("change_scope") == "remaining_http_budget_reservation_only" and
+        manifest.get("model_facing_semantics_changed") is False and
+        evidence.get("budget_validation_failure_seen") is True and
+        evidence.get("assigned_groups") == 12 and
+        evidence.get("group_assigned") == 12 and
+        evidence.get("group_started") == 0 and
+        evidence.get("group_terminal") == 0 and
+        evidence.get("generation_logical_requests") == 0 and
+        evidence.get("generation_http_attempts") == 0 and
+        evidence.get("identity_probe_http_attempts") == 1 and
+        evidence.get("identity_probe_terminal_count") == 1 and
+        evidence.get("total_http_attempts") == 1 and
+        evidence.get("prior_server_shutdown_verified") is True and
+        evidence.get("api_key_removed") is True and
+        evidence.get("identity_probe_model_id_matches") is True
+    )
+
+
 def _git_changed_paths(base_commit: str, current_commit: str) -> list[str]:
     result = subprocess.run(
         ["git", "-C", str(ROOT), "diff", "--name-only", f"{base_commit}..{current_commit}"],
@@ -192,11 +229,18 @@ def _resume_erratum_evidence(out: Path) -> dict[str, Any]:
     infrastructure = read_jsonl(out / "researcher/infrastructure-http-attempts.jsonl")
     failures = read_jsonl(out / "run-failures.jsonl")
     status = json.loads((out / "run-status.json").read_text(encoding="utf-8"))
+    launches = read_jsonl(out / "launches.jsonl")
+    shutdowns = read_jsonl(out / "shutdowns.jsonl")
+    cleanups = read_jsonl(out / "api-key-cleanups.jsonl")
     probe_starts = [row for row in infrastructure if row.get("event") == "attempt_started"]
     probe_terminals = [row for row in infrastructure if row.get("event") == "attempt_terminal"]
     metadata_failure_seen = any(
         row.get("error_type") == "AttributeError" and
         row.get("error_message") == "'GGUFChatTokenCounter' object has no attribute 'tokenizer_metadata'"
+        for row in failures)
+    budget_failure_seen = any(
+        row.get("error_type") == "ValueError" and
+        row.get("error_message") == "full run request budget must match a frozen ColluScope study ceiling"
         for row in failures)
     model_id_matches = any(
         row.get("event") == "attempt_terminal" and row.get("status") == "response_returned" and
@@ -205,6 +249,7 @@ def _resume_erratum_evidence(out: Path) -> dict[str, Any]:
         for row in probe_terminals)
     return {
         "failure_signature_seen": metadata_failure_seen,
+        "budget_validation_failure_seen": budget_failure_seen,
         "assigned_groups": status.get("assigned_groups"),
         "group_assigned": sum(row.get("event") == "group_assigned" for row in progress),
         "group_started": sum(row.get("event") == "group_started" for row in progress),
@@ -214,11 +259,14 @@ def _resume_erratum_evidence(out: Path) -> dict[str, Any]:
         "identity_probe_http_attempts": len(probe_starts),
         "identity_probe_terminal_count": len(probe_terminals),
         "total_http_attempts": len(probe_starts) + len(generation_http),
-        "prior_server_shutdown_verified": bool(
-            isinstance(status.get("shutdown"), dict) and status["shutdown"].get("terminated") is True),
-        "api_key_removed": bool(
-            isinstance(status.get("api_key_cleanup"), dict) and
-            status["api_key_cleanup"].get("status") == "REMOVED"),
+        "prior_server_shutdown_verified": bool(launches) and all(
+            any(row.get("session_id") == launch.get("session_id") and row.get("terminated") is True
+                for row in shutdowns) for launch in launches),
+        # A key can be created before the server launch command is validated,
+        # so failed pre-launch cleanup rows legitimately have no session ID.
+        "api_key_removed": bool(cleanups) and all(
+            row.get("status") == "REMOVED" and row.get("exists_after_cleanup") is False
+            for row in cleanups),
         "identity_probe_model_id_matches": model_id_matches,
     }
 
@@ -228,38 +276,93 @@ def _authorize_or_revalidate_resume_erratum(out: Path, freeze: dict[str, Any],
                                             schedule: list[dict[str, Any]]) -> dict[str, Any] | None:
     if not M3_RESUME_ERRATA.is_file():
         return None
-    manifest_bytes = M3_RESUME_ERRATA.read_bytes()
-    manifest = json.loads(manifest_bytes)
-    manifest_hash = hashlib.sha256(manifest_bytes).hexdigest()
     current_runner_hash = hashes.get("scripts/run_m3_mechanism.py")
-    changed_paths = _git_changed_paths(freeze.get("source_commit", ""), git["commit"])
     authorizations_path = out / "resume-source-errata.jsonl"
     authorizations = read_jsonl(authorizations_path)
-    if authorizations:
-        prior = authorizations[0]
-        if (len(authorizations) != 1 or prior.get("authorized_source_commit") != git["commit"] or
-                prior.get("authorized_runner_sha256") != current_runner_hash or
-                prior.get("authorized_input_sha256") != hashes or
-                prior.get("manifest_sha256") != manifest_hash or
-                prior.get("changed_paths") != changed_paths or
-                prior.get("schedule_sha256") != canonical_sha256(schedule)):
-            return None
-        return prior
-
-    ancestor = subprocess.run(
-        ["git", "-C", str(ROOT), "merge-base", "--is-ancestor",
-         freeze.get("source_commit", ""), git["commit"]],
-        capture_output=True, text=True, timeout=15, check=False)
-    if ancestor.returncode != 0:
-        return None
     evidence = _resume_erratum_evidence(out)
-    if not _resume_erratum_eligible(freeze, hashes, manifest, git, changed_paths, evidence):
-        return None
+    if authorizations:
+        if len(authorizations) > 2:
+            return None
+        previous_commit = freeze.get("source_commit")
+        previous_hashes = freeze.get("input_sha256", {})
+        for index, prior in enumerate(authorizations):
+            manifest_path = (ROOT / (prior.get("manifest_path") or
+                            "docs/M3_RUNTIME_RESUME_ERRATA.json"))
+            if not manifest_path.is_file():
+                return None
+            prior_manifest_bytes = manifest_path.read_bytes()
+            prior_manifest = json.loads(prior_manifest_bytes)
+            prior_manifest_hash = hashlib.sha256(prior_manifest_bytes).hexdigest()
+            prior_paths = _git_changed_paths(previous_commit, prior.get("authorized_source_commit", ""))
+            prior_ancestor = subprocess.run(
+                ["git", "-C", str(ROOT), "merge-base", "--is-ancestor",
+                 previous_commit, prior.get("authorized_source_commit", "")],
+                capture_output=True, text=True, timeout=15, check=False)
+            prior_input = prior.get("authorized_input_sha256", {})
+            changed_input_keys = [key for key in prior_input
+                                  if prior_input[key] != previous_hashes.get(key)]
+            expected_scope = ("metadata_export_and_resume_guard_only" if index == 0 else
+                              "remaining_http_budget_reservation_only")
+            expected_schema = ("m3-runtime-resume-erratum-v1" if index == 0 else
+                               "m3-runtime-budget-erratum-v1")
+            if (prior.get("base_source_commit") != previous_commit or
+                    prior.get("source_branch") != git.get("branch") or
+                    prior_ancestor.returncode != 0 or
+                    prior.get("base_runner_sha256") != previous_hashes.get("scripts/run_m3_mechanism.py") or
+                    prior.get("manifest_sha256") != prior_manifest_hash or
+                    prior.get("changed_paths") != prior_manifest.get("allowed_changed_paths") or
+                    prior_paths != prior_manifest.get("allowed_changed_paths") or
+                    prior_manifest.get("schema_version") != expected_schema or
+                    prior_manifest.get("change_scope") != expected_scope or
+                    prior_manifest.get("authorized_runner_sha256") != prior.get("authorized_runner_sha256") or
+                    prior_input.get("scripts/run_m3_mechanism.py") != prior.get("authorized_runner_sha256") or
+                    set(prior_input) != set(previous_hashes) or
+                    changed_input_keys != ["scripts/run_m3_mechanism.py"] or
+                    prior.get("schedule_sha256") != canonical_sha256(schedule)):
+                return None
+            previous_commit, previous_hashes = prior.get("authorized_source_commit"), prior_input
+        last = authorizations[-1]
+        if (git.get("commit") == last.get("authorized_source_commit") and
+                current_runner_hash == last.get("authorized_runner_sha256") and
+                hashes == last.get("authorized_input_sha256") and
+                last.get("schedule_sha256") == canonical_sha256(schedule)):
+            return last
+        if len(authorizations) != 1 or not M3_BUDGET_ERRATA.is_file():
+            return None
+        manifest_bytes = M3_BUDGET_ERRATA.read_bytes()
+        manifest = json.loads(manifest_bytes)
+        changed_paths = _git_changed_paths(previous_commit, git["commit"])
+        ancestor = subprocess.run(
+            ["git", "-C", str(ROOT), "merge-base", "--is-ancestor", previous_commit, git["commit"]],
+            capture_output=True, text=True, timeout=15, check=False)
+        if (ancestor.returncode != 0 or not _resume_budget_erratum_eligible(
+                last, hashes, manifest, git, changed_paths, evidence)):
+            return None
+        base_commit = previous_commit
+        base_runner_hash = last["authorized_runner_sha256"]
+        erratum_manifest_path = "docs/M3_RUNTIME_BUDGET_ERRATA.json"
+    else:
+        manifest_path = M3_RESUME_ERRATA
+        manifest_bytes = manifest_path.read_bytes()
+        manifest = json.loads(manifest_bytes)
+        changed_paths = _git_changed_paths(freeze.get("source_commit", ""), git["commit"])
+        ancestor = subprocess.run(
+            ["git", "-C", str(ROOT), "merge-base", "--is-ancestor",
+             freeze.get("source_commit", ""), git["commit"]],
+            capture_output=True, text=True, timeout=15, check=False)
+        if (ancestor.returncode != 0 or not _resume_erratum_eligible(
+                freeze, hashes, manifest, git, changed_paths, evidence)):
+            return None
+        base_commit = freeze["source_commit"]
+        base_runner_hash = manifest["base_runner_sha256"]
+        erratum_manifest_path = "docs/M3_RUNTIME_RESUME_ERRATA.json"
+    manifest_hash = hashlib.sha256(manifest_bytes).hexdigest()
     record = {
-        "event": "metadata_only_source_erratum_authorized_before_generation",
-        "at_utc": utc_now(), "base_source_commit": freeze["source_commit"],
+        "event": "versioned_source_erratum_authorized_before_generation",
+        "at_utc": utc_now(), "base_source_commit": base_commit,
         "authorized_source_commit": git["commit"], "source_branch": git["branch"],
-        "base_runner_sha256": manifest["base_runner_sha256"],
+        "manifest_path": erratum_manifest_path,
+        "base_runner_sha256": base_runner_hash,
         "authorized_runner_sha256": current_runner_hash,
         "manifest_sha256": manifest_hash, "changed_paths": changed_paths,
         "authorized_input_sha256": hashes, "schedule_sha256": canonical_sha256(schedule),
@@ -832,7 +935,11 @@ def _preflight(config: dict[str, Any], out: Path,
 
     backend_config = replace(source, model_calls_enabled=True, preflight_enabled=False,
                              preflight_approval_id="", full_pilot_approval_id=M3_MECHANISM_APPROVAL_ID,
-                             max_logical_requests=MAX_LOGICAL, max_total_attempts=generation_attempt_ceiling)
+                             max_logical_requests=MAX_LOGICAL,
+                             # The backend accepts only the frozen study ceiling. The outer
+                             # RequestBudget below applies the smaller remaining ceiling after
+                             # every already-recorded identity probe has been reserved.
+                             max_total_attempts=MAX_GENERATION_HTTP_ATTEMPTS)
     runtime_base = load_runtime_config(HISTORY / "runtime-config.toml")
     if (runtime_base.raw["prompt_version"] != "m1-p0-frozen-v2" or
             runtime_base.monitor_can_see_private_messages is not False):
@@ -903,6 +1010,8 @@ def _preflight(config: dict[str, Any], out: Path,
                             "runtime_code_commit": source_state["commit"],
                             "runtime_code_sha256": source_code_sha256,
                                            "status": "PASS_LOCAL_IDENTITY", "at_utc": utc_now(),
+                            "effective_generation_http_attempt_ceiling": generation_attempt_ceiling,
+                            "backend_config_generation_http_attempt_ceiling": backend_config.max_total_attempts,
                                            "listener": listener, "model_probe": model_probe,
                                            "identity_probe_http_attempts": 1,
                                            "model_sha256": MODEL_SHA256, "server_sha256": SERVER_SHA256,
@@ -921,6 +1030,7 @@ def _preflight(config: dict[str, Any], out: Path,
             "server_path": str(server_path.resolve()), "model_path": str(model_path.resolve()),
             "bundle": bundle, "api_key_info": key_info, "process_guard": process_guard,
             "listener": listener, "model_probe": model_probe, "backend_config": backend_config,
+            "effective_generation_http_attempt_ceiling": generation_attempt_ceiling,
             "session_id": launch_record["session_id"],
             "output_streams": [stdout_stream, stderr_stream], "source_config": old_config,
         }
@@ -957,8 +1067,16 @@ def _write_environment(out: Path, git: dict[str, Any], config: dict[str, Any],
         "runtime_code_commit": git["commit"], "runtime_code_branch": git["branch"],
         "runtime_code_sha256": sha256_file(Path(__file__)),
         "runtime_source_erratum_applied": bool(source_errata),
-        "runtime_source_erratum_sha256": (source_errata[0].get("manifest_sha256")
+        "runtime_source_erratum_sha256": (source_errata[-1].get("manifest_sha256")
                                            if source_errata else None),
+        "runtime_source_errata": [{
+            "manifest_path": row.get("manifest_path", "docs/M3_RUNTIME_RESUME_ERRATA.json"),
+            "manifest_sha256": row.get("manifest_sha256"),
+            "base_source_commit": row.get("base_source_commit"),
+            "authorized_source_commit": row.get("authorized_source_commit"),
+            "authorized_runner_sha256": row.get("authorized_runner_sha256"),
+            "changed_paths": row.get("changed_paths"),
+        } for row in source_errata],
         "python": sys.version, "platform": platform.platform(),
         "model_path": runtime_info["model_path"], "model_sha256": MODEL_SHA256,
         "server_path": runtime_info["server_path"], "server_sha256": SERVER_SHA256,
@@ -983,7 +1101,8 @@ def _write_environment(out: Path, git: dict[str, Any], config: dict[str, Any],
         "assigned_groups": len(schedule),
         "call_budget": {"message_max": 24, "baseline_ballot_max": 36,
                          "counterfactual_ballot_max": 36, "logical_max": MAX_LOGICAL,
-                         "generation_http_attempts_max": backend_config.max_total_attempts,
+                         "generation_http_attempts_max": runtime_info["effective_generation_http_attempt_ceiling"],
+                         "backend_config_generation_http_attempts_safety_ceiling": backend_config.max_total_attempts,
                          "identity_probe_http_attempts_per_launch": IDENTITY_PROBE_HTTP_ATTEMPTS,
                          "all_http_attempts_max": MAX_ALL_HTTP_ATTEMPTS, "external_calls": 0,
                          "monitor_calls": 0, "training_calls": 0},
@@ -1262,7 +1381,8 @@ def _summary(out: Path, schedule: list[dict[str, Any]]) -> dict[str, Any]:
         "total_http_attempts": len(http_attempts) + len(infrastructure_attempts),
         "total_http_attempt_budget": MAX_ALL_HTTP_ATTEMPTS,
         "logical_budget": MAX_LOGICAL,
-        "generation_attempt_budget": MAX_GENERATION_HTTP_ATTEMPTS,
+        "generation_attempt_budget": min(MAX_GENERATION_HTTP_ATTEMPTS,
+                                          max(0, MAX_ALL_HTTP_ATTEMPTS - len(infrastructure_attempts))),
         "all_http_attempt_budget": MAX_ALL_HTTP_ATTEMPTS,
         "outside_api_calls": 0, "monitor_calls": 0, "training_calls": 0,
         "terminal_status_counts": {status: sum(row.get("status") == status for row in terminal_rows)
