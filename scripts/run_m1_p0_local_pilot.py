@@ -43,6 +43,9 @@ from scripts.run_m1_p0_local_preflight import (  # noqa: E402
 
 PREFLIGHT_APPROVAL_ID = "USER-APPROVED-8081-PREFLIGHT-2026-10-19"
 PILOT_APPROVAL_ID = "USER-AUTHORIZED-M1-P0-25-EPISODE-PILOT-2026-10-19"
+JSON_PREFIX_PREFLIGHT_APPROVAL_ID = "USER-REQUEST-JSON-PREFIX-PARSER-PREFLIGHT-2026-10-19"
+JSON_PREFIX_PILOT_APPROVAL_ID = "USER-REQUEST-JSON-PREFIX-PARSER-PILOT-2026-10-19"
+JSON_PREFIX_OUTPUT_CONTRACT = "json-v2-exact-empty-think-envelope"
 EXPECTED_MODEL_SHA256 = "d98cdcbd03e17ce47681435b5150e34c1417f50b5c0019dd560e4882c5745785"
 EXPECTED_SERVER_SHA256 = "3a8aea5f889c4b4c2ec41c98f4e1ed484bb7a40c4096883acb23d3cfe26b59fb"
 EXPECTED_BUNDLE_SHA256 = "9559fd2af95a7e83e3cf4a04aab22b67e1d1a2ec032b1e983ce091a6283c7759"
@@ -89,10 +92,14 @@ def _assert_port_free(port: int) -> None:
 
 def _validate_authorized_config(config_path: Path) -> Any:
     raw = tomllib.loads(config_path.read_text(encoding="utf-8"))
-    if (raw.get("model_calls_enabled") is not True or
-            raw.get("preflight_enabled") is not True or
-            raw.get("preflight_approval_id") != PREFLIGHT_APPROVAL_ID or
-            raw.get("full_pilot_approval_id") != PILOT_APPROVAL_ID):
+    approval_pair = (raw.get("preflight_approval_id"), raw.get("full_pilot_approval_id"))
+    legacy_pair = (PREFLIGHT_APPROVAL_ID, PILOT_APPROVAL_ID)
+    json_prefix_pair = (JSON_PREFIX_PREFLIGHT_APPROVAL_ID, JSON_PREFIX_PILOT_APPROVAL_ID)
+    if (raw.get("model_calls_enabled") is not True or raw.get("preflight_enabled") is not True or
+            approval_pair not in {legacy_pair, json_prefix_pair} or
+            (approval_pair == json_prefix_pair and
+             raw.get("action_output_contract_revision") != JSON_PREFIX_OUTPUT_CONTRACT) or
+            (approval_pair == legacy_pair and raw.get("action_output_contract_revision") is not None)):
         raise PermissionError("run-scoped config lacks the exact preflight and 25-episode approvals")
     if (raw.get("max_api_spend_usd") != 0.0 or raw["server"].get("base_url") !=
             f"http://127.0.0.1:{PORT}/v1" or raw["launch"].get("port") != PORT):
@@ -105,13 +112,14 @@ def _validate_authorized_config(config_path: Path) -> Any:
     return config
 
 
-def _consume_pilot_approval(out_dir: Path, ledger_dir: Path | None = None) -> Path:
+def _consume_pilot_approval(out_dir: Path, ledger_dir: Path | None = None,
+                            approval_id: str = PILOT_APPROVAL_ID) -> Path:
     """Make this 25-episode approval single-use across output directories."""
     ledger_dir = ledger_dir or ROOT / "runs" / "m1_p0_local" / "approval-ledger"
     ledger_dir.mkdir(parents=True, exist_ok=True)
-    approval_key = hashlib.sha256(PILOT_APPROVAL_ID.encode("utf-8")).hexdigest()
+    approval_key = hashlib.sha256(approval_id.encode("utf-8")).hexdigest()
     ledger_path = ledger_dir / f"{approval_key}.json"
-    record = {"approval_id": PILOT_APPROVAL_ID,
+    record = {"approval_id": approval_id,
               "consumed_at_utc": datetime.now(timezone.utc).isoformat(),
               "run_dir": str(out_dir.resolve()),
               "maximum_episode_count": 25,
@@ -453,6 +461,10 @@ def run(config_path: Path, runtime_config_path: Path, out_dir: Path,
     preflight_dir = out_dir / "preflight"
     preflight_dir.mkdir()
     backend_config = _validate_authorized_config(config_path)
+    run_authorization = tomllib.loads(config_path.read_text(encoding="utf-8"))
+    preflight_approval_id = run_authorization["preflight_approval_id"]
+    pilot_approval_id = run_authorization["full_pilot_approval_id"]
+    output_contract_revision = run_authorization.get("action_output_contract_revision", "json-v1")
     model_path = Path(backend_config.artifact_path).resolve()
     server_path = Path(backend_config.server_binary_path).resolve()
     bundle = llama_runtime_bundle_identity(server_path)
@@ -471,13 +483,17 @@ def run(config_path: Path, runtime_config_path: Path, out_dir: Path,
     (out_dir / "full-pilot-config.toml").write_bytes(config_path.read_bytes())
     (out_dir / "runtime-config.toml").write_bytes(runtime_config_path.read_bytes())
     _write_json(out_dir / "approval-record.json", {
-        "preflight_approval_id": PREFLIGHT_APPROVAL_ID,
-        "full_25_episode_pilot_approval_id": PILOT_APPROVAL_ID,
-        "authority": "user's latest direct request to run the 25 Episode behavior Pilot",
+        "preflight_approval_id": preflight_approval_id,
+        "full_25_episode_pilot_approval_id": pilot_approval_id,
+        "authority": ("user's direct instruction to repair the JSON-prefix parser and retry; "
+                      "bounded by the frozen 25-episode/95-request and 6/12/4 preflight ceilings"
+                      if pilot_approval_id == JSON_PREFIX_PILOT_APPROVAL_ID else
+                      "user's direct request to run the 25 Episode behavior Pilot"),
+        "action_output_contract_revision": output_contract_revision,
         "endpoint": "http://127.0.0.1:8081/v1", "external_paid_api_spend_usd": 0.0,
         "m2_authorized": False})
     if continuation is None:
-        _consume_pilot_approval(out_dir)
+        _consume_pilot_approval(out_dir, approval_id=pilot_approval_id)
     else:
         _claim_preflight_continuation(out_dir, continuation["previous_dir"])
         copied_parent = preflight_dir / "resumed-source"
@@ -704,8 +720,9 @@ def run(config_path: Path, runtime_config_path: Path, out_dir: Path,
                           "sha256": EXPECTED_MODEL_SHA256, "runtime": "local llama.cpp",
                           "external_model_calls": 0, "paid_api_calls": 0,
                           "sampling": backend_config.sampling},
-                "authorization": {"preflight": PREFLIGHT_APPROVAL_ID,
-                                  "pilot": PILOT_APPROVAL_ID},
+                "authorization": {"preflight": preflight_approval_id,
+                                  "pilot": pilot_approval_id},
+                "action_output_contract_revision": output_contract_revision,
                 "condition_ids": [condition["id"] for condition in base_runtime.conditions],
                 "seed_blocks": list(base_runtime.seed_blocks),
                 "prompt_version": base_runtime.raw["prompt_version"],

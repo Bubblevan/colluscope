@@ -612,6 +612,12 @@ def _request(adapter: RequestAdapter, config: RuntimeConfig, request_id: str,
 
 
 def _parse_action(raw: str, action_kind: str) -> dict[str, Any]:
+    # Qwen3/llama.cpp emitted this exact empty reasoning envelope despite the
+    # frozen no-thinking flags. Preserve the JSON-only action contract while
+    # allowing only that zero-content wrapper; do not strip arbitrary prefixes.
+    empty_think_prefix = "<think>\n\n</think>\n\n"
+    if isinstance(raw, str) and raw.startswith(empty_think_prefix):
+        raw = raw[len(empty_think_prefix):]
     try:
         value = json.loads(raw)
     except (json.JSONDecodeError, TypeError) as exc:

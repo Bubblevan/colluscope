@@ -1,5 +1,7 @@
 # M1-P0 25-Episode Pilot decision
 
+> **Historical decision under the original strict JSON-only parser.** The user later explicitly requested a parser revision and retry. See [`M1_P0_JSON_PREFIX_PARSER_REVISION.md`](M1_P0_JSON_PREFIX_PARSER_REVISION.md) and any separately identified follow-up run package; this record remains the correct decision for the original consumed approval and original artifacts.
+
 **Decision: NO-GO for this frozen real-LLM Pilot.** The user authorized a local 25-episode behavior Pilot, but its mandatory compatibility gate failed before episode 1. The full dataset therefore does not exist.
 
 ## GO findings

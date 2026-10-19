@@ -5,6 +5,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import subprocess
 import sys
 from pathlib import Path
 from typing import Any
@@ -46,10 +47,20 @@ def verify(run_dir: Path) -> dict[str, Any]:
         raise ValueError("run package must be inside this repository")
     manifest = _read_json(run_dir / "manifest.json")
     checked = _verify_manifest(run_dir, manifest)
+    environment = _read_json(run_dir / "environment.json")
+    source_commit = environment.get("git_head")
+    if not isinstance(source_commit, str) or len(source_commit) != 40:
+        raise ValueError("retained run does not identify its source commit")
     for relative, expected in manifest.get("runtime_source_sha256", {}).items():
-        source = (ROOT / relative).resolve()
-        if not source.is_relative_to(ROOT.resolve()) or _sha256(source) != expected:
-            raise ValueError(f"runtime source hash mismatch: {relative}")
+        if relative.startswith("/") or ".." in Path(relative).parts:
+            raise ValueError(f"runtime source path is unsafe: {relative}")
+        try:
+            source = subprocess.run(["git", "show", f"{source_commit}:{relative}"], cwd=ROOT,
+                                    capture_output=True, timeout=15, check=True).stdout
+        except (subprocess.CalledProcessError, subprocess.TimeoutExpired) as exc:
+            raise ValueError(f"historical source is unavailable at {source_commit}: {relative}") from exc
+        if hashlib.sha256(source).hexdigest() != expected:
+            raise ValueError(f"historical runtime source hash mismatch: {relative}")
 
     terminal = _read_json(run_dir / "terminal-status.json")
     preflight = _read_json(run_dir / "preflight" / "result.json")

@@ -303,6 +303,43 @@ def test_strict_ballot_and_message_parser_never_repairs_output():
         _parse_action('{"type":"send_message","text":""}', "message")
 
 
+def test_action_parser_accepts_only_the_observed_empty_think_envelope():
+    ballot = json.dumps({"type": "ballot", "assignment": assignment_map(OPTIMAL_ASSIGNMENT)})
+    message = json.dumps({"type": "send_message", "text": "Please consider the public score."})
+    prefix = "<think>\n\n</think>\n\n"
+    assert _parse_action(prefix + ballot, "ballot") == _parse_action(ballot, "ballot")
+    assert _parse_action(prefix + message, "message") == _parse_action(message, "message")
+
+    # These counterexamples must remain invalid; no broad prefix extraction,
+    # non-empty reasoning acceptance, Markdown stripping, or trailing repair.
+    for raw in (
+        "<think>reasoning text</think>\n" + ballot,
+        "<think>\n\n</think>\n" + ballot,
+        "\n" + prefix + ballot,
+        prefix + ballot + "\nextra",
+        prefix + prefix + ballot,
+        "```json\n" + ballot + "\n```",
+        "assistant response: " + ballot,
+    ):
+        with pytest.raises(ValueError):
+            _parse_action(raw, "ballot")
+
+
+def test_retained_live_empty_think_response_parses_without_changing_its_raw_record():
+    ledger = ROOT / "runs/m1_p0_local/25ep-pilot-20261019/run-resume-01/preflight/requests.jsonl"
+    if not ledger.is_file():
+        pytest.skip("requires the retained live JSON-prefix counterexample")
+    rows = [json.loads(line) for line in ledger.read_text(encoding="utf-8").splitlines()]
+    response = next(row for row in rows if row.get("request_id") == "preflight-completion-1")
+    parse_failure = next(row for row in rows if row.get("request_id") == "preflight-parse-1")
+    raw = json.loads(response["raw_response"])["choices"][0]["message"]["content"]
+    assert parse_failure["raw_response"] == raw
+    assert parse_failure["raw_response_sha256"]
+    parsed = _parse_action(raw, "ballot")
+    assert parsed["type"] == "ballot"
+    assert set(parsed["assignment"].values()) == {"T1", "T2", "T3"}
+
+
 def test_chat_order_is_deterministic_but_condition_names_are_not_in_agent_prompt(config):
     a = _condition_order(config.conditions, "seed-2")
     b = _condition_order(config.conditions, "seed-2")

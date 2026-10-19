@@ -1,5 +1,7 @@
 # M1-P0 local Qwen Pilot — evidence and stop record
 
+> **Historical run record.** This NO-GO applies to the original JSON-only parser and its consumed approval. A later user request initiated the separately frozen parser revision in [`M1_P0_JSON_PREFIX_PARSER_REVISION.md`](M1_P0_JSON_PREFIX_PARSER_REVISION.md); any resulting run has its own authorization, call ledger, and evidence package. No result from the revision may overwrite or reinterpret this record.
+
 **Result: NO-GO before research episodes.** The requested 25-episode dataset was not produced. The exact local model and server connect successfully on the approved loopback port, and tokenizer parity was corrected, but the first frozen-schema action probe returned non-JSON wrapper text. The frozen strict parser rejected it, so the runtime stopped at preflight as specified. No prompt, schema, parser, label, reward, condition, or acceptance threshold was changed to obtain a pass.
 
 ## What the two live attempts established

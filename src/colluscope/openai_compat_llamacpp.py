@@ -115,8 +115,12 @@ def load_llamacpp_backend_config(path: Path) -> LlamaCppBackendConfig:
                 "full_pilot_approval_id", "max_api_spend_usd", "status", "checkpoint",
                 "server", "tokenizer", "launch", "sampling", "limits", "retention",
                 "authorization"}
-    if set(raw) != expected:
+    allowed = expected | {"action_output_contract_revision"}
+    if set(raw) not in (expected, allowed):
         raise ValueError("llama.cpp config has missing or unknown top-level keys")
+    if ("action_output_contract_revision" in raw and
+            raw["action_output_contract_revision"] != "json-v2-exact-empty-think-envelope"):
+        raise ValueError("unknown action output contract revision")
     checkpoint, server = raw["checkpoint"], raw["server"]
     tokenizer, launch = raw["tokenizer"], raw["launch"]
     sampling, limits = raw["sampling"], raw["limits"]

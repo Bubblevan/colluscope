@@ -8,7 +8,9 @@ import shutil
 import pytest
 
 from scripts.run_m1_p0_local_pilot import (
-    PILOT_APPROVAL_ID, PREFLIGHT_APPROVAL_ID, ROOT, _consume_pilot_approval,
+    JSON_PREFIX_OUTPUT_CONTRACT, JSON_PREFIX_PILOT_APPROVAL_ID,
+    JSON_PREFIX_PREFLIGHT_APPROVAL_ID, PILOT_APPROVAL_ID, PREFLIGHT_APPROVAL_ID,
+    ROOT, _consume_pilot_approval,
     _build_probes, _runtime_source_files, _validate_authorized_config,
     _validate_preflight_continuation, _verify_preflight_continuation,
 )
@@ -52,6 +54,33 @@ def test_run_scoped_config_rejects_wrong_pilot_approval(tmp_path):
         PILOT_APPROVAL_ID, "UNAUTHORIZED-TEST-ID"), encoding="utf-8")
     with pytest.raises(PermissionError, match="exact preflight and 25-episode approvals"):
         _validate_authorized_config(path)
+
+
+def test_json_prefix_revision_requires_its_own_exact_approval_pair_and_contract(tmp_path):
+    path = _pilot_config(tmp_path)
+    revised = path.read_text(encoding="utf-8")
+    revised = revised.replace(PREFLIGHT_APPROVAL_ID, JSON_PREFIX_PREFLIGHT_APPROVAL_ID)
+    revised = revised.replace(PILOT_APPROVAL_ID, JSON_PREFIX_PILOT_APPROVAL_ID)
+    revised = revised.replace(
+        "[checkpoint]", f'action_output_contract_revision = "{JSON_PREFIX_OUTPUT_CONTRACT}"\n\n[checkpoint]', 1)
+    path.write_text(revised, encoding="utf-8")
+    assert _validate_authorized_config(path).model_calls_enabled is True
+
+    path.write_text(revised.replace(JSON_PREFIX_OUTPUT_CONTRACT, "wrong-contract"), encoding="utf-8")
+    with pytest.raises(PermissionError, match="exact preflight and 25-episode approvals"):
+        _validate_authorized_config(path)
+
+
+def test_parser_revision_approval_ledger_is_separate_and_single_use(tmp_path):
+    ledger = tmp_path / "ledger"
+    output = tmp_path / "run"
+    output.mkdir()
+    consumed = _consume_pilot_approval(output, ledger, JSON_PREFIX_PILOT_APPROVAL_ID)
+    assert consumed.is_file()
+    record = json.loads(consumed.read_text(encoding="utf-8"))
+    assert record["approval_id"] == JSON_PREFIX_PILOT_APPROVAL_ID
+    with pytest.raises(PermissionError, match="already consumed"):
+        _consume_pilot_approval(tmp_path / "second-run", ledger, JSON_PREFIX_PILOT_APPROVAL_ID)
 
 
 def test_full_25_episode_approval_is_single_use(tmp_path):
