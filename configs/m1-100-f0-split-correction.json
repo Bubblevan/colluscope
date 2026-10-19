@@ -1,0 +1,55 @@
+{
+  "schema_version": "m1-100-f0-split-correction-v1",
+  "status": "POST_RUN_HISTORICAL_METADATA_CORRECTION",
+  "scope": "F0 historical group metadata only; no M1-100 extension assignments, treatments, prompts, model responses, or artifacts changed",
+  "source_split_manifest": "frozen_protocol/m1-100-splits.json",
+  "source_split_manifest_sha256": "8ebc47258ea3cfc7295e65242ddec8aee005ed5c59545edf1cc5bd1e40f1e159",
+  "reason": "The frozen M1-100 F0 rows used the historical family alias icbcmatch_v1 and synthetic group IDs, while the immutable historical T rows identify allocation-3agent-v1 and the corresponding historical group IDs.",
+  "rows": [
+    {
+      "partition": "F0",
+      "seed_block_id": "seed-0",
+      "historical_scenario_family_id": "allocation-3agent-v1",
+      "historical_design_family_alias": "icbcmatch_v1",
+      "split_group_id": "655484de567c46c54bd3851fda3e2b59c941817984ba29b09e5fde7d76a0908a",
+      "episodes": 5,
+      "condition_ids": ["normal_cooperation", "common_incentive_parallel_behavior", "coalition_incentive_private_chat", "coalition_incentive_no_private_chat", "private_chat_no_side_bonus"]
+    },
+    {
+      "partition": "F0",
+      "seed_block_id": "seed-1",
+      "historical_scenario_family_id": "allocation-3agent-v1",
+      "historical_design_family_alias": "icbcmatch_v1",
+      "split_group_id": "977130b238079a2b13580bcde53e7c6dbfcb82d686bdc02e62fd177af58aae91",
+      "episodes": 5,
+      "condition_ids": ["normal_cooperation", "common_incentive_parallel_behavior", "coalition_incentive_private_chat", "coalition_incentive_no_private_chat", "private_chat_no_side_bonus"]
+    },
+    {
+      "partition": "F0",
+      "seed_block_id": "seed-2",
+      "historical_scenario_family_id": "allocation-3agent-v1",
+      "historical_design_family_alias": "icbcmatch_v1",
+      "split_group_id": "d8635e95bac11ac5062a29972d40c124bc190768ace8edc43c38893f9e8cc5f5",
+      "episodes": 5,
+      "condition_ids": ["normal_cooperation", "common_incentive_parallel_behavior", "coalition_incentive_private_chat", "coalition_incentive_no_private_chat", "private_chat_no_side_bonus"]
+    },
+    {
+      "partition": "F0",
+      "seed_block_id": "seed-3",
+      "historical_scenario_family_id": "allocation-3agent-v1",
+      "historical_design_family_alias": "icbcmatch_v1",
+      "split_group_id": "904a8c3971170a2822e9639ebc29d6aa169095ffa6451908d9a13c0d728da702",
+      "episodes": 5,
+      "condition_ids": ["normal_cooperation", "common_incentive_parallel_behavior", "coalition_incentive_private_chat", "coalition_incentive_no_private_chat", "private_chat_no_side_bonus"]
+    },
+    {
+      "partition": "F0",
+      "seed_block_id": "seed-4",
+      "historical_scenario_family_id": "allocation-3agent-v1",
+      "historical_design_family_alias": "icbcmatch_v1",
+      "split_group_id": "9a07b94016ad709fd732462b24a29c299e85cc491ec435a31d63901a3d63f1d6",
+      "episodes": 5,
+      "condition_ids": ["normal_cooperation", "common_incentive_parallel_behavior", "coalition_incentive_private_chat", "coalition_incentive_no_private_chat", "private_chat_no_side_bonus"]
+    }
+  ]
+}

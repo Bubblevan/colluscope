@@ -671,28 +671,64 @@ def _verify_history() -> tuple[list[dict[str, Any]], dict[str, Any]]:
                     "provenance": "historical; not generated under the M1-100 extension protocol"}
 
 
-def _verify_historical_split(history: list[dict[str, Any]], split_doc: dict[str, Any]) -> None:
+def _verify_historical_split(history: list[dict[str, Any]], split_doc: dict[str, Any],
+                            correction: dict[str, Any]) -> dict[str, Any]:
     f0 = split_doc["F0"]
     if len(history) != f0.get("episode_count") or len(f0.get("groups", [])) != 5:
         raise AuditError("F0 historical partition does not contain the frozen five groups/25 episodes")
+    if correction.get("schema_version") != "m1-100-f0-split-correction-v1":
+        raise AuditError("historical F0 metadata correction has an unsupported schema")
+    if correction.get("status") != "POST_RUN_HISTORICAL_METADATA_CORRECTION":
+        raise AuditError("historical F0 metadata correction is not explicitly post-run")
+    if correction.get("scope") != (
+            "F0 historical group metadata only; no M1-100 extension assignments, treatments, prompts, "
+            "model responses, or artifacts changed"):
+        raise AuditError("historical F0 metadata correction scope is not constrained")
     grouped = defaultdict(list)
     for row in history:
         grouped[row["split_group_id"]].append(row)
+    original_by_seed = {row["seed_block_id"]: row for row in f0["groups"]}
+    correction_rows = correction.get("rows")
+    if not isinstance(correction_rows, list) or len(correction_rows) != 5:
+        raise AuditError("F0 correction must enumerate exactly five historical matched groups")
     expected_group_ids = set()
-    for group in f0["groups"]:
-        group_id = group["split_group_id"]
+    seen_seeds = set()
+    all_conditions = {"normal_cooperation", "common_incentive_parallel_behavior",
+                      "coalition_incentive_private_chat", "coalition_incentive_no_private_chat",
+                      "private_chat_no_side_bonus"}
+    for group in correction_rows:
+        seed = group.get("seed_block_id")
+        if seed in seen_seeds or seed not in original_by_seed:
+            raise AuditError("F0 correction contains a duplicate or unregistered historical seed")
+        seen_seeds.add(seed)
+        original = original_by_seed[seed]
+        if (group.get("partition") != "F0" or group.get("episodes") != 5 or
+                group.get("historical_design_family_alias") != original.get("scenario_family_id") or
+                group.get("historical_scenario_family_id") != "allocation-3agent-v1" or
+                original.get("scenario_family_id") != "icbcmatch_v1" or
+                set(group.get("condition_ids", [])) != all_conditions or
+                set(original.get("condition_ids", [])) != all_conditions or
+                group.get("episodes") != original.get("episodes")):
+            raise AuditError(f"F0 correction conflicts with the frozen historical alias/conditions for {seed}")
+        group_id = group.get("split_group_id")
         expected_group_ids.add(group_id)
-        material = f"colluscope-m1-split-v1|{group['scenario_family_id']}|{group['seed_block_id']}"
+        material = f"colluscope-m1-split-v1|{group['historical_scenario_family_id']}|{seed}"
         if sha256_bytes(material.encode("utf-8")) != group_id:
-            raise AuditError(f"F0 split group ID does not recompute: {group_id}")
+            raise AuditError(f"corrected F0 split group ID does not recompute: {group_id}")
         rows = grouped.get(group_id, [])
         if (len(rows) != group["episodes"] or
                 {row["condition_id"] for row in rows} != set(group["condition_ids"]) or
-                any(row["scenario_family_id"] != group["scenario_family_id"] or
-                    row["seed_block_id"] != group["seed_block_id"] for row in rows)):
-            raise AuditError(f"historical matched conditions or provenance cross F0 group {group_id}")
+                any(row["scenario_family_id"] != group["historical_scenario_family_id"] or
+                    row["seed_block_id"] != seed for row in rows)):
+            raise AuditError(f"historical matched conditions or provenance cross corrected F0 group {group_id}")
     if set(grouped) != expected_group_ids:
-        raise AuditError("historical F0 contains an unregistered or missing matched group")
+        raise AuditError("historical F0 contains an unregistered or missing corrected matched group")
+    if seen_seeds != set(original_by_seed):
+        raise AuditError("F0 correction omits a frozen historical seed")
+    return {"status": "PASS_HISTORICAL_METADATA_RECONCILED",
+            "historical_scenario_family_id": "allocation-3agent-v1",
+            "preserved_frozen_alias": "icbcmatch_v1",
+            "matched_groups": len(correction_rows), "episodes": len(history)}
 
 
 def _verify_runtime_boundary(run: Path) -> dict[str, Any]:
@@ -806,7 +842,6 @@ def _verify_copied_freeze(run: Path) -> dict[str, Any]:
         "frozen_protocol/m1-100-scenarios.json": ROOT / "configs/m1-100-scenarios.json",
         "frozen_protocol/m1-100-splits.json": ROOT / "configs/m1-100-splits.json",
         "frozen_protocol/M1_100_PROTOCOL.md": ROOT / "docs/M1_100_PROTOCOL.md",
-        f"{source_prefix}/scripts_audit_m1_100.py": ROOT / "scripts/audit_m1_100.py",
         f"{source_prefix}/scripts_run_m1_100_extension.py": ROOT / "scripts/run_m1_100_extension.py",
     }
     for relative, current in current_mirrors.items():
@@ -843,8 +878,42 @@ def _verify_copied_freeze(run: Path) -> dict[str, Any]:
         if any(row.get("at_utc", "") < event.get("at_utc", "")
                for row in attempt_starts + [row for row in episodes if row.get("event") == "episode_started"]):
             raise AuditError("an episode or request started before the recorded source-freeze revision")
+    frozen_auditor = run / f"{source_prefix}/scripts_audit_m1_100.py"
+    frozen_auditor_sha = sha256_file(frozen_auditor)
+    current_auditor_sha = sha256_file(ROOT / "scripts/audit_m1_100.py")
+    audit_revision = None
+    if current_auditor_sha != frozen_auditor_sha:
+        revision_path = run / "frozen_protocol/postrun-audit-revision.json"
+        correction_path = run / "frozen_protocol/postrun-metadata/m1-100-f0-split-correction.json"
+        failure_path = run / "audit-failure.json"
+        if not revision_path.is_file() or not correction_path.is_file() or not failure_path.is_file():
+            raise AuditError("changed post-run auditor lacks a versioned correction and preserved first failure")
+        revision = read_json(revision_path)
+        correction = read_json(correction_path)
+        current_correction = ROOT / "configs/m1-100-f0-split-correction.json"
+        if not current_correction.is_file() or sha256_file(current_correction) != sha256_file(correction_path):
+            raise AuditError("run-scoped F0 correction differs from the committed correction manifest")
+        split_sha = sha256_file(run / "frozen_protocol/m1-100-splits.json")
+        if (revision.get("schema_version") != "m1-100-postrun-audit-revision-v1" or
+                revision.get("scope") != "auditor-only repair after all model responses; no T/B/E or request bytes changed" or
+                revision.get("frozen_auditor_sha256") != frozen_auditor_sha or
+                revision.get("corrected_auditor_sha256") != current_auditor_sha or
+                revision.get("f0_correction_sha256") != sha256_file(correction_path) or
+                revision.get("preserved_first_failure_sha256") != sha256_file(failure_path) or
+                revision.get("source_split_manifest_sha256") != split_sha or
+                correction.get("source_split_manifest_sha256") != split_sha or
+                correction.get("source_split_manifest") != "frozen_protocol/m1-100-splits.json"):
+            raise AuditError("post-run auditor revision does not bind exact source/correction/failure hashes")
+        audit_revision = {"status": "PASS_VERSIONED_POSTRUN_AUDITOR_REPAIR",
+            "implementation_commit": revision.get("implementation_commit"),
+            "frozen_auditor_sha256": frozen_auditor_sha,
+            "corrected_auditor_sha256": current_auditor_sha,
+            "f0_correction_sha256": sha256_file(correction_path),
+            "preserved_first_failure_sha256": sha256_file(failure_path),
+            "source_split_manifest_sha256": split_sha}
     return {"source_commit": design.get("source_commit"), "frozen_input_count": len(copied_hashes),
-            "freeze_revision": revision_number, "all_copied_frozen_inputs_rehashed": True}
+            "freeze_revision": revision_number, "all_copied_frozen_inputs_rehashed": True,
+            "postrun_audit_revision": audit_revision}
 
 
 def _summary(records: list[dict[str, Any]], keys: tuple[str, ...]) -> list[dict[str, Any]]:
@@ -876,6 +945,23 @@ def _write_csv(path: Path, rows: list[dict[str, Any]]) -> None:
         writer = csv.DictWriter(stream, fieldnames=columns, extrasaction="ignore")
         writer.writeheader()
         writer.writerows(rows)
+
+
+def _write_audit_failure(run: Path, exc: Exception) -> Path:
+    """Append a failure record without ever replacing the first observed failure."""
+    base = run / "audit-failure.json"
+    if not base.exists():
+        target = base
+    else:
+        revision = 2
+        while (run / f"audit-failure-attempt-{revision:03d}.json").exists():
+            revision += 1
+        target = run / f"audit-failure-attempt-{revision:03d}.json"
+    failure = {"status": "FAIL_INDEPENDENT_AUDIT", "error_type": type(exc).__name__,
+               "error": str(exc), "record_path": target.name}
+    target.write_text(json.dumps(failure, ensure_ascii=False, sort_keys=True, indent=2) + "\n",
+                      encoding="utf-8")
+    return target
 
 
 def _analysis(run: Path, new: list[dict[str, Any]], history: list[dict[str, Any]],
@@ -1013,8 +1099,13 @@ def audit(run: Path) -> dict[str, Any]:
     config = tomllib.loads((run / "frozen_protocol/m1-100.toml").read_text(encoding="utf-8"))
     scenario_doc = read_json(run / "frozen_protocol/m1-100-scenarios.json")
     split_doc = read_json(run / "frozen_protocol/m1-100-splits.json")
+    correction_path = run / "frozen_protocol/postrun-metadata/m1-100-f0-split-correction.json"
+    correction = read_json(correction_path)
+    if (correction.get("source_split_manifest_sha256") != sha256_file(run / "frozen_protocol/m1-100-splits.json") or
+            sha256_file(ROOT / "configs/m1-100-f0-split-correction.json") != sha256_file(correction_path)):
+        raise AuditError("F0 correction is not bound to the exact frozen split manifest and committed source")
     history, history_facts = _verify_history()
-    _verify_historical_split(history, split_doc)
+    historical_split_facts = _verify_historical_split(history, split_doc, correction)
     frozen_input_facts = _verify_copied_freeze(run)
     runtime_facts = _verify_runtime_boundary(run)
     new, request_facts = _verify_new(run, config, scenario_doc, split_doc)
@@ -1035,6 +1126,7 @@ def audit(run: Path) -> dict[str, Any]:
             "immutable_hashes": OLD_HASHES}, "F1_F2_F3": {"path": str(run), "episode_count": 75,
             "scenario_sha256": sha256_file(run / "frozen_protocol/m1-100-scenarios.json"),
             "split_sha256": sha256_file(run / "frozen_protocol/m1-100-splits.json"),
+            "f0_correction_sha256": sha256_file(correction_path),
             "protocol_sha256": sha256_file(run / "frozen_protocol/M1_100_PROTOCOL.md")}},
         "source_commit": read_json(run / "design-freeze.json")["source_commit"],
         "model_sha256": EXPECTED_MODEL_SHA256, "server_sha256": EXPECTED_SERVER_SHA256,
@@ -1043,6 +1135,7 @@ def audit(run: Path) -> dict[str, Any]:
         "audit_status": "PASS_INDEPENDENT_RAW_BALLOT_RECOMPUTE",
         "checked_new_files": {},
         "verification": {"historical_read_only_checks": history_facts,
+            "historical_split_metadata_reconciliation": historical_split_facts,
             "frozen_input_checks": frozen_input_facts,
             "runtime_boundary": runtime_facts,
             "new_request_facts": {key: value for key, value in request_facts.items() if key != "attempts_by_request"},
@@ -1081,10 +1174,8 @@ def main() -> int:
     try:
         result = audit(args.run)
     except Exception as exc:
-        failure = {"status": "FAIL_INDEPENDENT_AUDIT", "error_type": type(exc).__name__,
-                   "error": str(exc)}
-        (args.run / "audit-failure.json").write_text(json.dumps(failure, ensure_ascii=False,
-            sort_keys=True, indent=2) + "\n", encoding="utf-8")
+        failure_path = _write_audit_failure(args.run, exc)
+        failure = read_json(failure_path)
         print(json.dumps(failure, ensure_ascii=False, sort_keys=True))
         return 2
     print(json.dumps(result, ensure_ascii=False, sort_keys=True))

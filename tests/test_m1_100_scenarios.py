@@ -85,16 +85,51 @@ def test_independent_audit_detects_historical_matched_group_leakage():
     sys.path.insert(0, str(ROOT))
     from scripts.audit_m1_100 import AuditError, _verify_historical_split
     split_doc = json.loads((ROOT / "configs/m1-100-splits.json").read_text(encoding="utf-8"))
+    correction = json.loads((ROOT / "configs/m1-100-f0-split-correction.json").read_text(encoding="utf-8"))
     history = []
-    for group in split_doc["F0"]["groups"]:
+    for group in correction["rows"]:
         for condition in group["condition_ids"]:
             history.append({"split_group_id": group["split_group_id"],
-                "scenario_family_id": group["scenario_family_id"], "seed_block_id": group["seed_block_id"],
-                "condition_id": condition})
-    _verify_historical_split(history, split_doc)
+                "scenario_family_id": group["historical_scenario_family_id"],
+                "seed_block_id": group["seed_block_id"], "condition_id": condition})
+    result = _verify_historical_split(history, split_doc, correction)
+    assert result["status"] == "PASS_HISTORICAL_METADATA_RECONCILED"
+    assert result["preserved_frozen_alias"] == "icbcmatch_v1"
     history[0]["split_group_id"] = history[5]["split_group_id"]
-    with pytest.raises(AuditError, match="historical matched conditions"):
-        _verify_historical_split(history, split_doc)
+    with pytest.raises(AuditError, match="corrected F0 group"):
+        _verify_historical_split(history, split_doc, correction)
+
+
+def test_historical_split_correction_rejects_alias_or_family_relabeling():
+    import copy
+    sys.path.insert(0, str(ROOT))
+    from scripts.audit_m1_100 import AuditError, _verify_historical_split
+    split_doc = json.loads((ROOT / "configs/m1-100-splits.json").read_text(encoding="utf-8"))
+    correction = json.loads((ROOT / "configs/m1-100-f0-split-correction.json").read_text(encoding="utf-8"))
+    history = [{"split_group_id": group["split_group_id"],
+        "scenario_family_id": group["historical_scenario_family_id"],
+        "seed_block_id": group["seed_block_id"], "condition_id": condition}
+        for group in correction["rows"] for condition in group["condition_ids"]]
+    corrupted = copy.deepcopy(correction)
+    corrupted["rows"][0]["historical_design_family_alias"] = "allocation-3agent-v1"
+    with pytest.raises(AuditError, match="frozen historical alias"):
+        _verify_historical_split(history, split_doc, corrupted)
+    corrupted = copy.deepcopy(correction)
+    corrupted["rows"][0]["historical_scenario_family_id"] = "icbcmatch_v1"
+    with pytest.raises(AuditError, match="frozen historical alias"):
+        _verify_historical_split(history, split_doc, corrupted)
+
+
+def test_audit_failures_are_append_only_and_preserve_first_evidence(tmp_path):
+    sys.path.insert(0, str(ROOT))
+    from scripts.audit_m1_100 import _write_audit_failure
+    first = tmp_path / "audit-failure.json"
+    first.write_text('{"first_failure":"preserve"}\n', encoding="utf-8")
+    first_bytes = first.read_bytes()
+    path = _write_audit_failure(tmp_path, ValueError("second counterexample"))
+    assert first.read_bytes() == first_bytes
+    assert path.name == "audit-failure-attempt-002.json"
+    assert json.loads(path.read_text(encoding="utf-8"))["error"] == "second counterexample"
 
 
 def test_runtime_and_independent_settlement_use_selected_family_matrix():
