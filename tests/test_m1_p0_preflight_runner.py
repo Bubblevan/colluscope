@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import inspect
 import json
 import os
 import subprocess
@@ -10,23 +11,51 @@ from pathlib import Path
 import pytest
 
 from scripts import run_m1_p0_local_preflight as preflight_runner
-from scripts.run_m1_p0_local_preflight import (APPROVAL_ID, ROOT, _build_probes,
+from scripts.run_m1_p0_local_preflight import (APPROVAL_ID, CONSUMED_APPROVAL_IDS, ROOT, _build_probes,
                                                _listener_rows, _validate_approved_config,
-                                               _wait_for_server_startup)
-from colluscope.openai_compat_llamacpp import load_llamacpp_backend_config
+                                               _reserve_preflight_approval, _wait_for_server_startup)
+from colluscope.openai_compat_llamacpp import load_llamacpp_backend_config, llama_server_command
 from colluscope.openai_compat_llamacpp import (PREFLIGHT_NO_MESSAGE_INSTRUCTION,
                                                PREFLIGHT_SEND_MESSAGE_INSTRUCTION)
 
 
-def test_8081_preflight_config_changes_only_approved_scope():
-    config_path = ROOT / "runs" / "m1_p0_local" / "gguf-preflight-iteration-03" / "configs" / "m1-p0-8081-preflight.toml"
+def _current_v3_config(tmp_path: Path) -> Path:
+    original_path = ROOT / "configs" / "m1-p0-llama-local-draft.toml"
+    text = original_path.read_text(encoding="utf-8")
+    replacements = [
+        ('preflight_enabled = false', 'preflight_enabled = true'),
+        ('preflight_approval_id = ""', f'preflight_approval_id = "{APPROVAL_ID}"'),
+        ('base_url = "http://127.0.0.1:8080/v1"',
+         'base_url = "http://127.0.0.1:8081/v1"'),
+        ('port = 8080', 'port = 8081'),
+        ('live_preflight = "NOT_AUTHORIZED"', f'live_preflight = "{APPROVAL_ID}"'),
+    ]
+    for old, new in replacements:
+        assert text.count(old) == 1
+        text = text.replace(old, new, 1)
+    config_path = tmp_path / "m1-p0-interface-v3-run-scoped.toml"
+    config_path.write_text(text, encoding="utf-8")
+    return config_path
+
+
+def test_8081_preflight_config_changes_only_currently_approved_scope(tmp_path: Path):
+    config_path = _current_v3_config(tmp_path)
     original_path = ROOT / "configs" / "m1-p0-llama-local-draft.toml"
     approved = _validate_approved_config(config_path, original_path)
     assert approved["model_calls_enabled"] is False
     assert approved["preflight_enabled"] is True
     assert approved["preflight_approval_id"] == APPROVAL_ID
+    assert approved["full_pilot_approval_id"] == ""
     assert approved["launch"]["port"] == 8081
     assert approved["server"]["base_url"] == "http://127.0.0.1:8081/v1"
+    backend = load_llamacpp_backend_config(config_path)
+    command = llama_server_command(backend)
+    assert "--offline" in command
+    assert command[command.index("--host") + 1] == "127.0.0.1"
+    assert command[command.index("--port") + 1] == "8081"
+    assert backend.preflight_max_logical_requests == 6
+    assert backend.preflight_max_attempts == 12
+    assert backend.preflight_max_completion_attempts == 4
 
 
 def test_consumed_historical_preflight_approval_cannot_launch_again(tmp_path: Path):
@@ -38,9 +67,39 @@ def test_consumed_historical_preflight_approval_cannot_launch_again(tmp_path: Pa
             ROOT / "configs" / "m1-r-offline-v2.toml",
             ROOT / "configs" / "m1-p0-llama-local-draft.toml",
             output,
-            APPROVAL_ID,
+            next(iter(CONSUMED_APPROVAL_IDS)),
         )
     assert not output.exists()
+
+
+def test_current_v3_approval_can_be_reserved_only_once(tmp_path: Path):
+    output = tmp_path / "run-once"
+    ledger_dir = tmp_path / "ledger"
+    ledger_path = _reserve_preflight_approval(APPROVAL_ID, output, ledger_dir)
+    assert json.loads(ledger_path.read_text(encoding="utf-8"))["status"] == "RESERVED"
+    with pytest.raises(PermissionError, match="already reserved or consumed"):
+        _reserve_preflight_approval(APPROVAL_ID, tmp_path / "second-run", ledger_dir)
+
+
+def test_unapproved_id_is_rejected_before_creating_output(tmp_path: Path):
+    output = tmp_path / "must-not-be-created"
+    with pytest.raises(PermissionError, match="current V3 run-scoped authorization"):
+        preflight_runner.execute(
+            ROOT / "configs" / "m1-p0-llama-local-draft.toml",
+            ROOT / "configs" / "m1-r-offline-v2.toml",
+            ROOT / "configs" / "m1-p0-llama-local-draft.toml",
+            output,
+            "UNAUTHORIZED-TEST-ID",
+        )
+    assert not output.exists()
+
+
+def test_runner_has_no_unbudgeted_health_http_request():
+    source = inspect.getsource(preflight_runner.execute)
+    assert "health_url" not in source
+    assert "build_opener" not in source
+    assert "urllib.request" not in source
+    assert source.count("backend.preflight(") == 1
 
 
 @pytest.mark.parametrize("old,new", [
@@ -50,7 +109,7 @@ def test_consumed_historical_preflight_approval_cannot_launch_again(tmp_path: Pa
     ("min_p = 0.0", "min_p = 0.1"),
 ])
 def test_preflight_runner_rejects_unapproved_config_mutations(tmp_path: Path, old: str, new: str):
-    source = ROOT / "runs" / "m1_p0_local" / "gguf-preflight-iteration-03" / "configs" / "m1-p0-8081-preflight.toml"
+    source = _current_v3_config(tmp_path)
     text = source.read_text(encoding="utf-8")
     assert old in text
     mutated = tmp_path / "mutated.toml"

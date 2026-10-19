@@ -19,7 +19,6 @@ import threading
 import time
 import tomllib
 import urllib.error
-import urllib.request
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
@@ -37,7 +36,8 @@ from colluscope.openai_compat_llamacpp import (PREFLIGHT_NO_MESSAGE_INSTRUCTION,
                                                load_llamacpp_backend_config)  # noqa: E402
 
 
-APPROVAL_ID = "USER-APPROVED-8081-PREFLIGHT-2026-10-19"
+APPROVAL_ID = "USER-APPROVED-M1-P0-IF-V3-LOCAL-8081-6L12H4-20261019-RUN02"
+CONSUMED_APPROVAL_IDS = frozenset({"USER-APPROVED-8081-PREFLIGHT-2026-10-19"})
 EXPECTED_MODEL_SHA256 = "d98cdcbd03e17ce47681435b5150e34c1417f50b5c0019dd560e4882c5745785"
 EXPECTED_SERVER_SHA256 = "3a8aea5f889c4b4c2ec41c98f4e1ed484bb7a40c4096883acb23d3cfe26b59fb"
 EXPECTED_BUNDLE_SHA256 = "9559fd2af95a7e83e3cf4a04aab22b67e1d1a2ec032b1e983ce091a6283c7759"
@@ -284,6 +284,29 @@ def _validate_approved_config(config_path: Path, original_path: Path) -> dict[st
     return approved_raw
 
 
+def _reserve_preflight_approval(approval_id: str, out_dir: Path,
+                                ledger_dir: Path | None = None) -> Path:
+    if approval_id in CONSUMED_APPROVAL_IDS:
+        raise PermissionError("historical 8081 preflight approval was consumed")
+    if approval_id != APPROVAL_ID:
+        raise PermissionError("--approval-id must equal the current V3 run-scoped authorization")
+    ledger_dir = ledger_dir or ROOT / "runs" / "m1_p0_local" / "approval-ledger"
+    ledger_dir.mkdir(parents=True, exist_ok=True)
+    ledger_path = ledger_dir / (hashlib.sha256(approval_id.encode("utf-8")).hexdigest() + ".json")
+    record = {"approval_id": approval_id, "status": "RESERVED",
+              "scope": "one local M1-P0 Interface V3 preflight; no Pilot or M2",
+              "output_directory": str(out_dir.resolve()),
+              "reserved_at_utc": datetime.now(timezone.utc).isoformat()}
+    try:
+        with ledger_path.open("x", encoding="utf-8", newline="\n") as stream:
+            stream.write(json.dumps(record, ensure_ascii=False, sort_keys=True, indent=2) + "\n")
+            stream.flush()
+            os.fsync(stream.fileno())
+    except FileExistsError as exc:
+        raise PermissionError("this run-scoped preflight approval is already reserved or consumed") from exc
+    return ledger_path
+
+
 def _build_probes(backend_config: Any, runtime_config_path: Path) -> tuple[list[tuple[AgentRequest, str | None]], list[dict[str, Any]]]:
     runtime = load_runtime_config(runtime_config_path)
     by_id = {condition["id"]: condition for condition in runtime.conditions}
@@ -364,19 +387,23 @@ def _manifest(out_dir: Path) -> dict[str, Any]:
 
 def execute(config_path: Path, runtime_config_path: Path, original_config_path: Path,
             out_dir: Path, supplied_approval: str) -> int:
-    if supplied_approval == APPROVAL_ID:
-        raise PermissionError(
-            "the historical 8081 preflight approval was consumed; protocol v3 requires a new explicit approval")
+    if supplied_approval in CONSUMED_APPROVAL_IDS:
+        raise PermissionError("historical 8081 preflight approval was consumed")
+    if supplied_approval != APPROVAL_ID:
+        raise PermissionError("--approval-id must equal the current V3 run-scoped authorization")
+    _validate_approved_config(config_path, original_config_path)
     out_dir = out_dir.resolve()
     if out_dir.exists() and any(out_dir.iterdir()):
         raise FileExistsError(f"refusing to overwrite nonempty preflight evidence directory: {out_dir}")
+    approval_ledger_path = _reserve_preflight_approval(supplied_approval, out_dir)
     out_dir.mkdir(parents=True, exist_ok=True)
     logs_dir = out_dir / "logs"
     logs_dir.mkdir()
     shutil_copy = __import__("shutil").copy2
     shutil_copy(config_path, out_dir / "approved-config.toml")
-    approval = {"approval_id": APPROVAL_ID, "user_selection": "改用 8081（推荐）",
-                "scope": "bounded compatibility preflight only; no 25-episode pilot or M2",
+    approval = {"approval_id": APPROVAL_ID,
+                "user_authorization": "current explicit user approval for one local M1-P0 Interface V3 preflight",
+                "scope": "frozen local Qwen3/llama.cpp on 127.0.0.1:8081; max 6 logical / 12 HTTP / 4 completion attempts; no Pilot or M2",
                 "recorded_at_utc": datetime.now(timezone.utc).isoformat()}
     _write_json(out_dir / "approval-record.json", approval)
     result: dict[str, Any] = {
@@ -390,9 +417,6 @@ def execute(config_path: Path, runtime_config_path: Path, original_config_path: 
     process: subprocess.Popen[bytes] | None = None
     stdout_stream = stderr_stream = None
     try:
-        if supplied_approval != APPROVAL_ID:
-            raise PermissionError("--approval-id must equal the user-approved run-scoped ID")
-        _validate_approved_config(config_path, original_config_path)
         backend_config = load_llamacpp_backend_config(config_path)
         runtime_bundle = llama_runtime_bundle_identity(backend_config.server_binary_path)
         model_path = Path(backend_config.artifact_path).resolve()
@@ -419,6 +443,10 @@ def execute(config_path: Path, runtime_config_path: Path, original_config_path: 
                        "runtime_bundle": runtime_bundle,
                        "config_sampling": backend_config.sampling,
                        "launch_command": llama_server_command(backend_config),
+                        "network_boundary": {"inference_endpoint": backend_config.base_url,
+                                             "loopback_only": True, "llama_cpp_offline": True,
+                                             "third_party_api_calls": False,
+                                             "proxy_discovery_disabled_for_client": True},
                        "port_prelaunch_listeners": []}
         try:
             nvidia = subprocess.run(["nvidia-smi", "--query-gpu=name,memory.total,memory.free,utilization.gpu",
@@ -478,24 +506,14 @@ def execute(config_path: Path, runtime_config_path: Path, original_config_path: 
         if _process_image(process.pid).casefold() != str(server_path).casefold():
             raise PermissionError("server PID image changed after startup")
 
-        health_url = f"http://127.0.0.1:{PORT}/health"
-        try:
-            opener = urllib.request.build_opener(urllib.request.ProxyHandler({}))
-            with opener.open(health_url, timeout=5) as response:
-                health_body = response.read(4097).decode("utf-8", errors="strict")
-                health_status = response.status
-            health_payload = json.loads(health_body)
-            if health_status != 200 or health_payload.get("status") != "ok":
-                raise RuntimeError("llama.cpp /health returned a non-ready response")
-            _write_json(out_dir / "server-health.json", {
-                "status": "PASS", "method": "GET", "url": health_url,
-                "http_status": health_status, "response_body": health_body,
-                "pid": process.pid, "pid_image": launched_image})
-        except Exception as exc:
-            _write_json(out_dir / "server-health.json", {
-                "status": "FAIL", "method": "GET", "url": health_url,
-                "error_type": type(exc).__name__, "error": str(exc), "pid": process.pid})
-            raise
+        _write_json(out_dir / "server-readiness.json", {
+            "status": "PROCESS_AND_LOOPBACK_OWNER_VERIFIED",
+            "http_probe_sent": False,
+            "readiness_http_check": "the first budgeted GET /props request in the frozen six-request sequence",
+            "pid": process.pid,
+            "pid_image": launched_image,
+            "listener_rows": owner_rows,
+            "endpoint": f"http://127.0.0.1:{PORT}"})
         sampler.set_phase("server_listening_waiting_for_preflight")
 
         def listener_guard() -> bool:
@@ -616,6 +634,13 @@ def execute(config_path: Path, runtime_config_path: Path, original_config_path: 
                 "full_pilot_authorized": False, "m2_authorized": False}
     _write_json(out_dir / "terminal-status.json", terminal)
     _manifest(out_dir)
+    ledger_record = json.loads(approval_ledger_path.read_text(encoding="utf-8"))
+    ledger_record.update({"status": "CONSUMED", "terminal_status": result_status,
+                          "completed_at_utc": terminal["completed_at_utc"],
+                          "evidence_manifest_sha256": _sha256_file(out_dir / "manifest.json")})
+    temporary_ledger = approval_ledger_path.with_suffix(".tmp")
+    _write_json(temporary_ledger, ledger_record)
+    temporary_ledger.replace(approval_ledger_path)
     return 0 if result_status == "PASS_INTERFACE" else 2
 
 

@@ -28,3 +28,7 @@ V3 treats the interface question and instruction-compliance question separately.
 ## Remaining blocker and next action
 
 The V3 package is **ready for human review only**. Do not reuse prior one-time approval IDs. The single highest-value next action is review of the frozen V3 gate and, if accepted, a separate user-approved run-scoped protocol fixing model/runtime/tokenizer/template, sampling, output/context limits, endpoint, 6/12/4 ceilings, local compute bound, retention, and auditor permission. That approval would authorize only the stated preflight; a 25-episode pilot requires its separate approval and immutable 95/190 ceiling. No call is initiated by this decision.
+
+## 2026-10-19 Run 02 authorization addendum
+
+The status above records the earlier V3 review decision. The user has since explicitly authorized **one** local Interface V3 compatibility preflight under `docs/M1_P0_INTERFACE_V3_RUN02_PROTOCOL.md`, using the frozen GGUF/runtime and `127.0.0.1:8081` with ceilings of 6 logical requests, 12 HTTP attempts, and 4 completion attempts. This authorization does not approve a Pilot episode, M2, or model training. The unique run approval is consumed at most once; the separate Run 02 evidence and decision will supersede the earlier `UNKNOWN / NO-GO` compatibility line after execution.
