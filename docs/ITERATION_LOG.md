@@ -698,6 +698,17 @@
 - **REPORT / next action:** inspect and stage the exact freeze, verify the remote topic-branch push, then begin all 12 assigned groups once and independently replay every saved result.
 Exact pytest failure transcripts and schedule-generation JSON are preserved under the Git-ignored preflight directory. The committed records are sanitized summaries and reproducible hashes; no failed case was deleted from the local history.
 
+## M3-RUN-01 — preflight failures and metadata-only recovery
+
+- **Date:** 2026-10-20 (Asia/Shanghai); frozen protocol unchanged.
+- **INSPECT — highest integrity risk:** the default sandbox could not attest the owner of the child llama.cpp listener even though server stdout reported `127.0.0.1:8081`; proceeding with generation without exact PID ownership would violate the local-only gate. After the same run was resumed with authorized local process-table access, the identity endpoint returned the frozen model alias, then environment export failed on an invalid tokenizer metadata attribute.
+- **SPECIFY — falsifying cases:** an unverified/foreign listener must still block before any HTTP call; a verified listener with a wrong `/models` alias must block before generation; the environment writer must serialize the exact config-derived GGUF tokenizer metadata while the tokenizer counter deliberately lacks a `tokenizer_metadata` attribute.
+- **IMPLEMENT:** retained both failed startup/preflight sessions and added `run-failures.jsonl`; changed only the environment record source to the already hash-verified `backend_config.tokenizer_metadata`; added the regression test `test_m3_environment_records_frozen_json_safe_tokenizer_metadata`. No model-facing prompts, request payloads, arm order, sample IDs, matrix, rewards, sampling or parser changed.
+- **RUN:** first attempt stopped at exact listener attestation with 0 HTTP attempts and 0 generations. The resumed elevated local session passed exact PID and authenticated model-alias checks, making 1 `/models` HTTP attempt, then failed on metadata export; it shut down the server and removed the API key. The targeted test first exposed a test-placement fixture error (`NameError` from settlement assertions placed in the new test); that test-only defect was fixed, and both the metadata regression and original settlement test then passed (**2 passed**). The failure ledger, raw server sessions, and sanitized test transcript are recorded locally/publicly as appropriate.
+- **ADVERSARIAL REVIEW:** count the identity probe in the 192 total-attempt budget; no generation request or private model output exists. Do not weaken listener ownership or retry the model identity endpoint outside the append-only ledger. Reusing the same run path preserves the 12 assignments and all earlier attempts.
+- **DECIDE:** resume only after this metadata-only correction is committed and the complete repository suite passes. At this checkpoint, assigned=12; terminal=0; generation logical/HTTP=0; identity HTTP=1; total HTTP=1; outside API=0.
+- **REPORT / next action:** commit the correction as a versioned runtime erratum, then resume the same run. Stop if identity/PID checks fail again or any authorization boundary is exceeded.
+
 ## M3-MECHANISM-FREEZE-05 — final full-suite result and run-path counterexample
 
 - **Date:** 2026-10-20 (Asia/Shanghai); no M3 model call or llama-server launch.

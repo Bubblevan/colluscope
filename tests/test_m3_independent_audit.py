@@ -64,6 +64,39 @@ def test_independent_settlement_replays_all_way_tie_and_realized_private_scores(
         _same_public_result(corrupted, result, "synthetic tie")
 
 
+def test_m3_environment_records_frozen_json_safe_tokenizer_metadata(tmp_path):
+    metadata = {"model": "gpt2", "pre": "qwen2", "tokens_sha256": "a" * 64}
+    token_counter = SimpleNamespace(
+        tokenizer_sha256="b" * 64,
+        chat_template_sha256="c" * 64,
+        tokenizers_library_version="0.19.1",
+        jinja2_library_version="3.1.4",
+        # Deliberately no tokenizer_metadata attribute: the tokenizer counter
+        # is not the owner of the JSON-safe frozen metadata projection.
+    )
+    backend = SimpleNamespace(
+        tokenizer_metadata=metadata, sampling={}, context_length=4096,
+        input_budget_tokens=2048, message_max_output_tokens=128,
+        ballot_max_output_tokens=128, max_total_attempts=191,
+        timeout_seconds=120, max_attempts_per_request=2,
+    )
+    runtime_info = {
+        "model_path": "model.gguf", "server_path": "llama-server.exe",
+        "bundle": {"file_count": 4}, "listener": {"expected_pid": 1234},
+        "model_probe": {"model_ids": ["frozen-model"]},
+        "api_key_info": {"sha256": "d" * 64},
+    }
+
+    run_m3_mechanism._write_environment(
+        tmp_path, {"commit": "freeze", "branch": "codex/m3"},
+        {"runtime": {"endpoint": "http://127.0.0.1:8081/v1"}},
+        backend, token_counter, runtime_info, [],
+    )
+
+    recorded = json.loads((tmp_path / "environment.json").read_text(encoding="utf-8"))
+    assert recorded["tokenizer_metadata"] == metadata
+
+
 def test_incomplete_sealed_ballots_are_not_projected_as_public_evidence():
     partial = [{"agent_id": "A", "status": "VALID",
                 "parsed_action": {"assignment": {"A": "T1", "B": "T2", "C": "T3"}}}]

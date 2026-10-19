@@ -812,7 +812,10 @@ def _write_environment(out: Path, git: dict[str, Any], config: dict[str, Any],
         "chat_template_sha256": token_counter.chat_template_sha256,
         "tokenizers_library_version": token_counter.tokenizers_library_version,
         "jinja2_library_version": token_counter.jinja2_library_version,
-        "tokenizer_metadata": token_counter.tokenizer_metadata,
+        # The independently verified config carries the JSON-safe metadata
+        # projection. GGUFChatTokenCounter exposes parsed metadata as
+        # ``metadata`` plus tokenizer hashes, not ``tokenizer_metadata``.
+        "tokenizer_metadata": backend_config.tokenizer_metadata,
         "sampling": backend_config.sampling, "context_length": backend_config.context_length,
         "input_budget_tokens": backend_config.input_budget_tokens,
         "output_limits": {"message": backend_config.message_max_output_tokens,
