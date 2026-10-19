@@ -16,6 +16,7 @@ from colluscope.openai_compat_llamacpp import (LlamaCppPreflightBudget, LocalLla
                                                PREFLIGHT_SEND_MESSAGE_INSTRUCTION,
                                                llama_runtime_bundle_identity,
                                                load_llamacpp_backend_config, llama_server_command)
+from colluscope.openai_compat_vllm import BackendResponseError
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -47,8 +48,9 @@ class FakeCounter:
 
 
 class FakeResponse:
-    def __init__(self, body):
+    def __init__(self, body, headers=None):
         self.body = body
+        self.headers = headers or {}
 
     def __enter__(self):
         return self
@@ -71,6 +73,8 @@ class FakeOpener:
         result = self.results.pop(0)
         if isinstance(result, Exception):
             raise result
+        if isinstance(result, FakeResponse):
+            return result
         body = result if isinstance(result, bytes) else json.dumps(result).encode("utf-8")
         return FakeResponse(body)
 
@@ -195,6 +199,8 @@ def test_default_config_is_denied_and_launch_command_is_only_a_candidate():
     assert settings.full_pilot_approval_id == ""
     assert command[0] == settings.server_binary_path
     assert "--offline" in command and "--no-warmup" in command
+    assert command[command.index("--cors-origins") + 1] == "localhost"
+    assert "--no-cors-credentials" in command
     assert "--ctx-size" in command and command[command.index("--ctx-size") + 1] == "4096"
     assert settings.max_logical_requests == 95 and settings.max_total_attempts == 190
 
@@ -635,6 +641,7 @@ def test_fake_preflight_continuation_reuses_setup_and_dispatches_only_three_acti
     budget = LlamaCppPreflightBudget(enabled=True)
     budget.reuse_verified_setup(setup_records)
     opener = FakeOpener([
+        FakeResponse(json.dumps(props, ensure_ascii=False, separators=(",", ":")).encode("utf-8")),
         response('{"type":"ballot","assignment":{"A":"T1","B":"T2","C":"T3"}}'),
         response('{"type":"send_message","text":"Proposal"}'),
         response('{"type":"no_message"}'),
@@ -643,11 +650,13 @@ def test_fake_preflight_continuation_reuses_setup_and_dispatches_only_three_acti
     result = backend.preflight(budget, probes, reused_setup_responses=reused_responses)
     assert result["status"] == "PASS_INTERFACE"
     assert result["logical_requests"] == 6
-    assert result["http_attempts"] == 6
+    assert result["http_attempts"] == 7
     assert result["model_completion_attempts"] == 3
     assert result["reused_prior_setup_requests"] == 3
-    assert len(opener.calls) == 3
-    assert all(call[0].full_url.endswith("/v1/chat/completions") for call in opener.calls)
+    assert len(opener.calls) == 4
+    assert opener.calls[0][0].full_url.endswith("/props")
+    assert opener.calls[0][0].get_header("Origin") == "https://colluscope-cors-canary.invalid"
+    assert all(call[0].full_url.endswith("/v1/chat/completions") for call in opener.calls[1:])
 
 
 def test_port_8081_requires_bounded_preflight_gate_and_listener_owner(tmp_path):
@@ -656,8 +665,9 @@ def test_port_8081_requires_bounded_preflight_gate_and_listener_owner(tmp_path):
     counter = FakeCounter(settings)
     opener = FakeOpener([])
     backend = LocalLlamaCppBackend(settings, counter, opener, listener_guard=lambda: False)
-    command = llama_server_command(settings)
+    command = llama_server_command(settings, tmp_path / "api-key.txt")
     assert command[command.index("--port") + 1] == "8081"
+    assert command[command.index("--api-key-file") + 1].endswith("api-key.txt")
     with pytest.raises(PermissionError, match="listener process"):
         backend._open("http://127.0.0.1:8081/props", None, 10, "GET")
     assert opener.calls == []
@@ -684,6 +694,83 @@ def test_port_8081_allows_only_explicit_preflight_gated_local_full_pilot():
                          base_url="http://127.0.0.1:8081/v1", launch=launch)
     with pytest.raises(ValueError, match="launch settings"):
         LocalLlamaCppBackend(invalid, FakeCounter(invalid), FakeOpener([]))
+
+
+def test_real_live_transport_requires_per_run_key_and_sends_bearer_header():
+    launch = {**BASE.launch, "port": 8081}
+    settings = config_for(live=True, preflight=True,
+                          base_url="http://127.0.0.1:8081/v1", launch=launch)
+    with pytest.raises(PermissionError, match="API key file"):
+        llama_server_command(settings)
+    with pytest.raises(PermissionError, match="per-run API key"):
+        LocalLlamaCppBackend(settings, FakeCounter(settings))
+
+    opener = FakeOpener([FakeResponse(b'{"status":"ok"}')])
+    key = "test-only-api-key-material-1234567890"
+    backend = LocalLlamaCppBackend(settings, FakeCounter(settings), opener, api_key=key)
+    origin = "https://colluscope-cors-canary.invalid"
+    body = backend._open("http://127.0.0.1:8081/props", None, 10, "GET", origin=origin)
+    request = opener.calls[0][0]
+    assert body == b'{"status":"ok"}'
+    assert request.get_header("Authorization") == f"Bearer {key}"
+    assert request.get_header("Origin") == origin
+    assert backend._last_cors_probe == {
+        "origin_sent": origin, "access_control_allow_origin": None,
+        "status": "PASS_DENIED", "response_headers_recorded": True}
+
+
+def test_cors_probe_rejects_wildcard_or_reflected_untrusted_origin():
+    launch = {**BASE.launch, "port": 8081}
+    settings = config_for(preflight=True, base_url="http://127.0.0.1:8081/v1", launch=launch)
+    origin = "https://colluscope-cors-canary.invalid"
+    for allow_origin in ("*", origin):
+        opener = FakeOpener([FakeResponse(b"{}", {"Access-Control-Allow-Origin": allow_origin})])
+        backend = LocalLlamaCppBackend(settings, FakeCounter(settings), opener,
+                                       api_key="test-only-api-key-material-1234567890")
+        with pytest.raises(BackendResponseError, match="CORS boundary allowed an untrusted origin"):
+            backend._open("http://127.0.0.1:8081/props", None, 10, "GET", origin=origin)
+
+
+def test_preflight_cors_counterexample_stops_before_any_completion(tmp_path):
+    settings, _ = fake_server_bundle(config_for(preflight=True), tmp_path)
+    settings, counter = counter_for(settings)
+    opener = FakeOpener([FakeResponse(b"{}", {"Access-Control-Allow-Origin": "*"})])
+    backend = LocalLlamaCppBackend(settings, counter, opener,
+                                   api_key="test-only-api-key-material-1234567890")
+    probes = [(preflight_request_for(settings, request_id="probe-ballot", action_kind="ballot"), None),
+              (preflight_request_for(settings, request_id="probe-send", action_kind="message",
+                                     requested_action="send_message"), "send_message"),
+              (preflight_request_for(settings, request_id="probe-no-message", action_kind="message",
+                                     requested_action="no_message"), "no_message")]
+    budget = LlamaCppPreflightBudget(enabled=True)
+    opener.results.insert(0, http_error(401, '{"error":"unauthorized"}'))
+    with pytest.raises(BackendResponseError, match="CORS boundary allowed an untrusted origin"):
+        backend.preflight(budget, probes)
+    assert budget.logical_ids == {"preflight-props"}
+    assert budget.attempts == 2
+    assert budget.completion_attempts == 0
+    assert budget.records[0]["status"] == "expected_status_returned"
+    assert budget.records[0]["http_status"] == 401
+    assert budget.records[1]["cors_probe"]["status"] == "FAIL_ALLOWED"
+
+
+def test_preflight_rejects_server_that_accepts_missing_api_key_before_generation(tmp_path):
+    settings, _ = fake_server_bundle(config_for(preflight=True), tmp_path)
+    settings, counter = counter_for(settings)
+    opener = FakeOpener([FakeResponse(b'{"status":"unexpectedly-public"}')])
+    backend = LocalLlamaCppBackend(settings, counter, opener,
+                                   api_key="test-only-api-key-material-1234567890")
+    probes = [(preflight_request_for(settings, request_id="probe-ballot", action_kind="ballot"), None),
+              (preflight_request_for(settings, request_id="probe-send", action_kind="message",
+                                     requested_action="send_message"), "send_message"),
+              (preflight_request_for(settings, request_id="probe-no-message", action_kind="message",
+                                     requested_action="no_message"), "no_message")]
+    budget = LlamaCppPreflightBudget(enabled=True)
+    with pytest.raises(BackendResponseError, match="expected 401"):
+        backend.preflight(budget, probes)
+    assert budget.attempts == 1
+    assert budget.completion_attempts == 0
+    assert opener.calls[0][0].get_header("Authorization") is None
 
 
 def test_preflight_continuation_carries_only_three_hash_verified_setup_responses():

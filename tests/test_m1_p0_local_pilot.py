@@ -1,6 +1,8 @@
 from __future__ import annotations
 
 import hashlib
+import ast
+import inspect
 import json
 from pathlib import Path
 import shutil
@@ -8,10 +10,11 @@ import shutil
 import pytest
 
 from scripts.run_m1_p0_local_pilot import (
+    FORMAL_PILOT_APPROVAL_ID, FORMAL_PILOT_PREFLIGHT_APPROVAL_ID,
     JSON_PREFIX_OUTPUT_CONTRACT, JSON_PREFIX_PILOT_APPROVAL_ID,
     JSON_PREFIX_PREFLIGHT_APPROVAL_ID, JSON_PREFIX_RETRY_PILOT_APPROVAL_ID,
     JSON_PREFIX_RETRY_PREFLIGHT_APPROVAL_ID, PILOT_APPROVAL_ID, PREFLIGHT_APPROVAL_ID,
-    ROOT, _consume_pilot_approval,
+    ROOT, _consume_pilot_approval, run as run_live_pilot,
     _build_probes, _runtime_source_files, _validate_authorized_config,
     _validate_preflight_continuation, _validate_zero_http_runtime_retry_parent,
     _verify_preflight_continuation,
@@ -86,6 +89,29 @@ def test_json_prefix_revision_requires_its_own_exact_approval_pair_and_contract(
     retry_config = _validate_authorized_config(retry)
     assert retry_config.preflight_approval_id == JSON_PREFIX_RETRY_PREFLIGHT_APPROVAL_ID
     assert retry_config.max_logical_requests == 95
+
+
+def test_current_formal_pilot_request_requires_exact_run_scoped_pair_and_contract(tmp_path):
+    path = _pilot_config(tmp_path)
+    revised = path.read_text(encoding="utf-8")
+    revised = revised.replace(PREFLIGHT_APPROVAL_ID, FORMAL_PILOT_PREFLIGHT_APPROVAL_ID)
+    revised = revised.replace(PILOT_APPROVAL_ID, FORMAL_PILOT_APPROVAL_ID)
+    revised = revised.replace(
+        "[checkpoint]", f'action_output_contract_revision = "{JSON_PREFIX_OUTPUT_CONTRACT}"\n\n[checkpoint]', 1)
+    path.write_text(revised, encoding="utf-8")
+    assert _validate_authorized_config(path).full_pilot_approval_id == FORMAL_PILOT_APPROVAL_ID
+
+    path.write_text(revised.replace(FORMAL_PILOT_PREFLIGHT_APPROVAL_ID,
+                                    "WRONG-PREFLIGHT-ID"), encoding="utf-8")
+    with pytest.raises(PermissionError, match="exact preflight and 25-episode approvals"):
+        _validate_authorized_config(path)
+
+
+def test_formal_pilot_entrypoint_has_no_unbudgeted_health_http_request():
+    syntax = ast.parse(inspect.getsource(run_live_pilot))
+    called = {node.func.id for node in ast.walk(syntax)
+              if isinstance(node, ast.Call) and isinstance(node.func, ast.Name)}
+    assert "_health_check" not in called
 
 
 def test_parser_revision_approval_ledger_is_separate_and_single_use(tmp_path):

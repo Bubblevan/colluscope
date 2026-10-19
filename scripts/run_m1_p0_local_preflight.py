@@ -25,6 +25,7 @@ from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
+sys.path.insert(0, str(ROOT))
 
 from colluscope.gguf_tokenizer import GGUFChatTokenCounter  # noqa: E402
 from colluscope.m1_runtime import (AgentRequest, _canonical_hash, _generation_seed,
@@ -34,6 +35,7 @@ from colluscope.openai_compat_llamacpp import (PREFLIGHT_NO_MESSAGE_INSTRUCTION,
                                                LlamaCppPreflightBudget, LocalLlamaCppBackend,
                                                llama_runtime_bundle_identity, llama_server_command,
                                                load_llamacpp_backend_config)  # noqa: E402
+from scripts.local_llama_security import create_api_key_file, remove_api_key_file  # noqa: E402
 
 
 APPROVAL_ID = "USER-APPROVED-M1-P0-IF-V3-LOCAL-8081-6L12H4-20261019-RUN02"
@@ -415,6 +417,9 @@ def execute(config_path: Path, runtime_config_path: Path, original_config_path: 
     }
     sampler: GpuSampler | None = None
     process: subprocess.Popen[bytes] | None = None
+    api_key: str | None = None
+    api_key_file: Path | None = None
+    api_key_metadata: dict[str, Any] | None = None
     stdout_stream = stderr_stream = None
     try:
         backend_config = load_llamacpp_backend_config(config_path)
@@ -432,6 +437,7 @@ def execute(config_path: Path, runtime_config_path: Path, original_config_path: 
         if backend_config.launch["port"] != PORT:
             raise ValueError("the user-approved 8081 preflight port is not frozen in this config")
         _assert_port_free(PORT)
+        api_key, api_key_file, api_key_metadata = create_api_key_file(out_dir)
 
         environment = {"python": sys.version, "platform": platform.platform(),
                        "architecture": platform.machine(), "processor": platform.processor(),
@@ -442,7 +448,8 @@ def execute(config_path: Path, runtime_config_path: Path, original_config_path: 
                        "server_path": str(server_path), "server_sha256": EXPECTED_SERVER_SHA256,
                        "runtime_bundle": runtime_bundle,
                        "config_sampling": backend_config.sampling,
-                       "launch_command": llama_server_command(backend_config),
+                       "launch_command": llama_server_command(backend_config, api_key_file),
+                       "api_key_sha256": api_key_metadata["sha256"],
                         "network_boundary": {"inference_endpoint": backend_config.base_url,
                                              "loopback_only": True, "llama_cpp_offline": True,
                                              "third_party_api_calls": False,
@@ -480,7 +487,7 @@ def execute(config_path: Path, runtime_config_path: Path, original_config_path: 
         sampler.start()
         stdout_stream = (logs_dir / "llama-server.stdout.log").open("wb")
         stderr_stream = (logs_dir / "llama-server.stderr.log").open("wb")
-        command = llama_server_command(backend_config)
+        command = llama_server_command(backend_config, api_key_file)
         flags = getattr(subprocess, "CREATE_NO_WINDOW", 0) | getattr(subprocess, "CREATE_NEW_PROCESS_GROUP", 0)
         process = subprocess.Popen(command, stdin=subprocess.DEVNULL, stdout=stdout_stream,
                                   stderr=stderr_stream, cwd=str(server_path.parent),
@@ -553,7 +560,7 @@ def execute(config_path: Path, runtime_config_path: Path, original_config_path: 
                 sampler.set_phase("tokenizer_parity_validated")
             _write_jsonl(out_dir / "preflight-events.jsonl", row)
 
-        backend = LocalLlamaCppBackend(backend_config, token_counter,
+        backend = LocalLlamaCppBackend(backend_config, token_counter, api_key=api_key,
                                        listener_guard=listener_guard,
                                        preflight_event_hook=event_hook)
         budget = LlamaCppPreflightBudget(enabled=True, max_logical_requests=6,
@@ -590,6 +597,8 @@ def execute(config_path: Path, runtime_config_path: Path, original_config_path: 
             sampler.set_phase("server_shutdown") if sampler else None
             stop_result = _stop_own_process(process)
             _write_json(out_dir / "shutdown.json", stop_result)
+        if api_key_file is not None:
+            _write_json(out_dir / "api-key-cleanup.json", remove_api_key_file(api_key_file))
         if stdout_stream is not None:
             stdout_stream.close()
         if stderr_stream is not None:

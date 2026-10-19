@@ -49,10 +49,12 @@ def test_8081_preflight_config_changes_only_currently_approved_scope(tmp_path: P
     assert approved["launch"]["port"] == 8081
     assert approved["server"]["base_url"] == "http://127.0.0.1:8081/v1"
     backend = load_llamacpp_backend_config(config_path)
-    command = llama_server_command(backend)
+    command = llama_server_command(backend, tmp_path / "api-key.txt")
     assert "--offline" in command
     assert command[command.index("--host") + 1] == "127.0.0.1"
     assert command[command.index("--port") + 1] == "8081"
+    assert command[command.index("--cors-origins") + 1] == "localhost"
+    assert "--api-key-file" in command
     assert backend.preflight_max_logical_requests == 6
     assert backend.preflight_max_attempts == 12
     assert backend.preflight_max_completion_attempts == 4

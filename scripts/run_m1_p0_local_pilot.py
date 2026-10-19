@@ -37,6 +37,7 @@ from colluscope.openai_compat_llamacpp import (  # noqa: E402
     LlamaCppPreflightBudget, LocalLlamaCppBackend, llama_runtime_bundle_identity,
     llama_server_command, load_llamacpp_backend_config,
 )
+from scripts.local_llama_security import create_api_key_file, remove_api_key_file  # noqa: E402
 from scripts.run_m1_p0_local_preflight import (  # noqa: E402
     GpuSampler, _build_probes, _listener_snapshot, _process_image, _stop_own_process,
 )
@@ -48,6 +49,8 @@ JSON_PREFIX_PREFLIGHT_APPROVAL_ID = "USER-REQUEST-JSON-PREFIX-PARSER-PREFLIGHT-2
 JSON_PREFIX_PILOT_APPROVAL_ID = "USER-REQUEST-JSON-PREFIX-PARSER-PILOT-2026-10-19"
 JSON_PREFIX_RETRY_PREFLIGHT_APPROVAL_ID = "USER-REQUEST-JSON-PREFIX-PARSER-RETRY1-PREFLIGHT-2026-10-19"
 JSON_PREFIX_RETRY_PILOT_APPROVAL_ID = "USER-REQUEST-JSON-PREFIX-PARSER-RETRY1-PILOT-2026-10-19"
+FORMAL_PILOT_PREFLIGHT_APPROVAL_ID = "USER-REQUEST-FORMAL-25-EPISODE-PILOT-PREFLIGHT-2026-10-19"
+FORMAL_PILOT_APPROVAL_ID = "USER-REQUEST-FORMAL-25-EPISODE-PILOT-2026-10-19"
 JSON_PREFIX_OUTPUT_CONTRACT = "json-v2-exact-empty-think-envelope"
 EXPECTED_MODEL_SHA256 = "d98cdcbd03e17ce47681435b5150e34c1417f50b5c0019dd560e4882c5745785"
 EXPECTED_SERVER_SHA256 = "3a8aea5f889c4b4c2ec41c98f4e1ed484bb7a40c4096883acb23d3cfe26b59fb"
@@ -100,9 +103,12 @@ def _validate_authorized_config(config_path: Path) -> Any:
     json_prefix_pair = (JSON_PREFIX_PREFLIGHT_APPROVAL_ID, JSON_PREFIX_PILOT_APPROVAL_ID)
     json_prefix_retry_pair = (JSON_PREFIX_RETRY_PREFLIGHT_APPROVAL_ID,
                               JSON_PREFIX_RETRY_PILOT_APPROVAL_ID)
+    formal_pilot_pair = (FORMAL_PILOT_PREFLIGHT_APPROVAL_ID, FORMAL_PILOT_APPROVAL_ID)
     if (raw.get("model_calls_enabled") is not True or raw.get("preflight_enabled") is not True or
-            approval_pair not in {legacy_pair, json_prefix_pair, json_prefix_retry_pair} or
+            approval_pair not in {legacy_pair, json_prefix_pair, json_prefix_retry_pair, formal_pilot_pair} or
             (approval_pair in {json_prefix_pair, json_prefix_retry_pair} and
+             raw.get("action_output_contract_revision") != JSON_PREFIX_OUTPUT_CONTRACT) or
+            (approval_pair == formal_pilot_pair and
              raw.get("action_output_contract_revision") != JSON_PREFIX_OUTPUT_CONTRACT) or
             (approval_pair == legacy_pair and raw.get("action_output_contract_revision") is not None)):
         raise PermissionError("run-scoped config lacks the exact preflight and 25-episode approvals")
@@ -201,6 +207,7 @@ def _runtime_source_files() -> list[Path]:
     # outside the per-run source fingerprint.
     return [Path(__file__), ROOT / "scripts" / "run_m1_p0_local_preflight.py",
             ROOT / "scripts" / "verify_m1_p0_runtime_start_blocker.py",
+            ROOT / "scripts" / "local_llama_security.py",
             ROOT / "src" / "colluscope" / "m1_runtime.py",
             ROOT / "src" / "colluscope" / "openai_compat_llamacpp.py",
             ROOT / "src" / "colluscope" / "gguf_tokenizer.py"]
@@ -271,7 +278,10 @@ def _validate_preflight_continuation(previous_dir: Path, config_path: Path,
             (previous_dir / "runtime-config.toml").read_bytes() != runtime_config_path.read_bytes()):
         raise ValueError("continuation config/runtime differs from the failed run's frozen inputs")
     previous_launch = json.loads((previous_dir / "launch.json").read_text(encoding="utf-8"))
-    if previous_launch.get("command") != llama_server_command(backend_config):
+    previous_command = previous_launch.get("command", [])
+    if ("--api-key-file" not in previous_command or
+            previous_command != llama_server_command(
+                backend_config, previous_command[previous_command.index("--api-key-file") + 1])):
         raise ValueError("continuation server command differs from the previous exact launch")
     health = json.loads((previous_dir / "server-health.json").read_text(encoding="utf-8"))
     owner = json.loads((previous_dir / "listener-owner-attestation.json").read_text(encoding="utf-8"))
@@ -391,6 +401,40 @@ def _verify_live_run(out_dir: Path, config: Any, manifest: dict[str, Any]) -> di
             not {"preflight-props", "preflight-template", "preflight-tokenize",
                  "preflight-completion-1", "preflight-completion-2", "preflight-completion-3"}.issubset(preflight_ids)):
         raise ValueError("successful cumulative 6/12/4 preflight evidence is incomplete or over budget")
+    security = json.loads((out_dir / "security-boundary.json").read_text(encoding="utf-8"))
+    key_cleanup = json.loads((out_dir / "api-key-cleanup.json").read_text(encoding="utf-8"))
+    cors_probe = preflight_result.get("cors_origin_probe", {})
+    launch = json.loads((out_dir / "launch.json").read_text(encoding="utf-8"))
+    launch_command = launch.get("command", [])
+    auth_canary = [row for row in preflight_attempt_rows
+                   if row.get("request_id") == "preflight-props" and row.get("attempt") == 1]
+    if (security.get("status") != "PASS_LOCAL_BOUNDARY_AND_KEY_REMOVED" or
+            security.get("offline_mode") is not True or
+            security.get("cors_allowed_origins") != "localhost" or
+            security.get("cors_credentials") is not False or
+            security.get("api_key_authentication") != "per_run_bearer_key" or
+            not security.get("api_key_file_acl", {}).get("current_user_sid") or
+            security.get("api_key_file_acl", {}).get("acl_assignment_verified") is not True or
+            security.get("api_key_file_acl", {}).get("secret_content_recorded") is not False or
+            key_cleanup.get("status") != "REMOVED" or key_cleanup.get("exists_after_cleanup") is not False or
+            cors_probe.get("status") != "PASS_DENIED" or
+            preflight_result.get("api_key_authentication") != "unauthenticated_request_rejected_401" or
+            len(auth_canary) != 1 or auth_canary[0].get("http_status") != 401 or
+            auth_canary[0].get("expected_http_status") != 401 or
+            auth_canary[0].get("authentication_header_sent") is not False or
+            auth_canary[0].get("status") != "expected_status_returned" or
+            "--cors-origins" not in launch_command or
+            launch_command[launch_command.index("--cors-origins") + 1] != "localhost" or
+            "--no-cors-credentials" not in launch_command or
+            "--api-key-file" not in launch_command or "--api-key" in launch_command):
+        raise ValueError("local endpoint security boundary or CORS canary did not pass verification")
+    if any(row.get("api_key_sha256") != security.get("api_key_sha256") or
+           (row.get("request_id") == "preflight-props" and row.get("attempt") == 1 and
+            row.get("transport_authentication") != "unauthenticated_canary") or
+           (not (row.get("request_id") == "preflight-props" and row.get("attempt") == 1) and
+            row.get("transport_authentication") != "bearer_api_key")
+           for row in preflight_attempt_rows):
+        raise ValueError("one or more preflight requests lack per-run local API-key authentication")
     continuation_result = None
     if (out_dir / "preflight-resume.json").is_file():
         continuation_result = _verify_preflight_continuation(out_dir, preflight_rows)
@@ -400,6 +444,13 @@ def _verify_live_run(out_dir: Path, config: Any, manifest: dict[str, Any]) -> di
     e_rows = _read_jsonl(out_dir / "monitor_inputs" / "evidence.jsonl")
     observations = _read_jsonl(researcher / "agent_observations.jsonl")
     requests = _read_jsonl(researcher / "requests.jsonl")
+    expected_key_hash = security.get("api_key_sha256")
+    if any(row.get("transport") is not None and (
+            not isinstance(row.get("transport"), dict) or
+            row["transport"].get("transport_authentication") != "bearer_api_key" or
+            row["transport"].get("api_key_sha256") != expected_key_hash)
+            for row in requests):
+        raise ValueError("one or more Pilot requests lack the authenticated per-run local transport record")
     if not (len(t_rows) == len(b_rows) == len(e_rows) == 25):
         raise ValueError("all 25 assigned episodes must remain in T/B/E, including failures")
     if len({row["episode_id"] for row in t_rows}) != 25:
@@ -549,7 +600,7 @@ def run(config_path: Path, runtime_config_path: Path, out_dir: Path,
                                        "preflight-completion-3"],
             "reason": "local Qwen2 pre-tokenizer corrected; previously returned setup HTTP responses are revalidated offline",
         })
-    _write_json(out_dir / "environment.json", {
+    environment = {
         "python": sys.version, "platform": platform.platform(),
         "git_head": subprocess.run(["git", "rev-parse", "HEAD"], cwd=ROOT, capture_output=True,
                                     text=True, timeout=10, check=True).stdout.strip(),
@@ -564,11 +615,16 @@ def run(config_path: Path, runtime_config_path: Path, out_dir: Path,
             "jinja2": __import__("jinja2").__version__,
         },
         "base_url": backend_config.base_url, "sampling": backend_config.sampling,
+        "network_boundary": {"endpoint": "127.0.0.1:8081", "adapter_loopback_only": True,
+                             "llama_cpp_offline": True, "third_party_api_fallback": False,
+                             "cors_allowed_origins": "localhost", "cors_credentials": False,
+                             "per_run_api_key_required": True},
         "preflight_budget": {"logical": 6, "http_attempts": 12, "completion_attempts": 4},
         "preflight_prior_run_id": continuation["previous_dir"].name if continuation else None,
         "preflight_budget_is_cumulative_across_runs": continuation is not None,
         "pilot_budget": {"logical": 95, "http_attempts": 190, "episodes": 25,
-                         "completion_probes": 0}})
+                         "completion_probes": 0}}
+    _write_json(out_dir / "environment.json", environment)
     _write_json(preflight_dir / "inputs.json", {
         "protocol_id": "m1-p0-interface-v3",
         "probe_order": [request.request_id for request, _ in probes],
@@ -588,13 +644,38 @@ def run(config_path: Path, runtime_config_path: Path, out_dir: Path,
     budget: RequestBudget | None = None
     adapter: RequestAdapter | None = None
     owner_attestation: dict[str, Any] | None = None
+    api_key: str | None = None
+    api_key_file: Path | None = None
+    api_key_metadata: dict[str, Any] | None = None
     try:
         _assert_port_free(PORT)
         sampler = GpuSampler(out_dir / "gpu-samples.jsonl", interval_seconds=1.0)
         sampler.start()
         stdout_stream = (logs_dir / "llama-server.stdout.log").open("wb")
         stderr_stream = (logs_dir / "llama-server.stderr.log").open("wb")
-        command = llama_server_command(backend_config)
+        api_key, api_key_file, api_key_metadata = create_api_key_file(out_dir)
+        command = llama_server_command(backend_config, api_key_file)
+        environment["launch_command"] = command
+        environment["local_server_api_key"] = {
+            "sha256": api_key_metadata["sha256"],
+            "file_path": api_key_metadata["path"],
+            "secret_content_recorded": False,
+        }
+        _write_json(out_dir / "environment.json", environment)
+        _write_json(out_dir / "security-boundary.json", {
+            "status": "LOCAL_BOUNDARY_CONFIGURED",
+            "endpoint": backend_config.base_url,
+            "listener_host": "127.0.0.1",
+            "offline_mode": True,
+            "cors_allowed_origins": "localhost",
+            "cors_credentials": False,
+            "api_key_authentication": "per_run_bearer_key",
+            "api_key_sha256": api_key_metadata["sha256"],
+            "api_key_file_acl": api_key_metadata,
+            "untrusted_origin_canary": "https://colluscope-cors-canary.invalid",
+            "third_party_api_fallback": False,
+            "host_firewall_egress_rule": "not_modified",
+        })
         flags = getattr(subprocess, "CREATE_NO_WINDOW", 0) | getattr(subprocess, "CREATE_NEW_PROCESS_GROUP", 0)
         process = subprocess.Popen(command, stdin=subprocess.DEVNULL, stdout=stdout_stream,
                                    stderr=stderr_stream, cwd=str(server_path.parent),
@@ -632,8 +713,9 @@ def run(config_path: Path, runtime_config_path: Path, out_dir: Path,
             except Exception:
                 return False
 
-        health = _health_check(backend_config.base_url, process.pid, image, out_dir)
-        sampler.set_phase("server_health_validated")
+        # The first endpoint request is the budgeted preflight /props request.
+        # Do not send a separate unbudgeted /health HTTP probe.
+        sampler.set_phase("server_identity_preflight")
         events: list[dict[str, Any]] = []
 
         def event_hook(event: dict[str, Any]) -> None:
@@ -650,7 +732,7 @@ def run(config_path: Path, runtime_config_path: Path, out_dir: Path,
                 sampler.set_phase("tokenizer_parity_validated")
             _append_jsonl(preflight_dir / "events.jsonl", row)
 
-        backend = LocalLlamaCppBackend(backend_config, token_counter,
+        backend = LocalLlamaCppBackend(backend_config, token_counter, api_key=api_key,
                                        listener_guard=process_guard,
                                        preflight_event_hook=event_hook)
         preflight_budget = LlamaCppPreflightBudget(enabled=True, max_logical_requests=6,
@@ -727,6 +809,19 @@ def run(config_path: Path, runtime_config_path: Path, out_dir: Path,
                 sampler.set_phase("server_shutdown")
             shutdown = _stop_own_process(process)
             _write_json(out_dir / "shutdown.json", shutdown)
+        if api_key_file is not None:
+            cleanup = remove_api_key_file(api_key_file)
+            _write_json(out_dir / "api-key-cleanup.json", cleanup)
+            if (out_dir / "security-boundary.json").is_file():
+                security_boundary = json.loads((out_dir / "security-boundary.json").read_text(encoding="utf-8"))
+                security_boundary["api_key_cleanup"] = cleanup
+                if process is None or process.poll() is not None:
+                    security_boundary["status"] = (
+                        "LOCAL_CONFIGURED_KEY_REMOVED" if cleanup.get("status") == "REMOVED"
+                        else "FAIL_API_KEY_CLEANUP")
+                else:
+                    security_boundary["status"] = "FAIL_SERVER_STILL_RUNNING_KEY_RETAINED_OR_CLEANUP_FAILED"
+                _write_json(out_dir / "security-boundary.json", security_boundary)
         if stdout_stream is not None:
             stdout_stream.close()
         if stderr_stream is not None:
@@ -734,6 +829,14 @@ def run(config_path: Path, runtime_config_path: Path, out_dir: Path,
         if sampler is not None:
             sampler.set_phase("after_server_shutdown")
             sampler.stop()
+
+    if (preflight_result and preflight_result.get("status") == "PASS_INTERFACE" and
+            preflight_result.get("cors_origin_probe", {}).get("status") == "PASS_DENIED" and
+            (out_dir / "security-boundary.json").is_file()):
+        security_boundary = json.loads((out_dir / "security-boundary.json").read_text(encoding="utf-8"))
+        if security_boundary.get("status") == "LOCAL_CONFIGURED_KEY_REMOVED":
+            security_boundary["status"] = "PASS_LOCAL_BOUNDARY_AND_KEY_REMOVED"
+            _write_json(out_dir / "security-boundary.json", security_boundary)
 
     _write_json(out_dir / "terminal-status.json", {
         "status": status, "error": error,

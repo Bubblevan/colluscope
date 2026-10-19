@@ -1,6 +1,6 @@
 # M1-P0 Local GGUF Runtime TRD
 
-**Status:** offline implementation complete; the user authorized one bounded live preflight on the separate loopback port 8081. The llama.cpp server loaded the frozen GGUF, but the runner's listener-owner gate timed out before any HTTP request. Live compatibility remains NO-GO; full research calls remain unauthorized.
+**Historical status note (2026-10-19):** the first listener-owner failure and later Interface V3 PASS are recorded in their run-specific evidence. The V3 Pilot decision remained NO-GO under wildcard CORS/no API key. A new explicit user request now authorizes one formal 25-episode local Pilot under the separately frozen, hardened protocol in [`M1_P0_FORMAL_25EP_PILOT_PROTOCOL.md`](M1_P0_FORMAL_25EP_PILOT_PROTOCOL.md); that run has not yet executed when this note was frozen.
 **Candidate:** Qwen3-8B Q4_K_M GGUF through the installed local llama.cpp server.
 **Protocol basis:** the accepted `m1-p0-frozen-v2` prompts, schemas, five M1 conditions, and reward amounts remain unchanged.
 

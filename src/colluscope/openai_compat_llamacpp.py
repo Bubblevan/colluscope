@@ -295,19 +295,27 @@ def _validate_config(config: LlamaCppBackendConfig) -> None:
         raise PermissionError("live execution requires the matching separate approval ID")
 
 
-def llama_server_command(config: LlamaCppBackendConfig) -> list[str]:
-    """Return the exact candidate command; this function never starts it."""
+def llama_server_command(config: LlamaCppBackendConfig,
+                         api_key_file: str | Path | None = None) -> list[str]:
+    """Return the loopback-only candidate command; this function never starts it."""
     _validate_config(config)
+    if (config.preflight_enabled or config.model_calls_enabled) and api_key_file is None:
+        raise PermissionError("live llama.cpp launch requires a per-run API key file")
     launch = config.launch
-    return [config.server_binary_path, "--model", config.artifact_path,
+    command = [config.server_binary_path, "--model", config.artifact_path,
             "--alias", config.model_id, "--offline", "--host", launch["host"],
             "--port", str(launch["port"]), "--no-webui", "--no-warmup", "--jinja",
+            "--cors-origins", "localhost", "--no-cors-credentials",
             "--ctx-size", str(config.context_length), "--parallel", str(launch["parallel_slots"]),
             "--device", launch["gpu_device"], "--n-gpu-layers", launch["gpu_layers"],
             "--fit", launch["fit"], "--reasoning", launch["reasoning"],
             "--reasoning-format", launch["reasoning_format"], "--temp", str(config.temperature),
             "--top-p", str(config.top_p), "--top-k", str(config.top_k), "--min-p", str(config.min_p),
             "--samplers", ";".join(config.sampler_chain)]
+    if api_key_file is not None:
+        path = Path(api_key_file).resolve()
+        command.extend(["--api-key-file", str(path)])
+    return command
 
 
 @dataclass
@@ -412,13 +420,23 @@ class LocalLlamaCppBackend:
 
     def __init__(self, config: LlamaCppBackendConfig, token_counter: Any,
                  opener: Any | None = None, *,
+                 api_key: str | None = None,
                  listener_guard: Callable[[], bool] | None = None,
                  preflight_event_hook: Callable[[dict[str, Any]], None] | None = None):
         _validate_config(config)
+        if (opener is None and (config.preflight_enabled or config.model_calls_enabled)
+                and not api_key):
+            raise PermissionError("live llama.cpp transport requires a per-run API key")
+        if api_key is not None and len(api_key) < 32:
+            raise ValueError("local llama.cpp API key is shorter than the 32-character minimum")
         self.config = config
         self.token_counter = token_counter
+        self.api_key = api_key
+        self.api_key_sha256 = sha256(api_key.encode("ascii")).hexdigest() if api_key else None
         self.listener_guard = listener_guard
         self.preflight_event_hook = preflight_event_hook
+        self._last_cors_probe: dict[str, Any] | None = None
+        self._last_http_status: int | None = None
         self.tokenizer_metadata = dict(config.tokenizer_metadata)
         for attr, expected in (("artifact_sha256", config.artifact_sha256),
                                ("tokenizer_id", config.tokenizer_id),
@@ -530,6 +548,8 @@ class LocalLlamaCppBackend:
             "payload_json": payload_json,
             "payload_sha256": sha256(payload_json.encode("utf-8")).hexdigest(),
             "api_spend_ceiling_usd": 0.0,
+            "transport_authentication": "bearer_api_key" if self.api_key is not None else "injected_transport_only",
+            "api_key_sha256": self.api_key_sha256,
         }
         body = payload_json.encode("utf-8")
         self._prepared[request.request_id] = (request, body, metadata, token_count, messages)
@@ -539,7 +559,9 @@ class LocalLlamaCppBackend:
         _, metadata, _, _ = self._prepare(request)
         return dict(metadata)
 
-    def _open(self, url: str, data: bytes | None, timeout_seconds: int, method: str) -> bytes:
+    def _open(self, url: str, data: bytes | None, timeout_seconds: int, method: str,
+              *, origin: str | None = None, authenticated: bool = True,
+              expected_status: int | None = None) -> bytes:
         parsed = urllib.parse.urlsplit(url)
         if (parsed.scheme != "http" or parsed.hostname != "127.0.0.1" or
                 parsed.port != self.config.launch["port"] or
@@ -547,14 +569,39 @@ class LocalLlamaCppBackend:
             raise PermissionError("llama.cpp transport refuses every endpoint except frozen local loopback")
         if self.listener_guard is not None and not self.listener_guard():
             raise PermissionError("llama.cpp listener process does not match the launched server PID")
-        request = urllib.request.Request(url, data=data,
-                                         headers={"Content-Type": "application/json"} if data is not None else {},
-                                         method=method)
+        self._last_cors_probe = None
+        self._last_http_status = None
+        headers = {"Content-Type": "application/json"} if data is not None else {}
+        if authenticated and self.api_key is not None:
+            headers["Authorization"] = f"Bearer {self.api_key}"
+        if origin is not None:
+            headers["Origin"] = origin
+        request = urllib.request.Request(url, data=data, headers=headers, method=method)
         try:
             with self.opener.open(request, timeout=timeout_seconds) as response:
                 body = response.read(4_000_001)
+                self._last_http_status = getattr(response, "status", 200)
+                allow_origin = response.headers.get("Access-Control-Allow-Origin") if hasattr(
+                    response, "headers") else None
+                self._last_cors_probe = ({
+                    "origin_sent": origin,
+                    "access_control_allow_origin": allow_origin,
+                    "status": ("PASS_DENIED" if allow_origin not in ("*", origin) else "FAIL_ALLOWED"),
+                    "response_headers_recorded": True,
+                } if origin is not None else None)
+                if origin is not None and allow_origin in ("*", origin):
+                    raw = body.decode("utf-8", errors="replace")
+                    raise BackendResponseError(
+                        "local llama.cpp CORS boundary allowed an untrusted origin", raw_response=raw)
         except urllib.error.HTTPError as exc:
-            body = exc.read(4_000_001).decode("utf-8", errors="replace")
+            body_bytes = exc.read(4_000_001)
+            self._last_http_status = exc.code
+            if expected_status == exc.code:
+                if len(body_bytes) > 4_000_000:
+                    raise BackendResponseError("llama.cpp expected-status response exceeded the 4 MB safety limit",
+                                               body_bytes.decode("utf-8", errors="replace"))
+                return body_bytes
+            body = body_bytes.decode("utf-8", errors="replace")
             if 500 <= exc.code <= 599:
                 raise TransientTransportError(f"llama.cpp HTTP {exc.code}: {body[:1000]}",
                                               raw_response=body) from exc
@@ -570,6 +617,10 @@ class LocalLlamaCppBackend:
             body_text = body.decode("utf-8", errors="replace")
             raise BackendResponseError("llama.cpp response exceeded the 4 MB safety limit",
                                        raw_response=body_text)
+        if expected_status is not None and self._last_http_status != expected_status:
+            body_text = body.decode("utf-8", errors="replace")
+            raise BackendResponseError(
+                f"llama.cpp returned HTTP {self._last_http_status}; expected {expected_status}", body_text)
         return body
 
     def _decode_response(self, body: bytes, *, expected_prompt_tokens: int,
@@ -669,28 +720,43 @@ class LocalLlamaCppBackend:
         return result
 
     def _preflight_call(self, budget: LlamaCppPreflightBudget, request_id: str, method: str,
-                        url: str, payload: dict[str, Any] | None, *, completion: bool = False) -> bytes:
+                        url: str, payload: dict[str, Any] | None, *, completion: bool = False,
+                        origin: str | None = None, authenticated: bool = True,
+                        expected_status: int | None = None) -> bytes:
         payload_json = (json.dumps(payload, ensure_ascii=False, separators=(",", ":"))
                         if payload is not None else None)
         body = payload_json.encode("utf-8") if payload_json is not None else None
-        for attempt in (1, 2):
+        first_attempt = budget.attempts_by_request.get(request_id, 0) + 1
+        for attempt in range(first_attempt, 3):
             budget.reserve(request_id, attempt, completion=completion)
             started = time.perf_counter()
             record: dict[str, Any] = {"request_id": request_id, "attempt": attempt, "method": method,
                                       "url": url, "request_body": payload_json,
                                       "request_sha256": sha256(body).hexdigest() if body is not None else None,
                                       "completion_attempt": completion,
+                                      "security_probe_origin": origin,
+                                      "authentication_header_sent": authenticated and self.api_key is not None,
+                                      "expected_http_status": expected_status,
+                                      "transport_authentication": (
+                                          "unauthenticated_canary" if self.api_key is not None and not authenticated
+                                          else "bearer_api_key" if self.api_key is not None
+                                          else "injected_transport_only"),
+                                      "api_key_sha256": self.api_key_sha256,
                                       "started_at_utc": datetime.now(timezone.utc).isoformat()}
             if completion:
                 self._emit_preflight_event("completion_attempt_started", request_id=request_id, attempt=attempt)
             try:
-                response_body = self._open(url, body, self.config.timeout_seconds, method)
+                response_body = self._open(url, body, self.config.timeout_seconds, method,
+                                           origin=origin, authenticated=authenticated,
+                                           expected_status=expected_status)
             except (TimeoutBackendError, TransientTransportError) as exc:
                 raw = getattr(exc, "raw_response", None)
                 record.update({"status": "retryable_failure" if attempt < 2 else "failed",
                                "error_type": type(exc).__name__, "error": str(exc),
+                               "http_status": self._last_http_status,
                                "raw_response": raw,
                                "raw_response_sha256": sha256(raw.encode("utf-8")).hexdigest() if raw else None,
+                               "cors_probe": self._last_cors_probe if origin is not None else None,
                                "latency_seconds": time.perf_counter() - started})
                 budget.records.append(record)
                 if completion:
@@ -702,8 +768,10 @@ class LocalLlamaCppBackend:
             except Exception as exc:
                 raw = getattr(exc, "raw_response", None)
                 record.update({"status": "failed", "error_type": type(exc).__name__,
-                               "error": str(exc), "raw_response": raw,
+                               "error": str(exc), "http_status": self._last_http_status,
+                               "raw_response": raw,
                                "raw_response_sha256": sha256(raw.encode("utf-8")).hexdigest() if raw else None,
+                               "cors_probe": self._last_cors_probe if origin is not None else None,
                                "latency_seconds": time.perf_counter() - started})
                 budget.records.append(record)
                 if completion:
@@ -711,8 +779,10 @@ class LocalLlamaCppBackend:
                                                attempt=attempt, error_type=type(exc).__name__)
                 raise
             raw_text = response_body.decode("utf-8", errors="replace")
-            record.update({"status": "response_returned", "raw_response": raw_text,
+            record.update({"status": "expected_status_returned" if expected_status is not None else "response_returned",
+                           "http_status": self._last_http_status, "raw_response": raw_text,
                            "raw_response_sha256": sha256(response_body).hexdigest(),
+                           "cors_probe": self._last_cors_probe if origin is not None else None,
                            "latency_seconds": time.perf_counter() - started})
             budget.records.append(record)
             if completion:
@@ -762,11 +832,14 @@ class LocalLlamaCppBackend:
             raise RuntimeError("local llama.cpp launcher/DLL bundle differs from the frozen runtime identity")
 
         root = self.config.base_url.rsplit("/v1", 1)[0]
+        if self.api_key is not None and reused_setup_responses is None:
+            self._preflight_call(budget, "preflight-props", "GET", root + "/props", None,
+                                 authenticated=False, expected_status=401)
 
         def setup_response(request_id: str, method: str, url: str,
-                           payload: dict[str, Any] | None) -> bytes:
+                           payload: dict[str, Any] | None, *, origin: str | None = None) -> bytes:
             if reused_setup_responses is None:
-                return self._preflight_call(budget, request_id, method, url, payload)
+                return self._preflight_call(budget, request_id, method, url, payload, origin=origin)
             response = reused_setup_responses[request_id]
             expected_payload = (json.dumps(payload, ensure_ascii=False, separators=(",", ":"))
                                 if payload is not None else None)
@@ -778,11 +851,22 @@ class LocalLlamaCppBackend:
                     matching[0].get("request_sha256") != expected_hash or
                     matching[0].get("raw_response_sha256") != sha256(response).hexdigest()):
                 raise ValueError(f"reused preflight setup evidence differs from current request: {request_id}")
+            if origin is not None:
+                probed = self._preflight_call(budget, request_id, method, url, payload, origin=origin)
+                if sha256(probed).hexdigest() != sha256(response).hexdigest():
+                    raise ValueError(f"CORS canary changed the setup response body: {request_id}")
+                return probed
             self._emit_preflight_event("preflight_setup_response_reused", request_id=request_id,
                                        source_status="previously_returned_and_hash_verified")
             return response
 
-        props_body = setup_response("preflight-props", "GET", root + "/props", None)
+        cors_canary_origin = "https://colluscope-cors-canary.invalid"
+        props_body = setup_response("preflight-props", "GET", root + "/props", None,
+                                    origin=cors_canary_origin)
+        cors_probe = self._last_cors_probe
+        if (cors_probe is None or cors_probe.get("origin_sent") != cors_canary_origin or
+                cors_probe.get("status") != "PASS_DENIED"):
+            raise RuntimeError("local llama.cpp did not demonstrate denial of an untrusted CORS origin")
         try:
             props = json.loads(props_body.decode("utf-8"))
             settings = props["default_generation_settings"]
@@ -892,6 +976,14 @@ class LocalLlamaCppBackend:
             "verified_parallel_slots": props["total_slots"],
             "verified_chat_template_sha256": self.config.chat_template_sha256,
             "verified_tokenizer_ids": len(token_ids_local),
+            "cors_origin_probe": cors_probe,
+            "api_key_authentication": (
+                "unauthenticated_request_rejected_401" if any(
+                    row.get("request_id") == "preflight-props" and row.get("attempt") == 1 and
+                    row.get("expected_http_status") == 401 and row.get("http_status") == 401 and
+                    row.get("authentication_header_sent") is False
+                    for row in budget.records)
+                else "not_independently_probed"),
             "reused_prior_setup_requests": len(reused_setup_responses or {}),
             "verified_actions": actual_actions,
             "action_choice_diagnostics": action_choice_diagnostics,
