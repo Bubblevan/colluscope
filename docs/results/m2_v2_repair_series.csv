@@ -1,0 +1,13 @@
+﻿round,candidate_id,valid,invalid,assigned,valid_rate,gate_10_of_10,physical_http_attempts_all_candidates,source_summary_sha256
+initial,M2-V2-C1-full-json-schema,1,9,10,0.1,False,30,8b20df25982da21ccab9d26a685cd2ace2cc5519356cc52b689b280552ac8638
+initial,M2-V2-C2-full-json-object-schema,1,9,10,0.1,False,30,8b20df25982da21ccab9d26a685cd2ace2cc5519356cc52b689b280552ac8638
+initial,M2-V2-C3-compact-cited-json-schema,0,10,10,0.0,False,30,8b20df25982da21ccab9d26a685cd2ace2cc5519356cc52b689b280552ac8638
+repair_01,M2-V2-C1-full-json-schema,3,7,10,0.3,False,30,415e4d8434d21993dc9fa2f0ee071864b2f29c2f06e2d752e91fe3218f06b1a2
+repair_01,M2-V2-C2-full-json-object-schema,3,7,10,0.3,False,30,415e4d8434d21993dc9fa2f0ee071864b2f29c2f06e2d752e91fe3218f06b1a2
+repair_01,M2-V2-C3-compact-cited-json-schema,3,7,10,0.3,False,30,415e4d8434d21993dc9fa2f0ee071864b2f29c2f06e2d752e91fe3218f06b1a2
+repair_02,M2-V2-C1-full-json-schema,6,4,10,0.6,False,30,2b41406425a6dcce0c5f813a4cd30d270e508d02340b8181b6e9ef8d89b1e1d9
+repair_02,M2-V2-C2-full-json-object-schema,6,4,10,0.6,False,30,2b41406425a6dcce0c5f813a4cd30d270e508d02340b8181b6e9ef8d89b1e1d9
+repair_02,M2-V2-C3-compact-cited-json-schema,5,5,10,0.5,False,30,2b41406425a6dcce0c5f813a4cd30d270e508d02340b8181b6e9ef8d89b1e1d9
+repair_03,M2-V2-C1-full-json-schema,6,4,10,0.6,False,30,8b953dcf3dec5f253e66f3740e288cdb02ca4e4916808c5ed68039f6a5808a37
+repair_03,M2-V2-C2-full-json-object-schema,6,4,10,0.6,False,30,8b953dcf3dec5f253e66f3740e288cdb02ca4e4916808c5ed68039f6a5808a37
+repair_03,M2-V2-C3-compact-cited-json-schema,3,7,10,0.3,False,30,8b953dcf3dec5f253e66f3740e288cdb02ca4e4916808c5ed68039f6a5808a37

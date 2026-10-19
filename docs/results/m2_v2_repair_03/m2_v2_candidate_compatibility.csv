@@ -1,0 +1,4 @@
+candidate_id,valid,invalid,total,valid_rate,all_ten_valid_gate
+M2-V2-C1-full-json-schema,6,4,10,0.6,False
+M2-V2-C2-full-json-object-schema,6,4,10,0.6,False
+M2-V2-C3-compact-cited-json-schema,3,7,10,0.3,False

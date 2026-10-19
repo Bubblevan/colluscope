@@ -1,0 +1,11 @@
+view,permission,valid,invalid,total
+action_only,privileged_audit,2,1,3
+action_only,public_only,0,3,3
+raw_fusion,privileged_audit,2,1,3
+raw_fusion,public_only,2,1,3
+structured_evidence,privileged_audit,0,3,3
+structured_evidence,public_only,3,0,3
+structured_without_findings,privileged_audit,0,3,3
+structured_without_findings,public_only,3,0,3
+text_only,privileged_audit,0,3,3
+text_only,public_only,3,0,3
