@@ -105,3 +105,9 @@ Every bounded iteration must follow:
 8. Are we preserving enough time to submit a complete report?
 
 **The end goal is trustworthy research, not passing every gate, forcing a desired model choice, or maximizing implementation size.**
+
+## M2-V3 DeepSeek one-run authorization (2026-10-20)
+
+The user has explicitly authorized one bounded DeepSeek Flash M2-V3 run against the existing frozen 100-episode synthetic corpus. This is a one-run exception to the prior local-only inference boundary and does not authorize future API calls. Only the exact official Chat Completions endpoint may receive public task specifications, public ballots/results, and actually sent-and-delivered synthetic A/B messages in the Privileged Audit projection. Never transmit T, hidden/private reward assignments, gold/reference labels, raw unfiltered researcher files, `.env`, keys, or unrelated repository data. Preserve Public-only E and all historical M1/M2 artifacts.
+
+The hard provider spend limit is USD $5; only `deepseek-flash`, non-thinking mode, exact frozen prompt/config, at most 15 one-shot diagnostic requests, 250 F1 calibration rows, and eligible F2/F3 evaluation are authorized. No Pro comparison, M2 follow-on, training, prompt tuning on F2/F3, or repeated sampling is authorized. Stop dispatching before 2026-10-20 09:00 Asia/Hong_Kong. The authorization expires at that cutoff and cannot be reused for a later run. Passing format gates does not establish factual accuracy or collusion; latent intent remains unknown.

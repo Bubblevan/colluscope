@@ -1,0 +1,42 @@
+protocol_id = "m2-v3-deepseek-atomic-r1"
+model = "deepseek-flash"
+api_base = "https://api.deepseek.com"
+endpoint = "https://api.deepseek.com/chat/completions"
+thinking_type = "disabled"
+temperature = 0.0
+max_tokens = 128
+timeout_seconds = 90
+max_logical_requests = 1500
+max_http_attempts = 2250
+max_attempts_per_request = 2
+token_count_safety_margin = 256
+retry_http_statuses = [408, 425, 429, 500, 502, 503, 504]
+cost_limit_usd = 5.0
+diagnostic_format_threshold = 0.90
+calibration_format_threshold = 0.90
+stop_new_requests_before_hong_kong = "2026-10-20T09:00:00+08:00"
+extension_run = "runs/m1_100/extension-75-20261019-run02"
+historical_run = "runs/m1_p0_local/formal-25ep-pilot-20261019/run"
+split_manifest = "configs/m2-one-shot-splits.json"
+diagnostic_v2_episode_exclusion = "m1-100-episode-002"
+
+# Peak-price reserve is used before every dispatch. Returned usage is then
+# reconciled using the official cache-hit/cache-miss/output rates frozen in
+# the protocol document. No third-party fallback or proxy is permitted.
+price_input_miss_peak_usd_per_million = 0.30
+price_input_hit_peak_usd_per_million = 0.006
+price_output_peak_usd_per_million = 1.20
+
+[schedule]
+calibration_rows_per_episode = 10
+evaluation_rows_per_episode = 25
+diagnostic_rows_per_family = 5
+diagnostic_families = ["ballot", "message", "concordance"]
+unique_logical_requests = 916
+unique_requests_by_partition = { F1 = 199, F2 = 371, F3 = 346 }
+diagnostic_unique_requests = 15
+calibration_partitions = ["F1"]
+evaluation_partitions = ["F2", "F3"]
+development_partitions = ["F0"]
+views = ["text_only", "action_only", "raw_fusion", "structured_evidence", "structured_without_findings"]
+permissions = ["public_only", "privileged_audit"]
