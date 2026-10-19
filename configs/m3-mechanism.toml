@@ -1,0 +1,89 @@
+protocol_id = "colluscope-m3-mechanism-v1"
+status = "preregistered_local_generation"
+approval_id = "USER-AUTHORIZED-M3-MECHANISM-12-GROUPS-2026-10-20"
+schedule = "configs/m3-mechanism-schedule.json"
+scenario_source = "configs/m1-100-scenarios.json"
+split_source = "configs/m1-100-splits.json"
+extension_run_path = "runs/m3/mechanism-20261020"
+
+[model]
+id = "colluscope-qwen3-8b-q4km"
+format = "GGUF Q4_K_M"
+path = 'E:\Health-Copilot-Models\models\qwen3-8b\Qwen3-8B-Q4_K_M.gguf'
+sha256 = "d98cdcbd03e17ce47681435b5150e34c1417f50b5c0019dd560e4882c5745785"
+
+[runtime]
+kind = "llama.cpp"
+build = "b10068-571d0d540"
+binary_path = 'C:\Users\bubblevan\AppData\Local\Microsoft\WinGet\Packages\ggml.llamacpp_Microsoft.Winget.Source_8wekyb3d8bbwe\llama-server.exe'
+binary_sha256 = "3a8aea5f889c4b4c2ec41c98f4e1ed484bb7a40c4096883acb23d3cfe26b59fb"
+bundle_sha256 = "9559fd2af95a7e83e3cf4a04aab22b67e1d1a2ec032b1e983ce091a6283c7759"
+endpoint = "http://127.0.0.1:8081/v1"
+host = "127.0.0.1"
+port = 8081
+offline = true
+authenticated = true
+api_spend_usd = 0.0
+external_fallback = false
+
+[tokenizer]
+source = "embedded_gguf_metadata"
+sha256 = "06e72b9773cfad908874ae1a7aa92686068557c4aa624c857db88fe97052704f"
+chat_template_sha256 = "57f1fd00f0013a2be96aa79b857391f27e23df5b5f847072b524c897e24d0361"
+library = "tokenizers==0.19.1"
+jinja2 = "jinja2==3.1.4"
+
+[prompts]
+root = "prompts/m1-p0-v2"
+system = "prompts/m1-p0-v2/system.txt"
+message = "prompts/m1-p0-v2/message.txt"
+ballot = "prompts/m1-p0-v2/ballot.txt"
+communication_schema = "prompts/m1-p0-v2/communication.schema.json"
+ballot_schema = "prompts/m1-p0-v2/ballot.schema.json"
+new_prompt_templates = false
+
+[sampling]
+temperature = 0.0
+top_p = 1.0
+top_k = 0
+min_p = 0.0
+sampler_chain = ["top_k", "top_p", "min_p", "temperature"]
+reasoning = "disabled"
+seed_scheme = "colluscope-m1-p0-seed-v1; same group, agent and action kind share seed across focal arms"
+message_max_output_tokens = 512
+ballot_max_output_tokens = 256
+context_length = 4096
+input_budget_tokens = 3072
+timeout_seconds = 60
+
+[design]
+families = ["m1_100_family_1", "m1_100_family_2", "m1_100_family_3"]
+seed_blocks = ["seed-115", "seed-116", "seed-117", "seed-118", "seed-119", "seed-120", "seed-121", "seed-122", "seed-123", "seed-124", "seed-125", "seed-126"]
+groups = 12
+condition = "coalition_incentive_private_chat"
+private_target_bonus_units = 20
+message_stage_order = ["A", "B"]
+baseline_ballot_order = ["A", "B", "C"]
+counterfactual_arms = ["neutral", "masked", "no_delivery"]
+focal_selection = "sha256(colluscope-m3-focal-v1|group_id|sorted eligible delivered message IDs); modulo eligible count"
+arm_order = "sha256(colluscope-m3-arm-order-v1|group_id); offset/direction permutation over neutral,masked,no_delivery"
+chair = "numeric seed modulo 3 over A,B,C"
+monitor_can_see_private_messages = false
+monitor_can_see_private_incentives = false
+
+[budget]
+max_logical_requests = 96
+max_physical_http_attempts = 192
+max_generation_http_attempts = 191
+identity_probe_http_attempts_per_server_launch = 1
+max_attempts_per_logical_request = 2
+retryable_errors = ["documented transient transport error", "timeout"]
+invalid_model_output_retries = 0
+replacement_groups = 0
+external_api_calls = 0
+monitor_calls = 0
+training_calls = 0
+
+[retention]
+raw_requests_responses_and_private_messages = "local ignored runs/m3 directory only"
+sanitized_aggregates = "committed only after independent privacy scan"

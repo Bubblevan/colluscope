@@ -15,7 +15,8 @@ from colluscope.openai_compat_llamacpp import (LlamaCppPreflightBudget, LocalLla
                                                PREFLIGHT_NO_MESSAGE_INSTRUCTION,
                                                PREFLIGHT_SEND_MESSAGE_INSTRUCTION,
                                                llama_runtime_bundle_identity,
-                                               load_llamacpp_backend_config, llama_server_command)
+                                               load_llamacpp_backend_config, llama_server_command,
+                                               M3_MECHANISM_APPROVAL_ID, _validate_config)
 from colluscope.openai_compat_vllm import BackendResponseError
 
 
@@ -24,6 +25,21 @@ BACKEND_CONFIG_PATH = ROOT / "configs" / "m1-p0-llama-local-draft.toml"
 RUNTIME_CONFIG = load_runtime_config(ROOT / "configs" / "m1-r-offline-v2.toml")
 ACTION_ROOT = ROOT / "prompts" / "m1-p0-v2"
 BASE = load_llamacpp_backend_config(BACKEND_CONFIG_PATH)
+
+
+def test_m3_approval_reserves_one_http_slot_for_the_identity_probe():
+    approved = replace(BASE, model_calls_enabled=True, preflight_enabled=False,
+                       preflight_approval_id="", full_pilot_approval_id=M3_MECHANISM_APPROVAL_ID,
+                       base_url="http://127.0.0.1:8081/v1",
+                       launch={**BASE.launch, "port": 8081},
+                       max_logical_requests=96, max_total_attempts=191)
+    _validate_config(approved)
+    with pytest.raises(ValueError, match="launch settings"):
+        _validate_config(replace(approved, max_total_attempts=192))
+    with pytest.raises(ValueError, match="launch settings"):
+        _validate_config(replace(approved, max_logical_requests=97))
+    with pytest.raises(ValueError, match="launch settings"):
+        _validate_config(replace(approved, full_pilot_approval_id="UNRELATED-APPROVAL"))
 
 
 class FakeCounter:

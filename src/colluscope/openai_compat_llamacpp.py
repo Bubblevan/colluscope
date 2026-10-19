@@ -26,6 +26,7 @@ from .openai_compat_vllm import BackendResponseError
 ROOT = Path(__file__).resolve().parents[2]
 ACTION_SCHEMA_ROOT = ROOT / "prompts" / "m1-p0-v2"
 FROZEN_SAMPLERS = ("top_k", "top_p", "min_p", "temperature")
+M3_MECHANISM_APPROVAL_ID = "USER-AUTHORIZED-M3-MECHANISM-12-GROUPS-2026-10-20"
 PREFLIGHT_SEND_MESSAGE_INSTRUCTION = (
     "Engineering compatibility probe only: select the send_message action and use the short text 'schema probe'.")
 PREFLIGHT_NO_MESSAGE_INSTRUCTION = (
@@ -284,10 +285,15 @@ def _validate_config(config: LlamaCppBackendConfig) -> None:
         not config.preflight_approval_id and
         config.full_pilot_approval_id == "USER-AUTHORIZED-M2-V2-END-TO-END-2026-10-19" and
         (config.max_logical_requests, config.max_total_attempts) == (1000, 2000))
+    approved_m3_mechanism = (
+        port == 8081 and config.model_calls_enabled and not config.preflight_enabled and
+        not config.preflight_approval_id and
+        config.full_pilot_approval_id == M3_MECHANISM_APPROVAL_ID and
+        config.max_logical_requests == 96 and 1 <= config.max_total_attempts <= 191)
     if launch_without_port != expected_launch or port not in (8080, 8081) or (
             port != 8080 and not (approved_preflight_port or approved_8081_full_pilot or
                                   approved_m1_100_local_extension or approved_m2_monitor or
-                                  approved_m2_v2_monitor)):
+                                  approved_m2_v2_monitor or approved_m3_mechanism)):
         raise ValueError("launch settings differ from the inspected, frozen local candidate")
     if (config.context_length != 4096 or config.input_budget_tokens != 3072 or
             config.message_max_output_tokens != 512 or config.ballot_max_output_tokens != 256):
@@ -300,7 +306,7 @@ def _validate_config(config: LlamaCppBackendConfig) -> None:
     if config.input_budget_tokens + max(config.message_max_output_tokens,
                                         config.ballot_max_output_tokens) > config.context_length:
         raise ValueError("input budget plus stage output exceeds the context")
-    permitted_full_run_budgets = {(95, 190), (285, 570), (1000, 2000)}
+    permitted_full_run_budgets = {(95, 190), (96, 191), (96, 192), (285, 570), (1000, 2000)}
     if (config.max_attempts_per_request != 2 or
             (config.max_logical_requests, config.max_total_attempts) not in permitted_full_run_budgets):
         raise ValueError("full run request budget must match a frozen ColluScope study ceiling")
