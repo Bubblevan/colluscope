@@ -40,11 +40,14 @@ from colluscope.openai_compat_llamacpp import (  # noqa: E402
 from scripts.run_m1_p0_local_preflight import (  # noqa: E402
     GpuSampler, _build_probes, _listener_snapshot, _process_image, _stop_own_process,
 )
+from scripts.verify_m1_p0_runtime_start_blocker import verify as verify_runtime_start_blocker  # noqa: E402
 
 PREFLIGHT_APPROVAL_ID = "USER-APPROVED-8081-PREFLIGHT-2026-10-19"
 PILOT_APPROVAL_ID = "USER-AUTHORIZED-M1-P0-25-EPISODE-PILOT-2026-10-19"
 JSON_PREFIX_PREFLIGHT_APPROVAL_ID = "USER-REQUEST-JSON-PREFIX-PARSER-PREFLIGHT-2026-10-19"
 JSON_PREFIX_PILOT_APPROVAL_ID = "USER-REQUEST-JSON-PREFIX-PARSER-PILOT-2026-10-19"
+JSON_PREFIX_RETRY_PREFLIGHT_APPROVAL_ID = "USER-REQUEST-JSON-PREFIX-PARSER-RETRY1-PREFLIGHT-2026-10-19"
+JSON_PREFIX_RETRY_PILOT_APPROVAL_ID = "USER-REQUEST-JSON-PREFIX-PARSER-RETRY1-PILOT-2026-10-19"
 JSON_PREFIX_OUTPUT_CONTRACT = "json-v2-exact-empty-think-envelope"
 EXPECTED_MODEL_SHA256 = "d98cdcbd03e17ce47681435b5150e34c1417f50b5c0019dd560e4882c5745785"
 EXPECTED_SERVER_SHA256 = "3a8aea5f889c4b4c2ec41c98f4e1ed484bb7a40c4096883acb23d3cfe26b59fb"
@@ -95,9 +98,11 @@ def _validate_authorized_config(config_path: Path) -> Any:
     approval_pair = (raw.get("preflight_approval_id"), raw.get("full_pilot_approval_id"))
     legacy_pair = (PREFLIGHT_APPROVAL_ID, PILOT_APPROVAL_ID)
     json_prefix_pair = (JSON_PREFIX_PREFLIGHT_APPROVAL_ID, JSON_PREFIX_PILOT_APPROVAL_ID)
+    json_prefix_retry_pair = (JSON_PREFIX_RETRY_PREFLIGHT_APPROVAL_ID,
+                              JSON_PREFIX_RETRY_PILOT_APPROVAL_ID)
     if (raw.get("model_calls_enabled") is not True or raw.get("preflight_enabled") is not True or
-            approval_pair not in {legacy_pair, json_prefix_pair} or
-            (approval_pair == json_prefix_pair and
+            approval_pair not in {legacy_pair, json_prefix_pair, json_prefix_retry_pair} or
+            (approval_pair in {json_prefix_pair, json_prefix_retry_pair} and
              raw.get("action_output_contract_revision") != JSON_PREFIX_OUTPUT_CONTRACT) or
             (approval_pair == legacy_pair and raw.get("action_output_contract_revision") is not None)):
         raise PermissionError("run-scoped config lacks the exact preflight and 25-episode approvals")
@@ -132,6 +137,27 @@ def _consume_pilot_approval(out_dir: Path, ledger_dir: Path | None = None,
         raise PermissionError("this full 25-episode pilot approval was already consumed") from exc
     _write_json(out_dir / "approval-consumption.json", record)
     return ledger_path
+
+
+def _validate_zero_http_runtime_retry_parent(parent_dir: Path,
+                                             config_path: Path) -> dict[str, Any]:
+    parent_dir = parent_dir.resolve()
+    if not parent_dir.is_relative_to(ROOT.resolve()):
+        raise ValueError("runtime retry parent must be inside this repository")
+    result = verify_runtime_start_blocker(parent_dir)
+    parent_approval = json.loads((parent_dir / "approval-record.json").read_text(encoding="utf-8"))
+    parent_config = (parent_dir / "full-pilot-config.toml").read_text(encoding="utf-8")
+    normalized_current = config_path.read_text(encoding="utf-8").replace(
+        JSON_PREFIX_RETRY_PREFLIGHT_APPROVAL_ID, JSON_PREFIX_PREFLIGHT_APPROVAL_ID).replace(
+            JSON_PREFIX_RETRY_PILOT_APPROVAL_ID, JSON_PREFIX_PILOT_APPROVAL_ID)
+    if (parent_approval.get("preflight_approval_id") != JSON_PREFIX_PREFLIGHT_APPROVAL_ID or
+            parent_approval.get("full_25_episode_pilot_approval_id") != JSON_PREFIX_PILOT_APPROVAL_ID or
+            parent_config != normalized_current or result.get("http_requests") != 0 or
+            result.get("episodes") != 0):
+        raise PermissionError("runtime retry is limited to the verified zero-HTTP first attempt")
+    return {"run_dir": str(parent_dir),
+            "manifest_sha256": _sha256_file(parent_dir / "manifest.json"),
+            "status": result["status"]}
 
 
 def _health_check(url: str, pid: int, image: str, out_dir: Path) -> dict[str, Any]:
@@ -174,6 +200,7 @@ def _runtime_source_files() -> list[Path]:
     # the preflight runner would leave a mutable part of the actual call path
     # outside the per-run source fingerprint.
     return [Path(__file__), ROOT / "scripts" / "run_m1_p0_local_preflight.py",
+            ROOT / "scripts" / "verify_m1_p0_runtime_start_blocker.py",
             ROOT / "src" / "colluscope" / "m1_runtime.py",
             ROOT / "src" / "colluscope" / "openai_compat_llamacpp.py",
             ROOT / "src" / "colluscope" / "gguf_tokenizer.py"]
@@ -465,6 +492,10 @@ def run(config_path: Path, runtime_config_path: Path, out_dir: Path,
     preflight_approval_id = run_authorization["preflight_approval_id"]
     pilot_approval_id = run_authorization["full_pilot_approval_id"]
     output_contract_revision = run_authorization.get("action_output_contract_revision", "json-v1")
+    retry_parent: dict[str, Any] | None = None
+    if pilot_approval_id == JSON_PREFIX_RETRY_PILOT_APPROVAL_ID:
+        parent_dir = ROOT / "runs" / "m1_p0_local" / "25ep-pilot-json-prefix-v2-20261019" / "run"
+        retry_parent = _validate_zero_http_runtime_retry_parent(parent_dir, config_path)
     model_path = Path(backend_config.artifact_path).resolve()
     server_path = Path(backend_config.server_binary_path).resolve()
     bundle = llama_runtime_bundle_identity(server_path)
@@ -487,9 +518,11 @@ def run(config_path: Path, runtime_config_path: Path, out_dir: Path,
         "full_25_episode_pilot_approval_id": pilot_approval_id,
         "authority": ("user's direct instruction to repair the JSON-prefix parser and retry; "
                       "bounded by the frozen 25-episode/95-request and 6/12/4 preflight ceilings"
-                      if pilot_approval_id == JSON_PREFIX_PILOT_APPROVAL_ID else
+                      if pilot_approval_id in {JSON_PREFIX_PILOT_APPROVAL_ID,
+                                               JSON_PREFIX_RETRY_PILOT_APPROVAL_ID} else
                       "user's direct request to run the 25 Episode behavior Pilot"),
         "action_output_contract_revision": output_contract_revision,
+        "verified_zero_http_retry_parent": retry_parent,
         "endpoint": "http://127.0.0.1:8081/v1", "external_paid_api_spend_usd": 0.0,
         "m2_authorized": False})
     if continuation is None:

@@ -15,6 +15,7 @@ The source of the parser rule is the one retained live counterexample. This is a
 ## New run limits and frozen variables
 
 - New approval identifiers are bound to the user's direct request to repair the JSON-prefix parser and retry. The prior single-use approval and both prior run packages remain unchanged.
+- The first execution of this revision loaded the exact server/model but Windows denied the loopback health request with `WinError 10013` before an HTTP request reached llama.cpp. That zero-request package was independently verified. One separately identified environment retry is permitted only from that exact verified zero-HTTP parent; no further infrastructure retry is predeclared.
 - The revised run uses a fresh bounded preflight: maximum **6 logical requests / 12 HTTP attempts / 4 generation attempts**. It stops on the first non-retryable compatibility failure.
 - If preflight passes, the previously requested Pilot remains bounded at **25 assigned episodes / 95 logical calls / 190 HTTP attempts**, with at most two transport attempts per logical call. There is no comprehension-probe budget and no M2 work.
 - Transient transport/timeouts may use the frozen adapter retry policy. Parser/schema failures are non-retryable. No repeated preflight or episode sampling is allowed merely to obtain a syntactically successful response; doing so would condition inclusion on model formatting success.
@@ -29,4 +30,5 @@ Reproduce parser tests and old-failure integrity from this checkout:
 ```powershell
 python -m pytest -q tests/test_m1_runtime.py -k "action_parser or retained_live_empty_think"
 python scripts/verify_m1_p0_preflight_blocker.py --run runs/m1_p0_local/25ep-pilot-20261019/run-resume-01
+python scripts/verify_m1_p0_runtime_start_blocker.py --run runs/m1_p0_local/25ep-pilot-json-prefix-v2-20261019/run
 ```

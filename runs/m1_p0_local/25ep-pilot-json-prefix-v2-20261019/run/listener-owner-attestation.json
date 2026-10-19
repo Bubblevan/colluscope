@@ -1,0 +1,6 @@
+{
+  "diagnostics": "netstat: no matching listener; powershell fallback failed: Exception calling \"ProcessRecord\" with \"1\" argument(s): \"Access to a CIM resource was not available to the client.\"\nAt line:193 char:5\n+     $__cmdletization_objectModelWrapper.ProcessRecord($__cmdletizatio ...\n+     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n    + CategoryInfo          : NotSpecified: (:) [], ParentContainsErrorRecordException\n    + FullyQualifiedErrorId : CimException",
+  "expected_pid": 48508,
+  "rows": [],
+  "status": "table_unavailable_endpoint_identity_required"
+}

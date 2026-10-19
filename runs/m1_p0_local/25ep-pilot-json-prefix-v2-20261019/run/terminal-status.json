@@ -1,0 +1,28 @@
+{
+  "completed_at_utc": "2026-10-19T05:59:11.055254+00:00",
+  "episodes_attempted": 0,
+  "episodes_completed": 0,
+  "episodes_failed": 0,
+  "error": {
+    "error": "<urlopen error [WinError 10013] 以一种访问权限不允许的方式做了一个访问套接字的尝试。>",
+    "type": "URLError"
+  },
+  "external_model_calls": 0,
+  "listener_owner_attestation": {
+    "diagnostics": "netstat: no matching listener; powershell fallback failed: Exception calling \"ProcessRecord\" with \"1\" argument(s): \"Access to a CIM resource was not available to the client.\"\nAt line:193 char:5\n+     $__cmdletization_objectModelWrapper.ProcessRecord($__cmdletizatio ...\n+     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n    + CategoryInfo          : NotSpecified: (:) [], ParentContainsErrorRecordException\n    + FullyQualifiedErrorId : CimException",
+    "expected_pid": 48508,
+    "rows": [],
+    "status": "table_unavailable_endpoint_identity_required"
+  },
+  "model_calls_enabled": true,
+  "paid_api_calls": 0,
+  "pilot_http_attempt_limit": 190,
+  "pilot_http_attempts": 0,
+  "pilot_logical_request_limit": 95,
+  "pilot_logical_requests": 0,
+  "preflight_completion_attempt_limit": 4,
+  "preflight_http_attempt_limit": 12,
+  "preflight_logical_request_limit": 6,
+  "preflight_status": "NOT_RUN",
+  "status": "NO_GO_RUNTIME_FAILURE"
+}

@@ -1,0 +1,5 @@
+{
+  "error": "[Errno 2] No such file or directory: 'D:\\\\MyLab\\\\colluscope\\\\reference\\\\m1-p0-local-qwen-integration\\\\runs\\\\m1_p0_local\\\\25ep-pilot-json-prefix-v2-20261019\\\\run\\\\preflight\\\\result.json'",
+  "error_type": "FileNotFoundError",
+  "status": "FAIL"
+}

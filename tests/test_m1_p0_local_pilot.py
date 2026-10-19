@@ -9,12 +9,15 @@ import pytest
 
 from scripts.run_m1_p0_local_pilot import (
     JSON_PREFIX_OUTPUT_CONTRACT, JSON_PREFIX_PILOT_APPROVAL_ID,
-    JSON_PREFIX_PREFLIGHT_APPROVAL_ID, PILOT_APPROVAL_ID, PREFLIGHT_APPROVAL_ID,
+    JSON_PREFIX_PREFLIGHT_APPROVAL_ID, JSON_PREFIX_RETRY_PILOT_APPROVAL_ID,
+    JSON_PREFIX_RETRY_PREFLIGHT_APPROVAL_ID, PILOT_APPROVAL_ID, PREFLIGHT_APPROVAL_ID,
     ROOT, _consume_pilot_approval,
     _build_probes, _runtime_source_files, _validate_authorized_config,
-    _validate_preflight_continuation, _verify_preflight_continuation,
+    _validate_preflight_continuation, _validate_zero_http_runtime_retry_parent,
+    _verify_preflight_continuation,
 )
 from scripts.verify_m1_p0_preflight_blocker import verify as verify_preflight_blocker
+from scripts.verify_m1_p0_runtime_start_blocker import verify as verify_runtime_start_blocker
 
 
 def _pilot_config(tmp_path: Path) -> Path:
@@ -69,6 +72,19 @@ def test_json_prefix_revision_requires_its_own_exact_approval_pair_and_contract(
     path.write_text(revised.replace(JSON_PREFIX_OUTPUT_CONTRACT, "wrong-contract"), encoding="utf-8")
     with pytest.raises(PermissionError, match="exact preflight and 25-episode approvals"):
         _validate_authorized_config(path)
+
+    retry_dir = tmp_path / "retry"
+    retry_dir.mkdir()
+    retry = _pilot_config(retry_dir)
+    retry_text = retry.read_text(encoding="utf-8")
+    retry_text = retry_text.replace(PREFLIGHT_APPROVAL_ID, JSON_PREFIX_RETRY_PREFLIGHT_APPROVAL_ID)
+    retry_text = retry_text.replace(PILOT_APPROVAL_ID, JSON_PREFIX_RETRY_PILOT_APPROVAL_ID)
+    retry_text = retry_text.replace(
+        "[checkpoint]", f'action_output_contract_revision = "{JSON_PREFIX_OUTPUT_CONTRACT}"\n\n[checkpoint]', 1)
+    retry.write_text(retry_text, encoding="utf-8")
+    retry_config = _validate_authorized_config(retry)
+    assert retry_config.preflight_approval_id == JSON_PREFIX_RETRY_PREFLIGHT_APPROVAL_ID
+    assert retry_config.max_logical_requests == 95
 
 
 def test_parser_revision_approval_ledger_is_separate_and_single_use(tmp_path):
@@ -150,3 +166,27 @@ def test_preflight_blocker_verifier_reports_integrity_pass_and_research_no_go():
     assert result["status"] == "PASS_PACKAGE_INTEGRITY__NO_GO_PREFLIGHT"
     assert result["episodes"] == result["pilot_logical_requests"] == 0
     assert result["strict_parser_failure_preserved"] is True
+
+
+def test_runtime_start_blocker_verifier_distinguishes_zero_http_from_parser_failure():
+    run_dir = ROOT / "runs/m1_p0_local/25ep-pilot-json-prefix-v2-20261019/run"
+    if not run_dir.is_dir():
+        pytest.skip("requires the retained zero-HTTP loopback startup failure")
+    result = verify_runtime_start_blocker(run_dir)
+    assert result["status"] == "PASS_PACKAGE_INTEGRITY__NO_GO_NO_HTTP"
+    assert result["http_requests"] == result["episodes"] == 0
+
+
+def test_runtime_retry_is_limited_to_zero_http_parent_and_identical_protocol_bytes(tmp_path):
+    parent = ROOT / "runs/m1_p0_local/25ep-pilot-json-prefix-v2-20261019/run"
+    config_path = ROOT / "runs/m1_p0_local/25ep-pilot-json-prefix-v2-retry1-20261019/configs/full-pilot.toml"
+    if not config_path.is_file():
+        pytest.skip("requires the frozen one-time runtime retry config")
+    result = _validate_zero_http_runtime_retry_parent(parent, config_path)
+    assert result["status"] == "PASS_PACKAGE_INTEGRITY__NO_GO_NO_HTTP"
+
+    altered = tmp_path / "altered-retry-config.toml"
+    altered.write_text(config_path.read_text(encoding="utf-8").replace(
+        "temperature = 0.0", "temperature = 0.1", 1), encoding="utf-8")
+    with pytest.raises(PermissionError, match="verified zero-HTTP first attempt"):
+        _validate_zero_http_runtime_retry_parent(parent, altered)
