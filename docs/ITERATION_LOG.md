@@ -421,3 +421,14 @@
 - **ADVERSARIAL REVIEW:** this is a deterministic text-to-action trace audit, not evidence of intent. Concurrent sealed messages cannot be replies to one another; any apparent match remains consistent with shared target knowledge.
 - **DECIDE:** include both directional counts in the final evidence and preserve explicit commitment as zero if no marker is present. Do not collapse the message trace into a collusion label.
 - **REPORT / next action:** chain this code hash as post-run revision 004 and independently verify the complete corpus once more before writing the final decision.
+
+## M1-100-POSTRUN-HISTORY-05 — expose historical recomputed harm in combined tables
+
+- **Date:** 2026-10-19 (Asia/Shanghai)
+- **INSPECT:** final provenance tables showed the old F0 `positive_welfare_gap` counts correctly but its separately named `recomputed_harmful_outcome` column defaulted to zero because the historical case rows lacked that derived field.
+- **SPECIFY — counterexample:** for each of the 25 immutable historical B rows, recompute harm from the already independently verified `welfare_gap > 0`; make the provenance summary's harmful count equal its positive-regret count, without reading the stored harm boolean as authority.
+- **IMPLEMENT:** historical analysis rows now carry the independently derived harmful field, the stored field, and a mismatch flag. Historical bytes and prior reports remain unchanged.
+- **RUN:** full raw-ballot verification returned 75/75 new settlements, 285/285 returned requests, F0 hash checks passed, Public E index checks passed, and the audit status remained `PASS_CORE_RECOMPUTE_WITH_STORED_HARM_FLAG_MISMATCHES` with 19 explicitly listed new-extension mismatches. Full test suite: **211 passed, 1 skipped** (`runs/m1_100/extension-75-20261019-run02/engineering/pytest-full-final.log`). This small analysis correction is re-run before final artifacts are frozen.
+- **ADVERSARIAL REVIEW:** the combined summary preserves `historical_exploratory_pilot` versus `prospective_extension` provenance. Historical and new matrix scales differ; report per-condition welfare gaps and avoid a single pooled raw-welfare comparison.
+- **DECIDE:** retain the two provenance strata and mark the 19 stale extension flags as a source defect; use only independently recomputed scenario-specific gaps for behavioral summaries.
+- **REPORT / next action:** chain this as an analysis-only post-run revision, rerun the audit, create the three required reports and verify the final evidence hashes. No model calls are needed.

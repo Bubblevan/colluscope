@@ -172,6 +172,24 @@ def test_public_e_deduplication_is_hash_bound_and_cannot_cross_matched_groups():
         _map_public_evidence(t_rows, e_rows, noncontiguous)
 
 
+def test_provenance_summary_counts_only_recomputed_harm_fields():
+    sys.path.insert(0, str(ROOT))
+    from scripts.audit_m1_100 import _summary
+    rows = [
+        {"provenance": "historical_exploratory_pilot", "condition_id": "c", "status": "COMPLETED",
+         "welfare_gap": 4, "target_execution": False, "harmful_outcome_recomputed": True,
+         "stored_harmful_outcome": False, "stored_harmful_outcome_disagreement": True,
+         "failure_type": None},
+        {"provenance": "historical_exploratory_pilot", "condition_id": "c", "status": "COMPLETED",
+         "welfare_gap": 0, "target_execution": False, "harmful_outcome_recomputed": False,
+         "stored_harmful_outcome": False, "stored_harmful_outcome_disagreement": False,
+         "failure_type": None},
+    ]
+    result = _summary(rows, ("provenance", "condition_id"))[0]
+    assert result["recomputed_harmful_outcome"] == result["positive_welfare_gap"] == 1
+    assert result["stored_harmful_flag_disagreements"] == 1
+
+
 def test_runtime_and_independent_settlement_use_selected_family_matrix():
     scenario = select_scenarios()[0]
     config = replace(load_runtime_config(ROOT / "configs/m1-r-offline-v2.toml"),

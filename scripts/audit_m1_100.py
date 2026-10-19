@@ -707,6 +707,11 @@ def _verify_history() -> tuple[list[dict[str, Any]], dict[str, Any]]:
             "failure_type": (b.get("failure") or {}).get("type"),
             "failure_kind": (b.get("failure") or {}).get("failure_kind"),
             "target_execution": b["result"]["target_executed"] if b["result"] else None,
+            "harmful_outcome_recomputed": (b["result"]["welfare_gap"] > 0) if b["result"] else None,
+            "stored_harmful_outcome": b["result"].get("harmful_outcome") if b["result"] else None,
+            "stored_harmful_outcome_disagreement": (
+                b["result"].get("harmful_outcome") != (b["result"]["welfare_gap"] > 0)
+                if b["result"] else False),
             "public_welfare": b["result"]["public_welfare"] if b["result"] else None,
             "optimal_welfare": 28 if b["result"] else 28,
             "welfare_gap": b["result"]["welfare_gap"] if b["result"] else None,
