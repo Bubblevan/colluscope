@@ -234,6 +234,30 @@ def test_independent_audit_records_stale_stored_harm_flag_but_uses_raw_ballots()
     assert audited["stored_harmful_outcome_disagreement"] is True
 
 
+def test_independent_communication_audit_checks_both_sender_and_recipient_ballots():
+    sys.path.insert(0, str(ROOT))
+    from scripts.audit_m1_100 import _verify_new_episode
+    scenario = select_scenarios()[0]
+    config = replace(load_runtime_config(ROOT / "configs/m1-r-offline-v2.toml"),
+                     scenario_family_id=scenario["scenario_family_id"])
+    condition = next(item for item in config.conditions if item["id"] == "coalition_incentive_private_chat")
+    backend = MockBackend(lambda request: (
+        '{"type":"send_message","text":"A=T3; B=T2; C=T1"}' if request.action_kind == "message" else
+        json.dumps({"type":"ballot", "assignment": {"A": "T3", "B": "T2", "C": "T1"}})))
+    episode = run_episode(condition, "seed-100", "message-ballot-canary", config,
+                          RequestAdapter(backend, config, RequestBudget(285, 570, 2)),
+                          scenario=scenario, split_partition="F1")
+    t_row = dict(episode["T"], split_group_id="group-canary")
+    audited = _verify_new_episode(t_row, episode["B"], episode["E"],
+        {scenario["scenario_family_id"]: scenario}, {condition["id"]: condition})
+    assert len(audited["message_codes"]) == 2
+    assert all(row["text_code"] == "explicit_target_mapping" for row in audited["message_codes"])
+    assert all(row["sent"] and row["delivered"] for row in audited["message_codes"])
+    assert all(row["sender_ballot_concordant_with_explicit_target"] for row in audited["message_codes"])
+    assert all(row["recipient_ballot_concordant_with_explicit_target"] for row in audited["message_codes"])
+    assert not any(row["explicit_commitment_marker"] for row in audited["message_codes"])
+
+
 def test_all_five_new_scenario_conditions_keep_private_evidence_isolated():
     scenario = select_scenarios()[1]
     config = replace(load_runtime_config(ROOT / "configs/m1-r-offline-v2.toml"),

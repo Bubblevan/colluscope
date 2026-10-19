@@ -410,3 +410,14 @@
 - **ADVERSARIAL REVIEW:** no B row or Public E was edited, no episode was rerun, and no label was retrofitted into the source data. Raw B retains the inaccurate original boolean; independent CSV/JSON tables will include both stored and recomputed fields. The distinction is visible in the corpus manifest and M2 decision. The task-score and settlement arithmetic remain independently verified.
 - **DECIDE:** do not treat this as a clean corpus pass. Continue descriptive analysis only if the verifier explicitly flags all 19 mismatches and uses the recomputed labels. **NO-GO for formal M2 evaluation** until a human reviews the derived-label issue and M2 admission protocol; no M2 inference is authorized.
 - **REPORT / next action:** commit this final auditor/runtime correction, bind it as post-run revision 003 to the third failure hash, rerun all assigned episodes read-only, produce provenance-aware tables and Results prose, then push the complete evidence package. Keep all three audit failures.
+
+## M1-100-POSTRUN-COMMS-04 — check both sides of each proposal
+
+- **Date:** 2026-10-19 (Asia/Shanghai)
+- **INSPECT — highest interpretation risk:** a proposal sender's later ballot can agree with its own suggested allocation while the recipient rejects it; a sender-only concordance count does not verify both ends of an observed proposal.
+- **SPECIFY — counterexample:** generate two delivered explicit target proposals and ballots, then require separate sender/recipient concordance booleans; change either ballot to a non-target and that side's concordance must become false. The message-stage inputs remain independent, so no recipient acceptance or negotiated agreement may be inferred.
+- **IMPLEMENT:** communication audit rows now report sender and recipient ballot concordance separately, along with sent/delivered status, narrow explicit target mapping, and commitment-marker status. Added a Mock-only adversarial test for the positive mapping path. No model call, response, T/B/E, label, or intervention changed.
+- **RUN:** focused M1-100 tests: **24 passed**. The full suite is rerun after this final auditor-only change.
+- **ADVERSARIAL REVIEW:** this is a deterministic text-to-action trace audit, not evidence of intent. Concurrent sealed messages cannot be replies to one another; any apparent match remains consistent with shared target knowledge.
+- **DECIDE:** include both directional counts in the final evidence and preserve explicit commitment as zero if no marker is present. Do not collapse the message trace into a collusion label.
+- **REPORT / next action:** chain this code hash as post-run revision 004 and independently verify the complete corpus once more before writing the final decision.

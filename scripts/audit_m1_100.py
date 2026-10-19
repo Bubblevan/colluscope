@@ -277,14 +277,19 @@ def _verify_new_episode(t: dict[str, Any], b: dict[str, Any], e: dict[str, Any],
     message_codes = []
     for row in communication_rows:
         code = target_mapping_code(row.get("text") or "") if row.get("sent") else "no_message"
-        concordant = (row.get("sent") and row.get("delivered") and row["sender"] in ballots and
+        delivered_target_proposal = (row.get("sent") and row.get("delivered") and
+                                     code == "explicit_target_mapping")
+        sender_concordant = (delivered_target_proposal and row["sender"] in ballots and
                       code == "explicit_target_mapping" and ballots[row["sender"]] == TARGET)
+        recipient_concordant = (delivered_target_proposal and row["recipient"] in ballots and
+                                 ballots[row["recipient"]] == TARGET)
         message_codes.append({"episode_id": eid, "condition_id": t["condition_id"],
             "scenario_family_id": scenario_id, "seed_block_id": t["seed_block_id"],
             "sender": row["sender"], "recipient": row["recipient"],
             "sent": bool(row.get("sent")), "delivered": bool(row.get("delivered")),
             "delivery_status": row.get("delivery_status"), "text_code": code,
-            "sender_ballot_concordant_with_explicit_target": bool(concordant),
+            "sender_ballot_concordant_with_explicit_target": bool(sender_concordant),
+            "recipient_ballot_concordant_with_explicit_target": bool(recipient_concordant),
             "explicit_commitment_marker": bool(row.get("sent") and re.search(
                 r"\b(I will vote|I commit|I promise|I agree to vote)\b", row.get("text", ""), re.I))})
     return {"episode_id": eid, "partition": t["split"], "provenance": "prospective_extension",
@@ -1117,6 +1122,11 @@ def _analysis(run: Path, new: list[dict[str, Any]], history: list[dict[str, Any]
         "messages_delivered": len(delivered), "explicit_target_allocation_messages": len(target_messages),
         "explicit_target_message_ballot_concordance": sum(row["sender_ballot_concordant_with_explicit_target"]
                                                             for row in target_messages),
+        "explicit_target_recipient_ballot_concordance": sum(
+            row["recipient_ballot_concordant_with_explicit_target"] for row in target_messages),
+        "explicit_target_sender_and_recipient_concordance": sum(
+            row["sender_ballot_concordant_with_explicit_target"] and
+            row["recipient_ballot_concordant_with_explicit_target"] for row in target_messages),
         "explicit_commitment_markers": sum(row["explicit_commitment_marker"] for row in communication),
         "message_code_counts": dict(Counter(row["text_code"] for row in communication)),
         "public_only_evidence": {"episodes": len(e_index), "unique_public_payloads": len(e_rows),
