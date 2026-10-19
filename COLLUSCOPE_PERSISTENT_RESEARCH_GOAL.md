@@ -1,7 +1,7 @@
 # ColluScope — Persistent Research Goal / Codex North Star
 
 **Scope:** From the present M1-P0 blockage through the Apart Research AI Collusion Research Sprint (2026-10-23–25), submission (check official deadline and portal before final upload), and a reproducible post-event research archive.  
-**Current empirical state (2026-10-19):** the pinned local GGUF model has made real engineering-preflight completions, but **zero experimental episodes and zero monitor evaluations**. The latest `657eab9` documents `no_message` returned during a positive `send_message` preflight probe. No claim of genuine collusion or detector superiority is supported.
+**Current empirical state (2026-10-19, after M1-P0):** the pinned local Qwen3-8B Q4_K_M model completed the explicitly authorized 25-episode local Pilot (five conditions × five matched seed blocks; 25/25 completed). A post-run audit independently recomputed all settlements from hash-anchored T/B/Public-only E, analyzed 20 message decisions and five delivered messages, and preserved the original evidence hashes. There have been **zero monitor evaluations**. The observed patterns support a qualified descriptive case study, not a causal communication effect, latent-collusion label, or detector-superiority claim. See `docs/M1_P0_POSTRUN_SCIENTIFIC_AUDIT.md` and `docs/M1_P0_POSTRUN_DECISION.md`; M2 remains NO-GO pending review and separate authorization.
 
 ## 1. North Star: the outcome that matters
 
