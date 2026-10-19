@@ -266,6 +266,16 @@ def _build_input(case, view: str, permission: str, m2: dict[str, Any],
             "schema_sha256": sha256_bytes(canonical_json(schema))}
 
 
+def _logical_schedule(cases):
+    """Return exactly one evaluation for each case × permission × frozen view."""
+    schedule = [(case, permission, view)
+                for case in cases for permission in PERMISSIONS for view in VIEWS]
+    keys = [(case.episode_id, permission, view) for case, permission, view in schedule]
+    if len(schedule) != 1000 or len(set(keys)) != 1000:
+        raise ValueError("M2 frozen schedule must contain exactly 1,000 unique logical evaluations")
+    return schedule
+
+
 def prepare_run(out: Path) -> dict[str, Any]:
     out.mkdir(parents=True, exist_ok=True)
     # All run-root files include request hashes, validation failures, and error
@@ -303,69 +313,36 @@ def prepare_run(out: Path) -> dict[str, Any]:
     payloads: dict[str, dict[str, Any]] = {}
     duplicate_across_permission = []
     payload_permissions: dict[str, set[str]] = {}
-    for case in cases:
-        for permission in PERMISSIONS:
-            for view in VIEWS:
-                prepared = _build_input(case, view, permission, m2, schema,
-                                        system_prompt, user_template, counter, backend_config)
-                digest = prepared["payload_sha256"]
-                payload_permissions.setdefault(digest, set()).add(permission)
-                request_id = "m2-" + digest[:28]
-                eval_id_material = f"{case_id_by_episode[case.episode_id]}|{permission}|{view}|{m2['protocol_id']}"
-                eval_id = hashlib.sha256(eval_id_material.encode("utf-8")).hexdigest()[:24]
-                evals.append({"eval_id": eval_id, "case_id": case_id_by_episode[case.episode_id],
-                              "provenance": case.provenance, "partition": case.partition,
-                              "scenario_family_id": case.scenario_family_id,
-                              "seed_block_id": case.seed_block_id,
-                              "split_group_id": case.split_group_id,
-                              "condition_id": case.condition_id, "permission_profile": permission,
-                              "view_name": view, "logical_kind": "primary_view",
-                              "request_id": request_id, "payload_sha256": digest,
-                              "prompt_sha256": prepared["prompt_sha256"],
-                              "schema_sha256": prepared["schema_sha256"],
-                              "input_tokens_local": prepared["input_tokens_local"],
-                              "preparation_status": prepared["preparation_status"],
-                              "visible_event_ids": prepared["visible_event_ids"]})
-                if digest not in payloads:
-                    payloads[digest] = {"request_id": request_id, "payload_sha256": digest,
-                                        "permission_profile": permission, "partition": case.partition,
-                                        "view_name": view, "prepared": prepared,
-                                        "evaluation_ids": []}
-                elif (payloads[digest]["permission_profile"] != permission or
-                      payloads[digest]["partition"] != case.partition):
-                    duplicate_across_permission.append(digest)
-                payloads[digest]["evaluation_ids"].append(eval_id)
-            # Add the same-shaped structured no-findings ablation for each profile.
-            view = "structured_without_findings"
-            prepared = _build_input(case, view, permission, m2, schema,
-                                    system_prompt, user_template, counter, backend_config)
-            digest = prepared["payload_sha256"]
-            payload_permissions.setdefault(digest, set()).add(permission)
-            request_id = "m2-" + digest[:28]
-            eval_id_material = f"{case_id_by_episode[case.episode_id]}|{permission}|{view}|{m2['protocol_id']}"
-            eval_id = hashlib.sha256(eval_id_material.encode("utf-8")).hexdigest()[:24]
-            evals.append({"eval_id": eval_id, "case_id": case_id_by_episode[case.episode_id],
-                          "provenance": case.provenance, "partition": case.partition,
-                          "scenario_family_id": case.scenario_family_id,
-                          "seed_block_id": case.seed_block_id,
-                          "split_group_id": case.split_group_id,
-                          "condition_id": case.condition_id, "permission_profile": permission,
-                          "view_name": view, "logical_kind": "structured_without_findings_ablation",
-                          "request_id": request_id, "payload_sha256": digest,
-                          "prompt_sha256": prepared["prompt_sha256"],
-                          "schema_sha256": prepared["schema_sha256"],
-                          "input_tokens_local": prepared["input_tokens_local"],
-                          "preparation_status": prepared["preparation_status"],
-                          "visible_event_ids": prepared["visible_event_ids"]})
-            if digest not in payloads:
-                payloads[digest] = {"request_id": request_id, "payload_sha256": digest,
-                                    "permission_profile": permission, "partition": case.partition,
-                                    "view_name": view, "prepared": prepared,
-                                    "evaluation_ids": []}
-            elif (payloads[digest]["permission_profile"] != permission or
-                  payloads[digest]["partition"] != case.partition):
-                duplicate_across_permission.append(digest)
-            payloads[digest]["evaluation_ids"].append(eval_id)
+    for case, permission, view in _logical_schedule(cases):
+        prepared = _build_input(case, view, permission, m2, schema,
+                                system_prompt, user_template, counter, backend_config)
+        digest = prepared["payload_sha256"]
+        payload_permissions.setdefault(digest, set()).add(permission)
+        request_id = "m2-" + digest[:28]
+        eval_id_material = f"{case_id_by_episode[case.episode_id]}|{permission}|{view}|{m2['protocol_id']}"
+        eval_id = hashlib.sha256(eval_id_material.encode("utf-8")).hexdigest()[:24]
+        evals.append({"eval_id": eval_id, "case_id": case_id_by_episode[case.episode_id],
+                      "provenance": case.provenance, "partition": case.partition,
+                      "scenario_family_id": case.scenario_family_id,
+                      "seed_block_id": case.seed_block_id,
+                      "split_group_id": case.split_group_id,
+                      "condition_id": case.condition_id, "permission_profile": permission,
+                      "view_name": view, "logical_kind": "primary_view",
+                      "request_id": request_id, "payload_sha256": digest,
+                      "prompt_sha256": prepared["prompt_sha256"],
+                      "schema_sha256": prepared["schema_sha256"],
+                      "input_tokens_local": prepared["input_tokens_local"],
+                      "preparation_status": prepared["preparation_status"],
+                      "visible_event_ids": prepared["visible_event_ids"]})
+        if digest not in payloads:
+            payloads[digest] = {"request_id": request_id, "payload_sha256": digest,
+                                "permission_profile": permission, "partition": case.partition,
+                                "view_name": view, "prepared": prepared,
+                                "evaluation_ids": []}
+        elif (payloads[digest]["permission_profile"] != permission or
+              payloads[digest]["partition"] != case.partition):
+            duplicate_across_permission.append(digest)
+        payloads[digest]["evaluation_ids"].append(eval_id)
     if len(evals) != 1000 or len({row["eval_id"] for row in evals}) != 1000:
         raise ValueError("M2 frozen schedule must contain exactly 1,000 unique logical evaluations")
     if duplicate_across_permission:

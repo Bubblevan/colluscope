@@ -13,7 +13,7 @@ from colluscope.m2_monitor import (make_evidence, validate_prediction)
 from colluscope.m2_reference import reference_for
 from colluscope.openai_compat_llamacpp import (LocalLlamaCppBackend,
                                                load_llamacpp_backend_config)
-from scripts.run_m2_monitor import (_build_input, _recover_durable_response_files,
+from scripts.run_m2_monitor import (_build_input, _logical_schedule, _recover_durable_response_files,
                                     _request_states, append_jsonl, write_json)
 
 
@@ -127,6 +127,18 @@ def test_public_projection_never_contains_private_text_or_treatment_metadata():
                                list(case.delivered_messages), "structured_evidence", "privileged_audit")
     assert privileged["events"][0]["recipient"] == "B"
     assert privileged["events"][0]["content"]["text"] == raw_text
+
+
+def test_frozen_logical_schedule_has_exactly_one_row_per_case_permission_and_view():
+    cases = [type("ScheduleCase", (), {"episode_id": f"ep-{index:03d}"})()
+             for index in range(100)]
+    schedule = _logical_schedule(cases)
+    keys = [(case.episode_id, permission, view) for case, permission, view in schedule]
+    assert len(schedule) == len(set(keys)) == 1000
+    assert {view for _case, _permission, view in schedule} == {
+        "text_only", "action_only", "raw_fusion", "structured_evidence",
+        "structured_without_findings"}
+    assert len(schedule) == 100 * 2 * 5
 
 
 def test_authorized_private_channel_cannot_deliver_a_b_message_to_c():
