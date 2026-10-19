@@ -1,0 +1,314 @@
+{
+  "F0": {
+    "episode_count": 25,
+    "groups": [
+      {
+        "condition_ids": [
+          "normal_cooperation",
+          "common_incentive_parallel_behavior",
+          "coalition_incentive_private_chat",
+          "coalition_incentive_no_private_chat",
+          "private_chat_no_side_bonus"
+        ],
+        "episodes": 5,
+        "scenario_family_id": "icbcmatch_v1",
+        "seed_block_id": "seed-0",
+        "source": "runs/m1_p0_local/formal-25ep-pilot-20261019/run",
+        "split_group_id": "542d88668396a8bdb774af8b7d666a112e3d2ad918042fd9425167ccf8475a9a"
+      },
+      {
+        "condition_ids": [
+          "normal_cooperation",
+          "common_incentive_parallel_behavior",
+          "coalition_incentive_private_chat",
+          "coalition_incentive_no_private_chat",
+          "private_chat_no_side_bonus"
+        ],
+        "episodes": 5,
+        "scenario_family_id": "icbcmatch_v1",
+        "seed_block_id": "seed-1",
+        "source": "runs/m1_p0_local/formal-25ep-pilot-20261019/run",
+        "split_group_id": "c84e0a5f51501decb447871884da7aa983d232dff3475e1d58c02496610c4329"
+      },
+      {
+        "condition_ids": [
+          "normal_cooperation",
+          "common_incentive_parallel_behavior",
+          "coalition_incentive_private_chat",
+          "coalition_incentive_no_private_chat",
+          "private_chat_no_side_bonus"
+        ],
+        "episodes": 5,
+        "scenario_family_id": "icbcmatch_v1",
+        "seed_block_id": "seed-2",
+        "source": "runs/m1_p0_local/formal-25ep-pilot-20261019/run",
+        "split_group_id": "5f9072330b3abf2f5f5c5946c59c605f3d230f2adc6f2f40bd4106077fca381d"
+      },
+      {
+        "condition_ids": [
+          "normal_cooperation",
+          "common_incentive_parallel_behavior",
+          "coalition_incentive_private_chat",
+          "coalition_incentive_no_private_chat",
+          "private_chat_no_side_bonus"
+        ],
+        "episodes": 5,
+        "scenario_family_id": "icbcmatch_v1",
+        "seed_block_id": "seed-3",
+        "source": "runs/m1_p0_local/formal-25ep-pilot-20261019/run",
+        "split_group_id": "ee7ea6346254a685fa7259797062593e93b391e86c7287b0fa2672a10f92ab0e"
+      },
+      {
+        "condition_ids": [
+          "normal_cooperation",
+          "common_incentive_parallel_behavior",
+          "coalition_incentive_private_chat",
+          "coalition_incentive_no_private_chat",
+          "private_chat_no_side_bonus"
+        ],
+        "episodes": 5,
+        "scenario_family_id": "icbcmatch_v1",
+        "seed_block_id": "seed-4",
+        "source": "runs/m1_p0_local/formal-25ep-pilot-20261019/run",
+        "split_group_id": "b1be2a08c54c39526d9226d234fb05b7a5ed94a3a150a3f2661fc5387178ba66"
+      }
+    ],
+    "partition": "development_historical_descriptive_only"
+  },
+  "F1": {
+    "episode_count": 25,
+    "groups": [
+      {
+        "conditions": [
+          "normal_cooperation",
+          "common_incentive_parallel_behavior",
+          "coalition_incentive_private_chat",
+          "coalition_incentive_no_private_chat",
+          "private_chat_no_side_bonus"
+        ],
+        "partition": "F1",
+        "scenario_family_id": "m1_100_family_1",
+        "seed_block_id": "seed-100",
+        "split_group_id": "12530d8baebaa108be6fe7e15e01f28cd93b4c071c56713b820988a2707b29cd",
+        "split_group_id_material": "colluscope-m1-split-v1|m1_100_family_1|seed-100"
+      },
+      {
+        "conditions": [
+          "normal_cooperation",
+          "common_incentive_parallel_behavior",
+          "coalition_incentive_private_chat",
+          "coalition_incentive_no_private_chat",
+          "private_chat_no_side_bonus"
+        ],
+        "partition": "F1",
+        "scenario_family_id": "m1_100_family_1",
+        "seed_block_id": "seed-101",
+        "split_group_id": "79e7332c8edcd0384cf6ea6903897263f2f6c8fa28d403e6eb41b603b68f4e2f",
+        "split_group_id_material": "colluscope-m1-split-v1|m1_100_family_1|seed-101"
+      },
+      {
+        "conditions": [
+          "normal_cooperation",
+          "common_incentive_parallel_behavior",
+          "coalition_incentive_private_chat",
+          "coalition_incentive_no_private_chat",
+          "private_chat_no_side_bonus"
+        ],
+        "partition": "F1",
+        "scenario_family_id": "m1_100_family_2",
+        "seed_block_id": "seed-102",
+        "split_group_id": "3f7a709bba0827cf8abe5209be545f0cf328f16ecdfd317696d2eff43c5b6cda",
+        "split_group_id_material": "colluscope-m1-split-v1|m1_100_family_2|seed-102"
+      },
+      {
+        "conditions": [
+          "normal_cooperation",
+          "common_incentive_parallel_behavior",
+          "coalition_incentive_private_chat",
+          "coalition_incentive_no_private_chat",
+          "private_chat_no_side_bonus"
+        ],
+        "partition": "F1",
+        "scenario_family_id": "m1_100_family_2",
+        "seed_block_id": "seed-103",
+        "split_group_id": "a37d24a14e8823645a3f528b74ca9c9a00082ad25fb4fcdda62b74594148d62c",
+        "split_group_id_material": "colluscope-m1-split-v1|m1_100_family_2|seed-103"
+      },
+      {
+        "conditions": [
+          "normal_cooperation",
+          "common_incentive_parallel_behavior",
+          "coalition_incentive_private_chat",
+          "coalition_incentive_no_private_chat",
+          "private_chat_no_side_bonus"
+        ],
+        "partition": "F1",
+        "scenario_family_id": "m1_100_family_3",
+        "seed_block_id": "seed-104",
+        "split_group_id": "68c343d704de188e2716156c1384837654d15a77965c10012b0fee636cd6a46a",
+        "split_group_id_material": "colluscope-m1-split-v1|m1_100_family_3|seed-104"
+      }
+    ],
+    "partition": "calibration"
+  },
+  "F2": {
+    "episode_count": 25,
+    "groups": [
+      {
+        "conditions": [
+          "normal_cooperation",
+          "common_incentive_parallel_behavior",
+          "coalition_incentive_private_chat",
+          "coalition_incentive_no_private_chat",
+          "private_chat_no_side_bonus"
+        ],
+        "partition": "F2",
+        "scenario_family_id": "m1_100_family_1",
+        "seed_block_id": "seed-105",
+        "split_group_id": "6de844ee18be54dffc4e9d060df3d07f1f13a7c4fe86f7c7d7e76449ba2ab0c4",
+        "split_group_id_material": "colluscope-m1-split-v1|m1_100_family_1|seed-105"
+      },
+      {
+        "conditions": [
+          "normal_cooperation",
+          "common_incentive_parallel_behavior",
+          "coalition_incentive_private_chat",
+          "coalition_incentive_no_private_chat",
+          "private_chat_no_side_bonus"
+        ],
+        "partition": "F2",
+        "scenario_family_id": "m1_100_family_2",
+        "seed_block_id": "seed-106",
+        "split_group_id": "7b295c4d75d21f1f65362f92727adf08d790ec75aefa9a8bd0e2166c0dbee5ba",
+        "split_group_id_material": "colluscope-m1-split-v1|m1_100_family_2|seed-106"
+      },
+      {
+        "conditions": [
+          "normal_cooperation",
+          "common_incentive_parallel_behavior",
+          "coalition_incentive_private_chat",
+          "coalition_incentive_no_private_chat",
+          "private_chat_no_side_bonus"
+        ],
+        "partition": "F2",
+        "scenario_family_id": "m1_100_family_2",
+        "seed_block_id": "seed-107",
+        "split_group_id": "2d5ddb03086f53423078e34b33f4d58de7f95c7a012908ccb5fb84a1e5970394",
+        "split_group_id_material": "colluscope-m1-split-v1|m1_100_family_2|seed-107"
+      },
+      {
+        "conditions": [
+          "normal_cooperation",
+          "common_incentive_parallel_behavior",
+          "coalition_incentive_private_chat",
+          "coalition_incentive_no_private_chat",
+          "private_chat_no_side_bonus"
+        ],
+        "partition": "F2",
+        "scenario_family_id": "m1_100_family_3",
+        "seed_block_id": "seed-108",
+        "split_group_id": "e4fe5f1b81c90784638f534fbfe45ab7057d637e2914ed994f1569312d9346cb",
+        "split_group_id_material": "colluscope-m1-split-v1|m1_100_family_3|seed-108"
+      },
+      {
+        "conditions": [
+          "normal_cooperation",
+          "common_incentive_parallel_behavior",
+          "coalition_incentive_private_chat",
+          "coalition_incentive_no_private_chat",
+          "private_chat_no_side_bonus"
+        ],
+        "partition": "F2",
+        "scenario_family_id": "m1_100_family_3",
+        "seed_block_id": "seed-109",
+        "split_group_id": "43f6761cb5b5d80b0d8ad07796703741ac12a4d79725e2f7076f17f7ee7144b6",
+        "split_group_id_material": "colluscope-m1-split-v1|m1_100_family_3|seed-109"
+      }
+    ],
+    "partition": "held_out_evaluation"
+  },
+  "F3": {
+    "episode_count": 25,
+    "groups": [
+      {
+        "conditions": [
+          "normal_cooperation",
+          "common_incentive_parallel_behavior",
+          "coalition_incentive_private_chat",
+          "coalition_incentive_no_private_chat",
+          "private_chat_no_side_bonus"
+        ],
+        "partition": "F3",
+        "scenario_family_id": "m1_100_family_1",
+        "seed_block_id": "seed-110",
+        "split_group_id": "adfed212d0a69f70c8219e06863011793beb159695a1264d1a419dd2388e2e0b",
+        "split_group_id_material": "colluscope-m1-split-v1|m1_100_family_1|seed-110"
+      },
+      {
+        "conditions": [
+          "normal_cooperation",
+          "common_incentive_parallel_behavior",
+          "coalition_incentive_private_chat",
+          "coalition_incentive_no_private_chat",
+          "private_chat_no_side_bonus"
+        ],
+        "partition": "F3",
+        "scenario_family_id": "m1_100_family_1",
+        "seed_block_id": "seed-111",
+        "split_group_id": "55e8a484f8b3788a5eb6d382e14970c543b1ea6610b564ea25e76473fe7686b7",
+        "split_group_id_material": "colluscope-m1-split-v1|m1_100_family_1|seed-111"
+      },
+      {
+        "conditions": [
+          "normal_cooperation",
+          "common_incentive_parallel_behavior",
+          "coalition_incentive_private_chat",
+          "coalition_incentive_no_private_chat",
+          "private_chat_no_side_bonus"
+        ],
+        "partition": "F3",
+        "scenario_family_id": "m1_100_family_2",
+        "seed_block_id": "seed-112",
+        "split_group_id": "3a92b4d5c38e272be50ace38d0037ba0d5358dfebbd416d56a1093cc2758a1fd",
+        "split_group_id_material": "colluscope-m1-split-v1|m1_100_family_2|seed-112"
+      },
+      {
+        "conditions": [
+          "normal_cooperation",
+          "common_incentive_parallel_behavior",
+          "coalition_incentive_private_chat",
+          "coalition_incentive_no_private_chat",
+          "private_chat_no_side_bonus"
+        ],
+        "partition": "F3",
+        "scenario_family_id": "m1_100_family_3",
+        "seed_block_id": "seed-113",
+        "split_group_id": "b66fd240954fd7b84f368f8c9ee65c74f8f27d47086c8fdd7d13576473e4c8e2",
+        "split_group_id_material": "colluscope-m1-split-v1|m1_100_family_3|seed-113"
+      },
+      {
+        "conditions": [
+          "normal_cooperation",
+          "common_incentive_parallel_behavior",
+          "coalition_incentive_private_chat",
+          "coalition_incentive_no_private_chat",
+          "private_chat_no_side_bonus"
+        ],
+        "partition": "F3",
+        "scenario_family_id": "m1_100_family_3",
+        "seed_block_id": "seed-114",
+        "split_group_id": "7643007d645d4dd87f14a864fd84ff3671817ffcdf4a9e14be97719109ba1850",
+        "split_group_id_material": "colluscope-m1-split-v1|m1_100_family_3|seed-114"
+      }
+    ],
+    "partition": "held_out_evaluation"
+  },
+  "leakage_constraints": [
+    "all five condition rows per scenario/seed group remain in one partition",
+    "all T/B/E, observations, requests, and derived evidence views remain with the same group",
+    "F2/F3 are not used to tune scenarios, prompts, labels, thresholds, or model settings",
+    "historical F0 is development/descriptive only and is not represented as identically generated"
+  ],
+  "schema_version": "m1-100-splits-v1",
+  "unit": "scenario_family_id × seed_block_id; all five conditions and all views travel together"
+}

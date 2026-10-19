@@ -270,8 +270,13 @@ def _validate_config(config: LlamaCppBackendConfig) -> None:
     approved_8081_full_pilot = (port == 8081 and config.preflight_enabled and
                                 bool(config.preflight_approval_id) and config.model_calls_enabled and
                                 bool(config.full_pilot_approval_id))
+    approved_m1_100_local_extension = (
+        port == 8081 and config.model_calls_enabled and not config.preflight_enabled and
+        not config.preflight_approval_id and
+        config.full_pilot_approval_id == "USER-AUTHORIZED-M1-100-75-EPISODES-2026-10-19")
     if launch_without_port != expected_launch or port not in (8080, 8081) or (
-            port != 8080 and not (approved_preflight_port or approved_8081_full_pilot)):
+            port != 8080 and not (approved_preflight_port or approved_8081_full_pilot or
+                                  approved_m1_100_local_extension)):
         raise ValueError("launch settings differ from the inspected, frozen local candidate")
     if (config.context_length != 4096 or config.input_budget_tokens != 3072 or
             config.message_max_output_tokens != 512 or config.ballot_max_output_tokens != 256):
@@ -284,9 +289,10 @@ def _validate_config(config: LlamaCppBackendConfig) -> None:
     if config.input_budget_tokens + max(config.message_max_output_tokens,
                                         config.ballot_max_output_tokens) > config.context_length:
         raise ValueError("input budget plus stage output exceeds the context")
-    if (config.max_attempts_per_request != 2 or config.max_logical_requests != 95 or
-            config.max_total_attempts != 190):
-        raise ValueError("full pilot request budget differs from the frozen 95/190 ceiling")
+    permitted_full_run_budgets = {(95, 190), (285, 570)}
+    if (config.max_attempts_per_request != 2 or
+            (config.max_logical_requests, config.max_total_attempts) not in permitted_full_run_budgets):
+        raise ValueError("full run request budget must be the frozen 95/190 or M1-100 285/570 ceiling")
     if (config.preflight_max_logical_requests != 6 or config.preflight_max_attempts != 12 or
             config.preflight_max_completion_attempts != 4):
         raise ValueError("engineering preflight ceiling differs from 6 logical / 12 attempts / 4 completions")
@@ -422,7 +428,8 @@ class LocalLlamaCppBackend:
                  opener: Any | None = None, *,
                  api_key: str | None = None,
                  listener_guard: Callable[[], bool] | None = None,
-                 preflight_event_hook: Callable[[dict[str, Any]], None] | None = None):
+                 preflight_event_hook: Callable[[dict[str, Any]], None] | None = None,
+                 http_attempt_hook: Callable[[dict[str, Any]], None] | None = None):
         _validate_config(config)
         if (opener is None and (config.preflight_enabled or config.model_calls_enabled)
                 and not api_key):
@@ -435,6 +442,7 @@ class LocalLlamaCppBackend:
         self.api_key_sha256 = sha256(api_key.encode("ascii")).hexdigest() if api_key else None
         self.listener_guard = listener_guard
         self.preflight_event_hook = preflight_event_hook
+        self.http_attempt_hook = http_attempt_hook
         self._last_cors_probe: dict[str, Any] | None = None
         self._last_http_status: int | None = None
         self.tokenizer_metadata = dict(config.tokenizer_metadata)
@@ -455,6 +463,27 @@ class LocalLlamaCppBackend:
         self._full_pilot_attempts_by_request: dict[str, int] = {}
         self._full_pilot_attempts = 0
         self._full_pilot_terminal_ids: set[str] = set()
+
+    def restore_full_run_budget(self, attempts_by_request: dict[str, int]) -> None:
+        """Restore append-only prior-attempt usage and quarantine all old IDs."""
+        if self._full_pilot_attempts or self._full_pilot_logical_ids:
+            raise RuntimeError("cannot restore request budget after this backend has begun dispatch")
+        if (not isinstance(attempts_by_request, dict) or
+                any(not isinstance(request_id, str) or not request_id or
+                    not isinstance(attempts, int) or isinstance(attempts, bool) or
+                    not 1 <= attempts <= self.config.max_attempts_per_request
+                    for request_id, attempts in attempts_by_request.items())):
+            raise ValueError("restored request budget requires valid request IDs and bounded attempts")
+        total = sum(attempts_by_request.values())
+        if (len(attempts_by_request) > self.config.max_logical_requests or
+                total > self.config.max_total_attempts):
+            raise ValueError("restored request usage already exceeds the frozen run ceiling")
+        self._full_pilot_logical_ids = set(attempts_by_request)
+        self._full_pilot_attempts_by_request = dict(attempts_by_request)
+        self._full_pilot_attempts = total
+        # Terminal IDs are never resumed; interrupted episodes are failed and
+        # skipped, so their possibly uncertain last attempt is not repeated.
+        self._full_pilot_terminal_ids = set(attempts_by_request)
 
     def _messages(self, prompt: str) -> list[dict[str, str]]:
         if "\n\n" not in prompt:
@@ -561,7 +590,8 @@ class LocalLlamaCppBackend:
 
     def _open(self, url: str, data: bytes | None, timeout_seconds: int, method: str,
               *, origin: str | None = None, authenticated: bool = True,
-              expected_status: int | None = None) -> bytes:
+              expected_status: int | None = None, request_id: str | None = None,
+              attempt_number: int | None = None) -> bytes:
         parsed = urllib.parse.urlsplit(url)
         if (parsed.scheme != "http" or parsed.hostname != "127.0.0.1" or
                 parsed.port != self.config.launch["port"] or
@@ -577,6 +607,12 @@ class LocalLlamaCppBackend:
         if origin is not None:
             headers["Origin"] = origin
         request = urllib.request.Request(url, data=data, headers=headers, method=method)
+        if self.http_attempt_hook is not None and request_id is not None:
+            self.http_attempt_hook({"request_id": request_id, "attempt": attempt_number,
+                                    "method": method, "url": url,
+                                    "request_body_sha256": sha256(data).hexdigest() if data is not None else None,
+                                    "transport_authentication": "bearer_api_key" if authenticated and self.api_key else "none",
+                                    "api_key_sha256": self.api_key_sha256})
         try:
             with self.opener.open(request, timeout=timeout_seconds) as response:
                 body = response.read(4_000_001)
@@ -675,13 +711,15 @@ class LocalLlamaCppBackend:
                       "timings": timings, "latency_seconds": latency_seconds,
                       "reasoning_content_present": False})
 
-    def _complete_impl(self, request: AgentRequest, timeout_seconds: int) -> BackendResponse:
+    def _complete_impl(self, request: AgentRequest, timeout_seconds: int,
+                       attempt_number: int) -> BackendResponse:
         if timeout_seconds < 1 or timeout_seconds > self.config.timeout_seconds:
             raise ValueError("request timeout is outside the frozen llama.cpp backend deadline")
         body, _, prompt_tokens, _ = self._prepare(request)
         url = self.config.base_url.rstrip("/") + "/chat/completions"
         started = time.perf_counter()
-        response_body = self._open(url, body, timeout_seconds, "POST")
+        response_body = self._open(url, body, timeout_seconds, "POST", request_id=request.request_id,
+                                   attempt_number=attempt_number)
         latency = time.perf_counter() - started
         return self._decode_response(response_body, expected_prompt_tokens=prompt_tokens,
                                      latency_seconds=latency)
@@ -705,7 +743,7 @@ class LocalLlamaCppBackend:
             self._full_pilot_attempts_by_request[request.request_id] = attempt
             self._full_pilot_attempts += 1
         try:
-            result = self._complete_impl(request, timeout_seconds)
+            result = self._complete_impl(request, timeout_seconds, attempt)
         except (TimeoutBackendError, TransientTransportError):
             if attempt >= self.config.max_attempts_per_request:
                 with self._full_pilot_lock:

@@ -901,3 +901,55 @@ def test_backend_enforces_full_95_logical_190_physical_ceiling_without_adapter()
     with pytest.raises(RuntimeError, match="total HTTP-attempt hard limit"):
         backend.complete(request_for(settings, request_id="direct-96"), timeout_seconds=17)
     assert len(opener.calls) == 190
+
+
+def test_backend_enforces_m1_100_285_logical_570_physical_ceiling():
+    settings = config_for(live=True, max_logical_requests=285, max_total_attempts=570)
+    settings, counter = counter_for(settings)
+    ballot = '{"type":"ballot","assignment":{"A":"T1","B":"T2","C":"T3"}}'
+    outcomes = []
+    for _ in range(285):
+        outcomes.extend([TimeoutError("bounded synthetic transient"), response(ballot)])
+    opener = FakeOpener(outcomes)
+    backend = LocalLlamaCppBackend(settings, counter, opener)
+    for index in range(285):
+        request = request_for(settings, request_id=f"m1-100-{index}")
+        with pytest.raises(TimeoutError):
+            backend.complete(request, timeout_seconds=17)
+        assert backend.complete(request, timeout_seconds=17).text == ballot
+    assert backend._full_pilot_attempts == len(opener.calls) == 570
+    assert len(backend._full_pilot_logical_ids) == 285
+    with pytest.raises(RuntimeError, match="total HTTP-attempt hard limit"):
+        backend.complete(request_for(settings, request_id="m1-100-over-cap"), timeout_seconds=17)
+    assert len(opener.calls) == 570
+
+
+def test_restored_budget_counts_prior_attempts_and_quarantines_request_ids():
+    settings = config_for(live=True, max_logical_requests=285, max_total_attempts=570)
+    settings, counter = counter_for(settings)
+    backend = LocalLlamaCppBackend(settings, counter, FakeOpener([]))
+    backend.restore_full_run_budget({"prior-a": 2, "prior-b": 1})
+    assert backend._full_pilot_attempts == 3
+    assert backend._full_pilot_logical_ids == {"prior-a", "prior-b"}
+    assert backend._full_pilot_terminal_ids == {"prior-a", "prior-b"}
+    with pytest.raises(ValueError, match="bounded attempts"):
+        LocalLlamaCppBackend(settings, counter, FakeOpener([])).restore_full_run_budget({"bad": 3})
+    with pytest.raises(ValueError, match="exceeds"):
+        LocalLlamaCppBackend(settings, counter, FakeOpener([])).restore_full_run_budget(
+            {f"id-{i}": 2 for i in range(286)})
+
+
+def test_physical_http_attempt_hook_records_only_after_loopback_guards():
+    settings = config_for(live=True)
+    settings, counter = counter_for(settings)
+    ballot = '{"type":"ballot","assignment":{"A":"T1","B":"T2","C":"T3"}}'
+    hook_rows = []
+    backend = LocalLlamaCppBackend(settings, counter, FakeOpener([response(ballot)]),
+                                   http_attempt_hook=hook_rows.append)
+    assert backend.complete(request_for(settings), timeout_seconds=17).text == ballot
+    assert len(hook_rows) == 1
+    assert hook_rows[0]["request_id"] == "req-1"
+    assert hook_rows[0]["attempt"] == 1
+    assert hook_rows[0]["method"] == "POST"
+    assert hook_rows[0]["url"] == settings.base_url + "/chat/completions"
+    assert hook_rows[0]["request_body_sha256"]
