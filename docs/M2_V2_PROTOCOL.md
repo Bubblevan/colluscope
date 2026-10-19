@@ -77,6 +77,7 @@ From the repository root, the intended sequence is:
 ~~~powershell
 python -m pytest -q
 python scripts/run_m2_v2.py --prepare-preflight --out runs/m2-v2/recovery-20261019/study
+python scripts/verify_m2_v2_preflight.py --out runs/m2-v2/recovery-20261019/study
 python scripts/run_m2_v2.py --preflight --out runs/m2-v2/recovery-20261019/study
 python scripts/run_m2_v2.py --prepare-formal --out runs/m2-v2/recovery-20261019/study
 python scripts/run_m2_v2.py --calibrate --out runs/m2-v2/recovery-20261019/study

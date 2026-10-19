@@ -248,9 +248,10 @@ def _candidate_registry_hash() -> dict[str, Any]:
              ROOT / "scripts/run_m1_100_extension.py", ROOT / "scripts/run_m2_monitor.py",
              ROOT / "scripts/diagnose_m2_v1_responses.py",
              ROOT / "scripts/local_llama_security.py", ROOT / "scripts/score_m2_v2.py",
+             ROOT / "scripts/verify_m2_v2_preflight.py",
              ROOT / "tests/test_m2_v2_contract.py", ROOT / "tests/test_m2_v2_integration.py",
              ROOT / "tests/test_m2_v2_scoring.py", ROOT / "tests/test_m2_v2_runtime.py",
-             ROOT / "tests/test_m2_v1_diagnosis.py",
+             ROOT / "tests/test_m2_v1_diagnosis.py", ROOT / "tests/test_m2_v2_preflight_verifier.py",
              ROOT / "configs/m2-one-shot-splits.json", ROOT / ".gitignore",
              ROOT / "docs/M2_V2_PROTOCOL.md", ROOT / "docs/M2_V2_INTERFACE_DIAGNOSIS.md"]
     return {
@@ -956,10 +957,11 @@ def prepare_formal(out: Path) -> dict[str, Any]:
         ROOT / "scripts/run_m1_100_extension.py", ROOT / "scripts/run_m2_monitor.py",
         ROOT / "scripts/diagnose_m2_v1_responses.py",
         ROOT / "scripts/local_llama_security.py", ROOT / "configs/m2-one-shot-splits.json",
+        ROOT / "scripts/verify_m2_v2_preflight.py",
         ROOT / "docs/M2_V2_PROTOCOL.md", ROOT / "docs/M2_V2_INTERFACE_DIAGNOSIS.md",
         ROOT / "tests/test_m2_v2_contract.py", ROOT / "tests/test_m2_v2_integration.py",
         ROOT / "tests/test_m2_v2_scoring.py", ROOT / "tests/test_m2_v2_runtime.py",
-        ROOT / "tests/test_m2_v1_diagnosis.py",
+        ROOT / "tests/test_m2_v1_diagnosis.py", ROOT / "tests/test_m2_v2_preflight_verifier.py",
         ROOT / ".gitignore",
     ]
     manifest = {
