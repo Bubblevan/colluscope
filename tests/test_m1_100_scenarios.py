@@ -177,6 +177,63 @@ def test_output_preparation_creates_frozen_source_directory_before_copy(tmp_path
     assert (output / "frozen_protocol/source/scripts_audit_m1_100.py").is_file()
 
 
+def test_local_server_identity_pin_matches_the_audited_checkpoint_config():
+    sys.path.insert(0, str(ROOT))
+    from scripts.run_m1_100_extension import (EXPECTED_MODEL_SHA256, EXPECTED_SERVER_SHA256,
+        OLD_RUN)
+    from colluscope.openai_compat_llamacpp import load_llamacpp_backend_config
+    config = load_llamacpp_backend_config(OLD_RUN / "full-pilot-config.toml")
+    assert config.artifact_sha256 == EXPECTED_MODEL_SHA256
+    assert config.server_binary_sha256 == EXPECTED_SERVER_SHA256
+
+
+def test_pre_response_resume_revisions_only_code_and_preserves_75_assignments(tmp_path):
+    import subprocess
+    sys.path.insert(0, str(ROOT))
+    from scripts.run_m1_100_extension import (_prepare_output, build_schedule, read_jsonl)
+    previous_commit = subprocess.run(["git", "rev-parse", "HEAD~1"], cwd=ROOT,
+        capture_output=True, text=True, check=True).stdout.strip()
+    current_commit = subprocess.run(["git", "rev-parse", "HEAD"], cwd=ROOT,
+        capture_output=True, text=True, check=True).stdout.strip()
+    output = tmp_path / "resume-run"
+    schedule = build_schedule()
+    inputs = {"frozen": "same"}
+    _prepare_output(output, schedule, {"source_commit": previous_commit,
+        "source_branch": "fixture-branch", "input_sha256": inputs}, resume=False)
+    _prepare_output(output, schedule, {"source_commit": current_commit,
+        "source_branch": "fixture-branch", "input_sha256": inputs}, resume=True)
+    design = json.loads((output / "design-freeze.json").read_text(encoding="utf-8"))
+    revision = read_jsonl(output / "design-freeze-revisions.jsonl")
+    assert design["freeze_revision"] == 2
+    assert design["source_commit"] == current_commit
+    assert len(revision) == 1 and revision[0]["model_responses_before_revision"] == 0
+    assert len([row for row in read_jsonl(output / "progress.jsonl")
+                if row["event"] == "episode_assigned"]) == 75
+    assert (output / "frozen_protocol/source/scripts_run_m1_100_extension.py").is_file()
+    assert (output / "frozen_protocol/source-revision-002/scripts_run_m1_100_extension.py").is_file()
+    from scripts.audit_m1_100 import _verify_copied_freeze
+    assert _verify_copied_freeze(output)["freeze_revision"] == 2
+
+
+def test_pre_response_resume_refuses_a_changed_commit_after_episode_start(tmp_path):
+    import subprocess
+    sys.path.insert(0, str(ROOT))
+    from scripts.run_m1_100_extension import (_prepare_output, append_jsonl, build_schedule)
+    previous_commit = subprocess.run(["git", "rev-parse", "HEAD~1"], cwd=ROOT,
+        capture_output=True, text=True, check=True).stdout.strip()
+    current_commit = subprocess.run(["git", "rev-parse", "HEAD"], cwd=ROOT,
+        capture_output=True, text=True, check=True).stdout.strip()
+    output = tmp_path / "started-run"
+    schedule = build_schedule()
+    inputs = {"frozen": "same"}
+    _prepare_output(output, schedule, {"source_commit": previous_commit,
+        "source_branch": "fixture-branch", "input_sha256": inputs}, resume=False)
+    append_jsonl(output / "progress.jsonl", {"event": "episode_started", "episode_id": schedule[0]["episode_id"]})
+    with pytest.raises(ValueError, match="after an episode has started"):
+        _prepare_output(output, schedule, {"source_commit": current_commit,
+            "source_branch": "fixture-branch", "input_sha256": inputs}, resume=True)
+
+
 def test_independent_audit_does_not_infer_target_proposal_from_generic_agreement():
     sys.path.insert(0, str(ROOT))
     from scripts.audit_m1_100 import settle, target_mapping_code

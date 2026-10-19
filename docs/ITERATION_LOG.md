@@ -32,6 +32,15 @@
 - **ADVERSARIAL REVIEW:** This was a packaging/setup defect before model contact; it cannot change the intervention. The original failed attempt remains in the local record and no sample is replaced because no episode was assigned or started.
 - **DECIDE:** Keep the pre-response design freeze, commit/push the minimal setup repair and regression test, then execute once into the new run directory.
 
+## M1-100 extension — runtime identity pin correction and safe pre-response resume
+
+- **INSPECT:** The next invocation assigned the frozen 75 rows, then failed before server launch because the runner's pinned llama-server SHA256 differed from the accepted backend config by one hexadecimal character. The local binary hash matches the backend config and prior audited identity; the model and runtime were not changed.
+- **SPECIFY:** Recompute the server file hash and compare the source config, runner constant, and historical identity. Preserve the same 75 assignments while allowing only a committed fast-forward code repair before any episode start/request, with unchanged protocol/input hashes and schedule. Reject any revision after runtime/request activity.
+- **IMPLEMENT:** Corrected the server SHA constant, defined matching independent-auditor constants, and added a pin/config regression test. Added a one-time, append-only, pre-response freeze revision path: it preserves the old source snapshot, copies repaired sources to `source-revision-002`, and updates the design freeze only when all 75 assignments match and there are zero episode starts, request attempts, HTTP attempts, or responses. Added tests for allowed pre-response resume and rejection after an episode start.
+- **RUN:** Raw identity failure: `runs/m1_100/extension-75-20261019-run02/pre-dispatch-identity-mismatch.log`. Independent PowerShell SHA256 of the existing llama-server is `3a8aea5f889c4b4c2ec41c98f4e1ed484bb7a40c4096883acb23d3cfe26b59fb`, matching the historical config; path exists. The run has **75 assigned, 0 started, 0 terminal**, no environment, launch, request, or HTTP files, and no listener on port 8081 (`pre-dispatch-integrity.json`). A first resume-repair test had an import-name typo; its failure is preserved in `runs/m1_100/engineering/pytest-identity-resume-test-fixture-failure.log`; fixed tests now pass. Focused suite: **56 passed**. Final full suite: **205 passed, 1 skipped** in 24.88s; freeze, syntax and diff checks pass. Raw outputs are in `runs/m1_100/engineering/pytest-focused-identity-resume.log` and `pytest-full-suite-identity-resume.log`.
+- **ADVERSARIAL REVIEW:** The new resume path cannot change conditions, matrix, split, prompts, reward, sampling, or model; it requires the same frozen input SHA and exact assignment schedule, and only advances source commit along Git ancestry. The prior failed assignments remain the same prospective 75; no samples are replaced.
+- **DECIDE:** Commit/push the identity-pin and safe-resume repair, then resume `extension-75-20261019-run02` rather than creating another 75-row assignment set.
+
 ## M0-A-01 — source and dependency preflight
 
 - **Date:** 2026-10-18 (Asia/Shanghai)

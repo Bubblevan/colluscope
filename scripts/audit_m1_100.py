@@ -25,6 +25,9 @@ OLD_RUN = ROOT / "runs/m1_p0_local/formal-25ep-pilot-20261019/run"
 AGENTS = ("A", "B", "C")
 TASKS = ("T1", "T2", "T3")
 TARGET = ("T3", "T2", "T1")
+EXPECTED_MODEL_SHA256 = "d98cdcbd03e17ce47681435b5150e34c1417f50b5c0019dd560e4882c5745785"
+EXPECTED_SERVER_SHA256 = "3a8aea5f889c4b4c2ec41c98f4e1ed484bb7a40c4096883acb23d3cfe26b59fb"
+EXPECTED_BUNDLE_SHA256 = "9559fd2af95a7e83e3cf4a04aab22b67e1d1a2ec032b1e983ce091a6283c7759"
 OLD_HASHES = {
     "researcher/T.jsonl": "30c397583618cbed20fa529cf4ac39e69caca43456d09abbddb25b1f6e888464",
     "researcher/B.jsonl": "139c1bc09891276763223677ee88de6e45bdcee80a348fb64d2258b666b3014a",
@@ -712,7 +715,8 @@ def _verify_runtime_boundary(run: Path) -> dict[str, Any]:
             environment.get("jinja2_library_version") != tokenizer["jinja2_library_version"] or
             environment.get("tokenizer_metadata") != tokenizer):
         raise AuditError("runtime tokenizer or chat-template metadata differs from the frozen backend config")
-    if (environment.get("server_sha256") != "3a8aea5f889c4b4c2ec41c98f4e1ed484bb7a40c4096883acb23d3cfe26b59fb" or
+    if (environment.get("server_sha256") != EXPECTED_SERVER_SHA256 or
+            backend_source["server"]["binary_sha256"] != EXPECTED_SERVER_SHA256 or
             sha256_file(Path(environment["server_path"])) != environment["server_sha256"]):
         raise AuditError("independently recomputed llama-server SHA256 is not the frozen identity")
     server_dir = Path(environment["server_path"]).resolve().parent
@@ -720,7 +724,7 @@ def _verify_runtime_boundary(run: Path) -> dict[str, Any]:
     for path in sorted((item for item in server_dir.iterdir() if item.is_file()), key=lambda item: item.name.casefold()):
         entries.append({"name": path.name, "size_bytes": path.stat().st_size, "sha256": sha256_file(path)})
     bundle_hash = sha256_bytes(json.dumps(entries, sort_keys=True, separators=(",", ":")).encode())
-    if bundle_hash != environment.get("runtime_bundle_sha256") or bundle_hash != "9559fd2af95a7e83e3cf4a04aab22b67e1d1a2ec032b1e983ce091a6283c7759":
+    if bundle_hash != environment.get("runtime_bundle_sha256") or bundle_hash != EXPECTED_BUNDLE_SHA256:
         raise AuditError("independently recomputed llama.cpp runtime bundle identity mismatch")
     command = launch.get("command", [])
     required_pairs = (("--host", "127.0.0.1"), ("--port", "8081"),
@@ -792,19 +796,55 @@ def _verify_copied_freeze(run: Path) -> dict[str, Any]:
         path = run / relative
         if not path.is_file() or sha256_file(path) != entry:
             raise AuditError(f"frozen run input changed or is missing: {relative}")
+    revision_number = design.get("freeze_revision", 1)
+    if revision_number not in {1, 2}:
+        raise AuditError("run has an unsupported source-freeze revision")
+    source_prefix = ("frozen_protocol/source" if revision_number == 1 else
+                     "frozen_protocol/source-revision-002")
     current_mirrors = {
         "frozen_protocol/m1-100.toml": ROOT / "configs/m1-100.toml",
         "frozen_protocol/m1-100-scenarios.json": ROOT / "configs/m1-100-scenarios.json",
         "frozen_protocol/m1-100-splits.json": ROOT / "configs/m1-100-splits.json",
         "frozen_protocol/M1_100_PROTOCOL.md": ROOT / "docs/M1_100_PROTOCOL.md",
-        "frozen_protocol/source/scripts_audit_m1_100.py": ROOT / "scripts/audit_m1_100.py",
-        "frozen_protocol/source/scripts_run_m1_100_extension.py": ROOT / "scripts/run_m1_100_extension.py",
+        f"{source_prefix}/scripts_audit_m1_100.py": ROOT / "scripts/audit_m1_100.py",
+        f"{source_prefix}/scripts_run_m1_100_extension.py": ROOT / "scripts/run_m1_100_extension.py",
     }
     for relative, current in current_mirrors.items():
         if sha256_file(current) != copied_hashes.get(relative):
             raise AuditError(f"current replay source differs from the committed run freeze: {relative}")
+    if revision_number == 1:
+        if (run / "design-freeze-revision-001.json").exists() or (run / "design-freeze-revisions.jsonl").exists():
+            raise AuditError("unregistered pre-response freeze-revision evidence exists")
+    else:
+        prior_path = run / "design-freeze-revision-001.json"
+        revisions_path = run / "design-freeze-revisions.jsonl"
+        revisions = read_jsonl(revisions_path)
+        if len(revisions) != 1:
+            raise AuditError("source-freeze revision history is not exactly one append-only event")
+        prior = read_json(prior_path)
+        event = revisions[0]
+        if (prior.get("source_commit") != event.get("from_commit") or
+                design.get("source_commit") != event.get("to_commit") or
+                event.get("previous_copied_input_sha256") != prior.get("copied_input_sha256") or
+                event.get("previous_design_freeze_sha256") != sha256_file(prior_path) or
+                event.get("assigned_episode_count") != 75 or
+                event.get("episode_started_count_before_revision") != 0 or
+                event.get("request_attempt_starts_before_revision") != 0 or
+                event.get("physical_http_attempts_before_revision") != 0 or
+                event.get("model_responses_before_revision") != 0 or
+                event.get("assignment_schedule_sha256") != design.get("schedule_sha256")):
+            raise AuditError("pre-response source-freeze revision evidence is inconsistent")
+        for relative, expected in prior.get("copied_input_sha256", {}).items():
+            if not (run / relative).is_file() or sha256_file(run / relative) != expected:
+                raise AuditError(f"original pre-response source snapshot changed: {relative}")
+        attempt_path = run / "researcher/request-attempt-starts.jsonl"
+        attempt_starts = read_jsonl(attempt_path) if attempt_path.exists() else []
+        episodes = read_jsonl(run / "progress.jsonl")
+        if any(row.get("at_utc", "") < event.get("at_utc", "")
+               for row in attempt_starts + [row for row in episodes if row.get("event") == "episode_started"]):
+            raise AuditError("an episode or request started before the recorded source-freeze revision")
     return {"source_commit": design.get("source_commit"), "frozen_input_count": len(copied_hashes),
-            "all_copied_frozen_inputs_rehashed": True}
+            "freeze_revision": revision_number, "all_copied_frozen_inputs_rehashed": True}
 
 
 def _summary(records: list[dict[str, Any]], keys: tuple[str, ...]) -> list[dict[str, Any]]:
@@ -997,8 +1037,8 @@ def audit(run: Path) -> dict[str, Any]:
             "split_sha256": sha256_file(run / "frozen_protocol/m1-100-splits.json"),
             "protocol_sha256": sha256_file(run / "frozen_protocol/M1_100_PROTOCOL.md")}},
         "source_commit": read_json(run / "design-freeze.json")["source_commit"],
-        "model_sha256": EXPECTED_MODEL_SHA256, "server_sha256": "3a8aea5f889c4b4c2ec41c98f4e1ed484cb7a40c4096883acb23d3cfe26b59fb",
-        "runtime_bundle_sha256": "9559fd2af95a7e83e3cf4a04aab22b67e1d1a2ec032b1e983ce091a6283c7759",
+        "model_sha256": EXPECTED_MODEL_SHA256, "server_sha256": EXPECTED_SERVER_SHA256,
+        "runtime_bundle_sha256": EXPECTED_BUNDLE_SHA256,
         "private_message_policy": "raw text stays local; Public-only E is unchanged and contains no message event",
         "audit_status": "PASS_INDEPENDENT_RAW_BALLOT_RECOMPUTE",
         "checked_new_files": {},

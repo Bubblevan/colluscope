@@ -39,9 +39,16 @@ from scripts.run_m1_p0_local_preflight import (  # noqa: E402
 
 APPROVAL_ID = "USER-AUTHORIZED-M1-100-75-EPISODES-2026-10-19"
 EXPECTED_MODEL_SHA256 = "d98cdcbd03e17ce47681435b5150e34c1417f50b5c0019dd560e4882c5745785"
-EXPECTED_SERVER_SHA256 = "3a8aea5f889c4b4c2ec41c98f4e1ed484cb7a40c4096883acb23d3cfe26b59fb"
+EXPECTED_SERVER_SHA256 = "3a8aea5f889c4b4c2ec41c98f4e1ed484bb7a40c4096883acb23d3cfe26b59fb"
 EXPECTED_BUNDLE_SHA256 = "9559fd2af95a7e83e3cf4a04aab22b67e1d1a2ec032b1e983ce091a6283c7759"
 PORT = 8081
+RUNTIME_SOURCE_PATHS = (
+    "scripts/run_m1_100_extension.py", "scripts/local_llama_security.py",
+    "scripts/freeze_m1_100_design.py", "scripts/audit_m1_100.py",
+    "scripts/run_m1_p0_local_preflight.py", "src/colluscope/m1_runtime.py",
+    "src/colluscope/openai_compat_llamacpp.py", "src/colluscope/gguf_tokenizer.py",
+    "src/colluscope/m1_100_scenarios.py",
+)
 OLD_RUN = ROOT / "runs/m1_p0_local/formal-25ep-pilot-20261019/run"
 OLD_HASHES = {
     "researcher/T.jsonl": "30c397583618cbed20fa529cf4ac39e69caca43456d09abbddb25b1f6e888464",
@@ -279,8 +286,59 @@ def _prepare_output(out: Path, schedule: list[dict[str, Any]], freeze: dict[str,
         raise FileExistsError(f"refusing to overwrite a nonempty M1-100 output directory: {out}")
     if resume:
         design = json.loads((out / "design-freeze.json").read_text(encoding="utf-8"))
-        if design["source_commit"] != freeze["source_commit"] or design["input_sha256"] != freeze["input_sha256"]:
-            raise ValueError("resume source commit or frozen design inputs differ from the original run")
+        if design["input_sha256"] != freeze["input_sha256"]:
+            raise ValueError("resume frozen protocol/config/model inputs differ from the original run")
+        if design["source_commit"] == freeze["source_commit"]:
+            return
+        if design.get("freeze_revision", 1) != 1 or (out / "design-freeze-revision-001.json").exists():
+            raise ValueError("only one pre-response source-code freeze revision is permitted")
+        progress = read_jsonl(out / "progress.jsonl")
+        if any(row.get("event") != "episode_assigned" for row in progress):
+            raise ValueError("source-code freeze revision is forbidden after an episode has started or terminated")
+        expected_ids = {row["episode_id"] for row in schedule}
+        assignment_rows = [row for row in progress if row.get("event") == "episode_assigned"]
+        if len(assignment_rows) != 75 or {row["episode_id"] for row in assignment_rows} != expected_ids:
+            raise ValueError("pre-response source-code revision requires the exact original 75 assignments")
+        current_schedule_hash = hashlib.sha256(json_bytes(schedule)).hexdigest()
+        saved_schedule = json.loads((out / "assignment-schedule.json").read_text(encoding="utf-8"))
+        expected_schedule = {"scheme": "sha256-offset-direction-v1", "episodes": schedule}
+        if (design.get("schedule_sha256") != current_schedule_hash or
+                saved_schedule != expected_schedule):
+            raise ValueError("pre-response source-code revision cannot change the original assignment schedule")
+        forbidden_activity = ("environment.json", "launch.json", "server-lifecycle.jsonl",
+            "researcher/request-attempt-starts.jsonl", "researcher/requests.jsonl",
+            "researcher/http-attempts.jsonl", "researcher/agent_observations.jsonl")
+        if any((out / relative).exists() and (out / relative).stat().st_size > 0 for relative in forbidden_activity):
+            raise ValueError("source-code freeze revision is forbidden after runtime or request activity")
+        ancestor = subprocess.run(["git", "merge-base", "--is-ancestor", design["source_commit"],
+                                   freeze["source_commit"]], cwd=ROOT, check=False, timeout=10)
+        if ancestor.returncode != 0:
+            raise ValueError("pre-response source-code revision must be a fast-forward descendant")
+        old_freeze_path = out / "design-freeze-revision-001.json"
+        shutil.copyfile(out / "design-freeze.json", old_freeze_path)
+        revision_source = out / "frozen_protocol/source-revision-002"
+        revision_source.mkdir(parents=True, exist_ok=False)
+        for relative in RUNTIME_SOURCE_PATHS:
+            shutil.copyfile(ROOT / relative, revision_source / relative.replace("/", "_"))
+        previous_hashes = design["copied_input_sha256"]
+        revision_row = {"event": "pre_response_source_freeze_revision", "at_utc": _utc(),
+            "from_commit": design["source_commit"], "to_commit": freeze["source_commit"],
+            "reason": "Correct pinned llama-server SHA256 and resume the same untouched 75 assignments",
+            "assignment_schedule_sha256": current_schedule_hash, "assigned_episode_count": 75,
+            "episode_started_count_before_revision": 0, "request_attempt_starts_before_revision": 0,
+            "physical_http_attempts_before_revision": 0, "model_responses_before_revision": 0,
+            "previous_design_freeze_sha256": sha256_file(old_freeze_path),
+            "previous_copied_input_sha256": previous_hashes}
+        append_jsonl(out / "design-freeze-revisions.jsonl", revision_row)
+        design["source_commit"] = freeze["source_commit"]
+        design["source_branch"] = freeze["source_branch"]
+        design["freeze_revision"] = 2
+        design["revision_reason"] = revision_row["reason"]
+        design["copied_input_sha256"] = {path.relative_to(out).as_posix(): sha256_file(path)
+            for path in (out / "frozen_protocol").rglob("*") if path.is_file()}
+        design["copied_input_sha256"][old_freeze_path.relative_to(out).as_posix()] = sha256_file(old_freeze_path)
+        design["copied_input_sha256"]["design-freeze-revisions.jsonl"] = sha256_file(out / "design-freeze-revisions.jsonl")
+        write_json(out / "design-freeze.json", design)
         return
 
     for directory in ("researcher", "monitor_inputs", "private", "logs", "episodes",
@@ -301,16 +359,12 @@ def _prepare_output(out: Path, schedule: list[dict[str, Any]], freeze: dict[str,
     prompts_source = ROOT / "prompts/m1-p0-v2"
     prompts_target = out / "frozen_protocol/prompts"
     shutil.copytree(prompts_source, prompts_target)
-    runtime_source_paths = ["scripts/run_m1_100_extension.py", "scripts/local_llama_security.py",
-                            "scripts/freeze_m1_100_design.py", "scripts/audit_m1_100.py",
-                            "scripts/run_m1_p0_local_preflight.py", "src/colluscope/m1_runtime.py",
-                            "src/colluscope/openai_compat_llamacpp.py", "src/colluscope/gguf_tokenizer.py",
-                            "src/colluscope/m1_100_scenarios.py"]
-    for relative in runtime_source_paths:
+    for relative in RUNTIME_SOURCE_PATHS:
         shutil.copyfile(ROOT / relative, out / "frozen_protocol/source" / relative.replace("/", "_"))
     hashes = {target.relative_to(out).as_posix(): sha256_file(target) for target in out.rglob("*") if target.is_file()}
     write_json(out / "design-freeze.json", {"protocol_id": "colluscope-m1-100-v1",
         "source_commit": freeze["source_commit"], "source_branch": freeze["source_branch"],
+        "freeze_revision": 1,
         "historical_run": str(OLD_RUN), "historical_hashes": OLD_HASHES,
         "input_sha256": freeze["input_sha256"], "copied_input_sha256": hashes,
         "schedule_sha256": hashlib.sha256(json_bytes(schedule)).hexdigest(),
