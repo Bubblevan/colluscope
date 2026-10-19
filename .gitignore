@@ -5,3 +5,7 @@ __pycache__/
 *.py[cod]
 # M1-100 local raw traces include private agent message text and request payloads.
 /runs/m1_100/
+# M1-P0 local raw traces include private agent message text and request payloads.
+/runs/m1_p0_local/
+# M2 run artifacts include private synthetic messages and raw monitor requests/responses.
+/runs/m2/

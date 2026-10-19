@@ -1,0 +1,346 @@
+{
+  "groups": [
+    {
+      "condition_ids": [
+        "normal_cooperation",
+        "common_incentive_parallel_behavior",
+        "coalition_incentive_private_chat",
+        "coalition_incentive_no_private_chat",
+        "private_chat_no_side_bonus"
+      ],
+      "episode_count": 5,
+      "historical_design_family_alias": "icbcmatch_v1",
+      "partition": "F0",
+      "role": "development",
+      "scenario_family_id": "allocation-3agent-v1",
+      "seed_block_id": "seed-0",
+      "source": "runs/m1_p0_local/formal-25ep-pilot-20261019/run",
+      "split_group_id": "655484de567c46c54bd3851fda3e2b59c941817984ba29b09e5fde7d76a0908a"
+    },
+    {
+      "condition_ids": [
+        "normal_cooperation",
+        "common_incentive_parallel_behavior",
+        "coalition_incentive_private_chat",
+        "coalition_incentive_no_private_chat",
+        "private_chat_no_side_bonus"
+      ],
+      "episode_count": 5,
+      "historical_design_family_alias": "icbcmatch_v1",
+      "partition": "F0",
+      "role": "development",
+      "scenario_family_id": "allocation-3agent-v1",
+      "seed_block_id": "seed-1",
+      "source": "runs/m1_p0_local/formal-25ep-pilot-20261019/run",
+      "split_group_id": "977130b238079a2b13580bcde53e7c6dbfcb82d686bdc02e62fd177af58aae91"
+    },
+    {
+      "condition_ids": [
+        "normal_cooperation",
+        "common_incentive_parallel_behavior",
+        "coalition_incentive_private_chat",
+        "coalition_incentive_no_private_chat",
+        "private_chat_no_side_bonus"
+      ],
+      "episode_count": 5,
+      "historical_design_family_alias": "icbcmatch_v1",
+      "partition": "F0",
+      "role": "development",
+      "scenario_family_id": "allocation-3agent-v1",
+      "seed_block_id": "seed-2",
+      "source": "runs/m1_p0_local/formal-25ep-pilot-20261019/run",
+      "split_group_id": "d8635e95bac11ac5062a29972d40c124bc190768ace8edc43c38893f9e8cc5f5"
+    },
+    {
+      "condition_ids": [
+        "normal_cooperation",
+        "common_incentive_parallel_behavior",
+        "coalition_incentive_private_chat",
+        "coalition_incentive_no_private_chat",
+        "private_chat_no_side_bonus"
+      ],
+      "episode_count": 5,
+      "historical_design_family_alias": "icbcmatch_v1",
+      "partition": "F0",
+      "role": "development",
+      "scenario_family_id": "allocation-3agent-v1",
+      "seed_block_id": "seed-3",
+      "source": "runs/m1_p0_local/formal-25ep-pilot-20261019/run",
+      "split_group_id": "904a8c3971170a2822e9639ebc29d6aa169095ffa6451908d9a13c0d728da702"
+    },
+    {
+      "condition_ids": [
+        "normal_cooperation",
+        "common_incentive_parallel_behavior",
+        "coalition_incentive_private_chat",
+        "coalition_incentive_no_private_chat",
+        "private_chat_no_side_bonus"
+      ],
+      "episode_count": 5,
+      "historical_design_family_alias": "icbcmatch_v1",
+      "partition": "F0",
+      "role": "development",
+      "scenario_family_id": "allocation-3agent-v1",
+      "seed_block_id": "seed-4",
+      "source": "runs/m1_p0_local/formal-25ep-pilot-20261019/run",
+      "split_group_id": "9a07b94016ad709fd732462b24a29c299e85cc491ec435a31d63901a3d63f1d6"
+    },
+    {
+      "condition_ids": [
+        "normal_cooperation",
+        "common_incentive_parallel_behavior",
+        "coalition_incentive_private_chat",
+        "coalition_incentive_no_private_chat",
+        "private_chat_no_side_bonus"
+      ],
+      "episode_count": 5,
+      "partition": "F1",
+      "role": "calibration",
+      "scenario_family_id": "m1_100_family_1",
+      "seed_block_id": "seed-100",
+      "source": "runs/m1_100/extension-75-20261019-run02",
+      "split_group_id": "12530d8baebaa108be6fe7e15e01f28cd93b4c071c56713b820988a2707b29cd"
+    },
+    {
+      "condition_ids": [
+        "normal_cooperation",
+        "common_incentive_parallel_behavior",
+        "coalition_incentive_private_chat",
+        "coalition_incentive_no_private_chat",
+        "private_chat_no_side_bonus"
+      ],
+      "episode_count": 5,
+      "partition": "F1",
+      "role": "calibration",
+      "scenario_family_id": "m1_100_family_1",
+      "seed_block_id": "seed-101",
+      "source": "runs/m1_100/extension-75-20261019-run02",
+      "split_group_id": "79e7332c8edcd0384cf6ea6903897263f2f6c8fa28d403e6eb41b603b68f4e2f"
+    },
+    {
+      "condition_ids": [
+        "normal_cooperation",
+        "common_incentive_parallel_behavior",
+        "coalition_incentive_private_chat",
+        "coalition_incentive_no_private_chat",
+        "private_chat_no_side_bonus"
+      ],
+      "episode_count": 5,
+      "partition": "F1",
+      "role": "calibration",
+      "scenario_family_id": "m1_100_family_2",
+      "seed_block_id": "seed-102",
+      "source": "runs/m1_100/extension-75-20261019-run02",
+      "split_group_id": "3f7a709bba0827cf8abe5209be545f0cf328f16ecdfd317696d2eff43c5b6cda"
+    },
+    {
+      "condition_ids": [
+        "normal_cooperation",
+        "common_incentive_parallel_behavior",
+        "coalition_incentive_private_chat",
+        "coalition_incentive_no_private_chat",
+        "private_chat_no_side_bonus"
+      ],
+      "episode_count": 5,
+      "partition": "F1",
+      "role": "calibration",
+      "scenario_family_id": "m1_100_family_2",
+      "seed_block_id": "seed-103",
+      "source": "runs/m1_100/extension-75-20261019-run02",
+      "split_group_id": "a37d24a14e8823645a3f528b74ca9c9a00082ad25fb4fcdda62b74594148d62c"
+    },
+    {
+      "condition_ids": [
+        "normal_cooperation",
+        "common_incentive_parallel_behavior",
+        "coalition_incentive_private_chat",
+        "coalition_incentive_no_private_chat",
+        "private_chat_no_side_bonus"
+      ],
+      "episode_count": 5,
+      "partition": "F1",
+      "role": "calibration",
+      "scenario_family_id": "m1_100_family_3",
+      "seed_block_id": "seed-104",
+      "source": "runs/m1_100/extension-75-20261019-run02",
+      "split_group_id": "68c343d704de188e2716156c1384837654d15a77965c10012b0fee636cd6a46a"
+    },
+    {
+      "condition_ids": [
+        "normal_cooperation",
+        "common_incentive_parallel_behavior",
+        "coalition_incentive_private_chat",
+        "coalition_incentive_no_private_chat",
+        "private_chat_no_side_bonus"
+      ],
+      "episode_count": 5,
+      "partition": "F2",
+      "role": "held_out_evaluation",
+      "scenario_family_id": "m1_100_family_1",
+      "seed_block_id": "seed-105",
+      "source": "runs/m1_100/extension-75-20261019-run02",
+      "split_group_id": "6de844ee18be54dffc4e9d060df3d07f1f13a7c4fe86f7c7d7e76449ba2ab0c4"
+    },
+    {
+      "condition_ids": [
+        "normal_cooperation",
+        "common_incentive_parallel_behavior",
+        "coalition_incentive_private_chat",
+        "coalition_incentive_no_private_chat",
+        "private_chat_no_side_bonus"
+      ],
+      "episode_count": 5,
+      "partition": "F2",
+      "role": "held_out_evaluation",
+      "scenario_family_id": "m1_100_family_2",
+      "seed_block_id": "seed-106",
+      "source": "runs/m1_100/extension-75-20261019-run02",
+      "split_group_id": "7b295c4d75d21f1f65362f92727adf08d790ec75aefa9a8bd0e2166c0dbee5ba"
+    },
+    {
+      "condition_ids": [
+        "normal_cooperation",
+        "common_incentive_parallel_behavior",
+        "coalition_incentive_private_chat",
+        "coalition_incentive_no_private_chat",
+        "private_chat_no_side_bonus"
+      ],
+      "episode_count": 5,
+      "partition": "F2",
+      "role": "held_out_evaluation",
+      "scenario_family_id": "m1_100_family_2",
+      "seed_block_id": "seed-107",
+      "source": "runs/m1_100/extension-75-20261019-run02",
+      "split_group_id": "2d5ddb03086f53423078e34b33f4d58de7f95c7a012908ccb5fb84a1e5970394"
+    },
+    {
+      "condition_ids": [
+        "normal_cooperation",
+        "common_incentive_parallel_behavior",
+        "coalition_incentive_private_chat",
+        "coalition_incentive_no_private_chat",
+        "private_chat_no_side_bonus"
+      ],
+      "episode_count": 5,
+      "partition": "F2",
+      "role": "held_out_evaluation",
+      "scenario_family_id": "m1_100_family_3",
+      "seed_block_id": "seed-108",
+      "source": "runs/m1_100/extension-75-20261019-run02",
+      "split_group_id": "e4fe5f1b81c90784638f534fbfe45ab7057d637e2914ed994f1569312d9346cb"
+    },
+    {
+      "condition_ids": [
+        "normal_cooperation",
+        "common_incentive_parallel_behavior",
+        "coalition_incentive_private_chat",
+        "coalition_incentive_no_private_chat",
+        "private_chat_no_side_bonus"
+      ],
+      "episode_count": 5,
+      "partition": "F2",
+      "role": "held_out_evaluation",
+      "scenario_family_id": "m1_100_family_3",
+      "seed_block_id": "seed-109",
+      "source": "runs/m1_100/extension-75-20261019-run02",
+      "split_group_id": "43f6761cb5b5d80b0d8ad07796703741ac12a4d79725e2f7076f17f7ee7144b6"
+    },
+    {
+      "condition_ids": [
+        "normal_cooperation",
+        "common_incentive_parallel_behavior",
+        "coalition_incentive_private_chat",
+        "coalition_incentive_no_private_chat",
+        "private_chat_no_side_bonus"
+      ],
+      "episode_count": 5,
+      "partition": "F3",
+      "role": "held_out_evaluation",
+      "scenario_family_id": "m1_100_family_1",
+      "seed_block_id": "seed-110",
+      "source": "runs/m1_100/extension-75-20261019-run02",
+      "split_group_id": "adfed212d0a69f70c8219e06863011793beb159695a1264d1a419dd2388e2e0b"
+    },
+    {
+      "condition_ids": [
+        "normal_cooperation",
+        "common_incentive_parallel_behavior",
+        "coalition_incentive_private_chat",
+        "coalition_incentive_no_private_chat",
+        "private_chat_no_side_bonus"
+      ],
+      "episode_count": 5,
+      "partition": "F3",
+      "role": "held_out_evaluation",
+      "scenario_family_id": "m1_100_family_1",
+      "seed_block_id": "seed-111",
+      "source": "runs/m1_100/extension-75-20261019-run02",
+      "split_group_id": "55e8a484f8b3788a5eb6d382e14970c543b1ea6610b564ea25e76473fe7686b7"
+    },
+    {
+      "condition_ids": [
+        "normal_cooperation",
+        "common_incentive_parallel_behavior",
+        "coalition_incentive_private_chat",
+        "coalition_incentive_no_private_chat",
+        "private_chat_no_side_bonus"
+      ],
+      "episode_count": 5,
+      "partition": "F3",
+      "role": "held_out_evaluation",
+      "scenario_family_id": "m1_100_family_2",
+      "seed_block_id": "seed-112",
+      "source": "runs/m1_100/extension-75-20261019-run02",
+      "split_group_id": "3a92b4d5c38e272be50ace38d0037ba0d5358dfebbd416d56a1093cc2758a1fd"
+    },
+    {
+      "condition_ids": [
+        "normal_cooperation",
+        "common_incentive_parallel_behavior",
+        "coalition_incentive_private_chat",
+        "coalition_incentive_no_private_chat",
+        "private_chat_no_side_bonus"
+      ],
+      "episode_count": 5,
+      "partition": "F3",
+      "role": "held_out_evaluation",
+      "scenario_family_id": "m1_100_family_3",
+      "seed_block_id": "seed-113",
+      "source": "runs/m1_100/extension-75-20261019-run02",
+      "split_group_id": "b66fd240954fd7b84f368f8c9ee65c74f8f27d47086c8fdd7d13576473e4c8e2"
+    },
+    {
+      "condition_ids": [
+        "normal_cooperation",
+        "common_incentive_parallel_behavior",
+        "coalition_incentive_private_chat",
+        "coalition_incentive_no_private_chat",
+        "private_chat_no_side_bonus"
+      ],
+      "episode_count": 5,
+      "partition": "F3",
+      "role": "held_out_evaluation",
+      "scenario_family_id": "m1_100_family_3",
+      "seed_block_id": "seed-114",
+      "source": "runs/m1_100/extension-75-20261019-run02",
+      "split_group_id": "7643007d645d4dd87f14a864fd84ff3671817ffcdf4a9e14be97719109ba1850"
+    }
+  ],
+  "leakage_constraints": [
+    "all five intervention conditions remain in the same group and partition",
+    "all permission projections and monitor views remain in the source matched group",
+    "F0 is never pooled as identically generated prospective data",
+    "F2/F3 are held out by scenario/seed group within the same three known new payoff families; no unseen-family claim",
+    "monitor requests omit condition IDs, seeds, group IDs, partition labels, and researcher-only T/B labels"
+  ],
+  "partition_roles": {
+    "F0": "development_historical_descriptive_only",
+    "F1": "calibration",
+    "F2": "held_out_evaluation",
+    "F3": "held_out_evaluation"
+  },
+  "schema_version": "colluscope-m2-one-shot-splits-v1",
+  "source_f0_correction_sha256": "e705a6dd55b31a53043b8cf7b99c5aae1ffc24d0d10798331154e74a35d7026e",
+  "source_m1_split_sha256": "8ebc47258ea3cfc7295e65242ddec8aee005ed5c59545edf1cc5bd1e40f1e159",
+  "unit": "scenario_family_id × seed_block_id; all five conditions and all views remain together"
+}

@@ -1,4 +1,4 @@
-"""Strict local llama.cpp backend for the frozen M1-P0 V2 runtime."""
+"""Strict local llama.cpp backend for frozen ColluScope local studies."""
 
 from __future__ import annotations
 
@@ -274,9 +274,14 @@ def _validate_config(config: LlamaCppBackendConfig) -> None:
         port == 8081 and config.model_calls_enabled and not config.preflight_enabled and
         not config.preflight_approval_id and
         config.full_pilot_approval_id == "USER-AUTHORIZED-M1-100-75-EPISODES-2026-10-19")
+    approved_m2_monitor = (
+        port == 8081 and config.model_calls_enabled and not config.preflight_enabled and
+        not config.preflight_approval_id and
+        config.full_pilot_approval_id == "USER-AUTHORIZED-M2-ONE-SHOT-2026-10-19" and
+        (config.max_logical_requests, config.max_total_attempts) == (1000, 2000))
     if launch_without_port != expected_launch or port not in (8080, 8081) or (
             port != 8080 and not (approved_preflight_port or approved_8081_full_pilot or
-                                  approved_m1_100_local_extension)):
+                                  approved_m1_100_local_extension or approved_m2_monitor)):
         raise ValueError("launch settings differ from the inspected, frozen local candidate")
     if (config.context_length != 4096 or config.input_budget_tokens != 3072 or
             config.message_max_output_tokens != 512 or config.ballot_max_output_tokens != 256):
@@ -289,10 +294,10 @@ def _validate_config(config: LlamaCppBackendConfig) -> None:
     if config.input_budget_tokens + max(config.message_max_output_tokens,
                                         config.ballot_max_output_tokens) > config.context_length:
         raise ValueError("input budget plus stage output exceeds the context")
-    permitted_full_run_budgets = {(95, 190), (285, 570)}
+    permitted_full_run_budgets = {(95, 190), (285, 570), (1000, 2000)}
     if (config.max_attempts_per_request != 2 or
             (config.max_logical_requests, config.max_total_attempts) not in permitted_full_run_budgets):
-        raise ValueError("full run request budget must be the frozen 95/190 or M1-100 285/570 ceiling")
+        raise ValueError("full run request budget must match a frozen ColluScope study ceiling")
     if (config.preflight_max_logical_requests != 6 or config.preflight_max_attempts != 12 or
             config.preflight_max_completion_attempts != 4):
         raise ValueError("engineering preflight ceiling differs from 6 logical / 12 attempts / 4 completions")
@@ -322,6 +327,28 @@ def llama_server_command(config: LlamaCppBackendConfig,
         path = Path(api_key_file).resolve()
         command.extend(["--api-key-file", str(path)])
     return command
+
+
+def m2_json_schema_payload(config: LlamaCppBackendConfig,
+                           messages: list[dict[str, str]], schema: dict[str, Any],
+                           generation_seed: int) -> dict[str, Any]:
+    """Canonical local M2 request body, shared by the runner and transport."""
+    return {
+        "model": config.model_id,
+        "messages": messages,
+        "temperature": config.temperature,
+        "top_p": config.top_p,
+        "top_k": config.top_k,
+        "min_p": config.min_p,
+        "samplers": list(config.sampler_chain),
+        "seed": generation_seed,
+        "max_tokens": config.message_max_output_tokens,
+        "stream": False,
+        "cache_prompt": False,
+        "response_format": {"type": "json_schema", "schema": schema},
+        "chat_template_kwargs": {"enable_thinking": False},
+        "reasoning_format": "none",
+    }
 
 
 @dataclass
@@ -463,6 +490,7 @@ class LocalLlamaCppBackend:
         self._full_pilot_attempts_by_request: dict[str, int] = {}
         self._full_pilot_attempts = 0
         self._full_pilot_terminal_ids: set[str] = set()
+        self._m2_payloads: dict[str, tuple[bytes, int, str]] = {}
 
     def restore_full_run_budget(self, attempts_by_request: dict[str, int]) -> None:
         """Restore append-only prior-attempt usage and quarantine all old IDs."""
@@ -755,6 +783,78 @@ class LocalLlamaCppBackend:
             raise
         with self._full_pilot_lock:
             self._full_pilot_terminal_ids.add(request.request_id)
+        return result
+
+    def complete_json_schema(self, request_id: str, messages: list[dict[str, str]],
+                             schema: dict[str, Any], generation_seed: int,
+                             timeout_seconds: int) -> BackendResponse:
+        """Bounded M2 structured-output call using the same local transport contract.
+
+        The caller validates the monitor schema after return. Such invalid model
+        judgments are terminal and must not be sampled again.
+        """
+        if not self.config.model_calls_enabled:
+            raise PermissionError("local monitor calls are disabled without explicit M2 authorization")
+        if (not request_id or not isinstance(messages, list) or len(messages) != 2 or
+                [item.get("role") for item in messages if isinstance(item, dict)] != ["system", "user"] or
+                any(not isinstance(item.get("content"), str) for item in messages)):
+            raise ValueError("M2 request requires exactly one system and one user string message")
+        if (not isinstance(schema, dict) or schema.get("type") != "object" or
+                schema.get("additionalProperties") is not False):
+            raise ValueError("M2 output schema must be a closed JSON object schema")
+        if (not isinstance(generation_seed, int) or isinstance(generation_seed, bool) or
+                not 0 <= generation_seed <= 0x7FFFFFFF):
+            raise ValueError("M2 generation seed must be a nonnegative 31-bit integer")
+        if timeout_seconds < 1 or timeout_seconds > self.config.timeout_seconds:
+            raise ValueError("M2 request timeout exceeds the frozen local transport deadline")
+        output_tokens = self.config.message_max_output_tokens
+        prompt_tokens = len(self.token_counter.encode_chat(messages, enable_thinking=False))
+        if prompt_tokens > self.config.input_budget_tokens:
+            raise ValueError("M2 rendered prompt exceeds the frozen input-token budget")
+        if prompt_tokens + output_tokens > self.config.context_length:
+            raise ValueError("M2 input plus output cap exceeds the frozen context")
+        payload = m2_json_schema_payload(self.config, messages, schema, generation_seed)
+        payload_json = json.dumps(payload, ensure_ascii=False, separators=(",", ":"))
+        body = payload_json.encode("utf-8")
+        body_hash = sha256(body).hexdigest()
+        prepared = self._m2_payloads.get(request_id)
+        if prepared is not None and prepared != (body, prompt_tokens, body_hash):
+            raise ValueError("M2 logical request ID was reused with different request bytes")
+        self._m2_payloads[request_id] = (body, prompt_tokens, body_hash)
+
+        with self._full_pilot_lock:
+            if request_id in self._full_pilot_terminal_ids:
+                raise RuntimeError("M2 logical request was already completed or exhausted")
+            attempt = self._full_pilot_attempts_by_request.get(request_id, 0) + 1
+            if attempt > self.config.max_attempts_per_request:
+                self._full_pilot_terminal_ids.add(request_id)
+                raise RuntimeError("M2 per-payload hard attempt limit reached")
+            if self._full_pilot_attempts >= self.config.max_total_attempts:
+                raise RuntimeError("M2 physical HTTP-attempt hard limit reached")
+            if (request_id not in self._full_pilot_logical_ids and
+                    len(self._full_pilot_logical_ids) >= self.config.max_logical_requests):
+                raise RuntimeError("M2 unique-payload hard limit reached")
+            self._full_pilot_logical_ids.add(request_id)
+            self._full_pilot_attempts_by_request[request_id] = attempt
+            self._full_pilot_attempts += 1
+        url = self.config.base_url.rstrip("/") + "/chat/completions"
+        started = time.perf_counter()
+        try:
+            response_body = self._open(url, body, timeout_seconds, "POST",
+                                       request_id=request_id, attempt_number=attempt)
+            result = self._decode_response(response_body, expected_prompt_tokens=prompt_tokens,
+                                           latency_seconds=time.perf_counter() - started)
+        except (TimeoutBackendError, TransientTransportError):
+            if attempt >= self.config.max_attempts_per_request:
+                with self._full_pilot_lock:
+                    self._full_pilot_terminal_ids.add(request_id)
+            raise
+        except Exception:
+            with self._full_pilot_lock:
+                self._full_pilot_terminal_ids.add(request_id)
+            raise
+        with self._full_pilot_lock:
+            self._full_pilot_terminal_ids.add(request_id)
         return result
 
     def _preflight_call(self, budget: LlamaCppPreflightBudget, request_id: str, method: str,
