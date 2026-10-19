@@ -1,5 +1,7 @@
 # M1-P0 Local Environment Inventory
 
+> **Historical inventory note (2026-10-19):** this earlier report predates the read-only extraction of tokenizer arrays and chat-template metadata embedded in the selected GGUF. The selected user-provided GGUF is accepted; the current static identity and unresolved live-parity findings are superseded by [`M1_P0_GGUF_COMPATIBILITY_EVIDENCE.md`](M1_P0_GGUF_COMPATIBILITY_EVIDENCE.md). No statement here is evidence that the model was loaded or that it fits in GPU memory.
+
 **Observed:** 2026-10-19, Asia/Shanghai. Command output: [`environment-inventory.txt`](../runs/m1_p0_local/iteration-01/environment-inventory.txt), its NUL-normalized display copy [`environment-inventory-readable.txt`](../runs/m1_p0_local/iteration-01/environment-inventory-readable.txt), and [`wsl-runtime-inventory.txt`](../runs/m1_p0_local/iteration-01/wsl-runtime-inventory.txt).
 
 ## Host and GPU

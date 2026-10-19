@@ -1,0 +1,130 @@
+{
+  "order": [
+    {
+      "condition_id": "private_chat_no_side_bonus",
+      "order_index": 0,
+      "seed_block_id": "seed-0"
+    },
+    {
+      "condition_id": "coalition_incentive_no_private_chat",
+      "order_index": 1,
+      "seed_block_id": "seed-0"
+    },
+    {
+      "condition_id": "coalition_incentive_private_chat",
+      "order_index": 2,
+      "seed_block_id": "seed-0"
+    },
+    {
+      "condition_id": "common_incentive_parallel_behavior",
+      "order_index": 3,
+      "seed_block_id": "seed-0"
+    },
+    {
+      "condition_id": "normal_cooperation",
+      "order_index": 4,
+      "seed_block_id": "seed-0"
+    },
+    {
+      "condition_id": "coalition_incentive_no_private_chat",
+      "order_index": 0,
+      "seed_block_id": "seed-1"
+    },
+    {
+      "condition_id": "coalition_incentive_private_chat",
+      "order_index": 1,
+      "seed_block_id": "seed-1"
+    },
+    {
+      "condition_id": "common_incentive_parallel_behavior",
+      "order_index": 2,
+      "seed_block_id": "seed-1"
+    },
+    {
+      "condition_id": "normal_cooperation",
+      "order_index": 3,
+      "seed_block_id": "seed-1"
+    },
+    {
+      "condition_id": "private_chat_no_side_bonus",
+      "order_index": 4,
+      "seed_block_id": "seed-1"
+    },
+    {
+      "condition_id": "private_chat_no_side_bonus",
+      "order_index": 0,
+      "seed_block_id": "seed-2"
+    },
+    {
+      "condition_id": "normal_cooperation",
+      "order_index": 1,
+      "seed_block_id": "seed-2"
+    },
+    {
+      "condition_id": "common_incentive_parallel_behavior",
+      "order_index": 2,
+      "seed_block_id": "seed-2"
+    },
+    {
+      "condition_id": "coalition_incentive_private_chat",
+      "order_index": 3,
+      "seed_block_id": "seed-2"
+    },
+    {
+      "condition_id": "coalition_incentive_no_private_chat",
+      "order_index": 4,
+      "seed_block_id": "seed-2"
+    },
+    {
+      "condition_id": "coalition_incentive_no_private_chat",
+      "order_index": 0,
+      "seed_block_id": "seed-3"
+    },
+    {
+      "condition_id": "coalition_incentive_private_chat",
+      "order_index": 1,
+      "seed_block_id": "seed-3"
+    },
+    {
+      "condition_id": "common_incentive_parallel_behavior",
+      "order_index": 2,
+      "seed_block_id": "seed-3"
+    },
+    {
+      "condition_id": "normal_cooperation",
+      "order_index": 3,
+      "seed_block_id": "seed-3"
+    },
+    {
+      "condition_id": "private_chat_no_side_bonus",
+      "order_index": 4,
+      "seed_block_id": "seed-3"
+    },
+    {
+      "condition_id": "private_chat_no_side_bonus",
+      "order_index": 0,
+      "seed_block_id": "seed-4"
+    },
+    {
+      "condition_id": "coalition_incentive_no_private_chat",
+      "order_index": 1,
+      "seed_block_id": "seed-4"
+    },
+    {
+      "condition_id": "coalition_incentive_private_chat",
+      "order_index": 2,
+      "seed_block_id": "seed-4"
+    },
+    {
+      "condition_id": "common_incentive_parallel_behavior",
+      "order_index": 3,
+      "seed_block_id": "seed-4"
+    },
+    {
+      "condition_id": "normal_cooperation",
+      "order_index": 4,
+      "seed_block_id": "seed-4"
+    }
+  ],
+  "scheme": "sha256-offset-direction-v1"
+}

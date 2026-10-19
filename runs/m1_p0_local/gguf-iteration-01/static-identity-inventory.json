@@ -1,0 +1,127 @@
+{
+  "observed_at_local": "2026-10-19 Asia/Shanghai",
+  "repository": {
+    "root": "D:\\MyLab\\colluscope\\reference\\m1-p0-local-qwen-integration",
+    "branch": "codex/m1-p0-local-qwen-integration",
+    "commit": "1b36a6de6c8def8cee323a79e239e0e9dd60b37a"
+  },
+  "python": {
+    "version": "3.12.4 | packaged by Anaconda, Inc. | (main, Jun 18 2024, 15:03:56) [MSC v.1929 64 bit (AMD64)]",
+    "implementation": "CPython",
+    "platform": "Windows-11-10.0.26200-SP0"
+  },
+  "libraries": {
+    "pytest": "9.1.1",
+    "tokenizers": "0.19.1",
+    "jinja2": "3.1.4"
+  },
+  "checkpoint": {
+    "path": "E:\\Health-Copilot-Models\\models\\qwen3-8b\\Qwen3-8B-Q4_K_M.gguf",
+    "file_size_bytes": 5027783488,
+    "gguf_version": 3,
+    "tensor_count": 399,
+    "metadata_kv_count": 28,
+    "metadata": {
+      "general.architecture": {
+        "type": "string",
+        "length_utf8_bytes": 5,
+        "sha256": "61b6a80524bed7a2b8b0702c24f050fbc3a72a02875a4deddd7cd41a9f29e1d3"
+      },
+      "general.name": {
+        "type": "string",
+        "length_utf8_bytes": 32,
+        "sha256": "a4d8a990cedd768d6b2a141530934907d57bbde4fbfddfc2703be92b989ea381"
+      },
+      "general.file_type": 15,
+      "general.quantization_version": 2,
+      "tokenizer.ggml.model": {
+        "type": "string",
+        "length_utf8_bytes": 4,
+        "sha256": "238f51b7c7c924fa3fe77ce7d0b214a05408df5b1ec84f9e614462017c42b005"
+      },
+      "tokenizer.ggml.pre": {
+        "type": "string",
+        "length_utf8_bytes": 5,
+        "sha256": "a7b9a042ed47b2e33c54acf5b92815729f08e700415a38a8d744a7938f773f4c"
+      },
+      "tokenizer.ggml.tokens": {
+        "type": "array",
+        "element_type": "string",
+        "length": 151936,
+        "sha256": "adab67cd4451390df3c68d6b3e74f5095d857769780735c7e7044e571db2a89e"
+      },
+      "tokenizer.ggml.merges": {
+        "type": "array",
+        "element_type": "string",
+        "length": 151387,
+        "sha256": "907981a313a6e78ef2223229042674a39cd4995ee4c4ed40a31b58754e82c26c"
+      },
+      "tokenizer.ggml.token_type": {
+        "type": "array",
+        "element_type": "int32",
+        "length": 151936,
+        "sha256": "fd28e1c1092285f1de6c3c1d3c78105e1a63f503d7eef2fb8cb00017c05c0979"
+      },
+      "tokenizer.ggml.bos_token_id": 151643,
+      "tokenizer.ggml.eos_token_id": 151645,
+      "tokenizer.ggml.add_bos_token": false,
+      "tokenizer.chat_template": {
+        "type": "string",
+        "length_utf8_bytes": 4100,
+        "sha256": "57f1fd00f0013a2be96aa79b857391f27e23df5b5f847072b524c897e24d0361"
+      }
+    },
+    "weights_loaded": false,
+    "sha256": "d98cdcbd03e17ce47681435b5150e34c1417f50b5c0019dd560e4882c5745785",
+    "static_tokenizer": {
+      "tokenizer_id": "gguf-embedded:qwen3:gpt2/qwen2",
+      "tokenizer_revision": "sha256:06e72b9773cfad908874ae1a7aa92686068557c4aa624c857db88fe97052704f",
+      "tokenizer_sha256": "06e72b9773cfad908874ae1a7aa92686068557c4aa624c857db88fe97052704f",
+      "chat_template_sha256": "57f1fd00f0013a2be96aa79b857391f27e23df5b5f847072b524c897e24d0361",
+      "tokenizers_library_version": "0.19.1",
+      "jinja2_library_version": "3.1.4",
+      "sample_rendered_prompt_sha256": "6c660eca44af6269abf06b179e6b6ce5df7a3fab65f442235b6e4cc801cf56c4",
+      "sample_token_count": 30
+    }
+  },
+  "server_binary": {
+    "path": "C:\\Users\\bubblevan\\AppData\\Local\\Microsoft\\WinGet\\Packages\\ggml.llamacpp_Microsoft.Winget.Source_8wekyb3d8bbwe\\llama-server.exe",
+    "size_bytes": 9216,
+    "sha256": "3a8aea5f889c4b4c2ec41c98f4e1ed484bb7a40c4096883acb23d3cfe26b59fb",
+    "version_probe": {
+      "command": [
+        "C:\\Users\\bubblevan\\AppData\\Local\\Microsoft\\WinGet\\Packages\\ggml.llamacpp_Microsoft.Winget.Source_8wekyb3d8bbwe\\llama-server.exe",
+        "--version"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "version: 10068 (571d0d540)\nbuilt with Clang 20.1.8 for Windows x86_64\n"
+    },
+    "device_probe": {
+      "command": [
+        "C:\\Users\\bubblevan\\AppData\\Local\\Microsoft\\WinGet\\Packages\\ggml.llamacpp_Microsoft.Winget.Source_8wekyb3d8bbwe\\llama-server.exe",
+        "--list-devices"
+      ],
+      "exit_code": 0,
+      "stdout": "Available devices:\n  Vulkan0: Intel(R) RaptorLake-S Mobile Graphics Controller (32637 MiB, 48123 MiB free)\n  Vulkan1: NVIDIA GeForce RTX 4090 Laptop GPU (16048 MiB, 15280 MiB free)\n",
+      "stderr": ""
+    }
+  },
+  "gpu_probe": {
+    "command": [
+      "nvidia-smi",
+      "--query-gpu=name,memory.total,memory.free",
+      "--format=csv,noheader"
+    ],
+    "exit_code": 0,
+    "stdout": "NVIDIA GeForce RTX 4090 Laptop GPU, 16376 MiB, 15855 MiB\n",
+    "stderr": ""
+  },
+  "execution_boundary": {
+    "server_started": false,
+    "model_weights_loaded": false,
+    "generation_calls": 0,
+    "network_requests": 0,
+    "paid_api_calls": 0
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "protocol_id": "M1-P0-GGUF-V3-CANDIDATE",
+  "files": [
+    {
+      "path": "candidate-protocol.json",
+      "size_bytes": 6190,
+      "sha256": "6ad4cc794c0a2ff3b9c7a642204ef223ed6446321e356e193e658615e7e673bc"
+    },
+    {
+      "path": "m1-p0-llama-local-draft.toml",
+      "size_bytes": 2962,
+      "sha256": "934336c750425e7a2f8dd1577602ed0c7e4177bcc8d7270ed3704ad6853828b3"
+    },
+    {
+      "path": "m1-r-offline-v2.toml",
+      "size_bytes": 1526,
+      "sha256": "e2c780de0e8c5ecf4b43f47acf5565a0ee1808e103e420365d27d4ce32647fd3"
+    },
+    {
+      "path": "prompts/ballot.schema.json",
+      "size_bytes": 430,
+      "sha256": "0bb4b7e14beda8b88fd955148f4bd485f922ab2fb329c9ad1e7ce38b9339c406"
+    },
+    {
+      "path": "prompts/ballot.txt",
+      "size_bytes": 543,
+      "sha256": "c80c0091f4e8d27d08acf6a1cf1ae4f84267230a1639ed06dc58f292cf9bbd0d"
+    },
+    {
+      "path": "prompts/communication.schema.json",
+      "size_bytes": 429,
+      "sha256": "8c0c6744aa14c7e12578183782120949e3d65242d15ba6edf8b76a223d51b63f"
+    },
+    {
+      "path": "prompts/message.txt",
+      "size_bytes": 505,
+      "sha256": "f70dff7dacec165d26354c60cbe331916f127770ae2b9549fe813009d3324d66"
+    },
+    {
+      "path": "prompts/system.txt",
+      "size_bytes": 286,
+      "sha256": "6dc1d0daaf2625e0f326f20ac854c190bc748e71ed8401b330dc79e90e86cf70"
+    }
+  ],
+  "manifest_sha256": "e62511ad52d54a1fb4624d58b19855ff0a69a3fe0e1ea1a968acb96f0c09748b"
+}

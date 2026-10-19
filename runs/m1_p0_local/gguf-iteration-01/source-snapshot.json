@@ -1,0 +1,173 @@
+{
+  "scope": "tracked runtime source, configs, V2 prompt/schema assets, tests and static inspector; excludes docs and generated outputs",
+  "base_commit": "1b36a6de6c8def8cee323a79e239e0e9dd60b37a",
+  "working_tree_clean_at_snapshot": false,
+  "files": [
+    {
+      "path": "configs/m0.toml",
+      "size_bytes": 194,
+      "sha256": "5ebeb87fb49ac28a3305663ef587c6edfdf69f66f776cd38e581af23895e144a"
+    },
+    {
+      "path": "configs/m1-p0-llama-local-draft.toml",
+      "size_bytes": 2962,
+      "sha256": "934336c750425e7a2f8dd1577602ed0c7e4177bcc8d7270ed3704ad6853828b3"
+    },
+    {
+      "path": "configs/m1-r-offline-v2.toml",
+      "size_bytes": 1526,
+      "sha256": "e2c780de0e8c5ecf4b43f47acf5565a0ee1808e103e420365d27d4ce32647fd3"
+    },
+    {
+      "path": "prompts/m1-p0-v2/ballot.schema.json",
+      "size_bytes": 430,
+      "sha256": "0bb4b7e14beda8b88fd955148f4bd485f922ab2fb329c9ad1e7ce38b9339c406"
+    },
+    {
+      "path": "prompts/m1-p0-v2/ballot.txt",
+      "size_bytes": 543,
+      "sha256": "c80c0091f4e8d27d08acf6a1cf1ae4f84267230a1639ed06dc58f292cf9bbd0d"
+    },
+    {
+      "path": "prompts/m1-p0-v2/communication.schema.json",
+      "size_bytes": 429,
+      "sha256": "8c0c6744aa14c7e12578183782120949e3d65242d15ba6edf8b76a223d51b63f"
+    },
+    {
+      "path": "prompts/m1-p0-v2/message.txt",
+      "size_bytes": 505,
+      "sha256": "f70dff7dacec165d26354c60cbe331916f127770ae2b9549fe813009d3324d66"
+    },
+    {
+      "path": "prompts/m1-p0-v2/system.txt",
+      "size_bytes": 286,
+      "sha256": "6dc1d0daaf2625e0f326f20ac854c190bc748e71ed8401b330dc79e90e86cf70"
+    },
+    {
+      "path": "pyproject.toml",
+      "size_bytes": 522,
+      "sha256": "7d004eb4068776701f0d9e0e6e3ce717db5e746b39784843d554a2589cc3b096"
+    },
+    {
+      "path": "scripts/inspect_local_gguf.py",
+      "size_bytes": 6437,
+      "sha256": "f32ff39a683e566ee43aeec7b6b27c693f3a6571d8e6bbab037b89f070655146"
+    },
+    {
+      "path": "src/colluscope/__init__.py",
+      "size_bytes": 129,
+      "sha256": "ebc48763a23f2a649354557ec7701b7fee787953c98d629c7d3d70c73af6f775"
+    },
+    {
+      "path": "src/colluscope/__main__.py",
+      "size_bytes": 48,
+      "sha256": "935a1c1166b0c1ea35a82256345000bf2c73ded718d77773bc27a71ecce28f7d"
+    },
+    {
+      "path": "src/colluscope/cli.py",
+      "size_bytes": 19364,
+      "sha256": "f2a0e015568970a58433c5da2ca6c599b4b0ac7fe4ee3f3e1767b31d4c9f9b19"
+    },
+    {
+      "path": "src/colluscope/generation.py",
+      "size_bytes": 11868,
+      "sha256": "06ed6a7c41345a20923a7636a774b5ee8561085e3fe107191dfb38e2c182d9b0"
+    },
+    {
+      "path": "src/colluscope/gguf_metadata.py",
+      "size_bytes": 7194,
+      "sha256": "3a05242fd2c6aca5010dd05729304aba4b5c04c9e42d54ee680d2dcff6e28214"
+    },
+    {
+      "path": "src/colluscope/gguf_tokenizer.py",
+      "size_bytes": 7457,
+      "sha256": "aaf2633e7b55cfb2d2319088ee33accc5b23b816290df46108b6a459be77455a"
+    },
+    {
+      "path": "src/colluscope/m1_runtime.py",
+      "size_bytes": 83605,
+      "sha256": "bac7cf9a4731986925713506979d426ec37c5ae27b668f30a0847e9d56c9ee2a"
+    },
+    {
+      "path": "src/colluscope/openai_compat_llamacpp.py",
+      "size_bytes": 47369,
+      "sha256": "4c7977256be21360bfeb0450f489a32fa826284dc4ef73650be4eab6439a007f"
+    },
+    {
+      "path": "src/colluscope/openai_compat_vllm.py",
+      "size_bytes": 25625,
+      "sha256": "f78b2c1a7bcaedbe7d58f00225b0bf753667e18ed4d2d2c0e8dc79594589f890"
+    },
+    {
+      "path": "src/colluscope/splitting.py",
+      "size_bytes": 2601,
+      "sha256": "5a593811af6738845fda61279d6a32251a66cbed9cd7ac2a6525403d2d8a97cc"
+    },
+    {
+      "path": "src/colluscope/views.py",
+      "size_bytes": 15509,
+      "sha256": "e2585f4ae395818c03299909ed3a576893e1719d506a4292e835175ca5d161a7"
+    },
+    {
+      "path": "src/colluscope/world.py",
+      "size_bytes": 4501,
+      "sha256": "7810c50b588d3851b1c92695a447691ecfa1ab2dde09cfc8aa82a534a7b49e28"
+    },
+    {
+      "path": "tests/test_cli.py",
+      "size_bytes": 3593,
+      "sha256": "3cb58ad6ac9ac0084a5fa4a45d289d827712f7638fab54f98ad6894d50396423"
+    },
+    {
+      "path": "tests/test_generation.py",
+      "size_bytes": 6658,
+      "sha256": "a08e84e7b6d02ff6d08845fba540cd0929d220b9e118009ccd7212c6bd062e84"
+    },
+    {
+      "path": "tests/test_gguf_metadata.py",
+      "size_bytes": 3719,
+      "sha256": "c9ac5aacd064cb5e5f3f5dfdac5916f10a2a4f7f9d05cb5ee846e26e1682fa18"
+    },
+    {
+      "path": "tests/test_gguf_tokenizer.py",
+      "size_bytes": 2587,
+      "sha256": "91d845a330853bfe44ea3cc1ea95b711f650d5002db28ed9f415d77b898d21fe"
+    },
+    {
+      "path": "tests/test_m01_research_design.py",
+      "size_bytes": 9852,
+      "sha256": "7423ad2b301ee626a747240f6abfdbc13a3479cafc30cf9b52208cba17aadada"
+    },
+    {
+      "path": "tests/test_m1_runtime.py",
+      "size_bytes": 25358,
+      "sha256": "52457035dd9489a46abb4189ca0c008ffc26055aae670767fddf8d1246d6088e"
+    },
+    {
+      "path": "tests/test_openai_compat_http_contract.py",
+      "size_bytes": 11261,
+      "sha256": "fc119bff42b6f2504991ff8b036eb35a301426fa30ad1d6c992a46a211417f3b"
+    },
+    {
+      "path": "tests/test_openai_compat_llamacpp.py",
+      "size_bytes": 22660,
+      "sha256": "6c42b1121e7450d587692d182565ae7c0a9ecbb37583e53d7e6da2c92bb5c7aa"
+    },
+    {
+      "path": "tests/test_openai_compat_vllm.py",
+      "size_bytes": 18012,
+      "sha256": "f1e715b4cb1bc4ddcd7f0cd18f3c3e6b06f1c14c7bf3d561b731777d6f9c6f12"
+    },
+    {
+      "path": "tests/test_views.py",
+      "size_bytes": 11913,
+      "sha256": "18fc329fd104ab5a84db8d49eecc0a746992d5e567b353bba902b126eff60ddb"
+    },
+    {
+      "path": "tests/test_world.py",
+      "size_bytes": 2079,
+      "sha256": "3860e3d6192d94087c496ca4a222a09b10f9d6bef9fe6b4bd254885c86f077e7"
+    }
+  ],
+  "snapshot_sha256": "cefd5f0f15f28a2e1485e03d497388da22448b227d4d0a6d29b0eaead6e707bf"
+}

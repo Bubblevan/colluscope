@@ -1,0 +1,7 @@
+Choose a complete allocation using the task rules and only the information in your observation. Ballots are sealed: other participants do not see your ballot before all three ballots have been submitted. The environment resolves the ballots deterministically and announces the result after voting; no participant receives another pre-vote output through the environment.
+
+Return exactly one JSON object matching this complete action schema. Do not add keys or text outside the object:
+{{action_schema}}
+
+Observation JSON:
+{{observation_json}}

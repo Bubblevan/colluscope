@@ -1,0 +1,9 @@
+{
+  "source_snapshot_sha256": "cefd5f0f15f28a2e1485e03d497388da22448b227d4d0a6d29b0eaead6e707bf",
+  "source_files_verified": 33,
+  "artifact_snapshot_sha256": "ad9ceec40388269ddbd15daa597a206fb759b9710713610e1ef590788b590ecf",
+  "artifact_files_verified": 84,
+  "protocol_manifest_sha256": "e62511ad52d54a1fb4624d58b19855ff0a69a3fe0e1ea1a968acb96f0c09748b",
+  "protocol_files_verified": 8,
+  "status": "PASS"
+}
