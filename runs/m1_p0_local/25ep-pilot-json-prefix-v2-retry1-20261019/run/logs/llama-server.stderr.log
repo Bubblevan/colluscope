@@ -1,0 +1,27 @@
+0.00.344.907 I cmn  common_param: common_params_print_info: verbosity = 3 (adjust with the `-lv N` CLI arg)
+0.00.351.878 I srv          init: The UI is disabled
+0.00.351.883 I srv          init: Use --ui/--no-ui (or deprecated --webui/--no-webui) to enable/disable
+0.00.351.987 W srv  llama_server: -----------------
+0.00.351.988 W srv  llama_server: CORS is set to allow all origins ('*') and no API key is set
+0.00.351.989 W srv  llama_server: this can be a security risk (cross-origin attacks)
+0.00.351.989 W srv  llama_server: more info: https://github.com/ggml-org/llama.cpp/pull/25655
+0.00.351.989 W srv  llama_server: -----------------
+0.00.358.868 I srv    load_model: loading model 'E:\Health-Copilot-Models\models\qwen3-8b\Qwen3-8B-Q4_K_M.gguf'
+0.00.522.684 W load: control-looking token: 128247 '</s>' was not control-type; this is probably a bug in the model. its type will be overridden
+0.04.098.918 I srv    load_model: initializing, n_slots = 1, n_ctx_slot = 4096, kv_unified = 'false'
+0.04.106.226 I srv  llama_server: model loaded
+0.04.106.232 I srv  llama_server: listening on http://127.0.0.1:8081
+0.15.482.251 I slot get_availabl: id  0 | task -1 | selected slot by LRU, t_last = -1
+0.15.482.292 I slot launch_slot_: id  0 | task 0 | processing task, is_child = 0
+0.16.473.717 I slot print_timing: id  0 | task 0 | prompt eval time =     347.37 ms /   447 tokens (    0.78 ms per token,  1286.83 tokens per second)
+0.16.473.723 I slot print_timing: id  0 | task 0 |        eval time =     644.03 ms /    42 tokens (   15.33 ms per token,    65.21 tokens per second)
+0.16.473.723 I slot print_timing: id  0 | task 0 |       total time =     991.40 ms /   489 tokens
+0.16.473.724 I slot print_timing: id  0 | task 0 |    graphs reused =         40
+0.16.473.754 I slot      release: id  0 | task 0 | stop processing: n_tokens = 488, truncated = 0
+0.16.515.729 I slot get_availabl: id  0 | task -1 | selected slot by LCP similarity, sim_best = 0.128 (> 0.100 thold), f_keep = 0.121
+0.16.540.848 I slot launch_slot_: id  0 | task 43 | processing task, is_child = 0
+0.16.825.462 I slot print_timing: id  0 | task 43 | prompt eval time =     121.37 ms /   461 tokens (    0.26 ms per token,  3798.30 tokens per second)
+0.16.825.470 I slot print_timing: id  0 | task 43 |        eval time =     163.22 ms /    11 tokens (   14.84 ms per token,    67.39 tokens per second)
+0.16.825.470 I slot print_timing: id  0 | task 43 |       total time =     284.59 ms /   472 tokens
+0.16.825.471 I slot print_timing: id  0 | task 43 |    graphs reused =         49
+0.16.825.501 I slot      release: id  0 | task 43 | stop processing: n_tokens = 471, truncated = 0

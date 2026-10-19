@@ -1,0 +1,8 @@
+{
+  "approval_id": "USER-REQUEST-JSON-PREFIX-PARSER-RETRY1-PILOT-2026-10-19",
+  "consumed_at_utc": "2026-10-19T06:05:31.343667+00:00",
+  "maximum_episode_count": 25,
+  "maximum_http_attempts": 190,
+  "maximum_logical_requests": 95,
+  "run_dir": "D:\\MyLab\\colluscope\\reference\\m1-p0-local-qwen-integration\\runs\\m1_p0_local\\25ep-pilot-json-prefix-v2-retry1-20261019\\run"
+}

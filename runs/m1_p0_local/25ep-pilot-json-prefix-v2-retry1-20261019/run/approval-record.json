@@ -1,0 +1,14 @@
+{
+  "action_output_contract_revision": "json-v2-exact-empty-think-envelope",
+  "authority": "user's direct instruction to repair the JSON-prefix parser and retry; bounded by the frozen 25-episode/95-request and 6/12/4 preflight ceilings",
+  "endpoint": "http://127.0.0.1:8081/v1",
+  "external_paid_api_spend_usd": 0.0,
+  "full_25_episode_pilot_approval_id": "USER-REQUEST-JSON-PREFIX-PARSER-RETRY1-PILOT-2026-10-19",
+  "m2_authorized": false,
+  "preflight_approval_id": "USER-REQUEST-JSON-PREFIX-PARSER-RETRY1-PREFLIGHT-2026-10-19",
+  "verified_zero_http_retry_parent": {
+    "manifest_sha256": "9819a15400b09a650c5c96761d14526c345c3cf3ec7b9a122c451456f95a5997",
+    "run_dir": "D:\\MyLab\\colluscope\\reference\\m1-p0-local-qwen-integration\\runs\\m1_p0_local\\25ep-pilot-json-prefix-v2-20261019\\run",
+    "status": "PASS_PACKAGE_INTEGRITY__NO_GO_NO_HTTP"
+  }
+}

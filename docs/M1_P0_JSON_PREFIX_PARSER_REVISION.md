@@ -32,3 +32,11 @@ python -m pytest -q tests/test_m1_runtime.py -k "action_parser or retained_live_
 python scripts/verify_m1_p0_preflight_blocker.py --run runs/m1_p0_local/25ep-pilot-20261019/run-resume-01
 python scripts/verify_m1_p0_runtime_start_blocker.py --run runs/m1_p0_local/25ep-pilot-json-prefix-v2-20261019/run
 ```
+
+## Observed execution and stop
+
+The first parser-V2 runtime launch loaded the model but was blocked before HTTP by the restricted process's loopback permission (`WinError 10013`). Its zero-request package was retained and verified. One retry was authorized only for that exact zero-HTTP parent, with a fresh one-time approval ID and byte-identical protocol configuration apart from those IDs.
+
+The controlled retry passed listener ownership, `/health`, `/props`, template parity and the tested prompt's tokenizer parity. The first ballot response had the exact empty envelope and parsed successfully. The second completion also had that envelope and parsed to the valid `no_message` branch; however, this positive-path compatibility probe explicitly expected `send_message`. The probe therefore failed on an action mismatch, not on JSON parsing. It stopped before the third probe and before any assigned episode: 5 logical requests, 5 HTTP attempts, 2 completions; Pilot calls and episodes were zero.
+
+No further retry was made. Repeating the same probe until the model chooses `send_message` would make the compatibility result conditional on a favorable behavior response. Parser V2 is confirmed for the exact observed prefix, but the M1-P0 preflight as a whole remains **NO-GO** under its frozen expected-action contract. Details and hashes are in [`M1_P0_JSON_PREFIX_PARSER_REVISION_EVIDENCE.md`](M1_P0_JSON_PREFIX_PARSER_REVISION_EVIDENCE.md) and [`M1_P0_JSON_PREFIX_PARSER_REVISION_DECISION.md`](M1_P0_JSON_PREFIX_PARSER_REVISION_DECISION.md).

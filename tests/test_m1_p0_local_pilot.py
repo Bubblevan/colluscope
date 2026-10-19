@@ -17,6 +17,7 @@ from scripts.run_m1_p0_local_pilot import (
     _verify_preflight_continuation,
 )
 from scripts.verify_m1_p0_preflight_blocker import verify as verify_preflight_blocker
+from scripts.verify_m1_p0_preflight_action_mismatch import verify as verify_preflight_action_mismatch
 from scripts.verify_m1_p0_runtime_start_blocker import verify as verify_runtime_start_blocker
 
 
@@ -190,3 +191,14 @@ def test_runtime_retry_is_limited_to_zero_http_parent_and_identical_protocol_byt
         "temperature = 0.0", "temperature = 0.1", 1), encoding="utf-8")
     with pytest.raises(PermissionError, match="verified zero-HTTP first attempt"):
         _validate_zero_http_runtime_retry_parent(parent, altered)
+
+
+def test_parser_revision_preflight_verifier_preserves_action_mismatch_without_episode_data():
+    run_dir = ROOT / "runs/m1_p0_local/25ep-pilot-json-prefix-v2-retry1-20261019/run"
+    if not run_dir.is_dir():
+        pytest.skip("requires the retained parser-V2 action mismatch")
+    result = verify_preflight_action_mismatch(run_dir)
+    assert result["status"] == "PASS_PACKAGE_INTEGRITY__NO_GO_ACTION_MISMATCH"
+    assert result["empty_prefix_parser_accepted_ballot"] is True
+    assert result["message_probe_actual"] == "no_message"
+    assert result["episodes"] == 0
