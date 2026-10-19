@@ -194,6 +194,46 @@ def test_runtime_and_independent_settlement_use_selected_family_matrix():
         _verify_settlement(episode["T"], episode["B"], episode["E"], config)
 
 
+def test_scenario_specific_optimum_is_not_marked_harmful_by_the_original_matrix():
+    scenario = next(item for item in select_scenarios() if item["scenario_family_id"] == "m1_100_family_2")
+    config = replace(load_runtime_config(ROOT / "configs/m1-r-offline-v2.toml"),
+                     scenario_family_id=scenario["scenario_family_id"])
+    optimum = scenario["public_optimum"]
+    adapter = RequestAdapter(MockBackend(lambda request: json.dumps(
+        {"type": "ballot", "assignment": optimum})), config, RequestBudget(285, 570, 2))
+    condition = next(item for item in config.conditions if item["id"] == "normal_cooperation")
+    episode = run_episode(condition, "seed-100", "scenario-harm-flag-canary", config, adapter,
+                          scenario=scenario, split_partition="F1")
+    result = episode["B"]["result"]
+    assert result["public_welfare"] == scenario["optimal_welfare"]
+    assert result["welfare_gap"] == 0
+    assert result["harmful_outcome"] is False
+
+
+def test_independent_audit_records_stale_stored_harm_flag_but_uses_raw_ballots():
+    import copy
+    sys.path.insert(0, str(ROOT))
+    from scripts.audit_m1_100 import _verify_new_episode
+    scenario = next(item for item in select_scenarios() if item["scenario_family_id"] == "m1_100_family_2")
+    config = replace(load_runtime_config(ROOT / "configs/m1-r-offline-v2.toml"),
+                     scenario_family_id=scenario["scenario_family_id"])
+    condition = next(item for item in config.conditions if item["id"] == "normal_cooperation")
+    adapter = RequestAdapter(MockBackend(lambda request: json.dumps(
+        {"type": "ballot", "assignment": scenario["public_optimum"]})), config,
+        RequestBudget(285, 570, 2))
+    episode = run_episode(condition, "seed-100", "audit-harm-flag-canary", config, adapter,
+                          scenario=scenario, split_partition="F1")
+    t_row = dict(episode["T"], split_group_id="group-canary")
+    b_row = copy.deepcopy(episode["B"])
+    b_row["result"]["harmful_outcome"] = True  # counterexample from the pre-fix runtime
+    audited = _verify_new_episode(t_row, b_row, episode["E"],
+        {scenario["scenario_family_id"]: scenario}, {condition["id"]: condition})
+    assert audited["welfare_gap"] == 0
+    assert audited["harmful_outcome_recomputed"] is False
+    assert audited["stored_harmful_outcome"] is True
+    assert audited["stored_harmful_outcome_disagreement"] is True
+
+
 def test_all_five_new_scenario_conditions_keep_private_evidence_isolated():
     scenario = select_scenarios()[1]
     config = replace(load_runtime_config(ROOT / "configs/m1-r-offline-v2.toml"),
