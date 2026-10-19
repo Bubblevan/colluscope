@@ -950,17 +950,25 @@ def _verify_copied_freeze(run: Path) -> dict[str, Any]:
         previous_auditor_sha = frozen_auditor_sha
         for number, revision_path in enumerate(revision_paths, 1):
             revision = read_json(revision_path)
-            expected_failure_path = run / ("audit-failure.json" if number == 1 else
-                f"audit-failure-attempt-{number:03d}.json")
-            if not expected_failure_path.is_file():
-                raise AuditError(f"post-run audit revision {number} has no retained triggering failure")
+            change_kind = revision.get("change_kind", "failure_repair")
+            if change_kind == "analysis_refinement":
+                expected_failure_path = None
+                failure_binding_valid = (revision.get("triggering_failure_path") is None and
+                                         revision.get("triggering_failure_sha256") is None)
+            elif change_kind == "failure_repair":
+                expected_failure_path = run / ("audit-failure.json" if number == 1 else
+                    f"audit-failure-attempt-{number:03d}.json")
+                failure_binding_valid = (expected_failure_path.is_file() and
+                    revision.get("triggering_failure_path") == expected_failure_path.name and
+                    revision.get("triggering_failure_sha256") == sha256_file(expected_failure_path))
+            else:
+                raise AuditError(f"post-run audit revision {number} has an unknown change kind")
             if (revision.get("schema_version") != "m1-100-postrun-audit-revision-v1" or
                     revision.get("revision_number") != number or
                     revision.get("frozen_auditor_sha256") != previous_auditor_sha or
                     revision.get("f0_correction_sha256") != sha256_file(correction_path) or
                     revision.get("preserved_first_failure_sha256") != sha256_file(first_failure) or
-                    revision.get("triggering_failure_path") != expected_failure_path.name or
-                    revision.get("triggering_failure_sha256") != sha256_file(expected_failure_path) or
+                    not failure_binding_valid or
                     revision.get("source_split_manifest_sha256") != split_sha or
                     not isinstance(revision.get("implementation_commit"), str) or
                     not re.fullmatch(r"[0-9a-f]{40}", revision["implementation_commit"])):
@@ -970,8 +978,9 @@ def _verify_copied_freeze(run: Path) -> dict[str, Any]:
                 "implementation_commit": revision["implementation_commit"],
                 "frozen_auditor_sha256": revision["frozen_auditor_sha256"],
                 "corrected_auditor_sha256": previous_auditor_sha,
-                "triggering_failure_path": expected_failure_path.name,
-                "triggering_failure_sha256": revision["triggering_failure_sha256"]})
+                "change_kind": change_kind,
+                "triggering_failure_path": revision.get("triggering_failure_path"),
+                "triggering_failure_sha256": revision.get("triggering_failure_sha256")})
         if previous_auditor_sha != current_auditor_sha:
             raise AuditError("post-run audit revision chain does not terminate at the current auditor")
     elif (run / "frozen_protocol/postrun-audit-revision.json").exists():
