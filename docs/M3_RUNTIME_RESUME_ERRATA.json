@@ -1,0 +1,32 @@
+{
+  "schema_version": "m3-runtime-resume-erratum-v1",
+  "protocol_id": "colluscope-m3-mechanism-v1",
+  "base_source_commit": "2da217c2ea81d90a5783b5ea67c63d26a5803d86",
+  "base_runner_sha256": "abc6f2c5f6330c34cab9b9c25f2471615435a1f423091e14cccb62fcb4e029b5",
+  "authorized_runner_sha256": "231f5cbc3136c5039a16159b9205042ef36786e2686b5475ad4f8e374cc1ce42",
+  "allowed_changed_paths": [
+    "docs/ITERATION_LOG.md",
+    "docs/M3_RUNTIME_ERRATA.md",
+    "docs/M3_RUNTIME_RESUME_ERRATA.json",
+    "docs/RESEARCH_RISK_REGISTER.md",
+    "docs/results/merge-m0-m2/m3-runtime-recovery.log",
+    "docs/results/merge-m0-m2/pytest-m3-runtime-errata.log",
+    "scripts/audit_m3_mechanism.py",
+    "scripts/run_m3_mechanism.py",
+    "tests/test_m3_independent_audit.py"
+  ],
+  "change_scope": "metadata_export_and_resume_guard_only",
+  "model_facing_semantics_changed": false,
+  "pre_generation_requirements": {
+    "assigned_groups": 12,
+    "group_started": 0,
+    "group_terminal": 0,
+    "generation_logical_requests": 0,
+    "generation_http_attempts": 0,
+    "identity_probe_http_attempts": 1,
+    "identity_probe_model_id": "colluscope-qwen3-8b-q4km",
+    "previous_owned_server_shutdown": true,
+    "previous_temporary_api_key_removed": true
+  },
+  "retention_policy": "Keep the original design-freeze unchanged; append one authorization record before generation; subsequent resume must use the exact authorized source commit, runner hash, input-hash map and manifest hash."
+}

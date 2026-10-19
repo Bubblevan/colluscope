@@ -13,6 +13,7 @@ from pathlib import Path
 import re
 import statistics
 import sys
+import subprocess
 import tomllib
 from typing import Any
 from urllib.parse import urlsplit
@@ -289,6 +290,81 @@ def _verify_history(run: Path) -> dict[str, str]:
     return result
 
 
+def _validate_runtime_code_provenance(run: Path, freeze: dict[str, Any],
+                                      environment: dict[str, Any]) -> dict[str, Any]:
+    """Independently verify the source-only runtime erratum, if one was used."""
+    base_commit = freeze.get("source_commit")
+    runtime_commit = environment.get("runtime_code_commit", base_commit)
+    runtime_sha256 = environment.get("runtime_code_sha256")
+    base_runner_sha256 = freeze.get("input_sha256", {}).get("scripts/run_m3_mechanism.py")
+    auth_path = run / "resume-source-errata.jsonl"
+    authorizations = _read_jsonl(auth_path) if auth_path.exists() else []
+    if runtime_commit == base_commit:
+        _require(runtime_sha256 == base_runner_sha256,
+                 "runtime code hash differs from the original pre-generation freeze")
+        _require(not authorizations and environment.get("runtime_source_erratum_applied") is False,
+                 "run claims a source erratum but uses the original source commit")
+        return {"status": "PASS_ORIGINAL_FROZEN_SOURCE", "runtime_code_commit": runtime_commit,
+                "runtime_code_sha256": runtime_sha256}
+
+    manifest_path = ROOT / "docs/M3_RUNTIME_RESUME_ERRATA.json"
+    _require(manifest_path.is_file() and len(authorizations) == 1,
+             "runtime source changed without one exact, versioned resume erratum")
+    manifest_bytes = manifest_path.read_bytes()
+    manifest = json.loads(manifest_bytes)
+    manifest_sha256 = hashlib.sha256(manifest_bytes).hexdigest()
+    auth = authorizations[0]
+    _require(manifest.get("schema_version") == "m3-runtime-resume-erratum-v1" and
+             manifest.get("base_source_commit") == base_commit and
+             manifest.get("base_runner_sha256") == base_runner_sha256 and
+             manifest.get("authorized_runner_sha256") == runtime_sha256 and
+             auth.get("base_source_commit") == base_commit and
+             auth.get("authorized_source_commit") == runtime_commit and
+             auth.get("authorized_runner_sha256") == runtime_sha256 and
+             auth.get("manifest_sha256") == manifest_sha256 and
+             environment.get("runtime_source_erratum_applied") is True and
+             environment.get("runtime_source_erratum_sha256") == manifest_sha256,
+             "runtime erratum manifest, source commit, and run ledger disagree")
+    frozen_hashes = freeze.get("input_sha256", {})
+    current_hashes = auth.get("authorized_input_sha256", {})
+    _require(set(current_hashes) == set(frozen_hashes) and
+             [key for key in current_hashes if current_hashes[key] != frozen_hashes.get(key)] ==
+             ["scripts/run_m3_mechanism.py"],
+             "runtime erratum changed model-facing or frozen protocol input hashes")
+    _require(current_hashes.get("scripts/run_m3_mechanism.py") == runtime_sha256 and
+             auth.get("changed_paths") == manifest.get("allowed_changed_paths"),
+             "runtime erratum source hash or changed-file allowlist is inconsistent")
+    diff = subprocess.run(
+        ["git", "-C", str(ROOT), "diff", "--name-only",
+         f"{base_commit}..{runtime_commit}"],
+        capture_output=True, text=True, check=False, timeout=15)
+    _require(diff.returncode == 0, "could not inspect the committed source-erratum diff")
+    changed_paths = sorted(line.replace("\\", "/") for line in diff.stdout.splitlines() if line.strip())
+    _require(changed_paths == manifest.get("allowed_changed_paths"),
+             "committed source-erratum diff contains unapproved files")
+    ancestor = subprocess.run(
+        ["git", "-C", str(ROOT), "merge-base", "--is-ancestor", base_commit, runtime_commit],
+        capture_output=True, text=True, check=False, timeout=15)
+    _require(ancestor.returncode == 0, "runtime erratum commit is not a descendant of the freeze")
+    source = subprocess.run(
+        ["git", "-C", str(ROOT), "show", f"{runtime_commit}:scripts/run_m3_mechanism.py"],
+        capture_output=True, check=False, timeout=15)
+    _require(source.returncode == 0 and hashlib.sha256(source.stdout).hexdigest() == runtime_sha256,
+             "runtime source commit does not contain the hashed M3 runner")
+    infra = _read_jsonl(run / "researcher/infrastructure-http-attempts.jsonl")
+    probe_sources = [row for row in infra if row.get("runtime_code_commit") == runtime_commit and
+                     row.get("runtime_code_sha256") == runtime_sha256 and
+                     row.get("event") == "attempt_terminal" and
+                     row.get("status") == "response_returned" and
+                     row.get("model_ids") == ["colluscope-qwen3-8b-q4km"]]
+    _require(bool(probe_sources),
+             "no successful identity probe is tied to the authorized runtime code commit/hash")
+    return {"status": "PASS_VERSIONED_METADATA_ONLY_ERRATUM",
+            "base_source_commit": base_commit, "runtime_code_commit": runtime_commit,
+            "runtime_code_sha256": runtime_sha256, "manifest_sha256": manifest_sha256,
+            "changed_paths": changed_paths}
+
+
 def _privacy_scan(public_outputs: list[Path], private_messages: list[str]) -> dict[str, Any]:
     checked_files = 0
     leaks = []
@@ -477,6 +553,7 @@ def audit(run: Path, out: Path) -> dict[str, Any]:
              "design freeze schedule digest does not match assigned groups")
     _require(environment.get("source_commit") == freeze.get("source_commit"),
              "execution source commit differs from design freeze")
+    runtime_code_provenance = _validate_runtime_code_provenance(run, freeze, environment)
     _require(environment.get("model_sha256") == MODEL_SHA256 and environment.get("server_sha256") ==
              "3a8aea5f889c4b4c2ec41c98f4e1ed484bb7a40c4096883acb23d3cfe26b59fb",
              "execution model/server identity differs from freeze")
@@ -515,6 +592,10 @@ def audit(run: Path, out: Path) -> dict[str, Any]:
         _require(expected_model_id in probe.get("model_ids", []) and
                  probe.get("model_ids") == terminal_probe.get("model_ids") and
                  probe.get("response_sha256") == terminal_probe.get("response_sha256") and
+                 passed[0].get("runtime_code_commit") == environment.get("runtime_code_commit") and
+                 passed[0].get("runtime_code_sha256") == environment.get("runtime_code_sha256") and
+                 terminal_probe.get("runtime_code_commit") == environment.get("runtime_code_commit") and
+                 terminal_probe.get("runtime_code_sha256") == environment.get("runtime_code_sha256") and
                  passed[0].get("model_sha256") == MODEL_SHA256 and
                  passed[0].get("server_sha256") == "3a8aea5f889c4b4c2ec41c98f4e1ed484bb7a40c4096883acb23d3cfe26b59fb",
                  "identity preflight model IDs or checkpoint/runtime hash differ from the exact response")
@@ -530,6 +611,9 @@ def audit(run: Path, out: Path) -> dict[str, Any]:
              "run summary HTTP counters differ from the independent attempt ledgers")
     starts_by_id: dict[str, list[dict[str, Any]]] = {}
     for row in request_starts:
+        _require(row.get("runtime_code_commit") == environment.get("runtime_code_commit") and
+                 row.get("runtime_code_sha256") == environment.get("runtime_code_sha256"),
+                 "generation reservation is not tied to the audited runtime source commit/hash")
         starts_by_id.setdefault(row["request_id"], []).append(row)
     _require(all(len(rows) <= 2 for rows in starts_by_id.values()), "a logical request had more than one retry")
     http_by_id: dict[str, list[dict[str, Any]]] = {}
@@ -1186,6 +1270,7 @@ def audit(run: Path, out: Path) -> dict[str, Any]:
     retry_count = sum(max(0, len(rows) - 1) for rows in starts_by_id.values())
     summary = {
         "protocol_id": "colluscope-m3-mechanism-v1", "audit_version": "m3-independent-replay-v1",
+        "runtime_code_provenance": runtime_code_provenance,
         "run_status": run_status.get("status"), "assigned_groups": 12,
         "terminal_groups": run_status.get("terminal_groups"),
         "completed_groups": run_status.get("completed_groups"),

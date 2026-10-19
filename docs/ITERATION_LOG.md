@@ -709,6 +709,17 @@ Exact pytest failure transcripts and schedule-generation JSON are preserved unde
 - **DECIDE:** resume only after this metadata-only correction is committed and the complete repository suite passes. At this checkpoint, assigned=12; terminal=0; generation logical/HTTP=0; identity HTTP=1; total HTTP=1; outside API=0.
 - **REPORT / next action:** commit the correction as a versioned runtime erratum, then resume the same run. Stop if identity/PID checks fail again or any authorization boundary is exceeded.
 
+## M3-RUN-02 — exact source-erratum resume gate
+
+- **Date:** 2026-10-20 (Asia/Shanghai); no new HTTP request or generation since the single recorded identity probe.
+- **INSPECT — highest integrity risk:** the first metadata fix was committed, but the runner's resume predicate rejected any source SHA change, including the documented instrumentation-only correction. Simply bypassing this predicate would make future raw evidence unable to distinguish frozen protocol code from the corrected runtime.
+- **SPECIFY — falsifying cases:** resume must be rejected if any prompt/config/scenario/split hash changes, if an unlisted source file changes, if any generation reservation or group start exists before authorization, if the exact runtime hash differs, or if the earlier identity response does not match the frozen model. A valid exception must bind the original freeze commit, exact allowed changed paths, corrected runner hash, recorded error, and one successful identity probe.
+- **IMPLEMENT:** introduced `M3_RUNTIME_RESUME_ERRATA.json` and a pre-generation-only verifier; it checks Git ancestry and exact path/hash diffs, verifies the existing ACL, confirms all 12 assignments but zero started/terminal groups and zero generations, confirms exactly one successful model identity probe and cleanup, then appends an authorization ledger. Environment/session and attempt records distinguish the original freeze source from the runtime code commit and hash. The independent audit independently verifies the manifest, Git source blob, changed-path list, and request provenance. The historical `design-freeze.json` remains byte-identical.
+- **RUN:** the focused M3 audit suite passes (**19 passed**), and the full repository suite now passes (**337 passed, 1 skipped**; opt-in Windows owner-table integration). Exact schedule regeneration remains byte-identical (`380e5556f1e822a2e7f5e5a4eef31c41fd0a15aaffb9f37adb53e48b31951d75`). The prior rejected resume is preserved: zero additional HTTP attempts and zero generations.
+- **ADVERSARIAL REVIEW:** the exception cannot accept a changed prompt or arbitrary source edit; only the exact versioned runner hash and committed file list are permitted, and only before any generation. Later resume requires the same authorized source commit, file hash, and manifest digest.
+- **DECIDE:** the corrected-source resume gate has passed its focused counterexamples and full-suite run. Proceed after exact allowlist/manifest verification, `git diff --check`, privacy scan, and a clean pushed commit. Then resume the same schedule and count all identity probes against the 192-attempt ceiling.
+- **REPORT / next action:** validate the exact manifest/path allowlist against the committed diff, commit and push, then continue. Any mismatch remains a hard NO-GO.
+
 ## M3-MECHANISM-FREEZE-05 — final full-suite result and run-path counterexample
 
 - **Date:** 2026-10-20 (Asia/Shanghai); no M3 model call or llama-server launch.

@@ -13,6 +13,7 @@ import pytest
 
 from scripts.audit_m3_mechanism import (
     AuditFailure, _assert_only_selected_inbound_diff, _same_public_result, _settle,
+    _validate_runtime_code_provenance,
     _validate_http_attempt_link, _validate_identity_probe_ledger,
 )
 from scripts import run_m3_mechanism
@@ -86,6 +87,10 @@ def test_m3_environment_records_frozen_json_safe_tokenizer_metadata(tmp_path):
         "model_probe": {"model_ids": ["frozen-model"]},
         "api_key_info": {"sha256": "d" * 64},
     }
+    (tmp_path / "design-freeze.json").write_text(
+        json.dumps({"source_commit": "freeze", "source_branch": "codex/m3"}),
+        encoding="utf-8",
+    )
 
     run_m3_mechanism._write_environment(
         tmp_path, {"commit": "freeze", "branch": "codex/m3"},
@@ -95,6 +100,57 @@ def test_m3_environment_records_frozen_json_safe_tokenizer_metadata(tmp_path):
 
     recorded = json.loads((tmp_path / "environment.json").read_text(encoding="utf-8"))
     assert recorded["tokenizer_metadata"] == metadata
+    assert recorded["source_commit"] == "freeze"
+    assert recorded["runtime_code_commit"] == "freeze"
+
+
+def test_metadata_only_resume_erratum_requires_unchanged_inputs_and_zero_generation():
+    frozen_hashes = {"scripts/run_m3_mechanism.py": "a" * 64,
+                     "prompts/m1-p0-v2/ballot.txt": "b" * 64}
+    current_hashes = {"scripts/run_m3_mechanism.py": "c" * 64,
+                      "prompts/m1-p0-v2/ballot.txt": "b" * 64}
+    allowed_paths = ["docs/M3_RUNTIME_RESUME_ERRATA.json", "scripts/run_m3_mechanism.py"]
+    freeze = {"source_commit": "base", "source_branch": "codex/m3",
+              "input_sha256": frozen_hashes}
+    manifest = {"schema_version": "m3-runtime-resume-erratum-v1",
+                "base_source_commit": "base", "base_runner_sha256": "a" * 64,
+                "authorized_runner_sha256": "c" * 64,
+                "allowed_changed_paths": allowed_paths,
+                "change_scope": "metadata_export_and_resume_guard_only",
+                "model_facing_semantics_changed": False}
+    git = {"commit": "corrected", "branch": "codex/m3"}
+    evidence = {"failure_signature_seen": True, "assigned_groups": 12,
+                "group_assigned": 12, "group_started": 0, "group_terminal": 0,
+                "generation_logical_requests": 0, "generation_http_attempts": 0,
+                "identity_probe_http_attempts": 1, "identity_probe_terminal_count": 1,
+                "total_http_attempts": 1, "prior_server_shutdown_verified": True,
+                "api_key_removed": True, "identity_probe_model_id_matches": True}
+
+    assert run_m3_mechanism._resume_erratum_eligible(
+        freeze, current_hashes, manifest, git, allowed_paths, evidence)
+    generated = {**evidence, "generation_http_attempts": 1}
+    assert not run_m3_mechanism._resume_erratum_eligible(
+        freeze, current_hashes, manifest, git, allowed_paths, generated)
+    prompt_changed = {**current_hashes, "prompts/m1-p0-v2/ballot.txt": "d" * 64}
+    assert not run_m3_mechanism._resume_erratum_eligible(
+        freeze, prompt_changed, manifest, git, allowed_paths, evidence)
+    extra_source_change = [*allowed_paths, "prompts/m1-p0-v2/ballot.txt"]
+    assert not run_m3_mechanism._resume_erratum_eligible(
+        freeze, current_hashes, manifest, git, extra_source_change, evidence)
+
+
+def test_independent_audit_requires_original_runtime_hash_when_no_erratum(tmp_path):
+    freeze = {"source_commit": "frozen-commit",
+              "input_sha256": {"scripts/run_m3_mechanism.py": "a" * 64}}
+    environment = {"runtime_code_commit": "frozen-commit",
+                   "runtime_code_sha256": "a" * 64,
+                   "runtime_source_erratum_applied": False}
+
+    assert _validate_runtime_code_provenance(tmp_path, freeze, environment)["status"] == \
+        "PASS_ORIGINAL_FROZEN_SOURCE"
+    environment["runtime_code_sha256"] = "b" * 64
+    with pytest.raises(AuditFailure, match="runtime code hash differs"):
+        _validate_runtime_code_provenance(tmp_path, freeze, environment)
 
 
 def test_incomplete_sealed_ballots_are_not_projected_as_public_evidence():

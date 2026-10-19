@@ -71,6 +71,7 @@ HISTORY = ROOT / "runs/m1_p0_local/formal-25ep-pilot-20261019/run"
 M1_CONFIG = ROOT / "configs/m1-100.toml"
 M3_CONFIG = ROOT / "configs/m3-mechanism.toml"
 PROMPT_DIR = ROOT / "prompts/m1-p0-v2"
+M3_RESUME_ERRATA = ROOT / "docs/M3_RUNTIME_RESUME_ERRATA.json"
 
 
 class UnsafeRuntimeError(RuntimeError):
@@ -137,6 +138,135 @@ def _git_state() -> dict[str, Any]:
     if status:
         raise UnsafeRuntimeError("M3 frozen code/protocol must be committed with a clean working tree")
     return {"commit": commit, "branch": branch, "working_tree_clean": True}
+
+
+def _resume_erratum_eligible(freeze: dict[str, Any], hashes: dict[str, str],
+                             manifest: dict[str, Any], git: dict[str, Any],
+                             changed_paths: list[str], evidence: dict[str, Any]) -> bool:
+    """Permit only the preregistered metadata-only source correction pre-generation."""
+    input_key = "scripts/run_m3_mechanism.py"
+    frozen_hashes = freeze.get("input_sha256")
+    if not isinstance(frozen_hashes, dict) or set(frozen_hashes) != set(hashes):
+        return False
+    changed_hashes = [key for key in hashes if hashes[key] != frozen_hashes.get(key)]
+    return bool(
+        manifest.get("schema_version") == "m3-runtime-resume-erratum-v1" and
+        manifest.get("base_source_commit") == freeze.get("source_commit") and
+        manifest.get("base_runner_sha256") == frozen_hashes.get(input_key) and
+        manifest.get("authorized_runner_sha256") == hashes.get(input_key) and
+        manifest.get("authorized_runner_sha256") != manifest.get("base_runner_sha256") and
+        changed_hashes == [input_key] and
+        git.get("commit") != freeze.get("source_commit") and
+        git.get("branch") == freeze.get("source_branch") and
+        manifest.get("allowed_changed_paths") == changed_paths and
+        manifest.get("change_scope") == "metadata_export_and_resume_guard_only" and
+        manifest.get("model_facing_semantics_changed") is False and
+        evidence.get("failure_signature_seen") is True and
+        evidence.get("assigned_groups") == 12 and
+        evidence.get("group_assigned") == 12 and
+        evidence.get("group_started") == 0 and
+        evidence.get("group_terminal") == 0 and
+        evidence.get("generation_logical_requests") == 0 and
+        evidence.get("generation_http_attempts") == 0 and
+        evidence.get("identity_probe_http_attempts") == 1 and
+        evidence.get("identity_probe_terminal_count") == 1 and
+        evidence.get("total_http_attempts") == 1 and
+        evidence.get("prior_server_shutdown_verified") is True and
+        evidence.get("api_key_removed") is True and
+        evidence.get("identity_probe_model_id_matches") is True
+    )
+
+
+def _git_changed_paths(base_commit: str, current_commit: str) -> list[str]:
+    result = subprocess.run(
+        ["git", "-C", str(ROOT), "diff", "--name-only", f"{base_commit}..{current_commit}"],
+        capture_output=True, text=True, check=True, timeout=15)
+    return sorted(line.replace("\\", "/") for line in result.stdout.splitlines() if line.strip())
+
+
+def _resume_erratum_evidence(out: Path) -> dict[str, Any]:
+    progress = read_jsonl(out / "progress.jsonl")
+    starts = read_jsonl(out / "researcher/request-attempt-starts.jsonl")
+    requests = read_jsonl(out / "researcher/requests.jsonl")
+    generation_http = read_jsonl(out / "researcher/http-attempts.jsonl")
+    infrastructure = read_jsonl(out / "researcher/infrastructure-http-attempts.jsonl")
+    failures = read_jsonl(out / "run-failures.jsonl")
+    status = json.loads((out / "run-status.json").read_text(encoding="utf-8"))
+    probe_starts = [row for row in infrastructure if row.get("event") == "attempt_started"]
+    probe_terminals = [row for row in infrastructure if row.get("event") == "attempt_terminal"]
+    metadata_failure_seen = any(
+        row.get("error_type") == "AttributeError" and
+        row.get("error_message") == "'GGUFChatTokenCounter' object has no attribute 'tokenizer_metadata'"
+        for row in failures)
+    model_id_matches = any(
+        row.get("event") == "attempt_terminal" and row.get("status") == "response_returned" and
+        row.get("model_ids") == ["colluscope-qwen3-8b-q4km"] and
+        row.get("session_id") in {probe.get("session_id") for probe in probe_starts}
+        for row in probe_terminals)
+    return {
+        "failure_signature_seen": metadata_failure_seen,
+        "assigned_groups": status.get("assigned_groups"),
+        "group_assigned": sum(row.get("event") == "group_assigned" for row in progress),
+        "group_started": sum(row.get("event") == "group_started" for row in progress),
+        "group_terminal": sum(row.get("event") == "group_terminal" for row in progress),
+        "generation_logical_requests": len(starts) + len(requests),
+        "generation_http_attempts": len(generation_http),
+        "identity_probe_http_attempts": len(probe_starts),
+        "identity_probe_terminal_count": len(probe_terminals),
+        "total_http_attempts": len(probe_starts) + len(generation_http),
+        "prior_server_shutdown_verified": bool(
+            isinstance(status.get("shutdown"), dict) and status["shutdown"].get("terminated") is True),
+        "api_key_removed": bool(
+            isinstance(status.get("api_key_cleanup"), dict) and
+            status["api_key_cleanup"].get("status") == "REMOVED"),
+        "identity_probe_model_id_matches": model_id_matches,
+    }
+
+
+def _authorize_or_revalidate_resume_erratum(out: Path, freeze: dict[str, Any],
+                                            hashes: dict[str, str], git: dict[str, Any],
+                                            schedule: list[dict[str, Any]]) -> dict[str, Any] | None:
+    if not M3_RESUME_ERRATA.is_file():
+        return None
+    manifest_bytes = M3_RESUME_ERRATA.read_bytes()
+    manifest = json.loads(manifest_bytes)
+    manifest_hash = hashlib.sha256(manifest_bytes).hexdigest()
+    current_runner_hash = hashes.get("scripts/run_m3_mechanism.py")
+    changed_paths = _git_changed_paths(freeze.get("source_commit", ""), git["commit"])
+    authorizations_path = out / "resume-source-errata.jsonl"
+    authorizations = read_jsonl(authorizations_path)
+    if authorizations:
+        prior = authorizations[0]
+        if (len(authorizations) != 1 or prior.get("authorized_source_commit") != git["commit"] or
+                prior.get("authorized_runner_sha256") != current_runner_hash or
+                prior.get("authorized_input_sha256") != hashes or
+                prior.get("manifest_sha256") != manifest_hash or
+                prior.get("changed_paths") != changed_paths or
+                prior.get("schedule_sha256") != canonical_sha256(schedule)):
+            return None
+        return prior
+
+    ancestor = subprocess.run(
+        ["git", "-C", str(ROOT), "merge-base", "--is-ancestor",
+         freeze.get("source_commit", ""), git["commit"]],
+        capture_output=True, text=True, timeout=15, check=False)
+    if ancestor.returncode != 0:
+        return None
+    evidence = _resume_erratum_evidence(out)
+    if not _resume_erratum_eligible(freeze, hashes, manifest, git, changed_paths, evidence):
+        return None
+    record = {
+        "event": "metadata_only_source_erratum_authorized_before_generation",
+        "at_utc": utc_now(), "base_source_commit": freeze["source_commit"],
+        "authorized_source_commit": git["commit"], "source_branch": git["branch"],
+        "base_runner_sha256": manifest["base_runner_sha256"],
+        "authorized_runner_sha256": current_runner_hash,
+        "manifest_sha256": manifest_hash, "changed_paths": changed_paths,
+        "authorized_input_sha256": hashes, "schedule_sha256": canonical_sha256(schedule),
+        "pre_generation_evidence": evidence,
+    }
+    append_jsonl(authorizations_path, record)
+    return record
 
 
 def _scenario_inputs() -> tuple[dict[str, Any], list[dict[str, Any]], dict[str, str]]:
@@ -239,7 +369,15 @@ def _prepare_output(out: Path, schedule: list[dict[str, Any]], hashes: dict[str,
             raise ValueError("--resume requires a durable M3 design freeze")
         old = json.loads(freeze.read_text(encoding="utf-8"))
         if old.get("input_sha256") != hashes or old.get("source_commit") != git["commit"]:
-            raise UnsafeRuntimeError("resume code or frozen input hashes differ from the original run")
+            # Existing raw data must be protected before the append-only
+            # source-erratum authorization ledger is written.
+            verify_private_directory_acl(out)
+            authorization = _authorize_or_revalidate_resume_erratum(
+                out, old, hashes, git, schedule)
+            if authorization is None:
+                raise UnsafeRuntimeError(
+                    "resume code or frozen input hashes differ from the original run and no exact "
+                    "pre-generation metadata erratum authorizes this source")
         if old.get("schedule_sha256") != canonical_sha256(schedule):
             raise UnsafeRuntimeError("resume assigned group schedule differs from the original run")
         return
@@ -604,7 +742,8 @@ class _NoRedirect(urllib.request.HTTPRedirectHandler):
 
 def _probe_models(url: str, api_key: str, attempt_log: Path,
                   timeout: float = 10.0, listener_pid: int | None = None,
-                  session_id: str | None = None) -> dict[str, Any]:
+                  session_id: str | None = None, source_commit: str | None = None,
+                  source_code_sha256: str | None = None) -> dict[str, Any]:
     endpoint = url.rstrip("/") + "/models"
     request = urllib.request.Request(endpoint, headers={"Authorization": f"Bearer {api_key}"}, method="GET")
     opener = urllib.request.build_opener(urllib.request.ProxyHandler({}), _NoRedirect())
@@ -612,6 +751,8 @@ def _probe_models(url: str, api_key: str, attempt_log: Path,
     attempt_id = f"identity-probe-{number:03d}"
     record = {"attempt_id": attempt_id, "session_id": session_id,
               "request_attempt": 1,
+              "runtime_code_commit": source_commit,
+              "runtime_code_sha256": source_code_sha256,
               "listener_pid": listener_pid, "method": "GET", "endpoint": endpoint,
               "authentication": "bearer_api_key", "redirects": "disabled",
               "proxy": "disabled"}
@@ -657,8 +798,11 @@ def _listener_is_own(port: int, pid: int) -> dict[str, Any]:
 
 
 def _preflight(config: dict[str, Any], out: Path,
-               generation_attempt_ceiling: int) -> tuple[Any, Any, LocalLlamaCppBackend, str, Path,
+               generation_attempt_ceiling: int,
+               source_state: dict[str, Any] | None = None) -> tuple[Any, Any, LocalLlamaCppBackend, str, Path,
                                                           subprocess.Popen[bytes], GpuSampler, dict[str, Any]]:
+    source_state = source_state or _git_state()
+    source_code_sha256 = sha256_file(Path(__file__))
     old_config = tomllib.loads((HISTORY / "full-pilot-config.toml").read_text(encoding="utf-8"))
     _check_history_unchanged()
     source = load_llamacpp_backend_config(HISTORY / "full-pilot-config.toml")
@@ -716,6 +860,8 @@ def _preflight(config: dict[str, Any], out: Path,
         image = _process_image(process.pid)
         launch_record = {"session_id": f"server-session-{len(read_jsonl(out / 'launches.jsonl')) + 1:03d}",
                          "pid": process.pid, "image_path": image, "command": command,
+                         "runtime_code_commit": source_state["commit"],
+                         "runtime_code_sha256": source_code_sha256,
                                          "host": "127.0.0.1", "port": PORT, "at_utc": utc_now(),
                                          "prelaunch_listener_snapshot": listener_diagnostic,
                                          "api_key_sha256": key_info["sha256"],
@@ -747,11 +893,15 @@ def _preflight(config: dict[str, Any], out: Path,
         model_probe = _probe_models(source.base_url, api_key,
                                     out / "researcher/infrastructure-http-attempts.jsonl",
                                     listener_pid=process.pid,
-                                    session_id=launch_record["session_id"])
+                                    session_id=launch_record["session_id"],
+                                    source_commit=source_state["commit"],
+                                    source_code_sha256=source_code_sha256)
         if source.model_id not in model_probe["model_ids"]:
             raise UnsafeRuntimeError("authenticated /models response does not identify the frozen model alias")
         listener = _listener_is_own(PORT, process.pid)
         preflight_record = {"session_id": launch_record["session_id"],
+                            "runtime_code_commit": source_state["commit"],
+                            "runtime_code_sha256": source_code_sha256,
                                            "status": "PASS_LOCAL_IDENTITY", "at_utc": utc_now(),
                                            "listener": listener, "model_probe": model_probe,
                                            "identity_probe_http_attempts": 1,
@@ -798,9 +948,17 @@ def _preflight(config: dict[str, Any], out: Path,
 def _write_environment(out: Path, git: dict[str, Any], config: dict[str, Any],
                        backend_config: Any, token_counter: GGUFChatTokenCounter,
                        runtime_info: dict[str, Any], schedule: list[dict[str, Any]]) -> None:
+    freeze = json.loads((out / "design-freeze.json").read_text(encoding="utf-8"))
+    source_errata = read_jsonl(out / "resume-source-errata.jsonl")
     environment = {
         "protocol_id": PROTOCOL_ID, "approval_id": M3_MECHANISM_APPROVAL_ID,
-        "started_at_utc": utc_now(), "source_commit": git["commit"], "source_branch": git["branch"],
+        "started_at_utc": utc_now(), "source_commit": freeze["source_commit"],
+        "source_branch": freeze["source_branch"],
+        "runtime_code_commit": git["commit"], "runtime_code_branch": git["branch"],
+        "runtime_code_sha256": sha256_file(Path(__file__)),
+        "runtime_source_erratum_applied": bool(source_errata),
+        "runtime_source_erratum_sha256": (source_errata[0].get("manifest_sha256")
+                                           if source_errata else None),
         "python": sys.version, "platform": platform.platform(),
         "model_path": runtime_info["model_path"], "model_sha256": MODEL_SHA256,
         "server_path": runtime_info["server_path"], "server_sha256": SERVER_SHA256,
@@ -997,7 +1155,7 @@ def run(out_dir: Path, *, resume: bool = False) -> dict[str, Any]:
                 prior_identity_probes >= MAX_ALL_HTTP_ATTEMPTS):
             raise UnsafeRuntimeError("durable attempt ledger is already over the frozen hard ceiling")
         runtime, token_counter, backend, api_key, key_path, process, sampler, runtime_info = _preflight(
-            config, out, generation_attempt_ceiling)
+            config, out, generation_attempt_ceiling, source_state=git)
         _write_environment(out, git, config, runtime_info["backend_config"], token_counter,
                            runtime_info, schedule)
         budget = RequestBudget(MAX_LOGICAL, generation_attempt_ceiling, MAX_PER_REQUEST)
@@ -1006,9 +1164,12 @@ def run(out_dir: Path, *, resume: bool = False) -> dict[str, Any]:
         budget.attempts = sum(attempts_by_id.values())
         backend.restore_full_run_budget(attempts_by_id)
 
+        runner_sha256 = sha256_file(Path(__file__))
+
         def on_start(row: dict[str, Any]) -> None:
             append_jsonl(starts_path, {"at_utc": utc_now(), "session_id": runtime_info["session_id"],
-                                      "listener_pid": process.pid, **row})
+                                      "listener_pid": process.pid, "runtime_code_commit": git["commit"],
+                                      "runtime_code_sha256": runner_sha256, **row})
 
         def on_record(row: dict[str, Any]) -> None:
             append_jsonl(out / "researcher/requests.jsonl", {"at_utc": utc_now(), **row})
