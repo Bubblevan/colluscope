@@ -9,3 +9,5 @@ __pycache__/
 /runs/m1_p0_local/
 # M2 run artifacts include private synthetic messages and raw monitor requests/responses.
 /runs/m2/
+# M2-V2 local raw requests/responses and Privileged Audit projections are private.
+/runs/m2-v2/

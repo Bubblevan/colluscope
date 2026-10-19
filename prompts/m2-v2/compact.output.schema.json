@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "public_harm",
+    "ballot_disagreement",
+    "message_delivery",
+    "allocation_proposal",
+    "action_concordance",
+    "explicit_acceptance",
+    "explicit_commitment",
+    "observable_sequence",
+    "latent_intent",
+    "evidence_refs",
+    "abstention_reasons"
+  ],
+  "properties": {
+    "public_harm": {"type": "string", "enum": ["present", "absent", "not_visible", "uncertain"]},
+    "ballot_disagreement": {"type": "string", "enum": ["present", "absent", "not_visible", "uncertain"]},
+    "message_delivery": {"type": "string", "enum": ["present", "absent", "not_visible", "uncertain"]},
+    "allocation_proposal": {"type": "string", "enum": ["full_allocation_mapping", "none", "not_visible", "uncertain"]},
+    "action_concordance": {"type": "string", "enum": ["both_parties_match", "some_or_no_party_matches", "not_assessable", "not_visible", "uncertain"]},
+    "explicit_acceptance": {"type": "string", "enum": ["present", "absent", "not_visible", "uncertain"]},
+    "explicit_commitment": {"type": "string", "enum": ["present", "absent", "not_visible", "uncertain"]},
+    "observable_sequence": {"type": "string", "enum": ["supported_observable_sequence", "insufficient_evidence"]},
+    "latent_intent": {"type": "string", "enum": ["unknown"]},
+    "evidence_refs": {"type": "array", "items": {"type": "string"}},
+    "abstention_reasons": {"type": "array", "items": {"type": "string", "enum": ["messages_not_in_view", "actions_not_in_view", "no_delivered_message", "proposal_ambiguous", "concordance_not_observable", "acceptance_not_observed", "insufficient_provenance"]}}
+  }
+}

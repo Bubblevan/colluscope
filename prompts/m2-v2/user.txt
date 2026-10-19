@@ -1,0 +1,7 @@
+Permission profile: {permission_profile}
+Evidence view: {view_name}
+
+This permission label describes auditor access, not an agent's treatment. The view intentionally omits some event types. An empty delivered-message list does not establish that a channel was unavailable.
+
+Evidence object:
+{evidence_json}

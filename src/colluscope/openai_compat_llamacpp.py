@@ -279,9 +279,15 @@ def _validate_config(config: LlamaCppBackendConfig) -> None:
         not config.preflight_approval_id and
         config.full_pilot_approval_id == "USER-AUTHORIZED-M2-ONE-SHOT-2026-10-19" and
         (config.max_logical_requests, config.max_total_attempts) == (1000, 2000))
+    approved_m2_v2_monitor = (
+        port == 8081 and config.model_calls_enabled and not config.preflight_enabled and
+        not config.preflight_approval_id and
+        config.full_pilot_approval_id == "USER-AUTHORIZED-M2-V2-END-TO-END-2026-10-19" and
+        (config.max_logical_requests, config.max_total_attempts) == (1000, 2000))
     if launch_without_port != expected_launch or port not in (8080, 8081) or (
             port != 8080 and not (approved_preflight_port or approved_8081_full_pilot or
-                                  approved_m1_100_local_extension or approved_m2_monitor)):
+                                  approved_m1_100_local_extension or approved_m2_monitor or
+                                  approved_m2_v2_monitor)):
         raise ValueError("launch settings differ from the inspected, frozen local candidate")
     if (config.context_length != 4096 or config.input_budget_tokens != 3072 or
             config.message_max_output_tokens != 512 or config.ballot_max_output_tokens != 256):
