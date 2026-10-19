@@ -385,6 +385,68 @@ def test_fake_preflight_runs_exact_six_request_sequence_and_parses_all_actions(t
         "completion_attempt_started", "completion_attempt_finished"]
 
 
+def test_fake_preflight_continuation_reuses_setup_and_dispatches_only_three_actions(tmp_path):
+    template = "frozen fake template"
+    template_hash = hashlib.sha256(template.encode("utf-8")).hexdigest()
+    settings = config_for(preflight=True, chat_template_sha256=template_hash)
+    settings, bundle = fake_server_bundle(settings, tmp_path)
+    counter = FakeCounter(settings, template=template)
+    ballot = request_for(settings, request_id="probe-ballot", action_kind="ballot")
+    send = request_for(settings, request_id="probe-send", action_kind="message")
+    no_message = request_for(settings, request_id="probe-no-message", action_kind="message")
+    probes = [(ballot, None), (send, "send_message"), (no_message, "no_message")]
+    messages = [{"role": "system", "content": "frozen system instructions"},
+                {"role": "user", "content": ballot.prompt.split("\n\n", 1)[1]}]
+    rendered = counter.render_chat(messages, enable_thinking=False)
+    tokens = counter.encode_chat(messages, enable_thinking=False)
+    props = {"default_generation_settings": {"n_ctx": 4096,
+             "params": {"temperature": 0.0, "top_p": 1.0, "top_k": 0, "min_p": 0.0,
+                        "samplers": ["top_k", "top_p", "min_p", "temperature"]}},
+             "chat_template": template, "model_path": settings.artifact_path,
+             "build_info": settings.server_build_info, "total_slots": 1}
+    setup_payloads = {
+        "preflight-props": ("GET", "http://127.0.0.1:8080/props", None, props),
+        "preflight-template": ("POST", "http://127.0.0.1:8080/apply-template",
+                               {"messages": messages, "chat_template_kwargs": {"enable_thinking": False}},
+                               {"prompt": rendered}),
+        "preflight-tokenize": ("POST", "http://127.0.0.1:8080/tokenize",
+                               {"content": rendered, "add_special": False,
+                                "parse_special": True, "with_pieces": False},
+                               {"tokens": tokens}),
+    }
+    setup_records = []
+    reused_responses = {}
+    for request_id, (method, url, payload, response_body) in setup_payloads.items():
+        request_body = (json.dumps(payload, ensure_ascii=False, separators=(",", ":"))
+                        if payload is not None else None)
+        raw = json.dumps(response_body, ensure_ascii=False, separators=(",", ":"))
+        setup_records.append({"request_id": request_id, "attempt": 1, "method": method,
+                              "url": url, "request_body": request_body,
+                              "request_sha256": hashlib.sha256(request_body.encode("utf-8")).hexdigest()
+                              if request_body is not None else None,
+                              "completion_attempt": False, "status": "response_returned",
+                              "raw_response": raw,
+                              "raw_response_sha256": hashlib.sha256(raw.encode("utf-8")).hexdigest()})
+        reused_responses[request_id] = raw.encode("utf-8")
+
+    budget = LlamaCppPreflightBudget(enabled=True)
+    budget.reuse_verified_setup(setup_records)
+    opener = FakeOpener([
+        response('{"type":"ballot","assignment":{"A":"T1","B":"T2","C":"T3"}}'),
+        response('{"type":"send_message","text":"Proposal"}'),
+        response('{"type":"no_message"}'),
+    ])
+    backend = LocalLlamaCppBackend(settings, counter, opener)
+    result = backend.preflight(budget, probes, reused_setup_responses=reused_responses)
+    assert result["status"] == "PASS"
+    assert result["logical_requests"] == 6
+    assert result["http_attempts"] == 6
+    assert result["model_completion_attempts"] == 3
+    assert result["reused_prior_setup_requests"] == 3
+    assert len(opener.calls) == 3
+    assert all(call[0].full_url.endswith("/v1/chat/completions") for call in opener.calls)
+
+
 def test_port_8081_requires_bounded_preflight_gate_and_listener_owner(tmp_path):
     launch = {**BASE.launch, "port": 8081}
     settings = config_for(preflight=True, base_url="http://127.0.0.1:8081/v1", launch=launch)
@@ -419,6 +481,52 @@ def test_port_8081_allows_only_explicit_preflight_gated_local_full_pilot():
                          base_url="http://127.0.0.1:8081/v1", launch=launch)
     with pytest.raises(ValueError, match="launch settings"):
         LocalLlamaCppBackend(invalid, FakeCounter(invalid), FakeOpener([]))
+
+
+def test_preflight_continuation_carries_only_three_hash_verified_setup_responses():
+    rows = []
+    for request_id, method, url, response in (
+            ("preflight-props", "GET", "http://127.0.0.1:8081/props", "{}"),
+            ("preflight-template", "POST", "http://127.0.0.1:8081/apply-template", "{}"),
+            ("preflight-tokenize", "POST", "http://127.0.0.1:8081/tokenize", "{}")):
+        rows.append({"request_id": request_id, "attempt": 1, "method": method, "url": url,
+                     "request_body": None if method == "GET" else "{}",
+                     "request_sha256": None if method == "GET" else hashlib.sha256(b"{}").hexdigest(),
+                     "completion_attempt": False, "status": "response_returned",
+                     "raw_response": response,
+                     "raw_response_sha256": hashlib.sha256(response.encode("utf-8")).hexdigest()})
+    budget = LlamaCppPreflightBudget(enabled=True)
+    budget.reuse_verified_setup(rows)
+    assert budget.logical_ids == {"preflight-props", "preflight-template", "preflight-tokenize"}
+    assert budget.attempts == 3
+    assert budget.completion_attempts == 0
+    for index in range(1, 4):
+        budget.reserve(f"preflight-completion-{index}", 1, completion=True)
+    assert len(budget.logical_ids) == 6
+    assert budget.attempts == 6
+    assert budget.completion_attempts == 3
+    with pytest.raises(RuntimeError, match="logical-request hard limit"):
+        budget.reserve("preflight-unapproved-seventh", 1)
+
+
+def test_preflight_continuation_rejects_tampered_prior_setup_response():
+    raw = "{}"
+    rows = [{"request_id": request_id, "attempt": 1, "method": method, "url": url,
+             "request_body": None if method == "GET" else "{}",
+             "request_sha256": None if method == "GET" else hashlib.sha256(b"{}").hexdigest(),
+             "completion_attempt": False, "status": "response_returned",
+             "raw_response": raw,
+             "raw_response_sha256": hashlib.sha256(raw.encode("utf-8")).hexdigest()}
+            for request_id, method, url in (
+                ("preflight-props", "GET", "http://127.0.0.1:8081/props"),
+                ("preflight-template", "POST", "http://127.0.0.1:8081/apply-template"),
+                ("preflight-tokenize", "POST", "http://127.0.0.1:8081/tokenize"))]
+    rows[1]["raw_response"] = "tampered"
+    budget = LlamaCppPreflightBudget(enabled=True)
+    with pytest.raises(ValueError, match="integrity checks"):
+        budget.reuse_verified_setup(rows)
+    assert budget.logical_ids == set()
+    assert budget.attempts == 0
 
 
 def test_preflight_fails_closed_on_template_mismatch_and_records_raw_response(tmp_path):

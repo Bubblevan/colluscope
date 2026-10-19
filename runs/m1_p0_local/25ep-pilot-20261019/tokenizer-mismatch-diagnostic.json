@@ -1,0 +1,152 @@
+{
+  "local_token_count": 478,
+  "server_token_count": 447,
+  "first_difference_index": 114,
+  "local_window": [
+    902,
+    24880,
+    21189,
+    2441,
+    855,
+    12,
+    29358,
+    2550,
+    1526,
+    279,
+    4573,
+    13,
+    198,
+    198,
+    5598
+  ],
+  "server_window": [
+    902,
+    24880,
+    21189,
+    2441,
+    855,
+    8273,
+    1272,
+    2550,
+    1526,
+    279,
+    4573,
+    382,
+    5598,
+    6896,
+    825
+  ],
+  "server_window_pieces": [
+    "Ġno",
+    "Ġparticipant",
+    "Ġreceives",
+    "Ġanother",
+    "Ġpre",
+    "-v",
+    "ote",
+    "Ġoutput",
+    "Ġthrough",
+    "Ġthe",
+    "Ġenvironment",
+    ".ĊĊ",
+    "Return",
+    "Ġexactly",
+    "Ġone"
+  ],
+  "local_window_pieces": [
+    "Ġno",
+    "Ġparticipant",
+    "Ġreceives",
+    "Ġanother",
+    "Ġpre",
+    "-",
+    "vote",
+    "Ġoutput",
+    "Ġthrough",
+    "Ġthe",
+    "Ġenvironment",
+    ".",
+    "Ċ",
+    "Ċ",
+    "Return"
+  ],
+  "special_token_candidates": [
+    {
+      "token_id": 21189,
+      "piece": "Ġreceives",
+      "token_type": 1
+    },
+    {
+      "token_id": 902,
+      "piece": "Ġno",
+      "token_type": 1
+    },
+    {
+      "token_id": 5598,
+      "piece": "Return",
+      "token_type": 1
+    },
+    {
+      "token_id": 2441,
+      "piece": "Ġanother",
+      "token_type": 1
+    },
+    {
+      "token_id": 24880,
+      "piece": "Ġparticipant",
+      "token_type": 1
+    },
+    {
+      "token_id": 8273,
+      "piece": "-v",
+      "token_type": 1
+    },
+    {
+      "token_id": 6896,
+      "piece": "Ġexactly",
+      "token_type": 1
+    },
+    {
+      "token_id": 825,
+      "piece": "Ġone",
+      "token_type": 1
+    },
+    {
+      "token_id": 2550,
+      "piece": "Ġoutput",
+      "token_type": 1
+    },
+    {
+      "token_id": 855,
+      "piece": "Ġpre",
+      "token_type": 1
+    },
+    {
+      "token_id": 1272,
+      "piece": "ote",
+      "token_type": 1
+    },
+    {
+      "token_id": 1526,
+      "piece": "Ġthrough",
+      "token_type": 1
+    },
+    {
+      "token_id": 279,
+      "piece": "Ġthe",
+      "token_type": 1
+    },
+    {
+      "token_id": 4573,
+      "piece": "Ġenvironment",
+      "token_type": 1
+    },
+    {
+      "token_id": 382,
+      "piece": ".ĊĊ",
+      "token_type": 1
+    }
+  ],
+  "prefix_equal_before_difference": true,
+  "full_sequences_equal": false
+}

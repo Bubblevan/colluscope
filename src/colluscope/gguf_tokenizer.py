@@ -10,7 +10,7 @@ from typing import Any
 import jinja2
 import tokenizers
 from jinja2 import Environment, StrictUndefined
-from tokenizers import AddedToken, Tokenizer, decoders, models, pre_tokenizers
+from tokenizers import AddedToken, Regex, Tokenizer, decoders, models, pre_tokenizers
 
 from .gguf_metadata import GGUFArray, read_gguf
 
@@ -18,6 +18,23 @@ from .gguf_metadata import GGUFArray, read_gguf
 _CAPTURED_ARRAYS = frozenset({
     "tokenizer.ggml.tokens", "tokenizer.ggml.merges", "tokenizer.ggml.token_type",
 })
+
+# llama.cpp's GGUF "qwen2" pre-tokenizer attaches a leading punctuation
+# character to a following word. The generic tokenizers ByteLevel regex uses a
+# GPT-2 boundary and can split strings such as "-vote" differently even when
+# the vocabulary and merge table are identical.
+_QWEN2_PRETOKENIZER_REGEX = (
+    r"(?i:'s|'t|'re|'ve|'m|'ll|'d)|[^\r\n\p{L}\p{N}]?\p{L}+|"
+    r"\p{N}{1,3}| ?[^\s\p{L}\p{N}]+[\r\n]*|\s*[\r\n]+|\s+(?!\S)|\s+"
+)
+
+
+def _qwen2_pre_tokenizer() -> pre_tokenizers.Sequence:
+    """Match the Qwen2 regex boundary before applying GPT-style byte mapping."""
+    return pre_tokenizers.Sequence([
+        pre_tokenizers.Split(Regex(_QWEN2_PRETOKENIZER_REGEX), behavior="isolated"),
+        pre_tokenizers.ByteLevel(add_prefix_space=False, use_regex=False),
+    ])
 
 
 class GGUFChatTokenCounter:
@@ -58,7 +75,7 @@ class GGUFChatTokenCounter:
                 raise ValueError("GGUF BPE merge entry is malformed")
             merges.append(tuple(merge.split(" ", 1)))
         self.tokenizer = Tokenizer(models.BPE(vocab, merges, unk_token=None))
-        self.tokenizer.pre_tokenizer = pre_tokenizers.ByteLevel(add_prefix_space=False, use_regex=True)
+        self.tokenizer.pre_tokenizer = _qwen2_pre_tokenizer()
         self.tokenizer.decoder = decoders.ByteLevel()
         special_tokens = [AddedToken(piece, normalized=False, special=True)
                           for piece, token_type in zip(token_array.values, type_array.values)

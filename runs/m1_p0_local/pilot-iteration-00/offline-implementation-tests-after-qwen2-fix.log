@@ -1,0 +1,6 @@
+..........................................s............................. [ 47%]
+........................................................................ [ 94%]
+........                                                                 [100%]
+=========================== short test summary info ===========================
+SKIPPED [1] tests\test_m1_p0_preflight_runner.py:61: opt-in host-dependent Windows owner-table integration check
+151 passed, 1 skipped in 15.93s

@@ -1,0 +1,8 @@
+{
+  "approval_id": "USER-AUTHORIZED-M1-P0-25-EPISODE-PILOT-2026-10-19",
+  "consumed_at_utc": "2026-10-19T05:29:37.304611+00:00",
+  "maximum_episode_count": 25,
+  "maximum_http_attempts": 190,
+  "maximum_logical_requests": 95,
+  "run_dir": "D:\\MyLab\\colluscope\\reference\\m1-p0-local-qwen-integration\\runs\\m1_p0_local\\25ep-pilot-20261019\\run"
+}

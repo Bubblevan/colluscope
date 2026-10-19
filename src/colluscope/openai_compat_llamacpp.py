@@ -339,6 +339,36 @@ class LlamaCppPreflightBudget:
         if completion:
             self.completion_attempts += 1
 
+    def reuse_verified_setup(self, records: list[dict[str, Any]]) -> None:
+        """Carry forward the three successful, non-generation checks once.
+
+        This is only for an explicitly linked continuation after a preflight
+        stopped at client-side tokenizer validation. It preserves the original
+        6/12/4 aggregate ceiling instead of repeating successful HTTP probes.
+        The caller must separately verify the parent run and exact server/model
+        identity before supplying these records.
+        """
+        if self.logical_ids or self.attempts or self.completion_attempts or self.records:
+            raise ValueError("preflight setup evidence can only be reused into an empty budget")
+        expected_ids = ("preflight-props", "preflight-template", "preflight-tokenize")
+        by_id: dict[str, list[dict[str, Any]]] = {}
+        for row in records:
+            if row.get("request_id") in expected_ids:
+                by_id.setdefault(row["request_id"], []).append(row)
+        if set(by_id) != set(expected_ids) or any(len(by_id[key]) != 1 for key in expected_ids):
+            raise ValueError("continuation requires exactly one record for each successful setup request")
+        for request_id in expected_ids:
+            row = by_id[request_id][0]
+            raw = row.get("raw_response")
+            if (row.get("attempt") != 1 or row.get("status") != "response_returned" or
+                    row.get("completion_attempt") is not False or not isinstance(raw, str) or
+                    row.get("raw_response_sha256") != sha256(raw.encode("utf-8")).hexdigest()):
+                raise ValueError(f"continuation setup response failed integrity checks: {request_id}")
+        self.logical_ids.update(expected_ids)
+        self.attempts_by_request.update({request_id: 1 for request_id in expected_ids})
+        self.attempts = len(expected_ids)
+        self.records.extend(dict(by_id[request_id][0]) for request_id in expected_ids)
+
 
 class _NoRedirect(urllib.request.HTTPRedirectHandler):
     def redirect_request(self, req, fp, code, msg, headers, newurl):
@@ -665,7 +695,8 @@ class LocalLlamaCppBackend:
                                        **details})
 
     def _run_preflight(self, budget: LlamaCppPreflightBudget,
-                       probes: list[tuple[AgentRequest, str]]) -> dict[str, Any]:
+                       probes: list[tuple[AgentRequest, str]],
+                       reused_setup_responses: dict[str, bytes] | None = None) -> dict[str, Any]:
         """Run six bounded local checks only when a separate preflight is enabled.
 
         The exact sequence is `/props`, `/apply-template`, `/tokenize`, then a
@@ -680,6 +711,10 @@ class LocalLlamaCppBackend:
                 budget.max_attempts > self.config.preflight_max_attempts or
                 budget.max_completion_attempts > self.config.preflight_max_completion_attempts):
             raise ValueError("preflight budget exceeds the frozen 6/12/4 ceiling")
+        if reused_setup_responses is not None:
+            expected_setup_ids = {"preflight-props", "preflight-template", "preflight-tokenize"}
+            if set(reused_setup_responses) != expected_setup_ids or not expected_setup_ids.issubset(budget.logical_ids):
+                raise ValueError("resumed preflight setup responses do not match the verified budget ledger")
         expected = [("ballot", None), ("message", "send_message"), ("message", "no_message")]
         if len(probes) != 3 or [(request.action_kind, action) for request, action in probes] != expected:
             raise ValueError("preflight requires ballot, send_message, and no_message probes in frozen order")
@@ -689,7 +724,27 @@ class LocalLlamaCppBackend:
             raise RuntimeError("local llama.cpp launcher/DLL bundle differs from the frozen runtime identity")
 
         root = self.config.base_url.rsplit("/v1", 1)[0]
-        props_body = self._preflight_call(budget, "preflight-props", "GET", root + "/props", None)
+
+        def setup_response(request_id: str, method: str, url: str,
+                           payload: dict[str, Any] | None) -> bytes:
+            if reused_setup_responses is None:
+                return self._preflight_call(budget, request_id, method, url, payload)
+            response = reused_setup_responses[request_id]
+            expected_payload = (json.dumps(payload, ensure_ascii=False, separators=(",", ":"))
+                                if payload is not None else None)
+            body = expected_payload.encode("utf-8") if expected_payload is not None else None
+            expected_hash = sha256(body).hexdigest() if body is not None else None
+            matching = [row for row in budget.records if row.get("request_id") == request_id]
+            if (len(matching) != 1 or matching[0].get("method") != method or
+                    matching[0].get("url") != url or matching[0].get("request_body") != expected_payload or
+                    matching[0].get("request_sha256") != expected_hash or
+                    matching[0].get("raw_response_sha256") != sha256(response).hexdigest()):
+                raise ValueError(f"reused preflight setup evidence differs from current request: {request_id}")
+            self._emit_preflight_event("preflight_setup_response_reused", request_id=request_id,
+                                       source_status="previously_returned_and_hash_verified")
+            return response
+
+        props_body = setup_response("preflight-props", "GET", root + "/props", None)
         try:
             props = json.loads(props_body.decode("utf-8"))
             settings = props["default_generation_settings"]
@@ -720,8 +775,8 @@ class LocalLlamaCppBackend:
 
         ballot_messages = self._messages(probes[0][0].prompt)
         expected_render = self.token_counter.render_chat(ballot_messages, enable_thinking=False)
-        apply_body = self._preflight_call(
-            budget, "preflight-template", "POST", root + "/apply-template",
+        apply_body = setup_response(
+            "preflight-template", "POST", root + "/apply-template",
             {"messages": ballot_messages, "chat_template_kwargs": {"enable_thinking": False}})
         try:
             server_render = json.loads(apply_body.decode("utf-8"))["prompt"]
@@ -731,8 +786,8 @@ class LocalLlamaCppBackend:
             raise RuntimeError("local GGUF Jinja renderer differs from llama.cpp /apply-template output")
 
         token_ids_local = self.token_counter.encode_chat(ballot_messages, enable_thinking=False)
-        tokenize_body = self._preflight_call(
-            budget, "preflight-tokenize", "POST", root + "/tokenize",
+        tokenize_body = setup_response(
+            "preflight-tokenize", "POST", root + "/tokenize",
             {"content": server_render,
              "add_special": self.tokenizer_metadata.get("add_bos_token", False),
              "parse_special": True, "with_pieces": False})
@@ -785,16 +840,18 @@ class LocalLlamaCppBackend:
             "verified_parallel_slots": props["total_slots"],
             "verified_chat_template_sha256": self.config.chat_template_sha256,
             "verified_tokenizer_ids": len(token_ids_local),
+            "reused_prior_setup_requests": len(reused_setup_responses or {}),
             "verified_actions": actual_actions,
             "records": budget.records,
         }
 
     def preflight(self, budget: LlamaCppPreflightBudget,
-                  probes: list[tuple[AgentRequest, str]]) -> dict[str, Any]:
+                  probes: list[tuple[AgentRequest, str]], *,
+                  reused_setup_responses: dict[str, bytes] | None = None) -> dict[str, Any]:
         """Wrap preflight verification failures with a retained raw-evidence row."""
         record_count = len(budget.records)
         try:
-            return self._run_preflight(budget, probes)
+            return self._run_preflight(budget, probes, reused_setup_responses)
         except Exception as exc:
             new_records = budget.records[record_count:]
             if new_records and new_records[-1].get("status") == "response_returned":

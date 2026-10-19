@@ -12,6 +12,7 @@ import hashlib
 import json
 import os
 import platform
+import shutil
 import socket
 import subprocess
 import sys
@@ -170,6 +171,158 @@ def _runtime_source_files() -> list[Path]:
             ROOT / "src" / "colluscope" / "gguf_tokenizer.py"]
 
 
+def _validate_preflight_continuation(previous_dir: Path, config_path: Path,
+                                     runtime_config_path: Path, backend_config: Any,
+                                     probes: list[Any], prompt_evidence: list[dict[str, Any]]) -> dict[str, Any]:
+    """Validate a single continuation after setup checks and tokenizer parity failed.
+
+    Successful `/props`, `/apply-template`, and `/tokenize` calls are reused as
+    cumulative preflight evidence. The next run must repeat the exact frozen
+    server command and may issue only the three remaining action probes, keeping
+    the aggregate preflight within 6 logical / 12 HTTP / 4 completion attempts.
+    """
+    previous_dir = previous_dir.resolve()
+    if not previous_dir.is_relative_to(ROOT.resolve()):
+        raise ValueError("preflight continuation evidence must be inside this repository")
+    manifest_path = previous_dir / "manifest.json"
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    for relative, expected in manifest.get("sha256", {}).items():
+        path = (previous_dir / relative).resolve()
+        if not path.is_relative_to(previous_dir) or not path.is_file() or _sha256_file(path) != expected:
+            raise ValueError(f"prior preflight artifact hash mismatch: {relative}")
+    environment = json.loads((previous_dir / "environment.json").read_text(encoding="utf-8"))
+    previous_head = environment.get("git_head")
+    if not isinstance(previous_head, str) or len(previous_head) != 40:
+        raise ValueError("prior preflight does not identify a full Git commit SHA")
+    if (environment.get("model_sha256") != EXPECTED_MODEL_SHA256 or
+            environment.get("server_sha256") != EXPECTED_SERVER_SHA256 or
+            environment.get("runtime_bundle_sha256") != EXPECTED_BUNDLE_SHA256 or
+            environment.get("base_url") != backend_config.base_url):
+        raise ValueError("prior preflight model/server/endpoint differs from the frozen local pilot")
+    for relative, expected in manifest.get("runtime_source_sha256", {}).items():
+        source = subprocess.run(["git", "show", f"{previous_head}:{relative}"], cwd=ROOT,
+                                capture_output=True, timeout=15, check=True)
+        if hashlib.sha256(source.stdout).hexdigest() != expected:
+            raise ValueError(f"prior run source fingerprint does not match its Git commit: {relative}")
+
+    terminal = json.loads((previous_dir / "terminal-status.json").read_text(encoding="utf-8"))
+    result = json.loads((previous_dir / "preflight" / "result.json").read_text(encoding="utf-8"))
+    if (terminal.get("status") != "NO_GO_PREFLIGHT" or terminal.get("episodes_attempted") != 0 or
+            terminal.get("pilot_logical_requests") != 0 or terminal.get("pilot_http_attempts") != 0 or
+            result.get("status") != "FAIL" or
+            result.get("error") != "local GGUF tokenizer IDs differ from llama.cpp /tokenize"):
+        raise ValueError("continuation is allowed only for the retained preflight tokenizer mismatch with zero episodes")
+    state = result.get("budget_state", {})
+    if (state.get("logical_requests") != 3 or state.get("http_attempts") != 3 or
+            state.get("completion_attempts") != 0 or state.get("attempts_by_request") != {
+                "preflight-props": 1, "preflight-template": 1, "preflight-tokenize": 1}):
+        raise ValueError("prior preflight usage differs from the three permitted setup checks")
+    approval = json.loads((previous_dir / "approval-record.json").read_text(encoding="utf-8"))
+    consumed = json.loads((previous_dir / "approval-consumption.json").read_text(encoding="utf-8"))
+    ledger = ROOT / "runs" / "m1_p0_local" / "approval-ledger" / (
+        hashlib.sha256(PILOT_APPROVAL_ID.encode("utf-8")).hexdigest() + ".json")
+    ledger_record = json.loads(ledger.read_text(encoding="utf-8"))
+    if (approval.get("full_25_episode_pilot_approval_id") != PILOT_APPROVAL_ID or
+            approval.get("preflight_approval_id") != PREFLIGHT_APPROVAL_ID or
+            consumed.get("approval_id") != PILOT_APPROVAL_ID or
+            Path(consumed.get("run_dir", "")).resolve() != previous_dir or
+            ledger_record.get("run_dir") != str(previous_dir)):
+        raise PermissionError("prior preflight is not the run that consumed this exact pilot approval")
+    if ((previous_dir / "full-pilot-config.toml").read_bytes() != config_path.read_bytes() or
+            (previous_dir / "runtime-config.toml").read_bytes() != runtime_config_path.read_bytes()):
+        raise ValueError("continuation config/runtime differs from the failed run's frozen inputs")
+    previous_launch = json.loads((previous_dir / "launch.json").read_text(encoding="utf-8"))
+    if previous_launch.get("command") != llama_server_command(backend_config):
+        raise ValueError("continuation server command differs from the previous exact launch")
+    health = json.loads((previous_dir / "server-health.json").read_text(encoding="utf-8"))
+    owner = json.loads((previous_dir / "listener-owner-attestation.json").read_text(encoding="utf-8"))
+    if (health.get("status") != "PASS" or owner.get("status") != "verified_exact_pid" or
+            owner.get("expected_pid") != previous_launch.get("pid")):
+        raise ValueError("prior run did not verify the exact local listener and health endpoint")
+
+    old_inputs = json.loads((previous_dir / "preflight" / "inputs.json").read_text(encoding="utf-8"))
+    if old_inputs.get("prompts") != prompt_evidence:
+        raise ValueError("continuation probes differ from the failed run's exact prompt evidence")
+    rows = _read_jsonl(previous_dir / "preflight" / "requests.jsonl")
+    setup_ids = ("preflight-props", "preflight-template", "preflight-tokenize")
+    setup_records: list[dict[str, Any]] = []
+    reused: dict[str, bytes] = {}
+    root = backend_config.base_url.rsplit("/v1", 1)[0]
+    endpoints = {"preflight-props": ("GET", root + "/props"),
+                 "preflight-template": ("POST", root + "/apply-template"),
+                 "preflight-tokenize": ("POST", root + "/tokenize")}
+    for request_id in setup_ids:
+        matching = [row for row in rows if row.get("request_id") == request_id and
+                    isinstance(row.get("attempt"), int)]
+        if len(matching) != 1:
+            raise ValueError(f"prior setup request is missing or duplicated: {request_id}")
+        record = matching[0]
+        method, url = endpoints[request_id]
+        raw = record.get("raw_response")
+        if record.get("method") != method or record.get("url") != url or not isinstance(raw, str):
+            raise ValueError(f"prior setup request identity is invalid: {request_id}")
+        setup_records.append(record)
+        reused[request_id] = raw.encode("utf-8")
+    return {"previous_dir": previous_dir, "previous_manifest": manifest,
+            "previous_manifest_sha256": _sha256_file(manifest_path),
+            "previous_requests_sha256": _sha256_file(previous_dir / "preflight" / "requests.jsonl"),
+            "setup_records": setup_records, "setup_responses": reused}
+
+
+def _claim_preflight_continuation(out_dir: Path, previous_dir: Path) -> Path:
+    ledger_dir = ROOT / "runs" / "m1_p0_local" / "approval-ledger"
+    approval_key = hashlib.sha256(PILOT_APPROVAL_ID.encode("utf-8")).hexdigest()
+    marker = ledger_dir / f"{approval_key}.continuation.json"
+    record = {"approval_id": PILOT_APPROVAL_ID,
+              "continued_from": str(previous_dir.resolve()),
+              "continuation_run_dir": str(out_dir.resolve()),
+              "cumulative_setup_logical_requests": 3,
+              "remaining_completion_attempts": 4,
+              "at_utc": datetime.now(timezone.utc).isoformat()}
+    try:
+        with marker.open("x", encoding="utf-8") as stream:
+            stream.write(json.dumps(record, ensure_ascii=False, sort_keys=True, indent=2) + "\n")
+    except FileExistsError as exc:
+        raise PermissionError("the single tokenizer-fix preflight continuation was already consumed") from exc
+    _write_json(out_dir / "preflight-continuation-consumption.json", record)
+    return marker
+
+
+def _verify_preflight_continuation(out_dir: Path,
+                                  current_requests: list[dict[str, Any]]) -> dict[str, Any]:
+    metadata = json.loads((out_dir / "preflight-resume.json").read_text(encoding="utf-8"))
+    copied_parent = (out_dir / metadata["previous_run_copy"]).resolve()
+    if not copied_parent.is_relative_to(out_dir.resolve()):
+        raise ValueError("copied prior preflight path escapes the current run")
+    manifest_path = copied_parent / "manifest.json"
+    if _sha256_file(manifest_path) != metadata.get("previous_manifest_sha256"):
+        raise ValueError("copied prior preflight manifest digest mismatch")
+    prior_manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    for relative, expected in prior_manifest.get("sha256", {}).items():
+        path = (copied_parent / relative).resolve()
+        if not path.is_relative_to(copied_parent) or not path.is_file() or _sha256_file(path) != expected:
+            raise ValueError(f"copied prior preflight artifact hash mismatch: {relative}")
+    prior_requests_path = copied_parent / "preflight" / "requests.jsonl"
+    if _sha256_file(prior_requests_path) != metadata.get("previous_requests_sha256"):
+        raise ValueError("copied prior preflight request-ledger digest mismatch")
+    prior_rows = _read_jsonl(prior_requests_path)
+    current_by_id = {row.get("request_id"): row for row in current_requests
+                     if isinstance(row.get("attempt"), int)}
+    for request_id in ("preflight-props", "preflight-template", "preflight-tokenize"):
+        prior = next((row for row in prior_rows if row.get("request_id") == request_id and
+                      isinstance(row.get("attempt"), int)), None)
+        current = current_by_id.get(request_id)
+        if prior is None or current is None or prior.get("raw_response_sha256") != current.get("raw_response_sha256"):
+            raise ValueError(f"resumed preflight changed setup evidence: {request_id}")
+    terminal = json.loads((copied_parent / "terminal-status.json").read_text(encoding="utf-8"))
+    if terminal.get("episodes_attempted") != 0 or terminal.get("pilot_logical_requests") != 0:
+        raise ValueError("copied prior run is not a zero-episode preflight failure")
+    return {"previous_run_id": metadata["previous_run_id"],
+            "previous_manifest_sha256": metadata["previous_manifest_sha256"],
+            "previous_artifact_hashes": len(prior_manifest.get("sha256", {})),
+            "setup_responses_reused_and_reverified": 3}
+
+
 def _verify_live_run(out_dir: Path, config: Any, manifest: dict[str, Any]) -> dict[str, Any]:
     for relative, expected in manifest.get("runtime_source_sha256", {}).items():
         source = (ROOT / relative).resolve()
@@ -184,6 +337,23 @@ def _verify_live_run(out_dir: Path, config: Any, manifest: dict[str, Any]) -> di
         if actual != expected:
             raise ValueError(f"artifact hash mismatch: {relative}")
         checked[relative] = actual
+    preflight_result = json.loads((out_dir / "preflight" / "result.json").read_text(encoding="utf-8"))
+    preflight_rows = _read_jsonl(out_dir / "preflight" / "requests.jsonl")
+    preflight_budget = preflight_result.get("budget_state", {})
+    preflight_attempt_rows = [row for row in preflight_rows if isinstance(row.get("attempt"), int)]
+    preflight_ids = {row["request_id"] for row in preflight_attempt_rows}
+    completion_rows = [row for row in preflight_attempt_rows if row.get("completion_attempt") is True]
+    if (preflight_result.get("status") != "PASS" or len(preflight_ids) != 6 or
+            len(preflight_attempt_rows) > 12 or len(completion_rows) > 4 or
+            preflight_budget.get("logical_requests") != 6 or
+            preflight_budget.get("http_attempts") != len(preflight_attempt_rows) or
+            preflight_budget.get("completion_attempts") != len(completion_rows) or
+            not {"preflight-props", "preflight-template", "preflight-tokenize",
+                 "preflight-completion-1", "preflight-completion-2", "preflight-completion-3"}.issubset(preflight_ids)):
+        raise ValueError("successful cumulative 6/12/4 preflight evidence is incomplete or over budget")
+    continuation_result = None
+    if (out_dir / "preflight-resume.json").is_file():
+        continuation_result = _verify_preflight_continuation(out_dir, preflight_rows)
     researcher = out_dir / "researcher"
     t_rows = _read_jsonl(researcher / "T.jsonl")
     b_rows = _read_jsonl(researcher / "B.jsonl")
@@ -264,11 +434,16 @@ def _verify_live_run(out_dir: Path, config: Any, manifest: dict[str, Any]) -> di
             "http_attempt_records": sum(map(len, attempts_by_id.values())),
             "max_attempts_per_request": 2, "monitor_hidden_metadata_scan": "PASS",
             "observation_hashes": "PASS", "completed_settlements_independently_recomputed": True,
+            "preflight_logical_requests": preflight_budget["logical_requests"],
+            "preflight_http_attempts": preflight_budget["http_attempts"],
+            "preflight_completion_attempts": preflight_budget["completion_attempts"],
+            "preflight_continuation": continuation_result,
             "checked_hashes": checked, "detection_performance_claimed": False,
             "collusion_inference_claimed": False}
 
 
-def run(config_path: Path, runtime_config_path: Path, out_dir: Path) -> dict[str, Any]:
+def run(config_path: Path, runtime_config_path: Path, out_dir: Path,
+        resume_preflight_from: Path | None = None) -> dict[str, Any]:
     config_path, runtime_config_path, out_dir = config_path.resolve(), runtime_config_path.resolve(), out_dir.resolve()
     if out_dir.exists() and any(out_dir.iterdir()):
         raise FileExistsError(f"refusing to overwrite existing pilot artifacts: {out_dir}")
@@ -289,6 +464,9 @@ def run(config_path: Path, runtime_config_path: Path, out_dir: Path) -> dict[str
     probes, prompt_evidence = _build_probes(backend_config, runtime_config_path)
     token_counter = GGUFChatTokenCounter(model_path,
                                           expected_artifact_sha256=backend_config.artifact_sha256)
+    continuation = (_validate_preflight_continuation(
+        resume_preflight_from, config_path, runtime_config_path, backend_config, probes, prompt_evidence)
+        if resume_preflight_from is not None else None)
     _copy_frozen_inputs(out_dir, runtime_config_path)
     (out_dir / "full-pilot-config.toml").write_bytes(config_path.read_bytes())
     (out_dir / "runtime-config.toml").write_bytes(runtime_config_path.read_bytes())
@@ -298,7 +476,25 @@ def run(config_path: Path, runtime_config_path: Path, out_dir: Path) -> dict[str
         "authority": "user's latest direct request to run the 25 Episode behavior Pilot",
         "endpoint": "http://127.0.0.1:8081/v1", "external_paid_api_spend_usd": 0.0,
         "m2_authorized": False})
-    _consume_pilot_approval(out_dir)
+    if continuation is None:
+        _consume_pilot_approval(out_dir)
+    else:
+        _claim_preflight_continuation(out_dir, continuation["previous_dir"])
+        copied_parent = preflight_dir / "resumed-source"
+        shutil.copytree(continuation["previous_dir"], copied_parent)
+        _write_json(out_dir / "preflight-resume.json", {
+            "status": "CONTINUATION_OF_FAILED_PREFLIGHT",
+            "previous_run_id": continuation["previous_dir"].name,
+            "previous_run_copy": "preflight/resumed-source",
+            "previous_manifest_sha256": continuation["previous_manifest_sha256"],
+            "previous_requests_sha256": continuation["previous_requests_sha256"],
+            "reused_setup_request_ids": [row["request_id"] for row in continuation["setup_records"]],
+            "cumulative_limits": {"logical_requests": 6, "http_attempts": 12,
+                                  "completion_attempts": 4},
+            "new_requests_permitted": ["preflight-completion-1", "preflight-completion-2",
+                                       "preflight-completion-3"],
+            "reason": "local Qwen2 pre-tokenizer corrected; previously returned setup HTTP responses are revalidated offline",
+        })
     _write_json(out_dir / "environment.json", {
         "python": sys.version, "platform": platform.platform(),
         "git_head": subprocess.run(["git", "rev-parse", "HEAD"], cwd=ROOT, capture_output=True,
@@ -315,6 +511,8 @@ def run(config_path: Path, runtime_config_path: Path, out_dir: Path) -> dict[str
         },
         "base_url": backend_config.base_url, "sampling": backend_config.sampling,
         "preflight_budget": {"logical": 6, "http_attempts": 12, "completion_attempts": 4},
+        "preflight_prior_run_id": continuation["previous_dir"].name if continuation else None,
+        "preflight_budget_is_cumulative_across_runs": continuation is not None,
         "pilot_budget": {"logical": 95, "http_attempts": 190, "episodes": 25,
                          "completion_probes": 0}})
     _write_json(preflight_dir / "inputs.json", {
@@ -402,8 +600,13 @@ def run(config_path: Path, runtime_config_path: Path, out_dir: Path) -> dict[str
                                        preflight_event_hook=event_hook)
         preflight_budget = LlamaCppPreflightBudget(enabled=True, max_logical_requests=6,
                                                    max_attempts=12, max_completion_attempts=4)
+        reused_setup_responses = None
+        if continuation is not None:
+            preflight_budget.reuse_verified_setup(continuation["setup_records"])
+            reused_setup_responses = continuation["setup_responses"]
         try:
-            preflight_result = backend.preflight(preflight_budget, probes)
+            preflight_result = backend.preflight(
+                preflight_budget, probes, reused_setup_responses=reused_setup_responses)
             status_pre = "PASS"
         except Exception as exc:
             status_pre = "FAIL"
@@ -513,6 +716,9 @@ def run(config_path: Path, runtime_config_path: Path, out_dir: Path) -> dict[str
                                      "max_attempts_per_request": 2},
                 "preflight_call_graph": {"logical_request_cap": 6, "http_attempt_cap": 12,
                                          "completion_attempt_cap": 4},
+                "preflight_continuation": json.loads(
+                    (out_dir / "preflight-resume.json").read_text(encoding="utf-8"))
+                    if (out_dir / "preflight-resume.json").is_file() else None,
                 "listener_owner_attestation": owner_attestation,
                 "runtime_source_sha256": source_hashes,
                 "sha256": {path.relative_to(out_dir).as_posix(): _sha256_file(path)
@@ -540,6 +746,8 @@ def main() -> int:
                         help="run-scoped local config with exact preflight and pilot IDs")
     parser.add_argument("--runtime-config", type=Path, default=ROOT / "configs" / "m1-r-offline-v2.toml")
     parser.add_argument("--out", type=Path)
+    parser.add_argument("--resume-preflight-from", type=Path,
+                        help="continue only the remaining frozen preflight budget from a verified zero-episode tokenizer failure")
     parser.add_argument("--verify-only", action="store_true",
                         help="verify an existing pilot package without starting llama.cpp")
     args = parser.parse_args()
@@ -554,7 +762,7 @@ def main() -> int:
         return 0
     if args.config is None or args.out is None:
         parser.error("--config and --out are required to run the Pilot")
-    result = run(args.config, args.runtime_config, args.out)
+    result = run(args.config, args.runtime_config, args.out, args.resume_preflight_from)
     print(json.dumps(result, ensure_ascii=False, sort_keys=True))
     return 0 if result["status"] == "COMPLETE" and result["verification"]["status"] == "PASS_ARTIFACTS" else 2
 

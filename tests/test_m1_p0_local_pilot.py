@@ -1,12 +1,16 @@
 from __future__ import annotations
 
+import hashlib
+import json
 from pathlib import Path
+import shutil
 
 import pytest
 
 from scripts.run_m1_p0_local_pilot import (
     PILOT_APPROVAL_ID, PREFLIGHT_APPROVAL_ID, ROOT, _consume_pilot_approval,
-    _runtime_source_files, _validate_authorized_config,
+    _build_probes, _runtime_source_files, _validate_authorized_config,
+    _validate_preflight_continuation, _verify_preflight_continuation,
 )
 
 
@@ -63,3 +67,46 @@ def test_full_25_episode_approval_is_single_use(tmp_path):
 def test_runtime_fingerprint_covers_imported_preflight_orchestration():
     paths = {path.resolve() for path in _runtime_source_files()}
     assert (ROOT / "scripts" / "run_m1_p0_local_preflight.py").resolve() in paths
+
+
+def test_retained_zero_episode_tokenizer_failure_is_valid_continuation_source():
+    previous = ROOT / "runs/m1_p0_local/25ep-pilot-20261019/run"
+    model = Path(r"E:\Health-Copilot-Models\models\qwen3-8b\Qwen3-8B-Q4_K_M.gguf")
+    if not previous.is_dir() or not model.is_file():
+        pytest.skip("requires the retained local tokenizer-preflight failure and frozen GGUF")
+    config_path = ROOT / "runs/m1_p0_local/25ep-pilot-20261019/configs/full-pilot.toml"
+    runtime_path = ROOT / "configs/m1-r-offline-v2.toml"
+    config = _validate_authorized_config(config_path)
+    probes, evidence = _build_probes(config, runtime_path)
+    continuation = _validate_preflight_continuation(
+        previous, config_path, runtime_path, config, probes, evidence)
+    assert set(continuation["setup_responses"]) == {
+        "preflight-props", "preflight-template", "preflight-tokenize"}
+    assert len(continuation["setup_records"]) == 3
+    assert continuation["previous_manifest_sha256"]
+
+
+def test_continuation_verifier_checks_the_copied_parent_and_reused_responses(tmp_path):
+    previous = ROOT / "runs/m1_p0_local/25ep-pilot-20261019/run"
+    if not previous.is_dir():
+        pytest.skip("requires the retained failed-preflight evidence package")
+    out_dir = tmp_path / "resumed-run"
+    preflight = out_dir / "preflight"
+    preflight.mkdir(parents=True)
+    copied = preflight / "resumed-source"
+    shutil.copytree(previous, copied)
+    manifest_path = previous / "manifest.json"
+    requests_path = previous / "preflight" / "requests.jsonl"
+    digest = lambda path: hashlib.sha256(path.read_bytes()).hexdigest()
+    (out_dir / "preflight-resume.json").write_text(json.dumps({
+        "previous_run_id": previous.name,
+        "previous_run_copy": "preflight/resumed-source",
+        "previous_manifest_sha256": digest(manifest_path),
+        "previous_requests_sha256": digest(requests_path),
+    }), encoding="utf-8")
+    rows = [json.loads(line) for line in requests_path.read_text(encoding="utf-8").splitlines()]
+    verified = _verify_preflight_continuation(out_dir, rows)
+    assert verified["setup_responses_reused_and_reverified"] == 3
+    (copied / "preflight" / "requests.jsonl").write_text("tampered\n", encoding="utf-8")
+    with pytest.raises(ValueError, match="artifact hash mismatch"):
+        _verify_preflight_continuation(out_dir, rows)
