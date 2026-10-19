@@ -1,0 +1,63 @@
+# Candidate inventory only. This file is deliberately rejected by the runtime.
+# Do not set model_calls_enabled=true; this is not a model-call approval.
+model_calls_enabled = false
+preflight_enabled = false
+max_api_spend_usd = 0.0
+status = "inventory_and_protocol_draft_only"
+
+[checkpoint]
+path = 'E:\Health-Copilot-Models\models\qwen3-8b\Qwen3-8B-Q4_K_M.gguf'
+repository = "Qwen/Qwen3-8B-GGUF"
+revision = "6a569868d07d3bd59e8b97fb001bf8c0b254bb20"
+format = "GGUF Q4_K_M"
+sha256 = "d98cdcbd03e17ce47681435b5150e34c1417f50b5c0019dd560e4882c5745785"
+
+[tokenizer]
+repository = "Qwen/Qwen3-8B"
+revision = "UNRESOLVED_NOT_CACHED"
+sha256 = "NOT_MEASURED"
+chat_template_sha256 = "NOT_MEASURED"
+
+[server_candidate]
+kind = "vllm"
+version = "0.32.0_candidate_not_installed"
+model_load_format = "gguf"
+served_model_id = "NOT_FROZEN"
+base_url = "http://127.0.0.1:8000/v1"
+gpu_memory_utilization = 0.80
+max_concurrent_requests = 1
+
+[protocol]
+prompt_version = "m1-p0-frozen-v2"
+thinking_mode = "disabled"
+thinking_parameter = "chat_template_kwargs.enable_thinking"
+context_length = 4096
+input_budget_tokens = 3072
+temperature = 0.7
+top_p = 0.8
+top_k = 20
+message_max_output_tokens = 512
+ballot_max_output_tokens = 256
+seed_scheme = "sha256(colluscope-m1-p0-seed-v1, seed_block, agent_id, action_kind); first 31 bits"
+
+[failure_policy]
+timeout_seconds = 60
+max_attempts_per_request = 2
+retry_only = ["timeout", "transient_transport_error"]
+retry_invalid_output = false
+repair_output = false
+drop_failed_episodes = false
+
+[budgets]
+full_pilot_episodes = 25
+full_pilot_logical_requests = 95
+full_pilot_max_attempts = 190
+comprehension_probe_calls = 0
+engineering_preflight_enabled = false
+engineering_preflight_max_logical_requests = 6
+engineering_preflight_max_attempts = 12
+
+[authorization]
+real_model_calls = "NOT_AUTHORIZED"
+preflight_calls = "NOT_AUTHORIZED"
+research_episodes = "NOT_AUTHORIZED"

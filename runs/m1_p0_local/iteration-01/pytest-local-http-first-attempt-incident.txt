@@ -1,0 +1,4 @@
+First HTTP loopback attempt incident (preserved from tool-captured test output)
+
+Command: python -m pytest -q tests/test_openai_compat_http_contract.py tests/test_openai_compat_vllm.py -k "real_adapter_http or unsupported_oneof or malformed_action or timeout_is_physically or connection_refusal or duplicate_request or retry_cannot_bypass"
+Observed outcome: 6 failed, 5 passed, 39 deselected. Six local HTTP cases failed before reaching the loopback service with Windows WinError 10013 (PermissionError: an attempt was made to access a socket in a way forbidden by its access permissions). The connection-refusal negative case and five fake-transport cases passed. This first invocation was not redirected to a file; the test runner output was captured in the tool transcript and was truncated. A direct repeat was redirected to pytest-local-http-loopback-retry-pass.log and returned 7 passed. The full focused rerun will determine whether the socket restriction recurs.

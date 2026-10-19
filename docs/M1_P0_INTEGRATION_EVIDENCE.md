@@ -1,76 +1,70 @@
-# ColluScope M1-P0 Integration Gate Evidence
+# M1-P0 Local Integration Evidence
 
-**Starting commit:** `5786852f8280af94256c2f9a16f7e872ffdd9146` (`codex/m1-r-runtime`).
-**Working branch:** `codex/m1-p0-integration-gate-578`.
-**Evidence scope:** offline tests, deterministic Mock episodes, and fake in-memory HTTP responses only. No local model server or LLM request was made.
+**Scope:** offline runtime, Mock reproduction, and local loopback HTTP tests only. No model completion, server launch, preflight request, paid API, detector, or M1 research behavior was run.
 
-## Environment and source state
+## Source and environment
 
-The clean worktree was created from the exact accepted commit in a separate Git worktree at `D:\MyLab\colluscope\reference\m1-p0-gate`. The environment is recorded in `../runs/m1_p0/prechange/environment.txt`; baseline regression output and V1 artifact verification are in `../runs/m1_p0/prechange/`. V1 original run and canary manifest bytes were checked before and after verification and remained unchanged.
+- Topic branch: `codex/m1-p0-local-qwen-integration`.
+- Base checkout: prior accepted offline gate commit `29c27b8338314bf3e152c5255dc95e6d23f3e66b`, descending from accepted M1-R base `5786852f8280af94256c2f9a16f7e872ffdd9146`.
+- Current source snapshot in both new generated artifacts: `e1ac7b424b7c44cd922eb7a6b3432ea894bf238ab171b02c68019a29eeeca6e6`.
+- Run manifests record Git HEAD `29c27b8338314bf3e152c5255dc95e6d23f3e66b` with `working_tree_clean=false`; the verifier authenticates the full per-file source snapshot rather than relying on the commit label alone.
+- Local Qwen3-8B artifact: `E:\Health-Copilot-Models\models\qwen3-8b\Qwen3-8B-Q4_K_M.gguf`; size 5,027,783,488 bytes; SHA256 `d98cdcbd03e17ce47681435b5150e34c1417f50b5c0019dd560e4882c5745785`.
+- Environment facts and full hardware/model inventory: [M1_P0_LOCAL_ENVIRONMENT.md](M1_P0_LOCAL_ENVIRONMENT.md), with raw command output in `runs/m1_p0_local/iteration-01/`.
 
-## Actual commands and results
+## Actual offline results
 
-All commands below run from the new worktree root in PowerShell. Set `PYTHONPATH` before invoking package/tests.
-
-```powershell
-Set-Location D:\MyLab\colluscope\reference\m1-p0-gate
-$env:PYTHONPATH = 'src'
-python -m pytest -q
-python -m colluscope m1r --config configs/m1-r-offline-v2.toml --out runs/m1_p0/<new-run-dir>
-python -m colluscope verify-m1r --run runs/m1_p0/<new-run-dir>
-python -m colluscope m1r-canary --config configs/m1-r-offline-v2.toml --out runs/m1_p0/<new-canary-dir>
-```
-
-Evidence log files preserve both the first failed attempt and final successful runs:
-
-| Check | Result | Raw record |
+| Check | Result | Preserved evidence |
 |---|---:|---|
-| Baseline suite at accepted V1 source | 70 passed | `../runs/m1_p0/prechange/pytest-baseline.log` |
-| Iteration after first implementation | 70 passed | `../runs/m1_p0/prechange/pytest-after-runtime-scaffold.log` |
-| First new adapter test run | **1 failed, 7 passed**; test fixture used a context shorter than its configured max output | `../runs/m1_p0/iteration-01/pytest-vllm-adapter.log` |
-| Corrected adapter unit suite | 8 passed at that iteration | `../runs/m1_p0/iteration-01/pytest-vllm-adapter-retry.log` |
-| Final local-backend suite | **13 passed**; includes config round-trip, returned-model mismatch, raw failure retention, thinking-mode field, and shared budget checks | `../runs/m1_p0/iteration-01/pytest-vllm-thinking.log` |
-| V2 targeted tests before final audit | 4 passed | `../runs/m1_p0/iteration-01/pytest-v2-canary.log` |
-| First full v2 CLI generation | **failed independent verification** because verifier incorrectly expected C to have a private-message action | `../runs/m1_p0/iteration-01/m1r-v2-generation.log` and partial `../runs/m1_p0/v2-mock-run/` |
-| Targeted tests after C-boundary correction | 4 passed | `../runs/m1_p0/iteration-01/pytest-v2-verifier-fix.log` |
-| Pre-verifier-fix full suite | **86 passed**; intermediate result, not release evidence | `../runs/m1_p0/iteration-01/pytest-full-final.log` |
-| Final full repository suite after explicit thinking-mode config | **88 passed** (delivery rerun: 2.73s) | `../runs/m1_p0/iteration-01/pytest-full-delivery.log` |
-| V2 25-episode generation + automatic verifier | **PASS**, 25/25, 5 per condition, 95 logical Mock calls, 95 attempts / 190 ceiling, zero external/paid calls | `../runs/m1_p0/iteration-01/m1r-v2-generation-final-gate.log`; run `../runs/m1_p0/v2-mock-run-final-gate/` |
-| Standalone V2 verifier | **PASS**, all file hashes, settlement, E projection, group hashes and V2 self-history recomputed | `../runs/m1_p0/iteration-01/m1r-v2-verification-delivery.log` |
-| V2 adversarial suite | **PASS**, 11 traces / 18 assertions | `../runs/m1_p0/iteration-01/m1r-v2-canaries-final-gate.log`; cases `../runs/m1_p0/v2-canaries-final-gate/` |
-| Independent V2 canary verifier | **PASS**, 11 traces / 18 assertions; source snapshots match current source | `../runs/m1_p0/iteration-01/m1r-v2-canaries-verification-delivery.log` |
-| Historical V1 artifacts | **PASS**, 25-episode V1 run and 10-trace V1 canary still verify; manifests unchanged | `../runs/m1_p0/prechange/frozen-v1-verification.log`; regression `test_historical_v1_run_and_canaries_remain_verifiable_without_rewrite` |
+| Full repository regression | **102 passed** | `runs/m1_p0_local/iteration-01/pytest-full-offline-final.log` |
+| Final rerun after evidence/decision updates | **102 passed in 11.83s** | `runs/m1_p0_local/iteration-01/pytest-full-offline-delivery.log` |
+| Focused runtime/backend/HTTP regression | **52 passed** | `runs/m1_p0_local/iteration-01/pytest-focused-runtime-http-final.log` |
+| V2 25-episode deterministic Mock run | **PASS**, 25/25, five per condition, 95 logical requests, 95 attempts / 190 cap, independent settlement and E recomputation, behavioral evidence flag false | `runs/m1_p0_local/offline-v2-mock/`; generation and independent verifier logs in `runs/m1_p0_local/iteration-01/` |
+| V2 adversarial Mock canaries | **PASS**, 11 traces / 18 assertions; no-chat isolation, A/B-only routing, C exclusion, malformed ballot, timeouts, budget, welfare/score separation, schema and self-history checks | `runs/m1_p0_local/v2-canaries/`; generation and independent verifier logs in `runs/m1_p0_local/iteration-01/` |
+| Actual adapter to offline loopback HTTP service | **7 passed**; 7 scenario records and 8 observed HTTP requests; exact schema, request/response hash, error body, timeout, duplicate ID and budget evidence recorded | `runs/m1_p0_local/iteration-01/http-contract-requests.jsonl`, its summary and `pytest-http-contract-evidence.log` |
+| Historical V1 and prior accepted V2 gate artifacts | **PASS**, manifest bytes unchanged | Included in full tests; old integration reports/protocol are preserved byte-for-byte as `M1_P0_GATE_*` files |
 
-The failure logs remain in the evidence tree and are not counted as successful runs. The mistaken PowerShell verifier invocation, which wrote its Python source to a log without executing it, is retained as `m1r-v2-canaries-verification-delivery-command-error.log`; the corrected independent execution and PASS output are separately recorded. No difficult negative or failed case was removed. The final 25-episode Mock run has `behavioral_evidence_claimed=false`; identical T/B/E core hashes across v1/v2 are expected from the deterministic default Mock, while the prompt/observation hashes differ.
+The loopback service is an offline test server returning deterministic canned responses. The response payload is not from a model. A simulated `oneOf` rejection is retained and surfaced as a non-retryable error. No actual vLLM or llama.cpp server was contacted.
 
-## Schema and self-message counterexamples
+## Retained failures and revisions
 
-`test_v2_delivers_exact_action_schemas_and_rejects_schema_counterexamples` checks the exact five frozen prompt/schema file hashes, exact schema delivery, truncated JSON, extra keys, wrong action type, malformed allocations, empty messages, and absence of a condition label in the prompt. `test_v2_ballot_keeps_own_message_and_delivered_peer_suggestion_as_counterexample` supplies a promise, a conflicting delivered peer suggestion, and a contrary ballot; saved observation hash and record are checked. A tamper test removes the own action, recomputes both observation and file hashes, and confirms the independent semantic verifier still rejects it.
+- First loopback attempt: 6 HTTP-dependent cases failed before reaching the service with Windows WinError 10013; a repeated run and the full focused suite passed. `pytest-local-http-first-attempt-incident.txt` records the first outcome; the initial invocation output was not redirected, so it contains a clearly labeled excerpt/summary rather than a fabricated full trace. The retry is preserved in `pytest-local-http-loopback-retry-pass.log`.
+- First focused run after seed addition: **4 failed, 47 passed** because the old canary/verifier exact-field allowlists rejected the new researcher-only generation seed. Failed canary case/summary files are preserved under `canary-generation-first-fail-v1/` and `canary-generation-first-fail-v2/`; raw test output is `pytest-focused-runtime-http.log`.
+- Intermediate focused rerun: **1 failed, 50 passed** because the independent run verifier still required the pre-seed request envelope. The full raw traceback is `pytest-focused-runtime-http-second.log`.
+- Corrective change: current-source runs now require the seed, recompute it from T's seed block plus agent/stage, reject E exposure, and still accept archived V1/V2 schemas. A tamper test changes a seed and recomputes the request-file hash; verification rejects it.
+- The initial structured-schema test mismatch and disabled-config validation failures remain in `pytest-local-schema-first-fail.log` from the implementation iteration. No failing scenario or negative sample was removed.
+- Raw test logs preserve terminal output verbatim, including trailing spaces in traceback context. The source/document whitespace check excludes `runs/` evidence files so it does not rewrite or normalize failure records.
 
-The retained canary `self_message_and_different_peer_suggestion` exercises the same case in the exported package. It does not claim a model understood the text: responses are deterministic injected Mock actions.
+## Key artifact digests
 
-## Backend tests and limits
+| Artifact | SHA256 |
+|---|---|
+| Current runtime source snapshot | `e1ac7b424b7c44cd922eb7a6b3432ea894bf238ab171b02c68019a29eeeca6e6` |
+| Disabled local model draft config | `afe4cdd91fb71606b2d66ae533ff9222b00603d94cd79c704a4cc92e1b5acc92` |
+| New offline V2 run manifest | `baeae58c394b3cd25b0ba0a925e9cb26a8116bf0a5a9e859c1b265814d5ccc6c` |
+| New V2 canary manifest | `e61208860c485ad25516ed67d6245f70542c2b1788633a607ad088d572f3bfd9` |
+| Offline HTTP request/response JSONL | `ea7ea10c66575d6876ae19e5584b8603f8ae500e98c9ccc6737de37eaa91202a` |
+| Previous integration evidence preserved copy | `93b648aa026bd5f72e7ff719659b4c9864757979933a3f6597b3e228dd17b148` |
+| Previous integration decision preserved copy | `db1ededb03929c022f926bc2616a3d451c2a5ee37a660b1be67e6a9dd5a56d86` |
+| Previous V2 protocol preserved copy | `de6f1f2e0b9bc72bcc45b93813e440b9ce44bc4760e7a71eff5494fdbc83c8bb` |
+| Previous integration TRD preserved copy | `3262ecec3e4bb1a45479a66e9a27b5f2182303c337b6497b2c0dbb50e86641ff` |
+| Previous V2 source snapshot archive | `bbdb0a3720662331a38de000f458eb0e0406d8d1c4284122bb3442aeac8d08a8` |
 
-The 13 local-backend tests plus V2 runtime counterexamples use `FakeOpener`, not a socket. They verify exact local OpenAI-compatible request body, system/user mapping and thinking-mode field, explicit non-default test sampling values, configured timeout passed to transport, actual usage logging, raw response retention, truncation failure, one bounded timeout retry, 503-body retention/retry, local-only endpoint enforcement, tokenizer identity/context guards, model-config disabled-by-default, GET-only mocked preflight, returned-model mismatch rejection, config parsing, and hard request-budget rejection before the second HTTP dispatch. The fake `model_id="test/model"` is a unit-test fixture, not a selected experiment model.
+The per-run manifest contains exact hashes for T, B, E, requests, observations, prompts, schemas, configuration and randomized order. The archived pre-change V2 source list is authenticated separately so the older accepted run remains verifiable after these additions.
 
-`LocalVLLMBackend.preflight()` was tested only against injected fake `/version` and `/v1/models` replies. These are software tests, not P0-IV endpoint or model compatibility results. There is no selected real model/tokenizer, so no real structured-output request or cost result exists.
+## Reproduction
 
-## Exact call and money boundary
-
-- Current authorization and actual usage: **0 real model calls, $0.00 API spend**.
-- Full pilot research request budget: 75 ballots + 20 A/B message turns + 0 comprehension probes = **95 logical requests**.
-- Retry ceiling: two attempts/request, **190 maximum adapter attempts**, enforced by shared `RequestBudget` before backend dispatch. Preflight GETs and separately authorized structured-output probes require a separate ledger and budget.
-- Local vLLM proposed API ceiling: **$0.00** (loopback only). Host/GPU compute cost remains unpriced. Token/compute maximum remains unknown until model, tokenizer, output cap, context and hardware are approved. Offline Mock `256` is not a real-model recommendation.
-
-## Reproduction and hashes
+Run from the topic worktree root in PowerShell:
 
 ```powershell
-Set-Location D:\MyLab\colluscope\reference\m1-p0-gate
 $env:PYTHONPATH = 'src'
 python -m pytest -q
-python -m colluscope m1r --config configs/m1-r-offline-v2.toml --out runs/m1_p0/reproduction-run
-python -m colluscope verify-m1r --run runs/m1_p0/reproduction-run
-python -m colluscope m1r-canary --config configs/m1-r-offline-v2.toml --out runs/m1_p0/reproduction-canaries
+python -m colluscope m1r --config configs/m1-r-offline-v2.toml --out runs/m1_p0_local/reproduction-mock
+python -m colluscope verify-m1r --run runs/m1_p0_local/reproduction-mock
+python -m colluscope m1r-canary --config configs/m1-r-offline-v2.toml --out runs/m1_p0_local/reproduction-canaries
+python -c "from pathlib import Path; from colluscope.m1_runtime import verify_canary_suite; print(verify_canary_suite(Path('runs/m1_p0_local/reproduction-canaries'))['status'])"
+$env:COLLUSCOPE_OFFLINE_HTTP_EVIDENCE = 'runs/m1_p0_local/reproduction-http.jsonl'
+python -m pytest -q tests/test_openai_compat_http_contract.py
+Remove-Item Env:COLLUSCOPE_OFFLINE_HTTP_EVIDENCE
 ```
 
-Output directories must be new/empty. Prompt/schema hashes are enumerated in `M1_P0_FROZEN_PROTOCOL_V2.md`. `v2-mock-run-final-gate/manifest.json` and `v2-canaries-final-gate/manifest.json` contain per-file SHA256 values and source snapshots. V2 source snapshot SHA256 is `7c94667273a797ab2d3b9ce0d0fa2aa69d7f16eb56f6ac076dc6c149996fcf30`. The V2 run-manifest SHA256 is `809f19f6783d94da6745b77726d286ff413edf9bca212a7637a4bab7b26c2386`; the V2 canary-manifest SHA256 is `a360d73512b8d97d25a7c5afdfb3812163c7a1cce9b7bf193eab4d9a9ff0eb6d`. The real-backend config-template SHA256 is `9380a13d16c943c5c46a6499a92d63ad92774fab9081b55d9f1d3c3af4037c0c`. At generation, the implementation was uncommitted (`working_tree_clean=false`); the artifact embeds a per-file source snapshot matching the frozen candidate, which is independently checked by the verifier. The exact branch HEAD is reported in the integration decision and delivery message after push.
+The commands above use deterministic Mock episodes and a test-only `127.0.0.1` HTTP service. They do not start an LLM server or call a model.

@@ -1,0 +1,59 @@
+F.F.............                                                         [100%]
+================================== FAILURES ===================================
+___ test_adapter_records_exact_local_request_actual_usage_and_role_mapping ____
+
+    def test_adapter_records_exact_local_request_actual_usage_and_role_mapping():
+        settings = valid_config()
+        opener = FakeOpener([completion('{"type":"ballot","assignment":{"A":"T1","B":"T2","C":"T3"}}')])
+        backend = LocalVLLMBackend(settings, FakeCounter(), opener)
+        adapter = RequestAdapter(backend, OFFLINE_CONFIG, RequestBudget(1, 2, 2))
+        raw = adapter.invoke(request_for(settings))
+        assert raw.startswith('{"type":"ballot"')
+        sent, timeout = opener.calls[0]
+        payload = json.loads(sent.data)
+        assert timeout == 17  # transport-level deadline, not an advisory field
+        assert sent.full_url == "http://127.0.0.1:8000/v1/chat/completions"
+        assert sent.get_method() == "POST"
+        assert sent.get_header("Authorization") is None
+        expected_schema = json.loads((ROOT / "prompts" / "m1-p0-v2" / "ballot.schema.json").read_text(encoding="utf-8"))
+>       assert payload == {
+            "model": "test/model",
+            "messages": [{"role": "system", "content": "system instructions"},
+                         {"role": "user", "content": "user observation\n" + json.dumps(expected_schema, indent=2)}],
+            "temperature": 0.7, "top_p": 0.8, "top_k": 20, "seed": 72,
+            "max_tokens": 256, "stream": False,
+            "response_format": {"type": "json_schema", "json_schema": {
+                "name": "m1_p0_ballot_action", "schema": expected_schema}},
+            "chat_template_kwargs": {"enable_thinking": False},
+        }
+E       assert {'model': 'te..._p': 0.8, ...} == {'model': 'te..._p': 0.8, ...}
+E         
+E         Omitting 9 identical items, use -vv to show
+E         Differing items:
+E         {'messages': [{'role': 'system', 'content': 'system instructions'}, {'role': 'user', 'content': 'user observation\n{\n...},\n        "B": {"enum": ["T1", "T2", "T3"]},\n        "C": {"enum": ["T1", "T2", "T3"]}\n      }\n    }\n  }\n}\n'}]} != {'messages': [{'role': 'system', 'content': 'system instructions'}, {'role': 'user', 'content': 'user observation\n{\n...  "enum": [\n            "T1",\n            "T2",\n            "T3"\n          ]\n        }\n      }\n    }\n  }\n}'}]}
+E         Use -v to get more diff
+
+tests\test_openai_compat_vllm.py:107: AssertionError
+____ test_no_selected_model_or_enabled_config_can_be_loaded_from_template _____
+
+    def test_no_selected_model_or_enabled_config_can_be_loaded_from_template():
+        with pytest.raises(PermissionError, match="real model calls are disabled"):
+>           load_vllm_backend_config(ROOT / "configs" / "m1-p0-vllm-local.template.toml")
+
+tests\test_openai_compat_vllm.py:150: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+path = WindowsPath('D:/MyLab/colluscope/reference/m1-p0-local-qwen-integration/configs/m1-p0-vllm-local.template.toml')
+
+    def load_vllm_backend_config(path: Path) -> VLLMBackendConfig:
+        raw = tomllib.loads(path.read_text(encoding="utf-8"))
+        if set(raw) != {"model_calls_enabled", "max_api_spend_usd", "backend", "thinking", "sampling",
+                        "stage_limits", "limits"}:
+>           raise ValueError("vLLM config has missing or unknown top-level keys")
+E           ValueError: vLLM config has missing or unknown top-level keys
+
+src\colluscope\openai_compat_vllm.py:105: ValueError
+=========================== short test summary info ===========================
+FAILED tests/test_openai_compat_vllm.py::test_adapter_records_exact_local_request_actual_usage_and_role_mapping
+FAILED tests/test_openai_compat_vllm.py::test_no_selected_model_or_enabled_config_can_be_loaded_from_template
+2 failed, 14 passed in 0.12s

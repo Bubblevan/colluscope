@@ -1,0 +1,125 @@
+observed_at=2026-10-19T11:01:48.9539618+08:00
+python_version=Python 3.12.4
+pytest_version=pytest 9.1.1
+torch=2.2.2+cu118
+torch_cuda=True
+torch_cuda_runtime=11.8
+nvidia_smi=
+NVIDIA GeForce RTX 4090 Laptop GPU, 616.92, 16376 MiB, 15855 MiB
+nvcc=
+nvcc: NVIDIA (R) Cuda compiler driver
+Copyright (c) 2005-2024 NVIDIA Corporation
+Built on Thu_Jun__6_03:03:05_Pacific_Daylight_Time_2024
+Cuda compilation tools, release 12.5, V12.5.82
+Build cuda_12.5.r12.5/compiler.34385749_0
+llama_server_version=
+version: 10068 (571d0d540)
+built with Clang 20.1.8 for Windows x86_64
+llama_server_devices=
+Available devices:
+  Vulkan0: Intel(R) RaptorLake-S Mobile Graphics Controller (32637 MiB, 48123 MiB free)
+  Vulkan1: NVIDIA GeForce RTX 4090 Laptop GPU (16048 MiB, 15280 MiB free)
+docker_version=
+Docker version 27.0.3, build 7d4bcd8
+wsl_distros=
+  NAME              STATE           VERSION
+
+* Ubuntu-24.04      Stopped         2
+
+  docker-desktop    Stopped         2
+
+
+e_volume=
+
+DriveLetter   : E
+FileSystem    : NTFS
+Size          : 863145508864
+SizeRemaining : 184659210240
+
+model_dirs=
+E:\Health-Copilot-Models\models\bge-large-en-v1.5
+E:\Health-Copilot-Models\models\bge-reranker-v2-m3
+E:\Health-Copilot-Models\models\MedCPT-Article-Encoder
+E:\Health-Copilot-Models\models\MedCPT-Query-Encoder
+E:\Health-Copilot-Models\models\qwen3-8b
+E:\Health-Copilot-Models\models\Qwen3-Embedding-0.6B
+qwen3_8b_files=
+
+FullName : E:\Health-Copilot-Models\models\qwen3-8b\Qwen3-8B-Q4_K_M.gguf
+Length   : 5027783488
+
+FullName : E:\Health-Copilot-Models\models\qwen3-8b\.hfd\aria2c_urls.txt
+Length   : 144
+
+FullName : E:\Health-Copilot-Models\models\qwen3-8b\.hfd\download.log
+Length   : 0
+
+FullName : E:\Health-Copilot-Models\models\qwen3-8b\.hfd\filelist_stats
+Length   : 13
+
+FullName : E:\Health-Copilot-Models\models\qwen3-8b\.hfd\last_download_command
+Length   : 193
+
+FullName : E:\Health-Copilot-Models\models\qwen3-8b\.hfd\manifest
+Length   : 32
+
+FullName : E:\Health-Copilot-Models\models\qwen3-8b\.hfd\repo_info
+Length   : 13
+
+FullName : E:\Health-Copilot-Models\models\qwen3-8b\.hfd\repo_metadata.json
+Length   : 6776
+
+cached_tokenizer_files=
+
+FullName : E:\Health-Copilot-Models\models\bge-large-en-v1.5\1_Pooling\config.json
+Length   : 191
+
+FullName : E:\Health-Copilot-Models\models\bge-large-en-v1.5\config.json
+Length   : 779
+
+FullName : E:\Health-Copilot-Models\models\bge-large-en-v1.5\tokenizer_config.json
+Length   : 366
+
+FullName : E:\Health-Copilot-Models\models\bge-large-en-v1.5\tokenizer.json
+Length   : 711396
+
+FullName : E:\Health-Copilot-Models\models\bge-reranker-v2-m3\config.json
+Length   : 795
+
+FullName : E:\Health-Copilot-Models\models\bge-reranker-v2-m3\tokenizer_config.json
+Length   : 1173
+
+FullName : E:\Health-Copilot-Models\models\bge-reranker-v2-m3\tokenizer.json
+Length   : 17098273
+
+FullName : E:\Health-Copilot-Models\models\MedCPT-Article-Encoder\config.json
+Length   : 608
+
+FullName : E:\Health-Copilot-Models\models\MedCPT-Article-Encoder\tokenizer_config.json
+Length   : 1488
+
+FullName : E:\Health-Copilot-Models\models\MedCPT-Article-Encoder\tokenizer.json
+Length   : 706277
+
+FullName : E:\Health-Copilot-Models\models\MedCPT-Query-Encoder\config.json
+Length   : 608
+
+FullName : E:\Health-Copilot-Models\models\MedCPT-Query-Encoder\tokenizer_config.json
+Length   : 1488
+
+FullName : E:\Health-Copilot-Models\models\MedCPT-Query-Encoder\tokenizer.json
+Length   : 706277
+
+FullName : E:\Health-Copilot-Models\models\Qwen3-Embedding-0.6B\1_Pooling\config.json
+Length   : 313
+
+FullName : E:\Health-Copilot-Models\models\Qwen3-Embedding-0.6B\config.json
+Length   : 727
+
+FullName : E:\Health-Copilot-Models\models\Qwen3-Embedding-0.6B\tokenizer_config.json
+Length   : 9706
+
+FullName : E:\Health-Copilot-Models\models\Qwen3-Embedding-0.6B\tokenizer.json
+Length   : 11423705
+
+qwen3_8b_gguf_sha256=d98cdcbd03e17ce47681435b5150e34c1417f50b5c0019dd560e4882c5745785

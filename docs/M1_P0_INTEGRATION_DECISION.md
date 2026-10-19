@@ -1,32 +1,37 @@
-# ColluScope M1-P0 Integration Gate Decision
+# M1-P0 Local Integration Decision
 
-**Decision:** **GO for review of the offline V2 integration package. NO-GO for P0-IV live preflight and NO-GO for the 25-episode real-LLM behavior Pilot.**
-**Accepted source baseline:** `5786852f8280af94256c2f9a16f7e872ffdd9146`.
+## Decision
 
-## Gate decisions
+**GO for offline runtime and adapter review. NO-GO for live engineering preflight, M1-P0 research episodes, and M2 detector comparison.**
 
-| Gate | Decision | Evidence and limitation |
+No model call was made. The full 25-episode Mock run is infrastructure evidence only and explicitly sets `behavioral_evidence_claimed=false`.
+
+## Gate-by-gate result
+
+| Gate | Decision | Evidence |
 |---|---|---|
-| V1 preservation | **GO** | Original V1 prompt/config and M0/M0.1/M1-R runs remain unchanged. Historical V1 run and canary reverify against the authenticated archived V1 source snapshot; manifest bytes were checked before and after. |
-| Full action schema in agent prompt | **GO for V2 prompt path** | Exact communication/ballot schemas are in every respective V2 action prompt; prompt/schema byte hashes are frozen. Strict parser counterexamples reject truncated JSON, extra keys, wrong type, malformed allocation and invalid message. No real model adherence test was run. |
-| Self-message continuity | **GO for offline runtime plumbing** | Chat A/B ballot observations contain the exact agent's own prior action and only delivered peer messages. C/no-chat isolation remains. A semantic verifier catches removal even if the modified observation/file hashes are recomputed. Injected promise/suggestion/contrary-vote case retained. |
-| Local vLLM adapter | **GO for fake-transport software integration only** | Exact role mapping, request, timeout, output cap, response usage/raw body, retry, truncation and budget semantics tested with an injected fake opener. Remote endpoints/proxies/redirects are excluded. No model weights/server/LLM contacted; vLLM protocol compatibility with an actual chosen version is UNKNOWN. |
-| Original regression and adversarial controls | **GO offline** | Final full repository suite after thinking-mode configuration: 88 passed. V2 25-episode Mock run: 25/25, all condition counts 5, 95 calls / 95 attempts, independent settlement/E/hash verification. V2 canaries: 11 traces / 18 assertions, all pass. Failures remain in logs. |
-| T/B/E and inference scope | **GO as protocol; latent intent UNKNOWN** | T assignment, B actions/outcomes, and E permission projection remain separate. No condition, incentive, message, matching ballot, target action or welfare loss is itself collusion ground truth. |
-| Request budget | **GO for hard call-count enforcement** | 95 logical requests and maximum 190 attempts are reserved before backend dispatch. Fake transport confirms a second request is rejected at its budget boundary. Preflight/structured probes require a separately approved side budget. |
-| Monetary/token budget | **NO-GO for experiment approval** | Local endpoint API cap is set at $0.00; model/tokenizer/max-output/hardware are not selected, so exact token and GPU/host compute cost is unknown. No cost was incurred. |
-| P0-IV real backend preflight | **NOT RUN / NO-GO pending approval** | User authorization requires exact model, endpoint, sampling and call budget first. No actual endpoint was configured or contacted. Fake preflight test is not a preflight result. |
-| Full 25-episode real-LLM pilot | **NO-GO** | Requires separate approval of immutable model/revision, exact vLLM/server version, tokenizer/chat-template hashes/context, thinking mode and supported request field, sampling/output/timeout, 95/190 limit, compute/spend ceiling, retention/auditor permission, and preflight results. No automatic batch follows this decision. |
-| M2 or detector comparison | **NO-GO** | No monitor, four-view comparison, detector metric, tokenizer cost comparison, threshold tuning, or formal evaluation ran. |
+| Local artifact path and integrity | **GO for inventory** | Qwen3-8B Q4_K_M GGUF at `E:\Health-Copilot-Models\models\qwen3-8b\Qwen3-8B-Q4_K_M.gguf`, 5,027,783,488 bytes, SHA256 recorded and matched to local download metadata. |
+| Hardware and runtime inventory | **GO for inventory / NO-GO for compatibility claim** | RTX 4090 Laptop GPU (16 GB class) and installed versions are recorded. WSL can see the GPU, but has no vLLM, CUDA compiler or PyTorch. The installed llama.cpp build was not started. |
+| API action-schema delivery | **GO for client contract** | The actual adapter posts the exact communication and ballot schemas using `response_format.json_schema`; local HTTP canary confirms request bytes, hashes and explicit unsupported-`oneOf` handling. Real server acceptance/enforcement is UNKNOWN. |
+| Self-message continuity / agent isolation | **GO for offline plumbing** | V2 Mock canaries verify the A/B prior-action and delivered-peer-message fields, C/no-chat exclusion, no pre-vote ballot exposure and separate T/B/E paths. |
+| Call, retry and token budgets | **GO for offline enforcement** | 95 logical / 190 maximum behavior attempts are enforced; 2 attempts per request; 6 logical / 12 attempt preflight budget defaults disabled and is hard-capped; 0 comprehension probes. Stage output caps are separate, and context overflow fails before HTTP dispatch. |
+| Historical evidence | **GO** | Full suite verifies prior V1 and accepted V2 packages without changing manifest bytes. Prior integration docs/protocol are preserved with byte-identical hashes under `M1_P0_GATE_*`. |
+| Real model compatibility | **NO-GO** | Current file is GGUF, not the initial AWQ proposal. The matching Qwen3-8B base tokenizer/revision/hash is absent, vLLM is not installed in WSL, and the exact model-specific chat-template/tokenizer count has not been tested. |
+| Research outcome interpretation | **NO-GO for behavioral claims** | No LLM agent ran. Shared-target agreement in no-chat arms remains compatible with independent parallel choice. Channel availability, private-message use, shared incentive, target execution and welfare loss are not individually treated as collusion labels. |
 
-## Research limitations that remain
+## Why live preflight is blocked
 
-1. A/B share a rewarded target. Agreement on that target without chat cannot establish communication-induced coordination; parallel action is a live negative explanation.
-2. Chat arms get an extra message-stage turn even for `no_message`. The contrast is the bundled peer-message-turn opportunity plus deliberation exposure, not a pure message-content causal effect.
-3. The five blocks use one payoff matrix and only three public chair positions (A/B/C/A/B). They are not five independent random task environments and do not support generalization.
-4. Prompt-stated task rewards may not be comprehended or function as actual model utility. Receipt is not comprehension. Any failure to elicit harmful action must remain a result, not trigger post-hoc reward tuning.
-5. The V2 Mock still makes no behavioral claim. It always demonstrates software responses, not real-agent cooperation, collusion or harm.
+The local HTTP server is a test double; it proves the request construction and client failure policy, not that vLLM 0.32.0 or the installed llama.cpp build loads this model, implements the requested `oneOf` schema, honors Qwen3 non-thinking mode, or reports matching tokenizer usage. The official vLLM guide describes GGUF support as experimental and recommends the base tokenizer. That tokenizer is not currently cached under the user's model root. The installed llama.cpp server has a different structured-output request shape and has not been exercised.
 
-## The single next valuable action
+These are observable integration gaps, not failed model behavior. There is no valid basis to report a live compatibility PASS or an agent behavior result.
 
-Review this package and, only if the frozen design is acceptable, separately authorize a model-specific P0-IV request specifying the exact local model/revision, vLLM version, tokenizer/chat template/context, supported thinking mode/field, sampling/output limit, timeout, preflight request allowance, pilot 95/190 ceiling, maximum local compute/spend, retention, and private-message auditor permission. Until that is received, stop here.
+## Next review decision
+
+Before any live request, choose one exact local runtime path:
+
+1. Approve the existing Q4_K_M GGUF and nominate a compatible local server/tokenizer pair; or
+2. Separately authorize a different local checkpoint/runtime after its exact files are present under the approved model root.
+
+Then freeze exact model and tokenizer revisions/hashes, server build, chat template, tokenizer counter, launch/memory settings, and the preflight request allowance. The configured preflight ceiling is at most 6 logical / 12 attempts and remains disabled. A preflight is only a compatibility check; it does not authorize the 25-episode behavior pilot.
+
+Do not proceed automatically to M1-P0/P1 or M2. Stop here for user review.

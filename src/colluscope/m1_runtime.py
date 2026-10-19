@@ -65,10 +65,11 @@ def _source_snapshot() -> dict[str, Any]:
     relative_paths = [
         "pyproject.toml", "configs/m1-r-offline.toml", "configs/m1-pilot-draft.toml",
         "configs/m1-r-offline-v2.toml", "configs/m1-p0-vllm-local.template.toml",
+        "configs/m1-p0-local-draft.toml",
         "src/colluscope/cli.py", "src/colluscope/m1_runtime.py",
         "src/colluscope/openai_compat_vllm.py",
         "src/colluscope/world.py", "src/colluscope/views.py", "tests/test_m1_runtime.py",
-        "tests/test_openai_compat_vllm.py",
+        "tests/test_openai_compat_vllm.py", "tests/test_openai_compat_http_contract.py",
         "prompts/m1-p0/system.txt", "prompts/m1-p0/message.txt", "prompts/m1-p0/ballot.txt",
         "prompts/m1-p0/communication.schema.json", "prompts/m1-p0/ballot.schema.json",
     ]
@@ -92,8 +93,37 @@ def _known_legacy_v1_source_snapshot() -> dict[str, Any]:
     if set(recorded.get("files", {})) != set(order):
         raise ValueError("archived v1 source snapshot has an unexpected file set")
     aggregate = "\n".join(f"{path}\0{recorded['files'][path]}" for path in order).encode("utf-8")
-    if _hash(aggregate) != "7585c760c95d1e3730786c5a76039208f5af14e40009f9fc49530367807e5dda":
+    digest = _hash(aggregate)
+    if (digest != "7585c760c95d1e3730786c5a76039208f5af14e40009f9fc49530367807e5dda" or
+            recorded.get("sha256") != digest):
         raise ValueError("archived v1 source snapshot digest is invalid")
+    return {"sha256": recorded["sha256"], "files": recorded["files"]}
+
+
+def _known_m1_p0_gate_v2_source_snapshot() -> dict[str, Any]:
+    """Authenticate the V2 source snapshot used by the prior accepted offline gate."""
+    archived_path = ROOT / "docs" / "M1_P0_V2_GATE_SOURCE_SNAPSHOT.json"
+    recorded = json.loads(archived_path.read_text(encoding="utf-8"))
+    order = [
+        "pyproject.toml", "configs/m1-r-offline.toml", "configs/m1-pilot-draft.toml",
+        "configs/m1-r-offline-v2.toml", "configs/m1-p0-vllm-local.template.toml",
+        "src/colluscope/cli.py", "src/colluscope/m1_runtime.py",
+        "src/colluscope/openai_compat_vllm.py",
+        "src/colluscope/world.py", "src/colluscope/views.py", "tests/test_m1_runtime.py",
+        "tests/test_openai_compat_vllm.py",
+        "prompts/m1-p0/system.txt", "prompts/m1-p0/message.txt", "prompts/m1-p0/ballot.txt",
+        "prompts/m1-p0/communication.schema.json", "prompts/m1-p0/ballot.schema.json",
+        "prompts/m1-p0-v2/ballot.schema.json", "prompts/m1-p0-v2/ballot.txt",
+        "prompts/m1-p0-v2/communication.schema.json", "prompts/m1-p0-v2/message.txt",
+        "prompts/m1-p0-v2/system.txt",
+    ]
+    if set(recorded.get("files", {})) != set(order):
+        raise ValueError("archived M1-P0 V2 source snapshot has an unexpected file set")
+    aggregate = "\n".join(f"{path}\0{recorded['files'][path]}" for path in order).encode("utf-8")
+    digest = _hash(aggregate)
+    if (digest != "7c94667273a797ab2d3b9ce0d0fa2aa69d7f16eb56f6ac076dc6c149996fcf30" or
+            recorded.get("sha256") != digest):
+        raise ValueError("archived M1-P0 V2 source snapshot digest is invalid")
     return {"sha256": recorded["sha256"], "files": recorded["files"]}
 
 
@@ -104,7 +134,10 @@ def _source_snapshot_matches(manifest: dict[str, Any]) -> bool:
     historical_v1 = _known_legacy_v1_source_snapshot()
     is_v1 = (manifest.get("prompt_version") == "m1-p0-frozen-v1" or
              manifest.get("purpose") == "offline_adversarial_runtime_canaries")
-    return is_v1 and snapshot == historical_v1
+    if is_v1 and snapshot == historical_v1:
+        return True
+    historical_gate_v2 = _known_m1_p0_gate_v2_source_snapshot()
+    return manifest.get("prompt_version") == "m1-p0-frozen-v2" and snapshot == historical_gate_v2
 
 
 def _git_state() -> dict[str, Any]:
@@ -255,6 +288,7 @@ class AgentRequest:
     timeout_seconds: int
     observation_sha256: str
     prompt: str
+    generation_seed: int | None = None
 
 
 class Backend(Protocol):
@@ -447,6 +481,7 @@ def _request_dict(request: AgentRequest) -> dict[str, Any]:
         "agent_id": request.agent_id, "model_id": request.model_id,
         "sampling": request.sampling, "timeout_seconds": request.timeout_seconds,
         "observation_sha256": request.observation_sha256, "prompt": request.prompt,
+        "generation_seed": request.generation_seed,
     }
 
 
@@ -536,14 +571,32 @@ def _render(stage: str, observation: dict[str, Any], config: RuntimeConfig) -> s
     return f"{system}\n\n{template}"
 
 
+def _generation_seed(seed_block: str, agent_id: str, action_kind: str) -> int:
+    """Assign the same generation seed to the same agent/stage in matched blocks.
+
+    The seed is an API sampling parameter and researcher metadata. It is not
+    rendered into the agent prompt or exported into monitor evidence E.
+    """
+    try:
+        index = int(seed_block.removeprefix("seed-"))
+    except ValueError as exc:
+        raise ValueError(f"invalid frozen sampling seed block: {seed_block}") from exc
+    if seed_block != f"seed-{index}" or index < 0 or agent_id not in AGENTS or action_kind not in {"message", "ballot"}:
+        raise ValueError("sampling seed requires a valid seed block, agent and action stage")
+    material = f"colluscope-m1-p0-seed-v1\0{seed_block}\0{agent_id}\0{action_kind}".encode("utf-8")
+    return int.from_bytes(sha256(material).digest()[:4], "big") & 0x7FFFFFFF
+
+
 def _request(adapter: RequestAdapter, config: RuntimeConfig, request_id: str,
              action_kind: str, agent_id: str, observation: dict[str, Any],
-             observation_rows: list[dict[str, Any]], episode_id: str) -> str:
+             observation_rows: list[dict[str, Any]], episode_id: str,
+             seed_block: str) -> str:
     obs_hash = _canonical_hash(observation)
     request = AgentRequest(request_id=request_id, action_kind=action_kind, agent_id=agent_id,
                            model_id=config.model_id, sampling=config.sampling,
                            timeout_seconds=config.timeout_seconds,
-                           observation_sha256=obs_hash, prompt=_render(action_kind, observation, config))
+                           observation_sha256=obs_hash, prompt=_render(action_kind, observation, config),
+                           generation_seed=_generation_seed(seed_block, agent_id, action_kind))
     record = {"episode_id": episode_id, "request_id": request_id, "agent_id": agent_id,
               "stage": action_kind, "observation": observation, "sha256": obs_hash,
               "exposure_status": "prepared_not_yet_sent"}
@@ -630,7 +683,7 @@ def run_episode(condition: dict[str, Any], seed_block: str, episode_id: str,
                 request_counter += 1
                 req_id = f"req-{request_counter:04d}"
                 raw = _request(adapter, config, req_id, "message", agent, initial[agent],
-                               observation_rows, episode_id)
+                               observation_rows, episode_id, seed_block)
                 _confirm_delivery(delivery, agent, req_id)
                 try:
                     parsed = _parse_action(raw, "message")
@@ -666,7 +719,7 @@ def run_episode(condition: dict[str, Any], seed_block: str, episode_id: str,
             request_counter += 1
             req_id = f"req-{request_counter:04d}"
             raw = _request(adapter, config, req_id, "ballot", agent, observation,
-                           observation_rows, episode_id)
+                           observation_rows, episode_id, seed_block)
             _confirm_delivery(delivery, agent, req_id)
             try:
                 parsed = _parse_action(raw, "ballot")
@@ -977,7 +1030,7 @@ def verify_run(run_dir: Path) -> dict[str, Any]:
     forbidden_fields = {"condition_id", "oracle", "policy_id", "model_kind", "seed_block_id",
                         "split_group_id", "split", "private_incentive_rule",
                         "your_private_task_score_rule", "private_peer_channel",
-                        "private_target_bonus_recipients", "episode_id"}
+                        "private_target_bonus_recipients", "episode_id", "generation_seed"}
     for evidence in e_rows:
         _assert_no_forbidden_fields(evidence, forbidden_fields)
         if set(evidence) != {"task_spec", "events"}:
@@ -1002,12 +1055,29 @@ def verify_run(run_dir: Path) -> dict[str, Any]:
                     and record["agent_id"] == observation["agent_id"]]
         if not matching:
             raise ValueError("saved agent observation has no matching exact adapter request")
-    # Explicitly reject any request envelope that contains a treatment or seed field.
+    # Sampling seeds are transport controls, not agent prompt content or T labels.
+    # Current-source artifacts must record/recompute them; historical accepted
+    # snapshots predate the parameter and are verified with their original schema.
+    current_source_snapshot = manifest.get("source_snapshot") == _source_snapshot()
+    expected_seed_by_request: dict[str, int] = {}
+    seed_by_episode = {row["episode_id"]: row["seed_block_id"] for row in t_rows}
+    for behavior in b_rows:
+        block = seed_by_episode[behavior["episode_id"]]
+        for ballot in behavior["ballots"]:
+            expected_seed_by_request[ballot["request_id"]] = _generation_seed(block, ballot["agent_id"], "ballot")
+        for message in behavior["peer_messages"]:
+            expected_seed_by_request[message["request_id"]] = _generation_seed(block, message["sender"], "message")
+    # Reject treatment/oracle metadata in every agent request envelope.
     for record in request_rows:
         request = record["request"]
-        if set(request) != {"request_id", "action_kind", "agent_id", "model_id", "sampling",
-                            "timeout_seconds", "observation_sha256", "prompt"}:
+        expected_request_fields = {"request_id", "action_kind", "agent_id", "model_id", "sampling",
+                                   "timeout_seconds", "observation_sha256", "prompt"}
+        if current_source_snapshot:
+            expected_request_fields.add("generation_seed")
+        if set(request) != expected_request_fields:
             raise ValueError("hidden research metadata entered the model request envelope")
+        if current_source_snapshot and request["generation_seed"] != expected_seed_by_request.get(record["request_id"]):
+            raise ValueError("request generation seed differs from the matched seed-block schedule")
     group_by_seed: dict[str, set[tuple[str, str]]] = {}
     for row in t_rows:
         expected_group = sha256(f"colluscope-m1-split-v1|{row['scenario_family_id'].strip()}|{row['seed_block_id'].strip()}".encode()).hexdigest()
@@ -1284,9 +1354,13 @@ def _summarize_canaries(cases: list[dict[str, Any]], private_text: str, sentinel
                   if row["request_id"] == next(req["request_id"] for req in transient["received_requests"]
                                                if req["action_kind"] == "message" and req["agent_id"] == "A")]
     expected = {
-        "agent_request_has_no_research_envelope": all(
+        "agent_request_has_only_task_fields_and_sampling_seed": all(
             set(request) == {"request_id", "action_kind", "agent_id", "model_id", "sampling",
-                             "timeout_seconds", "observation_sha256", "prompt"} for request in requests),
+                             "timeout_seconds", "observation_sha256", "prompt", "generation_seed"}
+            and isinstance(request["generation_seed"], int)
+            and "seed_block_id" not in request and "condition_id" not in request
+            and "oracle" not in request and "generation_seed" not in request["prompt"]
+            for request in requests),
         "C_does_not_receive_A_B_private_message": sentinel not in c_prompt and "VOLUNTARY-DISCLOSURE-SENTINEL" not in c_prompt,
         "B_receives_delivered_A_message": sentinel in b_ballot["prompt"],
         "permissioned_E_retains_voluntary_disclosure": sentinel in e_chat,

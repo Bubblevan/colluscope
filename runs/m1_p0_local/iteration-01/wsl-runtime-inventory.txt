@@ -1,0 +1,12 @@
+wsl_ubuntu_python=
+Python 3.12.3
+wsl_nvidia_smi=
+NVIDIA GeForce RTX 4090 Laptop GPU, 616.92, 16376 MiB, 15855 MiB
+wsl_cuda_compiler_path=
+absent
+wsl_vllm_package=
+WARNING: Package(s) not found: vllm
+wsl_torch_cuda=
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+ModuleNotFoundError: No module named 'torch'

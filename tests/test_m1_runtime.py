@@ -8,7 +8,8 @@ import pytest
 from colluscope.m1_runtime import (
     AgentRequest, MockBackend, RequestAdapter, RequestBudget, RequestFailure, RuntimeConfig,
     TimeoutBackendError, TransientTransportError, _condition_order, _observation,
-    _chair_for_seed_block, _parse_action, _render, _task_spec, load_runtime_config, run_canary_case,
+    _chair_for_seed_block, _generation_seed, _parse_action, _render, _task_spec,
+    load_runtime_config, run_canary_case,
     run_canary_suite, run_offline, verify_canary_suite, verify_run,
 )
 from colluscope.world import AGENTS, COALITION_TARGET, OPTIMAL_ASSIGNMENT, assignment_map
@@ -140,6 +141,50 @@ def test_historical_v1_run_and_canaries_remain_verifiable_without_rewrite():
     assert (ROOT / "runs" / "m1_r" / "isolation-canaries-final" / "manifest.json").read_bytes() == canary_before
 
 
+def test_historical_accepted_v2_gate_artifacts_remain_verifiable_without_rewrite():
+    run = ROOT / "runs" / "m1_p0" / "v2-mock-run-final-gate"
+    canaries = ROOT / "runs" / "m1_p0" / "v2-canaries-final-gate"
+    run_before = (run / "manifest.json").read_bytes()
+    canaries_before = (canaries / "manifest.json").read_bytes()
+    assert verify_run(run)["episodes"] == 25
+    assert verify_canary_suite(canaries)["case_count"] == 11
+    assert (run / "manifest.json").read_bytes() == run_before
+    assert (canaries / "manifest.json").read_bytes() == canaries_before
+
+
+def test_generation_seed_is_stable_matched_and_researcher_only(tmp_path):
+    seed = _generation_seed("seed-2", "A", "ballot")
+    assert seed == _generation_seed("seed-2", "A", "ballot")
+    assert seed != _generation_seed("seed-3", "A", "ballot")
+    assert seed != _generation_seed("seed-2", "B", "ballot")
+    assert seed != _generation_seed("seed-2", "A", "message")
+    run_dir = run_offline(CONFIG_V2_PATH, tmp_path / "seeded-run")
+    request_rows = [json.loads(row) for row in
+                    (run_dir / "researcher" / "requests.jsonl").read_text(encoding="utf-8").splitlines()]
+    monitor_rows = [json.loads(row) for row in
+                    (run_dir / "monitor_inputs" / "evidence.jsonl").read_text(encoding="utf-8").splitlines()]
+    assert request_rows and all(row["request"]["generation_seed"] is not None for row in request_rows)
+    assert all("generation_seed" not in json.dumps(row) for row in monitor_rows)
+
+
+def test_current_run_verifier_rejects_removed_or_changed_sampling_seed(tmp_path):
+    from hashlib import sha256
+    from colluscope.m1_runtime import _json
+    from colluscope.views import canonical_json
+
+    run_dir = run_offline(CONFIG_V2_PATH, tmp_path / "tampered-seed")
+    manifest_path = run_dir / "manifest.json"
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    requests_path = run_dir / manifest["paths"]["requests"]
+    rows = [json.loads(row) for row in requests_path.read_text(encoding="utf-8").splitlines()]
+    rows[0]["request"]["generation_seed"] ^= 1
+    requests_path.write_bytes(b"".join(canonical_json(row) + b"\n" for row in rows))
+    manifest["sha256"][manifest["paths"]["requests"]] = sha256(requests_path.read_bytes()).hexdigest()
+    manifest_path.write_bytes(_json(manifest))
+    with pytest.raises(ValueError, match="generation seed differs"):
+        verify_run(run_dir)
+
+
 def test_v2_independent_verifier_detects_removed_self_history_even_if_hashes_are_recomputed(tmp_path):
     run_dir = run_offline(CONFIG_V2_PATH, tmp_path / "tampered-v2")
     t_rows = [json.loads(row) for row in (run_dir / "researcher" / "T.jsonl").read_text(encoding="utf-8").splitlines()]
@@ -180,8 +225,9 @@ def test_model_request_schema_has_no_seed_condition_or_oracle_metadata(config):
                           "a" * 64, "frozen prompt")
     assert set(request.__dict__) == {
         "request_id", "action_kind", "agent_id", "model_id", "sampling",
-        "timeout_seconds", "observation_sha256", "prompt",
+        "timeout_seconds", "observation_sha256", "prompt", "generation_seed",
     }
+    assert request.generation_seed is None
 
 
 def test_private_incentive_is_only_in_named_agent_observation(config):

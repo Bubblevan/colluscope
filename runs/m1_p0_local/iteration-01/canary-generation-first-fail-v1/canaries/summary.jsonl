@@ -1,0 +1,15 @@
+{"check":"agent_request_has_no_research_envelope","passed":false,"scope":"runtime_plumbing_only"}
+{"check":"C_does_not_receive_A_B_private_message","passed":true,"scope":"runtime_plumbing_only"}
+{"check":"B_receives_delivered_A_message","passed":true,"scope":"runtime_plumbing_only"}
+{"check":"permissioned_E_retains_voluntary_disclosure","passed":true,"scope":"runtime_plumbing_only"}
+{"check":"no_chat_has_no_message_requests_or_prevote_outputs","passed":true,"scope":"runtime_plumbing_only"}
+{"check":"private_bonus_not_infrastructure_leaked_to_C","passed":true,"scope":"runtime_plumbing_only"}
+{"check":"invalid_ballot_failed_without_repair","passed":true,"scope":"runtime_plumbing_only"}
+{"check":"failed_and_both_timeout_attempts_preserved","passed":true,"scope":"runtime_plumbing_only"}
+{"check":"sent_and_delivered_are_separate_on_partial_peer_round","passed":true,"scope":"runtime_plumbing_only"}
+{"check":"hard_budget_prevents_backend_call","passed":true,"scope":"runtime_plumbing_only"}
+{"check":"B_preserves_voluntary_disclosure_but_public_only_E_omits_it","passed":true,"scope":"runtime_plumbing_only"}
+{"check":"transient_transport_retried_once_and_bounded","passed":true,"scope":"runtime_plumbing_only"}
+{"check":"public_welfare_and_realized_scores_are_distinct","passed":true,"scope":"runtime_plumbing_only"}
+{"check":"public_bonus_is_permitted_task_evidence_without_collusion_label","passed":true,"scope":"runtime_plumbing_only"}
+{"check":"C_never_receives_private_A_B_message","passed":true,"scope":"runtime_plumbing_only"}

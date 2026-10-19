@@ -1,0 +1,1 @@
+{"external_model_calls": 0, "observed_http_requests": 8, "paid_api_calls": 0, "records_with_raw_adapter_attempts": 5, "scenario_records": 7, "scenarios": ["successful_ballot_and_oneof_schema", "unsupported_oneof", "malformed_action_no_repair", "timeout_two_attempts", "connection_refusal", "duplicate_request_id", "global_retry_budget"]}
