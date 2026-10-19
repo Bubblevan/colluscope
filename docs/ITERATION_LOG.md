@@ -23,6 +23,15 @@
 - **ADVERSARIAL REVIEW:** The independent auditor does not import runtime or settlement code. It rechecks each request's model ID, sampling, timeout, observation identity, generated seed, exact prompt reconstruction, request/action call graph, copied protocol/runtime hashes, and historical matched-group identity before analyzing raw response/action agreement.
 - **DECIDE:** Protocol freeze remains valid; no model response has been observed. Ready to commit/push the pre-response freeze, then start the authorized 75-episode run.
 
+## M1-100 extension — pre-dispatch repair (no model calls)
+
+- **INSPECT:** First invocation failed while copying frozen source files because `_prepare_output` had not created `frozen_protocol/source`.
+- **SPECIFY:** The counterexample is an empty fresh output directory: preparation must copy both runner and independent auditor sources and complete its freeze before any server process or model request exists.
+- **IMPLEMENT:** Create the source-copy directory before copying. Add an offline regression test that runs output preparation in a temporary directory and checks both frozen source copies. This changes no prompt, payoff, condition, model, sampling, or request limit.
+- **RUN:** The original traceback is preserved at `runs/m1_100/extension-75-20261019/pre-dispatch-runner-failure.log`. The failure occurred inside output preparation; no environment/launch/request file exists and no llama-server was started. The partial directory remains untouched. Regression checks: focused suite **53 passed**, full suite **202 passed, 1 skipped** in 24.72s, freeze check and syntax/diff checks passed; raw logs are `runs/m1_100/engineering/pytest-focused-repair.log` and `pytest-full-suite-repair.log`. Use a new output directory (`extension-75-20261019-run02`) for the authorized run.
+- **ADVERSARIAL REVIEW:** This was a packaging/setup defect before model contact; it cannot change the intervention. The original failed attempt remains in the local record and no sample is replaced because no episode was assigned or started.
+- **DECIDE:** Keep the pre-response design freeze, commit/push the minimal setup repair and regression test, then execute once into the new run directory.
+
 ## M0-A-01 — source and dependency preflight
 
 - **Date:** 2026-10-18 (Asia/Shanghai)

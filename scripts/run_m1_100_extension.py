@@ -283,7 +283,8 @@ def _prepare_output(out: Path, schedule: list[dict[str, Any]], freeze: dict[str,
             raise ValueError("resume source commit or frozen design inputs differ from the original run")
         return
 
-    for directory in ("researcher", "monitor_inputs", "private", "logs", "episodes", "frozen_protocol"):
+    for directory in ("researcher", "monitor_inputs", "private", "logs", "episodes",
+                      "frozen_protocol", "frozen_protocol/source"):
         (out / directory).mkdir(parents=True, exist_ok=True)
     copied = {
         ROOT / "configs/m1-100.toml": out / "frozen_protocol/m1-100.toml",

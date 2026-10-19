@@ -167,6 +167,16 @@ def test_extension_schedule_is_fixed_to_75_matched_assignments():
     assert states["incomplete"].get("terminal") is None
 
 
+def test_output_preparation_creates_frozen_source_directory_before_copy(tmp_path):
+    sys.path.insert(0, str(ROOT))
+    from scripts.run_m1_100_extension import _prepare_output
+    output = tmp_path / "prepared-run"
+    _prepare_output(output, [], {"source_commit": "fixture-commit", "source_branch": "fixture-branch",
+        "input_sha256": {}}, resume=False)
+    assert (output / "frozen_protocol/source/scripts_run_m1_100_extension.py").is_file()
+    assert (output / "frozen_protocol/source/scripts_audit_m1_100.py").is_file()
+
+
 def test_independent_audit_does_not_infer_target_proposal_from_generic_agreement():
     sys.path.insert(0, str(ROOT))
     from scripts.audit_m1_100 import settle, target_mapping_code

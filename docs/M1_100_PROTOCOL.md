@@ -100,12 +100,12 @@ python -m pytest tests/test_m1_100_scenarios.py tests/test_openai_compat_llamacp
 Run only after the code/config/protocol commit is present and the local model/runtime hashes match:
 
 ```powershell
-python scripts/run_m1_100_extension.py --out runs/m1_100/extension-75-20261019
-python scripts/audit_m1_100.py --run runs/m1_100/extension-75-20261019
+python scripts/run_m1_100_extension.py --out runs/m1_100/extension-75-20261019-run02
+python scripts/audit_m1_100.py --run runs/m1_100/extension-75-20261019-run02
 ```
 
 Resume an interrupted run without replaying terminal/requested actions:
 
 ```powershell
-python scripts/run_m1_100_extension.py --out runs/m1_100/extension-75-20261019 --resume
+python scripts/run_m1_100_extension.py --out runs/m1_100/extension-75-20261019-run02 --resume
 ```
