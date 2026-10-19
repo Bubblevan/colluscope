@@ -507,14 +507,59 @@ def _crosscheck_actions_against_raw_requests(run: Path, b_rows: list[dict[str, A
                 raise AuditError(f"completed chat message call graph is invalid for {eid}")
 
 
+def _map_public_evidence(t_rows: list[dict[str, Any]], e_rows: list[dict[str, Any]],
+                        e_index: list[dict[str, Any]]) -> tuple[list[dict[str, Any]], dict[str, Any]]:
+    """Resolve per-episode index rows to deduplicated, content-identical Public E rows."""
+    if len(t_rows) != len(e_index) or not e_rows or len(e_rows) > len(t_rows):
+        raise AuditError(f"Public E/index cardinality invalid: T={len(t_rows)}, E={len(e_rows)}, index={len(e_index)}")
+    mapped = []
+    seen_episode_ids = set()
+    index_scope: dict[int, tuple[Any, Any, Any, Any]] = {}
+    next_new_index = 0
+    last_index = None
+    references = Counter()
+    for row_number, (t, ref) in enumerate(zip(t_rows, e_index, strict=True)):
+        episode_id = t.get("episode_id")
+        if episode_id in seen_episode_ids or ref.get("episode_id") != episode_id:
+            raise AuditError(f"Public E index episode alignment mismatch at row {row_number}")
+        seen_episode_ids.add(episode_id)
+        idx = ref.get("evidence_row_index")
+        if isinstance(idx, bool) or not isinstance(idx, int) or not 0 <= idx < len(e_rows):
+            raise AuditError(f"Public E index has an invalid row number for {episode_id}")
+        e = e_rows[idx]
+        scope = (t.get("split"), t.get("scenario_family_id"), t.get("seed_block_id"), t.get("split_group_id"))
+        expected_ref = {"partition": scope[0], "scenario_family_id": scope[1],
+                        "seed_block_id": scope[2], "split_group_id": scope[3]}
+        if (any(ref.get(key) != value for key, value in expected_ref.items()) or
+                ref.get("evidence_sha256") != canonical_hash(e)):
+            raise AuditError(f"Public E index/provenance/hash chain mismatch at row {row_number}")
+        if idx == last_index:
+            if index_scope[idx] != scope:
+                raise AuditError(f"deduplicated Public E crosses a matched group or split at row {row_number}")
+        elif idx == next_new_index:
+            next_new_index += 1
+            last_index = idx
+            index_scope[idx] = scope
+        else:
+            raise AuditError(f"Public E rows are unreferenced or deduplication is noncontiguous at row {row_number}")
+        references[idx] += 1
+        mapped.append(e)
+    if next_new_index != len(e_rows) or set(references) != set(range(len(e_rows))):
+        raise AuditError("Public E contains an orphan row or has no complete episode index")
+    return mapped, {"episode_references": len(e_index), "unique_public_e_rows": len(e_rows),
+                    "deduplicated_references": len(e_index) - len(e_rows),
+                    "shared_rows_confined_to_same_matched_group": True}
+
+
 def _verify_new(run: Path, config: dict[str, Any], scenario_doc: dict[str, Any],
                 split_doc: dict[str, Any]) -> tuple[list[dict[str, Any]], dict[str, Any]]:
     t_rows = read_jsonl(run / "researcher/T.jsonl")
     b_rows = read_jsonl(run / "researcher/B.jsonl")
     e_rows = read_jsonl(run / "monitor_inputs/evidence.jsonl")
     e_index = read_jsonl(run / "researcher/evidence-index.jsonl")
-    if not (len(t_rows) == len(b_rows) == len(e_rows) == len(e_index) == 75):
-        raise AuditError(f"expected exactly 75 T/B/E rows; got {len(t_rows)}/{len(b_rows)}/{len(e_rows)}")
+    if not (len(t_rows) == len(b_rows) == len(e_index) == 75):
+        raise AuditError(f"expected exactly 75 T/B/index rows; got {len(t_rows)}/{len(b_rows)}/{len(e_index)}")
+    e_by_episode, e_facts = _map_public_evidence(t_rows, e_rows, e_index)
     if len({row["episode_id"] for row in t_rows}) != 75:
         raise AuditError("new extension T contains duplicate or missing episode IDs")
     scenario_by_id = {row["scenario_family_id"]: row for row in scenario_doc["families"]}
@@ -543,15 +588,7 @@ def _verify_new(run: Path, config: dict[str, Any], scenario_doc: dict[str, Any],
     if len(assignment_events) != 75 or len({row["episode_id"] for row in assignment_events}) != 75:
         raise AuditError("append-only assignment ledger is not 75 unique assigned episodes")
     schedule_by_id = {row["episode_id"]: row for row in schedule}
-    for row_index, (t, b, e, evidence_ref) in enumerate(zip(t_rows, b_rows, e_rows, e_index, strict=True)):
-        if (evidence_ref.get("evidence_row_index") != row_index or
-                evidence_ref.get("evidence_sha256") != canonical_hash(e) or
-                evidence_ref.get("episode_id") != t["episode_id"] or
-                evidence_ref.get("partition") != t["split"] or
-                evidence_ref.get("scenario_family_id") != t["scenario_family_id"] or
-                evidence_ref.get("seed_block_id") != t["seed_block_id"] or
-                evidence_ref.get("split_group_id") != t["split_group_id"]):
-            raise AuditError(f"Public E index/provenance/hash chain mismatch at row {row_index}")
+    for row_index, (t, b, e) in enumerate(zip(t_rows, b_rows, e_by_episode, strict=True)):
         frozen = schedule_by_id.get(t["episode_id"])
         if frozen is None or any(t.get(key) != frozen.get(key) for key in (
                 "scenario_family_id", "seed_block_id", "split_group_id", "condition_id")) or t.get("split") != frozen.get("partition"):
@@ -607,6 +644,7 @@ def _verify_new(run: Path, config: dict[str, Any], scenario_doc: dict[str, Any],
     terminal = {row["episode_id"]: row for row in progress if row.get("event") == "episode_terminal"}
     if len(terminal) != 75 or set(terminal) != {row["episode_id"] for row in t_rows}:
         raise AuditError("append-only progress ledger does not terminate all 75 assigned episodes")
+    request_facts["public_evidence_projection"] = e_facts
     return records, request_facts
 
 
@@ -881,39 +919,55 @@ def _verify_copied_freeze(run: Path) -> dict[str, Any]:
     frozen_auditor = run / f"{source_prefix}/scripts_audit_m1_100.py"
     frozen_auditor_sha = sha256_file(frozen_auditor)
     current_auditor_sha = sha256_file(ROOT / "scripts/audit_m1_100.py")
-    audit_revision = None
+    audit_revisions = []
     if current_auditor_sha != frozen_auditor_sha:
-        revision_path = run / "frozen_protocol/postrun-audit-revision.json"
         correction_path = run / "frozen_protocol/postrun-metadata/m1-100-f0-split-correction.json"
-        failure_path = run / "audit-failure.json"
-        if not revision_path.is_file() or not correction_path.is_file() or not failure_path.is_file():
+        first_failure = run / "audit-failure.json"
+        revisions_dir = run / "frozen_protocol"
+        revision_paths = [revisions_dir / "postrun-audit-revision.json"]
+        revision_paths.extend(sorted(revisions_dir.glob("postrun-audit-revision-[0-9][0-9][0-9].json")))
+        if not revision_paths[0].is_file() or not correction_path.is_file() or not first_failure.is_file():
             raise AuditError("changed post-run auditor lacks a versioned correction and preserved first failure")
-        revision = read_json(revision_path)
         correction = read_json(correction_path)
         current_correction = ROOT / "configs/m1-100-f0-split-correction.json"
         if not current_correction.is_file() or sha256_file(current_correction) != sha256_file(correction_path):
             raise AuditError("run-scoped F0 correction differs from the committed correction manifest")
         split_sha = sha256_file(run / "frozen_protocol/m1-100-splits.json")
-        if (revision.get("schema_version") != "m1-100-postrun-audit-revision-v1" or
-                revision.get("scope") != "auditor-only repair after all model responses; no T/B/E or request bytes changed" or
-                revision.get("frozen_auditor_sha256") != frozen_auditor_sha or
-                revision.get("corrected_auditor_sha256") != current_auditor_sha or
-                revision.get("f0_correction_sha256") != sha256_file(correction_path) or
-                revision.get("preserved_first_failure_sha256") != sha256_file(failure_path) or
-                revision.get("source_split_manifest_sha256") != split_sha or
-                correction.get("source_split_manifest_sha256") != split_sha or
+        if (correction.get("source_split_manifest_sha256") != split_sha or
                 correction.get("source_split_manifest") != "frozen_protocol/m1-100-splits.json"):
-            raise AuditError("post-run auditor revision does not bind exact source/correction/failure hashes")
-        audit_revision = {"status": "PASS_VERSIONED_POSTRUN_AUDITOR_REPAIR",
-            "implementation_commit": revision.get("implementation_commit"),
-            "frozen_auditor_sha256": frozen_auditor_sha,
-            "corrected_auditor_sha256": current_auditor_sha,
-            "f0_correction_sha256": sha256_file(correction_path),
-            "preserved_first_failure_sha256": sha256_file(failure_path),
-            "source_split_manifest_sha256": split_sha}
+            raise AuditError("post-run correction is not bound to the frozen split manifest")
+        previous_auditor_sha = frozen_auditor_sha
+        for number, revision_path in enumerate(revision_paths, 1):
+            revision = read_json(revision_path)
+            expected_failure_path = run / ("audit-failure.json" if number == 1 else
+                f"audit-failure-attempt-{number:03d}.json")
+            if not expected_failure_path.is_file():
+                raise AuditError(f"post-run audit revision {number} has no retained triggering failure")
+            if (revision.get("schema_version") != "m1-100-postrun-audit-revision-v1" or
+                    revision.get("revision_number") != number or
+                    revision.get("frozen_auditor_sha256") != previous_auditor_sha or
+                    revision.get("f0_correction_sha256") != sha256_file(correction_path) or
+                    revision.get("preserved_first_failure_sha256") != sha256_file(first_failure) or
+                    revision.get("triggering_failure_path") != expected_failure_path.name or
+                    revision.get("triggering_failure_sha256") != sha256_file(expected_failure_path) or
+                    revision.get("source_split_manifest_sha256") != split_sha or
+                    not isinstance(revision.get("implementation_commit"), str) or
+                    not re.fullmatch(r"[0-9a-f]{40}", revision["implementation_commit"])):
+                raise AuditError(f"post-run auditor revision {number} does not bind exact source/failure hashes")
+            previous_auditor_sha = revision.get("corrected_auditor_sha256")
+            audit_revisions.append({"revision_number": number,
+                "implementation_commit": revision["implementation_commit"],
+                "frozen_auditor_sha256": revision["frozen_auditor_sha256"],
+                "corrected_auditor_sha256": previous_auditor_sha,
+                "triggering_failure_path": expected_failure_path.name,
+                "triggering_failure_sha256": revision["triggering_failure_sha256"]})
+        if previous_auditor_sha != current_auditor_sha:
+            raise AuditError("post-run audit revision chain does not terminate at the current auditor")
+    elif (run / "frozen_protocol/postrun-audit-revision.json").exists():
+        raise AuditError("post-run audit revision exists although current auditor matches the frozen source")
     return {"source_commit": design.get("source_commit"), "frozen_input_count": len(copied_hashes),
             "freeze_revision": revision_number, "all_copied_frozen_inputs_rehashed": True,
-            "postrun_audit_revision": audit_revision}
+            "postrun_audit_revisions": audit_revisions}
 
 
 def _summary(records: list[dict[str, Any]], keys: tuple[str, ...]) -> list[dict[str, Any]]:

@@ -132,6 +132,46 @@ def test_audit_failures_are_append_only_and_preserve_first_evidence(tmp_path):
     assert json.loads(path.read_text(encoding="utf-8"))["error"] == "second counterexample"
 
 
+def test_public_e_deduplication_is_hash_bound_and_cannot_cross_matched_groups():
+    import copy
+    sys.path.insert(0, str(ROOT))
+    from scripts.audit_m1_100 import AuditError, _map_public_evidence, canonical_hash
+    e0 = {"task_spec": {"x": 1}, "events": []}
+    e1 = {"task_spec": {"x": 2}, "events": []}
+    group_a = {"split": "F1", "scenario_family_id": "family-a", "seed_block_id": "seed-100",
+               "split_group_id": "group-a"}
+    group_b = {"split": "F1", "scenario_family_id": "family-a", "seed_block_id": "seed-101",
+               "split_group_id": "group-b"}
+    t_rows = [{"episode_id": f"ep-{i}", **(group_a if i < 2 else group_b)} for i in range(3)]
+    e_rows = [e0, e1]
+    e_index = [{"episode_id": t["episode_id"], "evidence_row_index": i,
+        "partition": t["split"], "scenario_family_id": t["scenario_family_id"],
+        "seed_block_id": t["seed_block_id"], "split_group_id": t["split_group_id"],
+        "evidence_sha256": canonical_hash(e_rows[i])} for t, i in zip(t_rows, [0, 0, 1], strict=True)]
+    mapped, facts = _map_public_evidence(t_rows, e_rows, e_index)
+    assert mapped == [e0, e0, e1]
+    assert facts["deduplicated_references"] == 1
+    corrupted = copy.deepcopy(e_index)
+    cross_group_t = copy.deepcopy(t_rows)
+    cross_group_t[1].update(group_b)
+    for key, value in {"partition": group_b["split"], "scenario_family_id": group_b["scenario_family_id"],
+                       "seed_block_id": group_b["seed_block_id"], "split_group_id": group_b["split_group_id"]}.items():
+        corrupted[1][key] = value
+    with pytest.raises(AuditError, match="deduplicated Public E crosses"):
+        _map_public_evidence(cross_group_t, e_rows, corrupted)
+    corrupted = copy.deepcopy(e_index)
+    corrupted[1]["evidence_sha256"] = "0" * 64
+    with pytest.raises(AuditError, match="hash chain"):
+        _map_public_evidence(t_rows, e_rows, corrupted)
+    noncontiguous = copy.deepcopy(e_index)
+    noncontiguous[1]["evidence_row_index"] = 1
+    noncontiguous[1]["evidence_sha256"] = canonical_hash(e1)
+    noncontiguous[2]["evidence_row_index"] = 0
+    noncontiguous[2]["evidence_sha256"] = canonical_hash(e0)
+    with pytest.raises(AuditError, match="noncontiguous"):
+        _map_public_evidence(t_rows, e_rows, noncontiguous)
+
+
 def test_runtime_and_independent_settlement_use_selected_family_matrix():
     scenario = select_scenarios()[0]
     config = replace(load_runtime_config(ROOT / "configs/m1-r-offline-v2.toml"),
