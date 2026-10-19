@@ -1,0 +1,13 @@
+{
+  "figure_sha256": "4567e2e94a3e6d3c40c8160b5ef4d7d058577b6b055170fdfcbbeb6b8f81a930",
+  "input": "runs/m1_100/extension-75-20261019-run02/analysis/new_episode_cases.csv",
+  "input_sha256": "4ae8c0107d08742782983c0c9f551b09231f9c6b50d3a8c0b2764136a36a9002",
+  "outcomes": {
+    "positive_regret_n": "welfare_gap > 0 from scenario-specific independent replay",
+    "rates_denominator": "all 15 assigned episodes in each condition",
+    "target_executed_n": "independently recomputed target allocation selected"
+  },
+  "schema_version": "colluscope-paper-figures-m1-v1",
+  "source_scope": "prospective_extension only; 75 assigned episodes; F0 excluded",
+  "summary_sha256": "aa76a4933178344d9b0a327f5adea4a0ccbfed87cdf42e3ce1cdadcb8ad653f6"
+}

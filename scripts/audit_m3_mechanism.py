@@ -199,9 +199,14 @@ def _same_public_result(recorded: Any, independent: dict[str, Any], where: str) 
                 "target_executed", "individual_task_quality", "public_bonus_awarded",
                 "private_bonus_awarded", "realized_task_scores"):
         _require(recorded.get(key) == independent[key], f"{where} stored {key} differs from independent replay")
-    _require(recorded.get("chair_tiebreak") == independent["chair_tiebreak"] and
-             recorded.get("ballot_tally") == independent["ballot_tally"],
-             f"{where} stored tie-break diagnostics differ from independent replay")
+    has_tiebreak = "chair_tiebreak" in recorded
+    has_tally = "ballot_tally" in recorded
+    _require(has_tiebreak == has_tally,
+             f"{where} stored only part of the optional tie-break diagnostics")
+    if has_tiebreak:
+        _require(recorded["chair_tiebreak"] == independent["chair_tiebreak"] and
+                 recorded["ballot_tally"] == independent["ballot_tally"],
+                 f"{where} stored tie-break diagnostics differ from independent replay")
 
 
 def _extract_observation(prompt: str) -> dict[str, Any]:
@@ -262,17 +267,59 @@ def _assert_only_selected_inbound_diff(base: dict[str, Any], counter: dict[str, 
     _require(left == right, f"{arm} changes non-message agent context or leaks an arm label")
 
 
-def _load_episode_records(run: Path) -> tuple[dict[str, dict[str, Any]], dict[str, dict[str, Any]],
-                                               dict[str, dict[str, Any]]]:
+def _load_episode_records(run: Path, schedule: list[dict[str, Any]]) -> tuple[
+        dict[str, dict[str, Any]], dict[str, dict[str, Any]], dict[str, dict[str, Any]]]:
     t_rows = _read_jsonl(run / "researcher/T.jsonl")
     b_rows = _read_jsonl(run / "researcher/B.jsonl")
     e_rows = _read_jsonl(run / "monitor_inputs/evidence.jsonl")
-    for name, rows in (("T", t_rows), ("B", b_rows), ("E", e_rows)):
-        ids = [row.get("episode_id") for row in rows]
-        _require(len(ids) == len(set(ids)), f"duplicate episode IDs in {name}")
-    return ({row["episode_id"]: row for row in t_rows},
-            {row["episode_id"]: row for row in b_rows},
-            {row["episode_id"]: row for row in e_rows})
+    terminal = [row.get("episode_id") for row in _read_jsonl(run / "progress.jsonl")
+                if row.get("event") == "group_terminal"]
+    expected = [row["episode_id"] for row in schedule]
+    _require(len(expected) == len(set(expected)), "duplicate episode IDs in frozen schedule")
+    _require(len(terminal) == len(set(terminal)), "duplicate terminal episode IDs in progress ledger")
+    _require(terminal == expected, "terminal progress order differs from the frozen assignment schedule")
+    _require(len(t_rows) == len(b_rows) == len(e_rows) == len(expected),
+             "T/B/Public-E record counts differ from the frozen assignment schedule")
+
+    # Runtime B and E records are intentionally projected blobs without an episode_id.
+    # Recover their association only through the append order, independently checking
+    # every blob against its immutable per-episode envelope and the terminal ledger.
+    t_by_id: dict[str, dict[str, Any]] = {}
+    b_by_id: dict[str, dict[str, Any]] = {}
+    e_by_id: dict[str, dict[str, Any]] = {}
+    for index, eid in enumerate(expected):
+        episode_path = run / "episodes" / f"{eid}.json"
+        _require(episode_path.is_file(), f"missing immutable episode envelope for {eid}")
+        envelope = _read_json(episode_path)
+        _require(isinstance(envelope, dict) and set(("T", "B", "E")).issubset(envelope),
+                 f"malformed immutable episode envelope for {eid}")
+        _require(t_rows[index].get("episode_id") == eid,
+                 f"T record order/ID differs from schedule at row {index}")
+        _require(_canonical(t_rows[index]) == _canonical(envelope["T"]),
+                 f"T record differs from immutable episode envelope for {eid}")
+        _require(_canonical(b_rows[index]) == _canonical(envelope["B"]),
+                 f"B record order/content cannot be linked to immutable episode {eid}")
+        _require(_canonical(e_rows[index]) == _canonical(envelope["E"]),
+                 f"E record order/content cannot be linked to immutable episode {eid}")
+        t_by_id[eid], b_by_id[eid], e_by_id[eid] = t_rows[index], b_rows[index], e_rows[index]
+    return t_by_id, b_by_id, e_by_id
+
+
+def _behavior_action_events(b_record: dict[str, Any]) -> list[dict[str, Any]]:
+    """Collect all model behavior events without depending on episode eligibility."""
+    return (b_record.get("message_actions", []) + b_record.get("baseline_ballots", []) +
+            b_record.get("counterfactual_ballots", []))
+
+
+def _treatment_delivery_events(b_record: dict[str, Any]) -> list[dict[str, Any]]:
+    """T's delivery receipt covers the initial message and baseline stages only."""
+    return b_record.get("message_actions", []) + b_record.get("baseline_ballots", [])
+
+
+def _expected_t_delivery_status(agent: str, field: str, returned_ids: list[str]) -> str:
+    if field == "private_target_bonus_status" and agent == "C":
+        return "not_applicable"
+    return "confirmed" if returned_ids else "unknown"
 
 
 def _verify_history(run: Path) -> dict[str, str]:
@@ -529,6 +576,12 @@ def _write_csv(path: Path, fieldnames: list[str], rows: list[dict[str, Any]]) ->
         writer.writerows(rows)
 
 
+def write_json(path: Path, value: Any) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(value, ensure_ascii=False, sort_keys=True, indent=2) + "\n",
+                    encoding="utf-8", newline="\n")
+
+
 def _svg_chart(path: Path, rows: list[dict[str, Any]]) -> None:
     width, height = 920, 440
     left, top, plot_width, plot_height = 90, 60, 780, 290
@@ -599,7 +652,7 @@ def audit(run: Path, out: Path) -> dict[str, Any]:
     _require(run_status.get("assigned_groups") == 12 and run_status.get("terminal_groups") == 12,
              "all twelve assigned groups are not terminal")
     history_hashes = _verify_history(run)
-    t_by_id, b_by_id, e_by_id = _load_episode_records(run)
+    t_by_id, b_by_id, e_by_id = _load_episode_records(run, schedule)
     _require(set(t_by_id) == set(b_by_id) == set(e_by_id) == {row["episode_id"] for row in schedule},
              "T/B/Public-E episode coverage or IDs differ from the frozen schedule")
 
@@ -862,7 +915,8 @@ def audit(run: Path, out: Path) -> dict[str, Any]:
         obs_records = {request_id: rows for request_id, rows in observation_records_by_request.items()
                        if rows[-1].get("episode_id") == eid}
         obs_index = {request_id: rows[-1]["observation"] for request_id, rows in obs_records.items()}
-        action_events = message_actions + b_record.get("baseline_ballots", []) + cf_events
+        action_events = _behavior_action_events(b_record)
+        treatment_delivery_events = _treatment_delivery_events(b_record)
         for event in action_events:
             request_id = event.get("request_id")
             _require(request_id in obs_index,
@@ -894,14 +948,13 @@ def audit(run: Path, out: Path) -> dict[str, Any]:
                 _require("your_private_task_score_rule" not in observation,
                          f"private incentive text leaked to nonrecipient C in {eid}")
         for agent in AGENTS:
-            returned_ids = [event["request_id"] for event in action_events
+            returned_ids = [event["request_id"] for event in treatment_delivery_events
                             if event.get("agent_id") == agent and
                             event.get("observation_delivery_status") == "confirmed_response_returned"]
             assignment = t_record["assigned"][agent]
             for field in ("base_public_score_rule", "private_target_bonus_status"):
                 status = assignment[field]
-                expected_status = "confirmed" if returned_ids else (
-                    "not_applicable" if agent == "C" and field == "private_target_bonus_status" else "unknown")
+                expected_status = _expected_t_delivery_status(agent, field, returned_ids)
                 _require(status.get("delivery_status") == expected_status and
                          status.get("confirmation_request_ids") == (returned_ids if expected_status == "confirmed" else []),
                          f"T incentive-delivery ledger differs from recorded response delivery for {eid}/{agent}")
@@ -1114,8 +1167,12 @@ def audit(run: Path, out: Path) -> dict[str, Any]:
                     cf_settlement = _settle(cf_votes, group["chair"], group["scenario"]["matrix"])
                     stats["settlement_count"] += 1
                     stats["regret_sum"] += cf_settlement["welfare_gap"]
-                _require(cf.get("fixed_peer_settlement") == cf_settlement,
-                         f"stored fixed-peer settlement differs from independent replay for {eid}/{arm}")
+                recorded_cf_settlement = cf.get("fixed_peer_settlement")
+                _require((recorded_cf_settlement is None) == (cf_settlement is None),
+                         f"stored fixed-peer settlement availability differs from independent replay for {eid}/{arm}")
+                if cf_settlement is not None:
+                    _same_public_result(recorded_cf_settlement, cf_settlement,
+                                        f"{eid}/{arm} fixed-peer settlement")
                 proposal_pairs[arm].append({"episode_id": eid, "family": group["scenario_family_id"],
                     "eligible": True, "proposal_valid": proposal_assignment is not None,
                     "arm_valid": assignment is not None, "proposal_match": proposal_assignment == proposal_mapping

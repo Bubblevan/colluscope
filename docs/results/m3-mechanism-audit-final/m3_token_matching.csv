@@ -1,0 +1,9 @@
+episode_id,scenario_family_id,recipient_own_prior_mapping_bearing,recipient_own_prior_matches_focal,proposal_prompt_tokens,neutral_prompt_tokens,neutral_prompt_token_delta,neutral_message_tokens,neutral_message_token_delta,neutral_message_token_exact,masked_prompt_tokens,masked_prompt_token_delta,masked_message_tokens,masked_message_token_delta,masked_message_token_exact,no_delivery_prompt_tokens,no_delivery_prompt_token_delta,no_delivery_message_tokens,no_delivery_message_token_delta,no_delivery_message_token_exact
+m3-1-seed-115,m1_100_family_1,True,True,614,614,0,38,0,True,614,0,38,0,True,569,-45,,,
+m3-1-seed-118,m1_100_family_1,True,True,614,614,0,38,0,True,614,0,38,0,True,569,-45,,,
+m3-2-seed-119,m1_100_family_2,True,True,616,616,0,38,0,True,616,0,38,0,True,571,-45,,,
+m3-2-seed-120,m1_100_family_2,False,False,576,576,0,39,0,True,576,0,39,0,True,530,-46,,,
+m3-2-seed-121,m1_100_family_2,True,True,615,615,0,38,0,True,615,0,38,0,True,570,-45,,,
+m3-2-seed-122,m1_100_family_2,True,True,616,616,0,38,0,True,616,0,38,0,True,571,-45,,,
+m3-3-seed-124,m1_100_family_3,False,False,570,570,0,38,0,True,570,0,38,0,True,525,-45,,,
+m3-3-seed-125,m1_100_family_3,False,False,570,570,0,38,0,True,570,0,38,0,True,525,-45,,,

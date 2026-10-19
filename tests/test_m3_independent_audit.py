@@ -14,7 +14,9 @@ from colluscope.m1_runtime import BudgetExceeded
 
 from scripts.audit_m3_mechanism import (
     AuditFailure, _assert_only_selected_inbound_diff, _same_public_result, _settle,
-    _validate_runtime_code_provenance,
+    _behavior_action_events, _load_episode_records, _treatment_delivery_events,
+    _expected_t_delivery_status, _validate_runtime_code_provenance,
+    write_json,
     _validate_http_attempt_link, _validate_identity_probe_ledger,
 )
 from scripts import run_m3_mechanism
@@ -27,6 +29,90 @@ MATRIX = {
     "B": {"T1": 14, "T2": 17, "T3": 11},
     "C": {"T1": 11, "T2": 7, "T3": 11},
 }
+
+
+def _write_jsonl(path: Path, rows: list[dict]) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text("".join(json.dumps(row, ensure_ascii=False) + "\n" for row in rows),
+                    encoding="utf-8")
+
+
+def test_audit_links_idless_b_and_e_rows_to_episode_envelopes_and_schedule(tmp_path):
+    ids = ["episode-1", "episode-2"]
+    schedule = [{"episode_id": eid} for eid in ids]
+    episodes = {
+        eid: {"T": {"episode_id": eid, "value": index},
+              "B": {"ballot": index}, "E": {"events": [{"event_index": index}]}}
+        for index, eid in enumerate(ids)
+    }
+    for eid, result in episodes.items():
+        path = tmp_path / "episodes" / f"{eid}.json"
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(json.dumps(result), encoding="utf-8")
+    _write_jsonl(tmp_path / "researcher/T.jsonl", [episodes[eid]["T"] for eid in ids])
+    _write_jsonl(tmp_path / "researcher/B.jsonl", [episodes[eid]["B"] for eid in ids])
+    _write_jsonl(tmp_path / "monitor_inputs/evidence.jsonl", [episodes[eid]["E"] for eid in ids])
+    _write_jsonl(tmp_path / "progress.jsonl", [
+        {"event": "group_terminal", "episode_id": eid, "status": "COMPLETED"}
+        for eid in ids])
+
+    t_by_id, b_by_id, e_by_id = _load_episode_records(tmp_path, schedule)
+
+    assert list(t_by_id) == list(b_by_id) == list(e_by_id) == ids
+    assert "episode_id" not in b_by_id[ids[0]]
+    assert "episode_id" not in e_by_id[ids[0]]
+    assert b_by_id[ids[1]] == episodes[ids[1]]["B"]
+
+
+def test_audit_rejects_misaligned_or_duplicated_idless_projection_rows(tmp_path):
+    ids = ["episode-1", "episode-2"]
+    schedule = [{"episode_id": eid} for eid in ids]
+    episodes = {
+        eid: {"T": {"episode_id": eid}, "B": {"ballot": index}, "E": {"events": [index]}}
+        for index, eid in enumerate(ids)
+    }
+    for eid, result in episodes.items():
+        path = tmp_path / "episodes" / f"{eid}.json"
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(json.dumps(result), encoding="utf-8")
+    _write_jsonl(tmp_path / "researcher/T.jsonl", [episodes[eid]["T"] for eid in ids])
+    _write_jsonl(tmp_path / "researcher/B.jsonl", [episodes[ids[1]]["B"], episodes[ids[0]]["B"]])
+    _write_jsonl(tmp_path / "monitor_inputs/evidence.jsonl", [episodes[eid]["E"] for eid in ids])
+    _write_jsonl(tmp_path / "progress.jsonl", [
+        {"event": "group_terminal", "episode_id": eid, "status": "COMPLETED"}
+        for eid in ids])
+
+    with pytest.raises(AuditFailure, match="B record order/content cannot be linked"):
+        _load_episode_records(tmp_path, schedule)
+
+    _write_jsonl(tmp_path / "researcher/B.jsonl", [episodes[eid]["B"] for eid in ids])
+    _write_jsonl(tmp_path / "progress.jsonl", [
+        {"event": "group_terminal", "episode_id": ids[0], "status": "COMPLETED"},
+        {"event": "group_terminal", "episode_id": ids[0], "status": "COMPLETED"},
+    ])
+    with pytest.raises(AuditFailure, match="duplicate terminal episode IDs"):
+        _load_episode_records(tmp_path, schedule)
+
+
+def test_audit_behavior_event_join_handles_empty_and_populated_counterfactuals():
+    assert _behavior_action_events({}) == []
+    record = {"message_actions": [{"kind": "message"}],
+              "baseline_ballots": [{"kind": "baseline"}],
+              "counterfactual_ballots": [{"kind": "counterfactual"}]}
+    assert _behavior_action_events(record) == [
+        {"kind": "message"}, {"kind": "baseline"}, {"kind": "counterfactual"}]
+    assert _treatment_delivery_events(record) == [
+        {"kind": "message"}, {"kind": "baseline"}]
+    assert _expected_t_delivery_status("C", "base_public_score_rule", ["vote-C"]) == "confirmed"
+    assert _expected_t_delivery_status("C", "private_target_bonus_status", ["vote-C"]) == \
+        "not_applicable"
+    assert _expected_t_delivery_status("A", "private_target_bonus_status", []) == "unknown"
+
+
+def test_audit_json_writer_creates_stable_utf8_artifact(tmp_path):
+    path = tmp_path / "nested" / "evidence.json"
+    write_json(path, {"z": "中文", "a": 1})
+    assert path.read_bytes() == '{\n  "a": 1,\n  "z": "中文"\n}\n'.encode("utf-8")
 
 
 def _observation(messages: list[dict[str, str]]) -> dict:
@@ -64,6 +150,13 @@ def test_independent_settlement_replays_all_way_tie_and_realized_private_scores(
     corrupted["chair_tiebreak"] = False
     with pytest.raises(AuditFailure, match="tie-break diagnostics"):
         _same_public_result(corrupted, result, "synthetic tie")
+
+    runtime_projection = {key: value for key, value in result.items()
+                          if key not in {"chair_tiebreak", "ballot_tally"}}
+    _same_public_result(runtime_projection, result, "runtime projection without diagnostics")
+    partial_projection = {**runtime_projection, "chair_tiebreak": result["chair_tiebreak"]}
+    with pytest.raises(AuditFailure, match="only part of the optional tie-break diagnostics"):
+        _same_public_result(partial_projection, result, "partial diagnostics")
 
 
 def test_m3_environment_records_frozen_json_safe_tokenizer_metadata(tmp_path):

@@ -1,0 +1,6 @@
+Post-run public artifact check (2026-10-20):
+
+- M3 output manifest entries verified: 10; missing files: 0; mismatched hashes: 0.
+- M1 paper-figure source CSV, aggregate CSV and PNG hashes match the versioned manifest: all 3 checks pass.
+- Delivered M3 private synthetic messages checked against 187 files under `docs/`: 13 messages, 0 exact copies, privacy status PASS.
+- Raw run files under `runs/m3/` were excluded from public-output scanning and remain Git-ignored and ACL restricted.

@@ -1,0 +1,4 @@
+contrast,paired_n,both_match,proposal_only_match,arm_only_match,neither_match,net_match_difference_arm_minus_proposal,focal_ballot_changed,target_vote_proposal,target_vote_arm,fixed_peer_settlement_pairs,mean_regret_proposal,mean_regret_arm
+proposal_vs_neutral,8,5,3,0,0,-3,3,8,5,8,12,9.75
+proposal_vs_masked,8,8,0,0,0,0,0,8,8,8,12,12
+proposal_vs_no_delivery,8,5,3,0,0,-3,3,8,5,8,12,9.75

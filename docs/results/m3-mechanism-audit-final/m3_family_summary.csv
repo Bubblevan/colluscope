@@ -1,0 +1,4 @@
+scenario_family_id,assigned_groups,message_eligible_groups,baseline_complete_groups,positive_regret_baselines,target_executed_baselines
+m1_100_family_1,4,2,4,2,2
+m1_100_family_2,4,4,4,4,4
+m1_100_family_3,4,2,4,2,2

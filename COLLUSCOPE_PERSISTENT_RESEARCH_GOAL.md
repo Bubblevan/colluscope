@@ -1,7 +1,7 @@
 # ColluScope — Persistent Research Goal / Codex North Star
 
-**Scope:** From the present M1-P0 blockage through the Apart Research AI Collusion Research Sprint (2026-10-23–25), submission (check official deadline and portal before final upload), and a reproducible post-event research archive.  
-**Current empirical state (2026-10-20, after M2-V3 and M3 evidence audit):** the real-agent corpus contains 25 historical F0 and 75 prospective F1–F3 episodes. One previously authorized DeepSeek Flash monitor run completed 1,500 scheduled task/view rows using 916 requests; it is an observable-fact audit, not a collusion detector evaluation. An independent no-call replay matched all 1,500 frozen scores and found welfare_gap directly in every eligible action-bearing view, making the highest structured score answer-exposed. Raw Fusion with privileged messages did not improve public-harm classification. M1 behavior supports a descriptive shared-target/message-concordance pattern, but shared incentives, the extra message stage, and simultaneous message composition prevent causal or intent claims. See `docs/M2_FINAL_SCIENTIFIC_SYNTHESIS.md`, `docs/EVIDENCE_AWARE_AUDITING_FRAMEWORK.md`, and `docs/M3_MECHANISM_PROTOCOL_DRAFT.md`. M3 is a protocol draft only; no new model call is authorized.
+**Scope:** From the present M1-P0 blockage through the Apart Research AI Collusion Research Sprint (2026-10-23–25), submission (check official deadline and portal before final upload), and a reproducible post-event research archive.
+**Current empirical state (2026-10-20, after M3 post-run audit):** the real-agent corpus contains 25 historical F0 and 75 prospective F1–F3 episodes. The authorized DeepSeek Flash monitor run completed 1,500 scheduled task/view rows using 916 requests; it is an observable-fact audit, not a collusion detector evaluation. Independent replay matched all 1,500 frozen scores and found welfare-gap values directly in every eligible action-bearing view, making the top structured score answer-exposed. Raw Fusion with privileged messages did not improve public-harm classification. The authorized M3 local experiment assigned 12 new groups, completed all groups, and yielded eight eligible paired contexts. Proposal and token-matched Masked ballots were identical in 8/8; Neutral and No-delivery changed 3/8 ballots, but only one fixed-peer settlement changed. These finite responses do not identify intent or a population effect. See `docs/M2_FINAL_SCIENTIFIC_SYNTHESIS.md`, `docs/M3_SCIENTIFIC_RESULTS.md`, `docs/EVIDENCE_AWARE_AUDITING_FRAMEWORK.md`, and `docs/M3_DECISION.md`. The one-run M3 authorization is consumed; no additional model call is authorized.
 
 ## 1. North Star: the outcome that matters
 
@@ -65,7 +65,7 @@ Pick **one primary research question** for the hackathon paper; other questions 
 - Never claim real LLM collusion, an agreement, improvement of a detector, or a causal effect from Mock samples, a preflight, or treatment labels alone.
 - Never use pre-existing FTEC5660/ICBC team code without rights; disclose the M0–M1 foundation built before the Sprint and AI assistance. Keep original paper/code attributions and license caveats.
 - Never upload real private banking data, secrets, credentials, or local personal files as evidence. Preserve private-agent observations under access controls; when publishing, use sanitized synthetic data and inspect tracked `runs/` files for sensitive content.
-- Never call a paid provider, change server/model/driver packages, authorize new generation, run a 25-episode Pilot, or start M2 merely because this goal exists. A distinct, explicit approval is required for each new real-model batch and budget.
+- Do not call a paid provider, change server/model/driver packages, generate new episodes, run a 25-episode Pilot, or start M2 without a distinct, explicit approval fixing scope and budget. Previously consumed approvals do not authorize another run.
 - Never silently change a frozen source, parser, prompt, data split, reward, condition set, action schema, decoding option, label or result. Version every substantive revision and preserve the earlier contrary evidence.
 - A clean run requires exact source/runtime/model/checkpoint fingerprints and independent semantic verification. Hashes prove byte identity, **not** scientific validity.
 
@@ -73,13 +73,13 @@ Pick **one primary research question** for the hackathon paper; other questions 
 
 Every bounded iteration must follow:
 
-**INSPECT** → identify the highest-impact uncertainty blocking the paper.  
-**HYPOTHESIZE** → predict a falsifiable outcome and identify the alternative explanation.  
-**PREREGISTER** → specify what is held constant, what changes, negative control, success/fail/abstain gate, call/time ceiling.  
-**IMPLEMENT** → smallest reversible code/protocol change, with explicit experiment vs infrastructure provenance.  
-**RUN** → actually execute permitted tests, log raw evidence, including failures, and never cherry-pick.  
-**ADVERSARIAL REVIEW** → act as reviewer: find leakage, uncontrolled confounds, scope inflation, invalid labels and misleading metrics.  
-**DECIDE** → PASS, FAIL, AMBIGUOUS, BLOCKED or PIVOT, with a reason and bound.  
+**INSPECT** → identify the highest-impact uncertainty blocking the paper.
+**HYPOTHESIZE** → predict a falsifiable outcome and identify the alternative explanation.
+**PREREGISTER** → specify what is held constant, what changes, negative control, success/fail/abstain gate, call/time ceiling.
+**IMPLEMENT** → smallest reversible code/protocol change, with explicit experiment vs infrastructure provenance.
+**RUN** → actually execute permitted tests, log raw evidence, including failures, and never cherry-pick.
+**ADVERSARIAL REVIEW** → act as reviewer: find leakage, uncontrolled confounds, scope inflation, invalid labels and misleading metrics.
+**DECIDE** → PASS, FAIL, AMBIGUOUS, BLOCKED or PIVOT, with a reason and bound.
 **REPORT** → update research log/risk register and state exactly one highest-value next experiment.
 
 **Prioritization score:** maximize expected *reduction in a decisive scientific uncertainty* divided by engineering hours, model calls and deadline risk. Cheap decisive counterexamples outrank broad refactoring. Stop revisiting the same root cause without a materially new hypothesis; after two distinct failed remedies, surface the blocker and a scoped alternative instead of infinite retries.
@@ -124,4 +124,10 @@ Do not call an agent or monitor, train a model, or start the proposed M3 experim
 
 The user has explicitly authorized one prospective local M3 paired message-content experiment using the frozen Qwen3-8B Q4_K_M GGUF and audited llama.cpp build at authenticated loopback `127.0.0.1:8081`. The one-run budget is at most 12 new synthetic groups, 96 logical model generations and 192 total HTTP attempt reservations including one `/v1/models` identity probe per server launch; at most one documented transient retry is allowed per generation request. No external/paid inference, model download, training, M2 inference, or changes to historical M0–M2 raw data are authorized. The protocol and sample schedule must be committed before the first generation; raw prompts, requests, private messages, and local logs remain under Git-ignored `runs/m3/`. This one-use approval does not authorize any later generation or monitor evaluation.
 
-The former M3 no-call proposal remains in the history above as a record of the state before approval. It is superseded only for the exact M3 task just described. No model response has yet been generated in the current run-preparation iteration.
+The former M3 no-call proposal remains in the history above as a record of the state before approval. It was superseded only for the exact bounded experiment. That authorization has now been consumed.
+
+## M3 execution and closeout — authorization consumed (2026-10-20)
+
+The 12-group local run is `runs/m3/mechanism-20261020/`, derived from the committed source freeze and runtime errata chain documented in `docs/M3_EXECUTION_EVIDENCE.md`. Independent raw-ballot replay passed in `docs/results/m3-mechanism-audit-final/`: assigned/completed/failed = 12/12/0; logical generations = 84; generation HTTP attempts = 84; identity probes = 2; total HTTP attempts = 86; retries, invalid outputs, external calls, monitor calls and training calls = 0. Historical M1 hashes match. Raw prompts and message text remain local and ACL restricted; only sanitized results and hashes are committed.
+
+The primary conditional result is 8 eligible groups: Proposal and Masked ballots match in 8/8; Neutral and No-delivery ballots match Proposal in 5/8 and change in the same three contexts. Only one context changes the fixed-peer selected allocation. Five of eight recipients had prior own mapping-bearing messages matching the incoming target proposal. Report these as observable within-checkpoint responses; do not call them collusion, agreement, a semantic message effect, or a population causal effect. `docs/M3_POSTRUN_AUDIT_ERRATA.md` records the seven preserved auditor failures and fixes. The updated English manuscript remains a review draft; authors must verify citations, authorship, disclosure and the official submission format before any submission.

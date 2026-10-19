@@ -1,0 +1,5 @@
+arm,eligible_groups,assigned_group_slots,request_attempts_started,valid_ballots,failed_actions,missing_requests,match_count,match_rate,target_vote_count,changed_vs_proposal,settlement_count,mean_public_regret
+proposal,8,8,8,8,0,0,8,1.0,8,0,8,12.0
+neutral,8,8,8,8,0,0,5,0.625,5,3,8,9.75
+masked,8,8,8,8,0,0,8,1.0,8,0,8,12.0
+no_delivery,8,8,8,8,0,0,5,0.625,5,3,8,9.75

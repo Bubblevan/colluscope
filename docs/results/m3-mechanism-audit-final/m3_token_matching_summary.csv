@@ -1,0 +1,4 @@
+arm,eligible_group_denominator,observed_message_token_pairs,exact_message_token_matches,mean_absolute_message_token_delta,median_absolute_message_token_delta,observed_full_prompt_pairs,exact_full_prompt_token_matches,mean_absolute_full_prompt_token_delta,median_absolute_full_prompt_token_delta
+neutral,8,8,8,0,0.0,8,8,0,0.0
+masked,8,8,8,0,0.0,8,8,0,0.0
+no_delivery,8,0,0,,,8,0,45.125,45.0

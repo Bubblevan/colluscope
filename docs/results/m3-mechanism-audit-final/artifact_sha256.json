@@ -1,0 +1,12 @@
+{
+  "figures/m3_focal_ballot_match.svg": "87be3b5b265381786b01c89cf21ef9dc07fa1dac80491e0bf6257c1005c7f279",
+  "m3_arm_summary.csv": "d39405e5b6e2cc82fc5ececa57d7cd0cd7413fb051fc8dd2c3afb263da8c2a22",
+  "m3_family_summary.csv": "ac6eda5ab4b86f5f2eae484f644b23412cc9da3c8b98a2e1b2255a539f00a96f",
+  "m3_group_results.csv": "c2aa043d8aef430ff28ce3bbc3592e09ad817c4cf82681785bff287af94b3c0a",
+  "m3_paired_contrasts.csv": "b166227c7761398832d05de9bee98ba51ff745c26b2099327afbcfd971370b27",
+  "m3_self_history_summary.csv": "16c55fecf63dc55281fd53b907c8214d3fa838e200993519ae42ea44629ea6fc",
+  "m3_summary.json": "19b647f312736d34af3f56fdbb1749fdda8a7f4ff6bda3d0c8bab4923729da3a",
+  "m3_token_matching.csv": "220c3b9660bf306522882eee593d32ebbb35db71f63dbf348322b993035ebeab",
+  "m3_token_matching_summary.csv": "682d44f4a43869f19c1ee5e2c8320ecea62f0f34533a3e1816b72982a585c0ea",
+  "privacy_scan.json": "55a818b22fa2b2cf92ac466aca60e2546784dd69cea5efdffe8f911c8771edc4"
+}
