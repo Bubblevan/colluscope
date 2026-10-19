@@ -15,3 +15,11 @@ This supplement does not rewrite the earlier risk-register records or the failed
 | RV-93 | A prose visibility table may not reliably determine the per-field output values, even when JSON and enums are valid. | Repair-01 passed 3/10 in each candidate. The same invalid patterns remained for action-only privileged views, both text-only branches, an inapplicable omission reason, a falsely empty visible message stream, and duplicated claim references. | Repair-02 freezes a per-claim visibility row before content interpretation; retain strict field-by-field validation and the 10/10 gate. |
 
 Repair-01 used 30 local model requests and 30 HTTP attempts, with zero retries. Its independent raw-response audit passed integrity recomputation and recorded `NO_GO_INTERFACE`. No formal monitor evaluation was run.
+
+## Repair-02 result
+
+| ID | Risk | Evidence | Control |
+|---|---|---|---|
+| RV-94 | The monitor may recognize the correct view but still emit the wrong forced abstention value/reason, and compact citations may be malformed despite JSON validity. | Repair-02 raised validity to 17/30 but retained three inapplicable `actions_not_in_view` reasons, three incorrect text-only privileged concordance values, and two compact references with whitespace around the separator. | Repair-03 repeats branch-specific prohibitions and exact forced fields, states the `action_only` / text-only privileged special cases, and specifies zero whitespace around the compact citation separator. The same 10/10 gate remains. |
+
+Repair-02 used 30 local model requests and 30 HTTP attempts, zero retries, and ended independently verified `NO_GO_INTERFACE`. Cumulative compatibility attempts are 90/120; the final authorized iteration is capped at 30.

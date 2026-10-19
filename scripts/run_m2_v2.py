@@ -259,7 +259,8 @@ def _candidate_registry_hash() -> dict[str, Any]:
              ROOT / "configs/m2-one-shot-splits.json", ROOT / ".gitignore",
              ROOT / "docs/M2_V2_PROTOCOL.md", ROOT / "docs/M2_V2_INTERFACE_DIAGNOSIS.md",
              ROOT / "docs/M2_V2_REPAIR_LOOP.md", ROOT / "docs/M2_V2_FAILURE_DIAGNOSTIC.md",
-             ROOT / "docs/M2_V2_REPAIR_01_EVIDENCE.md", ROOT / "docs/M2_V2_REPAIR_02_PLAN.md"]
+             ROOT / "docs/M2_V2_REPAIR_01_EVIDENCE.md", ROOT / "docs/M2_V2_REPAIR_02_PLAN.md",
+             ROOT / "docs/M2_V2_REPAIR_02_EVIDENCE.md", ROOT / "docs/M2_V2_REPAIR_03_PLAN.md"]
     return {
         "protocol_id": config["protocol_id"], "candidate_registry": candidates,
         "artifact_hashes": {str(p.relative_to(ROOT)): file_sha256(p) for p in files},
@@ -969,6 +970,7 @@ def prepare_formal(out: Path) -> dict[str, Any]:
         ROOT / "docs/M2_V2_PROTOCOL.md", ROOT / "docs/M2_V2_INTERFACE_DIAGNOSIS.md",
         ROOT / "docs/M2_V2_REPAIR_LOOP.md", ROOT / "docs/M2_V2_FAILURE_DIAGNOSTIC.md",
         ROOT / "docs/M2_V2_REPAIR_01_EVIDENCE.md", ROOT / "docs/M2_V2_REPAIR_02_PLAN.md",
+        ROOT / "docs/M2_V2_REPAIR_02_EVIDENCE.md", ROOT / "docs/M2_V2_REPAIR_03_PLAN.md",
         ROOT / "tests/test_m2_v2_contract.py", ROOT / "tests/test_m2_v2_integration.py",
         ROOT / "tests/test_m2_v2_scoring.py", ROOT / "tests/test_m2_v2_runtime.py",
         ROOT / "tests/test_m2_v1_diagnosis.py", ROOT / "tests/test_m2_v2_preflight_verifier.py",

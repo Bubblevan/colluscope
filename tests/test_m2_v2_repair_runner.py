@@ -43,6 +43,20 @@ def test_repair_two_freezes_exact_visibility_rows_without_changing_candidate_gat
             assert required in prompt
 
 
+def test_repair_three_final_candidate_freeze_targets_remaining_contract_errors():
+    registry, full_prompt, compact_prompt = repair.repair_paths(3)
+    value = json.loads(registry.read_text(encoding="utf-8"))
+    assert value["repair_iteration"] == 3
+    assert value["cases"]["count"] == 10
+    assert len(value["candidates"]) == 3
+    full = full_prompt.read_text(encoding="utf-8")
+    compact = compact_prompt.read_text(encoding="utf-8")
+    assert "`action_concordance` = `not_assessable`" in full
+    assert "Never use `actions_not_in_view`" in full
+    assert "no whitespace before or after the colon" in compact
+    assert "`structured_without_findings`, the P events remain visible" in full
+
+
 def test_repair_loop_rejects_out_of_range_iterations():
     with pytest.raises(ValueError, match="between 1 and 3"):
         repair.repair_paths(4)
