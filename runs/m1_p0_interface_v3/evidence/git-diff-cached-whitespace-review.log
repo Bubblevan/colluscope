@@ -1,0 +1,64 @@
+COLLUSCOPE_PERSISTENT_RESEARCH_GOAL.md:3: trailing whitespace.
++**Scope:** From the present M1-P0 blockage through the Apart Research AI Collusion Research Sprint (2026-10-23–25), submission (check official deadline and portal before final upload), and a reproducible post-event research archive.  
+COLLUSCOPE_PERSISTENT_RESEARCH_GOAL.md:76: trailing whitespace.
++**INSPECT** → identify the highest-impact uncertainty blocking the paper.  
+COLLUSCOPE_PERSISTENT_RESEARCH_GOAL.md:77: trailing whitespace.
++**HYPOTHESIZE** → predict a falsifiable outcome and identify the alternative explanation.  
+COLLUSCOPE_PERSISTENT_RESEARCH_GOAL.md:78: trailing whitespace.
++**PREREGISTER** → specify what is held constant, what changes, negative control, success/fail/abstain gate, call/time ceiling.  
+COLLUSCOPE_PERSISTENT_RESEARCH_GOAL.md:79: trailing whitespace.
++**IMPLEMENT** → smallest reversible code/protocol change, with explicit experiment vs infrastructure provenance.  
+COLLUSCOPE_PERSISTENT_RESEARCH_GOAL.md:80: trailing whitespace.
++**RUN** → actually execute permitted tests, log raw evidence, including failures, and never cherry-pick.  
+COLLUSCOPE_PERSISTENT_RESEARCH_GOAL.md:81: trailing whitespace.
++**ADVERSARIAL REVIEW** → act as reviewer: find leakage, uncontrolled confounds, scope inflation, invalid labels and misleading metrics.  
+COLLUSCOPE_PERSISTENT_RESEARCH_GOAL.md:82: trailing whitespace.
++**DECIDE** → PASS, FAIL, AMBIGUOUS, BLOCKED or PIVOT, with a reason and bound.  
+docs/M1_P0_INTERFACE_DECISION.md:3: trailing whitespace.
++**Decision:** **GO for human review of the offline V3 protocol and implementation. NO-GO for any real-model preflight, M1-P0/P1 behavior episode, or M2 work.**  
+docs/M1_P0_INTERFACE_DECISION.md:4: trailing whitespace.
++**Baseline:** `657eab90356ce9137c2988aacb4b5b10d0402c28`  
+docs/M1_P0_INTERFACE_EVIDENCE.md:3: trailing whitespace.
++**Cycle:** M1-P0-IF-V3-01  
+docs/M1_P0_INTERFACE_EVIDENCE.md:4: trailing whitespace.
++**Protocol:** `m1-p0-interface-v3`  
+docs/M1_P0_INTERFACE_EVIDENCE.md:5: trailing whitespace.
++**Baseline commit:** `657eab90356ce9137c2988aacb4b5b10d0402c28`  
+docs/M1_P0_INTERFACE_EVIDENCE.md:6: trailing whitespace.
++**Evidence class:** offline software tests and integrity checks only  
+docs/M1_P0_INTERFACE_EVIDENCE.md:7: trailing whitespace.
++**Real model calls in this cycle:** 0  
+docs/M1_P0_INTERFACE_TRD.md:3: trailing whitespace.
++**Review date:** 2026-10-19 (Asia/Shanghai)  
+docs/M1_P0_INTERFACE_TRD.md:4: trailing whitespace.
++**Remote branch:** `codex/m1-p0-local-qwen-integration`  
+docs/M1_P0_INTERFACE_TRD.md:5: trailing whitespace.
++**Reviewed HEAD:** `657eab90356ce9137c2988aacb4b5b10d0402c28`  
+docs/M1_P0_INTERFACE_TRD.md:6: trailing whitespace.
++**Scope:** Separate structured-interface validity from model action-choice compliance; preserve frozen evidence; prepare an explicitly approved new live gate.  
+docs/M1_P0_INTERFACE_TRD.md:31: trailing whitespace.
++**Instruction-compliance diagnostic (descriptive):** if a probe deliberately requests a particular action, record `requested_action`, `actual_action`, `followed_instruction`, and the complete raw response. Do not convert a schema-valid alternative into a model-incompatibility claim. Do not count this diagnostic as an in-game behavior sample or quietly retune prompts after viewing it. Define in advance whether this check is advisory or blocking for a separately specified capability question. 
+docs/M1_P0_INTERFACE_TRD.md:79: trailing whitespace.
++**Engineering GO:** new offline tests, revised schema/compliance separation, preserved old failures, clean verified build, exact prompt/source/hash manifest.  
+docs/M1_P0_INTERFACE_TRD.md:80: trailing whitespace.
++**Live preflight GO:** only after a new explicit approval of server/runtime, local data retention, 6 logical / 12 HTTP / at most 4 model-completion engineering preflight requests. This must be a **new** ledger, not a reuse of consumed approval IDs.  
+docs/M1_P0_PRE_REGISTERED_PROTOCOL_V3.md:3: trailing whitespace.
++**Protocol ID:** `m1-p0-interface-v3`  
+docs/M1_P0_PRE_REGISTERED_PROTOCOL_V3.md:4: trailing whitespace.
++**Status:** frozen for review; offline implementation and counterexamples only  
+docs/M1_P0_PRE_REGISTERED_PROTOCOL_V3.md:5: trailing whitespace.
++**Source baseline:** `657eab90356ce9137c2988aacb4b5b10d0402c28`  
+runs/m1_p0_interface_v3/evidence/pytest-full-v3-protocol-resume-failure.log:19: trailing whitespace.
++tests\test_m1_p0_local_pilot.py:128: 
+runs/m1_p0_interface_v3/evidence/pytest-full-v3-protocol-resume-failure.log:33: trailing whitespace.
++    
+runs/m1_p0_interface_v3/evidence/pytest-full-v3-protocol-resume-failure.log:62: trailing whitespace.
++    
+runs/m1_p0_interface_v3/evidence/pytest-full-v3-protocol-resume-failure.log:97: trailing whitespace.
++    
+runs/m1_p0_interface_v3/evidence/pytest-legacy-status-expectation-counterexample.log:41: trailing whitespace.
++E         
+runs/m1_p0_interface_v3/evidence/pytest-legacy-status-expectation-counterexample.log:93: trailing whitespace.
++    
+runs/m1_p0_interface_v3/evidence/pytest-legacy-status-expectation-counterexample.log:105: trailing whitespace.
++E         

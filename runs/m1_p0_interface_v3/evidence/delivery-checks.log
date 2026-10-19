@@ -1,0 +1,4 @@
+git diff --check exit_code=0 (tracked modifications before staging)
+M0/M0.1 frozen diff exit_code=0
+git diff --cached --check exit_code=2 (warnings retained in git-diff-cached-whitespace-review.log; source includes intentional Markdown hard breaks and raw pytest failure traces)
+git diff --cached --check -- '*.py' exit_code=0

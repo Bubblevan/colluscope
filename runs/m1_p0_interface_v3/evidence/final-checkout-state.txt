@@ -1,0 +1,38 @@
+baseline_commit=657eab90356ce9137c2988aacb4b5b10d0402c28
+branch=codex/m1-p0-local-qwen-integration
+origin=https://github.com/Bubblevan/colluscope.git
+remote_topic_tip=657eab90356ce9137c2988aacb4b5b10d0402c28	refs/heads/codex/m1-p0-local-qwen-integration
+working_tree_status_before_commit:
+## codex/m1-p0-local-qwen-integration
+ M docs/ITERATION_LOG.md
+ M docs/RESEARCH_RISK_REGISTER.md
+ M scripts/run_m1_p0_local_pilot.py
+ M scripts/run_m1_p0_local_preflight.py
+ M src/colluscope/openai_compat_llamacpp.py
+ M tests/test_m1_p0_local_pilot.py
+ M tests/test_m1_p0_preflight_runner.py
+ M tests/test_openai_compat_llamacpp.py
+?? AGENTS.md
+?? CODEX_PERSISTENT_SETUP.md
+?? COLLUSCOPE_PERSISTENT_RESEARCH_GOAL.md
+?? docs/M1_P0_INTERFACE_DECISION.md
+?? docs/M1_P0_INTERFACE_EVIDENCE.md
+?? docs/M1_P0_INTERFACE_TRD.md
+?? docs/M1_P0_PRE_REGISTERED_PROTOCOL_V3.md
+?? runs/m1_p0_interface_v3/
+git_diff_stat:
+ docs/ITERATION_LOG.md                    |  14 ++
+ docs/RESEARCH_RISK_REGISTER.md           |   8 ++
+ scripts/run_m1_p0_local_pilot.py         |  16 ++-
+ scripts/run_m1_p0_local_preflight.py     |  30 +++--
+ src/colluscope/openai_compat_llamacpp.py |  70 ++++++++--
+ tests/test_m1_p0_local_pilot.py          |  11 +-
+ tests/test_m1_p0_preflight_runner.py     |  22 +++-
+ tests/test_openai_compat_llamacpp.py     | 211 ++++++++++++++++++++++++++++---
+ 8 files changed, 332 insertions(+), 50 deletions(-)
+final_focused_pytest=84 passed, 1 skipped
+final_full_pytest=164 passed, 1 skipped
+real_model_calls=0
+real_server_starts=0
+research_episodes=0
+monitor_evaluations=0

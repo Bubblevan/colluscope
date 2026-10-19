@@ -1,0 +1,113 @@
+FF                                                                       [100%]
+================================== FAILURES ===================================
+_ test_fake_preflight_runs_exact_six_request_sequence_and_parses_all_actions __
+
+tmp_path = WindowsPath('D:/MyLab/colluscope/reference/m1-p0-local-qwen-integration/.pytest-tmp/test_fake_preflight_runs_exact0')
+
+    def test_fake_preflight_runs_exact_six_request_sequence_and_parses_all_actions(tmp_path):
+        template = "frozen fake template"
+        template_hash = hashlib.sha256(template.encode("utf-8")).hexdigest()
+        settings = config_for(preflight=True, chat_template_sha256=template_hash)
+        settings, bundle = fake_server_bundle(settings, tmp_path)
+        counter = FakeCounter(settings, template=template)
+        ballot = request_for(settings, request_id="probe-ballot", action_kind="ballot")
+        send = request_for(settings, request_id="probe-send", action_kind="message")
+        no_message = request_for(settings, request_id="probe-no-message", action_kind="message")
+        ballot_messages = [{"role": "system", "content": "frozen system instructions"},
+                           {"role": "user", "content": ballot.prompt.split("\n\n", 1)[1]}]
+        rendered = counter.render_chat(ballot_messages, enable_thinking=False)
+        token_ids = counter.encode_chat(ballot_messages, enable_thinking=False)
+        props = {"default_generation_settings": {"n_ctx": 4096,
+                 "params": {"temperature": 0.0, "top_p": 1.0, "top_k": 0, "min_p": 0.0,
+                            "samplers": ["top_k", "top_p", "min_p", "temperature"]}},
+                 "chat_template": template, "model_path": settings.artifact_path,
+                 "build_info": settings.server_build_info, "total_slots": 1}
+        responses = [
+            props,
+            {"prompt": rendered},
+            {"tokens": token_ids},
+            response('{"type":"ballot","assignment":{"A":"T1","B":"T2","C":"T3"}}'),
+            response('{"type":"send_message","text":"Proposal"}'),
+            response('{"type":"no_message"}'),
+        ]
+        opener = FakeOpener(responses)
+        events = []
+        backend = LocalLlamaCppBackend(settings, counter, opener, preflight_event_hook=events.append)
+        budget = LlamaCppPreflightBudget(enabled=True)
+        result = backend.preflight(budget, [(ballot, None), (send, "send_message"),
+                                            (no_message, "no_message")])
+>       assert result["status"] == "PASS"
+E       AssertionError: assert 'PASS_INTERFACE' == 'PASS'
+E         
+E         - PASS
+E         + PASS_INTERFACE
+
+tests\test_protocol_v2_expectation_snapshot.py:370: AssertionError
+_ test_fake_preflight_continuation_reuses_setup_and_dispatches_only_three_actions _
+
+tmp_path = WindowsPath('D:/MyLab/colluscope/reference/m1-p0-local-qwen-integration/.pytest-tmp/test_fake_preflight_continuati0')
+
+    def test_fake_preflight_continuation_reuses_setup_and_dispatches_only_three_actions(tmp_path):
+        template = "frozen fake template"
+        template_hash = hashlib.sha256(template.encode("utf-8")).hexdigest()
+        settings = config_for(preflight=True, chat_template_sha256=template_hash)
+        settings, bundle = fake_server_bundle(settings, tmp_path)
+        counter = FakeCounter(settings, template=template)
+        ballot = request_for(settings, request_id="probe-ballot", action_kind="ballot")
+        send = request_for(settings, request_id="probe-send", action_kind="message")
+        no_message = request_for(settings, request_id="probe-no-message", action_kind="message")
+        probes = [(ballot, None), (send, "send_message"), (no_message, "no_message")]
+        messages = [{"role": "system", "content": "frozen system instructions"},
+                    {"role": "user", "content": ballot.prompt.split("\n\n", 1)[1]}]
+        rendered = counter.render_chat(messages, enable_thinking=False)
+        tokens = counter.encode_chat(messages, enable_thinking=False)
+        props = {"default_generation_settings": {"n_ctx": 4096,
+                 "params": {"temperature": 0.0, "top_p": 1.0, "top_k": 0, "min_p": 0.0,
+                            "samplers": ["top_k", "top_p", "min_p", "temperature"]}},
+                 "chat_template": template, "model_path": settings.artifact_path,
+                 "build_info": settings.server_build_info, "total_slots": 1}
+        setup_payloads = {
+            "preflight-props": ("GET", "http://127.0.0.1:8080/props", None, props),
+            "preflight-template": ("POST", "http://127.0.0.1:8080/apply-template",
+                                   {"messages": messages, "chat_template_kwargs": {"enable_thinking": False}},
+                                   {"prompt": rendered}),
+            "preflight-tokenize": ("POST", "http://127.0.0.1:8080/tokenize",
+                                   {"content": rendered, "add_special": False,
+                                    "parse_special": True, "with_pieces": False},
+                                   {"tokens": tokens}),
+        }
+        setup_records = []
+        reused_responses = {}
+        for request_id, (method, url, payload, response_body) in setup_payloads.items():
+            request_body = (json.dumps(payload, ensure_ascii=False, separators=(",", ":"))
+                            if payload is not None else None)
+            raw = json.dumps(response_body, ensure_ascii=False, separators=(",", ":"))
+            setup_records.append({"request_id": request_id, "attempt": 1, "method": method,
+                                  "url": url, "request_body": request_body,
+                                  "request_sha256": hashlib.sha256(request_body.encode("utf-8")).hexdigest()
+                                  if request_body is not None else None,
+                                  "completion_attempt": False, "status": "response_returned",
+                                  "raw_response": raw,
+                                  "raw_response_sha256": hashlib.sha256(raw.encode("utf-8")).hexdigest()})
+            reused_responses[request_id] = raw.encode("utf-8")
+    
+        budget = LlamaCppPreflightBudget(enabled=True)
+        budget.reuse_verified_setup(setup_records)
+        opener = FakeOpener([
+            response('{"type":"ballot","assignment":{"A":"T1","B":"T2","C":"T3"}}'),
+            response('{"type":"send_message","text":"Proposal"}'),
+            response('{"type":"no_message"}'),
+        ])
+        backend = LocalLlamaCppBackend(settings, counter, opener)
+        result = backend.preflight(budget, probes, reused_setup_responses=reused_responses)
+>       assert result["status"] == "PASS"
+E       AssertionError: assert 'PASS_INTERFACE' == 'PASS'
+E         
+E         - PASS
+E         + PASS_INTERFACE
+
+tests\test_protocol_v2_expectation_snapshot.py:441: AssertionError
+=========================== short test summary info ===========================
+FAILED tests/test_protocol_v2_expectation_snapshot.py::test_fake_preflight_runs_exact_six_request_sequence_and_parses_all_actions
+FAILED tests/test_protocol_v2_expectation_snapshot.py::test_fake_preflight_continuation_reuses_setup_and_dispatches_only_three_actions
+2 failed, 24 deselected in 0.29s

@@ -14,6 +14,8 @@ from scripts.run_m1_p0_local_preflight import (APPROVAL_ID, ROOT, _build_probes,
                                                _listener_rows, _validate_approved_config,
                                                _wait_for_server_startup)
 from colluscope.openai_compat_llamacpp import load_llamacpp_backend_config
+from colluscope.openai_compat_llamacpp import (PREFLIGHT_NO_MESSAGE_INSTRUCTION,
+                                               PREFLIGHT_SEND_MESSAGE_INSTRUCTION)
 
 
 def test_8081_preflight_config_changes_only_approved_scope():
@@ -25,6 +27,20 @@ def test_8081_preflight_config_changes_only_approved_scope():
     assert approved["preflight_approval_id"] == APPROVAL_ID
     assert approved["launch"]["port"] == 8081
     assert approved["server"]["base_url"] == "http://127.0.0.1:8081/v1"
+
+
+def test_consumed_historical_preflight_approval_cannot_launch_again(tmp_path: Path):
+    output = tmp_path / "must-not-be-created"
+    with pytest.raises(PermissionError, match="historical 8081 preflight approval was consumed"):
+        preflight_runner.execute(
+            ROOT / "runs" / "m1_p0_local" / "gguf-preflight-iteration-03" / "configs" /
+            "m1-p0-8081-preflight.toml",
+            ROOT / "configs" / "m1-r-offline-v2.toml",
+            ROOT / "configs" / "m1-p0-llama-local-draft.toml",
+            output,
+            APPROVAL_ID,
+        )
+    assert not output.exists()
 
 
 @pytest.mark.parametrize("old,new", [
@@ -46,7 +62,8 @@ def test_preflight_runner_rejects_unapproved_config_mutations(tmp_path: Path, ol
 def test_engineering_probe_prompts_have_no_treatment_or_episode_metadata():
     config = load_llamacpp_backend_config(ROOT / "configs" / "m1-p0-llama-local-draft.toml")
     probes, evidence = _build_probes(config, ROOT / "configs" / "m1-r-offline-v2.toml")
-    assert [expected or "ballot" for _, expected in probes] == ["ballot", "send_message", "no_message"]
+    assert [requested or "ballot" for _, requested in probes] == ["ballot", "send_message", "no_message"]
+    assert [row["requested_action"] for row in evidence] == ["ballot", "send_message", "no_message"]
     assert len({request.agent_id for request, _ in probes}) == 2
     for request, _ in probes:
         observation = next(row["observation"] for row in evidence
@@ -56,6 +73,9 @@ def test_engineering_probe_prompts_have_no_treatment_or_episode_metadata():
         assert "oracle" not in json.dumps(observation).lower()
         assert request.request_id.startswith("m1-p0-preflight-")
         assert request.generation_seed is not None
+    assert [row["observation"].get("preflight_probe_instruction") for row in evidence] == [
+        None, PREFLIGHT_SEND_MESSAGE_INSTRUCTION, PREFLIGHT_NO_MESSAGE_INSTRUCTION]
+    assert [row["requested_action"] for row in evidence] == ["ballot", "send_message", "no_message"]
 
 
 @pytest.mark.skipif(os.name != "nt" or os.environ.get("COLLUSCOPE_LIVE_WINDOWS_LISTENER_TEST") != "1",

@@ -12,6 +12,8 @@ import pytest
 from colluscope.m1_runtime import (AgentRequest, RequestAdapter,
                                    RequestBudget, RequestFailure, load_runtime_config, run_episode)
 from colluscope.openai_compat_llamacpp import (LlamaCppPreflightBudget, LocalLlamaCppBackend,
+                                               PREFLIGHT_NO_MESSAGE_INSTRUCTION,
+                                               PREFLIGHT_SEND_MESSAGE_INSTRUCTION,
                                                llama_runtime_bundle_identity,
                                                load_llamacpp_backend_config, llama_server_command)
 
@@ -99,6 +101,52 @@ def request_for(config, *, request_id="req-1", action_kind="ballot", content=Non
                         timeout, "e" * 64, prompt, 72)
 
 
+def _oneof_disjoint_by_required_type_const(schema):
+    branches = schema.get("oneOf")
+    if not isinstance(branches, list) or len(branches) < 2:
+        return False
+    constants = []
+    for branch in branches:
+        properties = branch.get("properties", {})
+        if (branch.get("type") != "object"
+                or "type" not in branch.get("required", [])
+                or not isinstance(properties.get("type"), dict)
+                or "const" not in properties["type"]):
+            return False
+        constants.append(properties["type"]["const"])
+    return len(constants) == len(set(constants))
+
+
+def test_frozen_communication_oneof_branches_are_disjoint_and_overlap_counterexample_fails():
+    schema = json.loads((ACTION_ROOT / "communication.schema.json").read_text(encoding="utf-8"))
+    assert _oneof_disjoint_by_required_type_const(schema)
+    assert {branch["properties"]["type"]["const"] for branch in schema["oneOf"]} == {
+        "send_message", "no_message"
+    }
+
+    overlapping = json.loads(json.dumps(schema))
+    overlapping["oneOf"][1]["properties"]["type"]["const"] = "send_message"
+    assert not _oneof_disjoint_by_required_type_const(overlapping)
+
+
+def preflight_request_for(config, *, request_id, action_kind, requested_action=None):
+    observation = {}
+    if requested_action == "send_message":
+        observation["preflight_probe_instruction"] = PREFLIGHT_SEND_MESSAGE_INSTRUCTION
+    elif requested_action == "no_message":
+        observation["preflight_probe_instruction"] = PREFLIGHT_NO_MESSAGE_INSTRUCTION
+    schema_name = "communication.schema.json" if action_kind == "message" else "ballot.schema.json"
+    template_name = "message.txt" if action_kind == "message" else "ballot.txt"
+    system = (ACTION_ROOT / "system.txt").read_text(encoding="utf-8").strip()
+    template = (ACTION_ROOT / template_name).read_text(encoding="utf-8").rstrip()
+    schema = (ACTION_ROOT / schema_name).read_text(encoding="utf-8")
+    observation_json = json.dumps(observation, ensure_ascii=False, sort_keys=True, separators=(",", ":"))
+    prompt = f"{system}\n\n" + template.replace("{{action_schema}}", schema).replace(
+        "{{observation_json}}", observation_json)
+    return AgentRequest(request_id, action_kind, "A", config.model_id, config.sampling,
+                        17, hashlib.sha256(observation_json.encode("utf-8")).hexdigest(), prompt, 72)
+
+
 def response(text, *, model=None, prompt_tokens=47, reasoning=None):
     message = {"role": "assistant", "content": text}
     if reasoning is not None:
@@ -124,6 +172,19 @@ def fake_server_bundle(config, tmp_path):
     identity = llama_runtime_bundle_identity(launcher)
     return replace(config, server_binary_path=str(launcher),
                    runtime_bundle_sha256=identity["sha256"]), identity
+
+
+def fake_preflight_setup_responses(settings, counter, ballot):
+    messages = [{"role": "system", "content": ballot.prompt.split("\n\n", 1)[0]},
+                {"role": "user", "content": ballot.prompt.split("\n\n", 1)[1]}]
+    rendered = counter.render_chat(messages, enable_thinking=False)
+    token_ids = counter.encode_chat(messages, enable_thinking=False)
+    props = {"default_generation_settings": {"n_ctx": 4096,
+             "params": {"temperature": 0.0, "top_p": 1.0, "top_k": 0, "min_p": 0.0,
+                        "samplers": ["top_k", "top_p", "min_p", "temperature"]}},
+             "chat_template": counter.template, "model_path": settings.artifact_path,
+             "build_info": settings.server_build_info, "total_slots": 1}
+    return [props, {"prompt": rendered}, {"tokens": token_ids}]
 
 
 def test_default_config_is_denied_and_launch_command_is_only_a_candidate():
@@ -263,6 +324,44 @@ def test_malformed_assistant_action_fails_explicitly_and_is_never_repaired():
     assert adapter.records[0]["status"] == "response_returned"
 
 
+def test_fake_http_send_message_flows_through_runtime_and_is_delivered_only_to_peer():
+    settings = config_for(live=True)
+    settings, counter = counter_for(settings)
+    runtime = settings.bind_runtime(RUNTIME_CONFIG)
+    condition = next(row for row in runtime.conditions
+                     if row["id"] == "coalition_incentive_private_chat")
+    sentinel = "FAKE-TRANSPORT-PEER-ONLY-SENTINEL"
+    ballot = '{"type":"ballot","assignment":{"A":"T1","B":"T2","C":"T3"}}'
+    opener = FakeOpener([
+        response(json.dumps({"type": "send_message", "text": sentinel})),
+        response('{"type":"no_message"}'),
+        response(ballot), response(ballot), response(ballot),
+    ])
+    adapter = RequestAdapter(LocalLlamaCppBackend(settings, counter, opener), runtime,
+                             RequestBudget(5, 10, 2))
+
+    episode = run_episode(condition, "seed-0", "fake-http-message-route", runtime, adapter,
+                          auditor_can_see_private_messages=True)
+
+    assert episode["B"]["status"] == "COMPLETED"
+    sent = episode["B"]["peer_messages"][0]
+    assert sent["sender"] == "A" and sent["recipient"] == "B"
+    assert sent["sent"] is True and sent["delivered"] is True
+    assert sent["text"] == sentinel
+    observations = {row["agent_id"] + ":" + row["stage"]: row["observation"]
+                    for row in episode["observations"]}
+    assert observations["A:ballot"]["your_previous_message_action"] == {
+        "type": "send_message", "text": sentinel}
+    assert sentinel in json.dumps(observations["B:ballot"], ensure_ascii=False)
+    assert sentinel not in json.dumps(observations["C:ballot"], ensure_ascii=False)
+    assert all(event["actor"] != "C" for event in episode["E"]["events"]
+               if event["type"] == "message")
+    assert any(event["type"] == "message" and sentinel in json.dumps(event, ensure_ascii=False)
+               for event in episode["E"]["events"])
+    assert len(opener.calls) == adapter.budget.attempts == 5
+    assert len(adapter.records) == 5
+
+
 def test_context_limit_fails_before_dispatch_and_retains_attempt_record():
     settings = config_for(live=True)
     settings, counter = counter_for(settings, token_count=4000)
@@ -341,10 +440,12 @@ def test_fake_preflight_runs_exact_six_request_sequence_and_parses_all_actions(t
     settings = config_for(preflight=True, chat_template_sha256=template_hash)
     settings, bundle = fake_server_bundle(settings, tmp_path)
     counter = FakeCounter(settings, template=template)
-    ballot = request_for(settings, request_id="probe-ballot", action_kind="ballot")
-    send = request_for(settings, request_id="probe-send", action_kind="message")
-    no_message = request_for(settings, request_id="probe-no-message", action_kind="message")
-    ballot_messages = [{"role": "system", "content": "frozen system instructions"},
+    ballot = preflight_request_for(settings, request_id="probe-ballot", action_kind="ballot")
+    send = preflight_request_for(settings, request_id="probe-send", action_kind="message",
+                                 requested_action="send_message")
+    no_message = preflight_request_for(settings, request_id="probe-no-message", action_kind="message",
+                                       requested_action="no_message")
+    ballot_messages = [{"role": "system", "content": ballot.prompt.split("\n\n", 1)[0]},
                        {"role": "user", "content": ballot.prompt.split("\n\n", 1)[1]}]
     rendered = counter.render_chat(ballot_messages, enable_thinking=False)
     token_ids = counter.encode_chat(ballot_messages, enable_thinking=False)
@@ -367,7 +468,7 @@ def test_fake_preflight_runs_exact_six_request_sequence_and_parses_all_actions(t
     budget = LlamaCppPreflightBudget(enabled=True)
     result = backend.preflight(budget, [(ballot, None), (send, "send_message"),
                                         (no_message, "no_message")])
-    assert result["status"] == "PASS"
+    assert result["status"] == "PASS_INTERFACE"
     assert result["logical_requests"] == len(opener.calls) == 6
     assert result["http_attempts"] == 6
     assert result["model_completion_attempts"] == 3
@@ -383,6 +484,106 @@ def test_fake_preflight_runs_exact_six_request_sequence_and_parses_all_actions(t
         "completion_attempt_started", "completion_attempt_finished",
         "completion_attempt_started", "completion_attempt_finished",
         "completion_attempt_started", "completion_attempt_finished"]
+    assert result["protocol_id"] == "m1-p0-interface-v3"
+    assert result["schema_transport_status"] == "PASS"
+    assert result["status"] == "PASS_INTERFACE"
+    assert [row["followed_instruction"] for row in result["action_choice_diagnostics"]] == [True, True, True]
+
+
+def test_valid_no_message_for_send_probe_is_compliance_diagnostic_not_interface_failure(tmp_path):
+    template = "frozen fake template"
+    template_hash = hashlib.sha256(template.encode("utf-8")).hexdigest()
+    settings = config_for(preflight=True, chat_template_sha256=template_hash)
+    settings, _ = fake_server_bundle(settings, tmp_path)
+    counter = FakeCounter(settings, template=template)
+    ballot = preflight_request_for(settings, request_id="probe-ballot", action_kind="ballot")
+    send = preflight_request_for(settings, request_id="probe-send", action_kind="message",
+                                 requested_action="send_message")
+    no_message = preflight_request_for(settings, request_id="probe-no-message", action_kind="message",
+                                       requested_action="no_message")
+    raw_no_message = '{"type":"no_message"}'
+    opener = FakeOpener([
+        *fake_preflight_setup_responses(
+            settings, counter, ballot,
+        ),
+        response('{"type":"ballot","assignment":{"A":"T1","B":"T2","C":"T3"}}'),
+        response(raw_no_message),
+        response(raw_no_message),
+    ])
+    budget = LlamaCppPreflightBudget(enabled=True)
+
+    result = LocalLlamaCppBackend(settings, counter, opener).preflight(
+        budget, [(ballot, None), (send, "send_message"), (no_message, "no_message")])
+
+    assert result["status"] == "PASS_INTERFACE"
+    assert result["schema_transport_status"] == "PASS"
+    assert result["verified_actions"] == ["ballot", "no_message", "no_message"]
+    assert result["action_choice_diagnostics"] == [
+        {"request_id": "probe-ballot", "action_kind": "ballot",
+         "requested_action": "ballot", "actual_action": "ballot",
+         "followed_instruction": True, "role": "descriptive_instruction_compliance_only"},
+        {"request_id": "probe-send", "action_kind": "message",
+         "requested_action": "send_message", "actual_action": "no_message",
+         "followed_instruction": False, "role": "descriptive_instruction_compliance_only"},
+        {"request_id": "probe-no-message", "action_kind": "message",
+         "requested_action": "no_message", "actual_action": "no_message",
+         "followed_instruction": True, "role": "descriptive_instruction_compliance_only"},
+    ]
+    assert result["positive_send_message_model_output"] == "UNVERIFIED"
+    assert result["positive_send_message_offline_plumbing"] == "NOT_ASSESSED_BY_LIVE_PREFLIGHT"
+    assert len(opener.calls) == budget.attempts == 6
+    assert not any(row.get("status") == "failed" for row in budget.records)
+
+
+def test_preflight_rejects_action_metadata_that_disagrees_with_frozen_prompt_before_http(tmp_path):
+    template = "frozen fake template"
+    settings = config_for(preflight=True,
+                          chat_template_sha256=hashlib.sha256(template.encode()).hexdigest())
+    settings, _ = fake_server_bundle(settings, tmp_path)
+    counter = FakeCounter(settings, template=template)
+    ballot = preflight_request_for(settings, request_id="probe-ballot", action_kind="ballot")
+    # The request says no_message, while its independent metadata claims send_message.
+    send_request = preflight_request_for(settings, request_id="probe-send", action_kind="message",
+                                         requested_action="no_message")
+    no_message = preflight_request_for(settings, request_id="probe-no-message", action_kind="message",
+                                       requested_action="no_message")
+    opener = FakeOpener([])
+    budget = LlamaCppPreflightBudget(enabled=True)
+
+    with pytest.raises(ValueError, match="metadata send_message does not match prompt instruction no_message"):
+        LocalLlamaCppBackend(settings, counter, opener).preflight(
+            budget, [(ballot, None), (send_request, "send_message"), (no_message, "no_message")])
+
+    assert opener.calls == [] and budget.attempts == 0
+    assert budget.records[0]["phase"] == "preflight_gate_before_http"
+
+
+def test_malformed_message_action_still_fails_interface_gate_and_retains_response(tmp_path):
+    template = "frozen fake template"
+    template_hash = hashlib.sha256(template.encode("utf-8")).hexdigest()
+    settings = config_for(preflight=True, chat_template_sha256=template_hash)
+    settings, _ = fake_server_bundle(settings, tmp_path)
+    counter = FakeCounter(settings, template=template)
+    ballot = preflight_request_for(settings, request_id="probe-ballot", action_kind="ballot")
+    send = preflight_request_for(settings, request_id="probe-send", action_kind="message",
+                                 requested_action="send_message")
+    no_message = preflight_request_for(settings, request_id="probe-no-message", action_kind="message",
+                                       requested_action="no_message")
+    malformed = '{"type":"no_message","extra":true}'
+    opener = FakeOpener([
+        *fake_preflight_setup_responses(settings, counter, ballot),
+        response('{"type":"ballot","assignment":{"A":"T1","B":"T2","C":"T3"}}'),
+        response(malformed),
+    ])
+    budget = LlamaCppPreflightBudget(enabled=True)
+
+    with pytest.raises(RuntimeError, match="strict parser"):
+        LocalLlamaCppBackend(settings, counter, opener).preflight(
+            budget, [(ballot, None), (send, "send_message"), (no_message, "no_message")])
+
+    assert len(opener.calls) == budget.attempts == 5
+    assert budget.records[-1]["status"] == "failed"
+    assert budget.records[-1]["raw_response"] == malformed
 
 
 def test_fake_preflight_continuation_reuses_setup_and_dispatches_only_three_actions(tmp_path):
@@ -391,11 +592,13 @@ def test_fake_preflight_continuation_reuses_setup_and_dispatches_only_three_acti
     settings = config_for(preflight=True, chat_template_sha256=template_hash)
     settings, bundle = fake_server_bundle(settings, tmp_path)
     counter = FakeCounter(settings, template=template)
-    ballot = request_for(settings, request_id="probe-ballot", action_kind="ballot")
-    send = request_for(settings, request_id="probe-send", action_kind="message")
-    no_message = request_for(settings, request_id="probe-no-message", action_kind="message")
+    ballot = preflight_request_for(settings, request_id="probe-ballot", action_kind="ballot")
+    send = preflight_request_for(settings, request_id="probe-send", action_kind="message",
+                                 requested_action="send_message")
+    no_message = preflight_request_for(settings, request_id="probe-no-message", action_kind="message",
+                                       requested_action="no_message")
     probes = [(ballot, None), (send, "send_message"), (no_message, "no_message")]
-    messages = [{"role": "system", "content": "frozen system instructions"},
+    messages = [{"role": "system", "content": ballot.prompt.split("\n\n", 1)[0]},
                 {"role": "user", "content": ballot.prompt.split("\n\n", 1)[1]}]
     rendered = counter.render_chat(messages, enable_thinking=False)
     tokens = counter.encode_chat(messages, enable_thinking=False)
@@ -438,7 +641,7 @@ def test_fake_preflight_continuation_reuses_setup_and_dispatches_only_three_acti
     ])
     backend = LocalLlamaCppBackend(settings, counter, opener)
     result = backend.preflight(budget, probes, reused_setup_responses=reused_responses)
-    assert result["status"] == "PASS"
+    assert result["status"] == "PASS_INTERFACE"
     assert result["logical_requests"] == 6
     assert result["http_attempts"] == 6
     assert result["model_completion_attempts"] == 3
@@ -535,7 +738,7 @@ def test_preflight_fails_closed_on_template_mismatch_and_records_raw_response(tm
     settings = config_for(preflight=True, chat_template_sha256=template_hash)
     settings, _ = fake_server_bundle(settings, tmp_path)
     counter = FakeCounter(settings, template=template)
-    ballot = request_for(settings, request_id="probe-ballot", action_kind="ballot")
+    ballot = preflight_request_for(settings, request_id="probe-ballot", action_kind="ballot")
     props = {"default_generation_settings": {"n_ctx": 4096,
              "params": {"temperature": 0.0, "top_p": 1.0, "top_k": 0, "min_p": 0.0,
                         "samplers": ["top_k", "top_p", "min_p", "temperature"]}},
@@ -546,8 +749,10 @@ def test_preflight_fails_closed_on_template_mismatch_and_records_raw_response(tm
     with pytest.raises(RuntimeError, match="chat template differs"):
         LocalLlamaCppBackend(settings, counter, opener).preflight(
             budget, [(ballot, None),
-                     (request_for(settings, action_kind="message"), "send_message"),
-                     (request_for(settings, action_kind="message"), "no_message")])
+                     (preflight_request_for(settings, request_id="probe-send", action_kind="message",
+                                            requested_action="send_message"), "send_message"),
+                     (preflight_request_for(settings, request_id="probe-no-message", action_kind="message",
+                                            requested_action="no_message"), "no_message")])
     assert len(opener.calls) == budget.attempts == 1
     assert [row["status"] for row in budget.records] == ["response_returned", "failed"]
     assert "wrong template" in budget.records[-1]["raw_response"]
@@ -561,9 +766,11 @@ def test_preflight_rejects_changed_runtime_dll_before_any_http_call(tmp_path):
     settings, _ = fake_server_bundle(settings, tmp_path)
     (Path(settings.server_binary_path).parent / "llama-server-impl.dll").write_bytes(b"tampered DLL")
     counter = FakeCounter(settings, template=template)
-    probes = [(request_for(settings, action_kind="ballot"), None),
-              (request_for(settings, action_kind="message"), "send_message"),
-              (request_for(settings, action_kind="message"), "no_message")]
+    probes = [(preflight_request_for(settings, request_id="probe-ballot", action_kind="ballot"), None),
+              (preflight_request_for(settings, request_id="probe-send", action_kind="message",
+                                     requested_action="send_message"), "send_message"),
+              (preflight_request_for(settings, request_id="probe-no-message", action_kind="message",
+                                     requested_action="no_message"), "no_message")]
     opener = FakeOpener([])
     budget = LlamaCppPreflightBudget(enabled=True)
     with pytest.raises(RuntimeError, match="bundle differs"):

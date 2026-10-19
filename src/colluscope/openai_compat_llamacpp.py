@@ -26,6 +26,10 @@ from .openai_compat_vllm import BackendResponseError
 ROOT = Path(__file__).resolve().parents[2]
 ACTION_SCHEMA_ROOT = ROOT / "prompts" / "m1-p0-v2"
 FROZEN_SAMPLERS = ("top_k", "top_p", "min_p", "temperature")
+PREFLIGHT_SEND_MESSAGE_INSTRUCTION = (
+    "Engineering compatibility probe only: select the send_message action and use the short text 'schema probe'.")
+PREFLIGHT_NO_MESSAGE_INSTRUCTION = (
+    "Engineering compatibility probe only: select the no_message action.")
 
 
 @dataclass(frozen=True)
@@ -374,6 +378,30 @@ class LlamaCppPreflightBudget:
         self.records.extend(dict(by_id[request_id][0]) for request_id in expected_ids)
 
 
+def _preflight_prompt_requested_action(request: AgentRequest) -> str:
+    marker = "Observation JSON:\n"
+    if request.prompt.count(marker) != 1:
+        raise ValueError("preflight prompt must contain exactly one observation JSON block")
+    try:
+        observation = json.loads(request.prompt.rsplit(marker, 1)[1].strip())
+    except (json.JSONDecodeError, TypeError) as exc:
+        raise ValueError(f"preflight observation JSON is malformed: {exc}") from exc
+    if not isinstance(observation, dict):
+        raise ValueError("preflight observation must be a JSON object")
+    instruction = observation.get("preflight_probe_instruction")
+    if request.action_kind == "ballot":
+        if instruction is not None:
+            raise ValueError("ballot probe must not include a message action-choice instruction")
+        return "ballot"
+    if request.action_kind != "message":
+        raise ValueError(f"unsupported preflight action kind: {request.action_kind}")
+    mapping = {PREFLIGHT_SEND_MESSAGE_INSTRUCTION: "send_message",
+               PREFLIGHT_NO_MESSAGE_INSTRUCTION: "no_message"}
+    if instruction not in mapping:
+        raise ValueError("message probe must use one exact frozen action-choice instruction")
+    return mapping[instruction]
+
+
 class _NoRedirect(urllib.request.HTTPRedirectHandler):
     def redirect_request(self, req, fp, code, msg, headers, newurl):
         return None
@@ -719,9 +747,15 @@ class LocalLlamaCppBackend:
             expected_setup_ids = {"preflight-props", "preflight-template", "preflight-tokenize"}
             if set(reused_setup_responses) != expected_setup_ids or not expected_setup_ids.issubset(budget.logical_ids):
                 raise ValueError("resumed preflight setup responses do not match the verified budget ledger")
-        expected = [("ballot", None), ("message", "send_message"), ("message", "no_message")]
-        if len(probes) != 3 or [(request.action_kind, action) for request, action in probes] != expected:
-            raise ValueError("preflight requires ballot, send_message, and no_message probes in frozen order")
+        requested = [("ballot", None), ("message", "send_message"), ("message", "no_message")]
+        if len(probes) != 3 or [(request.action_kind, action) for request, action in probes] != requested:
+            raise ValueError("preflight requires ballot, send_message-request, and no_message-request in frozen order")
+        for request, requested_action in probes:
+            prompt_action = _preflight_prompt_requested_action(request)
+            metadata_action = "ballot" if requested_action is None else requested_action
+            if prompt_action != metadata_action:
+                raise ValueError(
+                    f"preflight requested-action metadata {metadata_action} does not match prompt instruction {prompt_action}")
 
         runtime_bundle = llama_runtime_bundle_identity(self.config.server_binary_path)
         if runtime_bundle["sha256"] != self.config.runtime_bundle_sha256:
@@ -804,7 +838,8 @@ class LocalLlamaCppBackend:
         self._emit_preflight_event("tokenizer_parity_validated", token_count=len(token_ids_local))
 
         actual_actions: list[str] = []
-        for index, (request, expected_action) in enumerate(probes):
+        action_choice_diagnostics: list[dict[str, Any]] = []
+        for index, (request, requested_action) in enumerate(probes):
             body, _, prompt_tokens, _ = self._prepare(request)
             url = self.config.base_url.rstrip("/") + "/chat/completions"
             raw = self._preflight_call(budget, f"preflight-completion-{index + 1}", "POST", url,
@@ -820,19 +855,32 @@ class LocalLlamaCppBackend:
                                        "raw_response_sha256": sha256(response.text.encode("utf-8")).hexdigest()})
                 raise RuntimeError(f"preflight action failed the frozen strict parser: {exc}") from exc
             actual = action["type"]
-            expected_type = "ballot" if expected_action is None else expected_action
-            if actual != expected_type:
+            requested_type = "ballot" if requested_action is None else requested_action
+            # The ballot action is fixed by the request schema. Message requests
+            # intentionally accept either valid union branch; whether the model
+            # followed a probe's requested branch is a separate diagnostic.
+            if request.action_kind == "ballot" and actual != "ballot":
                 budget.records.append({"request_id": f"preflight-action-{index + 1}",
-                                       "status": "failed", "expected_action": expected_type,
+                                       "status": "failed", "requested_action": requested_type,
                                        "actual_action": actual, "raw_response": response.text,
                                        "raw_response_sha256": sha256(response.text.encode("utf-8")).hexdigest()})
-                raise RuntimeError(f"preflight expected {expected_type}, received {actual}")
+                raise RuntimeError(f"ballot request returned non-ballot action: {actual}")
             actual_actions.append(actual)
+            action_choice_diagnostics.append({
+                "request_id": request.request_id,
+                "action_kind": request.action_kind,
+                "requested_action": requested_type,
+                "actual_action": actual,
+                "followed_instruction": actual == requested_type,
+                "role": "descriptive_instruction_compliance_only",
+            })
 
         if len(budget.logical_ids) > 6 or budget.attempts > 12 or budget.completion_attempts > 4:
             raise AssertionError("preflight hard ceiling was exceeded")
         return {
-            "status": "PASS",
+            "protocol_id": "m1-p0-interface-v3",
+            "status": "PASS_INTERFACE",
+            "schema_transport_status": "PASS",
             "approval_id": self.config.preflight_approval_id,
             "logical_requests": len(budget.logical_ids),
             "http_attempts": budget.attempts,
@@ -846,6 +894,10 @@ class LocalLlamaCppBackend:
             "verified_tokenizer_ids": len(token_ids_local),
             "reused_prior_setup_requests": len(reused_setup_responses or {}),
             "verified_actions": actual_actions,
+            "action_choice_diagnostics": action_choice_diagnostics,
+            "positive_send_message_model_output": (
+                "OBSERVED" if "send_message" in actual_actions else "UNVERIFIED"),
+            "positive_send_message_offline_plumbing": "NOT_ASSESSED_BY_LIVE_PREFLIGHT",
             "records": budget.records,
         }
 

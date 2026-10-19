@@ -240,6 +240,10 @@ def _validate_preflight_continuation(previous_dir: Path, config_path: Path,
         if hashlib.sha256(source.stdout).hexdigest() != expected:
             raise ValueError(f"prior run source fingerprint does not match its Git commit: {relative}")
 
+    old_inputs = json.loads((previous_dir / "preflight" / "inputs.json").read_text(encoding="utf-8"))
+    if old_inputs.get("protocol_id") != "m1-p0-interface-v3":
+        raise ValueError("historical preflight protocol cannot be resumed under interface V3")
+
     terminal = json.loads((previous_dir / "terminal-status.json").read_text(encoding="utf-8"))
     result = json.loads((previous_dir / "preflight" / "result.json").read_text(encoding="utf-8"))
     if (terminal.get("status") != "NO_GO_PREFLIGHT" or terminal.get("episodes_attempted") != 0 or
@@ -275,7 +279,6 @@ def _validate_preflight_continuation(previous_dir: Path, config_path: Path,
             owner.get("expected_pid") != previous_launch.get("pid")):
         raise ValueError("prior run did not verify the exact local listener and health endpoint")
 
-    old_inputs = json.loads((previous_dir / "preflight" / "inputs.json").read_text(encoding="utf-8"))
     if old_inputs.get("prompts") != prompt_evidence:
         raise ValueError("continuation probes differ from the failed run's exact prompt evidence")
     rows = _read_jsonl(previous_dir / "preflight" / "requests.jsonl")
@@ -378,7 +381,9 @@ def _verify_live_run(out_dir: Path, config: Any, manifest: dict[str, Any]) -> di
     preflight_attempt_rows = [row for row in preflight_rows if isinstance(row.get("attempt"), int)]
     preflight_ids = {row["request_id"] for row in preflight_attempt_rows}
     completion_rows = [row for row in preflight_attempt_rows if row.get("completion_attempt") is True]
-    if (preflight_result.get("status") != "PASS" or len(preflight_ids) != 6 or
+    if (preflight_result.get("protocol_id") != "m1-p0-interface-v3" or
+            preflight_result.get("status") != "PASS_INTERFACE" or
+            preflight_result.get("schema_transport_status") != "PASS" or len(preflight_ids) != 6 or
             len(preflight_attempt_rows) > 12 or len(completion_rows) > 4 or
             preflight_budget.get("logical_requests") != 6 or
             preflight_budget.get("http_attempts") != len(preflight_attempt_rows) or
@@ -565,8 +570,9 @@ def run(config_path: Path, runtime_config_path: Path, out_dir: Path,
         "pilot_budget": {"logical": 95, "http_attempts": 190, "episodes": 25,
                          "completion_probes": 0}})
     _write_json(preflight_dir / "inputs.json", {
+        "protocol_id": "m1-p0-interface-v3",
         "probe_order": [request.request_id for request, _ in probes],
-        "expected_actions": [expected or "ballot" for _, expected in probes],
+        "requested_actions": [requested or "ballot" for _, requested in probes],
         "prompts": prompt_evidence,
         "schema_sha256": {path.name: _sha256_file(path) for path in sorted(
             (ROOT / "prompts" / "m1-p0-v2").glob("*.schema.json"))}})
@@ -656,7 +662,7 @@ def run(config_path: Path, runtime_config_path: Path, out_dir: Path,
         try:
             preflight_result = backend.preflight(
                 preflight_budget, probes, reused_setup_responses=reused_setup_responses)
-            status_pre = "PASS"
+            status_pre = preflight_result.get("status")
         except Exception as exc:
             status_pre = "FAIL"
             preflight_result = {"status": "FAIL", "error_type": type(exc).__name__,
@@ -669,7 +675,7 @@ def run(config_path: Path, runtime_config_path: Path, out_dir: Path,
         _write_json(preflight_dir / "result.json", preflight_result)
         for item in preflight_budget.records:
             _append_jsonl(preflight_dir / "requests.jsonl", item)
-        if status_pre != "PASS":
+        if status_pre != "PASS_INTERFACE":
             status = "NO_GO_PREFLIGHT"
             error = {"type": "PreflightFailed",
                      "error": preflight_result.get("error", "frozen local compatibility preflight failed")}

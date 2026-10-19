@@ -30,7 +30,9 @@ sys.path.insert(0, str(ROOT / "src"))
 from colluscope.gguf_tokenizer import GGUFChatTokenCounter  # noqa: E402
 from colluscope.m1_runtime import (AgentRequest, _canonical_hash, _generation_seed,
                                    _observation, _render, _task_spec, load_runtime_config)  # noqa: E402
-from colluscope.openai_compat_llamacpp import (LlamaCppPreflightBudget, LocalLlamaCppBackend,
+from colluscope.openai_compat_llamacpp import (PREFLIGHT_NO_MESSAGE_INSTRUCTION,
+                                               PREFLIGHT_SEND_MESSAGE_INSTRUCTION,
+                                               LlamaCppPreflightBudget, LocalLlamaCppBackend,
                                                llama_runtime_bundle_identity, llama_server_command,
                                                load_llamacpp_backend_config)  # noqa: E402
 
@@ -289,14 +291,12 @@ def _build_probes(backend_config: Any, runtime_config_path: Path) -> tuple[list[
     chat_condition = by_id["private_chat_no_side_bonus"]
     specifications = [
         ("ballot", "A", ballot_condition, None, None),
-        ("message", "A", chat_condition, "send_message",
-         "Engineering compatibility probe only: select the send_message action and use the short text 'schema probe'."),
-        ("message", "B", chat_condition, "no_message",
-         "Engineering compatibility probe only: select the no_message action."),
+        ("message", "A", chat_condition, "send_message", PREFLIGHT_SEND_MESSAGE_INSTRUCTION),
+        ("message", "B", chat_condition, "no_message", PREFLIGHT_NO_MESSAGE_INSTRUCTION),
     ]
     probes: list[tuple[AgentRequest, str | None]] = []
     prompt_evidence: list[dict[str, Any]] = []
-    for index, (action_kind, agent, condition, expected_action, instruction) in enumerate(specifications, start=1):
+    for index, (action_kind, agent, condition, requested_action, instruction) in enumerate(specifications, start=1):
         task_spec = _task_spec(condition["public_target_bonus_units"], runtime)
         observation = _observation(agent, task_spec, condition, runtime)
         if instruction is not None:
@@ -310,10 +310,10 @@ def _build_probes(backend_config: Any, runtime_config_path: Path) -> tuple[list[
             sampling=backend_config.sampling, timeout_seconds=backend_config.timeout_seconds,
             observation_sha256=_canonical_hash(observation), prompt=prompt,
             generation_seed=_generation_seed("seed-0", agent, action_kind))
-        probes.append((request, expected_action))
+        probes.append((request, requested_action))
         prompt_evidence.append({
             "request_id": request.request_id, "action_kind": action_kind, "agent_id": agent,
-            "expected_action": "ballot" if expected_action is None else expected_action,
+            "requested_action": "ballot" if requested_action is None else requested_action,
             "engineering_probe_not_research_episode": True,
             "observation": observation, "observation_canonical_json": canonical_observation,
             "observation_sha256": request.observation_sha256,
@@ -364,6 +364,9 @@ def _manifest(out_dir: Path) -> dict[str, Any]:
 
 def execute(config_path: Path, runtime_config_path: Path, original_config_path: Path,
             out_dir: Path, supplied_approval: str) -> int:
+    if supplied_approval == APPROVAL_ID:
+        raise PermissionError(
+            "the historical 8081 preflight approval was consumed; protocol v3 requires a new explicit approval")
     out_dir = out_dir.resolve()
     if out_dir.exists() and any(out_dir.iterdir()):
         raise FileExistsError(f"refusing to overwrite nonempty preflight evidence directory: {out_dir}")
@@ -433,8 +436,9 @@ def execute(config_path: Path, runtime_config_path: Path, original_config_path: 
         token_counter = GGUFChatTokenCounter(model_path,
                                               expected_artifact_sha256=backend_config.artifact_sha256)
         action_root = ROOT / "prompts" / "m1-p0-v2"
-        input_evidence = {"probe_order": [item[0].request_id for item in probes],
-                          "expected_actions": [item[1] or "ballot" for item in probes],
+        input_evidence = {"protocol_id": "m1-p0-interface-v3",
+                          "probe_order": [item[0].request_id for item in probes],
+                          "requested_actions": [item[1] or "ballot" for item in probes],
                           "prompts": prompt_evidence,
                           "schema_sha256": {path.name: _sha256_file(path)
                                             for path in sorted(action_root.glob("*.schema.json"))},
@@ -546,7 +550,9 @@ def execute(config_path: Path, runtime_config_path: Path, original_config_path: 
         if not listener_guard():
             raise PermissionError("launched server no longer exclusively owns the approved port")
         _write_json(out_dir / "preflight-result.json", result)
-        result_status = "PASS"
+        result_status = result["status"]
+        if result_status != "PASS_INTERFACE":
+            raise RuntimeError(f"unexpected preflight status for protocol v3: {result_status}")
         result_error = None
     except Exception as exc:
         result_status = "FAIL"
@@ -610,7 +616,7 @@ def execute(config_path: Path, runtime_config_path: Path, original_config_path: 
                 "full_pilot_authorized": False, "m2_authorized": False}
     _write_json(out_dir / "terminal-status.json", terminal)
     _manifest(out_dir)
-    return 0 if result_status == "PASS" else 2
+    return 0 if result_status == "PASS_INTERFACE" else 2
 
 
 def _git_head() -> str | None:

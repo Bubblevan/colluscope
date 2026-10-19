@@ -1,0 +1,19 @@
+ColluScope upstream schema source inspection
+Inspected: 2026-10-19T07:02:23Z
+Configured upstream: ggml-org/llama.cpp
+Full commit: 571d0d540df04f25298d0e159e520d9fc62ed121
+Method: read the pinned upstream server README and pinned converter source through GitHub web pages/raw view. No local model server was launched and no endpoint was contacted.
+
+Pinned sources:
+- https://github.com/ggml-org/llama.cpp/blob/571d0d540df04f25298d0e159e520d9fc62ed121/tools/server/README.md
+- https://raw.githubusercontent.com/ggml-org/llama.cpp/571d0d540df04f25298d0e159e520d9fc62ed121/common/json-schema-to-grammar.cpp
+- https://github.com/ggml-org/llama.cpp/blob/571d0d540df04f25298d0e159e520d9fc62ed121/tests/test-json-schema-to-grammar.cpp
+
+Observed upstream facts:
+1. README documents schema-constrained chat-completions output through response_format with type=json_schema and a schema value; it also documents chat_template_kwargs and reasoning_format.
+2. Pinned converter source checks for oneOf or anyOf and passes the alternatives into a union grammar builder. This shows source-level conversion support; it does not test the configured binary, endpoint request handling, or inference-time enforcement.
+3. The same pinned source contains branches converting const to a literal rule; required object fields and closed-object properties; and minLength/maxLength string bounds. These match the relevant keyword forms used by communication.schema.json.
+4. Frozen communication.schema.json has two object alternatives, both requiring `type`. The branch constants are `send_message` and `no_message`, hence the branches are disjoint. A union representation is equivalent for these alternatives; this does not generalize to overlapping oneOf alternatives.
+5. Local strict parsing remains authoritative after generation. Existing offline HTTP canaries prove only the client's posted bytes and error handling. The configured llama.cpp process was not contacted in this cycle; runtime acceptance/enforcement and positive model output remain UNKNOWN/UNVERIFIED.
+
+Falsifier added: test_frozen_communication_oneof_branches_are_disjoint_and_overlap_counterexample_fails. It passes on the frozen schema and rejects a copy where the second branch's discriminator overlaps the first.

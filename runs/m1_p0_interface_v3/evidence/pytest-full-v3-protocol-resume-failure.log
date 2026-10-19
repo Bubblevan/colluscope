@@ -1,0 +1,107 @@
+....................................F............s...................... [ 43%]
+........................................................................ [ 87%]
+....................                                                     [100%]
+================================== FAILURES ===================================
+__ test_retained_zero_episode_tokenizer_failure_is_valid_continuation_source __
+
+    def test_retained_zero_episode_tokenizer_failure_is_valid_continuation_source():
+        previous = ROOT / "runs/m1_p0_local/25ep-pilot-20261019/run"
+        model = Path(r"E:\Health-Copilot-Models\models\qwen3-8b\Qwen3-8B-Q4_K_M.gguf")
+        if not previous.is_dir() or not model.is_file():
+            pytest.skip("requires the retained local tokenizer-preflight failure and frozen GGUF")
+        config_path = ROOT / "runs/m1_p0_local/25ep-pilot-20261019/configs/full-pilot.toml"
+        runtime_path = ROOT / "configs/m1-r-offline-v2.toml"
+        config = _validate_authorized_config(config_path)
+        probes, evidence = _build_probes(config, runtime_path)
+>       continuation = _validate_preflight_continuation(
+            previous, config_path, runtime_path, config, probes, evidence)
+
+tests\test_m1_p0_local_pilot.py:128: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+previous_dir = WindowsPath('D:/MyLab/colluscope/reference/m1-p0-local-qwen-integration/runs/m1_p0_local/25ep-pilot-20261019/run')
+config_path = WindowsPath('D:/MyLab/colluscope/reference/m1-p0-local-qwen-integration/runs/m1_p0_local/25ep-pilot-20261019/configs/full-pilot.toml')
+runtime_config_path = WindowsPath('D:/MyLab/colluscope/reference/m1-p0-local-qwen-integration/configs/m1-r-offline-v2.toml')
+backend_config = LlamaCppBackendConfig(model_calls_enabled=True, preflight_enabled=True, preflight_approval_id='USER-APPROVED-8081-PREF..._policy='retain exact requests, responses, errors, private observations and all failures locally; no automatic upload')
+probes = [(AgentRequest(request_id='m1-p0-preflight-1-ballot-A', action_kind='ballot', agent_id='A', model_id='colluscope-qwen3...":"plurality; if every ballot is tied at one vote, select chair ballot"}}', generation_seed=1055606434), 'no_message')]
+prompt_evidence = [{'request_id': 'm1-p0-preflight-1-ballot-A', 'action_kind': 'ballot', 'agent_id': 'A', 'requested_action': 'ballot', ..._id': 'm1-p0-preflight-3-message-B', 'action_kind': 'message', 'agent_id': 'B', 'requested_action': 'no_message', ...}]
+
+    def _validate_preflight_continuation(previous_dir: Path, config_path: Path,
+                                         runtime_config_path: Path, backend_config: Any,
+                                         probes: list[Any], prompt_evidence: list[dict[str, Any]]) -> dict[str, Any]:
+        """Validate a single continuation after setup checks and tokenizer parity failed.
+    
+        Successful `/props`, `/apply-template`, and `/tokenize` calls are reused as
+        cumulative preflight evidence. The next run must repeat the exact frozen
+        server command and may issue only the three remaining action probes, keeping
+        the aggregate preflight within 6 logical / 12 HTTP / 4 completion attempts.
+        """
+        previous_dir = previous_dir.resolve()
+        if not previous_dir.is_relative_to(ROOT.resolve()):
+            raise ValueError("preflight continuation evidence must be inside this repository")
+        manifest_path = previous_dir / "manifest.json"
+        manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+        for relative, expected in manifest.get("sha256", {}).items():
+            path = (previous_dir / relative).resolve()
+            if not path.is_relative_to(previous_dir) or not path.is_file() or _sha256_file(path) != expected:
+                raise ValueError(f"prior preflight artifact hash mismatch: {relative}")
+        environment = json.loads((previous_dir / "environment.json").read_text(encoding="utf-8"))
+        previous_head = environment.get("git_head")
+        if not isinstance(previous_head, str) or len(previous_head) != 40:
+            raise ValueError("prior preflight does not identify a full Git commit SHA")
+        if (environment.get("model_sha256") != EXPECTED_MODEL_SHA256 or
+                environment.get("server_sha256") != EXPECTED_SERVER_SHA256 or
+                environment.get("runtime_bundle_sha256") != EXPECTED_BUNDLE_SHA256 or
+                environment.get("base_url") != backend_config.base_url):
+            raise ValueError("prior preflight model/server/endpoint differs from the frozen local pilot")
+        for relative, expected in manifest.get("runtime_source_sha256", {}).items():
+            source = subprocess.run(["git", "show", f"{previous_head}:{relative}"], cwd=ROOT,
+                                    capture_output=True, timeout=15, check=True)
+            if hashlib.sha256(source.stdout).hexdigest() != expected:
+                raise ValueError(f"prior run source fingerprint does not match its Git commit: {relative}")
+    
+        terminal = json.loads((previous_dir / "terminal-status.json").read_text(encoding="utf-8"))
+        result = json.loads((previous_dir / "preflight" / "result.json").read_text(encoding="utf-8"))
+        if (terminal.get("status") != "NO_GO_PREFLIGHT" or terminal.get("episodes_attempted") != 0 or
+                terminal.get("pilot_logical_requests") != 0 or terminal.get("pilot_http_attempts") != 0 or
+                result.get("status") != "FAIL" or
+                result.get("error") != "local GGUF tokenizer IDs differ from llama.cpp /tokenize"):
+            raise ValueError("continuation is allowed only for the retained preflight tokenizer mismatch with zero episodes")
+        state = result.get("budget_state", {})
+        if (state.get("logical_requests") != 3 or state.get("http_attempts") != 3 or
+                state.get("completion_attempts") != 0 or state.get("attempts_by_request") != {
+                    "preflight-props": 1, "preflight-template": 1, "preflight-tokenize": 1}):
+            raise ValueError("prior preflight usage differs from the three permitted setup checks")
+        approval = json.loads((previous_dir / "approval-record.json").read_text(encoding="utf-8"))
+        consumed = json.loads((previous_dir / "approval-consumption.json").read_text(encoding="utf-8"))
+        ledger = ROOT / "runs" / "m1_p0_local" / "approval-ledger" / (
+            hashlib.sha256(PILOT_APPROVAL_ID.encode("utf-8")).hexdigest() + ".json")
+        ledger_record = json.loads(ledger.read_text(encoding="utf-8"))
+        if (approval.get("full_25_episode_pilot_approval_id") != PILOT_APPROVAL_ID or
+                approval.get("preflight_approval_id") != PREFLIGHT_APPROVAL_ID or
+                consumed.get("approval_id") != PILOT_APPROVAL_ID or
+                Path(consumed.get("run_dir", "")).resolve() != previous_dir or
+                ledger_record.get("run_dir") != str(previous_dir)):
+            raise PermissionError("prior preflight is not the run that consumed this exact pilot approval")
+        if ((previous_dir / "full-pilot-config.toml").read_bytes() != config_path.read_bytes() or
+                (previous_dir / "runtime-config.toml").read_bytes() != runtime_config_path.read_bytes()):
+            raise ValueError("continuation config/runtime differs from the failed run's frozen inputs")
+        previous_launch = json.loads((previous_dir / "launch.json").read_text(encoding="utf-8"))
+        if previous_launch.get("command") != llama_server_command(backend_config):
+            raise ValueError("continuation server command differs from the previous exact launch")
+        health = json.loads((previous_dir / "server-health.json").read_text(encoding="utf-8"))
+        owner = json.loads((previous_dir / "listener-owner-attestation.json").read_text(encoding="utf-8"))
+        if (health.get("status") != "PASS" or owner.get("status") != "verified_exact_pid" or
+                owner.get("expected_pid") != previous_launch.get("pid")):
+            raise ValueError("prior run did not verify the exact local listener and health endpoint")
+    
+        old_inputs = json.loads((previous_dir / "preflight" / "inputs.json").read_text(encoding="utf-8"))
+        if old_inputs.get("prompts") != prompt_evidence:
+>           raise ValueError("continuation probes differ from the failed run's exact prompt evidence")
+E           ValueError: continuation probes differ from the failed run's exact prompt evidence
+
+scripts\run_m1_p0_local_pilot.py:280: ValueError
+=========================== short test summary info ===========================
+SKIPPED [1] tests\test_m1_p0_preflight_runner.py:76: opt-in host-dependent Windows owner-table integration check
+FAILED tests/test_m1_p0_local_pilot.py::test_retained_zero_episode_tokenizer_failure_is_valid_continuation_source
+1 failed, 162 passed, 1 skipped in 17.46s

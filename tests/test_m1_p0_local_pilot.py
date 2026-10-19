@@ -116,7 +116,7 @@ def test_runtime_fingerprint_covers_imported_preflight_orchestration():
     assert (ROOT / "scripts" / "run_m1_p0_local_preflight.py").resolve() in paths
 
 
-def test_retained_zero_episode_tokenizer_failure_is_valid_continuation_source():
+def test_retained_v2_zero_episode_failure_cannot_resume_under_interface_v3():
     previous = ROOT / "runs/m1_p0_local/25ep-pilot-20261019/run"
     model = Path(r"E:\Health-Copilot-Models\models\qwen3-8b\Qwen3-8B-Q4_K_M.gguf")
     if not previous.is_dir() or not model.is_file():
@@ -125,12 +125,9 @@ def test_retained_zero_episode_tokenizer_failure_is_valid_continuation_source():
     runtime_path = ROOT / "configs/m1-r-offline-v2.toml"
     config = _validate_authorized_config(config_path)
     probes, evidence = _build_probes(config, runtime_path)
-    continuation = _validate_preflight_continuation(
-        previous, config_path, runtime_path, config, probes, evidence)
-    assert set(continuation["setup_responses"]) == {
-        "preflight-props", "preflight-template", "preflight-tokenize"}
-    assert len(continuation["setup_records"]) == 3
-    assert continuation["previous_manifest_sha256"]
+    with pytest.raises(ValueError, match="historical preflight protocol cannot be resumed under interface V3"):
+        _validate_preflight_continuation(
+            previous, config_path, runtime_path, config, probes, evidence)
 
 
 def test_continuation_verifier_checks_the_copied_parent_and_reused_responses(tmp_path):

@@ -1,0 +1,12 @@
+commit=657eab90356ce9137c2988aacb4b5b10d0402c28
+branch=codex/m1-p0-local-qwen-integration
+status=
+date=2026-10-19T14:37:35.8986084+08:00
+pytest_exit=0
+historical_action_mismatch_exit=0
+historical_zero_http_exit=0
+final_pytest_exit=0
+m0_frozen_diff_exit=0
+legacy_status_expectation_counterexample_exit=1 (expected nonzero; obsolete PASS expectation)
+final_v3_pytest_exit=0
+final_m0_frozen_diff_exit=0

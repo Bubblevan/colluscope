@@ -1,0 +1,14 @@
+## codex/m1-p0-local-qwen-integration
+ M docs/RESEARCH_RISK_REGISTER.md
+ M scripts/run_m1_p0_local_pilot.py
+ M scripts/run_m1_p0_local_preflight.py
+ M src/colluscope/openai_compat_llamacpp.py
+ M tests/test_m1_p0_local_pilot.py
+ M tests/test_m1_p0_preflight_runner.py
+ M tests/test_openai_compat_llamacpp.py
+?? AGENTS.md
+?? CODEX_PERSISTENT_SETUP.md
+?? COLLUSCOPE_PERSISTENT_RESEARCH_GOAL.md
+?? docs/M1_P0_INTERFACE_TRD.md
+?? docs/M1_P0_PRE_REGISTERED_PROTOCOL_V3.md
+?? runs/m1_p0_interface_v3/
