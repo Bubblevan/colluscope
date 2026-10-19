@@ -1,6 +1,6 @@
 # M1-P0 GGUF Runtime Decision
 
-**Decision:** **GO for offline implementation review and the bounded local preflight only after resolving the port conflict. Preflight is user-authorized but BLOCKED before launch. NO-GO for the full M1-P0/P1 research pilot and M2.**
+**Decision:** **GO for offline implementation review. NO-GO for claiming the bounded local preflight passed, for M1-P0/P1 research calls, and for M2.** The user authorized a single bounded preflight on 127.0.0.1:8081. llama.cpp loaded the selected GGUF and logged that it was listening, but the runner's process-owner gate timed out without sending an HTTP request. The independent listener observations and in-run gate disagreed; the gate has not been shown reliable enough to protect prompts.
 
 ## GO: offline integration package
 
@@ -16,11 +16,13 @@ Exact commands and retained output are in [`M1_P0_GGUF_COMPATIBILITY_EVIDENCE.md
 
 ## NO-GO: live compatibility and research calls
 
-The user's 2026-10-19 request authorizes only the frozen six-logical-request compatibility preflight (at most 12 HTTP attempts and four generation attempts), with local retention and no paid API. The checked-in config remains default-denied pending a separate run-scoped approval record. This preflight has not started: frozen port 8080 is already bound by PID 12152 (`ApplicationWebServer.exe`), associated with service `NIApplicationWebServer`, on `0.0.0.0`; its executable path and command line are unavailable. No request was sent and that service was not stopped. There is still no empirical compatibility evidence that this exact server/model combination accepts the V2 `oneOf` schemas, renders the embedded template identically, produces matching token IDs, honors the no-reasoning settings, or fits the observed GPU. The official API docs and fake server are not substitutes for that evidence.
+The user's 2026-10-19 request authorized only the frozen six-logical-request compatibility preflight (at most 12 HTTP attempts and four generation attempts), with local retention and no paid API. The original 8080 listener remains untouched. A run-scoped config used 8081. The selected server process image and PID were recorded, and its raw stderr logged model load and `listening on http://127.0.0.1:8081`. However, the runner's startup owner poll returned no rows for 180 seconds and failed closed before `/props`; an independent read-only shell observation during the run showed PID 12636 listening on 127.0.0.1:8081. No HTTP request, completion, or research episode was created. This inconsistent owner attestation is a valid NO-GO counterexample. A fallback owner-table implementation also returned access denied; a `netstat` child-process canary failed once and passed once. Do not treat the later isolated pass as erasing the failures.
+
+The server log proves that the frozen GGUF was loaded by the selected binary, not that its tokenizer, template, schema, sampling, reasoning, or action behavior is compatible. `nvidia-smi` recorded 15,855 MiB free before launch, 10,395 MiB in periodic samples while the server was alive, and 15,533 MiB after shutdown. These are host-wide observations; they do not attribute GPU memory to this process. The sampler incorrectly labeled its in-run samples `prelaunch`, so no per-phase GPU-fit claim is supported.
 
 The preflight is specified as six logical requests, at most 12 HTTP attempts and four generation attempts. It must stop on the first mismatch. Approval of this preflight does not authorize the 25-episode pilot. Pilot authorization would separately need the exact model/runtime/tokenizer/sampling/context and a call/retention/auditor budget. No pilot or M2 work follows automatically.
 
-The current blocked attempt is recorded in `runs/m1_p0_local/gguf-preflight-iteration-02/`. Resolve the listener conflict without disrupting the NIApplicationWebServer service, then freeze the exact endpoint for this preflight before retrying.
+The first port-conflict attempt remains under `runs/m1_p0_local/gguf-preflight-iteration-02/`. The authorized 8081 startup attempt and its hashed output package are under `runs/m1_p0_local/gguf-preflight-iteration-03/run/`; test and owner-query failures are retained in the sibling `logs/` directory. The new runner code has not itself completed a verified owner check against llama.cpp. A future attempt requires review of an instrumented, stable PID-owner gate and phase-correct telemetry. No further service start is authorized by this decision.
 
 ## Research validity limitations preserved
 
@@ -31,4 +33,4 @@ The current blocked attempt is recorded in `runs/m1_p0_local/gguf-preflight-iter
 
 ## Stop condition
 
-Stop at M1-R plus offline llama.cpp compatibility implementation. Await human review of the frozen candidate protocol and this decision. Do not start M1-P0 live preflight, a real-agent pilot, or M2 without a separate explicit approval.
+Stop at offline llama.cpp integration review. Await human review of the failed-preflight evidence and revised owner-attestation approach. Do not start another server, M1-P0 real-agent pilot, or M2 automatically. Full-pilot and M2 authorization remain false.

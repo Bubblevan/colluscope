@@ -13,9 +13,10 @@ import urllib.error
 import urllib.parse
 import urllib.request
 from dataclasses import dataclass, field, replace
+from datetime import datetime, timezone
 from hashlib import sha256
 from pathlib import Path
-from typing import Any
+from typing import Any, Callable
 
 from .m1_runtime import (AgentRequest, BackendResponse, RuntimeConfig, TimeoutBackendError,
                          TransientTransportError, _parse_action)
@@ -233,6 +234,8 @@ def _validate_config(config: LlamaCppBackendConfig) -> None:
         is_loopback = (parsed.hostname or "").lower() == "localhost"
     if not is_loopback or parsed.hostname != "127.0.0.1":
         raise ValueError("only the frozen 127.0.0.1 local endpoint is permitted")
+    if parsed.port != config.launch.get("port"):
+        raise ValueError("llama.cpp endpoint port differs from the frozen launch port")
     if config.max_api_spend_usd != 0.0:
         raise ValueError("local backend must have a $0.00 API spend ceiling")
     if not config.model_id or config.model_id == "FILL_AFTER_APPROVAL":
@@ -248,10 +251,16 @@ def _validate_config(config: LlamaCppBackendConfig) -> None:
         raise ValueError("embedded tokenizer identity must use its metadata SHA256, not a fake repository commit")
     if config.server_version != "10068" or config.server_commit != "571d0d540":
         raise ValueError("server build differs from the inspected Windows llama.cpp binary")
-    if config.launch != {"host": "127.0.0.1", "port": 8080, "context_length": 4096,
-                         "parallel_slots": 1, "gpu_device": "Vulkan1", "gpu_layers": "all",
-                         "fit": "off", "offline": True, "webui": False, "warmup": False,
-                         "reasoning": "off", "reasoning_format": "none", "thinking_mode": "disabled"}:
+    expected_launch = {"host": "127.0.0.1", "context_length": 4096, "parallel_slots": 1,
+                       "gpu_device": "Vulkan1", "gpu_layers": "all", "fit": "off", "offline": True,
+                       "webui": False, "warmup": False, "reasoning": "off",
+                       "reasoning_format": "none", "thinking_mode": "disabled"}
+    launch_without_port = {key: value for key, value in config.launch.items() if key != "port"}
+    port = config.launch.get("port")
+    approved_preflight_port = (port == 8081 and config.preflight_enabled and
+                               bool(config.preflight_approval_id) and not config.model_calls_enabled)
+    if launch_without_port != expected_launch or port not in (8080, 8081) or (
+            port != 8080 and not approved_preflight_port):
         raise ValueError("launch settings differ from the inspected, frozen local candidate")
     if (config.context_length != 4096 or config.input_budget_tokens != 3072 or
             config.message_max_output_tokens != 512 or config.ballot_max_output_tokens != 256):
@@ -337,10 +346,14 @@ class LocalLlamaCppBackend:
     """OpenAI-compatible chat adapter that can contact only local llama.cpp."""
 
     def __init__(self, config: LlamaCppBackendConfig, token_counter: Any,
-                 opener: Any | None = None):
+                 opener: Any | None = None, *,
+                 listener_guard: Callable[[], bool] | None = None,
+                 preflight_event_hook: Callable[[dict[str, Any]], None] | None = None):
         _validate_config(config)
         self.config = config
         self.token_counter = token_counter
+        self.listener_guard = listener_guard
+        self.preflight_event_hook = preflight_event_hook
         self.tokenizer_metadata = dict(config.tokenizer_metadata)
         for attr, expected in (("artifact_sha256", config.artifact_sha256),
                                ("tokenizer_id", config.tokenizer_id),
@@ -463,9 +476,12 @@ class LocalLlamaCppBackend:
 
     def _open(self, url: str, data: bytes | None, timeout_seconds: int, method: str) -> bytes:
         parsed = urllib.parse.urlsplit(url)
-        if (parsed.scheme != "http" or parsed.hostname != "127.0.0.1" or parsed.port != 8080 or
+        if (parsed.scheme != "http" or parsed.hostname != "127.0.0.1" or
+                parsed.port != self.config.launch["port"] or
                 parsed.username or parsed.password or parsed.query or parsed.fragment):
             raise PermissionError("llama.cpp transport refuses every endpoint except frozen local loopback")
+        if self.listener_guard is not None and not self.listener_guard():
+            raise PermissionError("llama.cpp listener process does not match the launched server PID")
         request = urllib.request.Request(url, data=data,
                                          headers={"Content-Type": "application/json"} if data is not None else {},
                                          method=method)
@@ -598,7 +614,10 @@ class LocalLlamaCppBackend:
             record: dict[str, Any] = {"request_id": request_id, "attempt": attempt, "method": method,
                                       "url": url, "request_body": payload_json,
                                       "request_sha256": sha256(body).hexdigest() if body is not None else None,
-                                      "completion_attempt": completion}
+                                      "completion_attempt": completion,
+                                      "started_at_utc": datetime.now(timezone.utc).isoformat()}
+            if completion:
+                self._emit_preflight_event("completion_attempt_started", request_id=request_id, attempt=attempt)
             try:
                 response_body = self._open(url, body, self.config.timeout_seconds, method)
             except (TimeoutBackendError, TransientTransportError) as exc:
@@ -609,6 +628,9 @@ class LocalLlamaCppBackend:
                                "raw_response_sha256": sha256(raw.encode("utf-8")).hexdigest() if raw else None,
                                "latency_seconds": time.perf_counter() - started})
                 budget.records.append(record)
+                if completion:
+                    self._emit_preflight_event("completion_attempt_failed", request_id=request_id,
+                                               attempt=attempt, error_type=type(exc).__name__)
                 if attempt == 2:
                     raise
                 continue
@@ -619,14 +641,25 @@ class LocalLlamaCppBackend:
                                "raw_response_sha256": sha256(raw.encode("utf-8")).hexdigest() if raw else None,
                                "latency_seconds": time.perf_counter() - started})
                 budget.records.append(record)
+                if completion:
+                    self._emit_preflight_event("completion_attempt_failed", request_id=request_id,
+                                               attempt=attempt, error_type=type(exc).__name__)
                 raise
             raw_text = response_body.decode("utf-8", errors="replace")
             record.update({"status": "response_returned", "raw_response": raw_text,
                            "raw_response_sha256": sha256(response_body).hexdigest(),
                            "latency_seconds": time.perf_counter() - started})
             budget.records.append(record)
+            if completion:
+                self._emit_preflight_event("completion_attempt_finished", request_id=request_id,
+                                           attempt=attempt, latency_seconds=record["latency_seconds"])
             return response_body
         raise AssertionError("bounded preflight retry loop fell through")
+
+    def _emit_preflight_event(self, event: str, **details: Any) -> None:
+        if self.preflight_event_hook is not None:
+            self.preflight_event_hook({"event": event, "at_utc": datetime.now(timezone.utc).isoformat(),
+                                       **details})
 
     def _run_preflight(self, budget: LlamaCppPreflightBudget,
                        probes: list[tuple[AgentRequest, str]]) -> dict[str, Any]:
@@ -679,6 +712,8 @@ class LocalLlamaCppBackend:
                 raise RuntimeError(f"llama.cpp /props {key} differs from the frozen sampling settings")
         if params.get("samplers") != list(self.config.sampler_chain):
             raise RuntimeError("llama.cpp /props sampler chain differs from the frozen setting")
+        self._emit_preflight_event("server_properties_validated", model_path=model_path,
+                                   build_info=build_info, context_length=settings["n_ctx"])
 
         ballot_messages = self._messages(probes[0][0].prompt)
         expected_render = self.token_counter.render_chat(ballot_messages, enable_thinking=False)
@@ -704,6 +739,7 @@ class LocalLlamaCppBackend:
             raise RuntimeError(f"llama.cpp /tokenize response is malformed: {exc}") from exc
         if token_ids_server != token_ids_local:
             raise RuntimeError("local GGUF tokenizer IDs differ from llama.cpp /tokenize")
+        self._emit_preflight_event("tokenizer_parity_validated", token_count=len(token_ids_local))
 
         actual_actions: list[str] = []
         for index, (request, expected_action) in enumerate(probes):

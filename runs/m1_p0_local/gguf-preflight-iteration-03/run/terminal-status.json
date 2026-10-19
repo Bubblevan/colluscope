@@ -1,0 +1,18 @@
+{
+  "budget_maxima_enforced": {
+    "completion_attempts": 4,
+    "http_attempts": 12,
+    "logical_requests": 6
+  },
+  "completed_at_utc": "2026-10-19T04:24:11.645627+00:00",
+  "external_model_calls": 0,
+  "failure": {
+    "error": "llama-server did not bind the approved port within 180 seconds",
+    "type": "TimeoutError"
+  },
+  "full_pilot_authorized": false,
+  "local_completion_attempts": 0,
+  "logical_preflight_http_requests": 0,
+  "m2_authorized": false,
+  "status": "FAIL"
+}

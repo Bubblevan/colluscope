@@ -1,0 +1,57 @@
+{
+  "approval_id": "USER-APPROVED-8081-PREFLIGHT-2026-10-19",
+  "external_model_calls": 0,
+  "files": {
+    "approval-record.json": {
+      "sha256": "8b56210880f59cc964fcd0b7db30f73074da0f0e2cc75d97e17d5f5a018c1ea7",
+      "size_bytes": 251
+    },
+    "approved-config.toml": {
+      "sha256": "2210db1f9d2a9948bf2fbb4fafc3d630075345784b10599b556d99c1e77b5ee6",
+      "size_bytes": 3025
+    },
+    "environment.json": {
+      "sha256": "ef2de4276c2397c22b550fceb056f7b64c62a1eb656f51757d3731dc363754aa",
+      "size_bytes": 11760
+    },
+    "failure.json": {
+      "sha256": "f73be947783f3750bc380beb5504ae5007e03534c9263e3a4503716645aeef67",
+      "size_bytes": 230
+    },
+    "gpu-samples.jsonl": {
+      "sha256": "6a04f11954d2d6ab5b8c1819f69fb47519ae824c59fa518915bcd40ffdc3a65a",
+      "size_bytes": 201545
+    },
+    "launch.json": {
+      "sha256": "ab4cec4acfbc083db65d0d323c67db639b96da5742f6a731b9b4072ea0606c98",
+      "size_bytes": 1241
+    },
+    "logs/llama-server.stderr.log": {
+      "sha256": "06a7eb41ed8a04ed19a6474ab818905ed48d9be2ab00c0535d08616870321967",
+      "size_bytes": 1130
+    },
+    "logs/llama-server.stdout.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "preflight-inputs.json": {
+      "sha256": "8a6a3f2fb4b21e5832a9969c0166e9009655953ebdfd3a64f1435d8217eac02e",
+      "size_bytes": 14339
+    },
+    "shutdown.json": {
+      "sha256": "5d07154183ae69d5fd84f054ba385d522d8804dcc65036c6cc7ba11c5f100bb5",
+      "size_bytes": 65
+    },
+    "telemetry-summary.json": {
+      "sha256": "42bf87c25e48274b96a3bfdc329ae3009290514589871769589320fc73385405",
+      "size_bytes": 338
+    },
+    "terminal-status.json": {
+      "sha256": "1ebd1bfb7c154bb108312e3dbb6cfb778ddf7d87b4f2e2d676b2eaf1509197c9",
+      "size_bytes": 504
+    }
+  },
+  "paid_api_calls": 0,
+  "purpose": "bounded_local_gguf_preflight_8081",
+  "research_episodes": 0
+}

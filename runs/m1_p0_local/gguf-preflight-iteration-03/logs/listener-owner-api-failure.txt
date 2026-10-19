@@ -1,0 +1,5 @@
+Targeted failed attempt: GetExtendedTcpTable-based listener-owner query.
+Command: python -m pytest tests/test_m1_p0_preflight_runner.py tests/test_openai_compat_llamacpp.py -q
+Observed: 1 failed, 28 passed in 1.12s.
+Exact exception: OSError: [Errno 5] GetExtendedTcpTable size query failed.
+No model process or model request was started by this unit test.

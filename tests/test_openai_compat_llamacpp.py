@@ -362,7 +362,8 @@ def test_fake_preflight_runs_exact_six_request_sequence_and_parses_all_actions(t
         response('{"type":"no_message"}'),
     ]
     opener = FakeOpener(responses)
-    backend = LocalLlamaCppBackend(settings, counter, opener)
+    events = []
+    backend = LocalLlamaCppBackend(settings, counter, opener, preflight_event_hook=events.append)
     budget = LlamaCppPreflightBudget(enabled=True)
     result = backend.preflight(budget, [(ballot, None), (send, "send_message"),
                                         (no_message, "no_message")])
@@ -375,6 +376,34 @@ def test_fake_preflight_runs_exact_six_request_sequence_and_parses_all_actions(t
     assert [call[0].full_url.removeprefix("http://127.0.0.1:8080") for call in opener.calls] == [
         "/props", "/apply-template", "/tokenize", "/v1/chat/completions",
         "/v1/chat/completions", "/v1/chat/completions"]
+    assert [event["event"] for event in events if event["event"] in {
+        "server_properties_validated", "tokenizer_parity_validated",
+        "completion_attempt_started", "completion_attempt_finished"}] == [
+        "server_properties_validated", "tokenizer_parity_validated",
+        "completion_attempt_started", "completion_attempt_finished",
+        "completion_attempt_started", "completion_attempt_finished",
+        "completion_attempt_started", "completion_attempt_finished"]
+
+
+def test_port_8081_requires_bounded_preflight_gate_and_listener_owner(tmp_path):
+    launch = {**BASE.launch, "port": 8081}
+    settings = config_for(preflight=True, base_url="http://127.0.0.1:8081/v1", launch=launch)
+    counter = FakeCounter(settings)
+    opener = FakeOpener([])
+    backend = LocalLlamaCppBackend(settings, counter, opener, listener_guard=lambda: False)
+    command = llama_server_command(settings)
+    assert command[command.index("--port") + 1] == "8081"
+    with pytest.raises(PermissionError, match="listener process"):
+        backend._open("http://127.0.0.1:8081/props", None, 10, "GET")
+    assert opener.calls == []
+
+    for port, preflight in ((8082, True), (8081, False)):
+        invalid = config_for(preflight=preflight,
+                             preflight_approval_id="FAKE-PREFLIGHT-TEST-ONLY" if preflight else "",
+                             base_url=f"http://127.0.0.1:{port}/v1",
+                             launch={**BASE.launch, "port": port})
+        with pytest.raises(ValueError, match="launch settings"):
+            LocalLlamaCppBackend(invalid, FakeCounter(invalid), FakeOpener([]))
 
 
 def test_preflight_fails_closed_on_template_mismatch_and_records_raw_response(tmp_path):

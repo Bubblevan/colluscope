@@ -1,0 +1,7 @@
+First netstat listener-owner child canary attempt (captured terminal excerpt):
+
+Test: test_listener_owner_probe_sees_loopback_listener_and_owner_pid
+Result: AssertionError; observed rows=[] while the expected row was LocalAddress 127.0.0.1, LocalPort 8081, OwningProcess 6916.
+Suite result: 1 failed, 28 passed in 4.36s.
+
+The isolated rerun is separately retained as listener-netstat-canary-retry-pass.log (1 passed in 0.23s). Both outcomes remain relevant; the first failure is not treated as cured by a single pass.

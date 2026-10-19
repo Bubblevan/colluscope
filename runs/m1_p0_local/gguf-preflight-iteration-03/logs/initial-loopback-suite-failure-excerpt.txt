@@ -1,0 +1,14 @@
+Initial full-suite loopback failures (terminal excerpt; 6 failed, 129 passed):
+
+PermissionError: [WinError 10013] an attempt was made to access a socket in a way forbidden by its access permissions.
+The urllib stack wrapped this as URLError, then TransientTransportError. Test server audit remained empty for the retry-budget test.
+
+Failed tests:
+- test_real_adapter_http_success_transmits_ballot_and_oneof_schemas_and_exact_hashes
+- test_unsupported_oneof_is_explicitly_rejected_and_raw_error_is_retained
+- test_malformed_action_from_successful_http_response_is_not_repaired
+- test_timeout_is_physically_retried_twice_and_both_attempts_are_recorded
+- test_duplicate_request_id_cannot_reach_server_twice
+- test_retry_cannot_bypass_global_attempt_budget
+
+A later isolated rerun of the same HTTP contract module returned 7 passed; the failure was not removed from the record.

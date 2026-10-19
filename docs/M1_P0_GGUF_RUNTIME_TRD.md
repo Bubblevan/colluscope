@@ -1,12 +1,12 @@
 # M1-P0 Local GGUF Runtime TRD
 
-**Status:** offline implementation complete; bounded live preflight is authorized by the user's 2026-10-19 request but is blocked before launch by an unidentified process occupying the frozen port 8080. Full research calls remain unauthorized.
+**Status:** offline implementation complete; the user authorized one bounded live preflight on the separate loopback port 8081. The llama.cpp server loaded the frozen GGUF, but the runner's listener-owner gate timed out before any HTTP request. Live compatibility remains NO-GO; full research calls remain unauthorized.
 **Candidate:** Qwen3-8B Q4_K_M GGUF through the installed local llama.cpp server.
 **Protocol basis:** the accepted `m1-p0-frozen-v2` prompts, schemas, five M1 conditions, and reward amounts remain unchanged.
 
 ## Scope
 
-This change adds a local-only adapter and a static GGUF metadata tokenizer. It does not start the server, load model weights, call a model, run a real-agent episode, or compare monitors. `llama_server_command()` only returns a candidate command. The default config rejects live calls and preflight unless a separate approval ID is supplied; the checked-in candidate has both gates disabled.
+This change adds a local-only adapter, static GGUF metadata tokenizer, and a separately gated preflight runner. The checked-in candidate rejects live calls and preflight unless run-scoped approval is supplied. One authorized preflight startup loaded the local model server on 127.0.0.1:8081, but its process-owner gate failed closed before HTTP dispatch. No model completion, research episode, monitor input, or detector evaluation occurred.
 
 The model bytes are at `E:\Health-Copilot-Models\models\qwen3-8b\Qwen3-8B-Q4_K_M.gguf`, SHA256 `d98cdcbd03e17ce47681435b5150e34c1417f50b5c0019dd560e4882c5745785`. This is the selected user-provided model. It is identified as GGUF Q4_K_M and is not mislabeled AWQ.
 
@@ -26,7 +26,7 @@ T (treatment assignment), B (actual actions and settlement), E (auditor-permitte
 
 ## Adapter and tokenizer
 
-`LocalLlamaCppBackend` uses Python's standard-library HTTP client and can address only `http://127.0.0.1:8080`. It disables proxy discovery, refuses redirect targets, checks the endpoint again immediately before dispatch, sends no authorization header, disables streaming and prompt caching, and records the exact JSON request, response/error, hashes, usage, timing, timeout, and attempt through the shared `RequestAdapter`.
+`LocalLlamaCppBackend` uses Python's standard-library HTTP client and can address only `127.0.0.1` on the configured frozen port. The checked-in candidate remains on 8080; the run-scoped preflight candidate used 8081. It disables proxy discovery, refuses redirect targets, checks the endpoint and listener owner immediately before dispatch, sends no authorization header, disables streaming and prompt caching, and records the exact JSON request, response/error, hashes, usage, timing, timeout, and attempt through the shared `RequestAdapter`. The live attempt exposed an unreliable owner-poll path; it did not dispatch HTTP.
 
 The llama.cpp request uses the direct documented envelope `response_format: {type: "json_schema", schema: ...}`. There is no schema fallback. The request also sends the frozen `chat_template_kwargs.enable_thinking=false`, `reasoning_format=none`, exact sampler order, seed, and stage output limit. Non-2xx 5xx and transport timeouts may be retried once; schema, response, token-count, model-alias, parser, and output-limit errors are terminal. No response repair or vote substitution is allowed.
 
@@ -63,4 +63,4 @@ Malformed actions, HTTP/schema rejection, changed model alias, token/template mi
 
 ## What remains unknown
 
-Documentation for the inspected llama.cpp commit describes the direct schema shape, template kwargs, reasoning format, `/props`, `/apply-template`, `/tokenize`, context settings, and local runtime flags. It does **not** establish that this specific server build accepts the V2 `oneOf` schemas, that the static tokenizer exactly matches it, that the Qwen template renders identically, or that the model fits and behaves as intended. Those are live compatibility claims and remain unverified until a separately approved bounded preflight. This adapter test suite uses injected fake HTTP responses and is not evidence of actual llama.cpp enforcement or model behavior.
+Documentation for the inspected llama.cpp commit describes the direct schema shape, template kwargs, reasoning format, `/props`, `/apply-template`, `/tokenize`, context settings, and local runtime flags. The authorized attempt stopped before the first endpoint, so it does **not** establish that this specific server build accepts the V2 `oneOf` schemas, that the static tokenizer exactly matches it, that the Qwen template renders identically, or that the model fits and behaves as intended. Those compatibility claims remain unverified. This adapter test suite uses injected fake HTTP responses and is not evidence of actual llama.cpp enforcement or model behavior.
