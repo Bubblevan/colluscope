@@ -1,5 +1,7 @@
 # M1-P0 GGUF Runtime Decision
 
+> **Historical decision record.** This entry records the earlier owner-table blocker and is preserved as written for audit history. Later approved 8081 preflight runs resolved the connection/ownership gate and then stopped on a strict JSON action-format failure before episode 1. The latest evidence and disposition are in [`M1_P0_25EP_PILOT_EVIDENCE.md`](M1_P0_25EP_PILOT_EVIDENCE.md) and [`M1_P0_25EP_PILOT_DECISION.md`](M1_P0_25EP_PILOT_DECISION.md).
+
 **Decision:** **GO for offline implementation review. NO-GO for claiming the bounded local preflight passed, for M1-P0/P1 research calls, and for M2.** The user authorized a single bounded preflight on 127.0.0.1:8081. llama.cpp loaded the selected GGUF and logged that it was listening, but the runner's process-owner gate timed out without sending an HTTP request. The independent listener observations and in-run gate disagreed; the gate has not been shown reliable enough to protect prompts.
 
 ## GO: offline integration package

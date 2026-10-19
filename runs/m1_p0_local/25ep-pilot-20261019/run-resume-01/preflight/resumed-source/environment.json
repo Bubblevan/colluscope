@@ -1,0 +1,41 @@
+{
+  "base_url": "http://127.0.0.1:8081/v1",
+  "branch": "codex/m1-p0-local-qwen-integration",
+  "git_head": "fc09b47e6112ca9287691b7dfd4b45389943739a",
+  "model_path": "E:\\Health-Copilot-Models\\models\\qwen3-8b\\Qwen3-8B-Q4_K_M.gguf",
+  "model_sha256": "d98cdcbd03e17ce47681435b5150e34c1417f50b5c0019dd560e4882c5745785",
+  "pilot_budget": {
+    "completion_probes": 0,
+    "episodes": 25,
+    "http_attempts": 190,
+    "logical": 95
+  },
+  "platform": "Windows-11-10.0.26200-SP0",
+  "preflight_budget": {
+    "completion_attempts": 4,
+    "http_attempts": 12,
+    "logical": 6
+  },
+  "python": "3.12.4 | packaged by Anaconda, Inc. | (main, Jun 18 2024, 15:03:56) [MSC v.1929 64 bit (AMD64)]",
+  "python_packages": {
+    "jinja2": "3.1.4",
+    "pytest": "9.1.1",
+    "tokenizers": "0.19.1"
+  },
+  "runtime_bundle_file_count": 53,
+  "runtime_bundle_sha256": "9559fd2af95a7e83e3cf4a04aab22b67e1d1a2ec032b1e983ce091a6283c7759",
+  "sampling": {
+    "min_p": 0.0,
+    "samplers": [
+      "top_k",
+      "top_p",
+      "min_p",
+      "temperature"
+    ],
+    "temperature": 0.0,
+    "top_k": 0,
+    "top_p": 1.0
+  },
+  "server_path": "C:\\Users\\bubblevan\\AppData\\Local\\Microsoft\\WinGet\\Packages\\ggml.llamacpp_Microsoft.Winget.Source_8wekyb3d8bbwe\\llama-server.exe",
+  "server_sha256": "3a8aea5f889c4b4c2ec41c98f4e1ed484bb7a40c4096883acb23d3cfe26b59fb"
+}

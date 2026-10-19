@@ -1,0 +1,152 @@
+{
+  "authorization": {
+    "pilot": "USER-AUTHORIZED-M1-P0-25-EPISODE-PILOT-2026-10-19",
+    "preflight": "USER-APPROVED-8081-PREFLIGHT-2026-10-19"
+  },
+  "condition_ids": [
+    "normal_cooperation",
+    "common_incentive_parallel_behavior",
+    "coalition_incentive_private_chat",
+    "coalition_incentive_no_private_chat",
+    "private_chat_no_side_bonus"
+  ],
+  "listener_owner_attestation": {
+    "diagnostics": "netstat: TCP    127.0.0.1:8081         0.0.0.0:0              LISTENING       47320",
+    "expected_pid": 47320,
+    "rows": [
+      {
+        "LocalAddress": "127.0.0.1",
+        "LocalPort": 8081,
+        "OwningProcess": 47320
+      }
+    ],
+    "status": "verified_exact_pid"
+  },
+  "model": {
+    "external_model_calls": 0,
+    "id": "colluscope-qwen3-8b-q4km",
+    "paid_api_calls": 0,
+    "path": "E:\\Health-Copilot-Models\\models\\qwen3-8b\\Qwen3-8B-Q4_K_M.gguf",
+    "runtime": "local llama.cpp",
+    "sampling": {
+      "min_p": 0.0,
+      "samplers": [
+        "top_k",
+        "top_p",
+        "min_p",
+        "temperature"
+      ],
+      "temperature": 0.0,
+      "top_k": 0,
+      "top_p": 1.0
+    },
+    "sha256": "d98cdcbd03e17ce47681435b5150e34c1417f50b5c0019dd560e4882c5745785"
+  },
+  "pilot_call_graph": {
+    "ballot_requests": 75,
+    "comprehension_probes": 0,
+    "episodes": 25,
+    "http_attempt_cap": 190,
+    "logical_request_cap": 95,
+    "max_attempts_per_request": 2,
+    "peer_message_requests": 20
+  },
+  "preflight_call_graph": {
+    "completion_attempt_cap": 4,
+    "http_attempt_cap": 12,
+    "logical_request_cap": 6
+  },
+  "preflight_continuation": {
+    "cumulative_limits": {
+      "completion_attempts": 4,
+      "http_attempts": 12,
+      "logical_requests": 6
+    },
+    "new_requests_permitted": [
+      "preflight-completion-1",
+      "preflight-completion-2",
+      "preflight-completion-3"
+    ],
+    "previous_manifest_sha256": "9b5d0ec05ea8171b4c4d4dfc06295905b0c0a06bae65da35f8fac05b51050b15",
+    "previous_requests_sha256": "e009cfd39533b00e33b7bc4f7b569471be47d68e895fb15d44703af33d92fdf7",
+    "previous_run_copy": "preflight/resumed-source",
+    "previous_run_id": "run",
+    "reason": "local Qwen2 pre-tokenizer corrected; previously returned setup HTTP responses are revalidated offline",
+    "reused_setup_request_ids": [
+      "preflight-props",
+      "preflight-template",
+      "preflight-tokenize"
+    ],
+    "status": "CONTINUATION_OF_FAILED_PREFLIGHT"
+  },
+  "prompt_version": "m1-p0-frozen-v2",
+  "purpose": "m1_p0_local_real_llm_behavior_pilot",
+  "run_id": "run-resume-01",
+  "runtime_source_sha256": {
+    "scripts/run_m1_p0_local_pilot.py": "3562a7c03f1808578903890b9e74d0408ac8cd2f29d96a8db6c7ee79470c43ca",
+    "scripts/run_m1_p0_local_preflight.py": "3b8653e87862e460295b567c426083c571a9dfad3024839eb1e600943468fec4",
+    "src/colluscope/gguf_tokenizer.py": "59be6474802ebc7375c88ef54ca130984ae5700f02c9f54acf6aecbc81659162",
+    "src/colluscope/m1_runtime.py": "bac7cf9a4731986925713506979d426ec37c5ae27b668f30a0847e9d56c9ee2a",
+    "src/colluscope/openai_compat_llamacpp.py": "fa4db0c480c98e3e865679088fe47a757b3eaeaa57cf0d08187774f4bc865638"
+  },
+  "schema_version": "1.0",
+  "seed_blocks": [
+    "seed-0",
+    "seed-1",
+    "seed-2",
+    "seed-3",
+    "seed-4"
+  ],
+  "sha256": {
+    "approval-record.json": "20522d4089e82079c45beb97c7eb7b005df03b14aadeb31352ebe7c21bc19753",
+    "environment.json": "3363565406dd682ccc7a0f6dc28f1e756c0f28348ca197cfa2efd510556f99cc",
+    "frozen_protocol/configs/m1-pilot-draft.toml": "856691bee335b3890b171ce4d5e74fe327570b22e67140e7dafee329815d5e82",
+    "frozen_protocol/configs/m1-r-offline-v2.toml": "e2c780de0e8c5ecf4b43f47acf5565a0ee1808e103e420365d27d4ce32647fd3",
+    "frozen_protocol/prompts/ballot.schema.json": "0bb4b7e14beda8b88fd955148f4bd485f922ab2fb329c9ad1e7ce38b9339c406",
+    "frozen_protocol/prompts/ballot.txt": "c80c0091f4e8d27d08acf6a1cf1ae4f84267230a1639ed06dc58f292cf9bbd0d",
+    "frozen_protocol/prompts/communication.schema.json": "8c0c6744aa14c7e12578183782120949e3d65242d15ba6edf8b76a223d51b63f",
+    "frozen_protocol/prompts/message.txt": "f70dff7dacec165d26354c60cbe331916f127770ae2b9549fe813009d3324d66",
+    "frozen_protocol/prompts/system.txt": "6dc1d0daaf2625e0f326f20ac854c190bc748e71ed8401b330dc79e90e86cf70",
+    "full-pilot-config.toml": "74942946c2b9aadf6fab5723aeb00be364366af9e5ffdfd2eb47df1466e01c9b",
+    "gpu-samples.jsonl": "743fa60f1807e8a8289eb72b0666bccb9dbd6e035f61af93a55b10a0552f28d8",
+    "launch.json": "5eca9d68e1a8a9bb89f6d6d0475b5654d174ccf65038847c9cf069036ab95271",
+    "listener-owner-attestation.json": "7a8677540203b3e369aa2895880cd9ce5dabbe5c57f15c1221b3cc56e530da85",
+    "logs/llama-server.stderr.log": "2a1cba926815bd9d7d810c5147121a3fbf9a9d4430a1c33c82364f531313bc35",
+    "logs/llama-server.stdout.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "preflight-continuation-consumption.json": "504f6d37301005549c7c10409ac9fc00b8963e78e2620378d2e7ae441f8e44df",
+    "preflight-resume.json": "f534cf095ae928366299c6d15bbffc7575d7067ec6aa39e233f071b97e082031",
+    "preflight/events.jsonl": "5acddfccae6ed52a628c7ee05b83759753a093b326a0871e2d9443f8127fcd9d",
+    "preflight/inputs.json": "2e5d21e6a813ebf91b5d63bd93a01284cd67c128c2a14bab47f2e414f021b346",
+    "preflight/requests.jsonl": "49713fd4bda82bc75bb9ffab0e99f8992975b888d5e83f40b1222abad00224d5",
+    "preflight/result.json": "da6fd1f1cc54ad263ac963415d7911d89f9e025fba2a894aa635c0a0133baed0",
+    "preflight/resumed-source/approval-consumption.json": "399aa6d5149f983bed7f45d524002b8ca1b1f36ef049df2aa272cdb167ed4578",
+    "preflight/resumed-source/approval-record.json": "20522d4089e82079c45beb97c7eb7b005df03b14aadeb31352ebe7c21bc19753",
+    "preflight/resumed-source/environment.json": "168d2e58644fa82d0dc0ba0750b604ee7a92e5fa31ee9a01d97b0f214e9570e4",
+    "preflight/resumed-source/frozen_protocol/configs/m1-pilot-draft.toml": "856691bee335b3890b171ce4d5e74fe327570b22e67140e7dafee329815d5e82",
+    "preflight/resumed-source/frozen_protocol/configs/m1-r-offline-v2.toml": "e2c780de0e8c5ecf4b43f47acf5565a0ee1808e103e420365d27d4ce32647fd3",
+    "preflight/resumed-source/frozen_protocol/prompts/ballot.schema.json": "0bb4b7e14beda8b88fd955148f4bd485f922ab2fb329c9ad1e7ce38b9339c406",
+    "preflight/resumed-source/frozen_protocol/prompts/ballot.txt": "c80c0091f4e8d27d08acf6a1cf1ae4f84267230a1639ed06dc58f292cf9bbd0d",
+    "preflight/resumed-source/frozen_protocol/prompts/communication.schema.json": "8c0c6744aa14c7e12578183782120949e3d65242d15ba6edf8b76a223d51b63f",
+    "preflight/resumed-source/frozen_protocol/prompts/message.txt": "f70dff7dacec165d26354c60cbe331916f127770ae2b9549fe813009d3324d66",
+    "preflight/resumed-source/frozen_protocol/prompts/system.txt": "6dc1d0daaf2625e0f326f20ac854c190bc748e71ed8401b330dc79e90e86cf70",
+    "preflight/resumed-source/full-pilot-config.toml": "74942946c2b9aadf6fab5723aeb00be364366af9e5ffdfd2eb47df1466e01c9b",
+    "preflight/resumed-source/gpu-samples.jsonl": "c1860a14f0a582de7631cd25d5f2233f63d351d32854539f0cf03bc7bb5b13f7",
+    "preflight/resumed-source/launch.json": "cb49af2652176a6036166babee499fb3c030dfd9fefd91035eaea710d812d1c0",
+    "preflight/resumed-source/listener-owner-attestation.json": "16f74a7e23e8275fd008063858bf943588144927406a47e54a815308f8f4214e",
+    "preflight/resumed-source/logs/llama-server.stderr.log": "e12cbd81ac1fd0def203b20a3061e39923f75b595836749309cbfa4eeefa2846",
+    "preflight/resumed-source/logs/llama-server.stdout.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "preflight/resumed-source/preflight/events.jsonl": "0d4807aa841146426589dbe1d63328c2c26e14b4d2cb50a18c79996483b6127f",
+    "preflight/resumed-source/preflight/inputs.json": "2e5d21e6a813ebf91b5d63bd93a01284cd67c128c2a14bab47f2e414f021b346",
+    "preflight/resumed-source/preflight/requests.jsonl": "e009cfd39533b00e33b7bc4f7b569471be47d68e895fb15d44703af33d92fdf7",
+    "preflight/resumed-source/preflight/result.json": "8d3c0e5e356908aef61aaf8035f5243346d2e2cad4f16b5f3a239126f8af5132",
+    "preflight/resumed-source/runtime-config.toml": "e2c780de0e8c5ecf4b43f47acf5565a0ee1808e103e420365d27d4ce32647fd3",
+    "preflight/resumed-source/server-health.json": "1c947fb855b74148b5deca554880537a09e38db2a8cafbf57af61c1938071a70",
+    "preflight/resumed-source/shutdown.json": "556584a55cfe26004504633579877db0b5761752d2806e1b852dcba5a708f2e0",
+    "preflight/resumed-source/terminal-status.json": "0d6013b5b06023dad02cad21bc400e603859246c18d233eb5602951b8fd32445",
+    "preflight/resumed-source/verification.json": "72b44520cd7c13c2cc6d98aa58f9f68e6ddee4bcec507278f045106c2565d833",
+    "runtime-config.toml": "e2c780de0e8c5ecf4b43f47acf5565a0ee1808e103e420365d27d4ce32647fd3",
+    "server-health.json": "d77a98142050f5213581b87aac8c945459511368fafd77f950951b2da5164314",
+    "shutdown.json": "8e283ea1732cd884bfa67b68ea2e4dd4fcbac514510c95c035f4e98867246b68",
+    "terminal-status.json": "f7d9692a537f094117ab1e498a8749ff305f328dcf9b9b69df997f815d4499cd"
+  }
+}

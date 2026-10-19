@@ -12,6 +12,7 @@ from scripts.run_m1_p0_local_pilot import (
     _build_probes, _runtime_source_files, _validate_authorized_config,
     _validate_preflight_continuation, _verify_preflight_continuation,
 )
+from scripts.verify_m1_p0_preflight_blocker import verify as verify_preflight_blocker
 
 
 def _pilot_config(tmp_path: Path) -> Path:
@@ -110,3 +111,13 @@ def test_continuation_verifier_checks_the_copied_parent_and_reused_responses(tmp
     (copied / "preflight" / "requests.jsonl").write_text("tampered\n", encoding="utf-8")
     with pytest.raises(ValueError, match="artifact hash mismatch"):
         _verify_preflight_continuation(out_dir, rows)
+
+
+def test_preflight_blocker_verifier_reports_integrity_pass_and_research_no_go():
+    run_dir = ROOT / "runs/m1_p0_local/25ep-pilot-20261019/run-resume-01"
+    if not run_dir.is_dir():
+        pytest.skip("requires the retained zero-episode live preflight blocker")
+    result = verify_preflight_blocker(run_dir)
+    assert result["status"] == "PASS_PACKAGE_INTEGRITY__NO_GO_PREFLIGHT"
+    assert result["episodes"] == result["pilot_logical_requests"] == 0
+    assert result["strict_parser_failure_preserved"] is True

@@ -1,0 +1,7 @@
+{"at_utc": "2026-10-19T05:39:38.338868+00:00", "event": "preflight_setup_response_reused", "monotonic_ns": 116990468000000, "request_id": "preflight-props", "source_status": "previously_returned_and_hash_verified"}
+{"at_utc": "2026-10-19T05:39:38.347374+00:00", "build_info": "b10068-571d0d540", "context_length": 4096, "event": "server_properties_validated", "model_path": "E:\\Health-Copilot-Models\\models\\qwen3-8b\\Qwen3-8B-Q4_K_M.gguf", "monotonic_ns": 116990484000000}
+{"at_utc": "2026-10-19T05:39:38.366390+00:00", "event": "preflight_setup_response_reused", "monotonic_ns": 116990500000000, "request_id": "preflight-template", "source_status": "previously_returned_and_hash_verified"}
+{"at_utc": "2026-10-19T05:39:38.382404+00:00", "event": "preflight_setup_response_reused", "monotonic_ns": 116990515000000, "request_id": "preflight-tokenize", "source_status": "previously_returned_and_hash_verified"}
+{"at_utc": "2026-10-19T05:39:38.386413+00:00", "event": "tokenizer_parity_validated", "monotonic_ns": 116990531000000, "token_count": 447}
+{"at_utc": "2026-10-19T05:39:38.412966+00:00", "attempt": 1, "event": "completion_attempt_started", "monotonic_ns": 116990546000000, "request_id": "preflight-completion-1"}
+{"at_utc": "2026-10-19T05:39:39.448607+00:00", "attempt": 1, "event": "completion_attempt_finished", "latency_seconds": 1.0349392000061926, "monotonic_ns": 116991578000000, "request_id": "preflight-completion-1"}

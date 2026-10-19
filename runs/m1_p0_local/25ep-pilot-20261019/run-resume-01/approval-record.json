@@ -1,0 +1,8 @@
+{
+  "authority": "user's latest direct request to run the 25 Episode behavior Pilot",
+  "endpoint": "http://127.0.0.1:8081/v1",
+  "external_paid_api_spend_usd": 0.0,
+  "full_25_episode_pilot_approval_id": "USER-AUTHORIZED-M1-P0-25-EPISODE-PILOT-2026-10-19",
+  "m2_authorized": false,
+  "preflight_approval_id": "USER-APPROVED-8081-PREFLIGHT-2026-10-19"
+}

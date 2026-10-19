@@ -1,0 +1,10 @@
+{
+  "http_status": 200,
+  "method": "GET",
+  "pid": 47320,
+  "pid_image": "C:\\Users\\bubblevan\\AppData\\Local\\Microsoft\\WinGet\\Packages\\ggml.llamacpp_Microsoft.Winget.Source_8wekyb3d8bbwe\\llama-server.exe",
+  "process_owner_attestation": "recorded separately",
+  "response_body": "{\"status\":\"ok\"}",
+  "status": "PASS",
+  "url": "http://127.0.0.1:8081/health"
+}
