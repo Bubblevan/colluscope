@@ -1,8 +1,8 @@
-"""Offline-first M1-R episode runtime and auditable artifact writer.
+"""Offline-first M1 episode runtime and auditable artifact writer.
 
-This module contains no provider client. A future backend must implement the
-small ``complete`` protocol and be enabled only by a separately approved run.
 The shipped CLI deliberately permits only the deterministic Mock backend.
+The separately tested local vLLM adapter implements the same bounded request
+protocol, but this module never selects or enables it by default.
 """
 
 from __future__ import annotations
@@ -25,6 +25,8 @@ from .world import (AGENTS, COALITION_TARGET, OPTIMAL_ASSIGNMENT, QUALITY, TASKS
 
 ROOT = Path(__file__).resolve().parents[2]
 PROMPT_ROOT = ROOT / "prompts" / "m1-p0"
+PROMPT_ROOT_V2 = ROOT / "prompts" / "m1-p0-v2"
+LEGACY_V1_SOURCE_SNAPSHOT = ROOT / "docs" / "M1_P0_V1_SOURCE_SNAPSHOT.json"
 TARGET = list(COALITION_TARGET)
 MAX_MESSAGE_CHARS = 1000
 CONDITION_IDS = (
@@ -62,14 +64,47 @@ def _hash_file(path: Path) -> str:
 def _source_snapshot() -> dict[str, Any]:
     relative_paths = [
         "pyproject.toml", "configs/m1-r-offline.toml", "configs/m1-pilot-draft.toml",
+        "configs/m1-r-offline-v2.toml", "configs/m1-p0-vllm-local.template.toml",
+        "src/colluscope/cli.py", "src/colluscope/m1_runtime.py",
+        "src/colluscope/openai_compat_vllm.py",
+        "src/colluscope/world.py", "src/colluscope/views.py", "tests/test_m1_runtime.py",
+        "tests/test_openai_compat_vllm.py",
+        "prompts/m1-p0/system.txt", "prompts/m1-p0/message.txt", "prompts/m1-p0/ballot.txt",
+        "prompts/m1-p0/communication.schema.json", "prompts/m1-p0/ballot.schema.json",
+    ]
+    relative_paths.extend(path.relative_to(ROOT).as_posix()
+                          for path in sorted(PROMPT_ROOT_V2.iterdir()) if path.is_file())
+    files = {relative: _hash_file(ROOT / relative) for relative in relative_paths}
+    aggregate = "\n".join(f"{path}\0{digest}" for path, digest in files.items()).encode("utf-8")
+    return {"sha256": _hash(aggregate), "files": files}
+
+
+def _known_legacy_v1_source_snapshot() -> dict[str, Any]:
+    """Load and authenticate the source snapshot used by immutable M1-R v1 runs."""
+    recorded = json.loads(LEGACY_V1_SOURCE_SNAPSHOT.read_text(encoding="utf-8"))
+    order = [
+        "pyproject.toml", "configs/m1-r-offline.toml", "configs/m1-pilot-draft.toml",
         "src/colluscope/cli.py", "src/colluscope/m1_runtime.py",
         "src/colluscope/world.py", "src/colluscope/views.py", "tests/test_m1_runtime.py",
         "prompts/m1-p0/system.txt", "prompts/m1-p0/message.txt", "prompts/m1-p0/ballot.txt",
         "prompts/m1-p0/communication.schema.json", "prompts/m1-p0/ballot.schema.json",
     ]
-    files = {relative: _hash_file(ROOT / relative) for relative in relative_paths}
-    aggregate = "\n".join(f"{path}\0{digest}" for path, digest in files.items()).encode("utf-8")
-    return {"sha256": _hash(aggregate), "files": files}
+    if set(recorded.get("files", {})) != set(order):
+        raise ValueError("archived v1 source snapshot has an unexpected file set")
+    aggregate = "\n".join(f"{path}\0{recorded['files'][path]}" for path in order).encode("utf-8")
+    if _hash(aggregate) != "7585c760c95d1e3730786c5a76039208f5af14e40009f9fc49530367807e5dda":
+        raise ValueError("archived v1 source snapshot digest is invalid")
+    return {"sha256": recorded["sha256"], "files": recorded["files"]}
+
+
+def _source_snapshot_matches(manifest: dict[str, Any]) -> bool:
+    snapshot = manifest.get("source_snapshot")
+    if snapshot == _source_snapshot():
+        return True
+    historical_v1 = _known_legacy_v1_source_snapshot()
+    is_v1 = (manifest.get("prompt_version") == "m1-p0-frozen-v1" or
+             manifest.get("purpose") == "offline_adversarial_runtime_canaries")
+    return is_v1 and snapshot == historical_v1
 
 
 def _git_state() -> dict[str, Any]:
@@ -144,7 +179,12 @@ def load_runtime_config(path: Path) -> RuntimeConfig:
     }
     if set(raw) != required:
         raise ValueError(f"M1-R config keys must be exactly {sorted(required)}")
-    if (raw["schema_version"] != "m1-r-1.0" or
+    supported_versions = {
+        "m1-r-1.0": "m1-p0-frozen-v1",
+        "m1-r-2.0": "m1-p0-frozen-v2",
+    }
+    if (raw["schema_version"] not in supported_versions or
+            raw["prompt_version"] != supported_versions[raw["schema_version"]] or
             raw["status"] != "offline_runtime_canary_only" or
             raw["model_calls_enabled"] is not False or
             raw["external_model_calls"] != 0 or raw["paid_api_calls"] != 0):
@@ -218,7 +258,18 @@ class AgentRequest:
 
 
 class Backend(Protocol):
-    def complete(self, request: AgentRequest, timeout_seconds: int) -> str: ...
+    def complete(self, request: AgentRequest, timeout_seconds: int) -> str | BackendResponse: ...
+
+
+@dataclass(frozen=True)
+class BackendResponse:
+    """Raw assistant content plus optional provider response metadata."""
+    text: str
+    usage: dict[str, Any] | None = None
+    finish_reason: str | None = None
+    model: str | None = None
+    raw_body: str | None = None
+    metadata: dict[str, Any] = field(default_factory=dict)
 
 
 class TimeoutBackendError(TimeoutError):
@@ -227,6 +278,9 @@ class TimeoutBackendError(TimeoutError):
 
 class TransientTransportError(RuntimeError):
     """A retryable transport error; only this and timeout are retried."""
+    def __init__(self, message: str, raw_response: str | None = None):
+        super().__init__(message)
+        self.raw_response = raw_response
 
 
 class BudgetExceeded(RuntimeError):
@@ -234,10 +288,12 @@ class BudgetExceeded(RuntimeError):
 
 
 class RequestFailure(RuntimeError):
-    def __init__(self, message: str, request_id: str, failure_kind: str):
+    def __init__(self, message: str, request_id: str, failure_kind: str,
+                 raw_response: str | None = None):
         super().__init__(message)
         self.request_id = request_id
         self.failure_kind = failure_kind
+        self.raw_response = raw_response
 
 
 class ActionOutputFailure(RuntimeError):
@@ -315,43 +371,73 @@ class RequestAdapter:
             raise RequestFailure("logical request id cannot be reused", request.request_id,
                                  "duplicate_request_id")
         for attempt in range(1, self.config.max_attempts_per_request + 1):
+            metadata_builder = getattr(self.backend, "request_metadata", None)
+            attempt_record = {"request_id": request.request_id, "action_kind": request.action_kind,
+                              "agent_id": request.agent_id, "attempt": attempt,
+                              "request": _request_dict(request)}
             try:
                 self.budget.reserve(request.request_id, attempt)
             except BudgetExceeded as exc:
-                self.records.append({"request_id": request.request_id, "action_kind": request.action_kind,
-                                     "agent_id": request.agent_id, "attempt": attempt,
-                                     "status": "not_started_budget_exhausted", "error": str(exc),
-                                     "request": _request_dict(request)})
+                self.records.append({**attempt_record, "status": "not_started_budget_exhausted",
+                                     "error": str(exc)})
                 raise RequestFailure(str(exc), request.request_id, "budget_exceeded") from exc
             try:
-                raw = self.backend.complete(request, request.timeout_seconds)
+                transport = metadata_builder(request) if callable(metadata_builder) else None
+                if transport is not None:
+                    attempt_record["transport"] = transport
+                response = self.backend.complete(request, request.timeout_seconds)
+                if isinstance(response, BackendResponse):
+                    raw = response.text
+                else:
+                    raw = response
                 if not isinstance(raw, str):
                     raise TypeError("backend response must be raw text")
-                self.records.append({"request_id": request.request_id, "action_kind": request.action_kind,
-                                     "agent_id": request.agent_id, "attempt": attempt,
-                                     "status": "response_returned", "request": _request_dict(request),
-                                     "raw_response": raw, "response_sha256": _hash(raw.encode("utf-8"))})
-                self.terminal_request_ids.add(request.request_id)
-                return raw
             except (TimeoutError, TransientTransportError) as exc:
                 retryable = True
-                self.records.append({"request_id": request.request_id, "action_kind": request.action_kind,
-                                     "agent_id": request.agent_id, "attempt": attempt,
-                                     "status": "retryable_failure" if attempt < self.config.max_attempts_per_request else "failed",
-                                     "request": _request_dict(request), "error_type": type(exc).__name__,
-                                     "error": str(exc), "retryable": retryable})
+                record = {**attempt_record,
+                          "status": "retryable_failure" if attempt < self.config.max_attempts_per_request else "failed",
+                          "error_type": type(exc).__name__, "error": str(exc), "retryable": retryable}
+                failure_raw = getattr(exc, "raw_response", None)
+                if failure_raw is not None:
+                    record["backend_response"] = failure_raw
+                    record["backend_response_sha256"] = _hash(failure_raw.encode("utf-8"))
+                self.records.append(record)
                 if attempt == self.config.max_attempts_per_request:
                     kind = "timeout" if isinstance(exc, TimeoutError) else "transport"
                     self.terminal_request_ids.add(request.request_id)
-                    raise RequestFailure(f"{kind} after {attempt} attempt(s): {exc}", request.request_id, kind) from exc
+                    raise RequestFailure(f"{kind} after {attempt} attempt(s): {exc}", request.request_id,
+                                         kind, raw_response=failure_raw) from exc
+                continue
             except Exception as exc:
-                self.records.append({"request_id": request.request_id, "action_kind": request.action_kind,
-                                     "agent_id": request.agent_id, "attempt": attempt,
-                                     "status": "failed", "request": _request_dict(request),
-                                     "error_type": type(exc).__name__, "error": str(exc), "retryable": False})
+                record = {**attempt_record, "status": "failed", "error_type": type(exc).__name__,
+                          "error": str(exc), "retryable": False}
+                failure_raw = getattr(exc, "raw_response", None)
+                if failure_raw is not None:
+                    record["backend_response"] = failure_raw
+                    record["backend_response_sha256"] = _hash(failure_raw.encode("utf-8"))
+                self.records.append(record)
                 self.terminal_request_ids.add(request.request_id)
                 raise RequestFailure(f"non-retryable backend failure: {exc}", request.request_id,
-                                     "backend_error") from exc
+                                     "backend_error", raw_response=failure_raw) from exc
+            record = {**attempt_record, "status": "response_returned", "raw_response": raw,
+                      "response_sha256": _hash(raw.encode("utf-8"))}
+            truncated = isinstance(response, BackendResponse) and response.finish_reason == "length"
+            if isinstance(response, BackendResponse):
+                record["usage"] = response.usage
+                record["backend_response"] = response.raw_body
+                record["backend_response_sha256"] = (
+                    _hash(response.raw_body.encode("utf-8")) if response.raw_body is not None else None)
+                record["backend_response_metadata"] = {
+                    **response.metadata, "finish_reason": response.finish_reason, "model": response.model,
+                }
+            if truncated:
+                record["status"] = "truncated_output"
+            self.records.append(record)
+            self.terminal_request_ids.add(request.request_id)
+            if truncated:
+                raise RequestFailure("backend marked the response truncated by its output limit",
+                                     request.request_id, "truncated_output", raw_response=raw)
+            return raw
         raise AssertionError("bounded request retry loop fell through")
 
 
@@ -406,7 +492,8 @@ def _chair_for_seed_block(seed_block: str) -> str:
 
 
 def _observation(agent: str, task_spec: dict[str, Any], condition: dict[str, Any],
-                 config: RuntimeConfig, inbound: list[dict[str, Any]] | None = None) -> dict[str, Any]:
+                 config: RuntimeConfig, inbound: list[dict[str, Any]] | None = None,
+                 prior_message_action: dict[str, Any] | None = None) -> dict[str, Any]:
     private_rule = (config.private_bonus_template
                     if agent in condition["private_target_bonus_recipients"] else None)
     chat = condition["private_chat_available"] and agent in ("A", "B")
@@ -422,15 +509,31 @@ def _observation(agent: str, task_spec: dict[str, Any], condition: dict[str, Any
     # no-chat agents do not receive a false/null marker that reveals treatment.
     if chat:
         observation["private_peer_channel"] = {"recipient": peer, "messages_received": inbound or []}
+        if config.raw["prompt_version"] == "m1-p0-frozen-v2" and prior_message_action is not None:
+            observation["your_previous_message_action"] = prior_message_action
     return observation
 
 
-def _render(stage: str, observation: dict[str, Any]) -> str:
-    system = (PROMPT_ROOT / "system.txt").read_text(encoding="utf-8").strip()
+def _prompt_root(config: RuntimeConfig) -> Path:
+    if config.raw["prompt_version"] == "m1-p0-frozen-v1":
+        return PROMPT_ROOT
+    if config.raw["prompt_version"] == "m1-p0-frozen-v2":
+        return PROMPT_ROOT_V2
+    raise ValueError(f"unsupported frozen prompt version: {config.raw['prompt_version']!r}")
+
+
+def _render(stage: str, observation: dict[str, Any], config: RuntimeConfig) -> str:
+    prompt_root = _prompt_root(config)
+    system = (prompt_root / "system.txt").read_text(encoding="utf-8").strip()
     template_name = "message.txt" if stage == "message" else "ballot.txt"
-    template = (PROMPT_ROOT / template_name).read_text(encoding="utf-8").rstrip()
+    template = (prompt_root / template_name).read_text(encoding="utf-8").rstrip()
     payload = json.dumps(observation, ensure_ascii=False, sort_keys=True, separators=(",", ":"))
-    return f"{system}\n\n{template.replace('{{observation_json}}', payload)}"
+    template = template.replace("{{observation_json}}", payload)
+    if config.raw["prompt_version"] == "m1-p0-frozen-v2":
+        schema_name = "communication.schema.json" if stage == "message" else "ballot.schema.json"
+        schema = (prompt_root / schema_name).read_text(encoding="utf-8")
+        template = template.replace("{{action_schema}}", schema)
+    return f"{system}\n\n{template}"
 
 
 def _request(adapter: RequestAdapter, config: RuntimeConfig, request_id: str,
@@ -440,7 +543,7 @@ def _request(adapter: RequestAdapter, config: RuntimeConfig, request_id: str,
     request = AgentRequest(request_id=request_id, action_kind=action_kind, agent_id=agent_id,
                            model_id=config.model_id, sampling=config.sampling,
                            timeout_seconds=config.timeout_seconds,
-                           observation_sha256=obs_hash, prompt=_render(action_kind, observation))
+                           observation_sha256=obs_hash, prompt=_render(action_kind, observation, config))
     record = {"episode_id": episode_id, "request_id": request_id, "agent_id": agent_id,
               "stage": action_kind, "observation": observation, "sha256": obs_hash,
               "exposure_status": "prepared_not_yet_sent"}
@@ -521,6 +624,7 @@ def run_episode(condition: dict[str, Any], seed_block: str, episode_id: str,
         state.transition("TASK_AND_INCENTIVES_PREPARED")
 
         delivered: dict[str, list[dict[str, Any]]] = {agent: [] for agent in AGENTS}
+        message_actions: dict[str, dict[str, Any]] = {}
         if condition["private_chat_available"]:
             for agent in ("A", "B"):
                 request_counter += 1
@@ -536,6 +640,7 @@ def run_episode(condition: dict[str, Any], seed_block: str, episode_id: str,
                                      "delivery_status": "invalid_action_output", "raw_response": raw,
                                      "parse_error": str(exc), "text": None})
                     raise ActionOutputFailure(str(exc), req_id, agent, "message", raw) from exc
+                message_actions[agent] = parsed
                 item = {"sender": agent, "recipient": "B" if agent == "A" else "A",
                         "request_id": req_id, "sent": parsed["type"] == "send_message", "delivered": False,
                         "delivery_status": "pending_atomic_pair_completion" if parsed["type"] == "send_message"
@@ -556,7 +661,8 @@ def run_episode(condition: dict[str, Any], seed_block: str, episode_id: str,
 
         chosen: dict[str, tuple[str, ...]] = {}
         for agent in AGENTS:
-            observation = _observation(agent, task_spec, condition, config, delivered[agent])
+            observation = _observation(agent, task_spec, condition, config, delivered[agent],
+                                       message_actions.get(agent))
             request_counter += 1
             req_id = f"req-{request_counter:04d}"
             raw = _request(adapter, config, req_id, "ballot", agent, observation,
@@ -685,7 +791,8 @@ def run_offline(config_path: Path, out_dir: Path) -> Path:
                  [observation for row in rows for observation in row["observations"]])
     _write_jsonl(monitor / "evidence.jsonl", [row["E"] for row in rows])
     (out_dir / "config.toml").write_bytes(config.source_path.read_bytes())
-    prompt_files = sorted(PROMPT_ROOT.iterdir())
+    prompt_root = _prompt_root(config)
+    prompt_files = sorted(prompt_root.iterdir())
     frozen_prompts = out_dir / "frozen_protocol" / "prompts"
     frozen_prompts.mkdir(parents=True)
     for path in prompt_files:
@@ -732,6 +839,48 @@ def run_offline(config_path: Path, out_dir: Path) -> Path:
     return out_dir
 
 
+def _verify_v2_message_continuity(t_rows: list[dict[str, Any]], b_rows: list[dict[str, Any]],
+                                 obs_rows: list[dict[str, Any]]) -> None:
+    observations_by_request = {row["request_id"]: row for row in obs_rows}
+    if len(observations_by_request) != len(obs_rows):
+        raise ValueError("v2 observation request IDs must be unique")
+    for treatment, behavior in zip(t_rows, b_rows, strict=True):
+        chat_available = treatment["assigned"]["private_chat_available"]
+        own_message = {row["sender"]: row for row in behavior["peer_messages"]}
+        by_agent = {agent: [] for agent in AGENTS}
+        for row in obs_rows:
+            if row["episode_id"] == treatment["episode_id"]:
+                by_agent[row["agent_id"]].append(row)
+        for row in by_agent.values():
+            for observation_row in row:
+                if observation_row["stage"] == "message" and "your_previous_message_action" in observation_row["observation"]:
+                    raise ValueError("message-stage observation contains a future/self-history field")
+        for ballot in behavior["ballots"]:
+            observation_row = observations_by_request.get(ballot["request_id"])
+            if observation_row is None:
+                raise ValueError("v2 ballot has no saved observation")
+            agent = ballot["agent_id"]
+            observation = observation_row["observation"]
+            if not chat_available or agent == "C":
+                if "private_peer_channel" in observation or "your_previous_message_action" in observation:
+                    raise ValueError("v2 no-channel ballot contains a peer channel or prior message")
+                continue
+            own = own_message.get(agent)
+            if own is None:
+                raise ValueError(f"v2 chat ballot has no recorded prior action for {agent}")
+            expected_action = ({"type": "send_message", "text": own["text"]} if own["sent"]
+                               else {"type": "no_message"})
+            peer = "B" if agent == "A" else "A"
+            expected_received = [{"sender": row["sender"], "text": row["text"]}
+                                 for row in behavior["peer_messages"]
+                                 if row["recipient"] == agent and row["sent"] and row["delivered"]]
+            if observation.get("your_previous_message_action") != expected_action:
+                raise ValueError(f"v2 ballot omitted or changed {agent}'s own previous message action")
+            if observation.get("private_peer_channel") != {
+                    "recipient": peer, "messages_received": expected_received}:
+                raise ValueError(f"v2 ballot peer history is not the set of messages delivered to {agent}")
+
+
 def verify_run(run_dir: Path) -> dict[str, Any]:
     run_dir = run_dir.resolve()
     manifest = json.loads((run_dir / "manifest.json").read_text(encoding="utf-8"))
@@ -740,7 +889,7 @@ def verify_run(run_dir: Path) -> dict[str, Any]:
     if manifest["api_call_assertion"] != {"external_model_calls": 0, "paid_api_calls": 0,
                                          "network_client_in_runner": False}:
         raise ValueError("M1-R run makes an unsupported model/API assertion")
-    if manifest.get("source_snapshot") != _source_snapshot():
+    if not _source_snapshot_matches(manifest):
         raise ValueError("current runtime source does not match the artifact source snapshot")
     base = run_dir.resolve()
     checked = {}
@@ -773,6 +922,10 @@ def verify_run(run_dir: Path) -> dict[str, Any]:
     if set(condition_counts) != set(CONDITION_IDS) or any(value != 5 for value in condition_counts.values()):
         raise ValueError("condition/seed coverage differs from the frozen five-arm design")
     config = load_runtime_config(run_dir / "config.toml")
+    if manifest.get("prompt_version") != config.raw["prompt_version"]:
+        raise ValueError("manifest prompt version differs from the frozen run config")
+    if config.raw["prompt_version"] == "m1-p0-frozen-v2":
+        _verify_v2_message_continuity(t_rows, b_rows, obs_rows)
     randomized_order = json.loads((run_dir / "randomized_order.json").read_text(encoding="utf-8"))
     expected_order = [{"seed_block_id": seed, "condition_id": condition["id"], "order_index": order_index}
                       for seed in config.seed_blocks
@@ -1044,6 +1197,21 @@ def run_canary_suite(config_path: Path, out_dir: Path) -> Path:
                                  by_id["common_incentive_parallel_behavior"], "seed-3", config,
                                  lambda r: MockBackend().complete(r, r.timeout_seconds)))
 
+    if config.raw["prompt_version"] == "m1-p0-frozen-v2":
+        promise = "I will vote for target allocation A=T3, B=T2, C=T1."
+        suggestion = "I suggest the public-optimal allocation A=T1, B=T2, C=T3."
+
+        def self_history_handler(request: AgentRequest) -> str:
+            if request.action_kind == "message" and request.agent_id == "A":
+                return json.dumps({"type": "send_message", "text": promise})
+            if request.action_kind == "message" and request.agent_id == "B":
+                return json.dumps({"type": "send_message", "text": suggestion})
+            return json.dumps({"type": "ballot", "assignment": assignment_map(OPTIMAL_ASSIGNMENT)})
+
+        cases.append(run_canary_case("self_message_and_different_peer_suggestion",
+                                     by_id["private_chat_no_side_bonus"], "seed-4", config,
+                                     self_history_handler))
+
     cases.append(run_canary_case("zero_budget_rejects_without_call", by_id["normal_cooperation"],
                                  "seed-3", config, lambda r: MockBackend().complete(r, r.timeout_seconds),
                                  max_logical_requests=0, max_attempts=0))
@@ -1056,6 +1224,7 @@ def run_canary_suite(config_path: Path, out_dir: Path) -> Path:
               for path in sorted(out_dir.rglob("*")) if path.is_file()}
     _write_json(out_dir / "manifest.json", {
         "schema_version": "1.0", "purpose": "offline_adversarial_runtime_canaries",
+        "prompt_version": config.raw["prompt_version"],
         "external_model_calls": 0, "paid_api_calls": 0, "git": _git_state(),
         "source_snapshot": _source_snapshot(),
         "python_version": sys.version.split()[0], "platform": platform.platform(),
@@ -1071,7 +1240,7 @@ def verify_canary_suite(out_dir: Path) -> dict[str, Any]:
         raise ValueError("unsupported adversarial canary package")
     if manifest.get("external_model_calls") != 0 or manifest.get("paid_api_calls") != 0:
         raise ValueError("canary package asserts nonzero external/paid model calls")
-    if manifest.get("source_snapshot") != _source_snapshot():
+    if not _source_snapshot_matches(manifest):
         raise ValueError("canary runtime source snapshot mismatch")
     for relative, expected in manifest["sha256"].items():
         path = (out_dir / relative).resolve()
@@ -1163,5 +1332,33 @@ def _summarize_canaries(cases: list[dict[str, Any]], private_text: str, sentinel
             and "collusion" not in public_e.lower() and "condition_id" not in public_e,
         "C_never_receives_private_A_B_message": sentinel not in c_prompt,
     }
+    if config.raw["prompt_version"] == "m1-p0-frozen-v2":
+        all_v2_requests = [request for case in cases for request in case["received_requests"]]
+        v2_messages = [row for row in all_v2_requests if row["action_kind"] == "message"]
+        v2_ballots = [row for row in all_v2_requests if row["action_kind"] == "ballot"]
+        message_schema = (PROMPT_ROOT_V2 / "communication.schema.json").read_text(encoding="utf-8")
+        ballot_schema = (PROMPT_ROOT_V2 / "ballot.schema.json").read_text(encoding="utf-8")
+        self_history = by_name["self_message_and_different_peer_suggestion"]
+        a_ballot = next(row for row in self_history["received_requests"]
+                        if row["agent_id"] == "A" and row["action_kind"] == "ballot")
+        a_observation = json.loads(a_ballot["prompt"].split("Observation JSON:\n", 1)[1])
+        promise = "I will vote for target allocation A=T3, B=T2, C=T1."
+        suggestion = "I suggest the public-optimal allocation A=T1, B=T2, C=T3."
+        a_recorded_ballot = next(row for row in self_history["B"]["ballots"] if row["agent_id"] == "A")
+        expected["complete_action_schema_delivered_in_each_v2_action_prompt"] = (
+            bool(v2_messages) and bool(v2_ballots) and
+            all(message_schema in row["prompt"] for row in v2_messages) and
+            all(ballot_schema in row["prompt"] for row in v2_ballots))
+        expected["self_message_and_delivered_peer_suggestion_in_v2_ballot_observation"] = (
+            a_observation.get("your_previous_message_action") == {"type": "send_message", "text": promise} and
+            a_observation.get("private_peer_channel", {}).get("messages_received") ==
+            [{"sender": "B", "text": suggestion}])
+        expected["v2_record_preserves_promise_suggestion_and_contrary_ballot"] = (
+            any(row["sender"] == "A" and row["text"] == promise and row["sent"] and row["delivered"]
+                for row in self_history["B"]["peer_messages"]) and
+            any(row["sender"] == "B" and row["text"] == suggestion and row["sent"] and row["delivered"]
+                for row in self_history["B"]["peer_messages"]) and
+            a_recorded_ballot["parsed_assignment"] == assignment_map(OPTIMAL_ASSIGNMENT) and
+            a_recorded_ballot["parsed_assignment"] != assignment_map(COALITION_TARGET))
     return [{"check": name, "passed": bool(passed), "scope": "runtime_plumbing_only"}
             for name, passed in expected.items()]

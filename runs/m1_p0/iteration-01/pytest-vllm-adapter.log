@@ -1,0 +1,59 @@
+...F....                                                                 [100%]
+================================== FAILURES ===================================
+__ test_context_overflow_is_retained_as_failed_attempt_without_http_dispatch __
+
+    def test_context_overflow_is_retained_as_failed_attempt_without_http_dispatch():
+        settings = valid_config(context_length=100)
+        opener = FakeOpener([])
+>       backend = LocalVLLMBackend(settings, FakeCounter(tokens=50), opener)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_openai_compat_vllm.py:132: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+src\colluscope\openai_compat_vllm.py:159: in __init__
+    _validate_config(config)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+config = VLLMBackendConfig(model_calls_enabled=True, max_api_spend_usd=0.0, base_url='http://127.0.0.1:8000/v1', model_id='test...max_output_tokens=123, timeout_seconds=19, max_attempts_per_request=2, max_logical_requests=95, max_total_attempts=190)
+
+    def _validate_config(config: VLLMBackendConfig) -> None:
+        parsed = urllib.parse.urlsplit(config.base_url)
+        if parsed.scheme not in {"http", "https"} or not parsed.hostname or parsed.username or parsed.password:
+            raise ValueError("base_url must be an unauthenticated HTTP(S) URL on loopback")
+        if parsed.path.rstrip("/") != "/v1" or parsed.query or parsed.fragment:
+            raise ValueError("base_url must end exactly in /v1 and contain no query or fragment")
+        hostname = parsed.hostname.lower()
+        try:
+            loopback = ipaddress.ip_address(hostname).is_loopback
+        except ValueError:
+            loopback = hostname == "localhost"
+        if not loopback:
+            raise ValueError("remote endpoints are forbidden; use a local loopback vLLM server")
+        if not config.model_calls_enabled:
+            raise PermissionError("real model calls are disabled")
+        if (not config.model_id or config.model_id == "FILL_AFTER_APPROVAL" or
+                not config.server_version or config.server_version == "FILL_AFTER_APPROVAL" or
+                not config.tokenizer_id or config.tokenizer_id == "FILL_AFTER_APPROVAL"):
+            raise ValueError("model, server, and tokenizer identities must be fixed before execution")
+        if (len(config.model_revision) != 40 or any(ch not in "0123456789abcdef" for ch in config.model_revision.lower()) or
+                len(config.tokenizer_revision) != 40 or any(ch not in "0123456789abcdef" for ch in config.tokenizer_revision.lower())):
+            raise ValueError("model and tokenizer revisions must be immutable 40-character commit IDs")
+        for digest in (config.tokenizer_sha256, config.chat_template_sha256):
+            if len(digest) != 64 or any(ch not in "0123456789abcdef" for ch in digest.lower()):
+                raise ValueError("tokenizer and chat-template SHA256 values must be exact 64-character digests")
+        if not isinstance(config.context_length, int) or config.context_length < 1:
+            raise ValueError("model context length must be a positive integer")
+        if (isinstance(config.temperature, bool) or not isinstance(config.temperature, (int, float)) or
+                not math.isfinite(config.temperature) or config.temperature < 0):
+            raise ValueError("temperature must be a finite non-negative number")
+        if (isinstance(config.top_p, bool) or not isinstance(config.top_p, (int, float)) or
+                not math.isfinite(config.top_p) or not 0 < config.top_p <= 1):
+            raise ValueError("top_p must be a finite value in (0, 1]")
+        if not 1 <= config.max_output_tokens < config.context_length:
+>           raise ValueError("max output tokens must be positive and below the context length")
+E           ValueError: max output tokens must be positive and below the context length
+
+src\colluscope\openai_compat_vllm.py:133: ValueError
+=========================== short test summary info ===========================
+FAILED tests/test_openai_compat_vllm.py::test_context_overflow_is_retained_as_failed_attempt_without_http_dispatch
+1 failed, 7 passed in 0.21s

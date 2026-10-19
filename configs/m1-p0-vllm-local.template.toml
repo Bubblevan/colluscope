@@ -1,0 +1,32 @@
+# Intentionally non-runnable template. Fill only after explicit user approval.
+model_calls_enabled = false
+max_api_spend_usd = 0.0
+
+[backend]
+kind = "openai-compatible-vllm"
+base_url = "http://127.0.0.1:8000/v1"
+model_id = "FILL_AFTER_APPROVAL"
+model_revision = "FILL_AFTER_APPROVAL"
+server_version = "FILL_AFTER_APPROVAL"
+tokenizer_id = "FILL_AFTER_APPROVAL"
+tokenizer_revision = "FILL_AFTER_APPROVAL"
+tokenizer_sha256 = "FILL_AFTER_APPROVAL"
+chat_template_sha256 = "FILL_AFTER_APPROVAL"
+context_length = 0
+
+[thinking]
+mode = "FILL_AFTER_APPROVAL"
+request_parameter = "FILL_AFTER_APPROVAL"
+
+[sampling]
+# Do not copy the Offline Mock values. Freeze actual values only after model review.
+temperature = "FILL_AFTER_APPROVAL"
+top_p = "FILL_AFTER_APPROVAL"
+max_output_tokens = 0
+
+[limits]
+timeout_seconds = 0
+max_attempts_per_request = 2
+max_logical_requests = 95
+max_total_attempts = 190
+comprehension_probe_calls = 0

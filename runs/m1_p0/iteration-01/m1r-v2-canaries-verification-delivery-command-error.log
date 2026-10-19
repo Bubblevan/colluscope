@@ -1,0 +1,10 @@
+from pathlib import Path
+import json, hashlib
+from colluscope.m1_runtime import _source_snapshot, verify_canary_suite
+snap=_source_snapshot()['sha256']
+for p in ['runs/m1_p0/v2-mock-run-final-gate/manifest.json','runs/m1_p0/v2-canaries-final-gate/manifest.json']:
+ d=json.loads(Path(p).read_text())
+ assert d.get('source_snapshot',{}).get('sha256')==snap, (p,d.get('source_snapshot',{}).get('sha256'),snap)
+ print(p, 'source_snapshot_match=PASS', 'manifest_sha256='+hashlib.sha256(Path(p).read_bytes()).hexdigest())
+result=verify_canary_suite(Path('runs/m1_p0/v2-canaries-final-gate'))
+print(json.dumps(result,sort_keys=True))

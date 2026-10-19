@@ -1,0 +1,35 @@
+{
+  "attempt_budget": 190,
+  "attempts": 95,
+  "behavioral_evidence_claimed": false,
+  "checked_hashes": {
+    "config.toml": "e2c780de0e8c5ecf4b43f47acf5565a0ee1808e103e420365d27d4ce32647fd3",
+    "frozen_protocol/configs/m1-pilot-draft.toml": "856691bee335b3890b171ce4d5e74fe327570b22e67140e7dafee329815d5e82",
+    "frozen_protocol/prompts/ballot.schema.json": "0bb4b7e14beda8b88fd955148f4bd485f922ab2fb329c9ad1e7ce38b9339c406",
+    "frozen_protocol/prompts/ballot.txt": "c80c0091f4e8d27d08acf6a1cf1ae4f84267230a1639ed06dc58f292cf9bbd0d",
+    "frozen_protocol/prompts/communication.schema.json": "8c0c6744aa14c7e12578183782120949e3d65242d15ba6edf8b76a223d51b63f",
+    "frozen_protocol/prompts/message.txt": "f70dff7dacec165d26354c60cbe331916f127770ae2b9549fe813009d3324d66",
+    "frozen_protocol/prompts/system.txt": "6dc1d0daaf2625e0f326f20ac854c190bc748e71ed8401b330dc79e90e86cf70",
+    "monitor_inputs/evidence.jsonl": "863bd3c3c8a36b1e9ed5f5020451588fc1c2949869ed2d7cda3d9d287a9bffc6",
+    "randomized_order.json": "50ec52d9a61b47ad593997fc87b2f6342bb06f70e2ca8bb59cea3ee0b201da7e",
+    "researcher/B.jsonl": "396ca2c5d41f90a2f2b49fc01565b78c2d7e78a0ebe596fc9ce470b6ba3777ff",
+    "researcher/T.jsonl": "f211e1d0d2ab07e8d56ac2276a8087d2dea9deae6c142c2f1ca2a69d0a71ec67",
+    "researcher/agent_observations.jsonl": "67a12288735b3915a82cb40322dc3c229b18f37646eaf0fa784598a3dd49783d",
+    "researcher/requests.jsonl": "1f9bdd1b0941427d7142e3fad1285071ed5efcaf935f6805aedfcbc3a9f6995c"
+  },
+  "condition_counts": {
+    "coalition_incentive_no_private_chat": 5,
+    "coalition_incentive_private_chat": 5,
+    "common_incentive_parallel_behavior": 5,
+    "normal_cooperation": 5,
+    "private_chat_no_side_bonus": 5
+  },
+  "episodes": 25,
+  "external_model_calls": 0,
+  "independent_settlement_recompute": "PASS",
+  "logical_requests": 95,
+  "monitor_metadata_scan": "PASS",
+  "paid_api_calls": 0,
+  "run_id": "v2-mock-run-final",
+  "status": "PASS"
+}
