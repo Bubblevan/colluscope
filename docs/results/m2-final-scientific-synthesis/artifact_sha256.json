@@ -1,0 +1,28 @@
+{
+  "algorithm": "SHA-256",
+  "self_hash_excluded": true,
+  "files": {
+    "audit-attempt-01.log": "9cd0a0683c6f464f171cf19831d7b19d3afcb306035aee7361bd48a8fd396bc7",
+    "audit-attempt-02.log": "8be03bad5d1cedab3387ea76a9e9e055a6fd53e39f1032174d96f30c981ead4c",
+    "audit-attempt-03.log": "78637d78cc82acf2787bc3b47445df631f5a60ed5c2e40822d23cf8d15d9a2cc",
+    "audit-attempt-04.log": "78637d78cc82acf2787bc3b47445df631f5a60ed5c2e40822d23cf8d15d9a2cc",
+    "audit-attempt-05.log": "78637d78cc82acf2787bc3b47445df631f5a60ed5c2e40822d23cf8d15d9a2cc",
+    "audit-attempt-06.log": "b95286fa284546e6a150d79a5e87981e933ecc87b741324241af3a47389d896b",
+    "audit-attempt-07.log": "78637d78cc82acf2787bc3b47445df631f5a60ed5c2e40822d23cf8d15d9a2cc",
+    "audit-attempt-08.log": "78637d78cc82acf2787bc3b47445df631f5a60ed5c2e40822d23cf8d15d9a2cc",
+    "audit-attempt-09.log": "78637d78cc82acf2787bc3b47445df631f5a60ed5c2e40822d23cf8d15d9a2cc",
+    "audit-run.log": "8be03bad5d1cedab3387ea76a9e9e055a6fd53e39f1032174d96f30c981ead4c",
+    "figures/m2_public_harm_baselines.png": "aaa87a15c1bc81f77d451dfcfe76132f9c73346a33e2dde30d7b7db93fd23807",
+    "figures/m2_welfare_gap_visibility.png": "fc945947e6197f3e038735c73fb7210f9534d63cc438d5121cc815728d7f66ab",
+    "m2_baselines_and_metrics.csv": "e1dc518536a3bae3eb1d3f079a57eaef0667e440a09c83c83ef5ee954045a785",
+    "m2_citation_finding_sensitivity.csv": "ae699793dad9edcf254e3bac8a183b4cdb9467109891822a37cf3968d32dfc23",
+    "m2_final_audit_summary.json": "aa7727f7711147abc4ac580e61de6630d7da770c4451f6184f4253830355c71f",
+    "m2_group_paired_view_contrasts.csv": "0c3e6751047114b463ddc5aed2aa0f9f32b894a3c30b05cd385d9f5405874f2e",
+    "m2_model_input_field_values.csv": "6083f421e257de69d0634c9f58f594d352ea5afd1ca889df1f53c7403c6b220c",
+    "m2_recomputed_predictions.csv": "44149c403949a8ca1657ad741c4940d29de3fa50002261c62038bdc26c575531",
+    "m2_token_usage_by_view.csv": "ac7bb699a29bd5f882e56edf163b8dde4a81b667ddf3c7dc3cf9e4ac971dac5b",
+    "m2_view_input_inventory.csv": "f3889b914281c65da252a9fd659b53a52a2310abc0096533b59c37f020c783e0",
+    "m3_development_episode_inventory.csv": "9eb7477d41073eda3edc2d973f8ef1a5e3b0ea4f2e1fda3d2f98f0afe5d1b411",
+    "privacy_output_scan.json": "b18eb2c749b7728e2c9727557a6ab6160856c8264baf266d917b905affcbf998"
+  }
+}

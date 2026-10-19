@@ -1,0 +1,77 @@
+{
+  "audit_id": "m2-final-scientific-audit-v1",
+  "method": "independent raw M1 T/B/Public-E replay plus raw response parse; no frozen M2 scorer/reference imports",
+  "model_calls_this_audit": 0,
+  "assigned_rows": 1500,
+  "unique_completed_model_requests": 916,
+  "physical_attempts": 916,
+  "format_valid_rows": 1500,
+  "independent_replay_score_row_mismatches": {},
+  "all_primary_rows_match_frozen_score_file": true,
+  "source_episode_count": 100,
+  "source_partition_counts": {
+    "F0": 25,
+    "F1": 25,
+    "F2": 25,
+    "F3": 25
+  },
+  "message_bearing_episode_count": 12,
+  "delivered_message_event_count": 19,
+  "message_bearing_episode_counts_by_partition": {
+    "F1": 4,
+    "F2": 3,
+    "F3": 2,
+    "F0": 3
+  },
+  "delivered_message_event_counts_by_partition": {
+    "F0": 5,
+    "F1": 6,
+    "F2": 5,
+    "F3": 3
+  },
+  "F2_F3_matched_group_count": 10,
+  "F2_F3_previously_exposed": true,
+  "latent_collusion_gold_label": "NOT CREATED",
+  "recomputed_public_outcome_episode_count": 100,
+  "positive_welfare_gap_episode_counts_by_partition": {
+    "F0": 9,
+    "F1": 5,
+    "F2": 6,
+    "F3": 2
+  },
+  "token_usage_from_provider_responses": {
+    "input_tokens": 865059,
+    "output_tokens": 16222
+  },
+  "input_hashes": {
+    "source_commit_from_manifest": "5cb43bce230b82bf76c7e3fd63e27ee7cb15929d",
+    "manifest.json": "254745f5e1c1975a770c9851e2ba13ddbec27c4811c61a18dd9260cc1827b43b",
+    "evaluation_schedule.jsonl": "bba06b58d148e7d3ee45875454bbdaf6fe4438f97868867d920f874bdf1c1a72",
+    "logical_requests.jsonl": "073dd072c93074e274465f4455d0db556926de48c3fdd84498031755c6e94eef",
+    "results.jsonl": "62f83736f636d49262fc92fcb48fa25bf0e08729d861b65e2f35ae3e4b7665fe",
+    "original_scoring/scores.json": "6e35304265f59f555658300c3cec07e071a1e534254d64df931f4e92ec877253",
+    "original_scoring/summary.json": "9194f69f26c6c9c7c73cfe76e320dddeac223c077d0dea8697c785d09e37dc54",
+    "original_scoring/analysis.json": "01781f58486fc6f1ffa1c0b0f98666c9a1c941d3e29132b033af0a8d486db53c"
+  },
+  "output_files": [
+    "m2_recomputed_predictions.csv",
+    "m2_baselines_and_metrics.csv",
+    "m2_group_paired_view_contrasts.csv",
+    "m2_citation_finding_sensitivity.csv",
+    "m2_model_input_field_values.csv",
+    "m2_view_input_inventory.csv",
+    "m2_token_usage_by_view.csv",
+    "m3_development_episode_inventory.csv",
+    "privacy_output_scan.json",
+    "figures\\m2_public_harm_baselines.png",
+    "figures\\m2_welfare_gap_visibility.png",
+    "artifact_sha256.json"
+  ],
+  "privacy_output_scan": {
+    "long_private_message_strings_checked": 19,
+    "text_artifacts_scanned": 21,
+    "exact_private_message_matches": 0,
+    "message_derived_finding_values": "redacted in field inventory"
+  },
+  "errors_or_mismatches": []
+}

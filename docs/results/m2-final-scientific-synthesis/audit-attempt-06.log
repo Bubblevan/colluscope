@@ -1,0 +1,17 @@
+Traceback (most recent call last):
+  File "D:\MyLab\colluscope\reference\m1-p0-local-qwen-integration\scripts\audit_m2_final.py", line 1016, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "D:\MyLab\colluscope\reference\m1-p0-local-qwen-integration\scripts\audit_m2_final.py", line 1007, in main
+    summary = run(out_dir, run_dir)
+              ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\MyLab\colluscope\reference\m1-p0-local-qwen-integration\scripts\audit_m2_final.py", line 992, in run
+    "files": {str(path.relative_to(out_dir)).replace("\\", "/"): sha256(path)
+                                                                 ^^^^^^^^^^^^
+  File "D:\MyLab\colluscope\reference\m1-p0-local-qwen-integration\scripts\audit_m2_final.py", line 93, in sha256
+    with path.open("rb") as stream:
+         ^^^^^^^^^^^^^^^
+  File "D:\Anaconda\Lib\pathlib.py", line 1013, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'D:\\MyLab\\colluscope\\reference\\m1-p0-local-qwen-integration\\docs\\results\\m2-final-scientific-synthesis\\docs\\results\\m2-final-scientific-synthesis\\figures\\m2_public_harm_baselines.png'

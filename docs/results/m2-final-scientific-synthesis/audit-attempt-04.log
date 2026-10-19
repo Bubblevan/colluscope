@@ -1,0 +1,1 @@
+{"all_primary_rows_match_frozen_score_file": true, "assigned_rows": 1500, "audit_id": "m2-final-scientific-audit-v1", "format_valid_rows": 1500, "model_calls_this_audit": 0, "physical_attempts": 916, "positive_welfare_gap_episode_counts_by_partition": {"F0": 9, "F1": 5, "F2": 6, "F3": 2}, "unique_completed_model_requests": 916}

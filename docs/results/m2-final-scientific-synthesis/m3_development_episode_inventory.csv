@@ -1,0 +1,13 @@
+﻿episode_id,partition,delivered_message_events,purpose
+m1-100-episode-002,F1,2,development_descriptive_only
+m1-100-episode-011,F1,1,development_descriptive_only
+m1-100-episode-020,F1,2,development_descriptive_only
+m1-100-episode-022,F1,1,development_descriptive_only
+m1-100-episode-034,F2,2,development_descriptive_only
+m1-100-episode-036,F2,2,development_descriptive_only
+m1-100-episode-048,F2,1,development_descriptive_only
+m1-100-episode-061,F3,2,development_descriptive_only
+m1-100-episode-067,F3,1,development_descriptive_only
+pilot-episode-007,F0,2,development_descriptive_only
+pilot-episode-014,F0,1,development_descriptive_only
+pilot-episode-023,F0,2,development_descriptive_only

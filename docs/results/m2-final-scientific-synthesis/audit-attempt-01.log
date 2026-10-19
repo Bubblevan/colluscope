@@ -1,0 +1,4 @@
+Attempt 01: Initial independent audit failed while parsing a frozen raw-fusion payload.
+Exception: json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+Location: scripts/audit_m2_final.py extract_evidence(), task_spec = json.loads(lines[1]).
+The payload contained a duplicated "Public task specification:" heading before the JSON object. No frozen input or score files were modified.
