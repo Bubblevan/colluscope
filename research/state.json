@@ -1,17 +1,16 @@
 {
-  "schema_version": 2,
-  "program": "ColluScope Autoresearch",
-  "program_status": "active",
-  "status": "ready_for_hypothesis_selection",
+  "active_experiment_id": "b5-evidence-view-stability-120",
+  "active_hypothesis_id": "b5-evidence-view-stability",
+  "claim_level_status": {
+    "B4_B5_superiority": "INCONCLUSIVE",
+    "causal_communication_effect": "INCONCLUSIVE",
+    "cross_model_generalization": "INCONCLUSIVE",
+    "latent_collusion_or_intent": "NOT_IDENTIFIED"
+  },
+  "consecutive_cycles_without_new_uncertainty_reduction": 0,
   "current_branch": "codex/deepseek-first-m4-research-20261020",
-  "state_recorded_at_head": "0deb01b31b02fb8678172d9f82648f46d49ac499",
-  "active_experiment_id": null,
-  "active_hypothesis_id": null,
   "current_round": {
-    "owner": "DEEPSEEK-FIRST-RESEARCH-01",
-    "terminal_artifact": "research/handoffs/DEEPSEEK-FIRST-RESEARCH-01.json",
-    "status": "terminal_historical_closeout_reconciled",
-    "integrity_decision": "PASS",
+    "authorization_status": "consumed_and_never_reusable",
     "evidence_classes": [
       "live_engineering_preflight",
       "real_llm_behavior",
@@ -19,35 +18,36 @@
       "scripted_mock",
       "offline_reanalysis"
     ],
-    "historical_model_calls": 628,
     "historical_external_cost_usd": 0.2488836,
-    "authorization_status": "consumed_and_never_reusable",
-    "note": "This imported historical run is separate from all later experiments and from new cycles. It is not a preregistration or authorization."
+    "historical_model_calls": 628,
+    "integrity_decision": "PASS",
+    "note": "This imported historical run is separate from all later experiments and from new cycles. It is not a preregistration or authorization.",
+    "owner": "DEEPSEEK-FIRST-RESEARCH-01",
+    "status": "terminal_historical_closeout_reconciled",
+    "terminal_artifact": "research/handoffs/DEEPSEEK-FIRST-RESEARCH-01.json"
   },
-  "prior_runs_kept_separate": [
-    {
-      "run_id": "FULL-RESEARCH-EXECUTION-20261020",
-      "summary_artifact": "docs/results/full-research-execution-20261020/full_research_results_summary.json",
-      "summary_sha256": "7995b048ec160759a833dfbf2dc4b8f0e668ca8c1861d8566f596056118c029b",
-      "note": "Separate 856-row Monitor schedule and 24-group local M4 run; never pool its denominators with the 628-request DeepSeek-first run."
-    }
-  ],
-  "latest_decision": "PASS",
-  "latest_decision_type": "historical_integrity",
-  "latest_scientific_outcome": null,
-  "claim_level_status": {
-    "causal_communication_effect": "INCONCLUSIVE",
-    "B4_B5_superiority": "INCONCLUSIVE",
-    "cross_model_generalization": "INCONCLUSIVE",
-    "latent_collusion_or_intent": "NOT_IDENTIFIED"
-  },
-  "next_action": "Review the hash-pinned memory and three candidate hypotheses, then preregister one zero-call or offline cycle; no live model/API call is currently authorized.",
-  "consecutive_cycles_without_new_uncertainty_reduction": 0,
   "historical_approvals_reusable": false,
+  "latest_decision": "PREREGISTERED",
+  "latest_decision_type": "operational",
+  "latest_scientific_outcome": null,
+  "next_action": "Implement the frozen protocol and proceed only through an existing entry point within current authorization; the CLI does not dispatch.",
   "preexisting_untracked_paths_preserved": [
     "docs/COLOSSEUM_LOCAL_REPRO_PROTOCOL.md",
     "docs/results/colosseum-local-audit-20261020/",
     "docs/results/colosseum-runtime-hardening-20261020/"
   ],
-  "updated_at": "2026-10-21"
+  "prior_runs_kept_separate": [
+    {
+      "note": "Separate 856-row Monitor schedule and 24-group local M4 run; never pool its denominators with the 628-request DeepSeek-first run.",
+      "run_id": "FULL-RESEARCH-EXECUTION-20261020",
+      "summary_artifact": "docs/results/full-research-execution-20261020/full_research_results_summary.json",
+      "summary_sha256": "7995b048ec160759a833dfbf2dc4b8f0e668ca8c1861d8566f596056118c029b"
+    }
+  ],
+  "program": "ColluScope Autoresearch",
+  "program_status": "active",
+  "schema_version": 2,
+  "state_recorded_at_head": "0deb01b31b02fb8678172d9f82648f46d49ac499",
+  "status": "iteration_preregistered",
+  "updated_at": "2026-10-20"
 }

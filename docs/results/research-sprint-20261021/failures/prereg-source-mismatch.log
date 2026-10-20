@@ -1,0 +1,5 @@
+researchctl register research/b5-evidence-view-stability-preregistration-source.json
+Exit: 1
+ValueError: active budget snapshot disagrees with immutable authorization batch field source
+Effect: no experiment registered; 0 model calls.
+Resolution: make the budget snapshot source byte-for-byte equal to the immutable authorization batch source, then rerun registration.
