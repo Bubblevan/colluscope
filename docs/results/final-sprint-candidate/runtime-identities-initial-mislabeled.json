@@ -1,0 +1,27 @@
+{
+  "captured_for": "offline implementation readiness only; no generation or API inference",
+  "m1_assigned_groups": 24,
+  "m1_hard_generation_attempts": 264,
+  "m4_asset_identity": {
+    "chat_template_sha256": "57f1fd00f0013a2be96aa79b857391f27e23df5b5f847072b524c897e24d0361",
+    "jinja2_version": "3.1.4",
+    "model_sha256": "d98cdcbd03e17ce47681435b5150e34c1417f50b5c0019dd560e4882c5745785",
+    "runtime_binary_sha256": "3a8aea5f889c4b4c2ec41c98f4e1ed484bb7a40c4096883acb23d3cfe26b59fb",
+    "runtime_bundle_file_count": 53,
+    "runtime_bundle_sha256": "9559fd2af95a7e83e3cf4a04aab22b67e1d1a2ec032b1e983ce091a6283c7759",
+    "tokenizer_sha256": "06e72b9773cfad908874ae1a7aa92686068557c4aa624c857db88fe97052704f",
+    "tokenizers_version": "0.19.1",
+    "verified": true
+  },
+  "m4_live_config_sha256": "dccc96a68c09618c86e30427b0c8d22ce17170c59822720d1e079a0cf97f422a",
+  "monitor_assigned_rows": 280,
+  "monitor_authorization_id_configured": false,
+  "monitor_config_sha256": "d6c41d412dc9b298e778ac6aa041668bd219dfff4ab15bba77e0d98f5b3ec079",
+  "monitor_hard_cost_ceiling_usd": 1.0,
+  "monitor_hard_http_attempts": 280,
+  "monitor_live_dispatch_enabled": false,
+  "monitor_planned_peak_cost_upper_usd": 0.4086309,
+  "monitor_schedule_rows": 280,
+  "platform": "Windows-11-10.0.26200-SP0",
+  "python_version": "3.12.4"
+}

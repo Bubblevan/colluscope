@@ -1,0 +1,243 @@
+{
+  "base_commit_before_candidate_changes": "95cd6b5c5c0cc05ebf14a1be04052501b0602ad1",
+  "branch": "codex/final-sprint-execution-candidate-20261020",
+  "captured_utc": "2026-10-20T09:28:37.772856+00:00",
+  "file_count": 58,
+  "files": {
+    ".gitignore": {
+      "bytes": 931,
+      "sha256": "0cdc321f500ef1a942bb528fc7fc5fb0f46c071f17e2d776315ab842f449d562"
+    },
+    "configs/m4-live-runtime-v3.json": {
+      "bytes": 4154,
+      "sha256": "dccc96a68c09618c86e30427b0c8d22ce17170c59822720d1e079a0cf97f422a"
+    },
+    "configs/m4-positive-control-v2.json": {
+      "bytes": 1875,
+      "sha256": "1be8e7b38d188fdee3f11df4061712df278cdbe9784ad5c499517b6aa0b90937"
+    },
+    "configs/m4-runtime-v2.json": {
+      "bytes": 3537,
+      "sha256": "bfe5e5562fcaef4d53bea78db6e872c6c48e4bee6ad9df84f527ce73b736a026"
+    },
+    "configs/m4-scenarios-v1.json": {
+      "bytes": 12477,
+      "sha256": "c6c8341c208e2a0e6e83aa33559a2e94275d46ba2ae19c24a00887aea9cf5654"
+    },
+    "configs/m4-splits-v1.json": {
+      "bytes": 11966,
+      "sha256": "56f6fceca23bee74970c8291ba5ed99c9a8787f4de017720a747ce0bac5474d6"
+    },
+    "configs/sprint-monitor-runtime-v1.toml": {
+      "bytes": 1310,
+      "sha256": "d6c41d412dc9b298e778ac6aa041668bd219dfff4ab15bba77e0d98f5b3ec079"
+    },
+    "data/sprint-baseline-v1/controls.jsonl": {
+      "bytes": 17039,
+      "sha256": "3a0bbb19dae7709f2c3be1fba3726023a541f304710a757eafd12af5d3032cc0"
+    },
+    "docs/FINAL_SPRINT_EXECUTION_CANDIDATE.md": {
+      "bytes": 6514,
+      "sha256": "69eab26e23d8935bd831d561a9858765c383481488546fc46acd7b2d47796ead"
+    },
+    "docs/ITERATION_LOG.md": {
+      "bytes": 232617,
+      "sha256": "2d28a6d103644b243eaa58000cd88fb1936db638c4cc2f4340b2bf6708872f1a"
+    },
+    "docs/M4_LIVE_RUNTIME_DECISION.md": {
+      "bytes": 5806,
+      "sha256": "97709147840ebc4b47b989f46f587ed80b1bcafdfe0e2c2e3639d63d80271ab9"
+    },
+    "docs/M4_LIVE_RUNTIME_EVIDENCE.md": {
+      "bytes": 7658,
+      "sha256": "37a7c436e1f7c0f40fd1d181e8bf3e9065053420e1e4be0729e198d730672480"
+    },
+    "docs/M4_LIVE_RUNTIME_TRD.md": {
+      "bytes": 6726,
+      "sha256": "12bc3d270001d1d3f42110a0991ee1ffc285e1480eb24cc6744d7436ece1d14d"
+    },
+    "docs/M4_PROSPECTIVE_PROTOCOL.md": {
+      "bytes": 15512,
+      "sha256": "893af2ff5ac670c9a768b2846ae240b90a6a90cb8fad63c25bcfd520e1f796fa"
+    },
+    "docs/PRE_SPRINT_WORK_LOG.md": {
+      "bytes": 3805,
+      "sha256": "30a14045014181c8379bede95bccad0955bd80f8702dccea58854806cf97a808"
+    },
+    "docs/RESEARCH_RISK_REGISTER.md": {
+      "bytes": 96783,
+      "sha256": "c7351b74169fa1ba54d12efa99b7dd371cce8d93477bfd255f4911fa5ecdf851"
+    },
+    "docs/SPRINT_BASELINE_PROTOCOL.md": {
+      "bytes": 11501,
+      "sha256": "0a0cb78617c15e9cee2d8ea7830c7bd71cef991da771dae013971a5c9f314d9e"
+    },
+    "docs/results/final-sprint-candidate/baseline-verification.log": {
+      "bytes": 314,
+      "sha256": "42fcb8371627af15bc4e49fe4cb09d3dae798fa559eacc14020f4c9f89c7218c"
+    },
+    "docs/results/final-sprint-candidate/cli-help.log": {
+      "bytes": 1869,
+      "sha256": "368e78ff37a868db1bad4156ed8aba135e245bd688bb654a667ba19eaf58fa6a"
+    },
+    "docs/results/final-sprint-candidate/failure-history-initial-20261020.md": {
+      "bytes": 4372,
+      "sha256": "91eff980248a556baff6fda5f9b2793e03397c48ce36c6fb6bf50195848523f7"
+    },
+    "docs/results/final-sprint-candidate/pytest-full-history-attempt-01.log": {
+      "bytes": 519,
+      "sha256": "27aeb80923e16e9f2284c2d9c6858ac25fa0bccf42c08d4a61dd9e26311c2560"
+    },
+    "docs/results/final-sprint-candidate/pytest-full-history-attempt-02.log": {
+      "bytes": 600,
+      "sha256": "3b7cfabdd051ab38b271fe33f84ee6930882e203975f1f634f8c8ff5be4e58b2"
+    },
+    "docs/results/final-sprint-candidate/pytest-full-history-before-redirect-fixture-fix.log": {
+      "bytes": 600,
+      "sha256": "b18d09cda7e28dc63c4a1618717163ef6499509c103d257ff8d7f728ac0e05f6"
+    },
+    "docs/results/final-sprint-candidate/pytest-full-history-final.log": {
+      "bytes": 600,
+      "sha256": "5e92e3bffab1cabcaef189d650c912f4e47480afe2b0adf61b6969f851c1faaa"
+    },
+    "docs/results/final-sprint-candidate/pytest-portable-offline-failure-01.log": {
+      "bytes": 7355,
+      "sha256": "d16480f99e0e98b1478370b6f36ec62b6c2cb859170e6032e58cb598f96020f8"
+    },
+    "docs/results/final-sprint-candidate/pytest-portable-offline-final.log": {
+      "bytes": 807,
+      "sha256": "83ef93642d1e9414b1b5cc45e020b937ad5c24afd3ae35f7d69e43d1c53e681d"
+    },
+    "docs/results/final-sprint-candidate/pytest-redirect-focused-final.log": {
+      "bytes": 100,
+      "sha256": "d9772edda7360f9f73d31364226977873d026d3207b4a10d521c6fefefb29c2c"
+    },
+    "docs/results/final-sprint-candidate/pytest-targeted-attempt-01.log": {
+      "bytes": 112,
+      "sha256": "716e22834b3312f1dbee8cbc5165ed8cdb1266c481afefeb1412e3893534427b"
+    },
+    "docs/results/final-sprint-candidate/pytest-targeted-before-redirect-fixture-fix.log": {
+      "bytes": 112,
+      "sha256": "9bc5b3d68ef54e6de4900ce9d1cba74851ed5a8979ed97763dfdb6f1635bf317"
+    },
+    "docs/results/final-sprint-candidate/pytest-targeted-final.log": {
+      "bytes": 113,
+      "sha256": "535922df44ebc932b7ab644498473cc1df1c4e92c78083651d64710c6bad98ef"
+    },
+    "docs/results/final-sprint-candidate/runtime-identities-initial-mislabeled.json": {
+      "bytes": 1358,
+      "sha256": "19f3e33e08756cec75a7cd0c2af567c10fa5de0ae6712e3434f8be6bbf8dbdd8"
+    },
+    "docs/results/final-sprint-candidate/runtime-identities.json": {
+      "bytes": 1358,
+      "sha256": "5fd5616945ae39c2f0fa7813c1e97efacf6aa63be3118ebe51b9aabe7079ecd6"
+    },
+    "docs/results/sprint-baseline-v1/request_schedule.jsonl": {
+      "bytes": 153599,
+      "sha256": "95ed339974d0d75ff70a10b9114b26d14a618340791dc94c108f2b1ec70c86f9"
+    },
+    "prompts/m4-v1/ballot.schema.json": {
+      "bytes": 386,
+      "sha256": "07f8a02f4ed24834bac63ec41f5e58b438a488831be96ea97025f5a8b72899c6"
+    },
+    "prompts/m4-v1/ballot.txt": {
+      "bytes": 373,
+      "sha256": "b1a5a83acb0accbd1a265574c53539ef288351792c1d9666d7f6630a3f28fcef"
+    },
+    "prompts/m4-v1/communication.schema.json": {
+      "bytes": 355,
+      "sha256": "c86ac9212d8038f09641b3d9b9d930624d9d9bd43e25451553543ee0785661e0"
+    },
+    "prompts/m4-v1/message.txt": {
+      "bytes": 429,
+      "sha256": "f60db23bb1b6a44cd462b89323673663c592304f8974a3757ed931bdf20b5fb2"
+    },
+    "prompts/m4-v1/positive_control.schema.json": {
+      "bytes": 148,
+      "sha256": "dd180ae9514c6fda5afd30657cec0d6b3e658a52c0abe630d1fc791ec79d77a7"
+    },
+    "prompts/m4-v1/positive_control.txt": {
+      "bytes": 132,
+      "sha256": "521fe96b67e956ab7d03d24f5cefe0c20a72d2f7fae69a752078350e33a55b6e"
+    },
+    "prompts/m4-v1/system.txt": {
+      "bytes": 282,
+      "sha256": "689746fce17b62997a776c2460151e109922c46dc2a18193bdcffc417da5a2ba"
+    },
+    "prompts/sprint-baseline-v1/system.txt": {
+      "bytes": 971,
+      "sha256": "483dc4976b8012d62d44806fdbaf997b318f00a94fd87a06ae279e2c4a5e3544"
+    },
+    "prompts/sprint-baseline-v1/tasks.json": {
+      "bytes": 1581,
+      "sha256": "ebc7092a2852d4fdb42e0c694f7ac2bf8bc5a677bbc840b47505a3180076f9d3"
+    },
+    "prompts/sprint-baseline-v1/user.txt": {
+      "bytes": 465,
+      "sha256": "bbd9c644870954cd01d7c56bd013437859485bcb5728935ce47f114c3b78b6c2"
+    },
+    "scripts/audit_m4_live.py": {
+      "bytes": 1127,
+      "sha256": "71ced85ab2a4585ac9bfe2db840c818a7efa979031c033a7b5a4a547e31a509a"
+    },
+    "scripts/audit_sprint_monitor_live.py": {
+      "bytes": 15067,
+      "sha256": "fbda513581a9e74f3dcdb2183a3cf630de17c6d8c9aa3deba44e8cb68f5dac4c"
+    },
+    "scripts/local_llama_security.py": {
+      "bytes": 7156,
+      "sha256": "bedb520633ea167a227d19c5f6a0357f59577652d7fd1e7b7d5cfffb84920675"
+    },
+    "scripts/prepare_sprint_baselines.py": {
+      "bytes": 14856,
+      "sha256": "9a89abda703535148c6ab7fe993d4fee6ac92ec8d4cf41aaacfcf62066e91a36"
+    },
+    "scripts/run_m1_p0_local_preflight.py": {
+      "bytes": 37018,
+      "sha256": "e9daefc7030ceee78a08a4f0a864466eee0378592856be9254809a11fa476c8d"
+    },
+    "scripts/run_m4_live.py": {
+      "bytes": 1529,
+      "sha256": "da9a6d5692180b58731c2402e53b1afb2b28604a8f30b487492371bf605fdd70"
+    },
+    "scripts/run_m4_offline.py": {
+      "bytes": 34740,
+      "sha256": "cf4215cf12f03edb7e3dafeeaa50e3e0b08f080a543c1f96e45216fe6bb81b19"
+    },
+    "scripts/run_sprint_monitor.py": {
+      "bytes": 44181,
+      "sha256": "8039af9dbbd0711d02f3e643174023642d0cb0e61d5917c01d27e528552ea6cf"
+    },
+    "src/colluscope/m4_live_runtime.py": {
+      "bytes": 96419,
+      "sha256": "2f082c59c1f34928b77d0522751818ef4f1fdb2ee4dbe6756bdf9400c17e21c7"
+    },
+    "src/colluscope/sprint_baselines.py": {
+      "bytes": 26476,
+      "sha256": "e5e24b749f2303d5bbf5feb6b925311f8b5970d4eba535bdf509f6189d960c90"
+    },
+    "src/colluscope/sprint_controls.py": {
+      "bytes": 8263,
+      "sha256": "a909cc7b3973f3e0aab9d795d06c578bceeddfe3cc51e9db5bc168797bc6736b"
+    },
+    "src/colluscope/sprint_metrics.py": {
+      "bytes": 10670,
+      "sha256": "13cfd175c0b6a857364c237c781f6e7154539090088edb0bea8cbe70a7591ec1"
+    },
+    "src/colluscope/sprint_replay.py": {
+      "bytes": 14592,
+      "sha256": "0dcdad02bd5b402fe23c5379b77332882d4302fd61e9eab970675b5a990c743b"
+    },
+    "tests/test_m4_live_runtime.py": {
+      "bytes": 27168,
+      "sha256": "1a94320f451aebb6335c09d43c6e808ccd07b01e3fe090027e825622dc7d88f7"
+    },
+    "tests/test_sprint_monitor_runtime.py": {
+      "bytes": 26180,
+      "sha256": "ecae0dd9088d036823c8a28bb8ef969f5b9727af0438a6e1b18179c437c55acc"
+    }
+  },
+  "schema_version": "colluscope-final-sprint-candidate-artifacts-v1",
+  "scope_note": "Candidate source, frozen inputs, reports, test outputs and retained failures. Raw historical runs, model weights, credentials, and unrelated Colosseum artifacts are excluded. Hashes cover exact working-tree bytes.",
+  "self_hash": "excluded to avoid a recursive manifest hash"
+}

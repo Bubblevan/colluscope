@@ -88,3 +88,11 @@ Offline tests:
     python -m pytest -q tests/test_sprint_baselines.py tests/test_sprint_controls.py tests/test_sprint_preparation.py tests/test_m4_scenarios.py
 
 No command in this protocol dispatches model inference. Any future runner must be separately approved and must use the frozen 280-request ceiling.
+
+## Runtime implementation addendum (2026-10-20)
+
+The preceding statement that there is no inference dispatcher describes the protocol's state at the original freeze. It is superseded only as to implementation: `scripts/run_sprint_monitor.py` now contains the reviewed runtime v1.2 dispatcher, test-only injected-transport seam, append-only transport state, identity/usage/cost gates and 280-request enforcement; `scripts/audit_sprint_monitor_live.py` independently checks trace links and rescoring. The original 280-row protocol, view permissions, prompts, scoring and USD 1 ceiling are unchanged.
+
+`configs/sprint-monitor-runtime-v1.toml` remains disabled (`live_dispatch_enabled = false`, empty authorization ID). Thus the production live command still fails closed with the checked-in config. A later separately authorized run needs a separately versioned reviewed config, explicit ID, renewed pricing verification, provider/transmission approval and `DEEPSEEK_API_KEY` in the operator environment. No Monitor inference was performed for this implementation addendum. Fake transport tests are not Monitor performance evidence.
+
+See `docs/M4_LIVE_RUNTIME_DECISION.md` for the entry point, exact audit command and stop rules.

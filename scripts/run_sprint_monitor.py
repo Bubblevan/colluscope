@@ -293,7 +293,7 @@ def _ensure_private_run_root(out: Path, config: dict[str, Any], *, create: bool)
     return acl
 
 
-def _read_existing_state(out: Path, requests: list[BuiltRequest]) -> tuple[dict[str, dict[str, Any]], set[str]]:
+def _read_existing_state(out: Path, requests: list[BuiltRequest]) -> tuple[dict[str, dict[str, Any]], set[str], dict[str, dict[str, Any]]]:
     progress = _read_jsonl(out / "progress.jsonl")
     attempts = _read_jsonl(out / "attempts.jsonl")
     terminal: dict[str, dict[str, Any]] = {}
@@ -305,6 +305,7 @@ def _read_existing_state(out: Path, requests: list[BuiltRequest]) -> tuple[dict[
     by_request = {item.request_id: item for item in requests}
     started: set[str] = set()
     closed: set[str] = set()
+    terminal_events: dict[str, dict[str, Any]] = {}
     for event in attempts:
         request_id = event.get("request_id")
         if request_id not in by_request:
@@ -328,9 +329,25 @@ def _read_existing_state(out: Path, requests: list[BuiltRequest]) -> tuple[dict[
             if request_id not in started or request_id in closed:
                 raise RuntimeIntegrityError("attempt terminal has no unique start event")
             closed.add(request_id)
+            terminal_events[request_id] = event
+            response_sha = event.get("response_sha256")
+            if response_sha is not None:
+                response_path = out / "responses" / f"{request_id}.json"
+                if not response_path.is_file() or _sha(response_path.read_bytes()) != response_sha:
+                    raise RuntimeIntegrityError("terminal attempt response bytes are missing or tampered")
+    for request_id, row in terminal.items():
+        event = terminal_events.get(request_id)
+        if event is not None and row.get("status") != event.get("transport_status"):
+            raise RuntimeIntegrityError("progress terminal status differs from the append-only HTTP terminal")
     if len(started) > 280:
         raise RuntimeIntegrityError("restored HTTP attempt count exceeds hard cap")
-    return terminal, started - closed
+    # A terminal HTTP ledger with no progress row means the process stopped between
+    # the two durable appends. It must be recovered as terminal and never resent.
+    terminal_without_progress = {
+        request_id: terminal_events[request_id]
+        for request_id in closed - set(terminal)
+    }
+    return terminal, started - closed, terminal_without_progress
 
 
 def _extract_model_text(body: dict[str, Any]) -> tuple[str, str | None]:
@@ -443,7 +460,8 @@ def _score_response(request: BuiltRequest, raw_text: str, *, baseline_label: str
 
 def run_schedule(out: Path, *, mode: str = "mock", config_path: Path = CONFIG_PATH,
                  transport: Callable[[str, bytes, str, int], HTTPResult] | None = None,
-                 approval_id: str | None = None, secure_storage: bool = True) -> dict[str, Any]:
+                 approval_id: str | None = None, secure_storage: bool = True,
+                 test_mode: bool = False) -> dict[str, Any]:
     config = _load_config(config_path)
     if mode not in {"mock", "live"}:
         raise ValueError("mode must be mock or live")
@@ -453,6 +471,10 @@ def run_schedule(out: Path, *, mode: str = "mock", config_path: Path = CONFIG_PA
             raise LiveDispatchDisabled("live monitor inference is frozen off; no user approval is recorded")
         if approval_id != config["authorization_id"]:
             raise LiveDispatchDisabled("CLI approval ID does not match the separately approved config")
+        if test_mode and transport is None:
+            raise LiveDispatchDisabled("test-mode live path requires an injected fake transport")
+        if not test_mode and (transport is not None or not secure_storage):
+            raise LiveDispatchDisabled("production live dispatch forbids injected transports and ACL bypass")
         verified = datetime.strptime(config["pricing_verified_date"], "%Y-%m-%d").date()
         if (datetime.now(timezone.utc).date() - verified).days > 7:
             raise LiveDispatchDisabled("official pricing check is older than seven days; refresh it before approval")
@@ -470,9 +492,18 @@ def run_schedule(out: Path, *, mode: str = "mock", config_path: Path = CONFIG_PA
         out.mkdir(parents=True, exist_ok=True)
 
     expected_ids = {item.request_id for item in requests}
-    existing, incomplete = _read_existing_state(out, requests)
+    existing, incomplete, terminal_without_progress = _read_existing_state(out, requests)
     if not set(existing).issubset(expected_ids):
         raise RuntimeIntegrityError("progress ledger includes an evaluation outside the frozen schedule")
+    for request_id, event in sorted(terminal_without_progress.items()):
+        request = next(item for item in requests if item.request_id == request_id)
+        recovered_status = str(event.get("transport_status") or "TERMINAL_ATTEMPT_RECOVERED")
+        _terminalize(out, request, recovered_status,
+                     body_sha256=request.body_sha256,
+                     response_sha256=event.get("response_sha256"),
+                     recovered_after_terminal_attempt=True,
+                     retry_count=0)
+        existing[request_id] = {"request_id": request_id, "status": recovered_status}
     for request_id in sorted(incomplete):
         request = next(item for item in requests if item.request_id == request_id)
         _append_jsonl(out / "attempts.jsonl", {
@@ -488,7 +519,10 @@ def run_schedule(out: Path, *, mode: str = "mock", config_path: Path = CONFIG_PA
 
     frozen_manifest = {
         "schema_version": "sprint-monitor-runtime-v1",
-        "mode": mode,
+        "runtime_revision": "sprint-monitor-runtime-v1.2",
+        "mode": "live_fake_transport_test" if test_mode else mode,
+        "requested_mode": mode,
+        "fake_transport_only": test_mode or mode == "mock",
         "protocol_id": PROTOCOL,
         "runtime_config_sha256": _sha(config_path.read_bytes()),
         "request_count": len(requests),
@@ -504,16 +538,29 @@ def run_schedule(out: Path, *, mode: str = "mock", config_path: Path = CONFIG_PA
                 "prompts/sprint-baseline-v1/tasks.json",
             )
         },
+        "runtime_code_sha256": {
+            path: _sha((ROOT / path).read_bytes()) for path in (
+                "scripts/run_sprint_monitor.py",
+                "scripts/prepare_sprint_baselines.py",
+                "scripts/local_llama_security.py",
+                "scripts/audit_sprint_monitor_live.py",
+                "scripts/audit_sprint_monitor_mock.py",
+                "src/colluscope/sprint_baselines.py",
+                "src/colluscope/sprint_controls.py",
+                "src/colluscope/sprint_metrics.py",
+                "src/colluscope/sprint_replay.py",
+            )
+        },
         "private_storage_acl": acl,
         "credential_material_saved": False,
-        "real_model_or_api_calls_in_this_task": 0 if mode == "mock" else None,
+        "real_model_or_api_calls_in_this_task": 0 if mode == "mock" or test_mode else None,
         "mock_outputs_are_model_evidence": False,
     }
     manifest_path = out / "run_manifest.json"
     if manifest_path.exists():
         old = json.loads(manifest_path.read_text(encoding="utf-8"))
-        for key in ("schema_version", "mode", "protocol_id", "runtime_config_sha256", "request_count",
-                    "endpoint", "model_alias", "prompt_hashes"):
+        for key in ("schema_version", "runtime_revision", "mode", "protocol_id", "runtime_config_sha256",
+                    "request_count", "endpoint", "model_alias", "prompt_hashes", "runtime_code_sha256"):
             if old.get(key) != frozen_manifest.get(key):
                 raise RuntimeIntegrityError(f"resume manifest mismatch for {key}")
     else:
@@ -589,7 +636,9 @@ def run_schedule(out: Path, *, mode: str = "mock", config_path: Path = CONFIG_PA
             raw_error = {"error_type": error_kind, "error_message": str(exc)}
             response_bytes = _json_bytes(raw_error)
             response_hash = _sha(response_bytes)
-            _write_json(out / "responses" / f"{request.request_id}.json", raw_error)
+            error_response_path = out / "responses" / f"{request.request_id}.json"
+            error_response_path.parent.mkdir(parents=True, exist_ok=True)
+            error_response_path.write_bytes(response_bytes)
             _append_jsonl(out / "attempts.jsonl", {
                 "event": "attempt_terminal", "request_id": request.request_id,
                 "body_sha256": request.body_sha256, "http_status": None,
@@ -675,9 +724,20 @@ def run_schedule(out: Path, *, mode: str = "mock", config_path: Path = CONFIG_PA
                 actual_cost = (input_tokens * config["input_usd_per_million_tokens_peak_cache_miss"]
                                + output_tokens * config["output_usd_per_million_tokens_peak"]) / 1_000_000
                 details["cost_upper_peak_usd"] = actual_cost
-                if input_tokens > config["max_input_token_upper_bound"] or output_tokens > config["max_output_tokens"]:
+                total_tokens = usage.get("total_tokens")
+                if (input_tokens < 0 or output_tokens < 0
+                        or (type(total_tokens) is int and total_tokens != input_tokens + output_tokens)):
+                    terminal_status = "INVALID_USAGE_ACCOUNTING"
+                    fatal_reason = "provider-reported token usage is negative or internally inconsistent"
+                    details["cost_upper_peak_usd"] = request.reserve_usd
+                elif input_tokens > config["max_input_token_upper_bound"] or output_tokens > config["max_output_tokens"]:
                     terminal_status = "TOKEN_BUDGET_EXCEEDED"
                     fatal_reason = "provider-reported usage exceeded pre-dispatch token bound"
+                elif actual_cost > request.reserve_usd + 1e-12:
+                    terminal_status = "REQUEST_COST_RESERVE_EXCEEDED"
+                    fatal_reason = "provider-reported peak cost exceeded the request reservation"
+            else:
+                details["cost_upper_peak_usd"] = request.reserve_usd
         else:
             details["usage"] = None
             details["cost_upper_peak_usd"] = request.reserve_usd
@@ -704,19 +764,49 @@ def run_schedule(out: Path, *, mode: str = "mock", config_path: Path = CONFIG_PA
     terminal_map = {row["request_id"]: row for row in final_rows}
     if len(terminal_map) != len(final_rows):
         raise RuntimeIntegrityError("duplicate schedule row terminalization")
+    attempt_rows = _read_jsonl(out / "attempts.jsonl")
+    started_ids = {row["request_id"] for row in attempt_rows if row.get("event") == "attempt_started"}
+    request_by_id = {request.request_id: request for request in requests}
+    reported_cost = 0.0
+    missing_usage_reserve = 0.0
+    usage_rows = 0
+    for request_id in started_ids:
+        row = terminal_map[request_id]
+        usage_row = row.get("usage")
+        if (isinstance(usage_row, dict)
+                and type(usage_row.get("input_tokens")) is int
+                and type(usage_row.get("output_tokens")) is int
+                and usage_row["input_tokens"] >= 0 and usage_row["output_tokens"] >= 0
+                and row.get("status") != "INVALID_USAGE_ACCOUNTING"):
+            usage_rows += 1
+            reported_cost += (usage_row["input_tokens"] * config["input_usd_per_million_tokens_peak_cache_miss"]
+                              + usage_row["output_tokens"] * config["output_usd_per_million_tokens_peak"]) / 1_000_000
+        else:
+            missing_usage_reserve += request_by_id[request_id].reserve_usd
+    is_fake_transport = mode == "mock" or test_mode
+    all_completed = all(r["status"] == "COMPLETED" for r in final_rows)
     summary = {
-        "status": "OFFLINE_MOCK_COMPLETE" if mode == "mock" and all(r["status"] == "COMPLETED" for r in final_rows)
-                  else "TERMINALIZED_WITH_FAILURES",
-        "mode": mode,
+        "status": ("OFFLINE_MOCK_COMPLETE" if mode == "mock" and all_completed else
+                   "FAKE_LIVE_TRANSPORT_COMPLETE" if test_mode and all_completed else
+                   "TERMINALIZED_WITH_FAILURES"),
+        "mode": "live_fake_transport_test" if test_mode else mode,
+        "requested_mode": mode,
+        "fake_transport_only": is_fake_transport,
         "assigned_rows": len(requests),
         "terminal_rows": len(final_rows),
         "completed_rows": sum(row["status"] == "COMPLETED" for row in final_rows),
         "failed_or_unexecuted_rows": sum(row["status"] != "COMPLETED" for row in final_rows),
         "logical_http_requests": attempts_started,
-        "physical_http_attempts": attempts_started,
+        "transport_invocations": attempts_started,
+        "physical_http_attempts": 0 if is_fake_transport else attempts_started,
+        "fake_transport_attempt_slots": attempts_started if is_fake_transport else 0,
         "retries": 0,
-        "real_model_or_api_calls": 0 if mode == "mock" else attempts_started,
+        "real_model_or_api_calls": 0 if is_fake_transport else attempts_started,
         "reserved_peak_cost_usd": round(reserved_usd, 12),
+        "provider_reported_usage_rows": usage_rows,
+        "provider_reported_peak_cost_usd": round(reported_cost, 12),
+        "missing_usage_reserved_upper_usd": round(missing_usage_reserve, 12),
+        "conservative_total_peak_cost_usd": round(reported_cost + missing_usage_reserve, 12),
         "hard_cost_ceiling_usd": config["hard_estimated_cost_usd"],
         "no_request_or_response_contains_auth_header": all(
             not row.get("auth_header_saved", True)

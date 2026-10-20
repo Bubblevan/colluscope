@@ -1,0 +1,50 @@
+=== scripts/run_m4_live.py --help ===
+usage: run_m4_live.py [-h] [--config CONFIG] --out OUT [--execute-live]
+                      [--approval-id APPROVAL_ID]
+
+Explicitly authorized local Qwen/llama.cpp executor for the frozen M4-v2
+schedule.
+
+options:
+  -h, --help            show this help message and exit
+  --config CONFIG
+  --out OUT             new run directory beneath runs/m4; raw artifacts stay
+                        local and ACL-restricted
+  --execute-live        required explicit live-inference switch; omitted by
+                        default
+  --approval-id APPROVAL_ID
+                        operator's separate approval reference; does not
+                        itself authorize a future run
+=== scripts/audit_m4_live.py --help ===
+usage: audit_m4_live.py [-h] --run RUN [--config CONFIG]
+
+Independently replay live M4 settlements and raw request/response links.
+
+options:
+  -h, --help       show this help message and exit
+  --run RUN
+  --config CONFIG  optional frozen live runtime config; defaults to checked-in
+                   v3
+=== scripts/run_sprint_monitor.py --help ===
+usage: run_sprint_monitor.py [-h] [--config CONFIG] [--out OUT]
+                             [--mode {mock,live}] [--approval-id APPROVAL_ID]
+
+Bounded B2-B5 dispatcher; default and only current mode is offline mock.
+
+options:
+  -h, --help            show this help message and exit
+  --config CONFIG
+  --out OUT
+  --mode {mock,live}
+  --approval-id APPROVAL_ID
+=== scripts/audit_sprint_monitor_live.py --help ===
+usage: audit_sprint_monitor_live.py [-h] --run RUN [--config CONFIG]
+                                    [--out OUT]
+
+Offline replay of a saved Sprint Monitor live run; never performs inference.
+
+options:
+  -h, --help       show this help message and exit
+  --run RUN
+  --config CONFIG
+  --out OUT

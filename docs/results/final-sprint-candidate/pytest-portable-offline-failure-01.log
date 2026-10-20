@@ -1,0 +1,147 @@
+........................................................................ [ 16%]
+.................s...................................................... [ 32%]
+........................................................................ [ 48%]
+........................................................................ [ 64%]
+........................................................................ [ 80%]
+......................................F................................. [ 96%]
+...............                                                          [100%]
+================================== FAILURES ===================================
+_ test_monitor_http_transport_does_not_forward_authentication_through_redirect _
+
+endpoint = 'http://127.0.0.1:53926/chat/completions', body = b'{}'
+api_key = 'test-secret-never-persist', timeout = 2
+
+    def urllib_transport(endpoint: str, body: bytes, api_key: str, timeout: int) -> HTTPResult:
+        request = urllib.request.Request(
+            endpoint, data=body, method="POST",
+            headers={"Content-Type": "application/json", "Authorization": f"Bearer {api_key}"},
+        )
+        class NoRedirect(urllib.request.HTTPRedirectHandler):
+            def redirect_request(self, req, fp, code, msg, headers, newurl):
+                return None
+        opener = urllib.request.build_opener(urllib.request.ProxyHandler({}), NoRedirect())
+        try:
+>           with opener.open(request, timeout=timeout) as response:
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+scripts\run_sprint_monitor.py:381: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+D:\Anaconda\Lib\urllib\request.py:515: in open
+    response = self._open(req, data)
+               ^^^^^^^^^^^^^^^^^^^^^
+D:\Anaconda\Lib\urllib\request.py:532: in _open
+    result = self._call_chain(self.handle_open, protocol, protocol +
+D:\Anaconda\Lib\urllib\request.py:492: in _call_chain
+    result = func(*args)
+             ^^^^^^^^^^^
+D:\Anaconda\Lib\urllib\request.py:1373: in http_open
+    return self.do_open(http.client.HTTPConnection, req)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+D:\Anaconda\Lib\urllib\request.py:1348: in do_open
+    r = h.getresponse()
+        ^^^^^^^^^^^^^^^
+D:\Anaconda\Lib\http\client.py:1428: in getresponse
+    response.begin()
+D:\Anaconda\Lib\http\client.py:331: in begin
+    version, status, reason = self._read_status()
+                              ^^^^^^^^^^^^^^^^^^^
+D:\Anaconda\Lib\http\client.py:292: in _read_status
+    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <socket.SocketIO object at 0x000002752685A8F0>
+b = <memory at 0x0000027524F57040>
+
+    def readinto(self, b):
+        """Read up to len(b) bytes into the writable buffer *b* and return
+        the number of bytes read.  If the socket is non-blocking and no bytes
+        are available, None is returned.
+    
+        If *b* is non-empty, a 0 return value indicates that the connection
+        was shutdown at the other end.
+        """
+        self._checkClosed()
+        self._checkReadable()
+        if self._timeout_occurred:
+            raise OSError("cannot read from timed out object")
+        while True:
+            try:
+>               return self._sock.recv_into(b)
+                       ^^^^^^^^^^^^^^^^^^^^^^^
+E               ConnectionAbortedError: [WinError 10053] ��������е�������ֹ��һ���ѽ��������ӡ�
+
+D:\Anaconda\Lib\socket.py:708: ConnectionAbortedError
+
+The above exception was the direct cause of the following exception:
+
+    def test_monitor_http_transport_does_not_forward_authentication_through_redirect():
+        redirect_target_hits = []
+        observed_auth = []
+    
+        class SinkHandler(BaseHTTPRequestHandler):
+            def log_message(self, *_args):
+                return
+    
+            def do_POST(self):
+                redirect_target_hits.append(self.path)
+                self.send_response(200)
+                self.send_header("Content-Length", "0")
+                self.end_headers()
+    
+        sink = ThreadingHTTPServer(("127.0.0.1", 0), SinkHandler)
+        sink_thread = threading.Thread(target=sink.serve_forever, daemon=True)
+        sink_thread.start()
+    
+        class RedirectHandler(BaseHTTPRequestHandler):
+            def log_message(self, *_args):
+                return
+    
+            def do_POST(self):
+                observed_auth.append(self.headers.get("Authorization"))
+                self.send_response(302)
+                self.send_header("Location", f"http://127.0.0.1:{sink.server_port}/credential-sink")
+                self.send_header("Content-Length", "0")
+                self.end_headers()
+    
+        redirect = ThreadingHTTPServer(("127.0.0.1", 0), RedirectHandler)
+        redirect_thread = threading.Thread(target=redirect.serve_forever, daemon=True)
+        redirect_thread.start()
+        try:
+>           response = runtime.urllib_transport(
+                f"http://127.0.0.1:{redirect.server_port}/chat/completions",
+                b"{}", "test-secret-never-persist", 2)
+
+tests\test_sprint_monitor_runtime.py:127: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+endpoint = 'http://127.0.0.1:53926/chat/completions', body = b'{}'
+api_key = 'test-secret-never-persist', timeout = 2
+
+    def urllib_transport(endpoint: str, body: bytes, api_key: str, timeout: int) -> HTTPResult:
+        request = urllib.request.Request(
+            endpoint, data=body, method="POST",
+            headers={"Content-Type": "application/json", "Authorization": f"Bearer {api_key}"},
+        )
+        class NoRedirect(urllib.request.HTTPRedirectHandler):
+            def redirect_request(self, req, fp, code, msg, headers, newurl):
+                return None
+        opener = urllib.request.build_opener(urllib.request.ProxyHandler({}), NoRedirect())
+        try:
+            with opener.open(request, timeout=timeout) as response:
+                return HTTPResult(response.status, response.read(), _safe_response_headers(response.headers))
+        except urllib.error.HTTPError as exc:
+            try:
+                raw = exc.read()
+            finally:
+                exc.close()
+            return HTTPResult(exc.code, raw, _safe_response_headers(exc.headers or {}))
+        except (urllib.error.URLError, TimeoutError, OSError) as exc:
+>           raise TransportFailure(type(exc).__name__, str(exc)) from exc
+E           scripts.run_sprint_monitor.TransportFailure: [WinError 10053] ��������е�������ֹ��һ���ѽ��������ӡ�
+
+scripts\run_sprint_monitor.py:390: TransportFailure
+=========================== short test summary info ===========================
+SKIPPED [1] tests\test_m1_p0_preflight_runner.py:142: opt-in host-dependent Windows owner-table integration check
+FAILED tests/test_sprint_monitor_runtime.py::test_monitor_http_transport_does_not_forward_authentication_through_redirect
+1 failed, 445 passed, 1 skipped in 205.83s (0:03:25)
