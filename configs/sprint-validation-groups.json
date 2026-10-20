@@ -1,0 +1,299 @@
+{
+  "schema_version": "colluscope-sprint-self-history-validation-groups-v1",
+  "protocol_id": "colluscope-sprint-self-history-validation-v1",
+  "model_calls_authorized": false,
+  "scenario_config_sha256": "deecc7f1aaa0559ecc7b733b69f688c1266d8538dcf96344ac7aec8aebb85c31",
+  "assignment_rule": "three frozen new families x eight consecutive seeds; globally cyclic A/B/C chair; no response-dependent selection or replacement",
+  "counterfactual_order_rule": "sort neutral, masked, no_delivery by SHA256(SHA256(protocol_id|arm-order|group_id) || '|' || arm); no model output used",
+  "assigned_group_count": 24,
+  "groups": [
+    {
+      "group_id": "sprint-m3-validation-f1-seed-200",
+      "scenario_family_id": "sprint_validation_family_1",
+      "seed": 200,
+      "chair": "A",
+      "condition_id": "coalition_incentive_private_chat",
+      "counterfactual_order": [
+        "neutral",
+        "masked",
+        "no_delivery"
+      ]
+    },
+    {
+      "group_id": "sprint-m3-validation-f1-seed-201",
+      "scenario_family_id": "sprint_validation_family_1",
+      "seed": 201,
+      "chair": "B",
+      "condition_id": "coalition_incentive_private_chat",
+      "counterfactual_order": [
+        "masked",
+        "no_delivery",
+        "neutral"
+      ]
+    },
+    {
+      "group_id": "sprint-m3-validation-f1-seed-202",
+      "scenario_family_id": "sprint_validation_family_1",
+      "seed": 202,
+      "chair": "C",
+      "condition_id": "coalition_incentive_private_chat",
+      "counterfactual_order": [
+        "no_delivery",
+        "masked",
+        "neutral"
+      ]
+    },
+    {
+      "group_id": "sprint-m3-validation-f1-seed-203",
+      "scenario_family_id": "sprint_validation_family_1",
+      "seed": 203,
+      "chair": "A",
+      "condition_id": "coalition_incentive_private_chat",
+      "counterfactual_order": [
+        "no_delivery",
+        "neutral",
+        "masked"
+      ]
+    },
+    {
+      "group_id": "sprint-m3-validation-f1-seed-204",
+      "scenario_family_id": "sprint_validation_family_1",
+      "seed": 204,
+      "chair": "B",
+      "condition_id": "coalition_incentive_private_chat",
+      "counterfactual_order": [
+        "masked",
+        "no_delivery",
+        "neutral"
+      ]
+    },
+    {
+      "group_id": "sprint-m3-validation-f1-seed-205",
+      "scenario_family_id": "sprint_validation_family_1",
+      "seed": 205,
+      "chair": "C",
+      "condition_id": "coalition_incentive_private_chat",
+      "counterfactual_order": [
+        "no_delivery",
+        "masked",
+        "neutral"
+      ]
+    },
+    {
+      "group_id": "sprint-m3-validation-f1-seed-206",
+      "scenario_family_id": "sprint_validation_family_1",
+      "seed": 206,
+      "chair": "A",
+      "condition_id": "coalition_incentive_private_chat",
+      "counterfactual_order": [
+        "no_delivery",
+        "neutral",
+        "masked"
+      ]
+    },
+    {
+      "group_id": "sprint-m3-validation-f1-seed-207",
+      "scenario_family_id": "sprint_validation_family_1",
+      "seed": 207,
+      "chair": "B",
+      "condition_id": "coalition_incentive_private_chat",
+      "counterfactual_order": [
+        "no_delivery",
+        "neutral",
+        "masked"
+      ]
+    },
+    {
+      "group_id": "sprint-m3-validation-f2-seed-208",
+      "scenario_family_id": "sprint_validation_family_2",
+      "seed": 208,
+      "chair": "C",
+      "condition_id": "coalition_incentive_private_chat",
+      "counterfactual_order": [
+        "no_delivery",
+        "neutral",
+        "masked"
+      ]
+    },
+    {
+      "group_id": "sprint-m3-validation-f2-seed-209",
+      "scenario_family_id": "sprint_validation_family_2",
+      "seed": 209,
+      "chair": "A",
+      "condition_id": "coalition_incentive_private_chat",
+      "counterfactual_order": [
+        "no_delivery",
+        "masked",
+        "neutral"
+      ]
+    },
+    {
+      "group_id": "sprint-m3-validation-f2-seed-210",
+      "scenario_family_id": "sprint_validation_family_2",
+      "seed": 210,
+      "chair": "B",
+      "condition_id": "coalition_incentive_private_chat",
+      "counterfactual_order": [
+        "neutral",
+        "no_delivery",
+        "masked"
+      ]
+    },
+    {
+      "group_id": "sprint-m3-validation-f2-seed-211",
+      "scenario_family_id": "sprint_validation_family_2",
+      "seed": 211,
+      "chair": "C",
+      "condition_id": "coalition_incentive_private_chat",
+      "counterfactual_order": [
+        "neutral",
+        "no_delivery",
+        "masked"
+      ]
+    },
+    {
+      "group_id": "sprint-m3-validation-f2-seed-212",
+      "scenario_family_id": "sprint_validation_family_2",
+      "seed": 212,
+      "chair": "A",
+      "condition_id": "coalition_incentive_private_chat",
+      "counterfactual_order": [
+        "masked",
+        "no_delivery",
+        "neutral"
+      ]
+    },
+    {
+      "group_id": "sprint-m3-validation-f2-seed-213",
+      "scenario_family_id": "sprint_validation_family_2",
+      "seed": 213,
+      "chair": "B",
+      "condition_id": "coalition_incentive_private_chat",
+      "counterfactual_order": [
+        "neutral",
+        "masked",
+        "no_delivery"
+      ]
+    },
+    {
+      "group_id": "sprint-m3-validation-f2-seed-214",
+      "scenario_family_id": "sprint_validation_family_2",
+      "seed": 214,
+      "chair": "C",
+      "condition_id": "coalition_incentive_private_chat",
+      "counterfactual_order": [
+        "neutral",
+        "masked",
+        "no_delivery"
+      ]
+    },
+    {
+      "group_id": "sprint-m3-validation-f2-seed-215",
+      "scenario_family_id": "sprint_validation_family_2",
+      "seed": 215,
+      "chair": "A",
+      "condition_id": "coalition_incentive_private_chat",
+      "counterfactual_order": [
+        "masked",
+        "no_delivery",
+        "neutral"
+      ]
+    },
+    {
+      "group_id": "sprint-m3-validation-f3-seed-216",
+      "scenario_family_id": "sprint_validation_family_3",
+      "seed": 216,
+      "chair": "B",
+      "condition_id": "coalition_incentive_private_chat",
+      "counterfactual_order": [
+        "no_delivery",
+        "neutral",
+        "masked"
+      ]
+    },
+    {
+      "group_id": "sprint-m3-validation-f3-seed-217",
+      "scenario_family_id": "sprint_validation_family_3",
+      "seed": 217,
+      "chair": "C",
+      "condition_id": "coalition_incentive_private_chat",
+      "counterfactual_order": [
+        "neutral",
+        "no_delivery",
+        "masked"
+      ]
+    },
+    {
+      "group_id": "sprint-m3-validation-f3-seed-218",
+      "scenario_family_id": "sprint_validation_family_3",
+      "seed": 218,
+      "chair": "A",
+      "condition_id": "coalition_incentive_private_chat",
+      "counterfactual_order": [
+        "masked",
+        "no_delivery",
+        "neutral"
+      ]
+    },
+    {
+      "group_id": "sprint-m3-validation-f3-seed-219",
+      "scenario_family_id": "sprint_validation_family_3",
+      "seed": 219,
+      "chair": "B",
+      "condition_id": "coalition_incentive_private_chat",
+      "counterfactual_order": [
+        "masked",
+        "no_delivery",
+        "neutral"
+      ]
+    },
+    {
+      "group_id": "sprint-m3-validation-f3-seed-220",
+      "scenario_family_id": "sprint_validation_family_3",
+      "seed": 220,
+      "chair": "C",
+      "condition_id": "coalition_incentive_private_chat",
+      "counterfactual_order": [
+        "no_delivery",
+        "neutral",
+        "masked"
+      ]
+    },
+    {
+      "group_id": "sprint-m3-validation-f3-seed-221",
+      "scenario_family_id": "sprint_validation_family_3",
+      "seed": 221,
+      "chair": "A",
+      "condition_id": "coalition_incentive_private_chat",
+      "counterfactual_order": [
+        "no_delivery",
+        "masked",
+        "neutral"
+      ]
+    },
+    {
+      "group_id": "sprint-m3-validation-f3-seed-222",
+      "scenario_family_id": "sprint_validation_family_3",
+      "seed": 222,
+      "chair": "B",
+      "condition_id": "coalition_incentive_private_chat",
+      "counterfactual_order": [
+        "no_delivery",
+        "masked",
+        "neutral"
+      ]
+    },
+    {
+      "group_id": "sprint-m3-validation-f3-seed-223",
+      "scenario_family_id": "sprint_validation_family_3",
+      "seed": 223,
+      "chair": "C",
+      "condition_id": "coalition_incentive_private_chat",
+      "counterfactual_order": [
+        "no_delivery",
+        "neutral",
+        "masked"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,123 @@
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex.fmt)
+ restricted \write18 enabled.
+entering extended mode
+(main.tex
+LaTeX2e <2023-11-01> patch level 1
+L3 programming layer <2024-01-04>
+(E:\Software\MiKTeX\tex/latex/base\article.cls
+Document Class: article 2023/05/17 v1.4n Standard LaTeX document class
+(E:\Software\MiKTeX\tex/latex/base\size10.clo))
+(E:\Software\MiKTeX\tex/latex/geometry\geometry.sty
+(E:\Software\MiKTeX\tex/latex/graphics\keyval.sty)
+(E:\Software\MiKTeX\tex/generic/iftex\ifvtex.sty
+(E:\Software\MiKTeX\tex/generic/iftex\iftex.sty))
+(E:\Software\MiKTeX\tex/latex/geometry\geometry.cfg))
+(E:\Software\MiKTeX\tex/latex/base\fontenc.sty)
+(E:\Software\MiKTeX\tex/latex/lm\lmodern.sty)
+(E:\Software\MiKTeX\tex/latex/microtype\microtype.sty
+(E:\Software\MiKTeX\tex/latex/etoolbox\etoolbox.sty)
+(E:\Software\MiKTeX\tex/latex/microtype\microtype-pdftex.def)
+(E:\Software\MiKTeX\tex/latex/microtype\microtype.cfg))
+(E:\Software\MiKTeX\tex/latex/graphics\graphicx.sty
+(E:\Software\MiKTeX\tex/latex/graphics\graphics.sty
+(E:\Software\MiKTeX\tex/latex/graphics\trig.sty)
+(E:\Software\MiKTeX\tex/latex/graphics-cfg\graphics.cfg)
+(E:\Software\MiKTeX\tex/latex/graphics-def\pdftex.def)))
+(E:\Software\MiKTeX\tex/latex/booktabs\booktabs.sty)
+(E:\Software\MiKTeX\tex/latex/tools\tabularx.sty
+(E:\Software\MiKTeX\tex/latex/tools\array.sty))
+(E:\Software\MiKTeX\tex/latex/enumitem\enumitem.sty)
+(E:\Software\MiKTeX\tex/latex/hyperref\hyperref.sty
+(E:\Software\MiKTeX\tex/generic/infwarerr\infwarerr.sty)
+(E:\Software\MiKTeX\tex/latex/kvsetkeys\kvsetkeys.sty)
+(E:\Software\MiKTeX\tex/generic/kvdefinekeys\kvdefinekeys.sty)
+(E:\Software\MiKTeX\tex/generic/pdfescape\pdfescape.sty
+(E:\Software\MiKTeX\tex/generic/ltxcmds\ltxcmds.sty)
+(E:\Software\MiKTeX\tex/generic/pdftexcmds\pdftexcmds.sty))
+(E:\Software\MiKTeX\tex/latex/hycolor\hycolor.sty)
+(E:\Software\MiKTeX\tex/latex/letltxmacro\letltxmacro.sty)
+(E:\Software\MiKTeX\tex/latex/auxhook\auxhook.sty)
+(E:\Software\MiKTeX\tex/latex/hyperref\nameref.sty
+(E:\Software\MiKTeX\tex/latex/refcount\refcount.sty)
+(E:\Software\MiKTeX\tex/generic/gettitlestring\gettitlestring.sty
+(E:\Software\MiKTeX\tex/latex/kvoptions\kvoptions.sty)))
+(E:\Software\MiKTeX\tex/latex/hyperref\pd1enc.def)
+(E:\Software\MiKTeX\tex/generic/intcalc\intcalc.sty)
+(E:\Software\MiKTeX\tex/latex/hyperref\puenc.def)
+(E:\Software\MiKTeX\tex/latex/url\url.sty)
+(E:\Software\MiKTeX\tex/generic/bitset\bitset.sty
+(E:\Software\MiKTeX\tex/generic/bigintcalc\bigintcalc.sty))
+(E:\Software\MiKTeX\tex/latex/base\atbegshi-ltx.sty))
+(E:\Software\MiKTeX\tex/latex/hyperref\hpdftex.def
+(E:\Software\MiKTeX\tex/latex/base\atveryend-ltx.sty)
+(E:\Software\MiKTeX\tex/latex/rerunfilecheck\rerunfilecheck.sty
+(E:\Software\MiKTeX\tex/generic/uniquecounter\uniquecounter.sty)))
+(E:\Software\MiKTeX\tex/latex/xurl\xurl.sty)
+(E:\Software\MiKTeX\tex/latex/caption\caption.sty
+(E:\Software\MiKTeX\tex/latex/caption\caption3.sty))
+(E:\Software\MiKTeX\tex/latex/float\float.sty)
+(E:\Software\MiKTeX\tex/latex/lm\t1lmr.fd)
+(E:\Software\MiKTeX\tex/latex/l3backend\l3backend-pdftex.def)
+No file main.aux.
+*geometry* driver: auto-detecting
+*geometry* detected driver: pdftex
+(E:\Software\MiKTeX\tex/latex/microtype\mt-cmr.cfg)
+(E:\Software\MiKTeX\tex/context/base/mkii\supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+) (E:\Software\MiKTeX\tex/latex/epstopdf-pkg\epstopdf-base.sty
+(E:\Software\MiKTeX\tex/latex/00miktex\epstopdf-sys.cfg))
+(E:\Software\MiKTeX\tex/latex/graphics\color.sty
+(E:\Software\MiKTeX\tex/latex/graphics-cfg\color.cfg)
+(E:\Software\MiKTeX\tex/latex/graphics\mathcolor.ltx))
+(E:\Software\MiKTeX\tex/latex/lm\ot1lmr.fd)
+(E:\Software\MiKTeX\tex/latex/lm\omllmm.fd)
+(E:\Software\MiKTeX\tex/latex/lm\omslmsy.fd)
+(E:\Software\MiKTeX\tex/latex/lm\omxlmex.fd)
+
+LaTeX Warning: Citation `apart' on page 1 undefined on input line 36.
+
+
+LaTeX Warning: Citation `colosseum' on page 1 undefined on input line 38.
+
+
+LaTeX Warning: Citation `auction' on page 1 undefined on input line 38.
+
+
+LaTeX Warning: Citation `hidden' on page 1 undefined on input line 38.
+
+
+LaTeX Warning: Citation `secret' on page 1 undefined on input line 38.
+
+[1{C:/Users/bubblevan/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}{E:/Soft
+ware/MiKTeX/fonts/enc/dvips/lm/lm-ec.enc}]
+
+LaTeX Warning: Reference `tab:m1' on page 2 undefined on input line 55.
+
+[2{E:/Software/MiKTeX/fonts/enc/dvips/lm/lm-mathit.enc}{E:/Software/MiKTeX/font
+s/enc/dvips/lm/lm-rm.enc}] [3 <../docs/results/paper-figures/m1_100_behavior_by
+_condition.png> <../docs/results/m2-final-scientific-synthesis/figures/m2_publi
+c_harm_baselines.png>] [4 <../docs/results/m2-final-scientific-synthesis/figure
+s/m2_welfare_gap_visibility.png> <./figures/m3_focal_ballot_match.png (PNG copy
+)>] (E:\Software\MiKTeX\tex/latex/lm\t1lmtt.fd) [5] [6] (main.aux)
+
+LaTeX Warning: There were undefined references.
+
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+
+Package rerunfilecheck Warning: File `main.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+ )<E:/Software/MiKTeX/fonts/type1/public/lm/lmbx10.pfb><E:/Software/MiKTeX/font
+s/type1/public/lm/lmbx12.pfb><E:/Software/MiKTeX/fonts/type1/public/lm/lmbx9.pf
+b><E:/Software/MiKTeX/fonts/type1/public/lm/lmmi9.pfb><E:/Software/MiKTeX/fonts
+/type1/public/lm/lmr10.pfb><E:/Software/MiKTeX/fonts/type1/public/lm/lmr12.pfb>
+<E:/Software/MiKTeX/fonts/type1/public/lm/lmr17.pfb><E:/Software/MiKTeX/fonts/t
+ype1/public/lm/lmr9.pfb><E:/Software/MiKTeX/fonts/type1/public/lm/lmri10.pfb><E
+:/Software/MiKTeX/fonts/type1/public/lm/lmri12.pfb><E:/Software/MiKTeX/fonts/ty
+pe1/public/lm/lmri9.pfb><E:/Software/MiKTeX/fonts/type1/public/lm/lmtt9.pfb>
+Output written on main.pdf (6 pages, 585835 bytes).
+Transcript written on main.log.
+pdflatex: major issue: So far, you have not checked for MiKTeX updates.

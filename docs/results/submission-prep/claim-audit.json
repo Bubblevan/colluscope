@@ -1,0 +1,107 @@
+{
+  "audit_id": "submission-claim-metric-recompute-v1",
+  "input_sha256": {
+    "docs/results/m2-final-scientific-synthesis/m2_recomputed_predictions.csv": "44149c403949a8ca1657ad741c4940d29de3fa50002261c62038bdc26c575531",
+    "docs/results/m3-mechanism-audit-final/m3_arm_summary.csv": "d39405e5b6e2cc82fc5ececa57d7cd0cd7413fb051fc8dd2c3afb263da8c2a22",
+    "docs/results/m3-mechanism-audit-final/m3_group_results.csv": "c2aa043d8aef430ff28ce3bbc3592e09ad817c4cf82681785bff287af94b3c0a",
+    "docs/results/m3-mechanism-audit-final/m3_paired_contrasts.csv": "b166227c7761398832d05de9bee98ba51ff745c26b2099327afbcfd971370b27",
+    "docs/results/m3-mechanism-audit-final/m3_token_matching_summary.csv": "682d44f4a43869f19c1ee5e2c8320ecea62f0f34533a3e1816b72982a585c0ea",
+    "docs/results/paper-figures/m1_100_behavior_summary.csv": "aa76a4933178344d9b0a327f5adea4a0ccbfed87cdf42e3ce1cdadcb8ad653f6"
+  },
+  "m1_prospective": {
+    "assigned_n": 75,
+    "condition_target_and_regret_counts": {
+      "coalition_incentive_no_private_chat": [
+        0,
+        0
+      ],
+      "coalition_incentive_private_chat": [
+        9,
+        9
+      ],
+      "common_incentive_parallel_behavior": [
+        0,
+        1
+      ],
+      "normal_cooperation": [
+        0,
+        2
+      ],
+      "private_chat_no_side_bonus": [
+        0,
+        1
+      ]
+    },
+    "positive_regret_n": 13
+  },
+  "m2_f2_f3": {
+    "always_negative_public_harm": {
+      "correct": 294,
+      "n": 350
+    },
+    "structured_public_only_public_harm": {
+      "answer_exposed": true,
+      "correct": 50,
+      "n": 50
+    },
+    "task_n_and_exact_correct": {
+      "allocation_proposal": {
+        "correct": 181,
+        "n": 200
+      },
+      "ballot_disagreement": {
+        "correct": 350,
+        "n": 350
+      },
+      "message_delivery": {
+        "correct": 200,
+        "n": 200
+      },
+      "proposal_action_concordance": {
+        "correct": 149,
+        "n": 150
+      },
+      "public_harm": {
+        "correct": 158,
+        "n": 350
+      }
+    }
+  },
+  "m3": {
+    "arm_counts": {
+      "masked": [
+        8,
+        0,
+        12.0
+      ],
+      "neutral": [
+        5,
+        3,
+        9.75
+      ],
+      "no_delivery": [
+        5,
+        3,
+        9.75
+      ],
+      "proposal": [
+        8,
+        0,
+        12.0
+      ]
+    },
+    "assigned_groups": 12,
+    "eligible_groups": 8,
+    "no_delivery_full_prompt_abs_delta_mean": 45.125,
+    "no_delivery_full_prompt_abs_delta_median": 45.0,
+    "post_hoc_self_history": {
+      "match_changed_neutral_n": 0,
+      "match_n": 5,
+      "nonmatch_changed_neutral_n": 3,
+      "nonmatch_n": 3
+    }
+  },
+  "model_calls": 0,
+  "scope": "recompute headline manuscript metrics from frozen sanitized audit CSVs; does not read or mutate private M3 raw run",
+  "status": "PASS"
+}

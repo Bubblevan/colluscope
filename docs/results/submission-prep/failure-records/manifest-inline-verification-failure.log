@@ -1,0 +1,12 @@
+Preserved failed one-off verification attempt (2026-10-20):
+
+The PowerShell `python -c` payload contained literal `\\n` sequences rather than newline characters. Python rejected it before reading the manifest:
+
+```
+  File "<string>", line 1
+    import hashlib,json,pathlib; m=json.loads(pathlib.Path('docs/results/submission-prep/submission_manifest.json').read_text()); bad=[];\\nfor x in m['files']:\\n p=pathlib.Path(x['path']); h=hashlib.sha256(p.read_bytes()).hexdigest() if p.is_file() else None;\\n if h!=x['sha256'] or h is None: bad.append(x['path'])\\nunsafe=[x['path'] for x in m['files'] if x['path'].replace('\\\\','/').startswith('runs/m3/') or 'raw-private' in x['path'].lower()]; print(...)
+                                                                                                                                          ^
+SyntaxError: unexpected character after line continuation character
+```
+
+No files were changed by the failed command. Replaced the inline payload with `scripts/verify_submission_manifest.py`; no research or model calls are involved.

@@ -1,0 +1,20 @@
+{
+  "record_id": "submission-validity-review-01",
+  "date": "2026-10-20",
+  "stage": "offline protocol preparation; before any Sprint validation model call",
+  "failed_artifact": "configs/sprint-validation-scenarios.json v1",
+  "failed_artifact_sha256": "54b2617aee5bdb8f6b536a0a6d242b74dc1af4f573d66fc7d9ae0ef29c963826",
+  "preserved_copy": "docs/results/submission-prep/failure-records/sprint-validation-scenarios-v1-score-field-names.json",
+  "counterexample": "The values target_welfare + 20 (57, 52, 48) and optimal_welfare (43, 44, 46) were named A_B_target_score_with_private_bonus and A_B_score_at_public_optimum_without_bonus. They are one recipient's realized score under the frozen rule, not the sum of A and B's two scores. The misleading name could inflate or confuse the represented incentive.",
+  "repair": "Regenerate only the new proposal config with explicit per-recipient and combined-A/B score fields; correct the protocol table and reschedule-hash binding. Keep candidate matrices, selection algorithm, target, bonus amount, groups, prompts and all M0-M3 artifacts unchanged.",
+  "corrected_config_sha256": "deecc7f1aaa0559ecc7b733b69f688c1266d8538dcf96344ac7aec8aebb85c31",
+  "corrected_group_manifest_sha256": "d6f79c55c89cabaee841f7ffd0d6b2580e789baf9be463c7a6c851b6e9f3b6a4",
+  "model_calls": 0,
+  "old_values_removed_from_history": false,
+  "old_M0_M3_artifacts_modified": false,
+  "verification": [
+    "python scripts/freeze_submission_validation_scenarios.py --check",
+    "python scripts/freeze_submission_validation_groups.py --check"
+  ],
+  "status": "RESOLVED_BEFORE_INFERENCE"
+}

@@ -1,0 +1,5 @@
+source=submission-prep\paper.md
+source_sha256=79507f9b4f265f9aaee711db4a143bf073dbc52664df79431f7fdd265e47fa87
+abstract_words=138
+output=output\pdf\ColluScope_Submission_Candidate_2026-10-20.pdf
+output_sha256=1be807a6860cbf8bff868dd710a490d99308ead643c28a3f0f5777aa9ba8d8bc

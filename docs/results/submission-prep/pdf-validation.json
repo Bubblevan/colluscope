@@ -1,0 +1,65 @@
+{
+  "clickable_reference_count": 5,
+  "embedded_raster_figure_count": 4,
+  "font_names_from_pdf_text_objects": [
+    "Helvetica",
+    "Helvetica-Bold",
+    "Helvetica-Oblique"
+  ],
+  "page_count": 5,
+  "page_size": "US Letter",
+  "pages": [
+    {
+      "height_pt": 792,
+      "hyperlinks": 0,
+      "page": 1,
+      "raster_images": 0,
+      "text_chars": 4258,
+      "width_pt": 612
+    },
+    {
+      "height_pt": 792,
+      "hyperlinks": 0,
+      "page": 2,
+      "raster_images": 0,
+      "text_chars": 3341,
+      "width_pt": 612
+    },
+    {
+      "height_pt": 792,
+      "hyperlinks": 0,
+      "page": 3,
+      "raster_images": 2,
+      "text_chars": 1079,
+      "width_pt": 612
+    },
+    {
+      "height_pt": 792,
+      "hyperlinks": 0,
+      "page": 4,
+      "raster_images": 2,
+      "text_chars": 2325,
+      "width_pt": 612
+    },
+    {
+      "height_pt": 792,
+      "hyperlinks": 5,
+      "page": 5,
+      "raster_images": 0,
+      "text_chars": 4347,
+      "width_pt": 612
+    }
+  ],
+  "pdf_sha256": "826a90742690ce88644a1b07e5bc35c48804a4c2611ab7d10394c8b62452f1cd",
+  "pdf_size_bytes": 419761,
+  "required_clickable_urls": [
+    "https://apartresearch.com/sprints/ai-collusion-research-sprint-2026-10-23-to-2026-10-25",
+    "https://arxiv.org/abs/2602.15198",
+    "https://arxiv.org/abs/2507.01413",
+    "https://arxiv.org/abs/2410.03768",
+    "https://proceedings.neurips.cc/paper_files/paper/2024/hash/861f7dad098aec1c3560fb7add468d41-Abstract-Conference.html"
+  ],
+  "required_headings_present": true,
+  "status": "PASS_STRUCTURAL_CHECKS",
+  "visual_inspection": "manual page PNG review completed separately; see SUBMISSION_FORMAT_AND_RENDER_CHECK.md"
+}

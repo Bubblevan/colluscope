@@ -1,0 +1,4 @@
+source_sha256=87be3b5b265381786b01c89cf21ef9dc07fa1dac80491e0bf6257c1005c7f279
+output=submission-prep\figures\m3_focal_ballot_match.png
+output_sha256=3f8d5cdd43da01ec14ba01b73e980c7fcd79ab00cf29e1d3037bb8dbabf28421
+dimensions=2760x1320; scale=3

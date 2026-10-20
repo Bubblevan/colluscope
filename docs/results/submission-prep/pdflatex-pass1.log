@@ -1,0 +1,54 @@
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex.fmt)
+ restricted \write18 enabled.
+entering extended mode
+(main.tex
+LaTeX2e <2023-11-01> patch level 1
+L3 programming layer <2024-01-04>
+(E:\Software\MiKTeX\tex/latex/base\article.cls
+Document Class: article 2023/05/17 v1.4n Standard LaTeX document class
+(E:\Software\MiKTeX\tex/latex/base\size10.clo))
+(E:\Software\MiKTeX\tex/latex/geometry\geometry.sty
+(E:\Software\MiKTeX\tex/latex/graphics\keyval.sty)
+(E:\Software\MiKTeX\tex/generic/iftex\ifvtex.sty
+(E:\Software\MiKTeX\tex/generic/iftex\iftex.sty))
+(E:\Software\MiKTeX\tex/latex/geometry\geometry.cfg))
+(E:\Software\MiKTeX\tex/latex/base\fontenc.sty)
+(E:\Software\MiKTeX\tex/latex/lm\lmodern.sty)
+(E:\Software\MiKTeX\tex/latex/microtype\microtype.sty
+(E:\Software\MiKTeX\tex/latex/etoolbox\etoolbox.sty)
+(E:\Software\MiKTeX\tex/latex/microtype\microtype-pdftex.def)
+(E:\Software\MiKTeX\tex/latex/microtype\microtype.cfg))
+(E:\Software\MiKTeX\tex/latex/graphics\graphicx.sty
+(E:\Software\MiKTeX\tex/latex/graphics\graphics.sty
+(E:\Software\MiKTeX\tex/latex/graphics\trig.sty)
+(E:\Software\MiKTeX\tex/latex/graphics-cfg\graphics.cfg)
+(E:\Software\MiKTeX\tex/latex/graphics-def\pdftex.def)))
+(E:\Software\MiKTeX\tex/latex/booktabs\booktabs.sty)
+(E:\Software\MiKTeX\tex/latex/tools\tabularx.sty
+(E:\Software\MiKTeX\tex/latex/tools\array.sty))
+(E:\Software\MiKTeX\tex/latex/enumitem\enumitem.sty)
+(E:\Software\MiKTeX\tex/latex/hyperref\hyperref.sty
+(E:\Software\MiKTeX\tex/generic/infwarerr\infwarerr.sty)
+(E:\Software\MiKTeX\tex/latex/kvsetkeys\kvsetkeys.sty)
+(E:\Software\MiKTeX\tex/generic/kvdefinekeys\kvdefinekeys.sty)
+(E:\Software\MiKTeX\tex/generic/pdfescape\pdfescape.sty
+(E:\Software\MiKTeX\tex/generic/ltxcmds\ltxcmds.sty)
+(E:\Software\MiKTeX\tex/generic/pdftexcmds\pdftexcmds.sty))
+(E:\Software\MiKTeX\tex/latex/hycolor\hycolor.sty)
+(E:\Software\MiKTeX\tex/latex/letltxmacro\letltxmacro.sty)
+(E:\Software\MiKTeX\tex/latex/auxhook\auxhook.sty)
+(E:\Software\MiKTeX\tex/latex/hyperref\nameref.sty
+(E:\Software\MiKTeX\tex/latex/refcount\refcount.sty)
+(E:\Software\MiKTeX\tex/generic/gettitlestring\gettitlestring.sty
+(E:\Software\MiKTeX\tex/latex/kvoptions\kvoptions.sty)))
+(E:\Software\MiKTeX\tex/latex/hyperref\pd1enc.def)
+(E:\Software\MiKTeX\tex/generic/intcalc\intcalc.sty)
+(E:\Software\MiKTeX\tex/latex/hyperref\puenc.def)
+(E:\Software\MiKTeX\tex/latex/url\url.sty)
+(E:\Software\MiKTeX\tex/generic/bitset\bitset.sty
+(E:\Software\MiKTeX\tex/generic/bigintcalc\bigintcalc.sty))
+(E:\Software\MiKTeX\tex/latex/base\atbegshi-ltx.sty))
+(E:\Software\MiKTeX\tex/latex/hyperref\hpdftex.def
+(E:\Software\MiKTeX\tex/latex/base\atveryend-ltx.sty)
+(E:\Software\MiKTeX\tex/latex/rerunfilecheck\rerunfilecheck.sty
+(E:\Software\MiKTeX\tex/generic/uniquecounter\uniquecounter.sty)))
