@@ -1,0 +1,169 @@
+{
+  "actual_external_cost_usd": 0,
+  "actual_model_calls": 0,
+  "actual_wallclock_minutes": 13,
+  "approval_required_for_next_action": true,
+  "authorization_id": null,
+  "belief_updates": [
+    {
+      "claim_id": "m4-b5-raw-response-provenance",
+      "evidence_refs": [
+        {
+          "path": "docs/results/research-sprint-20261021/raw-response-repeatability-v5/m4-b5-raw-response-repeatability-audit.json",
+          "sha256": "1926e9c60f565ef6b18ab1c3df7cd17326694b0e6cb88899fa7b500b67d7f62d"
+        },
+        {
+          "path": "docs/results/research-sprint-20261021/raw-response-repeatability-v5/m4-b5-raw-response-repeatability-rows.csv",
+          "sha256": "2ca94b277f71dafb0d81534e9cb7b83b31ba9ab4cb99b2d4f16b2ecb44efcc62"
+        },
+        {
+          "path": "docs/M4_B5_RAW_RESPONSE_REPEATABILITY_EVIDENCE.md",
+          "sha256": "f61e7c2b1cd702f671029b250651f52175ef1441f3f36f67351678761b8f13aa"
+        }
+      ],
+      "outcome": "SUPPORTED",
+      "remaining_alternatives": "The provider alias is mutable; matching reported fingerprints do not establish identical hidden serving state. The audit does not identify randomness, message semantics, the cause of cross-view changes, correctness, collusion, or intent.",
+      "statement": "Among the 48 preregistered historical/current exact-request B5 pairs, raw model tool-call labels differ in 19 pairs and every raw label/reference reproduces its stored row under a strict independent parser.",
+      "what_changed": "Independent raw parsing and association checks show the finite label differences are present in the retained model responses rather than introduced by the stored parser/scorer mapping."
+    }
+  ],
+  "closed_at_utc": "2026-10-20T21:56:58+00:00",
+  "closed_git_head": "176263c286cfe0ebe15bd6eb6b82c581d3c5df7c",
+  "decision": "PASS",
+  "denominator_summary": "48 exact-request pairs: 24 Public-only and 24 Privileged Audit; all 48 source associations and strict parses valid; no rows excluded.",
+  "evidence_class": "offline_reanalysis",
+  "experiment_id": "m4-b5-raw-response-repeatability-v1",
+  "failures_retained": true,
+  "material_update": {
+    "claim_id": "m4-b5-raw-response-provenance",
+    "evidence_refs": [
+      {
+        "path": "docs/results/research-sprint-20261021/raw-response-repeatability-v5/m4-b5-raw-response-repeatability-audit.json",
+        "sha256": "1926e9c60f565ef6b18ab1c3df7cd17326694b0e6cb88899fa7b500b67d7f62d"
+      },
+      {
+        "path": "docs/results/research-sprint-20261021/raw-response-repeatability-v5/m4-b5-raw-response-repeatability-rows.csv",
+        "sha256": "2ca94b277f71dafb0d81534e9cb7b83b31ba9ab4cb99b2d4f16b2ecb44efcc62"
+      },
+      {
+        "path": "docs/M4_B5_RAW_RESPONSE_REPEATABILITY_EVIDENCE.md",
+        "sha256": "f61e7c2b1cd702f671029b250651f52175ef1441f3f36f67351678761b8f13aa"
+      }
+    ],
+    "independent_critic_confirmed": true,
+    "remaining_alternatives": "Hidden provider state, mutable alias behavior, temporal serving changes and other unobserved factors remain possible; no causal view contrast is identified.",
+    "what_changed": "Raw tool-call parsing confirms 19 finite exact-request label disagreements and zero raw/stored mappings that differ; this narrows a measurement-integrity alternative but does not identify causal mechanisms."
+  },
+  "model_request_ledger": null,
+  "new_uncertainty_reduced": true,
+  "next_action": "Continue offline. If B5 remains a priority, preregister an interleaved repeatability design that varies evidence-view components separately. Do not dispatch or reuse the closed 232-request authorization; new model inference needs separate scope-specific approval.",
+  "next_action_evidence_class": "offline_reanalysis",
+  "next_action_kind": "continue_offline",
+  "next_action_max_external_cost_usd": 0,
+  "next_action_max_model_calls": 0,
+  "outcome_rationale": "In the frozen finite set of 48 historical/current exact-request pairs, 19 label disagreements are present in the raw tool-call arguments and all raw labels/references independently reproduce the stored rows. This does not identify why outputs differ or explain the earlier evidence-view effect.",
+  "outputs": [
+    {
+      "path": "docs/M4_B5_RAW_RESPONSE_REPEATABILITY_EVIDENCE.md",
+      "sha256": "f61e7c2b1cd702f671029b250651f52175ef1441f3f36f67351678761b8f13aa"
+    },
+    {
+      "path": "docs/M4_B5_RAW_RESPONSE_REPEATABILITY_DECISION.md",
+      "sha256": "6ba298b5ba32caaaeabef4a609b49b94fdd3416e8fa6c931a558a63a691bcf84"
+    },
+    {
+      "path": "docs/SCIENTIFIC_DIRECTION_UPDATE_20261021.md",
+      "sha256": "f7e6a87a42bbe804b65f8b0c89402c59c1eb72d35b9674972844616b22410625"
+    },
+    {
+      "path": "docs/ITERATION_LOG_APPENDIX_20261021.md",
+      "sha256": "a464497deb355b59f0139872144414fbfbf86956b2f0f85efb8cc2ef29b06a98"
+    },
+    {
+      "path": "docs/RESEARCH_RISK_REGISTER_ADDENDUM_20261021.md",
+      "sha256": "2ff44fd8353081f5b070e75a78832994c763a83610ea0f1b7fb73b97fb24ef1e"
+    },
+    {
+      "path": "docs/results/research-sprint-20261021/raw-response-repeatability-independent-critic-review-v2.md",
+      "sha256": "7ac870d6a907952e5effff3a6e382625483c9876c8575f4591857e77911c2c3e"
+    },
+    {
+      "path": "docs/results/research-sprint-20261021/raw-response-repeatability-blind-critic-packet-v2.md",
+      "sha256": "3903a3595f0ba8917628eb8307071fb23a9401634c5bdef74b3a8ecd1786fd84"
+    },
+    {
+      "path": "docs/results/research-sprint-20261021/raw-response-repeatability-v5/m4-b5-raw-response-repeatability-audit.json",
+      "sha256": "1926e9c60f565ef6b18ab1c3df7cd17326694b0e6cb88899fa7b500b67d7f62d"
+    },
+    {
+      "path": "docs/results/research-sprint-20261021/raw-response-repeatability-v5/m4-b5-raw-response-repeatability-rows.csv",
+      "sha256": "2ca94b277f71dafb0d81534e9cb7b83b31ba9ab4cb99b2d4f16b2ecb44efcc62"
+    },
+    {
+      "path": "docs/results/research-sprint-20261021/raw-response-repeatability-v5/rebuilt-schedule-check.json",
+      "sha256": "456600dd1dd969aef75fae848a8c900f38bb60612f0dcf1315f5da03ad0770a0"
+    },
+    {
+      "path": "docs/results/research-sprint-20261021/raw-response-repeatability-v5/logs/focused-tests.txt",
+      "sha256": "9b28ad03819f4063a94d270d57fb6ea1eb2a2be6aae2860d62fe0869be69c487"
+    },
+    {
+      "path": "docs/results/research-sprint-20261021/raw-response-repeatability-v5/logs/schedule-rebuild.txt",
+      "sha256": "741815f4aebbae99a5f9a946f80cdb4e733646e45fc904f695f9e92ac4005252"
+    },
+    {
+      "path": "docs/results/research-sprint-20261021/raw-response-repeatability-v5/logs/audit-replay.txt",
+      "sha256": "ef2345f51b8b1ebd356f2e77b1124d55d26290fc02adb90b25cfce51dfbd5e52"
+    },
+    {
+      "path": "docs/results/research-sprint-20261021/raw-response-repeatability-v5/logs/researchctl-audit-preclose-restored.json",
+      "sha256": "e18b4bc841381fa3cb2ea9cf50dd58b5a3f7a97fd0fc2b0377254d3fd95d5942"
+    },
+    {
+      "path": "docs/results/research-sprint-20261021/raw-response-repeatability-v5/logs/researchctl-audit-preclosure.json",
+      "sha256": "cbcc975bf6b70e33762a8e07c2a7f6d8fe0efebd1112f4c5bc68e0d7503530ef"
+    },
+    {
+      "path": "docs/results/research-sprint-20261021/raw-response-repeatability-failures/initial-prereg-validation.log",
+      "sha256": "6d00ba4498fb7f559abf8a9df1ecb7fe599e9801d43bdecd154e1cda5a4f2bfb"
+    },
+    {
+      "path": "docs/results/research-sprint-20261021/raw-response-repeatability-failures/first-test-failure.log",
+      "sha256": "2dd4d9d067658172d4cda53bcfa3acf3f212348c10c1cd2536a95b59827e6036"
+    },
+    {
+      "path": "scripts/audit_m4_b5_raw_response_repeatability.py",
+      "sha256": "fd15a28d7a680d6b440f59e01f5fc6b6fd4788c0f4cac7fc2c294d49146ee775"
+    },
+    {
+      "path": "scripts/freeze_m4_b5_raw_response_repeatability.py",
+      "sha256": "194112dc47a7cab16b821b2519d5d4ee4f34e72dab45eb8cb672fe6a25613eee"
+    },
+    {
+      "path": "tests/test_m4_b5_raw_response_repeatability.py",
+      "sha256": "127174fc411b786b826f47f478a2132423f8551b84d7218c5e148d653176f1d6"
+    },
+    {
+      "path": "research/schedules/m4-b5-raw-response-repeatability-v1.json",
+      "sha256": "456600dd1dd969aef75fae848a8c900f38bb60612f0dcf1315f5da03ad0770a0"
+    },
+    {
+      "path": "research/experiments/m4-b5-raw-response-repeatability-v1/preregistration.json",
+      "sha256": "ae02ee38d191570445ad911e58219748209ef9bdd50085e32981f2f9a4fc5a06"
+    },
+    {
+      "path": "research/experiments/m4-b5-raw-response-repeatability-v1/execution-amendments.jsonl",
+      "sha256": "c654011d09af625b64b1a5dfb92f8ea5faae6b63f2a7730fa52eb976ccdcf9a0"
+    }
+  ],
+  "results_summary": "19/48 raw labels differed across historical/current exact request bodies with matching reported fingerprints (17/24 Public-only; 2/24 Privileged); all 96 raw row predictions matched stored labels and references. Raw refs differed in 3 privileged pairs; no full response bodies were identical. Focused tests 12/12 passed; researchctl audit passed. No new model/API calls.",
+  "review_artifact": {
+    "path": "docs/results/research-sprint-20261021/raw-response-repeatability-independent-critic-review-v2.md",
+    "sha256": "7ac870d6a907952e5effff3a6e382625483c9876c8575f4591857e77911c2c3e"
+  },
+  "review_finding": "Independent critic reviewed only sanitized v5 artifacts and code, confirmed the finite claim and public audit gates, and found no remaining material flaw. The critic did not access raw runs or rerun the tests.",
+  "review_mode": "independent",
+  "schema_version": 2,
+  "scientific_outcome": "SUPPORTED",
+  "scientific_update": "Finite raw-response label variation is supported for these retained observations. Parser/scorer mismatch does not explain these 19 rows. Provider-state identity, stochastic cause, the cause of prior evidence-view changes, semantic comprehension, collusion, and intent remain unidentified."
+}

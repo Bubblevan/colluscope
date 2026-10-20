@@ -155,6 +155,29 @@
       "what_changed": "Independent replay verified every assigned request and showed identical historical/current request bytes with label disagreement on many fixed cases, adding finite output non-repeatability as a concrete alternative to single-call view attribution."
     },
     {
+      "claim_id": "m4-b5-raw-response-provenance",
+      "evidence_refs": [
+        {
+          "path": "docs/results/research-sprint-20261021/raw-response-repeatability-v5/m4-b5-raw-response-repeatability-audit.json",
+          "sha256": "1926e9c60f565ef6b18ab1c3df7cd17326694b0e6cb88899fa7b500b67d7f62d"
+        },
+        {
+          "path": "docs/results/research-sprint-20261021/raw-response-repeatability-v5/m4-b5-raw-response-repeatability-rows.csv",
+          "sha256": "2ca94b277f71dafb0d81534e9cb7b83b31ba9ab4cb99b2d4f16b2ecb44efcc62"
+        },
+        {
+          "path": "docs/M4_B5_RAW_RESPONSE_REPEATABILITY_EVIDENCE.md",
+          "sha256": "f61e7c2b1cd702f671029b250651f52175ef1441f3f36f67351678761b8f13aa"
+        }
+      ],
+      "experiment_id": "m4-b5-raw-response-repeatability-v1",
+      "outcome": "SUPPORTED",
+      "remaining_alternatives": "The provider alias is mutable; matching reported fingerprints do not establish identical hidden serving state. The audit does not identify randomness, message semantics, the cause of cross-view changes, correctness, collusion, or intent.",
+      "scientific_outcome": "SUPPORTED",
+      "statement": "Among the 48 preregistered historical/current exact-request B5 pairs, raw model tool-call labels differ in 19 pairs and every raw label/reference reproduces its stored row under a strict independent parser.",
+      "what_changed": "Independent raw parsing and association checks show the finite label differences are present in the retained model responses rather than introduced by the stored parser/scorer mapping."
+    },
+    {
       "claim_id": "observable-evidence-boundary",
       "evidence_refs": [
         {

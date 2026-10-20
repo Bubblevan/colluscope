@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "archived_at": "2026-10-21",
-  "reason": "Keep active comparison set at three candidates while preserving the retired proposal-content direction unchanged in substance.",
+  "reason": "Preserve completed/retired hypotheses outside the maximum-three active candidate set; no historical preregistration or conclusion is removed.",
   "candidates": [
     {
       "hypothesis_id": "proposal-content-vs-format",
@@ -24,6 +24,30 @@
           "sha256": "e1db75339f0824630c10796d54c0dd04407215e9a64547c4727d88eb0d5bea8a"
         }
       ]
+    },
+    {
+      "competing_explanations": [
+        "The observed equality is an artifact of the finite scripted pair construction or serialization.",
+        "The permitted privileged evidence still does not identify latent intent without an intervention or defensible labels."
+      ],
+      "discriminating_prediction": "The frozen 12-pair audit verifies exact Public-only projection equality and independently enumerates which source-event sequence components differ in privileged views.",
+      "evidence_refs": [
+        {
+          "path": "docs/results/research-sprint-20261021/MATCHED_WORLD_SEQUENCE_VISIBILITY_AUDIT.md",
+          "sha256": "f76ec46a585431d9e5d58d5583790587be6ec37242943ef1dc223b31ea87dada"
+        },
+        {
+          "path": "docs/results/research-sprint-20261021/matched-world-sequence-visibility-v4-final.json",
+          "sha256": "36827cf5b7a84a97b7bca0d5a3b704cfc8ad3a55763d6fa1667f7d0beda85390"
+        }
+      ],
+      "hypothesis": "Some paired mechanisms with byte-identical authorized Public-only evidence cannot be distinguished from that evidence alone; predeclared additional permitted evidence or an intervention can distinguish at least some such pairs.",
+      "hypothesis_id": "observable-evidence-boundary",
+      "selection_note": "Finite construction-boundary evidence only: 8/12 pairs have at least one determinate sequence-component difference, and complete proposal-acceptance-both-actions is present in only 2/24 worlds. Supporting Track 2.3 framing; not a general impossibility result.",
+      "status": "supported",
+      "title": "Map the observable evidence boundary for coordination claims",
+      "archived_reason": "Moved from the active candidate comparison after the registered finite construction-boundary audit closed as SUPPORTED; the hypothesis and evidence remain preserved in this archive."
     }
-  ]
+  ],
+  "updated_at": "2026-10-21"
 }

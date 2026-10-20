@@ -1,0 +1,11 @@
+Attempt: strict JSON validation of the first preregistration draft.
+Outcome: FAIL before registration or data analysis.
+Sanitized error: duplicate JSON object key `ambiguous_gate`.
+Response: removed the duplicate key; the retained preregistration draft now proceeds through strict duplicate-key validation before registry registration.
+No raw run, model output, private message, API key, or HTTP payload was read by this validation attempt.
+
+Attempt: researchctl preregistration validation against the previously selected B5 context-sensitivity hypothesis.
+Outcome: FAIL before registry write or data analysis.
+Sanitized error: preregistered hypothesis text did not match the selected candidate.
+Cause: this is a narrower provenance sub-hypothesis and therefore requires its own explicit candidate entry. Added that candidate within the three-candidate policy, then aligned the preregistration identity; no experiment result was inspected.
+Follow-up validation: registration still failed because the candidate and preregistration differed by the words `the raw` versus `raw`; exact candidate-text matching is required. Removed the wording mismatch before retrying. No registry mutation or output inspection occurred.

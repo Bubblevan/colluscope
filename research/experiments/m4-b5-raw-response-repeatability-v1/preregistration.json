@@ -1,0 +1,86 @@
+{
+  "authorization": {
+    "approval_id": null,
+    "approval_required": false,
+    "scope": "Offline reanalysis only. Read retained local raw request/response files and sanitized result records; no model, API, network, or external calls."
+  },
+  "authorization_batch_sha256": null,
+  "budget": {
+    "max_external_cost_usd": 0,
+    "max_model_calls": 0,
+    "max_wallclock_minutes": 60
+  },
+  "competing_explanations": [
+    "The exact-request label disagreements are present in the raw model tool-call arguments, and independent strict parsing reproduces each stored label.",
+    "The raw arguments have matching labels, while differences appear in stored predictions, result-to-request association, or downstream parsing/scoring.",
+    "Raw response bodies or non-label argument fields differ while the binary label remains the same; this establishes response-byte variation but does not explain label disagreement.",
+    "A frozen request, response, model-fingerprint, or row-association integrity check fails, making the affected comparison invalid rather than evidence for either explanation."
+  ],
+  "evaluator_version": 2,
+  "evidence_class": "offline_reanalysis",
+  "experiment_id": "m4-b5-raw-response-repeatability-v1",
+  "hypothesis": "Among the 48 preselected historical/current B5 pairs with byte-identical request bodies and matching reported system fingerprints, any stored label disagreement will also be present in raw model tool-call arguments, and an independent strict parser will reproduce both stored labels. A parser or scorer mismatch would falsify this hypothesis.",
+  "hypothesis_id": "m4-b5-raw-response-provenance",
+  "prior_evidence": [
+    {
+      "claim": "The previous independent B5 campaign found identical request bytes and reported fingerprints for 24 historical/current Public-only pairs with 7/24 stored labels matching, and 24 Privileged Audit pairs with 22/24 labels matching; it did not independently parse historical raw tool arguments in that comparison.",
+      "path": "docs/M4_B5_CONTEXT_SENSITIVITY_DECISION.md",
+      "sha256": "cd9ab94ad8756013e952f2a06d89d0e8a0a6975dc4e3e3f7e511cc661d6dcbb6"
+    },
+    {
+      "claim": "The retained Branch A replay independently reconstructs 24 natural M4 public-harm references and reports 20/24 B5 Public-to-Privileged prediction-label changes with unchanged references.",
+      "path": "docs/BRANCH_A_EVIDENCE_INVARIANCE.md",
+      "sha256": "56381dee01cacdd49735c878b4c130a9b8c2059a4d4c4fa5b01e0cadf407dd34"
+    }
+  ],
+  "protocol": {
+    "ambiguous_gate": "Classify as INCONCLUSIVE if any of the 48 frozen rows lacks an intact request/response association or cannot be strictly parsed; retain every affected row and report its sanitized error code. This finite reanalysis does not estimate a population-level model variance.",
+    "analysis_plan": "For every frozen pair, verify historical and current request/response bytes against the schedule and original sidecar hashes. Independently parse exactly one assistant report_evidence function call with strict JSON duplicate-key rejection and the frozen label/evidence_refs schema. Compare raw argument-string hashes, canonical argument hashes, raw parsed labels, raw parsed evidence refs, stored labels, stored refs, finish reasons, returned model, system_fingerprint, and result/attempt association. Report all 48 rows and per-permission counts. Raw response variation is supported only when the raw arguments differ and independently reproduce the stored predictions; scorer/association concern is supported if raw parsing disagrees with a stored row. Never export argument text, message text, request bodies, response bodies, request IDs, or source case IDs. No p-values or population claims.",
+    "denominator": "48 exact-request historical/current response pairs: 24 Public-only and 24 Privileged Audit. All rows selected before inspecting raw tool arguments remain in the denominator, including malformed, missing, or mismapped responses.",
+    "failure_gate": "INVALID_EXPERIMENT if any frozen raw request/response hash, case/permission match, exact request-body equality, or reported fingerprint equality fails; if selection uses any prediction/result label; if raw content or private messages appear in tracked outputs; or if the independent parser silently repairs a response. A row-level raw/stored discrepancy is a substantive finding and must not be dropped.",
+    "frozen_inputs": [
+      {
+        "path": "scripts/freeze_m4_b5_raw_response_repeatability.py",
+        "sha256": "194112dc47a7cab16b821b2519d5d4ee4f34e72dab45eb8cb672fe6a25613eee"
+      },
+      {
+        "path": "research/schedules/m4-b5-raw-response-repeatability-v1.json",
+        "sha256": "456600dd1dd969aef75fae848a8c900f38bb60612f0dcf1315f5da03ad0770a0"
+      },
+      {
+        "path": "docs/M4_B5_CONTEXT_SENSITIVITY_EVIDENCE.md",
+        "sha256": "906891199731c2b9a0a9a0f6822dd7c572896c29b41620fbf53e85e42bf37402"
+      },
+      {
+        "path": "docs/M4_B5_CONTEXT_SENSITIVITY_DECISION.md",
+        "sha256": "cd9ab94ad8756013e952f2a06d89d0e8a0a6975dc4e3e3f7e511cc661d6dcbb6"
+      },
+      {
+        "path": "docs/BRANCH_A_EVIDENCE_INVARIANCE.md",
+        "sha256": "56381dee01cacdd49735c878b4c130a9b8c2059a4d4c4fa5b01e0cadf407dd34"
+      },
+      {
+        "path": "docs/results/deepseek-first-m4/audit/monitor_per_reference_scores.csv",
+        "sha256": "ebfc472cb615fc351d35099e2f61469396a3f1d08d82534fe3daf4ebd9cc48a7"
+      }
+    ],
+    "held_constant": [
+      "The exact 24 matched case identities and the Public-only / Privileged Audit permissions frozen in the schedule.",
+      "The historical/current request body bytes and their matching reported model fingerprint for each pair.",
+      "The original response bytes, finish reasons, model metadata, and sanitized stored prediction records; no response is regenerated."
+    ],
+    "intervention": "No intervention and no inference. Independently parse and compare the original raw response tool arguments against the already stored parser/scorer outputs.",
+    "primary_outcome": "Among all 48 preselected exact-request pairs, the number of raw-label disagreements versus raw-label agreements, cross-tabulated against whether the stored labels match the independent raw parser; also count exact raw-argument and canonical-argument equality.",
+    "reproduction_command": "python scripts/freeze_m4_b5_raw_response_repeatability.py ; python scripts/audit_m4_b5_raw_response_repeatability.py ; python -m pytest -q tests/test_m4_b5_raw_response_repeatability.py ; python scripts/researchctl.py audit",
+    "runtime_identity": "Local deterministic Python 3.12.4 on Windows 11; zero model/API calls and zero external cost. Raw inputs are the already-retained, Git-ignored historical M4 Monitor run and M4-B5 context-sensitivity campaign run; source snapshot and every selected request/response byte sequence are hash-pinned in the sanitized schedule. No raw data is copied into tracked outputs.",
+    "sample_selection": "Use the complete intersection of all 24 natural M4 public_harm case hashes across historical B5 and current campaign A1 Public-only / Privileged-original arms. Pair by SHA-256(case_ref) and permission. Include a pair only if exact request bytes and reported system_fingerprint match; this rule was run before inspecting raw response arguments or labels. If the complete expected 48-pair set cannot be frozen, stop as INVALID_EXPERIMENT; do not substitute rows.",
+    "success_gate": "Integrity success requires exactly 48 frozen pairs, exact request-byte and reported-fingerprint equality within every pair, raw request/response hash verification, and a strict parser result or explicit retained failure for every row. Support the finite raw-response explanation only if at least one raw parsed label differs within an exact request/fingerprint pair and every independently parsed raw label matches its stored prediction. Support a downstream parser/scorer concern if any independent raw label/ref disagrees with its stored prediction/ref. These are finite provenance conclusions, not general claims about model stochasticity or evidence-view causality."
+  },
+  "registered_at_utc": "2026-10-20T21:43:30+00:00",
+  "registered_git_head": "176263c286cfe0ebe15bd6eb6b82c581d3c5df7c",
+  "research_branch_id": "m4-b5-raw-response-provenance",
+  "research_question": "In the 48 historical/current B5 pairs selected solely by case, permission, exact request bytes, and reported system fingerprint, do disagreements in stored public-harm labels originate in raw model tool-call arguments or in parsing, scoring, or row association?",
+  "schema_version": 2,
+  "selection_rationale": "The user's scientific direction review prioritizes the real M4 evidence-view anomaly over the low-positive synthetic sequence task. The 232-request A1 campaign then exposed low cross-run label agreement even for exact request bytes and matching reported fingerprints. Before spending any further inference budget on a causal view ablation, this zero-call, 48-pair raw-provenance audit is the smallest necessary test of the competing possibility that parsing/scoring/association created the apparent disagreement. It is a measurement-integrity step for Tier 1 evidence-view instability, not a standalone paper contribution.",
+  "title": "Raw-response provenance of exact-request B5 label disagreements"
+}

@@ -1,0 +1,66 @@
+{
+  "assigned_pairs": 48,
+  "canonical_argument_identical_pairs": 27,
+  "decision": "RAW_RESPONSE_LABEL_VARIATION_CONFIRMED_FINITE",
+  "experiment_id": "m4-b5-raw-response-repeatability-v1",
+  "full_response_byte_identical_pairs": 0,
+  "integrity_failures": 0,
+  "interpretation_limits": [
+    "The pairs are 48 finite historical/current repeats of exact request bytes with matching reported fingerprints; the service model alias is mutable and hidden provider state is unknown.",
+    "Raw argument variation cannot identify which evidence-view cue caused the historical Public-to-Privileged label changes.",
+    "This analysis does not measure population stochasticity, model capability, private-message comprehension, collusion, or intent.",
+    "A matching stored result validates this parser/scorer mapping only for these retained responses."
+  ],
+  "per_permission": {
+    "privileged_audit": {
+      "assigned_pairs": 24,
+      "canonical_arguments_equal": 20,
+      "integrity_valid": 24,
+      "raw_argument_bytes_equal": 15,
+      "raw_label_different": 2,
+      "raw_label_equal": 22,
+      "raw_label_transitions": {
+        "absent->absent": 19,
+        "absent->present": 1,
+        "insufficient_evidence->present": 1,
+        "present->present": 3
+      },
+      "raw_matches_stored_both_responses": 24,
+      "response_body_bytes_equal": 0,
+      "strict_parse_valid": 24
+    },
+    "public_only": {
+      "assigned_pairs": 24,
+      "canonical_arguments_equal": 7,
+      "integrity_valid": 24,
+      "raw_argument_bytes_equal": 3,
+      "raw_label_different": 17,
+      "raw_label_equal": 7,
+      "raw_label_transitions": {
+        "absent->present": 1,
+        "insufficient_evidence->insufficient_evidence": 2,
+        "insufficient_evidence->present": 15,
+        "present->insufficient_evidence": 1,
+        "present->present": 5
+      },
+      "raw_matches_stored_both_responses": 24,
+      "response_body_bytes_equal": 0,
+      "strict_parse_valid": 24
+    }
+  },
+  "raw_argument_byte_identical_pairs": 18,
+  "raw_label_agreement_pairs": 29,
+  "raw_label_disagreement_pairs": 19,
+  "schema_version": 1,
+  "source_hashes": {
+    "current_request_ledger_sha256": "882e7f00b1e99a515eb352ab4828b071ccf3b763e212d095af16f6e1cc5c1715",
+    "current_results_sha256": "25f5436374657a991d55cf2cc58af84623d2233c2d12fb3d004608079824bade",
+    "current_schedule_sha256": "c44585532b18e8def0488c4f3de42be1c4a04009566b396251c3da2659043c3c",
+    "historical_plan_sha256": "20b4c549f33348552875964efb99030ad0451a6c6b743cd37518173958d19ef6",
+    "historical_predictions_sha256": "060d39c1dc4ba466f20a7346a6a09a2e86ab906b25d3fd61d53e4a38de984d98"
+  },
+  "source_snapshot_hashes_match": true,
+  "status": "PASS_INDEPENDENT_RAW_RESPONSE_REPLAY",
+  "stored_mapping_mismatches": 0,
+  "strict_parse_failures": 0
+}

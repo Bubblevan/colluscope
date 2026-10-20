@@ -27,8 +27,8 @@
     "terminal_artifact": "research/handoffs/DEEPSEEK-FIRST-RESEARCH-01.json"
   },
   "historical_approvals_reusable": false,
-  "latest_closed_experiment_id": "m4-b5-context-sensitivity-campaign-v1",
-  "latest_decision": "AMBIGUOUS",
+  "latest_closed_experiment_id": "m4-b5-raw-response-repeatability-v1",
+  "latest_decision": "PASS",
   "latest_decision_type": "operational",
   "latest_review": {
     "authorization_status": "none_awaiting_scope_specific_user_approval",
@@ -40,8 +40,8 @@
     "status": "offline_draft_and_sanitized_schedule_validated_no_calls"
   },
   "latest_review_id": "m4-b5-campaign-preflight-20261021",
-  "latest_scientific_outcome": "INCONCLUSIVE",
-  "next_action": "Continue offline only. If this question remains important, prepare a new preregistered interleaved repeated-request design to estimate within-request response variability before comparing views. Any model/API work requires a new scope-specific user approval. Do not reuse the consumed authorization.",
+  "latest_scientific_outcome": "SUPPORTED",
+  "next_action": "Continue offline. If B5 remains a priority, preregister an interleaved repeatability design that varies evidence-view components separately. Do not dispatch or reuse the closed 232-request authorization; new model inference needs separate scope-specific approval.",
   "preexisting_untracked_paths_preserved": [
     "docs/COLOSSEUM_LOCAL_REPRO_PROTOCOL.md",
     "docs/results/colosseum-local-audit-20261020/",

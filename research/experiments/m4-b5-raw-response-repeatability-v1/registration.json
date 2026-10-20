@@ -1,0 +1,12 @@
+{
+  "authorization_batch_sha256": null,
+  "closed_at_utc": "2026-10-20T21:56:58+00:00",
+  "closed_git_head": "176263c286cfe0ebe15bd6eb6b82c581d3c5df7c",
+  "closure_sha256": "78d16df19531579e0a0dd6d091c748f35584124f845f17f39be8d74020346d6a",
+  "evaluator_v2_sha256": "e7b563b1a149a8c770a56728a4d13abcc53e8a12080866a1adfad03b2d234f6d",
+  "experiment_id": "m4-b5-raw-response-repeatability-v1",
+  "preregistration_sha256": "ae02ee38d191570445ad911e58219748209ef9bdd50085e32981f2f9a4fc5a06",
+  "registered_at_utc": "2026-10-20T21:43:30+00:00",
+  "registered_git_head": "176263c286cfe0ebe15bd6eb6b82c581d3c5df7c",
+  "schema_version": 1
+}

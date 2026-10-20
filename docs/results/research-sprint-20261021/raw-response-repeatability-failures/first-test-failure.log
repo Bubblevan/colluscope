@@ -1,0 +1,9 @@
+Attempt: targeted offline tests for the frozen 48-pair selector and raw-response parser.
+Outcome: 2 parser tests passed; 3 fixture tests failed before raw-response parsing.
+Sanitized error: the selector hard-coded the full campaign's 232 attempt-start rows, preventing reduced synthetic fixtures from exercising the selection rule.
+Repair: validate uniqueness of the full local attempt index and require each selected attempt association, without imposing the source campaign's total row count on a test fixture.
+The failure occurred on synthetic fixture data only. No model/API call was made and no raw private message or provider response was exported.
+
+Post-run adversarial review (after the first sanitized audit output):
+Finding: the first implementation compared direct source-file hashes and selected row hashes, but did not also gate the frozen selected-request/response multiset digests before assigning a scientific finite-repeatability decision.
+Repair: added those digest comparisons; any source snapshot mismatch now forces INVALID_EXPERIMENT. Added a synthetic tamper counterexample. The original sanitized v1 output is retained and not overwritten; the corrected replay is written under a versioned v2 directory.

@@ -56,25 +56,27 @@
     },
     {
       "competing_explanations": [
-        "The observed equality is an artifact of the finite scripted pair construction or serialization.",
-        "The permitted privileged evidence still does not identify latent intent without an intervention or defensible labels."
+        "The exact-request label disagreements are present in raw model tool-call arguments, and independent strict parsing reproduces each stored label.",
+        "Raw arguments have matching labels while differences appear in stored predictions, parsing, or row association.",
+        "Raw response bodies or ancillary argument fields differ while the binary label remains the same.",
+        "A frozen request, response, or model-fingerprint integrity check fails and invalidates affected comparisons."
       ],
-      "discriminating_prediction": "The frozen 12-pair audit verifies exact Public-only projection equality and independently enumerates which source-event sequence components differ in privileged views.",
+      "discriminating_prediction": "For the complete 48-pair historical/current exact-request and matching-reported-fingerprint schedule, independently strict-parse each raw report_evidence tool call and compare labels and evidence refs with the stored result. Preserve all missing, malformed, or mismatched rows; do not inspect labels during schedule selection.",
       "evidence_refs": [
         {
-          "path": "docs/results/research-sprint-20261021/MATCHED_WORLD_SEQUENCE_VISIBILITY_AUDIT.md",
-          "sha256": "f76ec46a585431d9e5d58d5583790587be6ec37242943ef1dc223b31ea87dada"
+          "path": "docs/M4_B5_CONTEXT_SENSITIVITY_DECISION.md",
+          "sha256": "cd9ab94ad8756013e952f2a06d89d0e8a0a6975dc4e3e3f7e511cc661d6dcbb6"
         },
         {
-          "path": "docs/results/research-sprint-20261021/matched-world-sequence-visibility-v4-final.json",
-          "sha256": "36827cf5b7a84a97b7bca0d5a3b704cfc8ad3a55763d6fa1667f7d0beda85390"
+          "path": "docs/BRANCH_A_EVIDENCE_INVARIANCE.md",
+          "sha256": "56381dee01cacdd49735c878b4c130a9b8c2059a4d4c4fa5b01e0cadf407dd34"
         }
       ],
-      "hypothesis": "Some paired mechanisms with byte-identical authorized Public-only evidence cannot be distinguished from that evidence alone; predeclared additional permitted evidence or an intervention can distinguish at least some such pairs.",
-      "hypothesis_id": "observable-evidence-boundary",
-      "selection_note": "Finite construction-boundary evidence only: 8/12 pairs have at least one determinate sequence-component difference, and complete proposal-acceptance-both-actions is present in only 2/24 worlds. Supporting Track 2.3 framing; not a general impossibility result.",
+      "hypothesis": "Among the 48 preselected historical/current B5 pairs with byte-identical request bodies and matching reported system fingerprints, any stored label disagreement will also be present in raw model tool-call arguments, and an independent strict parser will reproduce both stored labels. A parser or scorer mismatch would falsify this hypothesis.",
+      "hypothesis_id": "m4-b5-raw-response-provenance",
+      "selection_note": "Selected as a zero-call measurement-integrity test for the Tier 1 B5 evidence-view instability question. It can determine whether already reported finite label disagreement exists in raw responses or is introduced downstream; it is not a standalone scientific contribution and cannot explain which input cue caused the historical 20/24 paired changes.",
       "status": "supported",
-      "title": "Map the observable evidence boundary for coordination claims"
+      "title": "Does exact-request B5 label disagreement originate in raw responses or downstream mapping?"
     }
   ],
   "policy": "At most three read-only candidate directions may be compared. Only one can be selected for a formal cycle at a time. Candidate status is not preregistration or authorization.",
