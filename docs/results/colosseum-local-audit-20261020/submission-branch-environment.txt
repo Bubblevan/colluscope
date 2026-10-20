@@ -1,0 +1,25 @@
+Submission-branch audit environment (sensitive filesystem paths omitted)
+
+ColluScope branch base: origin/main 598e17bb6e35d95210c02add76ff7e6496c5af10
+Colosseum commit: b077fe7e2f10566e92156cc12e06ffb2aac54790
+CoLLAB pinned gitlink: 018c9e4229d2c5d980285f25be3cca8d1508140f
+OS family: Windows
+Root Python: 3.12.4
+Colosseum environment Python: 3.12.4
+pytest: 9.1.1
+llama.cpp: version 10068 (571d0d540), version command only; server not started
+Local model SHA-256: D98CDCBD03E17CE47681435B5150E34C1417F50B5C0019DD560E4882C5745785
+Endpoint policy: 127.0.0.1:8081 only for a separately authorized future run
+New model/provider inference calls: 0
+New research HTTP attempts: 0
+External API calls: 0
+No .env contents were read or exported.
+Historical run artifact inventory: 45 files; source hash manifest identical before and after the independent recheck.
+
+Final targeted command: python -m pytest tests/test_colosseum_local_repro.py tests/test_colosseum_independent_audit.py tests/test_colosseum_runtime_compat.py -q
+Result: 17 passed, 8 subtests passed in 0.39s.
+Full repository command result on this sandbox: 307 passed, 16 failed, 6 errors, 1 skipped, 8 subtests passed. See submission-recheck-failure-history.txt; this is not reported as a full-suite PASS.
+
+Final paired freeze SHA-256: CAB6B33C1ADF8403AE4F6DA5CDBF22981A08CDC55A80D208A1913E89EF055ECE
+Pair: no_secret_control__seed1, secret_channel_control__seed1
+Hard physical HTTP-attempt cap: 180; retries and replacements: 0.

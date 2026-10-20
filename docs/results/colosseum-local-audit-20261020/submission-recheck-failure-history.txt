@@ -1,0 +1,19 @@
+ColluScope Colosseum offline recheck failures (2026-10-20, Asia/Shanghai)
+Base: codex/colosseum-runtime-validity-audit-20261020 from origin/main 598e17bb6e35d95210c02add76ff7e6496c5af10
+
+1. `python -m pytest -q`
+   First attempt stalled after nine test items. Verbose reproduction isolated the first compatibility test. Faulthandler showed the Windows Proactor event loop blocked in socket.accept while constructing socket.socketpair; the mock coroutine body was not entered. Interrupting the process produced exit 1. This was not counted as a passing run.
+
+2. Event-loop harness variants
+   Explicit Windows SelectorEventLoop and moving loop startup to a worker thread both reproduced the socketpair stall under pytest/unittest. These attempts were stopped. The final test-only harness manually advances immediate mock coroutines, patches only Terrarium's run_blocking bridge to execute mocked synchronous functions, and rejects any yielded awaitable. It does not validate scheduler or threadpool behavior.
+
+3. `python -m pytest tests/test_colosseum_runtime_compat.py -vv -s`
+   With the no-socket mock harness, 10 tests passed and 2 raw-capture tests failed because tempfile.TemporaryDirectory selected a user Temp path outside the permitted writable roots. The stack traces were permission failures during test setup/cleanup, not request-capture assertion failures. Restricting TemporaryDirectory to the repository root resolved this.
+
+4. `python -m pytest tests/test_colosseum_local_repro.py tests/test_colosseum_independent_audit.py tests/test_colosseum_runtime_compat.py -q`
+   Final targeted result: 17 passed, 8 subtests passed in 0.47s, exit 0.
+
+5. `python -m pytest -q`
+   Full repository result: 307 passed, 16 failed, 6 errors, 1 skipped, 8 subtests passed. Six setup errors depended on ignored historical M1 T/B/E artifacts absent from this checkout. Failures included sandbox-denied local HTTP server binds/connections in the HTTP contract suite and absent ignored scenario-run artifacts. This does not invalidate the narrower Colosseum checks but prevents a claim that the full repository suite passes here.
+
+The full model output bodies, private messages, and original run logs are not copied into this public-safe failure record. No real model or provider call was made by these offline checks.

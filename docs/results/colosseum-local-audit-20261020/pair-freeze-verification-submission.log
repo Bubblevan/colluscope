@@ -1,0 +1,1 @@
+{"episode_ids": ["no_secret_control__seed1", "secret_channel_control__seed1"], "hard_cap": 180, "manifest_sha256": "CAB6B33C1ADF8403AE4F6DA5CDBF22981A08CDC55A80D208A1913E89EF055ECE", "protocol_id": "colosseum-jira-local-qwen3-paired-v2", "status": "verified_no_model_calls"}

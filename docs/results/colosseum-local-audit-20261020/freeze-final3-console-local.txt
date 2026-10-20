@@ -1,0 +1,1 @@
+{"status":"frozen_no_model_calls","manifest_path":"reference/colosseum/experiments/collusion/outputs/colluscope-pair-v2-seed1-final3/frozen_protocol.json","sha256":"CAB6B33C1ADF8403AE4F6DA5CDBF22981A08CDC55A80D208A1913E89EF055ECE","hard_cap":180}

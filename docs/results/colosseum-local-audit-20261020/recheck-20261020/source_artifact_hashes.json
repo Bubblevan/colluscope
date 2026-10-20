@@ -1,0 +1,232 @@
+{
+  "algorithm": "SHA-256",
+  "files": [
+    {
+      "path_relative_to_run": "frozen_configs/no_secret_control__seed1.yaml",
+      "bytes": 1311,
+      "sha256": "21B3ECA010388CC8315E8C371BC491AE181FE7EE5A34EA96EA5631E3E6E97583"
+    },
+    {
+      "path_relative_to_run": "frozen_configs/no_secret_control__seed2.yaml",
+      "bytes": 1311,
+      "sha256": "AC4382876ECBDFBF72B81BD1A55D168FDC66DBEC8374EE31E50C641EC0989177"
+    },
+    {
+      "path_relative_to_run": "frozen_configs/no_secret_control__seed3.yaml",
+      "bytes": 1311,
+      "sha256": "690D7781AE20D5ED1972B5ED7DF879B1874E3DD4FAC8D9CB1F7CEBDFCFF09207"
+    },
+    {
+      "path_relative_to_run": "frozen_configs/no_secret_control__seed4.yaml",
+      "bytes": 1311,
+      "sha256": "80AF05A188B3B4C41EA02A0EC36528B128C11DE667327F3EC981B10CB696F0B6"
+    },
+    {
+      "path_relative_to_run": "frozen_configs/no_secret_control__seed5.yaml",
+      "bytes": 1311,
+      "sha256": "CBD0EE9FD9CF398F1B6C7CAE2A243B8ABDF3538A41D35A75C6911AFAAD5E2C6B"
+    },
+    {
+      "path_relative_to_run": "frozen_configs/secret_channel_control__seed1.yaml",
+      "bytes": 1320,
+      "sha256": "5581EDFF82561860D70D5CEB709A16B55879E8285E10D7C5E2F55CB6751EE439"
+    },
+    {
+      "path_relative_to_run": "frozen_configs/secret_channel_control__seed2.yaml",
+      "bytes": 1320,
+      "sha256": "FA9629983DC6293D16D75EF65AC117CBDF18E41F7A83698DDA78E8AC8794563D"
+    },
+    {
+      "path_relative_to_run": "frozen_configs/secret_channel_control__seed3.yaml",
+      "bytes": 1320,
+      "sha256": "24D3B912375B784ECC7EACF511DE166251DD7961A68510F185FD96CEAF2280DE"
+    },
+    {
+      "path_relative_to_run": "frozen_configs/secret_channel_control__seed4.yaml",
+      "bytes": 1320,
+      "sha256": "EB0469ACFE3469A36214DF2E5B7D1A9EE55706D13C308D4D1ED89F402108D31B"
+    },
+    {
+      "path_relative_to_run": "frozen_configs/secret_channel_control__seed5.yaml",
+      "bytes": 1320,
+      "sha256": "EE7C2195464C46EDCE2F39103E8D9F3A1AE3226738BED8F21603626F404B6BA3"
+    },
+    {
+      "path_relative_to_run": "frozen_protocol.json",
+      "bytes": 8579,
+      "sha256": "1444B719389B4497B2587DBFC254FFD42C3ACD1A70DB011D686869A628C0FE2A"
+    },
+    {
+      "path_relative_to_run": "frozen_protocol_v1_initial.json",
+      "bytes": 7728,
+      "sha256": "DE2E32E04D74CD0A577AE2D0B9CE65FCE0DD3E81E9CE742701B2DDD287334365"
+    },
+    {
+      "path_relative_to_run": "frozen_protocol_v2_pre_source_validation.json",
+      "bytes": 8210,
+      "sha256": "E57080553D302A7964123B9144C788ED646DA1755A10F5B5A4E3C835B6EDDABD"
+    },
+    {
+      "path_relative_to_run": "frozen_protocol_v3_pre_readiness_repair.json",
+      "bytes": 8210,
+      "sha256": "5C1091493526E76CA5B6B53B6E578C6FBD3845C8D515DBC6311F23014362A083"
+    },
+    {
+      "path_relative_to_run": "http_requests.jsonl",
+      "bytes": 70865,
+      "sha256": "BDB3E760DFADF38B000BAD09C65FFA35D4BEEB6C940272DEBC2A6E77DA99F774"
+    },
+    {
+      "path_relative_to_run": "progress.jsonl",
+      "bytes": 3367,
+      "sha256": "44FFF9AECB8F584803A291B7EE19F7E7C3644C0376F11A4C2C9BC719676B74C2"
+    },
+    {
+      "path_relative_to_run": "raw/no_secret_control__seed1/llama-server-attempt-02.log",
+      "bytes": 105011,
+      "sha256": "200243C7B6F9F0A63B10E739CC83973804AEE5239EBEF90CBB9713770FFB6EB8"
+    },
+    {
+      "path_relative_to_run": "raw/no_secret_control__seed1/llama-server.log",
+      "bytes": 748,
+      "sha256": "D5BBD02DDE2F8DBB872F7FB48A56B686B1BC3E137B88FE605B2F084EBE93D8BD"
+    },
+    {
+      "path_relative_to_run": "raw/secret_channel_control__seed1/llama-server-attempt-01.log",
+      "bytes": 59647,
+      "sha256": "51DBCC4295CA866549C9C4B5344E499C5696EF25AA7D0A3E053695A821E8D7D2"
+    },
+    {
+      "path_relative_to_run": "upstream_runs/no_secret_control__seed1/20261020-103915/config.json",
+      "bytes": 1988,
+      "sha256": "F7F6EA3C589712253743814CAF7AD84561C6ACB21D9CF62B11995E86F5B4E8D1"
+    },
+    {
+      "path_relative_to_run": "upstream_runs/no_secret_control__seed1/20261020-103915/experiment.log",
+      "bytes": 2222,
+      "sha256": "F224E35FF7625265E026423E17687691771EFFED13E47F41B61F5868A2A53B35"
+    },
+    {
+      "path_relative_to_run": "upstream_runs/no_secret_control__seed1/20261020-103915/progress.json",
+      "bytes": 141,
+      "sha256": "50EE8A71C8A07EF26F46069D38840F7DB20C60935274B32D124A3011FD246415"
+    },
+    {
+      "path_relative_to_run": "upstream_runs/no_secret_control__seed1/20261020-103915/runs/qwen3-8b-q4km-local/no_secret_control/qwen3-8b-q4km-local__no_secret_control__complete__n6__c2__secret0__pvcontrol__seed1/agent_prompts.json",
+      "bytes": 178764,
+      "sha256": "10718594A1E7000AF52195BAF14938B2D4590BB33C47B4594827C5C0C31CC008"
+    },
+    {
+      "path_relative_to_run": "upstream_runs/no_secret_control__seed1/20261020-103915/runs/qwen3-8b-q4km-local/no_secret_control/qwen3-8b-q4km-local__no_secret_control__complete__n6__c2__secret0__pvcontrol__seed1/agent_prompts.md",
+      "bytes": 176688,
+      "sha256": "0614657CAADD9589461023F80BD8E6CA9DE9DCE5F2F037B48C81FC69CAAD5AB1"
+    },
+    {
+      "path_relative_to_run": "upstream_runs/no_secret_control__seed1/20261020-103915/runs/qwen3-8b-q4km-local/no_secret_control/qwen3-8b-q4km-local__no_secret_control__complete__n6__c2__secret0__pvcontrol__seed1/agent_trajectories.json",
+      "bytes": 12446,
+      "sha256": "C6147A51CB8F71F2C0130451147077495F235DDD9779847F727C6B109D180533"
+    },
+    {
+      "path_relative_to_run": "upstream_runs/no_secret_control__seed1/20261020-103915/runs/qwen3-8b-q4km-local/no_secret_control/qwen3-8b-q4km-local__no_secret_control__complete__n6__c2__secret0__pvcontrol__seed1/agent_turns.json",
+      "bytes": 14810,
+      "sha256": "2927194E01F3EE51A956C71EDFDBAAA0F34E1088E111075D09CAE37E24CCA511"
+    },
+    {
+      "path_relative_to_run": "upstream_runs/no_secret_control__seed1/20261020-103915/runs/qwen3-8b-q4km-local/no_secret_control/qwen3-8b-q4km-local__no_secret_control__complete__n6__c2__secret0__pvcontrol__seed1/blackboard_0.txt",
+      "bytes": 8695,
+      "sha256": "1EE706D194B51BE9B26604950525940FF4F91FC20BA7D1144F55AD24196FC9E6"
+    },
+    {
+      "path_relative_to_run": "upstream_runs/no_secret_control__seed1/20261020-103915/runs/qwen3-8b-q4km-local/no_secret_control/qwen3-8b-q4km-local__no_secret_control__complete__n6__c2__secret0__pvcontrol__seed1/blackboards.json",
+      "bytes": 16633,
+      "sha256": "954B632F41D7175EA15191B924E8B5F9AAAF0D03C67A63C73F3C77A96E46F3F5"
+    },
+    {
+      "path_relative_to_run": "upstream_runs/no_secret_control__seed1/20261020-103915/runs/qwen3-8b-q4km-local/no_secret_control/qwen3-8b-q4km-local__no_secret_control__complete__n6__c2__secret0__pvcontrol__seed1/communication_network.png",
+      "bytes": 143538,
+      "sha256": "887058E9759F0BD933B66A7ED22769A6E76B79AD6EA558265C096C36A3DCDD35"
+    },
+    {
+      "path_relative_to_run": "upstream_runs/no_secret_control__seed1/20261020-103915/runs/qwen3-8b-q4km-local/no_secret_control/qwen3-8b-q4km-local__no_secret_control__complete__n6__c2__secret0__pvcontrol__seed1/final_summary.json",
+      "bytes": 928,
+      "sha256": "A4C1CC3BB682BC89BEEFCB94A6C49691BBCACC33293DD48D5A2CE391DF5CF900"
+    },
+    {
+      "path_relative_to_run": "upstream_runs/no_secret_control__seed1/20261020-103915/runs/qwen3-8b-q4km-local/no_secret_control/qwen3-8b-q4km-local__no_secret_control__complete__n6__c2__secret0__pvcontrol__seed1/metrics.json",
+      "bytes": 4263,
+      "sha256": "47ECA56CFC3D274A1104ADB7A993B733A388A8D922A076D46AD5A79C7BEE9F9B"
+    },
+    {
+      "path_relative_to_run": "upstream_runs/no_secret_control__seed1/20261020-103915/runs/qwen3-8b-q4km-local/no_secret_control/qwen3-8b-q4km-local__no_secret_control__complete__n6__c2__secret0__pvcontrol__seed1/run_config.json",
+      "bytes": 1155,
+      "sha256": "35EC787C53B5300B01CE38E524A39659E339A9AAD70C89C0AA250E736AD1DB0B"
+    },
+    {
+      "path_relative_to_run": "upstream_runs/no_secret_control__seed1/20261020-103915/runs/qwen3-8b-q4km-local/no_secret_control/qwen3-8b-q4km-local__no_secret_control__complete__n6__c2__secret0__pvcontrol__seed1/tool_events.json",
+      "bytes": 12943,
+      "sha256": "45FF4B1AA47CF48067AFF068CD34D021462607EAB6C5633F85B3A0FD10148573"
+    },
+    {
+      "path_relative_to_run": "upstream_runs/no_secret_control__seed1/20261020-103915/summary.csv",
+      "bytes": 1266,
+      "sha256": "DFA4B0E6772E1E04EFBEAF1D243973D0DD90CAEDD9300D94FE8FCA95C6FD0B51"
+    },
+    {
+      "path_relative_to_run": "upstream_runs/no_secret_control__seed1/20261020-103915/summary.json",
+      "bytes": 1743,
+      "sha256": "C5431A32C817DF175F87C66920A38B57E387FC6FFC38E478DCFC431FAA993649"
+    },
+    {
+      "path_relative_to_run": "upstream_runs/no_secret_control__seed1/20261020-103915/summary.jsonl",
+      "bytes": 1496,
+      "sha256": "80924905598E2D007B60F25AC81334EF495C7FEF45DE25B0A491E222333D07C5"
+    },
+    {
+      "path_relative_to_run": "upstream_runs/secret_channel_control__seed1/20261020-110210/config.json",
+      "bytes": 1997,
+      "sha256": "C379968949BDE06F95A3B7201D212F719DC2908296F32B8136A54142C5C29970"
+    },
+    {
+      "path_relative_to_run": "upstream_runs/secret_channel_control__seed1/20261020-110210/experiment.log",
+      "bytes": 1118,
+      "sha256": "0DB3B26525D632D18B26695A5F8BE52A7B0533D739BDF6E1DEFFF97427C62833"
+    },
+    {
+      "path_relative_to_run": "upstream_runs/secret_channel_control__seed1/20261020-110210/progress.json",
+      "bytes": 374,
+      "sha256": "ABA97B7E5055FC38A01EC2A3002BE693AF08DF8E88EE4475EF070447D3E464C4"
+    },
+    {
+      "path_relative_to_run": "upstream_runs/secret_channel_control__seed1/20261020-110210/runs/qwen3-8b-q4km-local/secret_channel_control/qwen3-8b-q4km-local__secret_channel_control__complete__n6__c2__secret1__pvcontrol__seed1/agent_prompts.json",
+      "bytes": 88616,
+      "sha256": "FB8FE792D617CC6AB4C413C1DDEC958BC4EF41A692F9BAC098AE8711ED38FB6D"
+    },
+    {
+      "path_relative_to_run": "upstream_runs/secret_channel_control__seed1/20261020-110210/runs/qwen3-8b-q4km-local/secret_channel_control/qwen3-8b-q4km-local__secret_channel_control__complete__n6__c2__secret1__pvcontrol__seed1/agent_prompts.md",
+      "bytes": 88232,
+      "sha256": "EB168121B731381532DAF33E0687A86C664B4ED9B7C96FA07D29F8729C2C804B"
+    },
+    {
+      "path_relative_to_run": "upstream_runs/secret_channel_control__seed1/20261020-110210/runs/qwen3-8b-q4km-local/secret_channel_control/qwen3-8b-q4km-local__secret_channel_control__complete__n6__c2__secret1__pvcontrol__seed1/agent_trajectories.json",
+      "bytes": 9873,
+      "sha256": "330684AB8FF8AF76B1F48C665552A7FA1271232E965165B9FB37C5EE64B3AE0C"
+    },
+    {
+      "path_relative_to_run": "upstream_runs/secret_channel_control__seed1/20261020-110210/runs/qwen3-8b-q4km-local/secret_channel_control/qwen3-8b-q4km-local__secret_channel_control__complete__n6__c2__secret1__pvcontrol__seed1/blackboard_0.txt",
+      "bytes": 4369,
+      "sha256": "20414962A4440272F816FFA50054CBB2B0E4AB2B0184CF33532192D34F56574D"
+    },
+    {
+      "path_relative_to_run": "upstream_runs/secret_channel_control__seed1/20261020-110210/runs/qwen3-8b-q4km-local/secret_channel_control/qwen3-8b-q4km-local__secret_channel_control__complete__n6__c2__secret1__pvcontrol__seed1/blackboard_1.txt",
+      "bytes": 1791,
+      "sha256": "B4421EB0C9E381CC19FF627DBDAB52C68D1C0D1FFA26ABB651CA7EE105809AD5"
+    },
+    {
+      "path_relative_to_run": "upstream_runs/secret_channel_control__seed1/20261020-110210/runs/qwen3-8b-q4km-local/secret_channel_control/qwen3-8b-q4km-local__secret_channel_control__complete__n6__c2__secret1__pvcontrol__seed1/communication_network.png",
+      "bytes": 143538,
+      "sha256": "887058E9759F0BD933B66A7ED22769A6E76B79AD6EA558265C096C36A3DCDD35"
+    }
+  ],
+  "file_count": 45,
+  "raw_content_exported": false
+}

@@ -1,0 +1,21 @@
+{
+  "protocol_id": "colosseum-jira-local-qwen3-paired-v2",
+  "manifest_sha256": "CAB6B33C1ADF8403AE4F6DA5CDBF22981A08CDC55A80D208A1913E89EF055ECE",
+  "seed": 1,
+  "episode_ids": [
+    "no_secret_control__seed1",
+    "secret_channel_control__seed1"
+  ],
+  "model_sha256": "D98CDCBD03E17CE47681435B5150E34C1417F50B5C0019DD560E4882C5745785",
+  "llama_cpp": "10068 (571d0d540)",
+  "colosseum_commit": "b077fe7e2f10566e92156cc12e06ffb2aac54790",
+  "collab_gitlink": "018c9e4229d2c5d980285f25be3cca8d1508140f",
+  "pair_runner_sha256": "0F7E1F3EF53757FE616BB50B26941AE1716FA5C01AC70FCDE683A5B3F61D934D",
+  "orchestration_sha256": "56FE7831D728AB76EA09DAFEF3ACCF1FF9B5833BFEB968829EC3FAF71552998E",
+  "compatibility_adapter_sha256": "D41DB7E8601F85F3AC7BC02E0862424F3CA3DB0DC7BE22AB55CC322FC7F31BDD",
+  "hard_http_attempt_cap": 180,
+  "client_retries": 0,
+  "episode_replacements": 0,
+  "freeze_status": "verified_no_model_calls",
+  "machine_specific_paths_included": false
+}
