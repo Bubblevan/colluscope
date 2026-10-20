@@ -1,0 +1,23 @@
+{
+  "integrity_check": "FAIL",
+  "scientific_validity": "NOT_EVALUATED",
+  "registered_cycles": 4,
+  "open_experiments": [],
+  "new_iteration_usage": {
+    "model_calls": 232,
+    "external_cost_usd": 0.027381738
+  },
+  "usage_by_approval_id": {
+    "DS-FLASH-M4B5-CONTEXT-232-20261021": {
+      "model_calls": 232,
+      "external_cost_usd": 0.027381738
+    }
+  },
+  "project_limits": {
+    "max_model_calls": 1200,
+    "max_external_cost_usd": 2.5
+  },
+  "errors": [
+    "b5-evidence-view-stability-120: protocol.frozen_inputs[18] hash mismatch: .gitignore"
+  ]
+}

@@ -1,0 +1,87 @@
+# Frozen local llama.cpp candidate. All live use remains denied until separately approved.
+research_scope = "m1-package-replication-v3"
+model_calls_enabled = false
+preflight_enabled = false
+preflight_approval_id = ""
+full_pilot_approval_id = ""
+max_api_spend_usd = 0.0
+status = "offline_m1_package_replication_v3_candidate"
+
+[checkpoint]
+path = 'E:\Health-Copilot-Models\models\qwen3-8b\Qwen3-8B-Q4_K_M.gguf'
+repository = "Qwen/Qwen3-8B-GGUF"
+upstream_revision = "6a569868d07d3bd59e8b97fb001bf8c0b254bb20"
+format = "GGUF Q4_K_M"
+identity_kind = "sha256_file"
+file_sha256 = "d98cdcbd03e17ce47681435b5150e34c1417f50b5c0019dd560e4882c5745785"
+file_size_bytes = 5027783488
+
+[server]
+kind = "llama.cpp"
+binary_path = 'C:\Users\bubblevan\AppData\Local\Microsoft\WinGet\Packages\ggml.llamacpp_Microsoft.Winget.Source_8wekyb3d8bbwe\llama-server.exe'
+binary_sha256 = "3a8aea5f889c4b4c2ec41c98f4e1ed484bb7a40c4096883acb23d3cfe26b59fb"
+runtime_bundle_sha256 = "9559fd2af95a7e83e3cf4a04aab22b67e1d1a2ec032b1e983ce091a6283c7759"
+version = "10068"
+commit = "571d0d540"
+build_info = "b10068-571d0d540"
+base_url = "http://127.0.0.1:8081/v1"
+model_id = "colluscope-qwen3-8b-q4km"
+
+[tokenizer]
+source = "embedded_gguf_metadata"
+add_bos_token = false
+architecture = "qwen3"
+model = "gpt2"
+pretokenizer = "qwen2"
+vocabulary_count = 151936
+merges_count = 151387
+token_types_sha256 = "fd28e1c1092285f1de6c3c1d3c78105e1a63f503d7eef2fb8cb00017c05c0979"
+vocabulary_sha256 = "adab67cd4451390df3c68d6b3e74f5095d857769780735c7e7044e571db2a89e"
+merges_sha256 = "907981a313a6e78ef2223229042674a39cd4995ee4c4ed40a31b58754e82c26c"
+tokenizer_sha256 = "06e72b9773cfad908874ae1a7aa92686068557c4aa624c857db88fe97052704f"
+chat_template_sha256 = "57f1fd00f0013a2be96aa79b857391f27e23df5b5f847072b524c897e24d0361"
+tokenizers_library_version = "0.19.1"
+jinja2_library_version = "3.1.4"
+server_parity = "not_verified_live_preflight_required"
+
+[launch]
+host = "127.0.0.1"
+port = 8081
+context_length = 4096
+parallel_slots = 1
+gpu_device = "Vulkan1"
+gpu_layers = "all"
+fit = "off"
+offline = true
+webui = false
+warmup = false
+reasoning = "off"
+reasoning_format = "none"
+thinking_mode = "disabled"
+
+[sampling]
+temperature = 0.0
+top_p = 1.0
+top_k = 0
+min_p = 0.0
+sampler_chain = ["top_k", "top_p", "min_p", "temperature"]
+seed_scheme = "sha256(colluscope-m1-p0-seed-v1, seed_block, agent_id, action_kind); first 31 bits"
+
+[limits]
+input_budget_tokens = 3072
+message_max_output_tokens = 512
+ballot_max_output_tokens = 256
+timeout_seconds = 60
+max_attempts_per_request = 1
+full_pilot_logical_requests = 456
+full_pilot_max_attempts = 456
+engineering_preflight_logical_requests = 6
+engineering_preflight_max_attempts = 12
+engineering_preflight_max_completion_attempts = 4
+comprehension_probe_calls = 0
+
+[retention]
+policy = "retain exact requests, responses, errors, private observations and all failures locally; no automatic upload"
+
+[authorization]
+m1_package_replication_v3 = "NOT_AUTHORIZED"

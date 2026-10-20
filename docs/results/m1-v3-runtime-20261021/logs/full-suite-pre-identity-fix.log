@@ -1,0 +1,94 @@
+....................................................F................... [ 10%]
+........................................................................ [ 21%]
+...................................s.................................... [ 32%]
+........................................................................ [ 43%]
+........................................................................ [ 54%]
+........................................................................ [ 65%]
+........................................................................ [ 76%]
+........................................................................ [ 87%]
+..F..................................................................... [ 97%]
+..............                                                           [100%]
+================================== FAILURES ===================================
+_____________ test_committed_pilot_plan_reproduces_byte_for_byte ______________
+
+    def test_committed_pilot_plan_reproduces_byte_for_byte():
+        plan = _freeze_pilot_plan()
+        frozen_path = Path(__file__).resolve().parents[1] / "configs/m4-deepseek-pilot-plan-v1.json"
+>       assert frozen_path.read_bytes() == canonical(plan) + b"\n"
+E       assert b'{"config_sh...03a0804e"}}\n' == b'{"config_sh...03a0804e"}}\n'
+E
+E         At index 11625 diff: b'1' != b'f'
+E         Use -v to get more diff
+
+tests\test_deepseek_research_audit.py:51: AssertionError
+____________ test_researchctl_zero_call_register_close_sync_audit _____________
+
+tmp_path = WindowsPath('D:/MyLab/colluscope/.pytest-tmp/test_researchctl_zero_call_reg0')
+
+    def test_researchctl_zero_call_register_close_sync_audit(tmp_path: Path):
+        """Exercise the real CLI lifecycle in an isolated copy, without API dispatch."""
+        sandbox = tmp_path / "repo"
+        for relative in (
+            "scripts/researchctl.py",
+            "research/frozen_eval/evaluate_cycle.py",
+            "research/frozen_eval/evaluate_cycle_v2.py",
+            "research/state.json",
+            "research/budget.json",
+            "research/hypotheses.json",
+            "research/memory.json",
+            ".gitignore",
+        ):
+            destination = sandbox / relative
+            destination.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copy2(ROOT / relative, destination)
+        shutil.copytree(ROOT / "research/handoffs", sandbox / "research/handoffs")
+        for directory in ("research/experiments",):
+            source = ROOT / directory
+            destination = sandbox / directory
+            if source.exists():
+                shutil.copytree(source, destination, dirs_exist_ok=True)
+            else:
+                destination.mkdir(parents=True, exist_ok=True)
+        (sandbox / "research/authorizations").mkdir(parents=True, exist_ok=True)
+        budget_copy = sandbox / "research/budget.json"
+        isolated_budget = json.loads(budget_copy.read_text(encoding="utf-8"))
+        isolated_budget["authorization"] = {
+            "status": "none", "approval_id": None, "scope": None,
+            "authorized_experiment_ids": [], "max_model_calls": 0,
+            "max_external_cost_usd": 0.0, "source": None,
+            "approved_at_utc": None, "expires_at_utc": None,
+        }
+        isolated_budget["project_limits"] = {"max_model_calls": 0, "max_external_cost_usd": 0.0}
+        budget_copy.write_text(json.dumps(isolated_budget, indent=2) + "\n", encoding="utf-8")
+
+        registry_sources = [
+            sandbox / "research/state.json", sandbox / "research/budget.json",
+            sandbox / "research/hypotheses.json", sandbox / "research/memory.json",
+            *sorted((sandbox / "research/handoffs").glob("*.json")),
+        ]
+        reference_paths = set()
+        for registry_source in registry_sources:
+            reference_paths.update(_walk_refs(json.loads(registry_source.read_text(encoding="utf-8"))))
+        for relative in sorted(reference_paths):
+            source = (ROOT / relative).resolve()
+            if not source.is_relative_to(ROOT.resolve()) or not source.is_file():
+                continue
+            destination = sandbox / relative
+            destination.parent.mkdir(parents=True, exist_ok=True)
+            if not destination.exists():
+                shutil.copy2(source, destination)
+
+        frozen = sandbox / "research/e2e_frozen_input.json"
+        frozen.write_text(json.dumps({"fixture": "zero-call lifecycle only", "calls": 0}) + "\n",
+                          encoding="utf-8")
+        hypotheses = json.loads((sandbox / "research/hypotheses.json").read_text(encoding="utf-8"))
+>       candidate = next(item for item in hypotheses["candidates"]
+                         if item["hypothesis_id"] == "observable-evidence-boundary")
+E       StopIteration
+
+tests\test_researchctl_lifecycle_e2e.py:86: StopIteration
+=========================== short test summary info ===========================
+SKIPPED [1] tests\test_m1_p0_preflight_runner.py:142: opt-in host-dependent Windows owner-table integration check
+FAILED tests/test_deepseek_research_audit.py::test_committed_pilot_plan_reproduces_byte_for_byte
+FAILED tests/test_researchctl_lifecycle_e2e.py::test_researchctl_zero_call_register_close_sync_audit
+2 failed, 659 passed, 1 skipped in 189.94s (0:03:09)

@@ -12,6 +12,7 @@ import pytest
 from colluscope.m1_runtime import (AgentRequest, RequestAdapter,
                                    RequestBudget, RequestFailure, load_runtime_config, run_episode)
 from colluscope.openai_compat_llamacpp import (LlamaCppPreflightBudget, LocalLlamaCppBackend,
+                                               M1_PACKAGE_REPLICATION_V3_SCOPE,
                                                PREFLIGHT_NO_MESSAGE_INSTRUCTION,
                                                PREFLIGHT_SEND_MESSAGE_INSTRUCTION,
                                                llama_runtime_bundle_identity,
@@ -22,6 +23,7 @@ from colluscope.openai_compat_vllm import BackendResponseError
 
 ROOT = Path(__file__).resolve().parents[1]
 BACKEND_CONFIG_PATH = ROOT / "configs" / "m1-p0-llama-local-draft.toml"
+M1_PACKAGE_V3_CONFIG_PATH = ROOT / "configs" / "m1-package-replication-v3.toml"
 RUNTIME_CONFIG = load_runtime_config(ROOT / "configs" / "m1-r-offline-v2.toml")
 ACTION_ROOT = ROOT / "prompts" / "m1-p0-v2"
 BASE = load_llamacpp_backend_config(BACKEND_CONFIG_PATH)
@@ -40,6 +42,36 @@ def test_m3_approval_reserves_one_http_slot_for_the_identity_probe():
         _validate_config(replace(approved, max_logical_requests=97))
     with pytest.raises(ValueError, match="launch settings"):
         _validate_config(replace(approved, full_pilot_approval_id="UNRELATED-APPROVAL"))
+
+
+def test_m1_package_replication_v3_profile_is_offline_and_has_exact_zero_retry_budget(tmp_path):
+    settings = load_llamacpp_backend_config(M1_PACKAGE_V3_CONFIG_PATH)
+    assert settings.research_scope == M1_PACKAGE_REPLICATION_V3_SCOPE
+    assert settings.model_calls_enabled is False
+    assert settings.preflight_enabled is False
+    assert settings.full_pilot_approval_id == ""
+    assert settings.base_url == "http://127.0.0.1:8081/v1"
+    assert settings.max_logical_requests == settings.max_total_attempts == 456
+    assert settings.max_attempts_per_request == 1
+    assert settings.max_api_spend_usd == 0.0
+
+    for changes, message in (
+        ({"max_logical_requests": 455}, "frozen ColluScope study ceiling"),
+        ({"max_total_attempts": 457}, "frozen ColluScope study ceiling"),
+        ({"max_attempts_per_request": 2}, "frozen ColluScope study ceiling"),
+        ({"base_url": "https://api.example/v1"}, "plain HTTP loopback"),
+        ({"launch": {**settings.launch, "port": 8080},
+          "base_url": "http://127.0.0.1:8080/v1"}, "frozen to 127.0.0.1:8081"),
+    ):
+        with pytest.raises(ValueError, match=message):
+            _validate_config(replace(settings, **changes))
+
+    original = M1_PACKAGE_V3_CONFIG_PATH.read_text(encoding="utf-8")
+    mutated = original.replace('model_calls_enabled = false', 'model_calls_enabled = true')
+    blocked = tmp_path / "m1-v3-live-flag.toml"
+    blocked.write_text(mutated, encoding="utf-8")
+    with pytest.raises(PermissionError, match="offline-only candidate"):
+        load_llamacpp_backend_config(blocked)
 
 
 class FakeCounter:

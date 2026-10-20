@@ -27,6 +27,7 @@ ROOT = Path(__file__).resolve().parents[2]
 ACTION_SCHEMA_ROOT = ROOT / "prompts" / "m1-p0-v2"
 FROZEN_SAMPLERS = ("top_k", "top_p", "min_p", "temperature")
 M3_MECHANISM_APPROVAL_ID = "USER-AUTHORIZED-M3-MECHANISM-12-GROUPS-2026-10-20"
+M1_PACKAGE_REPLICATION_V3_SCOPE = "m1-package-replication-v3"
 PREFLIGHT_SEND_MESSAGE_INSTRUCTION = (
     "Engineering compatibility probe only: select the send_message action and use the short text 'schema probe'.")
 PREFLIGHT_NO_MESSAGE_INSTRUCTION = (
@@ -78,6 +79,7 @@ class LlamaCppBackendConfig:
     preflight_max_completion_attempts: int
     launch: dict[str, Any]
     retention_policy: str
+    research_scope: str = "legacy"
 
     @property
     def sampling(self) -> dict[str, Any]:
@@ -95,6 +97,8 @@ class LlamaCppBackendConfig:
     def bind_runtime(self, base_config: RuntimeConfig) -> RuntimeConfig:
         if not self.model_calls_enabled or not self.full_pilot_approval_id:
             raise PermissionError("full pilot calls require a separate explicit approval")
+        if self.research_scope not in {"legacy", M1_PACKAGE_REPLICATION_V3_SCOPE}:
+            raise ValueError("unsupported local research runtime scope")
         if base_config.raw.get("prompt_version") != "m1-p0-frozen-v2":
             raise ValueError("local llama.cpp backend can bind only to frozen M1-P0 V2")
         raw = {**base_config.raw,
@@ -120,8 +124,10 @@ def load_llamacpp_backend_config(path: Path) -> LlamaCppBackendConfig:
                 "full_pilot_approval_id", "max_api_spend_usd", "status", "checkpoint",
                 "server", "tokenizer", "launch", "sampling", "limits", "retention",
                 "authorization"}
-    allowed = expected | {"action_output_contract_revision"}
-    if set(raw) not in (expected, allowed):
+    allowed = expected | {"action_output_contract_revision", "research_scope"}
+    optional_key_sets = (expected, expected | {"action_output_contract_revision"},
+                         expected | {"research_scope"}, allowed)
+    if set(raw) not in optional_key_sets:
         raise ValueError("llama.cpp config has missing or unknown top-level keys")
     if ("action_output_contract_revision" in raw and
             raw["action_output_contract_revision"] != "json-v2-exact-empty-think-envelope"):
@@ -153,9 +159,24 @@ def load_llamacpp_backend_config(path: Path) -> LlamaCppBackendConfig:
                        "engineering_preflight_max_attempts", "engineering_preflight_max_completion_attempts",
                        "comprehension_probe_calls"}:
         raise ValueError("llama.cpp request and preflight limits are incomplete")
-    if set(raw["retention"]) != {"policy"} or set(raw["authorization"]) != {
-            "live_preflight", "full_25_episode_pilot", "m2_detector_evaluation"}:
+    scope = raw.get("research_scope", "legacy")
+    if scope not in {"legacy", M1_PACKAGE_REPLICATION_V3_SCOPE}:
+        raise ValueError("unknown local llama.cpp research scope")
+    expected_authorization_keys = (
+        {"m1_package_replication_v3"} if scope == M1_PACKAGE_REPLICATION_V3_SCOPE else
+        {"live_preflight", "full_25_episode_pilot", "m2_detector_evaluation"}
+    )
+    if (set(raw["retention"]) != {"policy"} or
+            set(raw["authorization"]) != expected_authorization_keys):
         raise ValueError("retention or authorization metadata is incomplete")
+    if scope == M1_PACKAGE_REPLICATION_V3_SCOPE and (
+            raw["status"] != "offline_m1_package_replication_v3_candidate"
+            or raw["model_calls_enabled"] is not False
+            or raw["preflight_enabled"] is not False
+            or raw["preflight_approval_id"] != ""
+            or raw["full_pilot_approval_id"] != ""
+            or raw["authorization"].get("m1_package_replication_v3") != "NOT_AUTHORIZED"):
+        raise PermissionError("M1 package replication v3 config is an offline-only candidate; live authorization is separate")
 
     if raw["model_calls_enabled"] is not False and not raw["full_pilot_approval_id"]:
         raise PermissionError("full model calls require a user-approved pilot ID")
@@ -203,7 +224,7 @@ def load_llamacpp_backend_config(path: Path) -> LlamaCppBackendConfig:
         preflight_max_logical_requests=limits["engineering_preflight_logical_requests"],
         preflight_max_attempts=limits["engineering_preflight_max_attempts"],
         preflight_max_completion_attempts=limits["engineering_preflight_max_completion_attempts"],
-        launch=launch, retention_policy=raw["retention"]["policy"])
+        launch=launch, retention_policy=raw["retention"]["policy"], research_scope=scope)
     _validate_config(settings)
     return settings
 
@@ -266,6 +287,8 @@ def _validate_config(config: LlamaCppBackendConfig) -> None:
                        "reasoning_format": "none", "thinking_mode": "disabled"}
     launch_without_port = {key: value for key, value in config.launch.items() if key != "port"}
     port = config.launch.get("port")
+    if config.research_scope == M1_PACKAGE_REPLICATION_V3_SCOPE and port != 8081:
+        raise ValueError("M1 package replication v3 is frozen to 127.0.0.1:8081")
     approved_preflight_port = (port == 8081 and config.preflight_enabled and
                                bool(config.preflight_approval_id) and not config.model_calls_enabled)
     approved_8081_full_pilot = (port == 8081 and config.preflight_enabled and
@@ -290,10 +313,16 @@ def _validate_config(config: LlamaCppBackendConfig) -> None:
         not config.preflight_approval_id and
         config.full_pilot_approval_id == M3_MECHANISM_APPROVAL_ID and
         config.max_logical_requests == 96 and 1 <= config.max_total_attempts <= 191)
+    approved_m1_package_v3_profile = (
+        config.research_scope == M1_PACKAGE_REPLICATION_V3_SCOPE
+        and port == 8081
+        and not config.preflight_enabled and not config.preflight_approval_id
+        and (not config.model_calls_enabled or bool(config.full_pilot_approval_id)))
     if launch_without_port != expected_launch or port not in (8080, 8081) or (
             port != 8080 and not (approved_preflight_port or approved_8081_full_pilot or
                                   approved_m1_100_local_extension or approved_m2_monitor or
-                                  approved_m2_v2_monitor or approved_m3_mechanism)):
+                                  approved_m2_v2_monitor or approved_m3_mechanism or
+                                  approved_m1_package_v3_profile)):
         raise ValueError("launch settings differ from the inspected, frozen local candidate")
     if (config.context_length != 4096 or config.input_budget_tokens != 3072 or
             config.message_max_output_tokens != 512 or config.ballot_max_output_tokens != 256):
@@ -306,10 +335,20 @@ def _validate_config(config: LlamaCppBackendConfig) -> None:
     if config.input_budget_tokens + max(config.message_max_output_tokens,
                                         config.ballot_max_output_tokens) > config.context_length:
         raise ValueError("input budget plus stage output exceeds the context")
-    permitted_full_run_budgets = {(95, 190), (96, 191), (96, 192), (285, 570), (1000, 2000)}
-    if (config.max_attempts_per_request != 2 or
+    legacy_budgets = {(95, 190), (96, 191), (96, 192), (285, 570), (1000, 2000)}
+    if config.research_scope == M1_PACKAGE_REPLICATION_V3_SCOPE:
+        permitted_full_run_budgets = {(456, 456)}
+        expected_attempts_per_request = 1
+    else:
+        permitted_full_run_budgets = legacy_budgets
+        expected_attempts_per_request = 2
+    if (config.max_attempts_per_request != expected_attempts_per_request or
             (config.max_logical_requests, config.max_total_attempts) not in permitted_full_run_budgets):
         raise ValueError("full run request budget must match a frozen ColluScope study ceiling")
+    if config.research_scope == M1_PACKAGE_REPLICATION_V3_SCOPE and (
+            (config.max_logical_requests, config.max_total_attempts) != (456, 456)
+            or config.max_attempts_per_request != 1):
+        raise ValueError("M1 package replication v3 is fixed at 456 generations, 456 HTTP attempts, and zero retries")
     if (config.preflight_max_logical_requests != 6 or config.preflight_max_attempts != 12 or
             config.preflight_max_completion_attempts != 4):
         raise ValueError("engineering preflight ceiling differs from 6 logical / 12 attempts / 4 completions")
