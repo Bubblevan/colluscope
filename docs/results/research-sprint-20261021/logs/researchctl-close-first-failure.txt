@@ -1,0 +1,3 @@
+RECORD REJECTED:
+- missing closure field: scientific_update
+- scientific_update must be a non-empty string

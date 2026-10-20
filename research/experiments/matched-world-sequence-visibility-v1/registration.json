@@ -1,6 +1,8 @@
 {
   "authorization_batch_sha256": null,
-  "closure_sha256": null,
+  "closed_at_utc": "2026-10-20T19:11:22+00:00",
+  "closed_git_head": "4fbd2ffad4773e35a479d415950cdd053337a9ff",
+  "closure_sha256": "835167e702eb66c944ff237e837d689a1b828c47dffbe5a74a560c7761e48714",
   "evaluator_v2_sha256": "e7b563b1a149a8c770a56728a4d13abcc53e8a12080866a1adfad03b2d234f6d",
   "experiment_id": "matched-world-sequence-visibility-v1",
   "preregistration_sha256": "e11ab6a8cdded5306ecc3df082ca6fb452c371380adf9a85164bf0187adb343b",

@@ -1,0 +1,102 @@
+{
+  "actual_external_cost_usd": 0,
+  "actual_model_calls": 0,
+  "actual_wallclock_minutes": 10,
+  "approval_required_for_next_action": true,
+  "authorization_id": null,
+  "belief_updates": [
+    {
+      "claim_id": "observable-evidence-boundary",
+      "evidence_refs": [
+        {
+          "path": "docs/results/research-sprint-20261021/MATCHED_WORLD_SEQUENCE_VISIBILITY_AUDIT.md",
+          "sha256": "f76ec46a585431d9e5d58d5583790587be6ec37242943ef1dc223b31ea87dada"
+        },
+        {
+          "path": "docs/results/research-sprint-20261021/matched-world-sequence-visibility-v4-final.json",
+          "sha256": "36827cf5b7a84a97b7bca0d5a3b704cfc8ad3a55763d6fa1667f7d0beda85390"
+        },
+        {
+          "path": "scripts/audit_matched_world_sequence_visibility.py",
+          "sha256": "f7326489b9ae877d5f549d2d1da784ff499b37247fff00b68bd424954765e6cc"
+        },
+        {
+          "path": "tests/test_matched_world_sequence_visibility.py",
+          "sha256": "80b63a452294a08cb7873d62b8fa4952210f50132ddec0c311080c2aea91b349"
+        },
+        {
+          "path": "docs/results/research-sprint-20261021/review-matched-world-sequence-visibility-v2.md",
+          "sha256": "6f233bfa209b2c33998249313e4cb8f20493d53298a151537a005fb2a37010d1"
+        }
+      ],
+      "outcome": "SUPPORTED",
+      "remaining_alternatives": "This finite scripted construction does not establish a general impossibility theorem, real-agent behavior, natural-language recognition, Monitor accuracy, collusion, or latent intent. Privileged payload differences also include structural/completeness fields, which is why only the separately computed sequence-level differences support this narrow result.",
+      "statement": "For this frozen set of 12 scripted matched-world pairs, the authorized Public-only request/reference projections are identical while at least one determinate privileged proposal/acceptance/action sequence element differs in 8 pairs.",
+      "what_changed": "The corrected independent source-event replay now tests the preregistered per-pair sequence distinction gate directly; 8/12 pairs have a determinate sequence-element difference, including 2/12 with a complete proposal-acceptance-both-actions sequence difference."
+    }
+  ],
+  "closed_at_utc": "2026-10-20T19:11:22+00:00",
+  "closed_git_head": "4fbd2ffad4773e35a479d415950cdd053337a9ff",
+  "decision": "PASS",
+  "denominator_summary": "12 matched pairs / 24 worlds; 24 public pair-by-method comparisons; 24 privileged pair-by-method comparisons; 72 frozen evidence records and 72 frozen request bodies verified. Every assigned pair and incomplete record retained.",
+  "evidence_class": "offline_reanalysis",
+  "experiment_id": "matched-world-sequence-visibility-v1",
+  "failures_retained": true,
+  "material_update": {
+    "claim_id": "observable-evidence-boundary",
+    "evidence_refs": [
+      {
+        "path": "docs/results/research-sprint-20261021/MATCHED_WORLD_SEQUENCE_VISIBILITY_AUDIT.md",
+        "sha256": "f76ec46a585431d9e5d58d5583790587be6ec37242943ef1dc223b31ea87dada"
+      },
+      {
+        "path": "docs/results/research-sprint-20261021/matched-world-sequence-visibility-v4-final.json",
+        "sha256": "36827cf5b7a84a97b7bca0d5a3b704cfc8ad3a55763d6fa1667f7d0beda85390"
+      }
+    ],
+    "independent_critic_confirmed": false,
+    "remaining_alternatives": "The conclusion remains specific to scripted fixtures; the corrected version has not received a second independent review.",
+    "what_changed": "Per-pair source-derived sequence facts were added to the audit and the frozen threshold is met for 8 of 12 pairs after correcting v2 coding gaps."
+  },
+  "model_request_ledger": null,
+  "new_uncertainty_reduced": false,
+  "next_action": "Prepare and register one small atomic DeepSeek evidence-audit diagnostic on the already frozen matched worlds only if the official low-price window is open and the exact request/cost ceiling is reserved; do not reuse the closed B5 approval. The task should test observable-sequence judgments and abstention, not latent collusion.",
+  "next_action_evidence_class": "monitor_evaluation",
+  "next_action_kind": "continue_offline",
+  "next_action_max_external_cost_usd": 0,
+  "next_action_max_model_calls": 0,
+  "outcome_rationale": "The corrected source-event audit meets the frozen construction-boundary gate on the exact 12-pair synthetic fixture: all 24 paired Public-only request and reference projections are equal, all 24 paired Privileged projections differ, and a determinate present-versus-absent sequence element differs in 8/12 pairs. This supports only the finite construction claim, not natural behavior, monitor accuracy, collusion, or intent.",
+  "outputs": [
+    {
+      "path": "docs/results/research-sprint-20261021/MATCHED_WORLD_SEQUENCE_VISIBILITY_AUDIT.md",
+      "sha256": "f76ec46a585431d9e5d58d5583790587be6ec37242943ef1dc223b31ea87dada"
+    },
+    {
+      "path": "docs/results/research-sprint-20261021/matched-world-sequence-visibility-v4-final.json",
+      "sha256": "36827cf5b7a84a97b7bca0d5a3b704cfc8ad3a55763d6fa1667f7d0beda85390"
+    },
+    {
+      "path": "docs/results/research-sprint-20261021/failure_history.jsonl",
+      "sha256": "0e8742507f15cbae63996caff227963fb27f91de6d6390f8070cff3b7f3f3951"
+    },
+    {
+      "path": "docs/results/research-sprint-20261021/logs/matched-world-sequence-visibility-tests-final.txt",
+      "sha256": "4f1e6ca46a56f06467fba78542a7dd12b9c3707b385171d5722294f8751f7f0f"
+    },
+    {
+      "path": "docs/results/research-sprint-20261021/logs/matched-world-sequence-visibility-v4-final.txt",
+      "sha256": "2056b7925db97a1c929d94ad39b814536ce2d2b282456b5d416eb1b812f3f6b4"
+    },
+    {
+      "path": "docs/results/research-sprint-20261021/logs/researchctl-close-first-failure.txt",
+      "sha256": "fc8da27bd580e307bd13e63809c86fcbd83559e75db39715a6bb8195c04c5c36"
+    }
+  ],
+  "results_summary": "Zero model, API, or network calls. Public-only paired requests/reference projections were equal 24/24; privileged evidence projections differed 24/24; 72/72 frozen evidence and request records verified; private message text and hidden construction metadata in Public-only requests were both 0. A determinate per-pair sequence-element difference was present in 8/12 pairs; complete observable sequence status was present in 2/24 worlds, absent in 20/24, unknown due incomplete evidence in 2/24.",
+  "review_artifact": null,
+  "review_finding": "An independent reviewer of the v2 result identified missing per-pair sequence coding, insufficient event-order constraints, and an unverified public-ballot presence label. These were corrected in the v4 implementation and covered by targeted tests. The independent review was not repeated on v4, so final v4 validation is recorded as adversarial self-review, not independent confirmation. The initial count-assertion failure and transient registered-protocol hash drift are preserved.",
+  "review_mode": "adversarial_self_review",
+  "schema_version": 2,
+  "scientific_outcome": "SUPPORTED",
+  "scientific_update": "For this frozen scripted fixture, identical Public-only projections coexist with determinate privileged sequence-element differences in 8 of 12 pairs. This is a construction-level evidence-boundary result and does not establish a general theorem, natural agent behavior, Monitor accuracy, collusion, or intent."
+}

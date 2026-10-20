@@ -5,6 +5,7 @@
   "scientific_outcome": "SUPPORTED",
   "decision": "PASS",
   "outcome_rationale": "The corrected source-event audit meets the frozen construction-boundary gate on the exact 12-pair synthetic fixture: all 24 paired Public-only request and reference projections are equal, all 24 paired Privileged projections differ, and a determinate present-versus-absent sequence element differs in 8/12 pairs. This supports only the finite construction claim, not natural behavior, monitor accuracy, collusion, or intent.",
+  "scientific_update": "For this frozen scripted fixture, identical Public-only projections coexist with determinate privileged sequence-element differences in 8 of 12 pairs. This is a construction-level evidence-boundary result and does not establish a general theorem, natural agent behavior, Monitor accuracy, collusion, or intent.",
   "denominator_summary": "12 matched pairs / 24 worlds; 24 public pair-by-method comparisons; 24 privileged pair-by-method comparisons; 72 frozen evidence records and 72 frozen request bodies verified. Every assigned pair and incomplete record retained.",
   "actual_model_calls": 0,
   "actual_external_cost_usd": 0,
@@ -52,8 +53,9 @@
   "outputs": [
     {"path": "docs/results/research-sprint-20261021/MATCHED_WORLD_SEQUENCE_VISIBILITY_AUDIT.md", "sha256": "f76ec46a585431d9e5d58d5583790587be6ec37242943ef1dc223b31ea87dada"},
     {"path": "docs/results/research-sprint-20261021/matched-world-sequence-visibility-v4-final.json", "sha256": "36827cf5b7a84a97b7bca0d5a3b704cfc8ad3a55763d6fa1667f7d0beda85390"},
-    {"path": "docs/results/research-sprint-20261021/failure_history.jsonl", "sha256": "180c535cd099a6d7b6cc85d34c65530ce490d5db9fbc0568eb8efb8ac1afccaa"},
+    {"path": "docs/results/research-sprint-20261021/failure_history.jsonl", "sha256": "0e8742507f15cbae63996caff227963fb27f91de6d6390f8070cff3b7f3f3951"},
     {"path": "docs/results/research-sprint-20261021/logs/matched-world-sequence-visibility-tests-final.txt", "sha256": "4f1e6ca46a56f06467fba78542a7dd12b9c3707b385171d5722294f8751f7f0f"},
-    {"path": "docs/results/research-sprint-20261021/logs/matched-world-sequence-visibility-v4-final.txt", "sha256": "2056b7925db97a1c929d94ad39b814536ce2d2b282456b5d416eb1b812f3f6b4"}
+    {"path": "docs/results/research-sprint-20261021/logs/matched-world-sequence-visibility-v4-final.txt", "sha256": "2056b7925db97a1c929d94ad39b814536ce2d2b282456b5d416eb1b812f3f6b4"},
+    {"path": "docs/results/research-sprint-20261021/logs/researchctl-close-first-failure.txt", "sha256": "fc8da27bd580e307bd13e63809c86fcbd83559e75db39715a6bb8195c04c5c36"}
   ]
 }

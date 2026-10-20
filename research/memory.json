@@ -88,6 +88,37 @@
       "scientific_outcome": "INCONCLUSIVE",
       "statement": "This 120-request synthetic diagnostic did not identify whether B5 labels are stable across the bundled Public-only versus task-irrelevant Privileged projection.",
       "what_changed": "The raw binary predictions were one-sided: all 40 primary-public and label-flip outputs were present, despite balanced reference labels. This exposes a failed positive control and prevents interpretation of the 0/18 assessable pair changes."
+    },
+    {
+      "claim_id": "observable-evidence-boundary",
+      "evidence_refs": [
+        {
+          "path": "docs/results/research-sprint-20261021/MATCHED_WORLD_SEQUENCE_VISIBILITY_AUDIT.md",
+          "sha256": "f76ec46a585431d9e5d58d5583790587be6ec37242943ef1dc223b31ea87dada"
+        },
+        {
+          "path": "docs/results/research-sprint-20261021/matched-world-sequence-visibility-v4-final.json",
+          "sha256": "36827cf5b7a84a97b7bca0d5a3b704cfc8ad3a55763d6fa1667f7d0beda85390"
+        },
+        {
+          "path": "scripts/audit_matched_world_sequence_visibility.py",
+          "sha256": "f7326489b9ae877d5f549d2d1da784ff499b37247fff00b68bd424954765e6cc"
+        },
+        {
+          "path": "tests/test_matched_world_sequence_visibility.py",
+          "sha256": "80b63a452294a08cb7873d62b8fa4952210f50132ddec0c311080c2aea91b349"
+        },
+        {
+          "path": "docs/results/research-sprint-20261021/review-matched-world-sequence-visibility-v2.md",
+          "sha256": "6f233bfa209b2c33998249313e4cb8f20493d53298a151537a005fb2a37010d1"
+        }
+      ],
+      "experiment_id": "matched-world-sequence-visibility-v1",
+      "outcome": "SUPPORTED",
+      "remaining_alternatives": "This finite scripted construction does not establish a general impossibility theorem, real-agent behavior, natural-language recognition, Monitor accuracy, collusion, or latent intent. Privileged payload differences also include structural/completeness fields, which is why only the separately computed sequence-level differences support this narrow result.",
+      "scientific_outcome": "SUPPORTED",
+      "statement": "For this frozen set of 12 scripted matched-world pairs, the authorized Public-only request/reference projections are identical while at least one determinate privileged proposal/acceptance/action sequence element differs in 8 pairs.",
+      "what_changed": "The corrected independent source-event replay now tests the preregistered per-pair sequence distinction gate directly; 8/12 pairs have a determinate sequence-element difference, including 2/12 with a complete proposal-acceptance-both-actions sequence difference."
     }
   ],
   "historical_scope": "The 628-request DeepSeek-first run and the separate 856-row Monitor run use different schedules and must never be pooled.",
@@ -119,5 +150,5 @@
   "purpose": "Claim-level memory for future cycle selection. This is a scoped summary of historical artifacts, not a universal scientific score.",
   "schema_version": 1,
   "update_rule": "Each closure must distinguish what changed, what remains plausible, and which hash-pinned evidence supports the update. Only a structured update confirmed by an independent review artifact counts toward the no-progress pivot counter. The registry checks provenance and shape, not truth.",
-  "updated_at": "2026-10-21"
+  "updated_at": "2026-10-20"
 }
