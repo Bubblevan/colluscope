@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "program": "ColluScope Autoresearch",
+  "status": "bootstrap_waiting_for_current_round_closeout",
+  "current_branch": "codex/deepseek-first-m4-research-20261020",
+  "current_checkout_head": "cacc5db",
+  "preexisting_untracked_paths_preserved": [
+    "docs/COLOSSEUM_LOCAL_REPRO_PROTOCOL.md",
+    "docs/results/colosseum-local-audit-20261020/",
+    "docs/results/colosseum-runtime-hardening-20261020/"
+  ],
+  "active_experiment_id": null,
+  "current_round": {
+    "owner": "separate Codex task reported by user",
+    "terminal_artifact": null,
+    "status": "awaiting terminal result and independent audit",
+    "note": "This checkout does not contain a verified closeout packet for the separate in-progress task. Do not infer its result."
+  },
+  "latest_decision": "NOT_ASSESSED_BY_AUTORESEARCH_HARNESS",
+  "next_action": "After the separate task reaches a terminal decision, import its sanitized result and audit references with exact hashes, then choose one offline or separately authorized next uncertainty-reducing cycle.",
+  "consecutive_cycles_without_new_uncertainty_reduction": 0,
+  "historical_approvals_reusable": false,
+  "updated_at": "2026-10-21"
+}

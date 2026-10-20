@@ -20,3 +20,13 @@ separate explicit user approval. Keep exact hashes and adverse evidence.
 Iterate: INSPECT → HYPOTHESIZE → PREREGISTER → IMPLEMENT → RUN →
 ADVERSARIAL REVIEW → DECIDE → REPORT. Log results and propose exactly the
 single highest-value next uncertainty-reducing experiment.
+
+## Autoresearch harness
+
+For ongoing research iterations, read `RESEARCH_PROGRAM.md` and the relevant
+skill under `.agents/skills/` before acting. Use `research/state.json` and
+`research/budget.json` as the current handoff and authorization snapshot, and
+`python scripts/researchctl.py` to register/audit cycles. The harness is a
+ledger and gate checker; it does not authorize or dispatch model calls.
+`research/frozen_eval/` is versioned evaluation policy. Any change to it needs
+a new version and an explicit audit trail; never edit it to improve a result.

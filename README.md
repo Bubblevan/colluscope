@@ -2,6 +2,13 @@
 
 An offline, CPU-only scripted research scaffold for the Apart Research AI Collusion Research Sprint, focusing on Track 2.2 and 2.3. It separates construction truth, actions/outcomes, and permission-filtered evidence. It does **not** contain real LLM agent results or detector-performance estimates.
 
+This README's run commands describe the historical M0 scaffold. The repository
+now also contains later M1–M4 protocols and evidence. For continued research,
+start with [RESEARCH_PROGRAM.md](RESEARCH_PROGRAM.md), inspect the handoff in
+`research/state.json`, and check the zero-call authorization snapshot in
+`research/budget.json`. The record-only registry CLI is documented in
+[`research/README.md`](research/README.md); it does not run experiments.
+
 ## Run M0
 
 Python 3.11 or 3.12 is required. The implementation uses only the Python standard library at runtime. Pytest is needed for the test command.

@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "scope": "new autoresearch cycles only; historical usage is recorded in existing research artifacts and is not re-authorized here",
+  "authorization": {
+    "status": "none",
+    "approval_id": null,
+    "authorized_experiment_ids": [],
+    "max_model_calls": 0,
+    "max_external_cost_usd": 0.0,
+    "source": null,
+    "expires_at_utc": null
+  },
+  "policy": {
+    "registration_does_not_authorize_execution": true,
+    "harness_dispatches_experiments": false,
+    "retries_or_replacements": 0,
+    "raw_run_data_may_be_tracked": false
+  }
+}
