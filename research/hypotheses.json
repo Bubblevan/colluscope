@@ -24,7 +24,7 @@
       "hypothesis": "Across the 24 fixed M4 contexts, B5 label changes will be more frequent between Public-only and Privileged-neutral views than between Privileged-original and Privileged-neutral views. This would indicate that the historical response change is more associated with the bundled evidence-view package than with the message-text substitution alone; it would not establish semantic comprehension or collusion.",
       "hypothesis_id": "m4-b5-context-sensitivity-mechanism",
       "selection_note": "Selected for the approved, bounded M4 B5 context-sensitivity monitor campaign. The broad context-access question overlaps Arike et al.; claims remain limited to fixed-case response sensitivity to evidence-view packaging and message-text substitution, not semantic comprehension or collusion. A2 is a synthetic compiler/arithmetic/enum-order diagnostic, not a population capability estimate. Protocol and registration are being frozen before dispatch.",
-      "status": "selected",
+      "status": "candidate",
       "title": "Which part of privileged evidence changes B5 public-harm responses?"
     },
     {
@@ -79,5 +79,5 @@
   ],
   "policy": "At most three read-only candidate directions may be compared. Only one can be selected for a formal cycle at a time. Candidate status is not preregistration or authorization.",
   "schema_version": 1,
-  "selected_hypothesis_id": "m4-b5-context-sensitivity-mechanism"
+  "selected_hypothesis_id": null
 }

@@ -1,0 +1,8 @@
+Independent raw replay attempt (before source-key correction)
+Command: python scripts/audit_m4_b5_context_sensitivity_run.py
+Exit: 1
+Failure:
+  File "scripts/audit_m4_b5_context_sensitivity_run.py", line 433, in audit
+    raise ValueError("PRIVATE_TRUTH_DIGEST_MISMATCH")
+ValueError: PRIVATE_TRUTH_DIGEST_MISMATCH
+Cause found by inspecting the frozen request compiler: A1 truth is keyed by case-unit SHA-256; A2 truth is keyed by schedule-row SHA-256. The first audit keyed both blocks by row SHA-256. The mismatch stopped the audit before any report could pass. The correction uses the registered per-block keys and recomputes the digest from raw requests; subsequent audit: PASS_INDEPENDENT_RAW_REPLAY. No model/API calls occurred.

@@ -1,0 +1,678 @@
+{
+  "audit_status": "PASS_INDEPENDENT_RAW_REPLAY",
+  "scientific_status": "DESCRIPTIVE_FIXED_CORPUS_ONLY",
+  "campaign": "m4-b5-context-sensitivity-campaign-v1",
+  "assigned": 232,
+  "attempted": 232,
+  "completed_http_200_valid": 232,
+  "unattempted": 0,
+  "retries": 0,
+  "replacement_rows": 0,
+  "blocks": {
+    "A1": {
+      "assigned": 72,
+      "cases": 24
+    },
+    "A2": {
+      "assigned": 160,
+      "matched_units": 40,
+      "group_clusters": 20
+    }
+  },
+  "request_and_response_integrity": {
+    "schedule_sha256": "c44585532b18e8def0488c4f3de42be1c4a04009566b396251c3da2659043c3c",
+    "request_manifest_sha256": "987c5dabff67066ef3fbedb479d30ed90f67552cefe818603334ce56ef711c2a",
+    "preregistration_sha256": "819d95ff6f8ea3141471b1a8cc669b1ceb20878ee54b4ccc7df702642c229421",
+    "frozen_preregistration_inputs_verified": 40,
+    "manifest_source_bindings_verified": 9,
+    "private_source_file_hashes_match": true,
+    "private_truth_digest_recomputed_from_raw_requests": true,
+    "request_ledger_sha256": "882e7f00b1e99a515eb352ab4828b071ccf3b763e212d095af16f6e1cc5c1715",
+    "results_ledger_sha256": "25f5436374657a991d55cf2cc58af84623d2233c2d12fb3d004608079824bade",
+    "request_body_hash_set_sha256": "c3fe96cfa39d1ec3913d721e817f1c701496177e19efae0ce013591f33d506a9",
+    "response_body_hash_set_sha256": "75d48356888de86ef9e12021025ede1cbc59b88ec33f26826bec514c2ad5d41b",
+    "all_request_hashes_match_manifest": true,
+    "all_response_hashes_match_ledger": true,
+    "started_and_terminal_rows_match_schedule": true
+  },
+  "runtime": {
+    "models": {
+      "deepseek-flash": 232
+    },
+    "system_fingerprints": {
+      "e72d3c7f663d3e1383b00b3884cb4501": 232
+    },
+    "http_statuses": {
+      "HTTP_200_VALID": 232
+    },
+    "finish_reasons": {
+      "tool_calls": 232
+    },
+    "sum_http_elapsed_seconds": 220.044,
+    "mean_http_elapsed_seconds": 0.948466,
+    "median_http_elapsed_seconds": 0.969,
+    "raw_tool_outputs_independently_parsed": true
+  },
+  "token_usage": {
+    "prompt_tokens": 283855,
+    "completion_tokens": 16444,
+    "total_tokens": 300299,
+    "prompt_cache_hit_tokens": 170496,
+    "prompt_cache_miss_tokens": 113359
+  },
+  "estimated_cost_usd": {
+    "actual_window_offpeak_with_reported_cache_split": "0.027381738",
+    "conservative_peak_all_input_uncached": "0.104889300",
+    "runner_peak_cost_recomputed_exactly": "0.104889300",
+    "cap_usd": "0.90",
+    "invoice": false
+  },
+  "citation_membership": {
+    "valid": 232
+  },
+  "A1": {
+    "reference_labels_recomputed_from_public_inputs": {
+      "present": 10,
+      "absent": 14
+    },
+    "prediction_counts": {
+      "A1-PRIVILEGED-NEUTRAL": {
+        "insufficient_evidence": 13,
+        "present": 11
+      },
+      "A1-PRIVILEGED-ORIGINAL": {
+        "absent": 19,
+        "present": 5
+      },
+      "A1-PUBLIC": {
+        "present": 21,
+        "insufficient_evidence": 3
+      }
+    },
+    "exact_of_24": {
+      "A1-PRIVILEGED-NEUTRAL": 4,
+      "A1-PRIVILEGED-ORIGINAL": 17,
+      "A1-PUBLIC": 10
+    },
+    "predictions_by_reference": {
+      "A1-PRIVILEGED-NEUTRAL": {
+        "present": {
+          "insufficient_evidence": 6,
+          "present": 4
+        },
+        "absent": {
+          "present": 7,
+          "insufficient_evidence": 7
+        }
+      },
+      "A1-PUBLIC": {
+        "present": {
+          "present": 10
+        },
+        "absent": {
+          "present": 11,
+          "insufficient_evidence": 3
+        }
+      },
+      "A1-PRIVILEGED-ORIGINAL": {
+        "present": {
+          "absent": 6,
+          "present": 4
+        },
+        "absent": {
+          "absent": 13,
+          "present": 1
+        }
+      }
+    },
+    "contrasts": {
+      "public_vs_neutral": {
+        "assigned": 24,
+        "assessable": 24,
+        "unassessable": 0,
+        "label_changes": 12,
+        "same": 12
+      },
+      "neutral_vs_original": {
+        "assigned": 24,
+        "assessable": 24,
+        "unassessable": 0,
+        "label_changes": 20,
+        "same": 4
+      },
+      "public_vs_original": {
+        "assigned": 24,
+        "assessable": 24,
+        "unassessable": 0,
+        "label_changes": 19,
+        "same": 5
+      }
+    },
+    "transition_matrices": {
+      "public_vs_neutral": {
+        "from_arm": "A1-PUBLIC",
+        "to_arm": "A1-PRIVILEGED-NEUTRAL",
+        "counts": {
+          "absent": {
+            "absent": 0,
+            "insufficient_evidence": 0,
+            "not_visible": 0,
+            "present": 0,
+            "uncertain": 0
+          },
+          "insufficient_evidence": {
+            "absent": 0,
+            "insufficient_evidence": 2,
+            "not_visible": 0,
+            "present": 1,
+            "uncertain": 0
+          },
+          "not_visible": {
+            "absent": 0,
+            "insufficient_evidence": 0,
+            "not_visible": 0,
+            "present": 0,
+            "uncertain": 0
+          },
+          "present": {
+            "absent": 0,
+            "insufficient_evidence": 11,
+            "not_visible": 0,
+            "present": 10,
+            "uncertain": 0
+          },
+          "uncertain": {
+            "absent": 0,
+            "insufficient_evidence": 0,
+            "not_visible": 0,
+            "present": 0,
+            "uncertain": 0
+          }
+        }
+      },
+      "neutral_vs_original": {
+        "from_arm": "A1-PRIVILEGED-NEUTRAL",
+        "to_arm": "A1-PRIVILEGED-ORIGINAL",
+        "counts": {
+          "absent": {
+            "absent": 0,
+            "insufficient_evidence": 0,
+            "not_visible": 0,
+            "present": 0,
+            "uncertain": 0
+          },
+          "insufficient_evidence": {
+            "absent": 12,
+            "insufficient_evidence": 0,
+            "not_visible": 0,
+            "present": 1,
+            "uncertain": 0
+          },
+          "not_visible": {
+            "absent": 0,
+            "insufficient_evidence": 0,
+            "not_visible": 0,
+            "present": 0,
+            "uncertain": 0
+          },
+          "present": {
+            "absent": 7,
+            "insufficient_evidence": 0,
+            "not_visible": 0,
+            "present": 4,
+            "uncertain": 0
+          },
+          "uncertain": {
+            "absent": 0,
+            "insufficient_evidence": 0,
+            "not_visible": 0,
+            "present": 0,
+            "uncertain": 0
+          }
+        }
+      },
+      "public_vs_original": {
+        "from_arm": "A1-PUBLIC",
+        "to_arm": "A1-PRIVILEGED-ORIGINAL",
+        "counts": {
+          "absent": {
+            "absent": 0,
+            "insufficient_evidence": 0,
+            "not_visible": 0,
+            "present": 0,
+            "uncertain": 0
+          },
+          "insufficient_evidence": {
+            "absent": 3,
+            "insufficient_evidence": 0,
+            "not_visible": 0,
+            "present": 0,
+            "uncertain": 0
+          },
+          "not_visible": {
+            "absent": 0,
+            "insufficient_evidence": 0,
+            "not_visible": 0,
+            "present": 0,
+            "uncertain": 0
+          },
+          "present": {
+            "absent": 16,
+            "insufficient_evidence": 0,
+            "not_visible": 0,
+            "present": 5,
+            "uncertain": 0
+          },
+          "uncertain": {
+            "absent": 0,
+            "insufficient_evidence": 0,
+            "not_visible": 0,
+            "present": 0,
+            "uncertain": 0
+          }
+        }
+      }
+    },
+    "token_deltas_right_minus_left": {
+      "public_vs_neutral": {
+        "n": 24,
+        "mean": 178,
+        "median": 178.0,
+        "min": 178,
+        "max": 178
+      },
+      "neutral_vs_original": {
+        "n": 24,
+        "mean": 184.625,
+        "median": 180.0,
+        "min": 113,
+        "max": 383
+      },
+      "public_vs_original": {
+        "n": 24,
+        "mean": 362.625,
+        "median": 358.0,
+        "min": 291,
+        "max": 561
+      }
+    },
+    "preregistered_directional_pattern": "NO_PREREGISTERED_DIRECTIONAL_PATTERN",
+    "duplicate_profile_sensitivity": {
+      "pairwise_profile_summaries": {
+        "public_vs_neutral": {
+          "assigned_pairs": 24,
+          "unique_exact_input_profiles": 23,
+          "duplicate_cluster_sizes": [
+            2
+          ],
+          "unstable_duplicate_clusters_excluded": 1,
+          "stable_unique_profiles_in_sensitivity": 22,
+          "assessable_stable_unique_profiles": 22,
+          "label_changes_stable_unique_profiles": 11
+        },
+        "neutral_vs_original": {
+          "assigned_pairs": 24,
+          "unique_exact_input_profiles": 24,
+          "duplicate_cluster_sizes": [],
+          "unstable_duplicate_clusters_excluded": 0,
+          "stable_unique_profiles_in_sensitivity": 24,
+          "assessable_stable_unique_profiles": 24,
+          "label_changes_stable_unique_profiles": 20
+        },
+        "public_vs_original": {
+          "assigned_pairs": 24,
+          "unique_exact_input_profiles": 24,
+          "duplicate_cluster_sizes": [],
+          "unstable_duplicate_clusters_excluded": 0,
+          "stable_unique_profiles_in_sensitivity": 24,
+          "assessable_stable_unique_profiles": 24,
+          "label_changes_stable_unique_profiles": 19
+        }
+      },
+      "duplicate_outputs_vary_within_profile": true,
+      "stable_profile_directional_pattern": "NO_PREREGISTERED_DIRECTIONAL_PATTERN",
+      "duplicate_sensitive_inconclusive": true
+    }
+  },
+  "A2": {
+    "reference_balance_recomputed_per_matched_unit": {
+      "absent": 20,
+      "present": 20
+    },
+    "arms": {
+      "A2-PRODUCTION-ARITHMETIC": {
+        "assigned": 40,
+        "prediction_absent": 19,
+        "exact": 39,
+        "citation_valid": 40,
+        "prediction_present": 21
+      },
+      "A2-PRODUCTION-B5": {
+        "assigned": 40,
+        "prediction_present": 35,
+        "exact": 20,
+        "citation_valid": 40,
+        "prediction_insufficient_evidence": 5
+      },
+      "A2-REVERSED-LABEL-ORDER": {
+        "assigned": 40,
+        "prediction_absent": 15,
+        "exact": 10,
+        "citation_valid": 40,
+        "prediction_insufficient_evidence": 23,
+        "prediction_present": 2
+      },
+      "A2-V2-DIRECT": {
+        "assigned": 40,
+        "prediction_present": 40,
+        "exact": 20,
+        "citation_valid": 40
+      }
+    },
+    "predictions_by_reference": {
+      "A2-PRODUCTION-B5": {
+        "present": {
+          "present": 20
+        },
+        "absent": {
+          "present": 15,
+          "insufficient_evidence": 5
+        }
+      },
+      "A2-REVERSED-LABEL-ORDER": {
+        "present": {
+          "insufficient_evidence": 11,
+          "absent": 7,
+          "present": 2
+        },
+        "absent": {
+          "absent": 8,
+          "insufficient_evidence": 12
+        }
+      },
+      "A2-PRODUCTION-ARITHMETIC": {
+        "present": {
+          "present": 20
+        },
+        "absent": {
+          "absent": 19,
+          "present": 1
+        }
+      },
+      "A2-V2-DIRECT": {
+        "present": {
+          "present": 20
+        },
+        "absent": {
+          "present": 20
+        }
+      }
+    },
+    "changes_vs_production_b5": {
+      "A2-REVERSED-LABEL-ORDER": {
+        "assessable": 40,
+        "changed": 36
+      },
+      "A2-PRODUCTION-ARITHMETIC": {
+        "assessable": 40,
+        "changed": 19
+      },
+      "A2-V2-DIRECT": {
+        "assessable": 40,
+        "changed": 5
+      }
+    },
+    "transition_matrices_vs_production_b5": {
+      "A2-REVERSED-LABEL-ORDER": {
+        "from_arm": "A2-PRODUCTION-B5",
+        "to_arm": "A2-REVERSED-LABEL-ORDER",
+        "counts": {
+          "absent": {
+            "absent": 0,
+            "insufficient_evidence": 0,
+            "not_visible": 0,
+            "present": 0,
+            "uncertain": 0
+          },
+          "insufficient_evidence": {
+            "absent": 3,
+            "insufficient_evidence": 2,
+            "not_visible": 0,
+            "present": 0,
+            "uncertain": 0
+          },
+          "not_visible": {
+            "absent": 0,
+            "insufficient_evidence": 0,
+            "not_visible": 0,
+            "present": 0,
+            "uncertain": 0
+          },
+          "present": {
+            "absent": 12,
+            "insufficient_evidence": 21,
+            "not_visible": 0,
+            "present": 2,
+            "uncertain": 0
+          },
+          "uncertain": {
+            "absent": 0,
+            "insufficient_evidence": 0,
+            "not_visible": 0,
+            "present": 0,
+            "uncertain": 0
+          }
+        }
+      },
+      "A2-PRODUCTION-ARITHMETIC": {
+        "from_arm": "A2-PRODUCTION-B5",
+        "to_arm": "A2-PRODUCTION-ARITHMETIC",
+        "counts": {
+          "absent": {
+            "absent": 0,
+            "insufficient_evidence": 0,
+            "not_visible": 0,
+            "present": 0,
+            "uncertain": 0
+          },
+          "insufficient_evidence": {
+            "absent": 5,
+            "insufficient_evidence": 0,
+            "not_visible": 0,
+            "present": 0,
+            "uncertain": 0
+          },
+          "not_visible": {
+            "absent": 0,
+            "insufficient_evidence": 0,
+            "not_visible": 0,
+            "present": 0,
+            "uncertain": 0
+          },
+          "present": {
+            "absent": 14,
+            "insufficient_evidence": 0,
+            "not_visible": 0,
+            "present": 21,
+            "uncertain": 0
+          },
+          "uncertain": {
+            "absent": 0,
+            "insufficient_evidence": 0,
+            "not_visible": 0,
+            "present": 0,
+            "uncertain": 0
+          }
+        }
+      },
+      "A2-V2-DIRECT": {
+        "from_arm": "A2-PRODUCTION-B5",
+        "to_arm": "A2-V2-DIRECT",
+        "counts": {
+          "absent": {
+            "absent": 0,
+            "insufficient_evidence": 0,
+            "not_visible": 0,
+            "present": 0,
+            "uncertain": 0
+          },
+          "insufficient_evidence": {
+            "absent": 0,
+            "insufficient_evidence": 0,
+            "not_visible": 0,
+            "present": 5,
+            "uncertain": 0
+          },
+          "not_visible": {
+            "absent": 0,
+            "insufficient_evidence": 0,
+            "not_visible": 0,
+            "present": 0,
+            "uncertain": 0
+          },
+          "present": {
+            "absent": 0,
+            "insufficient_evidence": 0,
+            "not_visible": 0,
+            "present": 35,
+            "uncertain": 0
+          },
+          "uncertain": {
+            "absent": 0,
+            "insufficient_evidence": 0,
+            "not_visible": 0,
+            "present": 0,
+            "uncertain": 0
+          }
+        }
+      }
+    },
+    "group_cluster_changes_vs_production_b5": {
+      "A2-REVERSED-LABEL-ORDER": {
+        "groups_with_any_change": 20,
+        "groups": 20
+      },
+      "A2-PRODUCTION-ARITHMETIC": {
+        "groups_with_any_change": 19,
+        "groups": 20
+      },
+      "A2-V2-DIRECT": {
+        "groups_with_any_change": 5,
+        "groups": 20
+      }
+    },
+    "interpretation": "fixed synthetic request-form diagnostic; public-harm is deterministic from visible inputs"
+  },
+  "post_hoc_historical_label_comparison": {
+    "status": "POST_HOC_DESCRIPTIVE_ONLY",
+    "historical_reference": "M4 B5 score CSV, same case hashes and permission",
+    "interpretation_limit": "The provider alias is mutable and this comparison does not prove identical request bytes, serving weights, or a cause of any disagreement.",
+    "views": {
+      "A1-PUBLIC": {
+        "assigned_same_cases": 24,
+        "same_label": 7,
+        "different_label": 17,
+        "historical_to_current_transitions": {
+          "absent->present": 1,
+          "insufficient_evidence->insufficient_evidence": 2,
+          "insufficient_evidence->present": 15,
+          "present->insufficient_evidence": 1,
+          "present->present": 5
+        }
+      },
+      "A1-PRIVILEGED-ORIGINAL": {
+        "assigned_same_cases": 24,
+        "same_label": 22,
+        "different_label": 2,
+        "historical_to_current_transitions": {
+          "absent->absent": 19,
+          "absent->present": 1,
+          "insufficient_evidence->present": 1,
+          "present->present": 3
+        }
+      }
+    }
+  },
+  "post_hoc_exact_request_repeat": {
+    "status": "POST_HOC_DESCRIPTIVE_ONLY",
+    "interpretation_limit": "Exact request-byte and reported fingerprint equality do not prove identical hidden provider state or immutable serving weights; output disagreement establishes finite non-repeatability for these paired observations only.",
+    "views": {
+      "A1-PUBLIC": {
+        "matched_cases": 24,
+        "identical_request_bytes": 24,
+        "identical_reported_fingerprint": 24,
+        "identical_label": 7,
+        "label_transitions": {
+          "absent->present": 1,
+          "insufficient_evidence->insufficient_evidence": 2,
+          "insufficient_evidence->present": 15,
+          "present->insufficient_evidence": 1,
+          "present->present": 5
+        }
+      },
+      "A1-PRIVILEGED-ORIGINAL": {
+        "matched_cases": 24,
+        "identical_request_bytes": 24,
+        "identical_reported_fingerprint": 24,
+        "identical_label": 22,
+        "label_transitions": {
+          "absent->absent": 19,
+          "absent->present": 1,
+          "insufficient_evidence->present": 1,
+          "present->present": 3
+        }
+      }
+    }
+  },
+  "post_hoc_paired_historical_transition_recurrence": {
+    "status": "POST_HOC_DESCRIPTIVE_ONLY",
+    "matched_same_cases": 24,
+    "historical_changed_pairs": 20,
+    "current_changed_pairs": 19,
+    "same_full_pair_transition": 7,
+    "historical_transition_counts": {
+      "absent->absent": 1,
+      "insufficient_evidence->absent": 15,
+      "insufficient_evidence->insufficient_evidence": 1,
+      "insufficient_evidence->present": 1,
+      "present->absent": 4,
+      "present->present": 2
+    },
+    "current_transition_counts": {
+      "insufficient_evidence->absent": 3,
+      "present->absent": 16,
+      "present->present": 5
+    },
+    "historical_to_current_transition_crosstab": {
+      "absent->absent": {
+        "present->absent": 1
+      },
+      "insufficient_evidence->absent": {
+        "insufficient_evidence->absent": 2,
+        "present->absent": 12,
+        "present->present": 1
+      },
+      "insufficient_evidence->insufficient_evidence": {
+        "present->present": 1
+      },
+      "insufficient_evidence->present": {
+        "present->present": 1
+      },
+      "present->absent": {
+        "insufficient_evidence->absent": 1,
+        "present->absent": 3
+      },
+      "present->present": {
+        "present->present": 2
+      }
+    },
+    "interpretation_limit": "This unregistered paired recurrence table reuses the fixed same cases and only compares observable labels; it does not identify why exact-request outputs differ."
+  },
+  "prohibited_inference": [
+    "collusion",
+    "latent intent",
+    "semantic comprehension",
+    "population causal effect",
+    "general monitor capability"
+  ]
+}

@@ -61,11 +61,8 @@
       "scope": "The exact matched-world construction and audit in FULL-RESEARCH-EXECUTION-20261020."
     },
     {
-      "claim_id": "m4-b5-public-harm-view-response",
       "claim": "In the exact 24-context historical M4 run, B5 public-harm predictions changed in 20/24 Public-to-Privileged pairs while independently replayed reference labels changed in 0/24.",
-      "outcome": "SUPPORTED",
-      "scope": "Only the retained M4 B5 public-harm requests and their exact matched permission views; not a causal content effect, population estimate, detector metric, or collusion label.",
-      "interpretation": "Transitions: 15 insufficient_evidence→absent, 4 present→absent, 1 insufficient_evidence→present. Fourteen changed pairs improved exactness, one worsened, five remained wrong. The intervention bundles message content, event inclusion/metadata, completeness, and token length.",
+      "claim_id": "m4-b5-public-harm-view-response",
       "evidence_refs": [
         {
           "path": "docs/BRANCH_A_EVIDENCE_INVARIANCE.md",
@@ -75,14 +72,14 @@
           "path": "docs/results/research-sprint-20261021/direction-review/public-harm-invariance-direction-review-rerun.json",
           "sha256": "f5c4e1e1a311cb7f52f8b1c2adcaedc164613fdfe7807ece00a5e8e6f690388f"
         }
-      ]
+      ],
+      "interpretation": "Transitions: 15 insufficient_evidence→absent, 4 present→absent, 1 insufficient_evidence→present. Fourteen changed pairs improved exactness, one worsened, five remained wrong. The intervention bundles message content, event inclusion/metadata, completeness, and token length.",
+      "outcome": "SUPPORTED",
+      "scope": "Only the retained M4 B5 public-harm requests and their exact matched permission views; not a causal content effect, population estimate, detector metric, or collusion label."
     },
     {
-      "claim_id": "b5-synthetic-production-compiler-gap",
       "claim": "The synthetic B5 diagnostic request builder was not byte-equivalent to the production M4 B5 request builder.",
-      "outcome": "SUPPORTED",
-      "scope": "The exact frozen synthetic projector and production B5 request compiler source paths reviewed on 2026-10-21.",
-      "interpretation": "The synthetic projector omits mechanical_ledger, explicit allowed-label/incomplete-record prompt text, and stream=false. This is a plausible explanation for protocol-dependent predictions, not a proven cause of all-present outputs.",
+      "claim_id": "b5-synthetic-production-compiler-gap",
       "evidence_refs": [
         {
           "path": "scripts/project_monitor_http_request_v2.py",
@@ -96,7 +93,10 @@
           "path": "src/colluscope/sprint_baselines.py",
           "sha256": "e5e24b749f2303d5bbf5feb6b925311f8b5970d4eba535bdf509f6189d960c90"
         }
-      ]
+      ],
+      "interpretation": "The synthetic projector omits mechanical_ledger, explicit allowed-label/incomplete-record prompt text, and stream=false. This is a plausible explanation for protocol-dependent predictions, not a proven cause of all-present outputs.",
+      "outcome": "SUPPORTED",
+      "scope": "The exact frozen synthetic projector and production B5 request compiler source paths reviewed on 2026-10-21."
     }
   ],
   "cycle_updates": [
@@ -126,6 +126,33 @@
       "scientific_outcome": "INCONCLUSIVE",
       "statement": "This 120-request synthetic diagnostic did not identify whether B5 labels are stable across the bundled Public-only versus task-irrelevant Privileged projection.",
       "what_changed": "The raw binary predictions were one-sided: all 40 primary-public and label-flip outputs were present, despite balanced reference labels. This exposes a failed positive control and prevents interpretation of the 0/18 assessable pair changes."
+    },
+    {
+      "claim_id": "m4-b5-context-sensitivity-mechanism",
+      "evidence_refs": [
+        {
+          "path": "docs/M4_B5_CONTEXT_SENSITIVITY_EVIDENCE.md",
+          "sha256": "906891199731c2b9a0a9a0f6822dd7c572896c29b41620fbf53e85e42bf37402"
+        },
+        {
+          "path": "docs/M4_B5_CONTEXT_SENSITIVITY_DECISION.md",
+          "sha256": "cd9ab94ad8756013e952f2a06d89d0e8a0a6975dc4e3e3f7e511cc661d6dcbb6"
+        },
+        {
+          "path": "docs/results/research-sprint-20261021/m4-b5-context-sensitivity-independent-audit.json",
+          "sha256": "6e5278737d9550d547ef4895ef9ed9bc6aa85fafdb1a26087fdbc4011a11041c"
+        },
+        {
+          "path": "docs/results/research-sprint-20261021/campaign-postrun-independent-critic-review.md",
+          "sha256": "9e9e9c59ebb730471c251735867c448fc568269f6e6cad803e5fc977e495dca7"
+        }
+      ],
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "outcome": "INCONCLUSIVE",
+      "remaining_alternatives": "Message semantics remain bundled with wording, salience, token length, event packaging, completeness cues, and provider-side variability. Exact request bodies and reported fingerprints do not guarantee identical hidden serving state.",
+      "scientific_outcome": "INCONCLUSIVE",
+      "statement": "For these 24 fixed M4 contexts, the frozen B5 request variants yield finite label changes, but no directional or causal message-semantic effect is identified.",
+      "what_changed": "Independent replay verified every assigned request and showed identical historical/current request bytes with label disagreement on many fixed cases, adding finite output non-repeatability as a concrete alternative to single-call view attribution."
     },
     {
       "claim_id": "observable-evidence-boundary",
@@ -187,10 +214,6 @@
     {
       "claim_id": "scientific-direction-review-20261021",
       "evidence_class": "offline_reanalysis",
-      "outcome": "INCONCLUSIVE",
-      "scope": "Research-route selection and source audits completed without new inference.",
-      "statement": "The real M4 B5 view-response anomaly is the highest-value next mechanism question; available evidence supports response sensitivity but does not identify its cause.",
-      "interpretation": "The 108-call scripted sequence plan remains paused. The unified 232-attempt campaign now has a schema-valid draft and sanitized assignment schedule, but it is not formally registered and has no current scope-specific authorization or runner.",
       "evidence_refs": [
         {
           "path": "docs/SCIENTIFIC_DIRECTION_REVIEW_20261021.md",
@@ -201,15 +224,15 @@
           "sha256": "cd6a45dbb18c2dedf8604c4699ca9c7a3c30d66a20c5605fe9af2938c7b5b18c"
         }
       ],
-      "independent_review_confirmed": false
+      "independent_review_confirmed": false,
+      "interpretation": "The 108-call scripted sequence plan remains paused. The unified 232-attempt campaign now has a schema-valid draft and sanitized assignment schedule, but it is not formally registered and has no current scope-specific authorization or runner.",
+      "outcome": "INCONCLUSIVE",
+      "scope": "Research-route selection and source audits completed without new inference.",
+      "statement": "The real M4 B5 view-response anomaly is the highest-value next mechanism question; available evidence supports response sensitivity but does not identify its cause."
     },
     {
       "claim_id": "m4-b5-context-sensitivity-campaign-design-readiness",
       "evidence_class": "offline_reanalysis",
-      "outcome": "INCONCLUSIVE",
-      "scope": "Draft-only sample and schedule preflight; no request bodies, model outputs, formal preregistration, or inference.",
-      "statement": "A sanitized draft schedule covers 24 M4 contexts across three views and 40 synthetic rows across four request forms (232 rows total), with no raw IDs, labels, references, or messages in the output.",
-      "interpretation": "The schedule and preregistration draft are structurally valid, but exact model request bytes, an experiment-specific runner with atomic pre-request reservation, registry registration, a current approval batch, and live model outputs remain absent. No scientific response effect is estimated.",
       "evidence_refs": [
         {
           "path": "docs/results/research-sprint-20261021/direction-review/campaign-preflight-evidence-index.json",
@@ -220,11 +243,15 @@
           "sha256": "cf066b696c8378ff9e185777a4d93155614698bc85b53f587e27b8443db34e91"
         }
       ],
-      "independent_review_confirmed": false
+      "independent_review_confirmed": false,
+      "interpretation": "The schedule and preregistration draft are structurally valid, but exact model request bytes, an experiment-specific runner with atomic pre-request reservation, registry registration, a current approval batch, and live model outputs remain absent. No scientific response effect is estimated.",
+      "outcome": "INCONCLUSIVE",
+      "scope": "Draft-only sample and schedule preflight; no request bodies, model outputs, formal preregistration, or inference.",
+      "statement": "A sanitized draft schedule covers 24 M4 contexts across three views and 40 synthetic rows across four request forms (232 rows total), with no raw IDs, labels, references, or messages in the output."
     }
   ],
   "purpose": "Claim-level memory for future cycle selection. This is a scoped summary of historical artifacts, not a universal scientific score.",
   "schema_version": 1,
   "update_rule": "Each closure must distinguish what changed, what remains plausible, and which hash-pinned evidence supports the update. Only a structured update confirmed by an independent review artifact counts toward the no-progress pivot counter. The registry checks provenance and shape, not truth.",
-  "updated_at": "2026-10-21"
+  "updated_at": "2026-10-20"
 }

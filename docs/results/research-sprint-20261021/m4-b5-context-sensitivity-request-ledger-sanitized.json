@@ -1,0 +1,1630 @@
+{
+  "schema_version": 1,
+  "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+  "requests": [
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "9ffe41280b4cb1ebb3e05d693491400a1f93c07efdb01a13ef3eb89f5f229a2e",
+      "started_at_utc": "2026-10-20T21:06:39.389540Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000076770"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "fb9cf5fb32c80c9c5823bc68a5fa0c86771346e40491bec2d69283c2c9941884",
+      "started_at_utc": "2026-10-20T21:04:44.929646Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000167052"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "32ccfcca7d77ee73de2cb5f286087bc967d3d3f6adfb4862610582f9e1a4b6b4",
+      "started_at_utc": "2026-10-20T21:08:13.158945Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000091788"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "71b90dea5b35cd6385315a902adda536853a84a37c13049e57ea7324825c0ca4",
+      "started_at_utc": "2026-10-20T21:05:53.830187Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000091788"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "11134b640d2b8c9285feca735836c8ff6a415946320a993635a7c037569ce836",
+      "started_at_utc": "2026-10-20T21:07:06.968494Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000148236"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "50ffa01714acae6e4b7f073d7ec5826e1c252ffe1101905a6ae9537acea578a9",
+      "started_at_utc": "2026-10-20T21:07:58.039838Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000218052"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "62e2ab7006ad537887fdab397b8dbdfcb9226abb3c7d0a5ccdff55c0bb7cf5a0",
+      "started_at_utc": "2026-10-20T21:07:38.927152Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000076770"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "3164b5126c817ed54fa452585fd87bd68fca0ea4569e0c27003f9c0f27a8ba41",
+      "started_at_utc": "2026-10-20T21:07:10.976516Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000217002"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "e556fdd0977c4b85bdcf0334faff6fc78ac6f86902d0b817b1fd472a6b6146d3",
+      "started_at_utc": "2026-10-20T21:06:47.797413Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000176736"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "569c28268ade323e33ff65883625dc99afeb08fd17f8af200013f93455a0b40a",
+      "started_at_utc": "2026-10-20T21:07:47.746461Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000076770"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "4abda771903dfdd46ba2441efb943641206a291064fcee1f9a5672c0eac3b6f4",
+      "started_at_utc": "2026-10-20T21:05:11.705586Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000109338"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "24e36a86e173eb17d4ebd7f18f62e9cdbb180910e10b5fcfe87d2cbba1dd4a15",
+      "started_at_utc": "2026-10-20T21:05:42.551983Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000109338"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "27a3bdbea0b89a799fa998c4e3818d2cabc967e9718cb9da88fb14967237ab7c",
+      "started_at_utc": "2026-10-20T21:06:42.309723Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000150036"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "6fa43825bae46d7f46a57b9b32c263a2c8da58484495ab66446264b5d79ab551",
+      "started_at_utc": "2026-10-20T21:05:08.768018Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000176736"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "b9f9847cb3cff5e9564b1d9ccaaa36ebe597b0876df21543b46c2fa2526f6e9c",
+      "started_at_utc": "2026-10-20T21:04:55.510945Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000076770"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "579742a096fc70be65869fd3a7dbf479222971e9628da629c4806e1e3b16418b",
+      "started_at_utc": "2026-10-20T21:06:23.656101Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000156120"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "f354a01e3d1daafe64892772f528291c856d3961a59f766025a0b6e20b79b662",
+      "started_at_utc": "2026-10-20T21:04:37.627646Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000213852"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "5e3b226ce54891f8acd312b7613dc7e7d7ac40473b59bdd3c50a9f87c338b3db",
+      "started_at_utc": "2026-10-20T21:05:59.185079Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000076770"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "5afb76cc40ffed8656624a686e68a4d55c1c9eabf0a519b6c181cf234860b901",
+      "started_at_utc": "2026-10-20T21:08:11.372873Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000072972"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "8e0b62a5ca5b40a311d82282456e250d6781b2addf0df8764773b9e88f4846cf",
+      "started_at_utc": "2026-10-20T21:06:57.793646Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000167052"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "1cb259ac864bd69b76de0b5e7b4cefa85fa7e87b9fdf39788e8fdbd4f48e2646",
+      "started_at_utc": "2026-10-20T21:05:26.379001Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000091788"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "0458031221dcdf1c756107c90e28edd860f3cb70a2afcc3a17324063355a08f6",
+      "started_at_utc": "2026-10-20T21:06:43.390682Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000227202"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "04cc5314fd453368fba017e6dcfe7f0c04becc3fc932f886beea2a7c2294f2ed",
+      "started_at_utc": "2026-10-20T21:07:02.434844Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000218952"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "f8a623de587a828e520f8a8a6ba2bfd674a29c0188c92055be56a6c4fe03357f",
+      "started_at_utc": "2026-10-20T21:08:12.352022Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000071706"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "380722faceb3802333b28c5999f184d876f97d1a5490c923d8424dcd04478736",
+      "started_at_utc": "2026-10-20T21:05:21.340612Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000109338"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "7d8fd0105c2c16b6e684959ab78a53132ccff099b0c5c1b0b1414b1ec4c882d4",
+      "started_at_utc": "2026-10-20T21:08:03.271140Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000072972"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "1b2bf6521c617e7b3e76b065fc197278a18f33f495e268b92b37e64191f5c908",
+      "started_at_utc": "2026-10-20T21:05:57.929448Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000091788"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "ce4ea5e6198f6e43ae25226df708c6a76c34d8f1105d8cde3c3910c6fbda01b2",
+      "started_at_utc": "2026-10-20T21:08:10.452226Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000148236"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "8b91153448853477cf6b3a55dc3bad88f9a8cd7447671110a1f0634af226f35c",
+      "started_at_utc": "2026-10-20T21:04:50.108864Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000093588"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "20c4efc68be1e92e658fcf1df91f5ca5985ca9c427033ce6667b923c64ca68c9",
+      "started_at_utc": "2026-10-20T21:04:53.529279Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000224952"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "98562cf48b33d6ff862053d13d43a6b7cc4a145ef85d3a7a75c1e473f4ac6c8c",
+      "started_at_utc": "2026-10-20T21:06:49.543924Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000093588"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "084fc7f88545cfbd9fff8cd6237e6c10aa06bb20b2b87eba6b16758a59f67b68",
+      "started_at_utc": "2026-10-20T21:05:48.970102Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000251202"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "de5959b0a1bcc0a62de354260f20260ca20fa5205625b41de06c0d2d1ed12f09",
+      "started_at_utc": "2026-10-20T21:07:43.365919Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000076770"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "4fde53859608693d680e6c749dcbf2032f25ddc47c1b51537c3af77438bf6921",
+      "started_at_utc": "2026-10-20T21:05:44.416118Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000109338"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "767b0aa8cf533c43f5ec1de9e3d31ee7ecc9c0a2de9749747de0410439f66729",
+      "started_at_utc": "2026-10-20T21:04:57.372760Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000167052"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "ed87a77b6b781b416bacc7d2e79807a7d2f96a2fdb392bed48da17342adfa9b2",
+      "started_at_utc": "2026-10-20T21:05:24.932481Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000076770"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "b3dd7fc75671af4c801cc5ca9fbac722066f5f7a74efe7e8f7055d45ec2b088b",
+      "started_at_utc": "2026-10-20T21:04:45.920898Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000109338"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "bdebf202de5794fbfc2738bfdabc5023a1af2d31aa1d13a99ffd99a2fb55112d",
+      "started_at_utc": "2026-10-20T21:07:50.209419Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000148236"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "16b5e1a9bf4ba4c69dee5cacacc03c0158a2bf8ffcf4b83e4c589f1477447abb",
+      "started_at_utc": "2026-10-20T21:08:08.054530Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000174936"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "cd6384287dec29f3929144cf172a9c5fc4cfba4ab670fb8a2a551bf5643b43c1",
+      "started_at_utc": "2026-10-20T21:05:23.157543Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000109338"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "3bc52798342c6f29cda34cbfc64ef08c7d20774a22b12d8acbfcba81d45c6262",
+      "started_at_utc": "2026-10-20T21:06:32.435367Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000071706"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "efb73af9f63c1b6912b27c64b692528c4be98468e0f9e757bfdcb3fbb147312b",
+      "started_at_utc": "2026-10-20T21:04:38.736891Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000184602"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "8095a29bc2cf80baee7426fa0889856047d81b1754a5550812569ab70ddae0fc",
+      "started_at_utc": "2026-10-20T21:06:07.177672Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000091788"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "1435e2701e8be21cc9d848607e392c1cff239f590a90464af67cf8e1d8cc6cdf",
+      "started_at_utc": "2026-10-20T21:05:34.575518Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000076770"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "f69d3ffc9e4df6e33d9f5fa82a95cf7129b818a5433ff5685628e83a135d6288",
+      "started_at_utc": "2026-10-20T21:06:22.553462Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000157920"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "b3c4fc1c2172e865c39fde154ea0ca8c53bea1b69f877c93096389482a5e118b",
+      "started_at_utc": "2026-10-20T21:07:33.089494Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000093588"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "24008120d9f9ce51b1849a74cb4f56a864c4e7c69a76cc72681d21a3da0a923f",
+      "started_at_utc": "2026-10-20T21:07:36.904790Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000091788"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "9df1396de4abcef0d0f77af0577e5b92f0e1957ef37e9f5b7e790bd8119b5131",
+      "started_at_utc": "2026-10-20T21:04:58.304672Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000091788"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "632b1272eb8ed15528a9de3f8bed2e8bd6bea42261add34e3ce30f44e4190739",
+      "started_at_utc": "2026-10-20T21:05:32.913353Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000091788"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "3f46441828074deba97ba898a6d5edb7d464d72c1dc1a5047b039d1d05782321",
+      "started_at_utc": "2026-10-20T21:04:59.406496Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000072972"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "fc35fd69bb4da398aee486a68cba176f45cc6cde72ba80650010598fcf012981",
+      "started_at_utc": "2026-10-20T21:08:05.980905Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000071706"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "902c5c9226c5608df113e733af968391ab2443cee2f9dfc97cd86fc0dada86c9",
+      "started_at_utc": "2026-10-20T21:08:20.592745Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000071706"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "7c91dcfee6a1c629eab67446e73963b6d19d5929884514ac65f3e2da7dcd9269",
+      "started_at_utc": "2026-10-20T21:07:14.042287Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000174936"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "d77751423d7e5e107faefaf1809e334d756530c1aad56521e8d5e2e5b843915b",
+      "started_at_utc": "2026-10-20T21:05:19.054818Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000076770"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "da0189ee8a90b53247c5ffcf7617bbd835b86ccaa1baa794a4f375e561ce463c",
+      "started_at_utc": "2026-10-20T21:05:28.646856Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000076770"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "1ff234045cae7ac2c20d54d66212ab5be3b7163311beb1e5557fbe548012b168",
+      "started_at_utc": "2026-10-20T21:05:35.656000Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000222702"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "fa015632c3e09303ebf09783c447ce821456322bb5df44aeea2a72441df20bd0",
+      "started_at_utc": "2026-10-20T21:04:44.109821Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000167052"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "39a87c99dc72c09f7e75e020c11cc07af093e9da6e26942477e58e9a33d50f09",
+      "started_at_utc": "2026-10-20T21:05:06.645730Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000091788"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "2bbc426364b4326b65ee30440a86669c994b47b3b4ee572d8707751b2b11a15a",
+      "started_at_utc": "2026-10-20T21:05:47.809293Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000168852"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "497b4d0c33cd8f445fb036db72256138cfcd15d14ae7e6c2d476538f558c1233",
+      "started_at_utc": "2026-10-20T21:06:45.645293Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000076770"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "e332eb433959f4c563d51d0ef269e894eb4b798875e81b1a788b5e5139092e80",
+      "started_at_utc": "2026-10-20T21:06:36.242264Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000071706"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "c5aeb82a14e2c95712418d62de766febba73696cad0f427088dc1bab11f55fad",
+      "started_at_utc": "2026-10-20T21:07:28.726052Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000091788"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "a584af42016deaee2960ae9cdc7e1de6b7ed8e0da9f5a9752ec06e60694f986d",
+      "started_at_utc": "2026-10-20T21:06:55.672417Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000072972"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "74cc7921bb9594b26d5440d58217364cbba01eabec57127f7cd17f36c670f2dc",
+      "started_at_utc": "2026-10-20T21:06:29.905533Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000076770"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "b5c35a264399f9fe7daef52a597eeeb1d687bd7b9a8637320dcedc67dace5e97",
+      "started_at_utc": "2026-10-20T21:05:43.617786Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000091788"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "7cbe282c4237ca51cfc5904a6d40d896ab8ffee97db25167ee40f072b163c74e",
+      "started_at_utc": "2026-10-20T21:08:01.806210Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000148236"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "a732045b49f1df135d2a5c9ff74eda43d08ca1405a961b1bf936f892d49dd4ee",
+      "started_at_utc": "2026-10-20T21:05:46.007180Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000076770"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "fd7ded105167345e032ff52eb7f7508f3ac829ea653aebd620df989be419f630",
+      "started_at_utc": "2026-10-20T21:07:37.922319Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000167052"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "6082bdbb7266d3e6b2f3d13b4b5871fb947e7b6d7615dc88b5be0fb41d155839",
+      "started_at_utc": "2026-10-20T21:07:12.058108Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000091788"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "dbdf67778662c3a85bce269b269df46ebdab33b20345fefcd1f6fa803ecf5455",
+      "started_at_utc": "2026-10-20T21:06:28.558528Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000076770"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "ba256f76d747a406c2e4ee1ecfd7268a506d51d5c37aa6fe5cd470fc16207053",
+      "started_at_utc": "2026-10-20T21:08:16.959523Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000076770"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "5a9187524622b7b5013c964a2ad08ae5727b879250d8797b65e0f4ac83e8258c",
+      "started_at_utc": "2026-10-20T21:06:24.433841Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000076770"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "447b06bb3dd92fcc34967521d8221beb3db1a645a993db457c3307c846f3c902",
+      "started_at_utc": "2026-10-20T21:06:05.604057Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000093588"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "bd45bcc7b25ceffd60192c6f2a910d6b8a7648e7597b03a5bf1a37ccd1ff15ea",
+      "started_at_utc": "2026-10-20T21:05:10.880870Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000091788"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "059f0d3bab6690052db039ee0b11c60c7c14c788c085564fa128693344467318",
+      "started_at_utc": "2026-10-20T21:07:17.323320Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000076770"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "590a09347331314fa04c8fffccf8522783836500904e5ac4a78c3b1f9b687f74",
+      "started_at_utc": "2026-10-20T21:04:43.174502Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000076770"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "7c24170e5a9a33e965469725971f9dd4dcaad22be96a2c8e6403b6aaf4c1f5ea",
+      "started_at_utc": "2026-10-20T21:06:25.932296Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000072972"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "ad54b15d8ab0b3951b82ae34c39296f8271f262e34c7ad60eaf2993a10f23afe",
+      "started_at_utc": "2026-10-20T21:05:55.897092Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000072972"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "e7cb9f6f61d89d04436fe7eed88d5c18940aa5012e53557a80fb968aa75f2627",
+      "started_at_utc": "2026-10-20T21:07:20.557285Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000071706"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "ceafeeba63ef05ff9fcedfc2dd350202063a7beb7b158b4a7a71534746b6bd42",
+      "started_at_utc": "2026-10-20T21:04:54.609282Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000091788"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "a949d525b96c24e953d6007f8d0078691aa314bcd019690b238e292962b231a2",
+      "started_at_utc": "2026-10-20T21:06:15.746427Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000076770"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "a6c46239353b0562613cd0e50bbc357ce92d395ee569c2748f729b6a109f8d98",
+      "started_at_utc": "2026-10-20T21:05:33.810584Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000212952"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "0bbea9d927784aca97a8712f81cfc29feb61ba5354126ab8f14cb8837a18d1f8",
+      "started_at_utc": "2026-10-20T21:04:35.528879Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000167052"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "5bd0491f33cae33478a008228621a5f36529224effc387e3d03ca06920dd8d73",
+      "started_at_utc": "2026-10-20T21:04:49.037331Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000184602"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "6444555253a2241fef45c3961b7fe68cf92cd349decac77822c900d840c50e3d",
+      "started_at_utc": "2026-10-20T21:06:00.036884Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000217902"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "48a64807a5f19d6de5e0a410405b8b8ff66352a62ea7882701717541231d497d",
+      "started_at_utc": "2026-10-20T21:04:47.870853Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000102138"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "26e3b8c9c5b35cee57f4a1785c882cf5d2d1a9ee4424e333fbca5028c54e473d",
+      "started_at_utc": "2026-10-20T21:07:46.169119Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000214452"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "eb2304d0be9a76c9177d8131e6ab08e368e4fd3cbbfd9667ff70fa488ff9edc2",
+      "started_at_utc": "2026-10-20T21:05:39.831428Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000093588"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "ed03f89f9703eb013ae39a9ec91863c6e105dfaeb5d0a71cb3d577921d112aee",
+      "started_at_utc": "2026-10-20T21:08:05.092229Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000093588"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "0ebb9b6407c3148250bad171a0ee81b26891ae5572b049859a326d8d07dee854",
+      "started_at_utc": "2026-10-20T21:07:44.579447Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000076770"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "987c9297a46ad141114966b3f31f869916b3cd5d9fcf06b12bba866298c24fff",
+      "started_at_utc": "2026-10-20T21:07:01.683895Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000076770"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "3f99615afee240b502a3f382f102e877b0e9af4ad528b17d72df2ebd1bd7c18f",
+      "started_at_utc": "2026-10-20T21:06:20.908604Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000093588"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "cbaf68728c02c4d6c2412a39d9bce9d16c1c9819063a5787a799d4ee6b7becfa",
+      "started_at_utc": "2026-10-20T21:06:25.369361Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000150036"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "e1bfd9819e1e82d191a65da9db68d21151b7ee6a5df7f13b845611a0855a79e7",
+      "started_at_utc": "2026-10-20T21:07:08.065101Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000157920"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "c4b3cd80caef1a73685b56931b8274d79892f6358ffaf081922b1d8049ec0055",
+      "started_at_utc": "2026-10-20T21:06:44.485484Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000080856"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "44568054ad5cf247664d282c82a9af6ce91b550866f8b38ef6e70905d9330ebb",
+      "started_at_utc": "2026-10-20T21:05:05.539703Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000076770"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "45cf22bf0799db61dc95125ce1425d115c83e08e893a22c783b07f7a17542034",
+      "started_at_utc": "2026-10-20T21:06:53.815939Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000093588"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "d67e0c2fd9789d13eb7fba5323d3b7087c313f18960e73c0a69fb936bedddd70",
+      "started_at_utc": "2026-10-20T21:06:17.803271Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000071706"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "d21fe76a1a5453d0d0aab7a6ee9760824b65de70e627ffde769149e62b465bca",
+      "started_at_utc": "2026-10-20T21:06:33.268321Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000076770"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "d46f16c25a8dfe398564344b987da851727c5a74b98772ff40ffbb30ab8951f4",
+      "started_at_utc": "2026-10-20T21:05:14.591811Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000222552"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "9aedd7b5183f59393f77a9952f097b3abd7cf96cd1a15e958682db7bd8d32be9",
+      "started_at_utc": "2026-10-20T21:06:06.369969Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000093588"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "28d27d3323cb508a8b399536d7b148bb8fbc0e8a2a9b7b128c39f20031afec38",
+      "started_at_utc": "2026-10-20T21:06:51.260661Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000076770"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "e6da8b8eae1f9362aab4fbaa165fbd8ff258603a6c91549efbe81140ba9d2b3c",
+      "started_at_utc": "2026-10-20T21:08:17.804911Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000093588"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "d026a27288f5b10e28a1d55eedb18cae799ec98926ba56b80caf7c54c25c59de",
+      "started_at_utc": "2026-10-20T21:08:22.619765Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000064506"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "ec3970d0126ec42c0a1bcd257222c90eec71231b7cb7f567ae06f5449bb8c5ff",
+      "started_at_utc": "2026-10-20T21:07:19.482256Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000148236"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "40ba6935ff43addc5225f5cf4a4ae098ed3312f3f0175e28f2358fc1643603fd",
+      "started_at_utc": "2026-10-20T21:08:07.022468Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000157920"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "857a59dbcac808dcbbcf9a432da3d9361f38b4aa975b0dffe369a41569a7e6c9",
+      "started_at_utc": "2026-10-20T21:05:01.911335Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000071706"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "69f1d830a9313253924ad1427b40afc4037773a70704241ea6d3ffa502bc36ee",
+      "started_at_utc": "2026-10-20T21:06:38.122575Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000156120"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "8301d93a82cac032e508fbb36d20f6a9c3e533074746f9a228831fdd8843db62",
+      "started_at_utc": "2026-10-20T21:07:13.158279Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000076770"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "bbef07b56a9a0126f9794a4f603a0ee91a4e1a875e13e4e69b96280e050c6bf1",
+      "started_at_utc": "2026-10-20T21:05:22.283154Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000167052"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "d29443a26299d8d19098df75868545939a6d0b314541a21935fcf4cd78e76b88",
+      "started_at_utc": "2026-10-20T21:06:52.024735Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000076770"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "023e6216c756fa5ea74704a69404197921b150c3c4e199fb2df934fe03971144",
+      "started_at_utc": "2026-10-20T21:07:46.916456Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000071706"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "d67b079310e78bfe16da4be193328e34482b12577857ec8be1d2d02e7b62c75f",
+      "started_at_utc": "2026-10-20T21:08:09.302046Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000216402"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "98d2381f062c7d84262f313ca8f969adfbe34cc98dbb6dc459b2b52ae17a7946",
+      "started_at_utc": "2026-10-20T21:07:42.191192Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000157920"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "e6343e9037ba8b282539d4f8d8b20376df29d07038a6f463b5d58cfc3a5eb992",
+      "started_at_utc": "2026-10-20T21:07:48.720260Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000148236"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "636751c0f8ef2660ed6a825bc8303fdb911a8879760d3224a06f972b8461e5f1",
+      "started_at_utc": "2026-10-20T21:07:04.859813Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000071706"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "ed642326550954a64daf33f5f4f9baf8189dcf6df85d846b07df647a6009e171",
+      "started_at_utc": "2026-10-20T21:06:26.616244Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000214902"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "fe8618defb9db05854c8e147bbdb1e98b9049c1dd8f5e742638028ed75a559d1",
+      "started_at_utc": "2026-10-20T21:06:01.558347Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000072972"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "8bc0f2c8268e977a4e7bb9d3d8c489bdca2be7d4a5d1a37d20ab040c21360b37",
+      "started_at_utc": "2026-10-20T21:07:15.074118Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000074772"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "afad03831b4653e6d0bc06d8e1516f29fd20ed606064401c18cc47698c95e887",
+      "started_at_utc": "2026-10-20T21:06:03.613813Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000091788"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "376c9d586e4cc19f39c8ea0282e65c3e648da6fb6a17610667e6f23672020dff",
+      "started_at_utc": "2026-10-20T21:08:14.175270Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000220302"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "d257755f050d4789292e42e91bc2e6862fc453cfc83a2c596ee945e721403619",
+      "started_at_utc": "2026-10-20T21:05:45.283666Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000071706"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "d2ac8bc5a87fd415df4c4a83a0c3a90631e9e6c015fa5aca542cd81122412e16",
+      "started_at_utc": "2026-10-20T21:07:25.680067Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000156120"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "e8acf72c0add0c7a14ae64e96dd47951f02c0ec82f0c6a24a9984fc279898754",
+      "started_at_utc": "2026-10-20T21:04:51.982038Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000102138"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "f9c6e11e8b23e1e865f11f65d7f9560df474cf25b7eaeac6d48746c2234a8a55",
+      "started_at_utc": "2026-10-20T21:06:31.604179Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000091788"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "e2c9ffd085bb84af8876d062b96587ab785a3cc5beca1821fed33e14f774fc57",
+      "started_at_utc": "2026-10-20T21:07:31.187631Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000072972"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "56d1213fc995a0c262ee63e3b7b8f0806928f95440d16ffdda4aeeb44a994b74",
+      "started_at_utc": "2026-10-20T21:05:03.919019Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000076770"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "9340b0933fb399bfbdada960d499273deca26e922beb5fe12033f37b0a1cd708",
+      "started_at_utc": "2026-10-20T21:07:59.976143Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000071706"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "82749a83c08daf39b117c8036c77ea18a6c903474d3656948873513a5d0cb4e7",
+      "started_at_utc": "2026-10-20T21:04:51.026637Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000091788"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "c796369e0616a808890b4a951ad0b7ea4a5fd58ce688da1e9b2281f86b9a4171",
+      "started_at_utc": "2026-10-20T21:05:31.018545Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000093588"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "72a9aa2c915ce30cf6ddbcd73b9919a5ce74b61477023850365ed85a86f8d385",
+      "started_at_utc": "2026-10-20T21:05:50.442745Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000093588"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "87b08d69a94147a4548f5419b50d7c9d7174a1c0d2316101030d6066bdab4f7a",
+      "started_at_utc": "2026-10-20T21:06:08.145640Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000217002"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "951c1912e9c8d79c6dda3262eb406daccba3e23222518d333390ee025d34762a",
+      "started_at_utc": "2026-10-20T21:06:40.790356Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000076770"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "61b0d57a02265163f5de4b7926cba922269b8491e27622d80e8df9b9f9b879a9",
+      "started_at_utc": "2026-10-20T21:05:07.654632Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000193752"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "c79acfb554c90174d9334d7f559600b656ea1376326c2fd424a388de0ca45578",
+      "started_at_utc": "2026-10-20T21:06:52.944712Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000225702"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "4ef9c1fea75924fa43c79c289f89694a605564ff562bee2bc633dce3ba1656fc",
+      "started_at_utc": "2026-10-20T21:04:36.514770Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000187668"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "4d779c9a462283de189e3e8ce1eeca1de378ee5f56cfc0d2a86990bcbb2a2644",
+      "started_at_utc": "2026-10-20T21:07:39.795972Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000091788"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "2089beca45037f2f2fb5f7fdd91657fe118c3761801903ab34b80ae1cb6e0d5a",
+      "started_at_utc": "2026-10-20T21:06:27.553644Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000109338"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "5d466a35b210e44ce21ae7c89e15d26309beabadab23006b87763ac31c57ed0d",
+      "started_at_utc": "2026-10-20T21:05:23.994902Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000109338"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "dcc0674a7c5591983dc7913d595db8fa88eda004c99ccbd5161efec4047431e6",
+      "started_at_utc": "2026-10-20T21:06:59.745569Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000210702"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "9b498d2cac5109d3c767feee5ba24457f3952138ca2ad89f15cec3a7d11124d9",
+      "started_at_utc": "2026-10-20T21:05:29.942605Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000091788"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "2bc9ba1a9ebaba114d8c51599367451a9d5d849f9c13c0383b8cb6faac8a2e9c",
+      "started_at_utc": "2026-10-20T21:04:41.017658Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000167052"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "63efd8f896557d4704d3f5b116e6a928f02fcb1c458f93f27073072a1c2132f2",
+      "started_at_utc": "2026-10-20T21:07:27.456373Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000091788"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "eecd6410b3156558dd77595cc898cb77f05cbe7d6617c3b8a0a19105dc481308",
+      "started_at_utc": "2026-10-20T21:06:21.715316Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000174936"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "ba8db6a92b9bb50a251290d9c723d533614f7e0ce40ea0e8b8ef19d9b3efba63",
+      "started_at_utc": "2026-10-20T21:07:54.931240Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000076770"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "10e2818835e2cd69520dd0e58419f8e9ed2e11a311b4e5f7bcc93c9975d388a8",
+      "started_at_utc": "2026-10-20T21:05:40.704840Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000167052"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "b5b4f065fa4bf3e31e53969aad9269c85556b04c4bd0b1134446877993151dcd",
+      "started_at_utc": "2026-10-20T21:04:42.116113Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000076770"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "1612142c983b5b286eb69f596f50555133c363ff3406ed47288ed82cd38b9bb2",
+      "started_at_utc": "2026-10-20T21:06:04.446308Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000148236"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "df21a972cea916b446a2ceb7ea1cf290fb06286faa4b9bbf853901b8d4860930",
+      "started_at_utc": "2026-10-20T21:07:23.470218Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000157920"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "49c7465dd0f8ea32ae41c5b1929342c7e9bebf7fb206bc197d540270f91e2c9d",
+      "started_at_utc": "2026-10-20T21:05:00.734455Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000109338"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "30b8871476fc3cab593367fc332fb61015c0af4e9bdfaf4cbbc907c8463d412f",
+      "started_at_utc": "2026-10-20T21:07:09.179886Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000072972"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "25d0b66da5293a8a99ddafde9521710ce02835b0667074c77442c4a5cabf4cc1",
+      "started_at_utc": "2026-10-20T21:05:04.700306Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000168852"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "80e1c5454c50e7749ecd79271d18c01c55c60371ddc24a744c6b824bbb6120f5",
+      "started_at_utc": "2026-10-20T21:06:00.840031Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000076770"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "88044dd2f6b43966d23cd4b49b1f709627c1847f8d6d9b2da1bfc0fa3a65ffb9",
+      "started_at_utc": "2026-10-20T21:05:27.508057Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000093588"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "498eb79962ece56db4f7b5852cf1ad4d3f59360b7b53d117d489e0f86c8d9c06",
+      "started_at_utc": "2026-10-20T21:07:56.159999Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000071706"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "5278420ff63c39de1e3725c796e9e9cb45e6981ac7413900297ec358e77df887",
+      "started_at_utc": "2026-10-20T21:07:26.680611Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000150036"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "1a91cabf5782840f32a48060cde87c9ff54f55d098d33389998a19489bf25547",
+      "started_at_utc": "2026-10-20T21:05:46.935219Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000227502"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "43931b93817ad616264f0eff0fe691305f0e40ba46cfc4189b32ffff3616a258",
+      "started_at_utc": "2026-10-20T21:06:02.721546Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000071706"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "daa78c00843ac088b8fdbd398edbbe8cc7073b13f5617cbcc5eaafe98129a0bf",
+      "started_at_utc": "2026-10-20T21:08:23.336330Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000093588"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "9a03b67d03458afbf27abbbf5cf78bef258430f8efb81571892da49ff25300ea",
+      "started_at_utc": "2026-10-20T21:06:19.017855Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000176736"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "f0174b7622f74b195b3c2c9d069a8b1370fbc2ac5d68df4ed103a70180e5227f",
+      "started_at_utc": "2026-10-20T21:05:17.695674Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000167052"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "59ea31217d39e65ac85df85caf9af6b7cb32a33c11eeb2086be9da001f191b4a",
+      "started_at_utc": "2026-10-20T21:06:09.291587Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000093588"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "72eb9e932b846b40cb369481b005db2a60c8d7f1eb2ca4388e2636d65b2bc570",
+      "started_at_utc": "2026-10-20T21:07:16.291598Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000156120"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "ff7b528c698b09253fddc068db4294b65ccbc574d1a25e9e9f3aefdd2285330a",
+      "started_at_utc": "2026-10-20T21:04:46.770174Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000167052"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "e2bfae9057170f9b99811bb06da10fc396f0acdb18ba940f9700fc3d01d2b181",
+      "started_at_utc": "2026-10-20T21:06:30.731830Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000157920"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "4386932b91f77c349ad57aea68953ed95234af427ac1ed44d5549cd4ed07ff8c",
+      "started_at_utc": "2026-10-20T21:07:45.378889Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000228252"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "c73dfe14dbbf53ddc3c6fc36e2150019844ee273580bd2facc3dd95483a48905",
+      "started_at_utc": "2026-10-20T21:07:03.052019Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000091788"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "0c1debae2a57603841ed8ee23530dceac78014de958413babca324a72e1c1fd1",
+      "started_at_utc": "2026-10-20T21:05:37.928642Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000076770"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "3f2fa5071fa61b80eb40a1716e25a24eb1d35768ed1595b7b3a880af5fa05a7e",
+      "started_at_utc": "2026-10-20T21:07:06.017056Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000157920"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "832d3543d9be1b24f983056d728dbf68d676ab4fdf40e65a8cee6ed33df70839",
+      "started_at_utc": "2026-10-20T21:05:51.600964Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000072972"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "95ccaecf5cd734f49f9d5482a6ac8e862bd94769ba608befb0e8d944134d3d49",
+      "started_at_utc": "2026-10-20T21:07:32.176317Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000076770"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "b476110e1dc73055b46d18894af5472f6d9036e64aa918f5be409042e46b5692",
+      "started_at_utc": "2026-10-20T21:06:13.890432Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000109338"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "1ad0b8c2748491ee4bc14a4c8037d26ac3d5ae2802719941b93fea3708a41321",
+      "started_at_utc": "2026-10-20T21:07:24.544690Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000076770"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "e7280c2d63439503a4319a325406ec92862b20f356adf8a2d36791ab6fbf9df5",
+      "started_at_utc": "2026-10-20T21:07:43.982641Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000148236"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "5941f58165e858618614f9402cc39f1470aa106e8e5d5acc444941811ba3c849",
+      "started_at_utc": "2026-10-20T21:08:21.606134Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000076770"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "5c40523d4a6e864c14e1396dbc8e0d1406e709668cd802d7f8f65512cba16e6e",
+      "started_at_utc": "2026-10-20T21:06:20.097626Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000223152"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "8a591226602d869d6c36391669ba7013a75009def6c884c2957780ecf3c70058",
+      "started_at_utc": "2026-10-20T21:07:56.986239Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000148236"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "c179f45895e72dd40fbebee40c70eb23f88e60ee42113c511ca3485f9bca80b8",
+      "started_at_utc": "2026-10-20T21:07:54.121931Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000076770"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "93a94aff2562d5b990da9c9246ba625dd1f03a3c17ead7b10c2a692fbe1fda47",
+      "started_at_utc": "2026-10-20T21:05:16.816447Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000167052"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "dd0cc7fd18678ae14172f1291c58c0abcfdd12404fe3a64b5f35586d71b093c3",
+      "started_at_utc": "2026-10-20T21:07:35.864441Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000071706"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "0644b388884a737c272565bd54e2d2515449b14ef6bbfcc7838d7dea3ec8481c",
+      "started_at_utc": "2026-10-20T21:05:56.798488Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000176736"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "2693322fd589f698fd16b7a3cdeeffc6852a772a2c9b0c30656a6732caae7b9a",
+      "started_at_utc": "2026-10-20T21:06:10.429641Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000072972"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "ce58efe01933ce19447acf4a9f2d7c761ebe364a46784231c0a30a62b9b71808",
+      "started_at_utc": "2026-10-20T21:07:03.751206Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000176736"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "112d642427f6993612d7f979574005680adc697ee87244b1e310a471ec004a69",
+      "started_at_utc": "2026-10-20T21:05:38.968856Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000072972"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "12ec2c6dba03960f8a2b038150a05d6e1de4633cfb10864c4a59237ab6811d12",
+      "started_at_utc": "2026-10-20T21:07:10.071568Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000072972"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "34ecd6b462e769c98d8ce4cd6d7e4d7a28daf7b5bb15024b41679d81f5f5f82d",
+      "started_at_utc": "2026-10-20T21:07:51.494561Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000091788"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "be91f9ba28be5f44bc4f9dc4be36586735150cb262032bb7b875e76614445456",
+      "started_at_utc": "2026-10-20T21:04:52.784296Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000109338"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "95206b6ee390278eab7fa9f002abe68d01fe98309bb7ce4329f2d9c5177e9afd",
+      "started_at_utc": "2026-10-20T21:06:50.450186Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000157920"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "dd78be0408417bed05214f1ae112803962a524d1b18e2a3b6091e24d090a4e3b",
+      "started_at_utc": "2026-10-20T21:05:12.609743Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000064506"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "11e6ab7cc3b9a566cff506091fafd7d940fe70a71f6c4bfc1e47662f471bb24c",
+      "started_at_utc": "2026-10-20T21:07:18.437939Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000071706"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "6296fc0e7147ac67385a196f9d3ad158e61b35c516b0ac1b2df372ebc429f007",
+      "started_at_utc": "2026-10-20T21:06:35.395623Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000072972"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "056f93d886c2a8f91a24bf84bdb1b78e7b7ca7fab65eb9420ac726698bead9f6",
+      "started_at_utc": "2026-10-20T21:07:22.435964Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000072972"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "ee6d88a719f5089372d5313a8469b2e1d06d7a57821e07f1c31e805efb40ba0a",
+      "started_at_utc": "2026-10-20T21:07:30.066618Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000229302"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "e0510978c351b628a29e533a414c07776b13883007254b7a3f5f96ae99ac4cac",
+      "started_at_utc": "2026-10-20T21:05:13.534583Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000091788"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "5352da2a45b0bdaaacd7454c1696d2796b74ec820c9cbf9089bb3cd82ce7da2e",
+      "started_at_utc": "2026-10-20T21:06:14.592022Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000072972"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "77f0860b9a0ba734a65a148856b8d93c3e4facd876366e6279d8d79ed9c4ee92",
+      "started_at_utc": "2026-10-20T21:08:18.899251Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000091788"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "8dfa26868d76f1e572905be5824207a018b438c4290d9953d9c4f4fd7350eaf7",
+      "started_at_utc": "2026-10-20T21:07:21.367680Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000093588"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "8322ebe08531b54d6f569f315641163c97859f78560390795b265077488d7da5",
+      "started_at_utc": "2026-10-20T21:06:12.072932Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000109338"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "aa24209e3719d67ccacb5bd7d45c398beadd358205699be03a35eb3678ad5b13",
+      "started_at_utc": "2026-10-20T21:08:19.796321Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000221502"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "9897bc3b033faa8d87695326bd6a041833ddf4a838c24b5445348d0a6b3cb0ba",
+      "started_at_utc": "2026-10-20T21:06:46.714196Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000091788"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "6d7df93ef9e9eaac93d1c76e62c5411dcadc47a354cd1da66268a3edf555071a",
+      "started_at_utc": "2026-10-20T21:05:20.150665Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000109338"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "a7af6d589a0624a450318949b35646edd7badbe404b8acad45618450bf860096",
+      "started_at_utc": "2026-10-20T21:06:37.251219Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000072972"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "aa26c615ddbab75ae72c51faf2773f1f6a5b4bc77206db6cacfd5584b3690cda",
+      "started_at_utc": "2026-10-20T21:04:34.515916Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000109338"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "dfceb0856cfee688329abaa43032b3e388005802e3391e4aeed9c9d323e53810",
+      "started_at_utc": "2026-10-20T21:08:01.031250Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000167052"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "84dfe79ca3d3dc34c2cd6f6ca63040c8e5130f787ff3a39d00072c65a51bac26",
+      "started_at_utc": "2026-10-20T21:08:15.918660Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000093588"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "73d9ce53f81898a38dbcb4b2a5dfed2c0aedc11eaaf2f315879e502f9f529ca3",
+      "started_at_utc": "2026-10-20T21:05:41.732075Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000148236"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "0e093ec6b93e326a2c7bd99fa644b26e7d855a27df1c9adbe72d623541760f28",
+      "started_at_utc": "2026-10-20T21:05:09.844795Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000167052"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "fb5f9254a75f9ebae4882a5552cf2e0db3ec9dfa2534738ad7f96177ab665a4c",
+      "started_at_utc": "2026-10-20T21:04:33.707188Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000204684"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "3f320289078f30c2c484a9fac8719d07e16c55698a70244d493cd5cb8f0f2db8",
+      "started_at_utc": "2026-10-20T21:07:59.217670Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000076770"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "c6e4c0763938157adedc4e54e24aef0bebe8d4dde0bd216e58ab00d36e45b8dc",
+      "started_at_utc": "2026-10-20T21:05:32.026394Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000174936"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "baa9938b86dc93c092dd5d3f6911fe3b2702baae842c4c77323c4c1ff522c2d9",
+      "started_at_utc": "2026-10-20T21:07:00.563624Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000093588"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "0946c265e5ae3e437081c39006b6824aa76d5222d9aa424c3568f2d9dae79086",
+      "started_at_utc": "2026-10-20T21:04:56.577211Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000093588"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "b8923e8d506c0a355ca2665717b8cbcc89fe840e1d941e8f91d2356f4e271163",
+      "started_at_utc": "2026-10-20T21:05:02.758393Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000076770"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "594ded9d3f5ef23cc4003825010725a30efdda6f3e6c3213c3d500f857eb671c",
+      "started_at_utc": "2026-10-20T21:04:39.924675Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000167052"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "9370b4d5393f3de807a1f33f2bf781c82ca9f286de42ae6539e7981f86182664",
+      "started_at_utc": "2026-10-20T21:07:35.001059Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000072972"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "2ae26271e13b403da7a65000a2c0126d78a746d2bc646092e45f6d77a64932b1",
+      "started_at_utc": "2026-10-20T21:08:04.159502Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000071706"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "83d8bca315679d31932342c513fafbcb8b9d530ec8361ba313e110f48b72794e",
+      "started_at_utc": "2026-10-20T21:05:36.796430Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000109338"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "7db72bad9e7b3b1737616153c84f3a0106ec7f9cc832d6dc2454761deaee0041",
+      "started_at_utc": "2026-10-20T21:08:14.993801Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000076770"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "96098a22c1873826f26a19bb4146e46eb03b436cab9061fccd35572b5283052c",
+      "started_at_utc": "2026-10-20T21:06:13.113664Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000093588"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "7d661268d5bd2d6df525108a043cc72539e03e0d8262329cea203d9ef5b8dc23",
+      "started_at_utc": "2026-10-20T21:06:48.817994Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000071706"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "0b9e3f15d3740e163327b1727640f6e4a83f5e00e7a88d4077fb984dcbd0b67b",
+      "started_at_utc": "2026-10-20T21:05:52.663833Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000091788"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "ee858004a6df0f4c9cec083c51cd99cd0f18835fafca3a7da17da37089f819f2",
+      "started_at_utc": "2026-10-20T21:06:54.647462Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000076770"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "5b295ceb47b50beab1cf33027cc8d66b1b9aca7319f3f0553480cacefe2b86c4",
+      "started_at_utc": "2026-10-20T21:05:54.850364Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000093588"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "25de2f239fea82fff1b3a9de5efae419b8cf25ef5a6b73df1f6e6f3bfe2f32bb",
+      "started_at_utc": "2026-10-20T21:07:33.875724Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000218202"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "6fd6e839905576c6640cd06c824a0508d3d64088c1b176bd68757bac54b31ef2",
+      "started_at_utc": "2026-10-20T21:06:34.300768Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000093588"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "c0f38ed10776e1d6ebf80950f7cbaa6f3b9e5580631b1c8f8ccdf6c82e638302",
+      "started_at_utc": "2026-10-20T21:06:58.982584Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000109338"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "02133a5978cb51c8f8f4d0e18bc4c6873fa44cad487bbd803c2ecd10e99ea71a",
+      "started_at_utc": "2026-10-20T21:07:52.836042Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000072972"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "d2cc80bd842634e4fbc5b0dfdb1b161434fc16fb412d56a2037c92409e27ba83",
+      "started_at_utc": "2026-10-20T21:06:16.507692Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000093588"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "cbaa200bcb3af4e729ed7690d5f17ebe6546d5f1a5d59341b8f384bd299f3cbf",
+      "started_at_utc": "2026-10-20T21:05:15.649453Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000093588"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "8b41bd83dc59163383e1993aa3a379a582bd60e5a6679a4d2206081679993112",
+      "started_at_utc": "2026-10-20T21:07:40.996825Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000080856"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "c7e0af13ef530f46275864fd372ff978ff1a56b3aa1656cf87628d03f08c754a",
+      "started_at_utc": "2026-10-20T21:05:25.532886Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000091788"
+    },
+    {
+      "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+      "attempt_id_sha256": "8b2f0d6a93d7719ca97c796053d2d1227b0cb402cbc4018530a9e7c20eaa29e5",
+      "started_at_utc": "2026-10-20T21:06:56.773898Z",
+      "terminal_status": "HTTP_200_VALID",
+      "external_cost_usd": "0.000072972"
+    }
+  ]
+}

@@ -1,6 +1,8 @@
 {
   "authorization_batch_sha256": "f6adea7f8c748aa639b44ecceb5e421553da4ed04a776781d685c9f826e792b8",
-  "closure_sha256": null,
+  "closed_at_utc": "2026-10-20T21:31:22+00:00",
+  "closed_git_head": "631a065a5ad49abc9522ee58ac300eb16510cced",
+  "closure_sha256": "c13c411aa708b596e92613b84c7039f3f3a870e2df77740cc3e0b6a93199b2e0",
   "evaluator_v2_sha256": "e7b563b1a149a8c770a56728a4d13abcc53e8a12080866a1adfad03b2d234f6d",
   "experiment_id": "m4-b5-context-sensitivity-campaign-v1",
   "preregistration_sha256": "819d95ff6f8ea3141471b1a8cc669b1ceb20878ee54b4ccc7df702642c229421",

@@ -1,0 +1,9 @@
+M4-B5 campaign registry closeout audit recovery (UTC 2026-10-21)
+
+Attempt 1: researchctl audit returned FAIL because the existing matched-world closure pins docs/results/research-sprint-20261021/failure_history.jsonl at SHA-256 0e8742507f15cbae63996caff227963fb27f91de6d6390f8070cff3b7f3f3951. Post-run entries had been appended to that shared file. Preserved all appended lines in campaign-postrun-failure-history-addendum.jsonl and restored the pinned file byte-for-byte from HEAD.
+
+Attempt 2: researchctl audit returned FAIL because the newly closed M4 closure still referenced the pre-correction hash of docs/M4_B5_CONTEXT_SENSITIVITY_EVIDENCE.md. Updated its evidence refs and output hash to the final report bytes; no scientific data changed.
+
+Attempt 3: researchctl audit returned FAIL because research/memory.json had not been synchronized from the new closed cycle. Ran `python scripts/researchctl.py sync-memory` (3 cycle updates).
+
+Final: researchctl audit returned PASS, scientific_validity NOT_EVALUATED, 3 registered cycles, 0 open experiments, and accounted 352 historical/current-cycle calls for USD 0.039167058 usage-derived cost. This registry integrity pass is administrative and does not certify scientific validity.
