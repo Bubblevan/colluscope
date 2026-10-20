@@ -1,0 +1,7 @@
+commit=42ba9698f47b5c4d7b80862ed880029887061444
+branch=codex/sprint-execution-readiness-20261020
+python=Python 3.12.4
+pytest=pytest 9.1.1
+os=Microsoft Windows NT 10.0.26200.0
+history_m1p0=False
+history_m1_100=False

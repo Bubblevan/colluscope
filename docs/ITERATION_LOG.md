@@ -1,5 +1,17 @@
 # Iteration Log
 
+## Full-history integration validation after M4 token-match remediation
+
+- **Date:** 2026-10-20 (Asia/Shanghai)
+- **Tested code commit:** `42ba9698f47b5c4d7b80862ed880029887061444`
+- **INSPECT — highest risk:** The prior full-suite result came from a checkout missing ignored historical M1-P0/M1-100 inputs. A red suite could therefore be a missing-data setup failure, while a green test-only run would not prove that current code still integrates with the frozen historical corpus.
+- **SPECIFY — falsifiers:** Restore only byte-identical, provenance-identified historical inputs; reject the setup if any source/copy SHA256 differs, if any M1/M2/M3 integration test still fails, or if the old run bytes change. Keep the original missing-data failure output so a later reviewer can see why the first run was not valid as a full-history test.
+- **IMPLEMENT:** No research code, protocol, prompt, label, or frozen run was changed. Restored two ignored local input trees from `reference/m1-p0-local-qwen-integration` at commit `e9d8b57c679815776fb64e1c806a71484f51c155`: the formal 25-episode M1-P0 run (34 files) and the 75-episode M1-100 extension (152 files). They remain under Git-ignored `runs/`; original raw messages and model responses were not staged. The source manifest records file paths, sizes, and hashes without copying raw contents into tracked evidence.
+- **RUN:** In the incomplete-data environment, the full suite returned **384 passed, 13 failed, 6 errors, 1 skipped**. The failures/errors were missing-history setup failures; the byte-preserved raw result is under ignored `runs/m1_p0_local/integration-test-evidence-20261020/pytest-full.log`. After restoring the two histories, the full suite returned **403 passed, 1 skipped**. The skip was an opt-in Windows listener-owner check; it was run separately and passed. A final one-shot full run with that opt-in enabled returned **404 passed in 74.17s**, exit 0. The focused M4 runtime/scenario/token-match suite returned **20 passed**. The post-run source and local-copy checksums matched for all 186 files (372 SHA256 checks, zero mismatches). Environment, run context, hash manifests, and test-output hashes are retained under `docs/results/full-history-integration-20261020/`; exact raw logs stay local under ignored `runs/`.
+- **ADVERSARIAL REVIEW:** The source clone remained at the same commit throughout; the byte checks ran after the final suite. The local history trees remain Git-ignored and were not added to the commit. The test run made no real model, llama.cpp generation, or external API calls; the opt-in listener test starts only a temporary `python -m http.server` on `127.0.0.1:8081` and verifies its owning PID. Full-suite coverage is against the current code with the historical data at the exact paths expected by the integration tests, not against synthetic replacements.
+- **DECIDE:** **GO for offline integration-test readiness** on this checkout: 404/404 collected tests passed when the Windows-only host check was enabled. This is not a GO for any new Agent/Monitor inference, M4 experiment, or detector evaluation. M0/M1 frozen artifacts remain unchanged.
+- **REPORT / next action:** Keep the restored history local and rerun `python -m pytest -q` after any code changes; for the same 404-test result on this Windows host, set `$env:COLLUSCOPE_LIVE_WINDOWS_LISTENER_TEST='1'` for the command. No new inference authorization is inferred.
+
 ## M1-100 extension — preregistration and runtime hardening (pre-run)
 
 - **Date:** 2026-10-19 (Asia/Shanghai)

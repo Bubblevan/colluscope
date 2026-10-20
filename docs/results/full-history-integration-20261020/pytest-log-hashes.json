@@ -1,0 +1,31 @@
+{
+  "raw_log_storage": "runs/m1_p0_local/integration-test-evidence-20261020",
+  "byte_preserved": true,
+  "files": [
+    {
+      "file": "pytest-full.log",
+      "size_bytes": 43166,
+      "sha256": "3cbeef2273cfad4ee9dc1a9a493149b277db9edece1c79b3274d1a3438924172"
+    },
+    {
+      "file": "pytest-full-with-history.log",
+      "size_bytes": 725,
+      "sha256": "81424668965dff3ef9221bba219bc6fee587a4f083c450e686f21e66b98b216c"
+    },
+    {
+      "file": "pytest-windows-listener-integration.log",
+      "size_bytes": 100,
+      "sha256": "feb75c93a843d411f0f8af82a52e072f9fb43ff8a0c007df635b59d93b0ca892"
+    },
+    {
+      "file": "pytest-full-with-history-and-listener.log",
+      "size_bytes": 518,
+      "sha256": "d79a0e43f8c2ccb6254a1c436428d456f7abf14ecffeda6096027ee1bd851752"
+    },
+    {
+      "file": "pytest-m4-focused.log",
+      "size_bytes": 102,
+      "sha256": "e086ad7a4a3dd35a5e79ed37d1a7c758cecbb1403d4a64e53ed89f0eb0b9493c"
+    }
+  ]
+}
