@@ -1,0 +1,18 @@
+{
+  "status": "DRAFT_SCHEDULE_ONLY_NOT_REGISTERED_NOT_AUTHORIZED",
+  "assigned_rows": 232,
+  "a1_contexts": 24,
+  "a2_groups": 20,
+  "arm_counts": {
+    "A1-PRIVILEGED-NEUTRAL": 24,
+    "A1-PRIVILEGED-ORIGINAL": 24,
+    "A1-PUBLIC": 24,
+    "A2-PRODUCTION-ARITHMETIC": 40,
+    "A2-PRODUCTION-B5": 40,
+    "A2-REVERSED-LABEL-ORDER": 40,
+    "A2-V2-DIRECT": 40
+  },
+  "schedule_sha256": "c87d1cf0470e6f2cf0f4b1388d5a5e2313bdce9134524dac379c5af6def3d9c1",
+  "output": "research/drafts/m4-b5-context-sensitivity-campaign-v1-schedule-draft.json",
+  "dispatched": false
+}

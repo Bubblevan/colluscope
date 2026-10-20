@@ -1,0 +1,4 @@
+Command: apply a context patch to update research/memory.json hash references
+Result: two apply_patch attempts failed before changing the file because the expected multi-line context did not match the file's exact content.
+Correction: use a structured JSON read/update/write, then verify the evidence-index hash references against the current files.
+Model/API attempts: 0

@@ -1,0 +1,24 @@
+F..                                                                      [100%]
+================================== FAILURES ===================================
+__ test_a2_arithmetic_aid_is_unranked_and_structured_oracle_keys_fail_closed __
+
+    def test_a2_arithmetic_aid_is_unranked_and_structured_oracle_keys_fail_closed():
+        manifest, _ = _load_manifest()
+        sample = next(variant["monitor_input"] for group in manifest["groups"]
+                      for trajectory in group["trajectories"]
+                      for variant in trajectory["variants"]
+                      if variant["variant_id"] == "public_canonical")
+        _body, compiled = _production_request(sample, add_arithmetic_table=True)
+        user_text = compiled["payload"]["messages"][1]["content"]
+        table = user_text.split("Public calculation aid:", 1)[1]
+>       assert table.count("total quality ") == 6
+E       AssertionError: assert 7 == 6
+E        +  where 7 = <built-in method count of str object at 0x000002CC2A583600>('total quality ')
+E        +    where <built-in method count of str object at 0x000002CC2A583600> = ' total quality for each possible allocation (no ranking is supplied):\nA=T1, B=T2, C=T3: total quality 189\nA=T1, B=T...ity 167\nA=T2, B=T3, C=T1: total quality 174\nA=T3, B=T1, C=T2: total quality 111\nA=T3, B=T2, C=T1: total quality 106'.count
+
+tests\test_m4_b5_context_sensitivity_runner.py:109: AssertionError
+=========================== short test summary info ===========================
+FAILED tests/test_m4_b5_context_sensitivity_runner.py::test_a2_arithmetic_aid_is_unranked_and_structured_oracle_keys_fail_closed
+1 failed, 2 passed in 1.39s
+
+pytest_exit=1

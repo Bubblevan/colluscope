@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "stage": "read_only_dispatch_gate_preflight",
+  "command_shape": "call _check_dispatch_gate using original runner without PYTHONPATH=research/frozen_eval",
+  "status": "FAILED_BEFORE_TRANSPORT",
+  "exception": "ModuleNotFoundError",
+  "message": "No module named evaluate_cycle",
+  "http_or_model_requests": 0,
+  "ledger_rows_created": 0,
+  "private_content_saved": false,
+  "resolution": "Use the versioned execution adapter, which adds the frozen evaluator directory to sys.path before importing the runner.",
+  "recorded_at_utc": "2026-10-20T20:53:54Z",
+  "failure_observed_in_current_turn": true
+}

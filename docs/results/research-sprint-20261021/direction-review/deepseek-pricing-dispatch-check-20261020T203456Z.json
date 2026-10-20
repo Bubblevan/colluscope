@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "checked_at_utc": "2026-10-20T20:34:56Z",
+  "pricing_source": "https://api-docs.deepseek.com/quick_start/pricing/",
+  "api_source": "https://api-docs.deepseek.com/api/create-chat-completion/",
+  "retrieval": "Official DeepSeek documentation opened read-only via web fallback after the Chrome skill surface was unavailable.",
+  "model_alias": "deepseek-flash",
+  "model_version": "DeepSeek-V4.1-Flash-1017",
+  "pricing_column_interpretation": "The first numeric column belongs to deepseek-flash; the larger second-column prices belong to deepseek-v4-pro and are not used in this campaign.",
+  "deepseek_flash_usd_per_million_tokens": {
+    "input_cache_hit_off_peak": 0.003,
+    "input_cache_hit_peak": 0.006,
+    "input_cache_miss_off_peak": 0.15,
+    "input_cache_miss_peak": 0.3,
+    "output_off_peak": 0.6,
+    "output_peak": 1.2
+  },
+  "peak_hours_utc_weekdays_excluding_chinese_public_holidays": ["01:00-04:00", "06:00-10:00"],
+  "all_other_hours_off_peak": true,
+  "endpoint": "POST https://api.deepseek.com/chat/completions",
+  "tool_calls_supported": true,
+  "thinking_disabled_supported": true,
+  "full_campaign_peak_no_cache_cost_bound_usd": 0.7712544,
+  "full_campaign_off_peak_no_cache_cost_bound_usd": 0.3856272,
+  "hard_cost_cap_usd": 0.9,
+  "immutable_weights": false,
+  "notes": [
+    "The official page shows Flash first and V4 Pro second in each pricing row. Search-result snippets can concatenate both values; this snapshot records only the Flash column.",
+    "Prices may change; the runner must still perform a per-request off-peak time gate, and dispatch is denied after the approved expiry."
+  ]
+}

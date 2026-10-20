@@ -1,0 +1,6 @@
+Command: read the synthetic manifest's trajectory keys by sorting the trajectory container
+Result: failed before reading or writing any files
+Error: TypeError: '<' not supported between instances of 'dict' and 'dict'
+Cause: the manifest stores trajectories as a list of objects, not a mapping whose keys can be sorted.
+Correction: inspect only the list type, row-key names, group count, and aggregate reference counts; the corrected inspection found 20 groups, two trajectories per group, and 20/20 trajectory references without printing source IDs or message text.
+Model/API attempts: 0

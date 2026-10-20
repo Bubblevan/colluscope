@@ -1,0 +1,6 @@
+Command: verify every referenced file in the prior direction-review evidence index using an inline exec string with embedded newline escapes
+Result: failed before reading or writing the index
+Error: SyntaxError: unexpected character after line continuation character
+Cause: the shell/JSON quoting preserved literal backslash-n sequences in the one-line Python argument.
+Correction: use a direct list-comprehension verifier; it checked all 15 file references and found one stale direction-review document hash caused by Markdown whitespace cleanup.
+Model/API attempts: 0

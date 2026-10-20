@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "stage": "read_only_dispatch_gate_preflight",
+  "command_shape": "PYTHONPATH=research/frozen_eval; call _check_dispatch_gate using original runner",
+  "status": "FAILED_BEFORE_TRANSPORT",
+  "exception": "CampaignError",
+  "message": "REGISTERED_SCHEDULE_HASH_MISMATCH",
+  "raw_schedule_file_sha256": "c44585532b18e8def0488c4f3de42be1c4a04009566b396251c3da2659043c3c",
+  "registered_protocol_schedule_sha256": "c44585532b18e8def0488c4f3de42be1c4a04009566b396251c3da2659043c3c",
+  "manifest_schedule_sha256": "c44585532b18e8def0488c4f3de42be1c4a04009566b396251c3da2659043c3c",
+  "canonical_schedule_object_sha256": "018adc3621f7d21406bd16f3f1a45ebea06bca08cb2fe92ec43a3c0f7ab01f6a",
+  "http_or_model_requests": 0,
+  "ledger_rows_created": 0,
+  "private_content_saved": false,
+  "resolution": "Retain the raw file hash as the authoritative source identity, verify it through frozen_inputs and the request manifest, and adapt only the secondary in-memory canonical-object comparison.",
+  "recorded_at_utc": "2026-10-20T20:53:54Z",
+  "failure_observed_in_current_turn": true
+}

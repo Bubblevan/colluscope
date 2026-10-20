@@ -1,0 +1,223 @@
+F                                                                        [100%]
+================================== FAILURES ===================================
+____________ test_researchctl_zero_call_register_close_sync_audit _____________
+
+tmp_path = WindowsPath('D:/MyLab/colluscope/.pytest-tmp/test_researchctl_zero_call_reg0')
+
+    def test_researchctl_zero_call_register_close_sync_audit(tmp_path: Path):
+        """Exercise the real CLI lifecycle in an isolated copy, without API dispatch."""
+        sandbox = tmp_path / "repo"
+        for relative in (
+            "scripts/researchctl.py",
+            "research/frozen_eval/evaluate_cycle.py",
+            "research/frozen_eval/evaluate_cycle_v2.py",
+            "research/state.json",
+            "research/budget.json",
+            "research/hypotheses.json",
+            "research/memory.json",
+            ".gitignore",
+        ):
+            destination = sandbox / relative
+            destination.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copy2(ROOT / relative, destination)
+        shutil.copytree(ROOT / "research/handoffs", sandbox / "research/handoffs")
+        for directory in ("research/experiments",):
+            source = ROOT / directory
+            destination = sandbox / directory
+            if source.exists():
+                shutil.copytree(source, destination, dirs_exist_ok=True)
+            else:
+                destination.mkdir(parents=True, exist_ok=True)
+        (sandbox / "research/authorizations").mkdir(parents=True, exist_ok=True)
+        budget_copy = sandbox / "research/budget.json"
+        isolated_budget = json.loads(budget_copy.read_text(encoding="utf-8"))
+        isolated_budget["authorization"] = {
+            "status": "none", "approval_id": None, "scope": None,
+            "authorized_experiment_ids": [], "max_model_calls": 0,
+            "max_external_cost_usd": 0.0, "source": None,
+            "approved_at_utc": None, "expires_at_utc": None,
+        }
+        isolated_state = json.loads((sandbox / "research/state.json").read_text(encoding="utf-8"))
+        historical = isolated_state.get("current_round", {})
+        iteration = isolated_state.get("new_iteration_usage", {})
+        isolated_budget["project_limits"] = {
+            "max_model_calls": int(historical.get("historical_model_calls", 0))
+            + int(iteration.get("model_calls", 0)),
+            "max_external_cost_usd": float(historical.get("historical_external_cost_usd", 0.0))
+            + float(iteration.get("external_cost_usd", 0.0)),
+        }
+        budget_copy.write_text(json.dumps(isolated_budget, indent=2) + "\n", encoding="utf-8")
+    
+        registry_sources = [
+            sandbox / "research/state.json", sandbox / "research/budget.json",
+            sandbox / "research/hypotheses.json", sandbox / "research/memory.json",
+            *sorted((sandbox / "research/handoffs").glob("*.json")),
+        ]
+        reference_paths = set()
+        for registry_source in registry_sources:
+            reference_paths.update(_walk_refs(json.loads(registry_source.read_text(encoding="utf-8"))))
+        for relative in sorted(reference_paths):
+            source = (ROOT / relative).resolve()
+            if not source.is_relative_to(ROOT.resolve()) or not source.is_file():
+                continue
+            destination = sandbox / relative
+            destination.parent.mkdir(parents=True, exist_ok=True)
+            if not destination.exists():
+                shutil.copy2(source, destination)
+    
+        frozen = sandbox / "research/e2e_frozen_input.json"
+        frozen.write_text(json.dumps({"fixture": "zero-call lifecycle only", "calls": 0}) + "\n",
+                          encoding="utf-8")
+        hypotheses = json.loads((sandbox / "research/hypotheses.json").read_text(encoding="utf-8"))
+        candidate = next(item for item in hypotheses["candidates"]
+                         if item.get("status") == "candidate")
+        experiment_id = "LIFECYCLE-E2E-01"
+        prior = _ref(sandbox / "research/handoffs/DEEPSEEK-FIRST-RESEARCH-01.json",
+                     "research/handoffs/DEEPSEEK-FIRST-RESEARCH-01.json")
+        frozen_ref = _ref(frozen, "research/e2e_frozen_input.json")
+        prereg = {
+            "schema_version": 2,
+            "experiment_id": experiment_id,
+            "title": "Zero-call research registry lifecycle validation",
+            "evidence_class": "offline_reanalysis",
+            "hypothesis_id": candidate["hypothesis_id"],
+            "research_branch_id": "registry-lifecycle-validation",
+            "selection_rationale": "Exercise registry integrity only; no scientific observation is generated.",
+            "research_question": "Can a zero-call cycle be registered, closed, synchronized, and audited without changing its evidence class?",
+            "hypothesis": candidate["hypothesis"],
+            "competing_explanations": candidate["competing_explanations"],
+            "prior_evidence": [{**prior, "claim": "Frozen candidate registry used for lifecycle validation."}],
+            "protocol": {
+                "sample_selection": "One synthetic fixture used only to exercise CLI record lifecycle.",
+                "intervention": "Register and close a zero-call cycle in an isolated repository copy.",
+                "held_constant": ["No model/provider calls", "All source evidence class and hypothesis text"],
+                "primary_outcome": "CLI registration, closure, memory sync, and audit complete with zero calls.",
+                "denominator": "One engineering lifecycle run; not a scientific sample.",
+                "success_gate": "All four CLI operations succeed and audit reports zero new calls and cost.",
+                "failure_gate": "Any CLI operation fails or any nonzero call/cost is recorded.",
+                "ambiguous_gate": "Not applicable; this is an engineering lifecycle check.",
+                "analysis_plan": "Read the CLI exit codes and final audit totals; do not interpret as hypothesis evidence.",
+                "reproduction_command": "pytest -q tests/test_researchctl_lifecycle_e2e.py",
+                "runtime_identity": "Python subprocesses executing copied repository CLI; provider dispatch is absent.",
+                "frozen_inputs": [frozen_ref],
+            },
+            "budget": {"max_model_calls": 0, "max_external_cost_usd": 0.0,
+                       "max_wallclock_minutes": 2},
+            "authorization": {"approval_required": False, "approval_id": None,
+                               "scope": "zero-call registry lifecycle test only"},
+        }
+        prereg_path = sandbox / "research/preregistration-e2e.json"
+        prereg_path.write_text(json.dumps(prereg, indent=2) + "\n", encoding="utf-8")
+    
+        def run_cli(*args: str) -> subprocess.CompletedProcess[str]:
+            return subprocess.run([sys.executable, "scripts/researchctl.py", *args], cwd=sandbox,
+                                  text=True, capture_output=True, check=False, timeout=30)
+    
+        registered = run_cli("register", "research/preregistration-e2e.json")
+        assert registered.returncode == 0, registered.stdout + registered.stderr
+        output = sandbox / "research/experiments" / experiment_id / "lifecycle-output.json"
+        output.write_text(json.dumps({"operations": ["register", "close", "sync-memory", "audit"],
+                                      "calls": 0, "cost_usd": 0.0}, sort_keys=True) + "\n",
+                          encoding="utf-8")
+        closure = {
+            "schema_version": 2,
+            "experiment_id": experiment_id,
+            "evidence_class": "offline_reanalysis",
+            "decision": "PIVOT",
+            "results_summary": "The registry lifecycle completed in an isolated copy with zero calls.",
+            "denominator_summary": "One engineering lifecycle validation; no scientific cases.",
+            "scientific_update": "No scientific hypothesis was tested or updated.",
+            "actual_model_calls": 0,
+            "actual_external_cost_usd": 0.0,
+            "actual_wallclock_minutes": 0,
+            "failures_retained": True,
+            "review_mode": "adversarial_self_review",
+            "review_finding": "The result validates CLI state transitions only; it does not validate research claims.",
+            "review_artifact": {},
+            "outputs": [_ref(output, f"research/experiments/{experiment_id}/lifecycle-output.json")],
+            "next_action": "Pivot after the no-progress cycle limit; the test grants no provider dispatch.",
+            "next_action_evidence_class": "offline_reanalysis",
+            "next_action_max_model_calls": 0,
+            "next_action_max_external_cost_usd": 0.0,
+            "new_uncertainty_reduced": False,
+            "approval_required_for_next_action": False,
+            "scientific_outcome": "INCONCLUSIVE",
+            "outcome_rationale": "Engineering lifecycle validation supplies no scientific evidence.",
+            "belief_updates": [{
+                "claim_id": candidate["hypothesis_id"],
+                "outcome": "UNCHANGED",
+                "statement": "Zero-call CLI behavior does not change the evidence-boundary hypothesis.",
+                "what_changed": "No scientific observation was collected.",
+                "remaining_alternatives": "All scientific explanations remain unresolved.",
+                "evidence_refs": [],
+            }],
+            "material_update": {"claim_id": candidate["hypothesis_id"],
+                                "what_changed": "No scientific material update.",
+                                "remaining_alternatives": "The CLI lifecycle says nothing about the research hypothesis.",
+                                "evidence_refs": [], "independent_critic_confirmed": False},
+            "next_action_kind": "pivot",
+            "authorization_id": None,
+            "model_request_ledger": None,
+        }
+        closure_path = sandbox / "research/closure-e2e.json"
+        closure_path.write_text(json.dumps(closure, indent=2) + "\n", encoding="utf-8")
+        closed = run_cli("close", "research/closure-e2e.json")
+        assert closed.returncode == 0, closed.stdout + closed.stderr
+        synced = run_cli("sync-memory")
+        assert synced.returncode == 0, synced.stdout + synced.stderr
+        audit = run_cli("audit")
+>       assert audit.returncode == 0, audit.stdout + audit.stderr
+E       AssertionError: {
+E           "integrity_check": "FAIL",
+E           "scientific_validity": "NOT_EVALUATED",
+E           "registered_cycles": 3,
+E           "open_experiments": [],
+E           "new_iteration_usage": {
+E             "model_calls": 0,
+E             "external_cost_usd": 0.0
+E           },
+E           "usage_by_approval_id": {},
+E           "project_limits": {
+E             "max_model_calls": 628,
+E             "max_external_cost_usd": 0.2488836
+E           },
+E           "errors": [
+E             "b5-evidence-view-stability-120: prior_evidence[1]: registered file does not exist: docs/results/evidence-invariance/synthetic-invariance-groups-v2.json",
+E             "b5-evidence-view-stability-120: protocol.frozen_inputs[0]: registered file does not exist: docs/B5_EVIDENCE_VIEW_STABILITY_PROTOCOL.md",
+E             "b5-evidence-view-stability-120: protocol.frozen_inputs[2]: registered file does not exist: docs/results/research-sprint-20261021/b5-invariance-schedule-120.json",
+E             "b5-evidence-view-stability-120: protocol.frozen_inputs[3]: registered file does not exist: docs/results/evidence-invariance/synthetic-invariance-groups-v2.json",
+E             "b5-evidence-view-stability-120: protocol.frozen_inputs[4]: registered file does not exist: docs/results/evidence-invariance/synthetic-invariance-groups-v1.json",
+E             "b5-evidence-view-stability-120: protocol.frozen_inputs[5]: registered file does not exist: prompts/m4-deepseek-agent-v1/monitor-system.txt",
+E             "b5-evidence-view-stability-120: protocol.frozen_inputs[6]: registered file does not exist: scripts/freeze_b5_invariance_schedule.py",
+E             "b5-evidence-view-stability-120: protocol.frozen_inputs[7]: registered file does not exist: scripts/freeze_synthetic_invariance_groups.py",
+E             "b5-evidence-view-stability-120: protocol.frozen_inputs[8]: registered file does not exist: scripts/freeze_synthetic_invariance_groups_v2.py",
+E             "b5-evidence-view-stability-120: protocol.frozen_inputs[10]: registered file does not exist: scripts/audit_public_harm_invariance.py",
+E             "b5-evidence-view-stability-120: protocol.frozen_inputs[11]: registered file does not exist: scripts/validate_synthetic_invariance_groups_v2.py",
+E             "b5-evidence-view-stability-120: protocol.frozen_inputs[12]: registered file does not exist: scripts/run_b5_invariance.py",
+E             "b5-evidence-view-stability-120: protocol.frozen_inputs[13]: registered file does not exist: scripts/score_b5_invariance_run.py",
+E             "b5-evidence-view-stability-120: protocol.frozen_inputs[14]: registered file does not exist: scripts/local_llama_security.py",
+E             "b5-evidence-view-stability-120: protocol.frozen_inputs[19]: registered file does not exist: tests/test_b5_invariance_runner.py",
+E             "b5-evidence-view-stability-120: protocol.frozen_inputs[20]: registered file does not exist: tests/test_public_harm_invariance_audit.py",
+E             "b5-evidence-view-stability-120: protocol.frozen_inputs[21]: registered file does not exist: tests/test_evidence_invariance_v2_projector.py",
+E             "b5-evidence-view-stability-120: protocol.frozen_inputs[22]: registered file does not exist: tests/test_researchctl_lifecycle_e2e.py",
+E             "matched-world-sequence-visibility-v1: prior_evidence[1]: registered file does not exist: docs/FULL_RESEARCH_EXECUTION_PROTOCOL.md",
+E             "matched-world-sequence-visibility-v1: protocol.frozen_inputs[0]: registered file does not exist: docs/MATCHED_WORLD_SEQUENCE_VISIBILITY_PROTOCOL.md",
+E             "matched-world-sequence-visibility-v1: protocol.frozen_inputs[1]: registered file does not exist: scripts/prepare_full_research_monitor.py",
+E             "matched-world-sequence-visibility-v1: protocol.frozen_inputs[2]: registered file does not exist: scripts/audit_full_research_monitor.py",
+E             "matched-world-sequence-visibility-v1: protocol.frozen_inputs[3]: registered file does not exist: configs/full-research-monitor-v1-matched-worlds.toml",
+E             "matched-world-sequence-visibility-v1: protocol.frozen_inputs[4]: registered file does not exist: configs/m4-live-runtime-v4.json",
+E             "matched-world-sequence-visibility-v1: protocol.frozen_inputs[5]: registered file does not exist: configs/m4-scenarios-v1.json",
+E             "matched-world-sequence-visibility-v1: protocol.frozen_inputs[6]: registered file does not exist: prompts/sprint-baseline-v1/system.txt",
+E             "matched-world-sequence-visibility-v1: protocol.frozen_inputs[7]: registered file does not exist: prompts/sprint-baseline-v1/tasks.json",
+E             "matched-world-sequence-visibility-v1: protocol.frozen_inputs[8]: registered file does not exist: prompts/sprint-baseline-v1/user.txt",
+E             "matched-world-sequence-visibility-v1: protocol.frozen_inputs[9]: registered file does not exist: docs/FULL_RESEARCH_EXECUTION_PROTOCOL.md"
+E           ]
+E         }
+E         
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['D:\\Anaconda\\python.exe', 'scripts/researchctl.py', 'audit'], returncode=1, stdout='{\n  "int...ocol.frozen_inputs[9]: registered file does not exist: docs/FULL_RESEARCH_EXECUTION_PROTOCOL.md"\n  ]\n}\n', stderr='').returncode
+
+tests\test_researchctl_lifecycle_e2e.py:191: AssertionError
+=========================== short test summary info ===========================
+FAILED tests/test_researchctl_lifecycle_e2e.py::test_researchctl_zero_call_register_close_sync_audit
+1 failed in 0.81s

@@ -1,0 +1,140 @@
+....................................................F................... [ 11%]
+........................................................................ [ 23%]
+...................................s.................................... [ 34%]
+........................................................................ [ 46%]
+........................................................................ [ 57%]
+........................................................................ [ 69%]
+........................................................................ [ 80%]
+....................................F................................... [ 92%]
+................................................                         [100%]
+================================== FAILURES ===================================
+_____________ test_committed_pilot_plan_reproduces_byte_for_byte ______________
+
+    def test_committed_pilot_plan_reproduces_byte_for_byte():
+        plan = _freeze_pilot_plan()
+        frozen_path = Path(__file__).resolve().parents[1] / "configs/m4-deepseek-pilot-plan-v1.json"
+>       assert frozen_path.read_bytes() == canonical(plan) + b"\n"
+E       assert b'{"config_sh...03a0804e"}}\n' == b'{"config_sh...03a0804e"}}\n'
+E         
+E         At index 11625 diff: b'1' != b'f'
+E         Use -v to get more diff
+
+tests\test_deepseek_research_audit.py:51: AssertionError
+____________ test_researchctl_zero_call_register_close_sync_audit _____________
+
+tmp_path = WindowsPath('D:/MyLab/colluscope/.pytest-tmp/test_researchctl_zero_call_reg0')
+
+    def test_researchctl_zero_call_register_close_sync_audit(tmp_path: Path):
+        """Exercise the real CLI lifecycle in an isolated copy, without API dispatch."""
+        sandbox = tmp_path / "repo"
+        for relative in (
+            "scripts/researchctl.py",
+            "research/frozen_eval/evaluate_cycle.py",
+            "research/frozen_eval/evaluate_cycle_v2.py",
+            "research/state.json",
+            "research/budget.json",
+            "research/hypotheses.json",
+            "research/memory.json",
+            ".gitignore",
+        ):
+            destination = sandbox / relative
+            destination.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copy2(ROOT / relative, destination)
+        shutil.copytree(ROOT / "research/handoffs", sandbox / "research/handoffs")
+        for directory in ("research/experiments",):
+            source = ROOT / directory
+            destination = sandbox / directory
+            if source.exists():
+                shutil.copytree(source, destination, dirs_exist_ok=True)
+            else:
+                destination.mkdir(parents=True, exist_ok=True)
+        (sandbox / "research/authorizations").mkdir(parents=True, exist_ok=True)
+        budget_copy = sandbox / "research/budget.json"
+        isolated_budget = json.loads(budget_copy.read_text(encoding="utf-8"))
+        isolated_budget["authorization"] = {
+            "status": "none", "approval_id": None, "scope": None,
+            "authorized_experiment_ids": [], "max_model_calls": 0,
+            "max_external_cost_usd": 0.0, "source": None,
+            "approved_at_utc": None, "expires_at_utc": None,
+        }
+        isolated_budget["project_limits"] = {"max_model_calls": 0, "max_external_cost_usd": 0.0}
+        budget_copy.write_text(json.dumps(isolated_budget, indent=2) + "\n", encoding="utf-8")
+    
+        registry_sources = [
+            sandbox / "research/state.json", sandbox / "research/budget.json",
+            sandbox / "research/hypotheses.json", sandbox / "research/memory.json",
+            *sorted((sandbox / "research/handoffs").glob("*.json")),
+        ]
+        reference_paths = set()
+        for registry_source in registry_sources:
+            reference_paths.update(_walk_refs(json.loads(registry_source.read_text(encoding="utf-8"))))
+        for relative in sorted(reference_paths):
+            source = (ROOT / relative).resolve()
+            if not source.is_relative_to(ROOT.resolve()) or not source.is_file():
+                continue
+            destination = sandbox / relative
+            destination.parent.mkdir(parents=True, exist_ok=True)
+            if not destination.exists():
+                shutil.copy2(source, destination)
+    
+        frozen = sandbox / "research/e2e_frozen_input.json"
+        frozen.write_text(json.dumps({"fixture": "zero-call lifecycle only", "calls": 0}) + "\n",
+                          encoding="utf-8")
+        hypotheses = json.loads((sandbox / "research/hypotheses.json").read_text(encoding="utf-8"))
+        candidate = next(item for item in hypotheses["candidates"]
+                         if item["hypothesis_id"] == "observable-evidence-boundary")
+        experiment_id = "LIFECYCLE-E2E-01"
+        prior = _ref(sandbox / "research/handoffs/DEEPSEEK-FIRST-RESEARCH-01.json",
+                     "research/handoffs/DEEPSEEK-FIRST-RESEARCH-01.json")
+        frozen_ref = _ref(frozen, "research/e2e_frozen_input.json")
+        prereg = {
+            "schema_version": 2,
+            "experiment_id": experiment_id,
+            "title": "Zero-call research registry lifecycle validation",
+            "evidence_class": "offline_reanalysis",
+            "hypothesis_id": candidate["hypothesis_id"],
+            "research_branch_id": "registry-lifecycle-validation",
+            "selection_rationale": "Exercise registry integrity only; no scientific observation is generated.",
+            "research_question": "Can a zero-call cycle be registered, closed, synchronized, and audited without changing its evidence class?",
+            "hypothesis": candidate["hypothesis"],
+            "competing_explanations": candidate["competing_explanations"],
+            "prior_evidence": [{**prior, "claim": "Frozen candidate registry used for lifecycle validation."}],
+            "protocol": {
+                "sample_selection": "One synthetic fixture used only to exercise CLI record lifecycle.",
+                "intervention": "Register and close a zero-call cycle in an isolated repository copy.",
+                "held_constant": ["No model/provider calls", "All source evidence class and hypothesis text"],
+                "primary_outcome": "CLI registration, closure, memory sync, and audit complete with zero calls.",
+                "denominator": "One engineering lifecycle run; not a scientific sample.",
+                "success_gate": "All four CLI operations succeed and audit reports zero new calls and cost.",
+                "failure_gate": "Any CLI operation fails or any nonzero call/cost is recorded.",
+                "ambiguous_gate": "Not applicable; this is an engineering lifecycle check.",
+                "analysis_plan": "Read the CLI exit codes and final audit totals; do not interpret as hypothesis evidence.",
+                "reproduction_command": "pytest -q tests/test_researchctl_lifecycle_e2e.py",
+                "runtime_identity": "Python subprocesses executing copied repository CLI; provider dispatch is absent.",
+                "frozen_inputs": [frozen_ref],
+            },
+            "budget": {"max_model_calls": 0, "max_external_cost_usd": 0.0,
+                       "max_wallclock_minutes": 2},
+            "authorization": {"approval_required": False, "approval_id": None,
+                               "scope": "zero-call registry lifecycle test only"},
+        }
+        prereg_path = sandbox / "research/preregistration-e2e.json"
+        prereg_path.write_text(json.dumps(prereg, indent=2) + "\n", encoding="utf-8")
+    
+        def run_cli(*args: str) -> subprocess.CompletedProcess[str]:
+            return subprocess.run([sys.executable, "scripts/researchctl.py", *args], cwd=sandbox,
+                                  text=True, capture_output=True, check=False, timeout=30)
+    
+        registered = run_cli("register", "research/preregistration-e2e.json")
+>       assert registered.returncode == 0, registered.stdout + registered.stderr
+E       AssertionError: ERROR: close the existing experiment first: m4-b5-context-sensitivity-campaign-v1
+E         
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['D:\\Anaconda\\python.exe', 'scripts/researchctl.py', 'register', 'research/preregistration-e2e... returncode=1, stdout='', stderr='ERROR: close the existing experiment first: m4-b5-context-sensitivity-campaign-v1\n').returncode
+
+tests\test_researchctl_lifecycle_e2e.py:131: AssertionError
+=========================== short test summary info ===========================
+SKIPPED [1] tests\test_m1_p0_preflight_runner.py:142: opt-in host-dependent Windows owner-table integration check
+FAILED tests/test_deepseek_research_audit.py::test_committed_pilot_plan_reproduces_byte_for_byte
+FAILED tests/test_researchctl_lifecycle_e2e.py::test_researchctl_zero_call_register_close_sync_audit
+2 failed, 621 passed, 1 skipped in 182.13s (0:03:02)

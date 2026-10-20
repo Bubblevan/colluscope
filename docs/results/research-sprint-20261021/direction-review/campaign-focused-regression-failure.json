@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "command": "python -m pytest -q tests/test_m4_b5_context_sensitivity_runner.py",
+  "observed_result": "1 failed, 11 passed in 25.97s",
+  "failing_test": "test_frozen_schedule_compiles_all_assigned_requests_without_oracle_fields",
+  "failure_class": "implementation_regression",
+  "exception": "NameError",
+  "message": "name 'value' is not defined",
+  "location": "scripts/run_m4_b5_context_sensitivity.py:_validate_public_request_manifest, stray list branch introduced while adding profile audit helper",
+  "sanitized_output_excerpt": "E       elif isinstance(value, list):\nE       NameError: name 'value' is not defined\n1 failed, 11 passed in 25.97s",
+  "repair": "Moved list recursion back into _assert_no_hidden_research_keys and removed the stray branch.",
+  "followup_result": "12 passed in 26.38s",
+  "followup_log": "docs/results/research-sprint-20261021/direction-review/campaign-offline-tests-final-v2.log",
+  "model_api_calls": 0,
+  "private_content_saved": false
+}

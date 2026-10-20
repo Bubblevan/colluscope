@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "approval_id": "DS-FLASH-M4B5-CONTEXT-232-20261021",
+  "scope": "One M4 B5 context-sensitivity monitor campaign (A1: all 24 M4 cases across three evidence views; A2: all 40 balanced synthetic rows across four request forms); official DeepSeek Flash only; maximum 232 physical attempts and USD 0.90; zero retries/replacements; off-peak only; expiry 2026-10-23T01:00:00Z.",
+  "authorized_experiment_ids": [
+    "m4-b5-context-sensitivity-campaign-v1"
+  ],
+  "max_model_calls": 232,
+  "max_external_cost_usd": 0.9,
+  "approved_at_utc": "2026-10-20T20:50:46Z",
+  "expires_at_utc": "2026-10-23T01:00:00Z",
+  "source": "User approval received in this active ColluScope task in reply to the explicit campaign-scope prompt: “批准此范围”. It authorizes up to 232 physical requests, USD 0.90, official DeepSeek Flash, off-peak only, zero retries/replacements, through 2026-10-23T01:00:00Z. Exact UI reply timestamp was not exposed to the task; approved_at_utc records the time this authorization was materialized in the research registry, not a claim about the exact reply instant."
+}

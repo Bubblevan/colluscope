@@ -190,15 +190,34 @@
       "outcome": "INCONCLUSIVE",
       "scope": "Research-route selection and source audits completed without new inference.",
       "statement": "The real M4 B5 view-response anomaly is the highest-value next mechanism question; available evidence supports response sensitivity but does not identify its cause.",
-      "interpretation": "The 108-call scripted sequence plan is paused and was not registered or dispatched. A new unified 232-attempt campaign needs fresh approval because the old grants are scope-bound.",
+      "interpretation": "The 108-call scripted sequence plan remains paused. The unified 232-attempt campaign now has a schema-valid draft and sanitized assignment schedule, but it is not formally registered and has no current scope-specific authorization or runner.",
       "evidence_refs": [
         {
           "path": "docs/SCIENTIFIC_DIRECTION_REVIEW_20261021.md",
-          "sha256": "e106719272d7d383322060857023271dd20b9c598b0fc600036cacf2b331ef58"
+          "sha256": "88142afca58f9d2d22905ca1076a2b2d7004b4f1a5fa59511b5afc3b6c5cb019"
         },
         {
-          "path": "docs/results/research-sprint-20261021/direction-review/evidence-index.json",
-          "sha256": "34df388a89e4fc439eeeede205493ae59936d71f76c3b48ee4a4a029fbe38e3d"
+          "path": "docs/results/research-sprint-20261021/direction-review/evidence-index-corrected.json",
+          "sha256": "cd6a45dbb18c2dedf8604c4699ca9c7a3c30d66a20c5605fe9af2938c7b5b18c"
+        }
+      ],
+      "independent_review_confirmed": false
+    },
+    {
+      "claim_id": "m4-b5-context-sensitivity-campaign-design-readiness",
+      "evidence_class": "offline_reanalysis",
+      "outcome": "INCONCLUSIVE",
+      "scope": "Draft-only sample and schedule preflight; no request bodies, model outputs, formal preregistration, or inference.",
+      "statement": "A sanitized draft schedule covers 24 M4 contexts across three views and 40 synthetic rows across four request forms (232 rows total), with no raw IDs, labels, references, or messages in the output.",
+      "interpretation": "The schedule and preregistration draft are structurally valid, but exact model request bytes, an experiment-specific runner with atomic pre-request reservation, registry registration, a current approval batch, and live model outputs remain absent. No scientific response effect is estimated.",
+      "evidence_refs": [
+        {
+          "path": "docs/results/research-sprint-20261021/direction-review/campaign-preflight-evidence-index.json",
+          "sha256": "761a0ca890b8ed241b63d04b463b697f9f7c5fdd739b78cb25899f9cc9784d76"
+        },
+        {
+          "path": "research/drafts/m4-b5-context-sensitivity-campaign-v1-schedule-draft.json",
+          "sha256": "cf066b696c8378ff9e185777a4d93155614698bc85b53f587e27b8443db34e91"
         }
       ],
       "independent_review_confirmed": false

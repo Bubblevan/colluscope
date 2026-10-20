@@ -1,19 +1,12 @@
 {
-  "schema_version": 1,
-  "selected_hypothesis_id": null,
-  "policy": "At most three read-only candidate directions may be compared. Only one can be selected for a formal cycle at a time. Candidate status is not preregistration or authorization.",
   "candidates": [
     {
-      "hypothesis_id": "m4-b5-context-sensitivity-mechanism",
-      "title": "Which part of privileged evidence changes B5 public-harm responses?",
-      "status": "candidate",
-      "hypothesis": "In the 24 retained Agent-derived M4 contexts, the Public-to-Privileged B5 response changes can be decomposed into a private-message-content component and a context-package component by comparing original private text with frozen neutral text under identical event metadata and ledger.",
       "competing_explanations": [
         "Actual message semantics affect the monitor output.",
         "Event inclusion, completeness cues, prompt length, or deterministic presentation explain most response changes.",
         "Synthetic B5 results differ because the synthetic request compiler and matrix/regret distribution do not match the production M4 B5 path."
       ],
-      "discriminating_prediction": "For all 24 assigned contexts, compare Public-only, Privileged-original, and Privileged-neutral raw labels. If original-vs-neutral is rare while neutral-vs-public is common, the historical response change is not explained mainly by message semantics. Pair this with a 40-row balanced synthetic compiler/arithmetic/enum-order diagnostic.",
+      "discriminating_prediction": "For all 24 assigned contexts, compare all three raw-label pairs: Public-only vs Privileged-neutral, Privileged-neutral vs Privileged-original, and Public-only vs Privileged-original. Predeclare the package-dominant, text-substitution-dominant, and ambiguous count patterns; report provider token differences and keep message meaning, length, wording, and salience confounded within the text-substitution contrast. Separately run the 40-row balanced synthetic compiler/arithmetic/enum-order diagnostic.",
       "evidence_refs": [
         {
           "path": "docs/BRANCH_A_EVIDENCE_INVARIANCE.md",
@@ -28,13 +21,13 @@
           "sha256": "f5c4e1e1a311cb7f52f8b1c2adcaedc164613fdfe7807ece00a5e8e6f690388f"
         }
       ],
-      "selection_note": "Highest-value Tier 1 direction. The broad context-access question overlaps Arike et al.; any claim must remain limited to isolating actual private content from event/context packaging in this multi-agent audit task. Not registered; pending one unified explicit call-budget approval."
+      "hypothesis": "Across the 24 fixed M4 contexts, B5 label changes will be more frequent between Public-only and Privileged-neutral views than between Privileged-original and Privileged-neutral views. This would indicate that the historical response change is more associated with the bundled evidence-view package than with the message-text substitution alone; it would not establish semantic comprehension or collusion.",
+      "hypothesis_id": "m4-b5-context-sensitivity-mechanism",
+      "selection_note": "Selected for the approved, bounded M4 B5 context-sensitivity monitor campaign. The broad context-access question overlaps Arike et al.; claims remain limited to fixed-case response sensitivity to evidence-view packaging and message-text substitution, not semantic comprehension or collusion. A2 is a synthetic compiler/arithmetic/enum-order diagnostic, not a population capability estimate. Protocol and registration are being frozen before dispatch.",
+      "status": "selected",
+      "title": "Which part of privileged evidence changes B5 public-harm responses?"
     },
     {
-      "hypothesis_id": "communication-content-choice-effect",
-      "title": "Does private message content change a recipient vote under a shared target incentive?",
-      "status": "candidate",
-      "hypothesis": "In a prospective matched design, replacing actual private allocation content with a frozen neutral message while holding task, incentive, message opportunity, and event structure fixed may change recipient ballot choice; own prior target expression may moderate the response.",
       "competing_explanations": [
         "Shared-target incentives cause parallel choices without communication.",
         "Role, seed, payoff matrix, chair rule, prior expressed choices, or token/salience differences explain ballot changes.",
@@ -55,13 +48,13 @@
           "sha256": "8c64c562aae0c39d8bf45ef6858a0618068dadf5e8a747b97dd962c42accfcc4"
         }
       ],
-      "selection_note": "Tier 2 for the current turn. Existing M3 evidence has only 8 proposal-eligible contexts (CSV: Neutral 3/8, Masked 0/8, No-delivery 3/8); M4 shared-target design and message/token confounds prevent causal inference."
+      "hypothesis": "In a prospective matched design, replacing actual private allocation content with a frozen neutral message while holding task, incentive, message opportunity, and event structure fixed may change recipient ballot choice; own prior target expression may moderate the response.",
+      "hypothesis_id": "communication-content-choice-effect",
+      "selection_note": "Tier 2 for the current turn. Existing M3 evidence has only 8 proposal-eligible contexts (CSV: Neutral 3/8, Masked 0/8, No-delivery 3/8); M4 shared-target design and message/token confounds prevent causal inference.",
+      "status": "candidate",
+      "title": "Does private message content change a recipient vote under a shared target incentive?"
     },
     {
-      "hypothesis_id": "observable-evidence-boundary",
-      "title": "Map the observable evidence boundary for coordination claims",
-      "status": "supported",
-      "hypothesis": "Some paired mechanisms with byte-identical authorized Public-only evidence cannot be distinguished from that evidence alone; predeclared additional permitted evidence or an intervention can distinguish at least some such pairs.",
       "competing_explanations": [
         "The observed equality is an artifact of the finite scripted pair construction or serialization.",
         "The permitted privileged evidence still does not identify latent intent without an intervention or defensible labels."
@@ -77,7 +70,14 @@
           "sha256": "36827cf5b7a84a97b7bca0d5a3b704cfc8ad3a55763d6fa1667f7d0beda85390"
         }
       ],
-      "selection_note": "Finite construction-boundary evidence only: 8/12 pairs have at least one determinate sequence-component difference, and complete proposal-acceptance-both-actions is present in only 2/24 worlds. Supporting Track 2.3 framing; not a general impossibility result."
+      "hypothesis": "Some paired mechanisms with byte-identical authorized Public-only evidence cannot be distinguished from that evidence alone; predeclared additional permitted evidence or an intervention can distinguish at least some such pairs.",
+      "hypothesis_id": "observable-evidence-boundary",
+      "selection_note": "Finite construction-boundary evidence only: 8/12 pairs have at least one determinate sequence-component difference, and complete proposal-acceptance-both-actions is present in only 2/24 worlds. Supporting Track 2.3 framing; not a general impossibility result.",
+      "status": "supported",
+      "title": "Map the observable evidence boundary for coordination claims"
     }
-  ]
+  ],
+  "policy": "At most three read-only candidate directions may be compared. Only one can be selected for a formal cycle at a time. Candidate status is not preregistration or authorization.",
+  "schema_version": 1,
+  "selected_hypothesis_id": "m4-b5-context-sensitivity-mechanism"
 }

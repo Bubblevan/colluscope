@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "checked_at_utc": "2026-10-20T19:52:20Z",
+  "source": "https://api-docs.deepseek.com/quick_start/pricing/",
+  "retrieval": "Read-only official docs page via web fallback; chrome-use failed to open its local lifecycle lock with access denied.",
+  "model_alias": "deepseek-flash",
+  "official_serving_version_label": "DeepSeek-V4.1-Flash-1017",
+  "off_peak_usd_per_million_tokens": {
+    "input_cache_hit": 0.003,
+    "input_cache_miss": 0.15,
+    "output": 0.6
+  },
+  "peak_usd_per_million_tokens": {
+    "input_cache_hit": 0.006,
+    "input_cache_miss": 0.3,
+    "output": 1.2
+  },
+  "peak_hours_utc_weekdays_excluding_chinese_public_holidays": ["01:00-04:00", "06:00-10:00"],
+  "all_other_hours_off_peak": true,
+  "observed_weekday_at_check": "Tuesday",
+  "off_peak_at_check": true,
+  "correction": "The preceding assistant report misstated the peak intervals as off-peak windows. The official page labels 01:00-04:00 and 06:00-10:00 UTC weekdays as PEAK; 19:52 UTC on Tuesday is off-peak.",
+  "campaign_estimate_max_232_requests_10000_input_512_output_each": {
+    "peak_no_cache_usd": 0.8385408,
+    "off_peak_no_cache_usd": 0.4192704,
+    "hard_cap_proposed_usd": 0.9
+  },
+  "immutable_weights": false
+}
