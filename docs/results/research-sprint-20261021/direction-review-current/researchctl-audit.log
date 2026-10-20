@@ -1,0 +1,25 @@
+{
+  "integrity_check": "PASS",
+  "scientific_validity": "NOT_EVALUATED",
+  "registered_cycles": 4,
+  "open_experiments": [],
+  "new_iteration_usage": {
+    "model_calls": 352,
+    "external_cost_usd": 0.039167058
+  },
+  "usage_by_approval_id": {
+    "DS-FLASH-1200-2P50-20261020": {
+      "model_calls": 120,
+      "external_cost_usd": 0.01178532
+    },
+    "DS-FLASH-M4B5-CONTEXT-232-20261021": {
+      "model_calls": 232,
+      "external_cost_usd": 0.027381738
+    }
+  },
+  "project_limits": {
+    "max_model_calls": 1200,
+    "max_external_cost_usd": 2.5
+  },
+  "errors": []
+}

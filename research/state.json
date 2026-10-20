@@ -31,18 +31,23 @@
   "latest_decision": "PASS",
   "latest_decision_type": "operational",
   "latest_review": {
-    "authorization_status": "no_current_scope_for_new_agent_inference",
-    "evidence": "docs/results/m1-100-factorial-interaction-20261021/analysis_manifest.json",
-    "evidence_sha256": "9bf7b0f9ac3e43b885599d71f506671e6478df5ef5df29fd9e27e8fc827bbaa4",
+    "status": "offline_direction_review_complete_waiting_for_new_scope_specific_approval",
+    "authorization_status": "current_232_request_M4_B5_scope_consumed_and_not_reusable",
     "experiment_registered": false,
     "new_model_api_attempts": 0,
     "new_model_calls": 0,
     "selected_next_hypothesis_id": "communication-content-choice-effect",
-    "status": "offline_direction_review_complete_replication_requires_fresh_scope_specific_approval"
+    "candidate_monitor_hypothesis_id": "m1-natural-message-action-audit",
+    "evidence": "docs/results/research-sprint-20261021/direction-review-current/evidence-synthesis.json",
+    "evidence_sha256": "2b1938199801e921295830738f6b34ff9bd81659f340493a0ad4da8db31a03d8",
+    "scope_draft": "research/drafts/m1-package-monitor-campaign-v1.md",
+    "scope_draft_sha256": "1c176eb1b8068167403a60240edd7f2a52ec27f77eb598b5fed5c317b320f5b7",
+    "critic_review": "docs/results/research-sprint-20261021/direction-review-current/independent-scientific-critic-review.md",
+    "critic_blind": false
   },
-  "latest_review_id": "m1-reward-chat-direction-review-20261021",
-  "latest_scientific_outcome": "SUPPORTED",
-  "next_action": "Preregister a confirmatory replication of the M1 private-reward by chat-stage package interaction using new matched scenario/seed groups. The present result is post-hoc and does not isolate message semantics. No Agent calls are authorized by the consumed 232-request DeepSeek Monitor approval; obtain a new experiment-specific scope before execution.",
+  "latest_review_id": "scientific-direction-review-current-20261021",
+  "latest_scientific_outcome": "INCONCLUSIVE",
+  "next_action": "Freeze the human annotation codebook and two-cycle preregistration for m1-reward-chat-24group-replication-v1 plus m1-natural-message-action-audit-v1, then request one exact approval for 672 total attempts and a $0.45 DeepSeek cap. Do not dispatch until a new approval exists.",
   "preexisting_untracked_paths_preserved": [
     "docs/COLOSSEUM_LOCAL_REPRO_PROTOCOL.md",
     "docs/results/colosseum-local-audit-20261020/",
@@ -60,6 +65,6 @@
   "program_status": "active",
   "schema_version": 2,
   "state_recorded_at_head": "75fbfe7a718addeb21b1bb38b8e328f7bd717f24",
-  "status": "ready_for_next_cycle",
+  "status": "ready_for_preregistration_and_new_scope_request",
   "updated_at": "2026-10-21"
 }

@@ -47,6 +47,61 @@
       "status": "supported",
       "title": "Map the observable evidence boundary for coordination claims",
       "archived_reason": "Moved from the active candidate comparison after the registered finite construction-boundary audit closed as SUPPORTED; the hypothesis and evidence remain preserved in this archive."
+    },
+    {
+      "competing_explanations": [
+        "Actual message semantics affect the monitor output.",
+        "Event inclusion, completeness cues, prompt length, or deterministic presentation explain most response changes.",
+        "Synthetic B5 results differ because the synthetic request compiler and matrix/regret distribution do not match the production M4 B5 path."
+      ],
+      "discriminating_prediction": "For all 24 assigned contexts, compare all three raw-label pairs: Public-only vs Privileged-neutral, Privileged-neutral vs Privileged-original, and Public-only vs Privileged-original. Predeclare the package-dominant, text-substitution-dominant, and ambiguous count patterns; report provider token differences and keep message meaning, length, wording, and salience confounded within the text-substitution contrast. Separately run the 40-row balanced synthetic compiler/arithmetic/enum-order diagnostic.",
+      "evidence_refs": [
+        {
+          "path": "docs/BRANCH_A_EVIDENCE_INVARIANCE.md",
+          "sha256": "56381dee01cacdd49735c878b4c130a9b8c2059a4d4c4fa5b01e0cadf407dd34"
+        },
+        {
+          "path": "docs/results/deepseek-first-m4/audit/monitor_per_reference_scores.csv",
+          "sha256": "ebfc472cb615fc351d35099e2f61469396a3f1d08d82534fe3daf4ebd9cc48a7"
+        },
+        {
+          "path": "docs/results/research-sprint-20261021/direction-review/public-harm-invariance-direction-review-rerun.json",
+          "sha256": "f5c4e1e1a311cb7f52f8b1c2adcaedc164613fdfe7807ece00a5e8e6f690388f"
+        }
+      ],
+      "hypothesis": "Across the 24 fixed M4 contexts, B5 label changes will be more frequent between Public-only and Privileged-neutral views than between Privileged-original and Privileged-neutral views. This would indicate that the historical response change is more associated with the bundled evidence-view package than with the message-text substitution alone; it would not establish semantic comprehension or collusion.",
+      "hypothesis_id": "m4-b5-context-sensitivity-mechanism",
+      "selection_note": "Selected for the approved, bounded M4 B5 context-sensitivity monitor campaign. The broad context-access question overlaps Arike et al.; claims remain limited to fixed-case response sensitivity to evidence-view packaging and message-text substitution, not semantic comprehension or collusion. A2 is a synthetic compiler/arithmetic/enum-order diagnostic, not a population capability estimate. Protocol and registration are being frozen before dispatch.",
+      "status": "closed_inconclusive",
+      "title": "Which part of privileged evidence changes B5 public-harm responses?",
+      "archived_reason": "The registered 232-request campaign closed AMBIGUOUS/INCONCLUSIVE; do not repeat this public-harm task as a live candidate. Its finite changes and confounds remain in the report.",
+      "archived_at": "2026-10-21"
+    },
+    {
+      "competing_explanations": [
+        "The exact-request label disagreements are present in raw model tool-call arguments, and independent strict parsing reproduces each stored label.",
+        "Raw arguments have matching labels while differences appear in stored predictions, parsing, or row association.",
+        "Raw response bodies or ancillary argument fields differ while the binary label remains the same.",
+        "A frozen request, response, or model-fingerprint integrity check fails and invalidates affected comparisons."
+      ],
+      "discriminating_prediction": "For the complete 48-pair historical/current exact-request and matching-reported-fingerprint schedule, independently strict-parse each raw report_evidence tool call and compare labels and evidence refs with the stored result. Preserve all missing, malformed, or mismatched rows; do not inspect labels during schedule selection.",
+      "evidence_refs": [
+        {
+          "path": "docs/M4_B5_CONTEXT_SENSITIVITY_DECISION.md",
+          "sha256": "cd9ab94ad8756013e952f2a06d89d0e8a0a6975dc4e3e3f7e511cc661d6dcbb6"
+        },
+        {
+          "path": "docs/BRANCH_A_EVIDENCE_INVARIANCE.md",
+          "sha256": "56381dee01cacdd49735c878b4c130a9b8c2059a4d4c4fa5b01e0cadf407dd34"
+        }
+      ],
+      "hypothesis": "Among the 48 preselected historical/current B5 pairs with byte-identical request bodies and matching reported system fingerprints, any stored label disagreement will also be present in raw model tool-call arguments, and an independent strict parser will reproduce both stored labels. A parser or scorer mismatch would falsify this hypothesis.",
+      "hypothesis_id": "m4-b5-raw-response-provenance",
+      "selection_note": "Selected as a zero-call measurement-integrity test for the Tier 1 B5 evidence-view instability question. It can determine whether already reported finite label disagreement exists in raw responses or is introduced downstream; it is not a standalone scientific contribution and cannot explain which input cue caused the historical 20/24 paired changes.",
+      "status": "supported",
+      "title": "Does exact-request B5 label disagreement originate in raw responses or downstream mapping?",
+      "archived_reason": "The exact-request raw-label audit closed SUPPORTED; this measurement question is complete and archived.",
+      "archived_at": "2026-10-21"
     }
   ],
   "updated_at": "2026-10-21"

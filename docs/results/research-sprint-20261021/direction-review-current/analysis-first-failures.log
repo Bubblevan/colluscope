@@ -1,0 +1,84 @@
+Retained first-attempt analysis failures
+Date: 2026-10-20 UTC / 2026-10-21 local
+No model/API/network requests were involved. No raw messages or payloads appear below.
+
+--- CSV aggregation: undefined x variable ---
+rows 232 cols ['block', 'arm', 'unit_sha256_prefix', 'group_sha256_prefix', 'trajectory_sha256_prefix', 'reference', 'prediction', 'exact', 'citation_valid', 'prompt_tokens', 'prompt_cache_hit_tokens', 'prompt_cache_miss_tokens', 'completion_tokens']
+Traceback (most recent call last):
+  File "<stdin>", line 10, in <module>
+NameError: name 'x' is not defined. Did you mean: 'xs'?
+
+--- CSV aggregation: undefined row variable ---
+A2 counts
+Traceback (most recent call last):
+  File "<stdin>", line 9, in <module>
+NameError: name 'row' is not defined. Did you mean: 'rows'?
+
+--- CSV aggregation: undefined r variable ---
+A2 counts
+Traceback (most recent call last):
+  File "<stdin>", line 9, in <module>
+NameError: name 'r' is not defined
+
+--- CSV aggregation: bool passed directly to sum ---
+matched units 40
+Traceback (most recent call last):
+  File "<stdin>", line 13, in <module>
+TypeError: 'bool' object is not iterable
+
+--- Matrix source hash incorrectly guessed ---
+Traceback (most recent call last):
+  File "scripts/freeze_m1_replication_candidates.py", line 130, in <module>
+    raise SystemExit(main())
+  File "scripts/freeze_m1_replication_candidates.py", line 115, in main
+    expected = canonical_json(build())
+  File "scripts/freeze_m1_replication_candidates.py", line 49, in build
+    raise ValueError("M1_100_SCENARIO_SOURCE_HASH_MISMATCH")
+ValueError: M1_100_SCENARIO_SOURCE_HASH_MISMATCH
+
+--- Matrix JSON written, then relative-output formatting failed ---
+Traceback (most recent call last):
+  File "scripts/freeze_m1_replication_candidates.py", line 130, in <module>
+    raise SystemExit(main())
+  File "scripts/freeze_m1_replication_candidates.py", line 124, in main
+    print(json.dumps({"status": "WROTE_CANDIDATE_DRAFT", "output": str(args.out.relative_to(ROOT)), ...}))
+  File "pathlib.py", line 682, in relative_to
+ValueError: 'research\\drafts\\m1-replication-candidate-matrices-20261021.json' is not in the subpath of 'D:\\MyLab\\colluscope'
+The already-written JSON passed --check; the generator path was corrected and then wrote/check-passed.
+
+--- First researchctl audit: uppercase SHA references ---
+{
+  "integrity_check": "FAIL",
+  "scientific_validity": "NOT_EVALUATED",
+  "registered_cycles": 4,
+  "open_experiments": [],
+  "errors": [
+    "hypotheses.candidates[0].evidence_refs[10].sha256 must be lowercase SHA-256",
+    "hypotheses.candidates[0].evidence_refs[12].sha256 must be lowercase SHA-256",
+    "hypotheses.candidates[1].evidence_refs[0].sha256 must be lowercase SHA-256"
+  ]
+}
+
+--- First synthesis --check: bytes passed to Path digest helper ---
+Traceback (most recent call last):
+  File "scripts/summarize_scientific_direction_review.py", line 207, in <module>
+    raise SystemExit(main())
+  File "scripts/summarize_scientific_direction_review.py", line 198, in main
+    print(json.dumps({"status": "PASS_HASHED_OFFLINE_SYNTHESIS", "output_sha256": digest(raw)}, sort_keys=True))
+  File "scripts/summarize_scientific_direction_review.py", line 28, in digest
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+AttributeError: 'bytes' object has no attribute 'read_bytes'
+
+--- Researchctl audit after pricing-snapshot edit: stale draft hash refs ---
+{
+  "integrity_check": "FAIL",
+  "scientific_validity": "NOT_EVALUATED",
+  "registered_cycles": 4,
+  "open_experiments": [],
+  "errors": [
+    "hypotheses.candidates[0].evidence_refs[11] hash mismatch: research/drafts/m1-package-monitor-campaign-v1.md",
+    "hypotheses.candidates[1].evidence_refs[1] hash mismatch: research/drafts/m1-package-monitor-campaign-v1.md"
+  ]
+}
+
+All are corrected metadata/analysis-code issues. The final researchctl audit, deterministic summary --check, and scenario-candidate --check pass.

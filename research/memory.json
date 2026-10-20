@@ -313,6 +313,41 @@
       "outcome": "INCONCLUSIVE",
       "scope": "Draft-only sample and schedule preflight; no request bodies, model outputs, formal preregistration, or inference.",
       "statement": "A sanitized draft schedule covers 24 M4 contexts across three views and 40 synthetic rows across four request forms (232 rows total), with no raw IDs, labels, references, or messages in the output."
+    },
+    {
+      "claim_id": "scientific-direction-review-current-20261021",
+      "evidence_class": "offline_reanalysis",
+      "evidence_refs": [
+        {
+          "path": "docs/SCIENTIFIC_DIRECTION_REVIEW_CURRENT_20261021.md",
+          "sha256": "2723f4406d5756edba3b2aa2f847a689919749e71d1f4f877603d165d96a4270"
+        },
+        {
+          "path": "docs/ITERATION_LOG_CURRENT_20261021.md",
+          "sha256": "7bc00123d3752e7b6267df94805cb6d28a3daf6c83c42a4269f7e1e7a4ec6760"
+        },
+        {
+          "path": "docs/results/research-sprint-20261021/direction-review-current/evidence-synthesis.json",
+          "sha256": "2b1938199801e921295830738f6b34ff9bd81659f340493a0ad4da8db31a03d8"
+        },
+        {
+          "path": "docs/results/research-sprint-20261021/direction-review-current/independent-scientific-critic-review.md",
+          "sha256": "5346abdc98e20d8ec298f1d28bd44167862a1938ef0760ad3b53ce400ebe3273"
+        },
+        {
+          "path": "research/drafts/m1-package-monitor-campaign-v1.md",
+          "sha256": "64d71966db5166d99accb45acf437d968046bf7f9fe17396d01340f0508b3e82"
+        },
+        {
+          "path": "research/drafts/m1-replication-candidate-matrices-20261021.json",
+          "sha256": "3265366003173c97477d51ef0c670e1486fa6fb5fd9538cd1c919ffd3aa2d150"
+        }
+      ],
+      "independent_review_confirmed": false,
+      "interpretation": "The M4 public-harm reference is independently reproducible from structured public evidence in 24/24 complete cases, and the synthetic public-harm rule baseline is exact on 40/40 rows. The B5 20/24 permission-view change remains mechanistically inconclusive; the 120-call synthetic run is one-sided, with all 40 public-canonical predictions present. A separate-context reviewer ranked the finite evidence-boundary route as the cheapest near-term step but warned it is not a standalone paper; this reviewer saw the selected-hypothesis registry, so it is not blind confirmation.",
+      "outcome": "INCONCLUSIVE",
+      "scope": "Direction selection after the completed M4 B5 campaign; finite M4 public-harm and synthetic A2 evidence only.",
+      "statement": "Keep the M1 private-reward × chat-stage package as the next primary prospective question, use C as the evidence/claim boundary, and reserve Monitor inference for human-referenced natural-language proposal/action extraction. No new experiment is registered or authorized."
     }
   ],
   "purpose": "Claim-level memory for future cycle selection. This is a scoped summary of historical artifacts, not a universal scientific score.",

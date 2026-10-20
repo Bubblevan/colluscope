@@ -1,0 +1,25 @@
+Scientific direction review — retained local analysis failures
+Date: 2026-10-21 local / 2026-10-20 UTC
+These are analysis-script mistakes, not model, API, experiment, or source-data failures.
+
+1. A2 aggregation attempt grouped only by trajectory_sha256_prefix. This collapsed 40 matched rows into 2 trajectory classes. The denominator check exposed the error; corrected key is (group_sha256_prefix, trajectory_sha256_prefix). No results were accepted from the incorrect aggregate.
+
+2. First row-count aggregation attempt used an undefined variable name in a list-comprehension. Python raised NameError before any result was written.
+
+3. Second row-count aggregation attempt used a different undefined variable name. Python raised NameError before any result was written.
+
+4. Third row-count aggregation attempt passed a Boolean directly to sum() instead of an iterable. Python raised TypeError before any result was written.
+
+5. First candidate-matrix generator draft contained an incorrect pinned hash for configs/m1-100-scenarios.json. It stopped with M1_100_SCENARIO_SOURCE_HASH_MISMATCH before writing a file. The hash was read from the tracked file and pinned correctly.
+
+6. The corrected candidate generator wrote the deterministic JSON, then failed while formatting a relative output path supplied from PowerShell. The JSON itself passed --check; the path reporting was corrected and the generator was rerun to completion.
+
+7. An initial cost statement must use the current official Flash off-peak cache-miss/output rates ($0.15/$0.60 per million), not the separate Pro-column prices or a historical price snapshot. The draft budget was recalculated at 216 requests × 10,000 input tokens + 512 output tokens = $0.3903552 worst-case off-peak, under a proposed $0.45 hard cap. No request was sent.
+
+8. The first `researchctl audit` after appending the new candidate records failed because three newly inserted SHA-256 references were uppercase. All reference values were normalized to lowercase; the same audit then passed with no errors and no open experiments. The failure and repair changed metadata only.
+
+9. The first deterministic `--check` path in the new synthesis script passed bytes to the Path-only digest helper and raised AttributeError. It was corrected to hash the byte string directly; the repeated `--check` then returned PASS with output SHA-256 92fab36d07b002d3fbdd7d9454cba113ea41ccd72938a0ba961cea24ed4c16df. No source row or model output was modified.
+
+10. A saved `researchctl audit` initially failed after the official pricing snapshot was added to the draft, because the mutable memory/candidate draft hash references still pointed to the preceding draft version. The current draft hash was recomputed and all three mutable records were updated; the repeated audit passed. No registered protocol, authorization record, or closed result changed.
+
+No failed attempt removed or replaced an assigned experiment row. No raw private message, request body, response body, or credential is included in this log.
