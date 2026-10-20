@@ -1,70 +1,83 @@
 {
+  "schema_version": 1,
+  "selected_hypothesis_id": null,
+  "policy": "At most three read-only candidate directions may be compared. Only one can be selected for a formal cycle at a time. Candidate status is not preregistration or authorization.",
   "candidates": [
     {
+      "hypothesis_id": "m4-b5-context-sensitivity-mechanism",
+      "title": "Which part of privileged evidence changes B5 public-harm responses?",
+      "status": "candidate",
+      "hypothesis": "In the 24 retained Agent-derived M4 contexts, the Public-to-Privileged B5 response changes can be decomposed into a private-message-content component and a context-package component by comparing original private text with frozen neutral text under identical event metadata and ledger.",
       "competing_explanations": [
-        "The two methods have similar accuracy once failures and common paired coverage are handled.",
-        "Additional evidence serialization increases truncation or changes formatting without improving factual support."
+        "Actual message semantics affect the monitor output.",
+        "Event inclusion, completeness cues, prompt length, or deterministic presentation explain most response changes.",
+        "Synthetic B5 results differ because the synthetic request compiler and matrix/regret distribution do not match the production M4 B5 path."
       ],
-      "discriminating_prediction": "A preregistered paired comparison will retain all assigned rows and failures, and report B4-only versus B5-only exact outcomes on common assessable units with task/case clustering and token/cost accounting.",
+      "discriminating_prediction": "For all 24 assigned contexts, compare Public-only, Privileged-original, and Privileged-neutral raw labels. If original-vs-neutral is rare while neutral-vs-public is common, the historical response change is not explained mainly by message semantics. Pair this with a 40-row balanced synthetic compiler/arithmetic/enum-order diagnostic.",
       "evidence_refs": [
+        {
+          "path": "docs/BRANCH_A_EVIDENCE_INVARIANCE.md",
+          "sha256": "56381dee01cacdd49735c878b4c130a9b8c2059a4d4c4fa5b01e0cadf407dd34"
+        },
+        {
+          "path": "docs/results/deepseek-first-m4/audit/monitor_per_reference_scores.csv",
+          "sha256": "ebfc472cb615fc351d35099e2f61469396a3f1d08d82534fe3daf4ebd9cc48a7"
+        },
+        {
+          "path": "docs/results/research-sprint-20261021/direction-review/public-harm-invariance-direction-review-rerun.json",
+          "sha256": "f5c4e1e1a311cb7f52f8b1c2adcaedc164613fdfe7807ece00a5e8e6f690388f"
+        }
+      ],
+      "selection_note": "Highest-value Tier 1 direction. The broad context-access question overlaps Arike et al.; any claim must remain limited to isolating actual private content from event/context packaging in this multi-agent audit task. Not registered; pending one unified explicit call-budget approval."
+    },
+    {
+      "hypothesis_id": "communication-content-choice-effect",
+      "title": "Does private message content change a recipient vote under a shared target incentive?",
+      "status": "candidate",
+      "hypothesis": "In a prospective matched design, replacing actual private allocation content with a frozen neutral message while holding task, incentive, message opportunity, and event structure fixed may change recipient ballot choice; own prior target expression may moderate the response.",
+      "competing_explanations": [
+        "Shared-target incentives cause parallel choices without communication.",
+        "Role, seed, payoff matrix, chair rule, prior expressed choices, or token/salience differences explain ballot changes.",
+        "The agent may not follow the intended message protocol, making the causal contrast non-identifiable."
+      ],
+      "discriminating_prediction": "Freeze new payoff contexts and the complete assigned denominator; randomize actual versus neutral delivered content within matched contexts before votes; report failures, all assigned groups, and predeclared own-history strata. A null contrast or control failure falsifies/blocks the narrow content-effect claim.",
+      "evidence_refs": [
+        {
+          "path": "docs/results/m3-mechanism-audit-final/m3_group_results.csv",
+          "sha256": "c2aa043d8aef430ff28ce3bbc3592e09ad817c4cf82681785bff287af94b3c0a"
+        },
         {
           "path": "docs/results/deepseek-first-m4/audit/postrun_analysis_v2.md",
           "sha256": "ab8882db0c1381e39f87f5ff3519ad2b5faaef625c63ab2bac8991c388fb4cba"
         },
         {
-          "path": "docs/results/full-research-execution-20261020/full_research_results_summary.json",
-          "sha256": "7995b048ec160759a833dfbf2dc4b8f0e668ca8c1861d8566f596056118c029b"
+          "path": "docs/M1_100_PROTOCOL.md",
+          "sha256": "8c64c562aae0c39d8bf45ef6858a0618068dadf5e8a747b97dd962c42accfcc4"
         }
       ],
-      "hypothesis": "On a new frozen evaluation with enough common assessable matched cases, B5 evidence-aware monitoring will improve exact observable-label accuracy over B4 raw fusion.",
-      "hypothesis_id": "monitor-method-contrast",
-      "selection_note": "The historical 628-request run has 126 assessable pairs but is descriptive and inconclusive; the separate 856-row run has no common assessable pair. A future confirmatory study would need a frozen output budget and explicit new authorization.",
-      "status": "candidate",
-      "title": "When can evidence-aware monitoring beat raw fusion?"
+      "selection_note": "Tier 2 for the current turn. Existing M3 evidence has only 8 proposal-eligible contexts (CSV: Neutral 3/8, Masked 0/8, No-delivery 3/8); M4 shared-target design and message/token confounds prevent causal inference."
     },
     {
-      "competing_explanations": [
-        "The observed equality is an artifact of the synthetic pair construction or a hidden routing/serialization difference.",
-        "The available privileged evidence still does not identify latent intent without an intervention or defensible labels."
-      ],
-      "discriminating_prediction": "A deterministic replay of the frozen matched-world sources will prove exact projection equality/difference and enumerate which added observable fields change the equivalence class, without treating monitor predictions as truth labels.",
-      "evidence_refs": [
-        {
-          "path": "docs/results/full-research-execution-20261020/full_research_results_summary.json",
-          "sha256": "7995b048ec160759a833dfbf2dc4b8f0e668ca8c1861d8566f596056118c029b"
-        }
-      ],
-      "hypothesis": "Some paired mechanisms with byte-identical authorized Public-only evidence cannot be distinguished from that evidence alone; predeclared additional permitted evidence or an intervention can distinguish at least some such pairs.",
       "hypothesis_id": "observable-evidence-boundary",
-      "selection_note": "This is the only current candidate with a plausible zero-call deterministic analysis path. The existing 856-row result reports identical Public-only projections and only 2/72 parseable matched-world outputs; the attachment's 20/24 prediction-change example is absent from the available records and is not adopted.",
+      "title": "Map the observable evidence boundary for coordination claims",
       "status": "supported",
-      "title": "Map the observable evidence boundary for coordination claims"
-    },
-    {
+      "hypothesis": "Some paired mechanisms with byte-identical authorized Public-only evidence cannot be distinguished from that evidence alone; predeclared additional permitted evidence or an intervention can distinguish at least some such pairs.",
       "competing_explanations": [
-        "The projection change is bundled: added event rows, changed event order/IDs, permission and completeness metadata can alter outputs independently of message meaning.",
-        "The primary labels are mechanically recoverable from public ballots and welfare, so apparent stability or instability may reflect this simple deterministic task rather than evidence-auditing ability.",
-        "Provider alias implementation or fingerprint drift, rather than view content, could change predictions during a multi-request schedule."
+        "The observed equality is an artifact of the finite scripted pair construction or serialization.",
+        "The permitted privileged evidence still does not identify latent intent without an intervention or defensible labels."
       ],
-      "discriminating_prediction": "On the frozen 20-group schedule, compare raw labels for the Public-only primary row and task-irrelevant-short Privileged row within every assigned group; retain failed/unassessable pairs in the N=20 denominator and separately require a label-flip positive control before interpreting stability.",
+      "discriminating_prediction": "The frozen 12-pair audit verifies exact Public-only projection equality and independently enumerates which source-event sequence components differ in privileged views.",
       "evidence_refs": [
         {
-          "path": "docs/results/evidence-invariance/synthetic-invariance-groups-v2.json",
-          "sha256": "0cc0dd9fd543761d0369e68eb7f151f1223aefec614e415046de8b8c019b8d20"
+          "path": "docs/results/research-sprint-20261021/MATCHED_WORLD_SEQUENCE_VISIBILITY_AUDIT.md",
+          "sha256": "f76ec46a585431d9e5d58d5583790587be6ec37242943ef1dc223b31ea87dada"
         },
         {
-          "path": "docs/BRANCH_A_EVIDENCE_INVARIANCE.md",
-          "sha256": "56381dee01cacdd49735c878b4c130a9b8c2059a4d4c4fa5b01e0cadf407dd34"
+          "path": "docs/results/research-sprint-20261021/matched-world-sequence-visibility-v4-final.json",
+          "sha256": "36827cf5b7a84a97b7bca0d5a3b704cfc8ad3a55763d6fa1667f7d0beda85390"
         }
       ],
-      "hypothesis": "Across the 20 frozen synthetic scenario groups, B5 raw public-harm labels will differ between Public-only canonical and Privileged Audit projections with two delivered task-irrelevant messages in at least four groups, provided at least 18 primary pairs are assessable.",
-      "hypothesis_id": "b5-evidence-view-stability",
-      "selection_note": "Selected as a bounded, synthetic-only diagnostic of prediction non-invariance under a bundled evidence projection. This cannot identify message-semantic causality, agent behavior, monitor superiority, or latent collusion.",
-      "status": "candidate",
-      "title": "Test B5 prediction stability across bundled synthetic evidence views"
+      "selection_note": "Finite construction-boundary evidence only: 8/12 pairs have at least one determinate sequence-component difference, and complete proposal-acceptance-both-actions is present in only 2/24 worlds. Supporting Track 2.3 framing; not a general impossibility result."
     }
-  ],
-  "policy": "At most three read-only candidate directions may be compared. Only one can be selected for a formal cycle at a time. Candidate status is not preregistration or authorization.",
-  "schema_version": 1,
-  "selected_hypothesis_id": null
+  ]
 }

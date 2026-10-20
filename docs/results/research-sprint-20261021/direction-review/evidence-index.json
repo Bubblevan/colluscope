@@ -1,0 +1,76 @@
+{
+  "schema_version": 1,
+  "review_base_commit": "07b6111505cdc9d8db5bac619798fa1f3895a7c7",
+  "evidence_class": "offline_reanalysis",
+  "new_model_api_calls": 0,
+  "artifacts": {
+    "branch_a_report": {
+      "path": "docs/BRANCH_A_EVIDENCE_INVARIANCE.md",
+      "sha256": "56381dee01cacdd49735c878b4c130a9b8c2059a4d4c4fa5b01e0cadf407dd34"
+    },
+    "direction_review": {
+      "path": "docs/SCIENTIFIC_DIRECTION_REVIEW_20261021.md",
+      "sha256": "e106719272d7d383322060857023271dd20b9c598b0fc600036cacf2b331ef58"
+    },
+    "m4_scenario_config": {
+      "path": "configs/m4-scenarios-v1.json",
+      "sha256": "c6c8341c208e2a0e6e83aa33559a2e94275d46ba2ae19c24a00887aea9cf5654"
+    },
+    "per_reference_scores": {
+      "path": "docs/results/deepseek-first-m4/audit/monitor_per_reference_scores.csv",
+      "sha256": "ebfc472cb615fc351d35099e2f61469396a3f1d08d82534fe3daf4ebd9cc48a7"
+    },
+    "independent_historical_audit": {
+      "path": "docs/results/deepseek-first-m4/audit/independent_audit.json",
+      "sha256": "ca5fadb95c7377d54659139c3e1138a51cc97333b2d05b6102cb94a3ca41af57"
+    },
+    "raw_request_response_set_manifest_sha256": "8ca7fb7eb62ef58792fef3b983be0ea3deed9267729c0f98447fe353b3014939",
+    "monitor_plan_sha256": "f2d00fed806cb61653f4a0f542b9c255c1c33923b098f66de84c689976bb198a",
+    "synthetic_manifest": {
+      "path": "docs/results/evidence-invariance/synthetic-invariance-groups-v2.json",
+      "sha256": "0cc0dd9fd543761d0369e68eb7f151f1223aefec614e415046de8b8c019b8d20"
+    },
+    "b5_terminal_evidence": {
+      "path": "docs/results/research-sprint-20261021/B5_EVIDENCE_VIEW_STABILITY_EVIDENCE.md",
+      "sha256": "9a281c7052269f961167edbeeeaf871d882dc6898696907a01386a5dc620b507"
+    },
+    "b5_deterministic_rule_audit": {
+      "path": "docs/results/research-sprint-20261021/B5_POSTCLOSE_RULE_BASELINE_AUDIT.md",
+      "sha256": "be534c19e05aa540fcc52cd82f969cc63ffca3e871d402c23d2163ce03facb1e"
+    },
+    "m3_group_results": {
+      "path": "docs/results/m3-mechanism-audit-final/m3_group_results.csv",
+      "sha256": "c2aa043d8aef430ff28ce3bbc3592e09ad817c4cf82681785bff287af94b3c0a"
+    },
+    "privileged_metadata_summary": {
+      "path": "docs/results/research-sprint-20261021/direction-review/m4-privileged-metadata-summary.json",
+      "sha256": "49111cac526bb84fbf8464beee5a69c4e656cae40c57deb6f981b2646972fd39"
+    },
+    "official_pricing_check": {
+      "path": "docs/results/research-sprint-20261021/direction-review/deepseek-pricing-check.json",
+      "sha256": "30c3516400b9c3a2ccbfb11be1af7b451bb485b0d339a8a802da5801f9014a01"
+    },
+    "privacy_scan_log": {
+      "path": "docs/results/research-sprint-20261021/direction-review/privacy-scan.log",
+      "sha256": "fe132048fcd991f65d2ffba21296703fa2b5744fc1f36c988d3f774ca8eb3a2f"
+    },
+    "paused_108_plan_status": {
+      "path": "docs/results/research-sprint-20261021/direction-review/paused-108-plan-status.json",
+      "sha256": "f514a89f670ad35d76ed9af3462f3b9c070bd677c30baa1ac924c4b6e67f45ad"
+    }
+  },
+  "replay_outputs": {
+    "m4_public_harm_invariance": {
+      "path": "docs/results/research-sprint-20261021/direction-review/public-harm-invariance-direction-review-rerun.json",
+      "sha256": "f5c4e1e1a311cb7f52f8b1c2adcaedc164613fdfe7807ece00a5e8e6f690388f"
+    },
+    "b5_rule_baseline": {
+      "path": "docs/results/research-sprint-20261021/direction-review/b5-rule-baseline-direction-review-rerun.json",
+      "sha256": "e2538cfb2b8711de054964151993a6340a40c55804d569d8455c8cdfb7e53ce6"
+    }
+  },
+  "privacy": {
+    "private_message_text_copied_to_report": false,
+    "raw_request_response_payloads_exported": false
+  }
+}

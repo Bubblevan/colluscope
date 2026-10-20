@@ -1,0 +1,1 @@
+A one-off Python update for hash-pinned research records failed at parse time because a dict literal key was malformed. No file was written by that command. The subsequent correction updates references by structured JSON paths.

@@ -1,0 +1,8 @@
+Replay time UTC: 2026-10-20 19:38:25 UTC
+M3 source: docs/results/m3-mechanism-audit-final/m3_group_results.csv
+M3 source SHA256: c2aa043d8aef430ff28ce3bbc3592e09ad817c4cf82681785bff287af94b3c0a
+Focal proposal eligible: 8
+Neutral ballot changed: 3/8
+Masked ballot changed: 0/8
+No-delivery ballot changed: 3/8
+Audit exit codes: public-harm=0; b5-rule=0

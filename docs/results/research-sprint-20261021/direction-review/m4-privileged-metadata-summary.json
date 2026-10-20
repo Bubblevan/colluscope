@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "source": "runs/deepseek-first-m4/monitor/requests/*.bin and matching *.meta.json",
+  "filter": {
+    "population": "m4_natural_traces",
+    "baseline_id": "B5_evidence_aware",
+    "task": "public_harm",
+    "permission": "privileged_audit"
+  },
+  "rows": 24,
+  "distinct_two_message_metadata_patterns": 1,
+  "distinct_event_order_visibility_delivery_patterns": 1,
+  "message_event_count_per_context": 2,
+  "actor_recipient_pairs": ["A->B", "B->A"],
+  "visibility": "private",
+  "sent": true,
+  "delivered": true,
+  "completeness_flag_present_rows": 24,
+  "mechanical_ledger_event_index_rows_per_context": 7,
+  "mechanical_ledger_normalized_ballots_per_context": 3,
+  "private_message_text_exported": false,
+  "interpretation": "The message-event metadata and ledger shape were constant across these 24 privileged request inputs. This does not isolate message-content effects; the historical Public/Privileged contrast still changes event inclusion, prompt length, and token usage.",
+  "first_attempt_failure": "The first local summarizer used the absent metadata key case_ref; the sanitized failure is preserved in metadata-structure-first-attempt.log. The corrected pass used case_ref_not_sent and emitted only aggregate facts."
+}

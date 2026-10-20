@@ -28,10 +28,10 @@
   },
   "historical_approvals_reusable": false,
   "latest_closed_experiment_id": "matched-world-sequence-visibility-v1",
-  "latest_decision": "PASS",
+  "latest_decision": "DIRECTION_A_SELECTED_PENDING_AUTHORIZATION",
   "latest_decision_type": "operational",
-  "latest_scientific_outcome": "SUPPORTED",
-  "next_action": "Prepare and register one small atomic DeepSeek evidence-audit diagnostic on the already frozen matched worlds only if the official low-price window is open and the exact request/cost ceiling is reserved; do not reuse the closed B5 approval. The task should test observable-sequence judgments and abstention, not latent collusion.",
+  "latest_scientific_outcome": "INCONCLUSIVE",
+  "next_action": "After a new single-scope user approval, freeze and execute the unified 232-attempt/$0.90 DeepSeek Flash off-peak campaign: 24 M4 contexts across Public-only/original-Privileged/neutral-Privileged (72) plus 40 balanced synthetic public-canonical cases across four prompt/compiler controls (160). No calls before approval; do not resume the 108-call sequence plan.",
   "preexisting_untracked_paths_preserved": [
     "docs/COLOSSEUM_LOCAL_REPRO_PROTOCOL.md",
     "docs/results/colosseum-local-audit-20261020/",
@@ -48,7 +48,17 @@
   "program": "ColluScope Autoresearch",
   "program_status": "active",
   "schema_version": 2,
-  "state_recorded_at_head": "0deb01b31b02fb8678172d9f82648f46d49ac499",
+  "state_recorded_at_head": "07b6111505cdc9d8db5bac619798fa1f3895a7c7",
   "status": "ready_for_next_cycle",
-  "updated_at": "2026-10-20"
+  "updated_at": "2026-10-21",
+  "latest_review_id": "scientific-direction-review-20261021",
+  "latest_review": {
+    "status": "offline_direction_review_complete_no_calls",
+    "experiment_registered": false,
+    "new_model_api_attempts": 0,
+    "new_model_calls": 0,
+    "proposed_campaign_id": "m4-b5-context-sensitivity-campaign-v1",
+    "authorization_status": "awaiting_new_scope_specific_approval",
+    "evidence": "docs/results/research-sprint-20261021/direction-review/evidence-index.json"
+  }
 }

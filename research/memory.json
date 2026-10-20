@@ -59,6 +59,44 @@
       "interpretation": "This supports the stated input-construction property for those 24 comparisons. It does not show that an LLM Monitor can distinguish the worlds or establish a general latent-collusion impossibility result; only 2/72 matched-world outputs were parseable.",
       "outcome": "SUPPORTED",
       "scope": "The exact matched-world construction and audit in FULL-RESEARCH-EXECUTION-20261020."
+    },
+    {
+      "claim_id": "m4-b5-public-harm-view-response",
+      "claim": "In the exact 24-context historical M4 run, B5 public-harm predictions changed in 20/24 Public-to-Privileged pairs while independently replayed reference labels changed in 0/24.",
+      "outcome": "SUPPORTED",
+      "scope": "Only the retained M4 B5 public-harm requests and their exact matched permission views; not a causal content effect, population estimate, detector metric, or collusion label.",
+      "interpretation": "Transitions: 15 insufficient_evidence→absent, 4 present→absent, 1 insufficient_evidence→present. Fourteen changed pairs improved exactness, one worsened, five remained wrong. The intervention bundles message content, event inclusion/metadata, completeness, and token length.",
+      "evidence_refs": [
+        {
+          "path": "docs/BRANCH_A_EVIDENCE_INVARIANCE.md",
+          "sha256": "56381dee01cacdd49735c878b4c130a9b8c2059a4d4c4fa5b01e0cadf407dd34"
+        },
+        {
+          "path": "docs/results/research-sprint-20261021/direction-review/public-harm-invariance-direction-review-rerun.json",
+          "sha256": "f5c4e1e1a311cb7f52f8b1c2adcaedc164613fdfe7807ece00a5e8e6f690388f"
+        }
+      ]
+    },
+    {
+      "claim_id": "b5-synthetic-production-compiler-gap",
+      "claim": "The synthetic B5 diagnostic request builder was not byte-equivalent to the production M4 B5 request builder.",
+      "outcome": "SUPPORTED",
+      "scope": "The exact frozen synthetic projector and production B5 request compiler source paths reviewed on 2026-10-21.",
+      "interpretation": "The synthetic projector omits mechanical_ledger, explicit allowed-label/incomplete-record prompt text, and stream=false. This is a plausible explanation for protocol-dependent predictions, not a proven cause of all-present outputs.",
+      "evidence_refs": [
+        {
+          "path": "scripts/project_monitor_http_request_v2.py",
+          "sha256": "76b03a02efdf0cc04152ed108d17d49320fffeae4cd7f5052da115c431b01a82"
+        },
+        {
+          "path": "src/colluscope/deepseek_monitor_v1.py",
+          "sha256": "e29fede57ce8c2edadccdcef3545bc6a51d02f5185f4007763be0b8516637975"
+        },
+        {
+          "path": "src/colluscope/sprint_baselines.py",
+          "sha256": "e5e24b749f2303d5bbf5feb6b925311f8b5970d4eba535bdf509f6189d960c90"
+        }
+      ]
     }
   ],
   "cycle_updates": [
@@ -145,10 +183,29 @@
       "outcome": "SUPPORTED",
       "scope": "Only the 20 primary and 20 label-flip public-canonical records in the B5 V2 synthetic fixture.",
       "statement": "For this frozen 40-row synthetic B5 public-canonical fixture, the public-harm reference is mechanically recoverable from the visible quality matrix, complete ballots, chair tie-break, and settled outcome."
+    },
+    {
+      "claim_id": "scientific-direction-review-20261021",
+      "evidence_class": "offline_reanalysis",
+      "outcome": "INCONCLUSIVE",
+      "scope": "Research-route selection and source audits completed without new inference.",
+      "statement": "The real M4 B5 view-response anomaly is the highest-value next mechanism question; available evidence supports response sensitivity but does not identify its cause.",
+      "interpretation": "The 108-call scripted sequence plan is paused and was not registered or dispatched. A new unified 232-attempt campaign needs fresh approval because the old grants are scope-bound.",
+      "evidence_refs": [
+        {
+          "path": "docs/SCIENTIFIC_DIRECTION_REVIEW_20261021.md",
+          "sha256": "e106719272d7d383322060857023271dd20b9c598b0fc600036cacf2b331ef58"
+        },
+        {
+          "path": "docs/results/research-sprint-20261021/direction-review/evidence-index.json",
+          "sha256": "34df388a89e4fc439eeeede205493ae59936d71f76c3b48ee4a4a029fbe38e3d"
+        }
+      ],
+      "independent_review_confirmed": false
     }
   ],
   "purpose": "Claim-level memory for future cycle selection. This is a scoped summary of historical artifacts, not a universal scientific score.",
   "schema_version": 1,
   "update_rule": "Each closure must distinguish what changed, what remains plausible, and which hash-pinned evidence supports the update. Only a structured update confirmed by an independent review artifact counts toward the no-progress pivot counter. The registry checks provenance and shape, not truth.",
-  "updated_at": "2026-10-20"
+  "updated_at": "2026-10-21"
 }

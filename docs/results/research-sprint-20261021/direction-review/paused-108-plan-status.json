@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "experiment_id": "atomic-sequence-monitor-108",
+  "status": "PAUSED_BEFORE_REGISTRATION",
+  "reason": "Direction review selected real M4 B5 context-sensitivity as higher-value; Critic found the synthetic sequence task rule-computable and insufficient to explain the historical M4 anomaly.",
+  "planned_logical_calls": 108,
+  "planned_physical_attempts": 108,
+  "planned_cost_ceiling_usd": 0.25,
+  "registration_created": false,
+  "model_api_attempts": 0,
+  "model_calls": 0,
+  "raw_responses_created": 0,
+  "dispatch_started": false,
+  "draft_runtime_code_rolled_back": true,
+  "authorization_reusable": false,
+  "note": "This file preserves the paused plan state only. It is not a preregistration or authorization."
+}
