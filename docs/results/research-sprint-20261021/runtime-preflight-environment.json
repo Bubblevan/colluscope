@@ -1,0 +1,17 @@
+{
+  "base_url_matches_official_host": true,
+  "checked_at_utc": "2026-10-20T18:28:02Z",
+  "credential_present": true,
+  "credential_value_recorded": false,
+  "endpoint_is_official_deepseek": true,
+  "endpoint_literal": "https://api.deepseek.com/chat/completions",
+  "local_env_exists": true,
+  "machine": "AMD64",
+  "model_alias_matches": true,
+  "model_calls": 0,
+  "network_probe_performed": false,
+  "planned_run_root_ignored": true,
+  "platform": "Windows-11-10.0.26200-SP0",
+  "python": "3.12.4",
+  "repository_head": "23b3c0c990d9df791e31bdb700cf063691d41f95"
+}

@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "archived_at": "2026-10-21",
+  "reason": "Keep active comparison set at three candidates while preserving the retired proposal-content direction unchanged in substance.",
+  "candidates": [
+    {
+      "hypothesis_id": "proposal-content-vs-format",
+      "title": "Separate proposal meaning from prompt length and salience",
+      "status": "retired",
+      "hypothesis": "For proposal-eligible contexts, a content-bearing proposal changes the recipient's ballot beyond changes caused by matched-length neutral text and formatting.",
+      "competing_explanations": [
+        "Observed ballot variation is caused by prompt length, salience, or serialization rather than proposal meaning.",
+        "Shared incentives and common knowledge of the rewarded target explain matching behavior without communication."
+      ],
+      "discriminating_prediction": "A future preregistered matched-context design will compare proposal content against length-matched neutral content and a no-delivery control while holding the common target and ballot context fixed.",
+      "selection_note": "Retired from the active three-candidate registry for this cycle; preserved in research/hypotheses-archive-20261021.json as a future question. Historical token-length confounding remains unresolved.",
+      "evidence_refs": [
+        {
+          "path": "docs/results/deepseek-first-m4/audit/postrun_analysis_v2.md",
+          "sha256": "ab8882db0c1381e39f87f5ff3519ad2b5faaef625c63ab2bac8991c388fb4cba"
+        },
+        {
+          "path": "docs/M4_DEEPSEEK_FIRST_RESEARCH_DECISION.md",
+          "sha256": "e1db75339f0824630c10796d54c0dd04407215e9a64547c4727d88eb0d5bea8a"
+        }
+      ]
+    }
+  ]
+}

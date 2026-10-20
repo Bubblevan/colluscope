@@ -1,0 +1,2 @@
+checked_nonlog_files=18 trailing_whitespace=0
+raw_stdout_logs_preserved=true; formatting whitespace in captured pytest output was not rewritten

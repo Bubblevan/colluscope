@@ -1,0 +1,20 @@
+Traceback (most recent call last):
+  File "D:\MyLab\colluscope\.research-worktrees\evidence-invariance\scripts\freeze_synthetic_invariance_groups_v2.py", line 285, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "D:\MyLab\colluscope\.research-worktrees\evidence-invariance\scripts\freeze_synthetic_invariance_groups_v2.py", line 263, in main
+    manifest = build_manifest()
+               ^^^^^^^^^^^^^^^^
+  File "D:\MyLab\colluscope\.research-worktrees\evidence-invariance\scripts\freeze_synthetic_invariance_groups_v2.py", line 194, in build_manifest
+    "variants": _variants(matrix, assignment, reference),
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\MyLab\colluscope\.research-worktrees\evidence-invariance\scripts\freeze_synthetic_invariance_groups_v2.py", line 159, in _variants
+    evidence = _evidence(matrix, assignment, style)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\MyLab\colluscope\.research-worktrees\evidence-invariance\scripts\freeze_synthetic_invariance_groups_v2.py", line 119, in _evidence
+    events = _message_events(style)
+             ^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\MyLab\colluscope\.research-worktrees\evidence-invariance\scripts\freeze_synthetic_invariance_groups_v2.py", line 106, in _message_events
+    texts = text_pairs[length]
+            ~~~~~~~~~~^^^^^^^^
+KeyError: 'irrelevant_short'

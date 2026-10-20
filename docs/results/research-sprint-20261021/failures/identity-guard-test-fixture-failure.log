@@ -1,0 +1,20 @@
+...F...                                                                  [100%]
+================================== FAILURES ===================================
+_________ test_malformed_success_response_is_not_repaired_or_retried __________
+
+tmp_path = WindowsPath('D:/MyLab/colluscope/.pytest-tmp/test_malformed_success_respons0')
+
+    def test_malformed_success_response_is_not_repaired_or_retried(tmp_path: Path):
+        out = tmp_path / "run"
+
+        def malformed(_body: bytes, _key: str):
+            return 200, b'{"choices":[{"finish_reason":"length","message":{}}]}', {}
+
+        result = runner.run(out, test_mode=True, transport=malformed)
+>       assert result["physical_attempts_total"] == 120
+E       assert 1 == 120
+
+tests\test_b5_invariance_runner.py:106: AssertionError
+=========================== short test summary info ===========================
+FAILED tests/test_b5_invariance_runner.py::test_malformed_success_response_is_not_repaired_or_retried
+1 failed, 6 passed in 12.06s

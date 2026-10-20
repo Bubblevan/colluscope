@@ -2,20 +2,22 @@
   "schema_version": 2,
   "scope": "new autoresearch cycles only; historical usage is preserved in source run records and never re-authorized here",
   "authorization": {
-    "status": "none",
-    "approval_id": null,
-    "scope": null,
-    "authorized_experiment_ids": [],
-    "max_model_calls": 0,
-    "max_external_cost_usd": 0.0,
-    "source": null,
-    "approved_at_utc": null,
-    "expires_at_utc": null
+    "status": "active",
+    "approval_id": "DS-FLASH-1200-2P50-20261020",
+    "scope": "One synthetic B5 evidence-view stability diagnostic, DeepSeek Flash only",
+    "authorized_experiment_ids": [
+      "b5-evidence-view-stability-120"
+    ],
+    "max_model_calls": 1200,
+    "max_external_cost_usd": 2.5,
+    "source": "User approval in current ColluScope task: \"批准1200次 2.5美元\"; only the experiment ID above is authorized.",
+    "approved_at_utc": "2026-10-20T18:07:55Z",
+    "expires_at_utc": "2026-10-21T01:00:00Z"
   },
   "authorization_records_directory": "research/authorizations",
   "project_limits": {
-    "max_model_calls": 0,
-    "max_external_cost_usd": 0.0
+    "max_model_calls": 1200,
+    "max_external_cost_usd": 2.5
   },
   "policy": {
     "registration_does_not_authorize_execution": true,

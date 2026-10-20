@@ -26,28 +26,6 @@
       ]
     },
     {
-      "hypothesis_id": "proposal-content-vs-format",
-      "title": "Separate proposal meaning from prompt length and salience",
-      "status": "candidate",
-      "hypothesis": "For proposal-eligible contexts, a content-bearing proposal changes the recipient's ballot beyond changes caused by matched-length neutral text and formatting.",
-      "competing_explanations": [
-        "Observed ballot variation is caused by prompt length, salience, or serialization rather than proposal meaning.",
-        "Shared incentives and common knowledge of the rewarded target explain matching behavior without communication."
-      ],
-      "discriminating_prediction": "A future preregistered matched-context design will compare proposal content against length-matched neutral content and a no-delivery control while holding the common target and ballot context fixed.",
-      "selection_note": "The 628-request run's proposal-minus-neutral focal inputs were 32–85 tokens longer, and the fixed-peer replay does not model peer responses. Any live follow-up needs a new protocol and explicit authorization.",
-      "evidence_refs": [
-        {
-          "path": "docs/results/deepseek-first-m4/audit/postrun_analysis_v2.md",
-          "sha256": "ab8882db0c1381e39f87f5ff3519ad2b5faaef625c63ab2bac8991c388fb4cba"
-        },
-        {
-          "path": "docs/M4_DEEPSEEK_FIRST_RESEARCH_DECISION.md",
-          "sha256": "e1db75339f0824630c10796d54c0dd04407215e9a64547c4727d88eb0d5bea8a"
-        }
-      ]
-    },
-    {
       "hypothesis_id": "observable-evidence-boundary",
       "title": "Map the observable evidence boundary for coordination claims",
       "status": "candidate",
@@ -62,6 +40,29 @@
         {
           "path": "docs/results/full-research-execution-20261020/full_research_results_summary.json",
           "sha256": "7995b048ec160759a833dfbf2dc4b8f0e668ca8c1861d8566f596056118c029b"
+        }
+      ]
+    },
+    {
+      "hypothesis_id": "b5-evidence-view-stability",
+      "title": "Test B5 prediction stability across bundled synthetic evidence views",
+      "status": "candidate",
+      "hypothesis": "Across the 20 frozen synthetic scenario groups, B5 raw public-harm labels will differ between Public-only canonical and Privileged Audit projections with two delivered task-irrelevant messages in at least four groups, provided at least 18 primary pairs are assessable.",
+      "competing_explanations": [
+        "The projection change is bundled: added event rows, changed event order/IDs, permission and completeness metadata can alter outputs independently of message meaning.",
+        "The primary labels are mechanically recoverable from public ballots and welfare, so apparent stability or instability may reflect this simple deterministic task rather than evidence-auditing ability.",
+        "Provider alias implementation or fingerprint drift, rather than view content, could change predictions during a multi-request schedule."
+      ],
+      "discriminating_prediction": "On the frozen 20-group schedule, compare raw labels for the Public-only primary row and task-irrelevant-short Privileged row within every assigned group; retain failed/unassessable pairs in the N=20 denominator and separately require a label-flip positive control before interpreting stability.",
+      "selection_note": "Selected as a bounded, synthetic-only diagnostic of prediction non-invariance under a bundled evidence projection. This cannot identify message-semantic causality, agent behavior, monitor superiority, or latent collusion.",
+      "evidence_refs": [
+        {
+          "path": "docs/results/evidence-invariance/synthetic-invariance-groups-v2.json",
+          "sha256": "0cc0dd9fd543761d0369e68eb7f151f1223aefec614e415046de8b8c019b8d20"
+        },
+        {
+          "path": "docs/BRANCH_A_EVIDENCE_INVARIANCE.md",
+          "sha256": "56381dee01cacdd49735c878b4c130a9b8c2059a4d4c4fa5b01e0cadf407dd34"
         }
       ]
     }

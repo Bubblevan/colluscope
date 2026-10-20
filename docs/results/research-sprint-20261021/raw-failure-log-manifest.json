@@ -1,0 +1,31 @@
+{
+  "archive_sha256": "9372413f839a2af3ba7d8fd81a0267a4075736f750140d63f047630bda4d1e56",
+  "files": [
+    {
+      "bytes": 2066,
+      "path": "docs/results/evidence-invariance/logs/targeted-tests-v2.txt",
+      "raw_sha256": "d0a8760ee99dccf66d9097b549fb3439bcc3fa328619ff320fee460570762ad5"
+    },
+    {
+      "bytes": 6127,
+      "path": "docs/results/research-sprint-20261021/failures/cost-preflight-test-expectation-failure.log",
+      "raw_sha256": "e9e203dca8e5f6ab006992f4e7059aa8dd87c91b8983eb5631472c7cdf52de63"
+    },
+    {
+      "bytes": 1027,
+      "path": "docs/results/research-sprint-20261021/failures/identity-guard-test-fixture-failure.log",
+      "raw_sha256": "6849e621014146a1774046be382028bed59558de0aaa45d098c2cc3e28cddbae"
+    },
+    {
+      "bytes": 12026,
+      "path": "docs/results/research-sprint-20261021/failures/initial-b5-runner-tests.log",
+      "raw_sha256": "dbd28dfd348bc7959e6b64682cb72d9ee7ba7ed71eb7fa8433f45680d532c289"
+    },
+    {
+      "bytes": 13239,
+      "path": "docs/results/research-sprint-20261021/failures/ledger-validation-test-regression.log",
+      "raw_sha256": "d2b2a5dfe292ed5a90906aff73680896a0f0f2dd30fa7f9cfd1e2497557a6c7a"
+    }
+  ],
+  "preservation": "exact raw bytes stored in raw-failure-logs-20261021.zip; visible text copies have trailing whitespace removed only"
+}

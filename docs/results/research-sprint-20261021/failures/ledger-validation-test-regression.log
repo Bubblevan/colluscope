@@ -1,0 +1,211 @@
+....F.....................................F                              [100%]
+================================== FAILURES ===================================
+_____ test_preexisting_unclosed_attempt_is_terminalized_and_never_resent ______
+
+tmp_path = WindowsPath('D:/MyLab/colluscope/.pytest-tmp/test_preexisting_unclosed_atte0')
+
+    def test_preexisting_unclosed_attempt_is_terminalized_and_never_resent(tmp_path: Path):
+        out = tmp_path / "run"
+        schedule, raw = runner.load_schedule()
+        out.mkdir()
+        (out / "schedule.json").write_bytes(raw)
+        first = schedule["rows"][0]
+        body = runner.frozen_request(first)
+        req = out / "requests" / f"{first['request_id']}.json"
+        req.parent.mkdir()
+        req.write_bytes(body)
+        runner.append(out / "attempts.jsonl", {"event": "attempt_started",
+                                                 "request_id": first["request_id"],
+                                                 "schedule_sha256": runner.sha(raw),
+                                                 "body_sha256": runner.sha(body),
+                                                 "request_path": f"requests/{first['request_id']}.json",
+                                                 "reserved_peak_usd": 0.0})
+        calls: list[bytes] = []
+
+        def success(body: bytes, _key: str):
+            calls.append(body)
+            return _response()
+
+>       result = runner.run(out, test_mode=True, transport=success)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_b5_invariance_runner.py:138:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+scripts\run_b5_invariance.py:510: in run
+    return _run_locked(out, test_mode=test_mode, transport=transport,
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+out = WindowsPath('D:/MyLab/colluscope/.pytest-tmp/test_preexisting_unclosed_atte0/run')
+test_mode = True
+transport = <function test_preexisting_unclosed_attempt_is_terminalized_and_never_resent.<locals>.success at 0x000001ED133C8540>
+schedule_path = WindowsPath('D:/MyLab/colluscope/docs/results/research-sprint-20261021/b5-invariance-schedule-120.json')
+acl = {'verified': False, 'test_fixture_only': True}
+
+    def _run_locked(out: Path, *, test_mode: bool, transport,
+                    schedule_path: Path, acl: dict[str, Any]) -> dict[str, Any]:
+        schedule, schedule_raw = load_schedule(schedule_path)
+        if schedule["dispatch"]["endpoint"] != ENDPOINT or schedule["dispatch"]["rows"] > FROZEN_SCHEDULE_ROWS:
+            raise RuntimeError("frozen dispatch endpoint or count differs from hard limit")
+        out = out.resolve()
+        manifest_path = out / "schedule.json"
+        if manifest_path.exists() and manifest_path.read_bytes() != schedule_raw:
+            raise RuntimeError("restored run schedule bytes differ; refusing resume")
+        if not manifest_path.exists():
+            _durable_write(manifest_path, schedule_raw)
+        schedule_hash = sha(schedule_raw)
+        attempts_path = out / "attempts.jsonl"
+        result_path = out / "results.jsonl"
+        bodies: dict[str, bytes] = {}
+        reservations: dict[str, float] = {}
+        for row in schedule["rows"]:
+            body = frozen_request(row)
+            if sha(body) != row["http_body_sha256"]:
+                raise RuntimeError("frozen HTTP body differs during pre-dispatch whole-schedule audit")
+            bodies[row["request_id"]] = body
+            reservations[row["request_id"]] = (
+                len(body) * RATE_INPUT_PEAK + 512 * RATE_OUTPUT_PEAK)
+        total_schedule_reserve = sum(reservations.values())
+        if total_schedule_reserve > MAX_RESERVED_USD + 1e-12:
+            raise RuntimeError("complete frozen schedule exceeds conservative cycle peak-cost cap")
+        attempts = read_jsonl(attempts_path)
+        starts = [row for row in attempts if row.get("event") == "attempt_started"]
+        if len(starts) > MAX_CALLS:
+            raise RuntimeError("attempt ledger exceeds the hard request cap")
+        started_ids = [row.get("request_id") for row in starts]
+        if len(started_ids) != len(set(started_ids)):
+            raise RuntimeError("duplicate attempt detected; zero-retry policy forbids continuation")
+        by_id = {row["request_id"]: row for row in schedule["rows"]}
+        for start in starts:
+            request_id = start.get("request_id")
+            frozen_row = by_id.get(request_id)
+            body = bodies.get(request_id)
+            expected_path = f"requests/{request_id}.json"
+            if (frozen_row is None or body is None
+                    or start.get("body_sha256") != frozen_row.get("http_body_sha256")
+                    or start.get("request_path") != expected_path
+                    or abs(float(start.get("reserved_peak_usd", -1)) - reservations[request_id]) > 1e-12):
+>               raise RuntimeError("restored pre-call ledger differs from the frozen schedule or reserve")
+E               RuntimeError: restored pre-call ledger differs from the frozen schedule or reserve
+
+scripts\run_b5_invariance.py:325: RuntimeError
+____________ test_researchctl_zero_call_register_close_sync_audit _____________
+
+tmp_path = WindowsPath('D:/MyLab/colluscope/.pytest-tmp/test_researchctl_zero_call_reg0')
+
+    def test_researchctl_zero_call_register_close_sync_audit(tmp_path: Path):
+        """Exercise the real CLI lifecycle in an isolated copy, without API dispatch."""
+        sandbox = tmp_path / "repo"
+        for relative in (
+            "scripts/researchctl.py",
+            "research/frozen_eval/evaluate_cycle.py",
+            "research/frozen_eval/evaluate_cycle_v2.py",
+            "research/state.json",
+            "research/budget.json",
+            "research/hypotheses.json",
+            "research/memory.json",
+            ".gitignore",
+        ):
+            destination = sandbox / relative
+            destination.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copy2(ROOT / relative, destination)
+        shutil.copytree(ROOT / "research/handoffs", sandbox / "research/handoffs")
+        for directory in ("research/authorizations", "research/experiments"):
+            source = ROOT / directory
+            destination = sandbox / directory
+            if source.exists():
+                shutil.copytree(source, destination, dirs_exist_ok=True)
+            else:
+                destination.mkdir(parents=True, exist_ok=True)
+
+        registry_sources = [
+            sandbox / "research/state.json", sandbox / "research/budget.json",
+            sandbox / "research/hypotheses.json", sandbox / "research/memory.json",
+            *sorted((sandbox / "research/handoffs").glob("*.json")),
+        ]
+        reference_paths = set()
+        for registry_source in registry_sources:
+            reference_paths.update(_walk_refs(json.loads(registry_source.read_text(encoding="utf-8"))))
+        for relative in sorted(reference_paths):
+            source = (ROOT / relative).resolve()
+            if not source.is_relative_to(ROOT.resolve()) or not source.is_file():
+                continue
+            destination = sandbox / relative
+            destination.parent.mkdir(parents=True, exist_ok=True)
+            if not destination.exists():
+                shutil.copy2(source, destination)
+
+        frozen = sandbox / "research/e2e_frozen_input.json"
+        frozen.write_text(json.dumps({"fixture": "zero-call lifecycle only", "calls": 0}) + "\n",
+                          encoding="utf-8")
+        hypotheses = json.loads((sandbox / "research/hypotheses.json").read_text(encoding="utf-8"))
+        candidate = next(item for item in hypotheses["candidates"]
+                         if item["hypothesis_id"] == "observable-evidence-boundary")
+        experiment_id = "LIFECYCLE-E2E-01"
+        prior = _ref(sandbox / "research/handoffs/DEEPSEEK-FIRST-RESEARCH-01.json",
+                     "research/handoffs/DEEPSEEK-FIRST-RESEARCH-01.json")
+        frozen_ref = _ref(frozen, "research/e2e_frozen_input.json")
+        prereg = {
+            "schema_version": 2,
+            "experiment_id": experiment_id,
+            "title": "Zero-call research registry lifecycle validation",
+            "evidence_class": "offline_reanalysis",
+            "hypothesis_id": candidate["hypothesis_id"],
+            "research_branch_id": "registry-lifecycle-validation",
+            "selection_rationale": "Exercise registry integrity only; no scientific observation is generated.",
+            "research_question": "Can a zero-call cycle be registered, closed, synchronized, and audited without changing its evidence class?",
+            "hypothesis": candidate["hypothesis"],
+            "competing_explanations": candidate["competing_explanations"],
+            "prior_evidence": [{**prior, "claim": "Frozen candidate registry used for lifecycle validation."}],
+            "protocol": {
+                "sample_selection": "One synthetic fixture used only to exercise CLI record lifecycle.",
+                "intervention": "Register and close a zero-call cycle in an isolated repository copy.",
+                "held_constant": ["No model/provider calls", "All source evidence class and hypothesis text"],
+                "primary_outcome": "CLI registration, closure, memory sync, and audit complete with zero calls.",
+                "denominator": "One engineering lifecycle run; not a scientific sample.",
+                "success_gate": "All four CLI operations succeed and audit reports zero new calls and cost.",
+                "failure_gate": "Any CLI operation fails or any nonzero call/cost is recorded.",
+                "ambiguous_gate": "Not applicable; this is an engineering lifecycle check.",
+                "analysis_plan": "Read the CLI exit codes and final audit totals; do not interpret as hypothesis evidence.",
+                "reproduction_command": "pytest -q tests/test_researchctl_lifecycle_e2e.py",
+                "runtime_identity": "Python subprocesses executing copied repository CLI; provider dispatch is absent.",
+                "frozen_inputs": [frozen_ref],
+            },
+            "budget": {"max_model_calls": 0, "max_external_cost_usd": 0.0,
+                       "max_wallclock_minutes": 2},
+            "authorization": {"approval_required": False, "approval_id": None,
+                               "scope": "zero-call registry lifecycle test only"},
+        }
+        prereg_path = sandbox / "research/preregistration-e2e.json"
+        prereg_path.write_text(json.dumps(prereg, indent=2) + "\n", encoding="utf-8")
+
+        def run_cli(*args: str) -> subprocess.CompletedProcess[str]:
+            return subprocess.run([sys.executable, "scripts/researchctl.py", *args], cwd=sandbox,
+                                  text=True, capture_output=True, check=False, timeout=30)
+
+        registered = run_cli("register", "research/preregistration-e2e.json")
+>       assert registered.returncode == 0, registered.stdout + registered.stderr
+E       AssertionError: Traceback (most recent call last):
+E           File "D:\MyLab\colluscope\.pytest-tmp\test_researchctl_zero_call_reg0\repo\scripts\researchctl.py", line 939, in <module>
+E             raise SystemExit(main())
+E                              ^^^^^^
+E           File "D:\MyLab\colluscope\.pytest-tmp\test_researchctl_zero_call_reg0\repo\scripts\researchctl.py", line 935, in main
+E             return args.func(args)
+E                    ^^^^^^^^^^^^^^^
+E           File "D:\MyLab\colluscope\.pytest-tmp\test_researchctl_zero_call_reg0\repo\scripts\researchctl.py", line 120, in wrapped
+E             return function(args)
+E                    ^^^^^^^^^^^^^^
+E           File "D:\MyLab\colluscope\.pytest-tmp\test_researchctl_zero_call_reg0\repo\scripts\researchctl.py", line 423, in command_register
+E             budget = budget_record()
+E                      ^^^^^^^^^^^^^^^
+E           File "D:\MyLab\colluscope\.pytest-tmp\test_researchctl_zero_call_reg0\repo\scripts\researchctl.py", line 187, in budget_record
+E             raise ValueError(f"active budget snapshot disagrees with immutable authorization batch field {key}")
+E         ValueError: active budget snapshot disagrees with immutable authorization batch field source
+E
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['D:\\Anaconda\\python.exe', 'scripts/researchctl.py', 'register', 'research/preregistration-e2e...n batch field {key}")\nValueError: active budget snapshot disagrees with immutable authorization batch field source\n').returncode
+
+tests\test_researchctl_lifecycle_e2e.py:120: AssertionError
+=========================== short test summary info ===========================
+FAILED tests/test_b5_invariance_runner.py::test_preexisting_unclosed_attempt_is_terminalized_and_never_resent
+FAILED tests/test_researchctl_lifecycle_e2e.py::test_researchctl_zero_call_register_close_sync_audit
+2 failed, 41 passed in 14.47s

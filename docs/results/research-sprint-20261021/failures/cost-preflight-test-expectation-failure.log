@@ -1,0 +1,99 @@
+.....F.                                                                  [100%]
+================================== FAILURES ===================================
+__________________ test_hard_call_and_cost_caps_are_enforced __________________
+
+tmp_path = WindowsPath('D:/MyLab/colluscope/.pytest-tmp/test_hard_call_and_cost_caps_a0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001423F6799D0>
+
+    def test_hard_call_and_cost_caps_are_enforced(tmp_path: Path, monkeypatch):
+        out = tmp_path / "run"
+        monkeypatch.setattr(runner, "MAX_CALLS", 1)
+        calls: list[bytes] = []
+
+        def success(body: bytes, _key: str):
+            calls.append(body)
+            return _response()
+
+        result = runner.run(out, test_mode=True, transport=success)
+        assert result["physical_attempts_total"] == 1
+        assert len(calls) == 1
+        assert result["unsent"] == 119
+
+        out2 = tmp_path / "cost-run"
+        monkeypatch.setattr(runner, "MAX_CALLS", 120)
+        monkeypatch.setattr(runner, "MAX_RESERVED_USD", 0.0000001)
+>       no_dispatch = runner.run(out2, test_mode=True, transport=success)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_b5_invariance_runner.py:162:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+scripts\run_b5_invariance.py:422: in run
+    return _run_locked(out, test_mode=test_mode, transport=transport,
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+out = WindowsPath('D:/MyLab/colluscope/.pytest-tmp/test_hard_call_and_cost_caps_a0/cost-run')
+test_mode = True
+transport = <function test_hard_call_and_cost_caps_are_enforced.<locals>.success at 0x000001423F7854E0>
+schedule_path = WindowsPath('D:/MyLab/colluscope/docs/results/research-sprint-20261021/b5-invariance-schedule-120.json')
+acl = {'verified': False, 'test_fixture_only': True}
+
+    def _run_locked(out: Path, *, test_mode: bool, transport,
+                    schedule_path: Path, acl: dict[str, Any]) -> dict[str, Any]:
+        schedule, schedule_raw = load_schedule(schedule_path)
+        if schedule["dispatch"]["endpoint"] != ENDPOINT or schedule["dispatch"]["rows"] > FROZEN_SCHEDULE_ROWS:
+            raise RuntimeError("frozen dispatch endpoint or count differs from hard limit")
+        out = out.resolve()
+        manifest_path = out / "schedule.json"
+        if manifest_path.exists() and manifest_path.read_bytes() != schedule_raw:
+            raise RuntimeError("restored run schedule bytes differ; refusing resume")
+        if not manifest_path.exists():
+            manifest_path.write_bytes(schedule_raw)
+        schedule_hash = sha(schedule_raw)
+        attempts_path = out / "attempts.jsonl"
+        result_path = out / "results.jsonl"
+        attempts = read_jsonl(attempts_path)
+        if sum(row.get("event") == "attempt_started" for row in attempts) > MAX_CALLS:
+            raise RuntimeError("attempt ledger exceeds the hard request cap")
+        started_ids = [row["request_id"] for row in attempts if row.get("event") == "attempt_started"]
+        if len(started_ids) != len(set(started_ids)):
+            raise RuntimeError("duplicate attempt detected; zero-retry policy forbids continuation")
+        terminal_ids = {row.get("request_id") for row in read_jsonl(result_path)}
+        if not set(terminal_ids).issubset(started_ids):
+            raise RuntimeError("result ledger contains a request with no durable pre-call record")
+        attempt_terminal = {row.get("request_id") for row in attempts if row.get("event") == "attempt_terminal"}
+        for request_id in started_ids:
+            if request_id not in terminal_ids:
+                append(result_path, {"request_id": request_id, "status": "INTERRUPTED_UNKNOWN_OUTCOME",
+                                     "http_status": None, "response_sha256": None,
+                                     "response_path": None, "safe_response_headers": {},
+                                     "elapsed_seconds": None,
+                                     "parse_error_code": "PROCESS_INTERRUPTED_AFTER_PRECALL_RECORD",
+                                     "parsed": None, "recovered_at_utc": now().isoformat()})
+            if request_id not in attempt_terminal:
+                append(attempts_path, {"event": "attempt_terminal", "request_id": request_id,
+                                       "http_status": None, "transport_error_type": "INTERRUPTED_UNKNOWN_OUTCOME",
+                                       "response_sha256": None,
+                                       "parse_error_code": "PROCESS_INTERRUPTED_AFTER_PRECALL_RECORD",
+                                       "finished_at_utc": now().isoformat()})
+        # A started request without a terminal record is ambiguous and is never resent.
+        attempted = set(started_ids)
+        _check_authorization() if not test_mode else None
+        key = "mock-key-for-test" if test_mode else load_api_key()
+        bodies: dict[str, bytes] = {}
+        reservations: dict[str, float] = {}
+        for row in schedule["rows"]:
+            body = frozen_request(row)
+            if sha(body) != row["http_body_sha256"]:
+                raise RuntimeError("frozen HTTP body differs during pre-dispatch whole-schedule audit")
+            bodies[row["request_id"]] = body
+            reservations[row["request_id"]] = (
+                len(body) * RATE_INPUT_PEAK + 512 * RATE_OUTPUT_PEAK)
+        total_schedule_reserve = sum(reservations.values())
+        if total_schedule_reserve > MAX_RESERVED_USD + 1e-12:
+>           raise RuntimeError("complete frozen schedule exceeds conservative cycle peak-cost cap")
+E           RuntimeError: complete frozen schedule exceeds conservative cycle peak-cost cap
+
+scripts\run_b5_invariance.py:296: RuntimeError
+=========================== short test summary info ===========================
+FAILED tests/test_b5_invariance_runner.py::test_hard_call_and_cost_caps_are_enforced
+1 failed, 6 passed in 11.81s
