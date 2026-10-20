@@ -847,3 +847,14 @@ Exact pytest failure transcripts and schedule-generation JSON are preserved unde
 - **ADVERSARIAL REVIEW:** first attempt consumed no generation request and started no server. It remains preserved; do not treat its 24 assignments as completed episodes or replace any group.
 - **DECIDE:** this is a bounded startup defect with a narrow repair and a targeted regression test; continue only if tests pass, then use a new output directory.
 
+
+## FULL-RESEARCH-M4-IDENTITY-SERIALIZATION-REPAIR-01 — keep runtime guard out of JSON audit
+
+- **Date:** 2026-10-20; second pre-generation startup failure.
+- **INSPECT:** frozen local server started and authenticated `/v1/models` returned HTTP 200 with expected alias. The parent failed before generation while JSON-serializing the `process_guard` callable into `server_identity.json`. The ignored run preserves one identity GET, expected alias, process start/stop, key removal, 24 assigned groups, zero group starts, zero ballots/messages, and zero physical generation attempts.
+- **SPECIFY:** counterexample test supplies a non-serializable callable alongside the three audit fields; serialization must succeed, exclude only the callable, and leave it usable for runtime guards.
+- **IMPLEMENT:** whitelist the JSON-persisted `listener`, `model_probe`, and API-key digest while preserving `process_guard` in the in-memory identity passed into the group runner.
+- **RUN:** `PYTHONPATH=src python -m pytest -q tests/test_m4_live_runtime.py`: **32 passed in 37.34s**. The callable exclusion plus JSON encoding was exercised directly; fake HTTP tests remained offline.
+- **ADVERSARIAL REVIEW:** the failed run is immutable and never resumed after this code hash change. It made one local authenticated identity GET, which is not a model generation; no ballots, communication or external requests occurred. The new retry uses a separate output directory and the same frozen group IDs.
+- **DECIDE:** bounded serialization repair; proceed only after the regression suite passes.
+

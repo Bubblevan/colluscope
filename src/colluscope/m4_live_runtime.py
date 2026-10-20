@@ -987,6 +987,12 @@ def _server_log_paths(out: Path) -> tuple[Path, Path]:
     return log_dir / "llama-server.stdout.log", log_dir / "llama-server.stderr.log"
 
 
+def _serializable_server_identity(identity: dict[str, Any]) -> dict[str, Any]:
+    """Select the durable audit fields; process guards remain runtime-only callables."""
+    return {key: identity[key] for key in ("listener", "model_probe", "api_key_sha256")
+            if key in identity}
+
+
 def _start_server(out: Path, config: dict[str, Any]) -> tuple[Any, str, Path, list[Any], dict[str, Any]]:
     import subprocess
     from scripts.local_llama_security import create_api_key_file
@@ -1251,7 +1257,7 @@ def run_live(out: Path, *, config_path: Path = LIVE_CONFIG, approval_id: str | N
     try:
         process, key, key_path, streams, server_identity = _start_server(out, config)
         manifest_path = out / "server_identity.json"
-        write_json(manifest_path, {**server_identity, "model": identity,
+        write_json(manifest_path, {**_serializable_server_identity(server_identity), "model": identity,
                                    "runtime": {k: v for k, v in config["runtime"].items()
                                                if k not in {"binary_path"}},
                                    "at_utc": utc_now()})

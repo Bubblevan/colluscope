@@ -26,6 +26,22 @@ def test_server_log_paths_create_nested_private_log_directory(tmp_path):
     assert stderr.read_bytes() == b"stderr-canary\n"
 
 
+def test_server_identity_audit_excludes_runtime_process_guard_callable():
+    identity = {
+        "listener": {"pid": 1234, "rows": []},
+        "model_probe": {"status": "PASS_MODEL_ALIAS"},
+        "api_key_sha256": "a" * 64,
+        "process_guard": lambda: True,
+    }
+
+    persisted = live._serializable_server_identity(identity)
+
+    assert set(persisted) == {"listener", "model_probe", "api_key_sha256"}
+    assert "process_guard" not in persisted
+    json.dumps(persisted)
+    assert identity["process_guard"]() is True
+
+
 class FakeLlamaState:
     def __init__(self, mode: str = "success", *, send_proposal: bool = True):
         self.mode = mode
