@@ -1,0 +1,22 @@
+{
+  "receipt_id": "sprint-baseline-offline-preparation-v1",
+  "created_utc": "2026-10-20T05:19:42.784923+00:00",
+  "base_commit": "598e17bb6e35d95210c02add76ff7e6496c5af10",
+  "protocol_config_sha256": "660dca56ab08ddf117aed541c98d173962f0c6b8980d8c3e19e082becbadc8d7",
+  "prompt_hashes": {
+    "system.txt": "483dc4976b8012d62d44806fdbaf997b318f00a94fd87a06ae279e2c4a5e3544",
+    "user.txt": "bbd9c644870954cd01d7c56bd013437859485bcb5728935ce47f114c3b78b6c2",
+    "tasks.json": "ebc7092a2852d4fdb42e0c694f7ac2bf8bc5a677bbc840b47505a3180076f9d3"
+  },
+  "case_count": 8,
+  "scenario_family_count": 7,
+  "reference_row_count": 280,
+  "scheduled_logical_requests": 280,
+  "max_physical_attempts": 280,
+  "real_model_or_api_calls": 0,
+  "external_traffic": 0,
+  "historical_raw_data_access": 0,
+  "construction_truth_passed_to_compiler": false,
+  "reference_answers_passed_to_compiler": false,
+  "results_scope": "scripted control sanity checks only; no LLM performance result"
+}

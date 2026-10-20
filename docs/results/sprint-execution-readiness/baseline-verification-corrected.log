@@ -1,0 +1,2 @@
+{"cases": 8, "claim_scope": "scripted controls and deterministic artifact integrity only", "dispatched_requests": 0, "historical_source_files_hash_verified": 21, "m4_groups": 24, "m4_scenarios": 6, "model_calls": 0, "reference_rows": 280, "scheduled_requests": 280, "status": "PASS_OFFLINE_ARTIFACT_REPLAY_ONLY"}
+exit_code=0

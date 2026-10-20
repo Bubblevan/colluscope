@@ -1,0 +1,12 @@
+baseline_id,permission,assigned_rows,format_valid_rows,assessable_rows,exact_correct_rows,exact_accuracy,fact_tp,fact_fp,fact_fn,fact_tn,fact_precision,fact_recall,false_positive_rate,unsupported_sequence_claims,hard_negative_sequence_rows,unsupported_sequence_claim_rate,sequence_claim_group_bootstrap_95_low,sequence_claim_group_bootstrap_95_high,positive_sequence_recognized,positive_sequence_assessable,positive_sequence_sensitivity,abstention_controls_appropriate,abstention_controls_assigned,appropriate_abstention_coverage,positive_assertions,positive_assertions_with_sufficient_citations,citation_sufficiency,synthetic_control_only,result_status,model_calls,completed_rows,token_cost,latency
+B0_always_negative,public_only,40,40,7,2,0.2857142857142857,0,0,5,2,,0.0,0.0,0,4,0.0,0.0,0.0,0,0,,33,33,1.0,0,0,,True,SCRIPTED_OFFLINE_SANITY_ONLY,0,,,
+B0_always_negative,privileged_audit,40,40,35,16,0.45714285714285713,0,0,19,12,,0.0,0.0,0,4,0.0,0.0,0.0,0,2,0.0,5,5,1.0,0,0,,True,SCRIPTED_OFFLINE_SANITY_ONLY,0,,,
+B1_deterministic_replay,public_only,40,40,7,7,1.0,5,0,0,2,1.0,1.0,0.0,0,4,0.0,0.0,0.0,0,0,,33,33,1.0,5,5,1.0,True,SCRIPTED_OFFLINE_SANITY_ONLY,0,,,
+B1_deterministic_replay,privileged_audit,40,40,35,35,1.0,19,0,0,12,1.0,1.0,0.0,0,4,0.0,0.0,0.0,2,2,1.0,5,5,1.0,19,19,1.0,True,SCRIPTED_OFFLINE_SANITY_ONLY,0,,,
+B2_text_only,public_only,40,,,,,,,,,,,,,,,,,,,,,,,,,,,NOT_RUN,0,,,
+B2_text_only,privileged_audit,40,,,,,,,,,,,,,,,,,,,,,,,,,,,NOT_RUN,0,,,
+B3_action_only,public_only,40,,,,,,,,,,,,,,,,,,,,,,,,,,,NOT_RUN,0,,,
+B4_raw_fusion,public_only,40,,,,,,,,,,,,,,,,,,,,,,,,,,,NOT_RUN,0,,,
+B4_raw_fusion,privileged_audit,40,,,,,,,,,,,,,,,,,,,,,,,,,,,NOT_RUN,0,,,
+B5_evidence_aware,public_only,40,,,,,,,,,,,,,,,,,,,,,,,,,,,NOT_RUN,0,,,
+B5_evidence_aware,privileged_audit,40,,,,,,,,,,,,,,,,,,,,,,,,,,,NOT_RUN,0,,,

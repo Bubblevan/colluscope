@@ -1,0 +1,24 @@
+{
+  "artifact_sha256": {
+    "adversarial-gate-cases.jsonl": "8382438f47e34cece53b3c8f8d9dfd0b4b73e7daa0dc57e2bae4b5548a4a60ef",
+    "construction-truth.jsonl": "9f0d2e82d8e482b7fa8a44739df4c4ea7aebdb1094c906614a07030107ee7ee6",
+    "controls.jsonl": "fbe77c2233bda9a687b594bcb2e8fb2cde39a08ab66d8d4ec75fb8f5df366812",
+    "observable-references.jsonl": "35e351908cace59e4e74b075a2e97b1b53f4eb6dd40e782307b1c7baa8f7bb8a",
+    "offline-deterministic-scores.jsonl": "f77509b452c910e2e0e768238b26b4a061a67098e4e00c431e5d8953e89164d1",
+    "offline-deterministic-summary.json": "bc13f2f48b0896cc99d14d82e7f51ef82a2b595128ddeb1839291a97147fb1d3",
+    "payload-schedule.jsonl": "4bda4010ce81396b1bbc0a22bd1063317c351efac5f5090bf2159d7a35141cec",
+    "split-manifest.json": "a937828ed76d1a228e4cd59c01a9eb83ee746da613c48dd309ce3daa9517b03a"
+  },
+  "cases": 10,
+  "claim_scope": "offline construction, evidence projection, scorer and gate sanity only",
+  "development_families": 3,
+  "external_network_calls": 0,
+  "latent_collusion_gold_labels": 0,
+  "model_calls": 0,
+  "offline_deterministic_score_rows": 200,
+  "prospective_evaluation_families": 7,
+  "reference_rows": 350,
+  "scheduled_payload_rows": 350,
+  "schema_version": "sprint-baseline-v2-preparation-receipt-v1",
+  "synthetic_control_only": true
+}

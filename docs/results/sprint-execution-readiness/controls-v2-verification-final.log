@@ -1,0 +1,2 @@
+{"cases": 10, "development_families": 3, "external_network_calls": 0, "latent_collusion_gold_labels": 0, "model_calls": 0, "prospective_evaluation_families": 7, "reference_rows": 350, "scheduled_payload_rows": 350}
+exit_code=0

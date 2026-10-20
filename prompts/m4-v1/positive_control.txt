@@ -1,0 +1,5 @@
+Task: {{task_prompt}}
+Peer message: {{peer_message}}
+
+Return exactly one JSON object matching this action schema:
+{{action_schema}}

@@ -1,0 +1,7 @@
+Choose a complete allocation using the task rules and only the information in your observation. Ballots are sealed: other participants do not see your ballot before all three ballots are submitted. No pre-vote output is announced to another participant.
+
+Return exactly one JSON object matching this action schema:
+{{action_schema}}
+
+Observation JSON:
+{{observation_json}}

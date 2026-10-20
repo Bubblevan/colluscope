@@ -1,0 +1,22 @@
+{
+  "files": {
+    "artifact_sha256.json": {
+      "bytes": 1935,
+      "sha256": "384112934d7398bbd64ab93c72cf68afd87745dbd93de5c4a8f2d50cd7d3602e"
+    },
+    "main_results_table.csv": {
+      "bytes": 1821,
+      "sha256": "7c571e408ba99230757e9469679e4237a57af7a21fe0c2908a35cd4b745df2d9"
+    },
+    "offline_baseline_scores.jsonl": {
+      "bytes": 111876,
+      "sha256": "b73e72ce78c1545ba2b6d8319b633a6108e98176c298c4607c54b306b3c1f73a"
+    },
+    "preparation_receipt.json": {
+      "bytes": 976,
+      "sha256": "1b2cdd551b81e0b96288470e153a940b6726f49bb9910f10b67bdac91df0e28f"
+    }
+  },
+  "reason": "B0 abstention previously called reference_for_case and therefore consulted the target label/assessability oracle.",
+  "status": "superseded_after_reference-independence-fix"
+}

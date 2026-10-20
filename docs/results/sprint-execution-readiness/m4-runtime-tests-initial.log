@@ -1,0 +1,8 @@
+Initial adversarial test run: `python -m pytest -q tests/test_m4_runtime.py`
+
+Result: 2 failed, 7 passed in 34.37s. This initial failure is retained as received; it is not overwritten by the repair run.
+
+1. `test_agent_payloads_isolate_private_reward_peer_messages_and_research_metadata` failed because the assertion searched for compact JSON (`"agent_id":"C"`) in a pretty-spaced JSON serialization of the saved message list. This is a test assertion formatting defect; no evidence of a C-context leak was observed.
+2. `test_baseline_settlement_recomputes_from_sealed_ballots_and_separates_scores` failed because the settlement artifact serialized ballots as lists while the independent replay test expected mapping objects. This exposed an evidence-schema ambiguity. The repair stores each ballot as an explicit A/B/C mapping and updates the replay assertion.
+
+No model or API calls occurred. The fixture was deterministic Mock output only.

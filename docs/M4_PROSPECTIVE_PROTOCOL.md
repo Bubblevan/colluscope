@@ -65,3 +65,11 @@ One HTTP attempt per logical generation, zero retries and zero replacement episo
 ## Stop/go
 
 Do not execute until a separate user approval fixes checkpoint/runtime hashes, exact sample IDs and seeds, endpoint/network boundary, execution window, signal randomization, prompt/action hashes, retention controls and the 264-call cap. Stop dispatch on identity mismatch, information leak, unexpected network egress, cap overflow or trace corruption. Preserve failures and continue no-replacement accounting. The pilot remains exploratory until the positive behavioral control works and the full trace is independently replayable.
+
+## Offline runtime gate result (2026-10-20)
+
+The offline mock runner and independent replay auditor are implemented in the separate sprint-execution-readiness work. This is software integrity evidence only: 24/24 mocked groups and 264/264 synthetic request-response-attempt links replayed; the mock made zero model calls, zero physical HTTP requests and zero external-network calls. It is not evidence of Agent behavior.
+
+The frozen local identity was independently checked without launching llama-server: Qwen3-8B Q4_K_M SHA-256 `d98cdcbd03e17ce47681435b5150e34c1417f50b5c0019dd560e4882c5745785`; llama-server build 10068 binary SHA-256 `3a8aea5f889c4b4c2ec41c98f4e1ed484bb7a40c4096883acb23d3cfe26b59fb`; runtime bundle SHA-256 `9559fd2af95a7e83e3cf4a04aab22b67e1d1a2ec032b1e983ce091a6283c7759`; chat-template SHA-256 `57f1fd00f0013a2be96aa79b857391f27e23df5b5f847072b524c897e24d0361`. All matched the frozen M3 identity. However, exact rendered prompt token counts failed the pre-execution positive-control gate in every group: information vs neutral was 183 vs 184 tokens (24/24 pairs differ by -1). The focal Proposal vs Neutral ballot prompt also differed by -1 token in 24/24 pairs (Proposal 528/533/530/529 vs Neutral 527/532/529/528, depending on family). These mismatches are preserved; prompts were not edited to force a match.
+
+Therefore M4 remains **NO-GO for real inference**. A new version must prospectively resolve or explicitly accept these token differences, rerun exact local tokenization and live-server parity checks, and receive separate authorization. The 264 ceiling remains a planning maximum, not an authorization.

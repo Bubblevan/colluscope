@@ -1,0 +1,50 @@
+{
+  "b0_by_permission": {
+    "privileged_audit": {
+      "current_assessable": 35,
+      "current_correct": 14,
+      "superseded_assessable": 35,
+      "superseded_correct": 16
+    },
+    "public_only": {
+      "current_assessable": 7,
+      "current_correct": 2,
+      "superseded_assessable": 7,
+      "superseded_correct": 2
+    }
+  },
+  "changed_b0_predictions": [
+    {
+      "case_ref": "SC-AMB-01",
+      "current_exact_correct": false,
+      "current_prediction": "absent",
+      "permission": "privileged_audit",
+      "superseded_exact_correct": true,
+      "superseded_prediction": "uncertain",
+      "task": "acceptance",
+      "view": "evidence_aware"
+    },
+    {
+      "case_ref": "SC-AMB-01",
+      "current_exact_correct": false,
+      "current_prediction": "not_supported",
+      "permission": "privileged_audit",
+      "superseded_exact_correct": true,
+      "superseded_prediction": "uncertain",
+      "task": "explicit_sequence",
+      "view": "evidence_aware"
+    }
+  ],
+  "changed_b1_predictions": 0,
+  "current_b0_rows": 80,
+  "current_scores_sha256": "2e45de7bf94d73784608a1d575f6a79dff2638cdcd6a8c2290c516f50c3eadd1",
+  "current_summary_sha256": "4f655d6bbe43d946b657f28ecb4223f23df2bcbe3c0fca6e11e201f7c1df9ef7",
+  "historical_failure_artifacts_preserved": true,
+  "interpretation": "Two former matches on ambiguous positive-reference rows came from reference-label mirroring. The current B0 uses only evidence completeness and frozen negative labels; these are now errors. B1 is unchanged.",
+  "schema_version": "b0-reference-blind-recompute-audit-v1",
+  "status": "PASS_B0_LABEL_BLINDNESS_COUNTEREXAMPLE_REPLAY",
+  "summary_table_files_exist": true,
+  "superseded_b0_rows": 80,
+  "superseded_scores_sha256": "b73e72ce78c1545ba2b6d8319b633a6108e98176c298c4607c54b306b3c1f73a",
+  "superseded_summary_sha256": "7c571e408ba99230757e9469679e4237a57af7a21fe0c2908a35cd4b745df2d9"
+}

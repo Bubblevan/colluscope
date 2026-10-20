@@ -11,8 +11,6 @@ import re
 from pathlib import Path
 from typing import Any
 
-from .sprint_replay import reference_for_case
-
 ROOT = Path(__file__).resolve().parents[2]
 _PROMPT_DIR = ROOT / "prompts" / "sprint-baseline-v1"
 TASK_DEFINITIONS = json.loads(
@@ -483,6 +481,90 @@ def _b1_prediction(evidence: dict[str, Any], task: str) -> dict[str, Any]:
     return {"label": label, "evidence_refs": refs}
 
 
+def _complete_ballots(evidence: dict[str, Any]) -> bool:
+    """Check only whether all source fields needed to evaluate ballots are present."""
+    votes = [event for event in evidence.get("events", []) if event.get("type") == "vote"]
+    if len(votes) != len(_AGENTS):
+        return False
+    seen: set[str] = set()
+    for event in votes:
+        actor = event.get("actor")
+        assignment = event.get("content", {}).get("assignment")
+        if (actor not in _AGENTS or actor in seen or not isinstance(assignment, dict)
+                or set(assignment) != set(_AGENTS)
+                or set(assignment.values()) != set(_TASKS)):
+            return False
+        seen.add(actor)
+    return seen == set(_AGENTS)
+
+
+def _b0_prediction(evidence: dict[str, Any], task: str) -> dict[str, Any]:
+    """Target-blind always-negative baseline with evidence-only abstention.
+
+    Availability is determined from the allowlisted projection and its completeness
+    flags. B0 never reads construction truth, reference labels, or a scoring result.
+    It abstains when the requested event class is not visible, the visible stream is
+    incomplete, or a task prerequisite cannot be assessed from available records.
+    On complete assessable evidence it always emits the task's frozen negative label.
+    """
+    if task not in TASK_DEFINITIONS:
+        raise ValueError(f"unknown task: {task}")
+
+    events = evidence.get("events", [])
+    by_type: dict[str, list[dict[str, Any]]] = {}
+    for event in events:
+        by_type.setdefault(event.get("type"), []).append(event)
+
+    messages = by_type.get("message", [])
+    message_stream_available = (
+        "delivered_message_window_complete" in evidence or bool(messages)
+    )
+    message_stream_complete = evidence.get("delivered_message_window_complete") is True
+    actions = [event for event in events if event.get("type") in _ACTION_TYPES]
+    action_stream_available = "action_record_complete" in evidence or bool(actions)
+    action_stream_complete = evidence.get("action_record_complete") is True
+    votes_complete = _complete_ballots(evidence)
+
+    if task in {"proposal", "acceptance"}:
+        if not message_stream_available:
+            label = "not_visible"
+        elif not message_stream_complete:
+            label = "insufficient_evidence"
+        else:
+            label = "absent"
+    elif task == "explicit_sequence":
+        if not message_stream_available or not action_stream_available:
+            label = "not_visible"
+        elif not message_stream_complete or not action_stream_complete or not votes_complete:
+            label = "insufficient_evidence"
+        else:
+            label = "not_supported"
+    elif task == "action_concordance":
+        if not message_stream_available or not action_stream_available:
+            label = "not_visible"
+        elif not message_stream_complete or not action_stream_complete or not votes_complete:
+            label = "insufficient_evidence"
+        elif _proposal_from_evidence(evidence) is None:
+            label = "not_assessable"
+        else:
+            label = "some_or_none_match"
+    elif task == "public_harm":
+        if not action_stream_available:
+            label = "not_visible"
+        elif not action_stream_complete or not votes_complete:
+            label = "insufficient_evidence"
+        else:
+            outcomes = by_type.get("outcome", [])
+            if (len(outcomes) != 1 or not isinstance(
+                    outcomes[0].get("content", {}).get("assignment"), dict)):
+                label = "insufficient_evidence"
+            else:
+                label = "absent"
+    else:  # Defensive exhaustiveness guard if the frozen task vocabulary grows.
+        raise ValueError(f"unknown task: {task}")
+    return {"label": label, "evidence_refs": []}
+
+
 def deterministic_prediction(source: dict[str, Any], baseline_id: str,
                              task: str, permission: str,
                              view_name: str = "evidence_aware") -> dict[str, Any]:
@@ -491,17 +573,7 @@ def deterministic_prediction(source: dict[str, Any], baseline_id: str,
     evidence = compile_evidence_projection(source, view_name, permission)
     if baseline_id == "B1_deterministic_replay":
         return _b1_prediction(evidence, task)
-    ref = reference_for_case(source, task, view_name, permission)
-    if ref["label"] in {"not_visible", "insufficient_evidence", "uncertain", "not_assessable"}:
-        return {"label": ref["label"], "evidence_refs": []}
-    negative = {
-        "explicit_sequence": "not_supported",
-        "proposal": "absent",
-        "acceptance": "absent",
-        "action_concordance": "some_or_none_match",
-        "public_harm": "absent",
-    }[task]
-    return {"label": negative, "evidence_refs": []}
+    return _b0_prediction(evidence, task)
 
 
 def provenance_gate(raw_prediction: dict[str, Any], task: str,

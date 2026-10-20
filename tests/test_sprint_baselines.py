@@ -1,4 +1,5 @@
 import json
+from copy import deepcopy
 from pathlib import Path
 import sys
 
@@ -16,6 +17,7 @@ from colluscope.sprint_baselines import (  # noqa: E402
 )
 from colluscope.sprint_controls import scripted_cases  # noqa: E402
 from colluscope.sprint_metrics import score_one, summarize_baseline  # noqa: E402
+from colluscope import sprint_replay  # noqa: E402
 from colluscope.sprint_replay import reference_for_case  # noqa: E402
 
 
@@ -299,6 +301,65 @@ def test_b1_replays_all_assessable_control_fields_against_independent_reference(
                         case["case_ref"], permission, task,
                         prediction["label"], reference["label"],
                     )
+
+
+def test_b0_never_calls_reference_oracle_and_ignores_researcher_only_labels(monkeypatch):
+    case = _case("SC-POS-01")
+    tasks = ("explicit_sequence", "proposal", "acceptance", "action_concordance", "public_harm")
+    profiles = ("public_only", "privileged_audit")
+    before = {
+        (task, profile): deterministic_prediction(
+            case, "B0_always_negative", task, profile
+        )
+        for task in tasks for profile in profiles
+    }
+
+    def forbidden_reference(*_args, **_kwargs):
+        raise AssertionError("B0 called the reference-label oracle")
+
+    monkeypatch.setattr(sprint_replay, "reference_for_case", forbidden_reference)
+    poisoned = deepcopy(case)
+    poisoned["construction_truth"] = {"label": "oracle-positive-sentinel"}
+    poisoned["reference_answers"] = {task: "reference-positive-sentinel" for task in tasks}
+    poisoned["expected_labels"] = {task: "expected-positive-sentinel" for task in tasks}
+    poisoned["scoring_results"] = {task: {"exact_correct": True} for task in tasks}
+    poisoned["T"]["assigned"] = {"hidden_target": "oracle-target-sentinel"}
+    for task in tasks:
+        for profile in profiles:
+            after = deterministic_prediction(
+                poisoned, "B0_always_negative", task, profile
+            )
+            assert after == before[(task, profile)]
+
+
+def test_b0_abstention_uses_only_projected_visibility_and_completeness():
+    case = _case("SC-POS-01")
+    # Action-only cannot answer message tasks even when the researcher knows
+    # the hidden/scripted case was positive.
+    assert deterministic_prediction(
+        case, "B0_always_negative", "proposal", "privileged_audit", "action_only"
+    )["label"] == "not_visible"
+
+    # A complete privileged stream with a visible task window is assessable; B0
+    # remains negative even on the scripted positive control.
+    assert deterministic_prediction(
+        case, "B0_always_negative", "proposal", "privileged_audit", "evidence_aware"
+    )["label"] == "absent"
+    assert deterministic_prediction(
+        case, "B0_always_negative", "explicit_sequence", "privileged_audit", "evidence_aware"
+    )["label"] == "not_supported"
+
+    incomplete = deepcopy(case)
+    incomplete["B"]["message_stream_complete"] = False
+    assert deterministic_prediction(
+        incomplete, "B0_always_negative", "acceptance", "privileged_audit", "evidence_aware"
+    )["label"] == "insufficient_evidence"
+
+    # Public-only with no visible message is not evidence that a private message
+    # did not exist; B0 must abstain without consulting the hidden source.
+    assert deterministic_prediction(
+        case, "B0_always_negative", "proposal", "public_only", "text_only"
+    )["label"] == "not_visible"
 
 
 def test_group_bootstrap_uses_scenario_families_and_is_reproducible():

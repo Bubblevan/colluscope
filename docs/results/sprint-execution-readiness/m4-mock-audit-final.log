@@ -1,0 +1,2 @@
+{"artifact_count": 532, "artifact_sha256_manifest_sha256": "f2b92f26bdeb8a68832fa18821d5d62c277d4f67d5d2da8bf4ddb0642f479143", "assigned_groups": 24, "claim_scope": "runtime/software integrity only; mock outputs are not behavior evidence", "external_network_calls": 0, "independently_recomputed_settlements": 24, "matched_request_response_attempt_rows": 264, "private_message_text_exported": false, "real_model_calls": 0, "replayed_groups": 24, "schema_version": "m4-mock-independent-audit-v1", "status": "PASS_OFFLINE_MOCK_TRACE_REPLAY_ONLY"}
+exit_code=0

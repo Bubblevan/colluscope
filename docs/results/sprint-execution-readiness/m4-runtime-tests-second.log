@@ -1,0 +1,5 @@
+Second adversarial test run after making settlement ballots explicit A/B/C maps: 1 failed, 8 passed in 34.68s.
+
+Failure: the same isolation test searched for a spaced JSON fragment in the persisted compact `Observation JSON` embedded within the prompt string. Direct inspection of `baseline-ballot-C` request JSON confirmed C's actual observation contains only public task data and has no `private_peer_channel` or private reward. This is a second test assertion representation error, not a runtime leak. Correct the test by parsing the observation JSON substring from the user prompt, then rerun.
+
+No model or API calls occurred. All generated rows were deterministic Mock outputs.

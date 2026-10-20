@@ -1,6 +1,6 @@
 {
   "receipt_id": "sprint-baseline-offline-preparation-v1",
-  "created_utc": "2026-10-20T05:19:42.784923+00:00",
+  "created_utc": "2026-10-20T05:50:02.973162+00:00",
   "base_commit": "598e17bb6e35d95210c02add76ff7e6496c5af10",
   "protocol_config_sha256": "660dca56ab08ddf117aed541c98d173962f0c6b8980d8c3e19e082becbadc8d7",
   "prompt_hashes": {

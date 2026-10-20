@@ -1,0 +1,4 @@
+{
+  "type": "object", "required": ["choice"], "additionalProperties": false,
+  "properties": {"choice": {"type": "string", "enum": ["T1", "T2"]}}
+}

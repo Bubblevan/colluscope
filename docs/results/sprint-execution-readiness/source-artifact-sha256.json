@@ -1,0 +1,365 @@
+{
+  "schema_version": "sprint-execution-readiness-source-artifact-sha256-v1",
+  "files": [
+    {
+      "path": ".gitignore",
+      "bytes": 931,
+      "sha256": "0cdc321f500ef1a942bb528fc7fc5fb0f46c071f17e2d776315ab842f449d562"
+    },
+    {
+      "path": "configs/m4-runtime-v1.json",
+      "bytes": 2919,
+      "sha256": "45ddc41963a729047e9f27dcc0f40d4eed22e659eb743fdfe4974ecb142418ed"
+    },
+    {
+      "path": "configs/sprint-monitor-runtime-v1.toml",
+      "bytes": 1310,
+      "sha256": "d6c41d412dc9b298e778ac6aa041668bd219dfff4ab15bba77e0d98f5b3ec079"
+    },
+    {
+      "path": "data/sprint-baseline-v2/adversarial-gate-cases.jsonl",
+      "bytes": 796,
+      "sha256": "8382438f47e34cece53b3c8f8d9dfd0b4b73e7daa0dc57e2bae4b5548a4a60ef"
+    },
+    {
+      "path": "data/sprint-baseline-v2/construction-truth.jsonl",
+      "bytes": 3641,
+      "sha256": "9f0d2e82d8e482b7fa8a44739df4c4ea7aebdb1094c906614a07030107ee7ee6"
+    },
+    {
+      "path": "data/sprint-baseline-v2/controls.jsonl",
+      "bytes": 21438,
+      "sha256": "fbe77c2233bda9a687b594bcb2e8fb2cde39a08ab66d8d4ec75fb8f5df366812"
+    },
+    {
+      "path": "data/sprint-baseline-v2/observable-references.jsonl",
+      "bytes": 103715,
+      "sha256": "35e351908cace59e4e74b075a2e97b1b53f4eb6dd40e782307b1c7baa8f7bb8a"
+    },
+    {
+      "path": "data/sprint-baseline-v2/offline-deterministic-scores.jsonl",
+      "bytes": 142848,
+      "sha256": "f77509b452c910e2e0e768238b26b4a061a67098e4e00c431e5d8953e89164d1"
+    },
+    {
+      "path": "data/sprint-baseline-v2/offline-deterministic-summary.json",
+      "bytes": 4343,
+      "sha256": "bc13f2f48b0896cc99d14d82e7f51ef82a2b595128ddeb1839291a97147fb1d3"
+    },
+    {
+      "path": "data/sprint-baseline-v2/payload-schedule.jsonl",
+      "bytes": 239595,
+      "sha256": "4bda4010ce81396b1bbc0a22bd1063317c351efac5f5090bf2159d7a35141cec"
+    },
+    {
+      "path": "data/sprint-baseline-v2/preparation-receipt.json",
+      "bytes": 1303,
+      "sha256": "9e6f7efe7ed62c4578a47a1162355cf3c78257cd2c46e4be8a78a2a8d368d97d"
+    },
+    {
+      "path": "data/sprint-baseline-v2/split-manifest.json",
+      "bytes": 4073,
+      "sha256": "a937828ed76d1a228e4cd59c01a9eb83ee746da613c48dd309ce3daa9517b03a"
+    },
+    {
+      "path": "docs/ITERATION_LOG.md",
+      "bytes": 218508,
+      "sha256": "f8a01a373307afe67a2992da03669a3be4fdbe61297df332b6817028e8bf0bb5"
+    },
+    {
+      "path": "docs/M4_PROSPECTIVE_PROTOCOL.md",
+      "bytes": 9492,
+      "sha256": "7a3f1ae6ae4e665b5310c36850d2a62c781cd5f949b289bc800d35fb4f5d5b9d"
+    },
+    {
+      "path": "docs/RESEARCH_RISK_REGISTER.md",
+      "bytes": 90493,
+      "sha256": "7856eb4daf0f133898fe5cad254348454c3509c7e080d67c725d6faf0e47fb6d"
+    },
+    {
+      "path": "docs/SPRINT_EXECUTION_READINESS_DECISION.md",
+      "bytes": 4301,
+      "sha256": "f7ebf0cd15c5df637739bf1e7f49d4947400c98c0527a9fe0aae555a971e8016"
+    },
+    {
+      "path": "docs/SPRINT_EXECUTION_READINESS_EVIDENCE.md",
+      "bytes": 6677,
+      "sha256": "766f355855de9a93692a4890b254269ac2ca70552dd9cf5595acdce7b996a273"
+    },
+    {
+      "path": "docs/SPRINT_EXECUTION_READINESS_PROTOCOL.md",
+      "bytes": 5044,
+      "sha256": "780f25857ffc74793da22e940faf19a2641b02c1c7c8ade5cb9b3a447b2087a4"
+    },
+    {
+      "path": "docs/results/sprint-baseline-v1/artifact_sha256.json",
+      "bytes": 1935,
+      "sha256": "81297d954f8df9bd59b20ed6b81e0eea4f4294372e3334589226b5995047bc13"
+    },
+    {
+      "path": "docs/results/sprint-baseline-v1/main_results_table.csv",
+      "bytes": 1805,
+      "sha256": "4f655d6bbe43d946b657f28ecb4223f23df2bcbe3c0fca6e11e201f7c1df9ef7"
+    },
+    {
+      "path": "docs/results/sprint-baseline-v1/offline_baseline_scores.jsonl",
+      "bytes": 111881,
+      "sha256": "2e45de7bf94d73784608a1d575f6a79dff2638cdcd6a8c2290c516f50c3eadd1"
+    },
+    {
+      "path": "docs/results/sprint-baseline-v1/preparation_receipt.json",
+      "bytes": 976,
+      "sha256": "4ce1726a3a94165dbd87a3bf248a14849be6fdcbf04b0e0794c6511eea6d8bd7"
+    },
+    {
+      "path": "docs/results/sprint-baseline-v1/source_inventory.json",
+      "bytes": 2785,
+      "sha256": "ef02ac39a5f3dd8408b45fc164ab9f93552053f1a5efd70a0c4d53832b5d034d"
+    },
+    {
+      "path": "docs/results/sprint-execution-readiness/b0-recompute-final.log",
+      "bytes": 1697,
+      "sha256": "ef7d5eaf02bfcafbdb93dc4b4d1d38db5349b53023e6b27c333a92d452c6274c"
+    },
+    {
+      "path": "docs/results/sprint-execution-readiness/b0-recompute.log",
+      "bytes": 84,
+      "sha256": "37343c46212489aa84eda69e38a4c3e9383657e6e3570783011f656d04cca727"
+    },
+    {
+      "path": "docs/results/sprint-execution-readiness/b0-score-delta.json",
+      "bytes": 1957,
+      "sha256": "69f0a4a950e78024acb599fc402967c4931bdfc7e132d988d47eaf532cce5c89"
+    },
+    {
+      "path": "docs/results/sprint-execution-readiness/b0-targeted-tests-initial.log",
+      "bytes": 99,
+      "sha256": "ba9c0f95a246eeefd91c454aff27dac63c228e2d212a2e5ec5b42a45abe68b50"
+    },
+    {
+      "path": "docs/results/sprint-execution-readiness/baseline-verification-corrected.log",
+      "bytes": 325,
+      "sha256": "9cfa5ef390d0594adfb0c29338a83834fd382d11b5e781278dfa9800763e0ea6"
+    },
+    {
+      "path": "docs/results/sprint-execution-readiness/baseline-verification-final.log",
+      "bytes": 1360,
+      "sha256": "74c42c6beac5d6294e0b24fdef214343825c559eec7919bc3df8bf0b2d71a057"
+    },
+    {
+      "path": "docs/results/sprint-execution-readiness/controls-v2-verification-final.log",
+      "bytes": 227,
+      "sha256": "7509b4b345152140f05d5bdd61f95aa6797d3183dd121ce0e6242bf30409f699"
+    },
+    {
+      "path": "docs/results/sprint-execution-readiness/m4-environment-first-run.log",
+      "bytes": 624,
+      "sha256": "dd8257618b9408c4764405d05c09b8ebc9ff4712b0fd179d0fad8c975d57207e"
+    },
+    {
+      "path": "docs/results/sprint-execution-readiness/m4-local-environment-verification.log",
+      "bytes": 9949,
+      "sha256": "f7ff205f39c9c1234644c0bd0026a08b205550bcf546ef462ded1d062cba398b"
+    },
+    {
+      "path": "docs/results/sprint-execution-readiness/m4-local-environment.json",
+      "bytes": 15231,
+      "sha256": "71cc18adffdcd084739d42098b83f8feec0431fa9d718a97e22eb573fe5ef30b"
+    },
+    {
+      "path": "docs/results/sprint-execution-readiness/m4-mock-audit-final.log",
+      "bytes": 556,
+      "sha256": "519725a80a7c7a465756ea7ae59dd48dbe86c4676c1faed569dedd40e0ff8ac0"
+    },
+    {
+      "path": "docs/results/sprint-execution-readiness/m4-mock-audit.json",
+      "bytes": 584,
+      "sha256": "b21357425df8519f179d4c3b457ab6143c3938754a99f832e1122fc8052e0047"
+    },
+    {
+      "path": "docs/results/sprint-execution-readiness/m4-runtime-tests-initial.log",
+      "bytes": 943,
+      "sha256": "3bf3dcfa6d72cd35538d2ea53dab766339ba8b655fb3ae1d57542e9796a7fef8"
+    },
+    {
+      "path": "docs/results/sprint-execution-readiness/m4-runtime-tests-second.log",
+      "bytes": 683,
+      "sha256": "504d7f21e60ef4d78dc99d1a137db61d5dcd3287da82b542747c2373661b3952"
+    },
+    {
+      "path": "docs/results/sprint-execution-readiness/merge-python-version.log",
+      "bytes": 14,
+      "sha256": "84cb1f1bb612c0ff1c818047eb464813fb74f08e27eb19946389e10fd7ccbb36"
+    },
+    {
+      "path": "docs/results/sprint-execution-readiness/merge-targeted-tests.log",
+      "bytes": 5934,
+      "sha256": "1de94f0f50ba5270b0591e9d60645faff93e79a3cd94854181baa1d9bfb00833"
+    },
+    {
+      "path": "docs/results/sprint-execution-readiness/monitor-mock-audit-final.log",
+      "bytes": 740,
+      "sha256": "e2a1b991842467bdd80df77dea72203f255193f29f16726c858f2cfe16ebec64"
+    },
+    {
+      "path": "docs/results/sprint-execution-readiness/monitor-runtime-tests-after-score-fix.log",
+      "bytes": 100,
+      "sha256": "1f82688f9f791037877270016d9b90202eb1881143262901f45862e83785cd4a"
+    },
+    {
+      "path": "docs/results/sprint-execution-readiness/monitor-runtime-tests-initial.log",
+      "bytes": 2079,
+      "sha256": "533948eb0abaed9ff71130beec484cb07bc54ef92654f732ee6eda4d55b2bcbe"
+    },
+    {
+      "path": "docs/results/sprint-execution-readiness/pytest-full-suite-final.log",
+      "bytes": 42367,
+      "sha256": "ac08fb7cbefc52aaa8c878b46224e32786d25beeb308aa012985febc935a83c4"
+    },
+    {
+      "path": "docs/results/sprint-execution-readiness/readiness-only-tests-final.log",
+      "bytes": 100,
+      "sha256": "93bc7e76af1fbb16e6c4c027abd4bd5cfb218537fc50f8b4dec829a23be6c7af"
+    },
+    {
+      "path": "docs/results/sprint-execution-readiness/sprint-monitor-mock-audit.json",
+      "bytes": 786,
+      "sha256": "f661024414cbb7abc7b0d11b07e5b4748609583f5a9a12bbc49095cda1b88841"
+    },
+    {
+      "path": "docs/results/sprint-execution-readiness/superseded-b0-before-v2/artifact_sha256.json",
+      "bytes": 1935,
+      "sha256": "384112934d7398bbd64ab93c72cf68afd87745dbd93de5c4a8f2d50cd7d3602e"
+    },
+    {
+      "path": "docs/results/sprint-execution-readiness/superseded-b0-before-v2/main_results_table.csv",
+      "bytes": 1821,
+      "sha256": "7c571e408ba99230757e9469679e4237a57af7a21fe0c2908a35cd4b745df2d9"
+    },
+    {
+      "path": "docs/results/sprint-execution-readiness/superseded-b0-before-v2/offline_baseline_scores.jsonl",
+      "bytes": 111876,
+      "sha256": "b73e72ce78c1545ba2b6d8319b633a6108e98176c298c4607c54b306b3c1f73a"
+    },
+    {
+      "path": "docs/results/sprint-execution-readiness/superseded-b0-before-v2/preparation_receipt.json",
+      "bytes": 976,
+      "sha256": "1b2cdd551b81e0b96288470e153a940b6726f49bb9910f10b67bdac91df0e28f"
+    },
+    {
+      "path": "docs/results/sprint-execution-readiness/superseded-b0-before-v2/superseded_index.json",
+      "bytes": 810,
+      "sha256": "2403a27ad31465e8107ba1ff3096269c17376fb73908996663d5da18521818a4"
+    },
+    {
+      "path": "docs/results/sprint-execution-readiness/targeted-suite-final.log",
+      "bytes": 5936,
+      "sha256": "1081912e2471946f10a245782e553664d09e616d2e0931b328c906105463cea4"
+    },
+    {
+      "path": "docs/results/sprint-execution-readiness/v2-control-tests-initial.log",
+      "bytes": 724,
+      "sha256": "d203247acda745ed8c4b1960d36c943874743a358d125ae773b12db658cac293"
+    },
+    {
+      "path": "prompts/m4-v1/ballot.schema.json",
+      "bytes": 386,
+      "sha256": "07f8a02f4ed24834bac63ec41f5e58b438a488831be96ea97025f5a8b72899c6"
+    },
+    {
+      "path": "prompts/m4-v1/ballot.txt",
+      "bytes": 373,
+      "sha256": "b1a5a83acb0accbd1a265574c53539ef288351792c1d9666d7f6630a3f28fcef"
+    },
+    {
+      "path": "prompts/m4-v1/communication.schema.json",
+      "bytes": 355,
+      "sha256": "c86ac9212d8038f09641b3d9b9d930624d9d9bd43e25451553543ee0785661e0"
+    },
+    {
+      "path": "prompts/m4-v1/message.txt",
+      "bytes": 429,
+      "sha256": "f60db23bb1b6a44cd462b89323673663c592304f8974a3757ed931bdf20b5fb2"
+    },
+    {
+      "path": "prompts/m4-v1/positive_control.schema.json",
+      "bytes": 148,
+      "sha256": "dd180ae9514c6fda5afd30657cec0d6b3e658a52c0abe630d1fc791ec79d77a7"
+    },
+    {
+      "path": "prompts/m4-v1/positive_control.txt",
+      "bytes": 132,
+      "sha256": "521fe96b67e956ab7d03d24f5cefe0c20a72d2f7fae69a752078350e33a55b6e"
+    },
+    {
+      "path": "prompts/m4-v1/system.txt",
+      "bytes": 282,
+      "sha256": "689746fce17b62997a776c2460151e109922c46dc2a18193bdcffc417da5a2ba"
+    },
+    {
+      "path": "scripts/audit_b0_recompute.py",
+      "bytes": 4425,
+      "sha256": "4225e9705f88399041e76eb21938b77d03c6f73c28420619b9a9f0057a760f3c"
+    },
+    {
+      "path": "scripts/audit_m4_mock.py",
+      "bytes": 11797,
+      "sha256": "bb4d97691332552248a74de8f96ced64dbeab0bef33922f94bbef37d333e10d5"
+    },
+    {
+      "path": "scripts/audit_sprint_monitor_mock.py",
+      "bytes": 6756,
+      "sha256": "6c92de8b349be1cc074cd1c4f857f660789e57770f501aeef4b5522f82845729"
+    },
+    {
+      "path": "scripts/prepare_sprint_controls_v2.py",
+      "bytes": 10050,
+      "sha256": "f24d1aeb133a791194837f7f6cb3fff385553f929b69b5c1e85c9dd8a8600a0e"
+    },
+    {
+      "path": "scripts/run_m4_offline.py",
+      "bytes": 33683,
+      "sha256": "5cacb8c6ab3c876adc0d29cdc4028e5bd74f1b637e7253d83eb6558324467097"
+    },
+    {
+      "path": "scripts/run_sprint_monitor.py",
+      "bytes": 38432,
+      "sha256": "7a9719376889dba3aeb7e757bbb1412e49bd449633547f939dad07fc265b8353"
+    },
+    {
+      "path": "scripts/verify_m4_local_environment.py",
+      "bytes": 10964,
+      "sha256": "fd38d267a4a2e4b69ec9d0a81fea17524357a1b3cc067b090290a941fbfb4ea8"
+    },
+    {
+      "path": "src/colluscope/sprint_baselines.py",
+      "bytes": 26476,
+      "sha256": "e5e24b749f2303d5bbf5feb6b925311f8b5970d4eba535bdf509f6189d960c90"
+    },
+    {
+      "path": "src/colluscope/sprint_controls_v2.py",
+      "bytes": 14210,
+      "sha256": "6558f668ad1b84cac0f833aa32b6ee115f77ea2b9cfcb216b84c8760d941ba93"
+    },
+    {
+      "path": "tests/test_m4_runtime.py",
+      "bytes": 8743,
+      "sha256": "3b1e94f0c38e6a917f085c5f2276bb55e95cab0c7359ebd6faf2bf976bea54e5"
+    },
+    {
+      "path": "tests/test_sprint_baselines.py",
+      "bytes": 18030,
+      "sha256": "4e1b5190bb04013959ac16f1646be3100bbb9c99d2da3510e617723c72412dcc"
+    },
+    {
+      "path": "tests/test_sprint_controls_v2.py",
+      "bytes": 5783,
+      "sha256": "e1749694b097ab0275881467ed27c6ec93d59e839b7d634dee73f772fff7d5a6"
+    },
+    {
+      "path": "tests/test_sprint_monitor_runtime.py",
+      "bytes": 10124,
+      "sha256": "e22ec72df3413567825d76646cfd82f6fb295c15e19d7ef31d07e18786362bc3"
+    }
+  ]
+}

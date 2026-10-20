@@ -1,0 +1,6 @@
+Initial run: `python -m pytest -q tests/test_sprint_controls_v2.py`
+
+Result: 2 failed, 4 passed. No model/API calls.
+
+1. The v2 reordered-event fixture's acceptance message also contained a complete allocation, so the reference parser correctly selected it as the first proposal and classified the later proposal as a reply. The fixture did not isolate event ordering as intended.
+2. Two alternative-mapping acceptance fixtures used the phrase `I agree to cast`, which is outside the frozen v1 narrow phrase set (`agreed to cast` is recognized). The observed `uncertain` labels exposed this construction/codebook boundary. The new controls will use the already frozen `commit to cast` phrase, without broadening the parser.

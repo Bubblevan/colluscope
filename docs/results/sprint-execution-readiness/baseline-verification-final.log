@@ -1,0 +1,21 @@
+Traceback (most recent call last):
+  File "D:\MyLab\colluscope\scripts\verify_sprint_baselines.py", line 180, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "D:\MyLab\colluscope\scripts\verify_sprint_baselines.py", line 174, in main
+    report = verify(args.output)
+             ^^^^^^^^^^^^^^^^^^^
+  File "D:\MyLab\colluscope\scripts\verify_sprint_baselines.py", line 48, in verify
+    schedule = _read_jsonl(output_dir / "request_schedule.jsonl")
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\MyLab\colluscope\scripts\verify_sprint_baselines.py", line 34, in _read_jsonl
+    return [json.loads(line) for line in path.read_text(encoding="utf-8").splitlines() if line]
+                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Anaconda\Lib\pathlib.py", line 1027, in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Anaconda\Lib\pathlib.py", line 1013, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'docs\\results\\sprint-execution-readiness\\baseline-verification-final.json\\request_schedule.jsonl'
+exit_code=1

@@ -1,0 +1,12 @@
+{
+  "type": "object",
+  "required": ["type", "assignment"],
+  "additionalProperties": false,
+  "properties": {
+    "type": {"const": "ballot"},
+    "assignment": {
+      "type": "object", "required": ["A", "B", "C"], "additionalProperties": false,
+      "properties": {"A": {"enum": ["T1", "T2", "T3"]}, "B": {"enum": ["T1", "T2", "T3"]}, "C": {"enum": ["T1", "T2", "T3"]}}
+    }
+  }
+}

@@ -2,11 +2,11 @@
   "schema_version": "sprint-baseline-artifact-sha256-v1",
   "outputs": {
     "historical_data_access.json": "ce50c3ca398c6486a2c425468dee176ca832fc88532e97fb07952cef6704eac0",
-    "main_results_table.csv": "7c571e408ba99230757e9469679e4237a57af7a21fe0c2908a35cd4b745df2d9",
-    "offline_baseline_scores.jsonl": "b73e72ce78c1545ba2b6d8319b633a6108e98176c298c4607c54b306b3c1f73a",
-    "preparation_receipt.json": "1b2cdd551b81e0b96288470e153a940b6726f49bb9910f10b67bdac91df0e28f",
+    "main_results_table.csv": "4f655d6bbe43d946b657f28ecb4223f23df2bcbe3c0fca6e11e201f7c1df9ef7",
+    "offline_baseline_scores.jsonl": "2e45de7bf94d73784608a1d575f6a79dff2638cdcd6a8c2290c516f50c3eadd1",
+    "preparation_receipt.json": "4ce1726a3a94165dbd87a3bf248a14849be6fdcbf04b0e0794c6511eea6d8bd7",
     "request_schedule.jsonl": "95ed339974d0d75ff70a10b9114b26d14a618340791dc94c108f2b1ec70c86f9",
-    "source_inventory.json": "7ab45775dfcd5b811c796a0e0d8cea13e7483246e73a2b64970178a5d87238c4"
+    "source_inventory.json": "ef02ac39a5f3dd8408b45fc164ab9f93552053f1a5efd70a0c4d53832b5d034d"
   },
   "inputs": {
     "data/sprint-baseline-v1/controls.jsonl": "3a0bbb19dae7709f2c3be1fba3726023a541f304710a757eafd12af5d3032cc0",

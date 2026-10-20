@@ -1,0 +1,41 @@
+..F...F....                                                              [100%]
+================================== FAILURES ===================================
+____ test_offline_mock_end_to_end_terminalizes_all_280_without_model_claim ____
+
+tmp_path = WindowsPath('D:/MyLab/colluscope/.pytest-tmp/test_offline_mock_end_to_end_t0')
+
+    def test_offline_mock_end_to_end_terminalizes_all_280_without_model_claim(tmp_path):
+        summary = _run(tmp_path, runtime.mock_transport)
+        run = tmp_path / "run"
+        progress = runtime._read_jsonl(run / "progress.jsonl")
+        attempts = runtime._read_jsonl(run / "attempts.jsonl")
+>       assert summary["status"] == "OFFLINE_MOCK_COMPLETE"
+E       AssertionError: assert 'TERMINALIZED_WITH_FAILURES' == 'OFFLINE_MOCK_COMPLETE'
+E         
+E         - OFFLINE_MOCK_COMPLETE
+E         + TERMINALIZED_WITH_FAILURES
+
+tests\test_sprint_monitor_runtime.py:69: AssertionError
+___ test_invalid_citation_is_scored_separately_and_sequence_claim_is_gated ____
+
+tmp_path = WindowsPath('D:/MyLab/colluscope/.pytest-tmp/test_invalid_citation_is_score0')
+
+    def test_invalid_citation_is_scored_separately_and_sequence_claim_is_gated(tmp_path):
+        called = []
+        content = '{"label":"supported","evidence_refs":["M99"]}'
+    
+        def transport(*_args):
+            called.append(1)
+            return _response(content)
+    
+        summary = _run(tmp_path, transport, config_path=_config_with_request_cap(tmp_path, 1))
+        out = tmp_path / "run"
+>       raw = runtime._read_jsonl(out / "raw_predictions.jsonl")[0]
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       IndexError: list index out of range
+
+tests\test_sprint_monitor_runtime.py:158: IndexError
+=========================== short test summary info ===========================
+FAILED tests/test_sprint_monitor_runtime.py::test_offline_mock_end_to_end_terminalizes_all_280_without_model_claim
+FAILED tests/test_sprint_monitor_runtime.py::test_invalid_citation_is_scored_separately_and_sequence_claim_is_gated
+2 failed, 9 passed in 26.24s

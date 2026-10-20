@@ -1,0 +1,106 @@
+...................................F....F........F...................... [ 76%]
+......................                                                   [100%]
+================================== FAILURES ===================================
+_ test_outer_m3_budget_reserves_all_but_one_generation_slot_after_identity_probe _
+
+    def test_outer_m3_budget_reserves_all_but_one_generation_slot_after_identity_probe():
+>       source = run_m3_mechanism.load_llamacpp_backend_config(
+            run_m3_mechanism.HISTORY / "full-pilot-config.toml")
+
+tests\test_m3_independent_audit.py:205: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+src\colluscope\openai_compat_llamacpp.py:118: in load_llamacpp_backend_config
+    raw = tomllib.loads(Path(path).read_text(encoding="utf-8"))
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+D:\Anaconda\Lib\pathlib.py:1027: in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = WindowsPath('D:/MyLab/colluscope/runs/m1_p0_local/formal-25ep-pilot-20261019/run/full-pilot-config.toml')
+mode = 'r', buffering = -1, encoding = 'utf-8', errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed to by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+>       return io.open(self, mode, buffering, encoding, errors, newline)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       FileNotFoundError: [Errno 2] No such file or directory: 'D:\\MyLab\\colluscope\\runs\\m1_p0_local\\formal-25ep-pilot-20261019\\run\\full-pilot-config.toml'
+
+D:\Anaconda\Lib\pathlib.py:1013: FileNotFoundError
+_______ test_frozen_m3_config_and_schedule_have_the_exact_local_budget ________
+
+    def test_frozen_m3_config_and_schedule_have_the_exact_local_budget():
+>       config, schedule, hashes = run_m3_mechanism._scenario_inputs()
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_m3_independent_audit.py:318: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+scripts\run_m3_mechanism.py:439: in _scenario_inputs
+    "historical_m1_runtime_config": sha256_file(HISTORY / "runtime-config.toml"),
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts\run_m3_mechanism.py:84: in sha256_file
+    with path.open("rb") as stream:
+         ^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = WindowsPath('D:/MyLab/colluscope/runs/m1_p0_local/formal-25ep-pilot-20261019/run/runtime-config.toml')
+mode = 'rb', buffering = -1, encoding = None, errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed to by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+>       return io.open(self, mode, buffering, encoding, errors, newline)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       FileNotFoundError: [Errno 2] No such file or directory: 'D:\\MyLab\\colluscope\\runs\\m1_p0_local\\formal-25ep-pilot-20261019\\run\\runtime-config.toml'
+
+D:\Anaconda\Lib\pathlib.py:1013: FileNotFoundError
+_ test_interrupted_group_recovery_keeps_stage_rows_separate_and_never_resamples _
+
+tmp_path = WindowsPath('D:/MyLab/colluscope/.pytest-tmp/test_interrupted_group_recover0')
+
+    def test_interrupted_group_recovery_keeps_stage_rows_separate_and_never_resamples(tmp_path):
+>       _, schedule, _ = run_m3_mechanism._scenario_inputs()
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_m3_independent_audit.py:483: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+scripts\run_m3_mechanism.py:439: in _scenario_inputs
+    "historical_m1_runtime_config": sha256_file(HISTORY / "runtime-config.toml"),
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts\run_m3_mechanism.py:84: in sha256_file
+    with path.open("rb") as stream:
+         ^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = WindowsPath('D:/MyLab/colluscope/runs/m1_p0_local/formal-25ep-pilot-20261019/run/runtime-config.toml')
+mode = 'rb', buffering = -1, encoding = None, errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed to by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+>       return io.open(self, mode, buffering, encoding, errors, newline)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       FileNotFoundError: [Errno 2] No such file or directory: 'D:\\MyLab\\colluscope\\runs\\m1_p0_local\\formal-25ep-pilot-20261019\\run\\runtime-config.toml'
+
+D:\Anaconda\Lib\pathlib.py:1013: FileNotFoundError
+=========================== short test summary info ===========================
+FAILED tests/test_m3_independent_audit.py::test_outer_m3_budget_reserves_all_but_one_generation_slot_after_identity_probe
+FAILED tests/test_m3_independent_audit.py::test_frozen_m3_config_and_schedule_have_the_exact_local_budget
+FAILED tests/test_m3_independent_audit.py::test_interrupted_group_recovery_keeps_stage_rows_separate_and_never_resamples
+3 failed, 91 passed in 1.83s

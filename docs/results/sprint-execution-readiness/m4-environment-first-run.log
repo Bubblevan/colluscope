@@ -1,0 +1,3 @@
+Command: `python scripts/verify_m4_local_environment.py --out docs/results/sprint-execution-readiness/m4-local-environment.json`
+
+First run exit: 2 (`NO_GO_LOCAL_IDENTITY_OR_TOKEN_MATCH`). File/model/runtime/tokenizer identity checks passed, and no server was launched or model/network call made. Positive-control token counting did not execute because the verifier itself raised `NameError: name 'Counter' is not defined` while assembling the paired-delta summary. This is retained as a verification-tool failure, not evidence of token equality or inequality. The import is repaired and the complete verification is rerun.

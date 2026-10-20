@@ -1,0 +1,20 @@
+{
+  "artifact_file_count": 847,
+  "artifact_inventory_sha256": "1c0e80a02adc864ca18299a11ff8171f68d5903e22947955b4f192c99bdf74c1",
+  "assigned_rows": 280,
+  "auth_headers_saved": false,
+  "claim_scope": "runtime and artifact integrity only; Mock responses are not monitor evidence",
+  "external_network_calls": 0,
+  "hard_cost_ceiling_usd": 1.0,
+  "raw_private_tree_acl_verified": true,
+  "raw_request_files": 280,
+  "raw_response_files": 280,
+  "real_model_or_api_calls": 0,
+  "request_body_bytes_replayed": 1182903,
+  "request_response_attempt_links_verified": 280,
+  "reserved_peak_cost_usd": 0.4086309,
+  "retries": 0,
+  "schema_version": "sprint-monitor-mock-independent-audit-v1",
+  "status": "PASS_OFFLINE_MOCK_DISPATCH_REPLAY_ONLY",
+  "terminal_rows": 280
+}
