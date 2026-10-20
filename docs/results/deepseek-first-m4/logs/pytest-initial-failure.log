@@ -1,0 +1,176 @@
+.FFFFF.F.FFF.                                                            [100%]
+================================== FAILURES ===================================
+_ test_strict_parser_rejects_non_contract_responses[{"id": "resp-1", "model": "deepseek-flash", "system_fingerprint": "fp1", "choices": [{"finish_reason": "stop", "message": {"role": "assistant", "content": null, "tool_calls": [{"id": "call-1", "type": "function", "function": {"name": "submit_message", "arguments": "{\"action\":\"send_message\",\"text\":\"hello\"}"}}]}}], "usage": {"prompt_tokens": 100, "completion_tokens": 15}}-NO_FORCED_TOOL_CALL] _
+
+response = b'{"id": "resp-1", "model": "deepseek-flash", "system_fingerprint": "fp1", "choices": [{"finish_reason": "stop", "mess...action\\":\\"send_message\\",\\"text\\":\\"hello\\"}"}}]}}], "usage": {"prompt_tokens": 100, "completion_tokens": 15}}'
+expected = 'NO_FORCED_TOOL_CALL'
+
+    @pytest.mark.parametrize("response,expected", [
+        (_response({"action": "send_message", "text": "hello"}, finish="stop"), "NO_FORCED_TOOL_CALL"),
+        (_response({"action": "no_message", "text": ""}, calls=[]), "TOOL_CALL_COUNT"),
+        (_response({"action": "no_message", "text": ""}, content="action"), "FREE_TEXT_ACTION"),
+        (_response({"action": "no_message", "text": ""}, tool_name="wrong"), "TOOL_NAME_MISMATCH"),
+    ])
+    def test_strict_parser_rejects_non_contract_responses(response, expected):
+        name, schema = agent_tool("message")
+>       with pytest.raises(DeepSeekRequestError, match=expected):
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: 'NO_FORCED_TOOL_CALL'
+E         Actual message: "strict response finish_reason='stop'"
+
+tests\test_deepseek_m4_v1.py:59: AssertionError
+_ test_strict_parser_rejects_non_contract_responses[{"id": "resp-1", "model": "deepseek-flash", "system_fingerprint": "fp1", "choices": [{"finish_reason": "tool_calls", "message": {"role": "assistant", "content": null, "tool_calls": []}}], "usage": {"prompt_tokens": 100, "completion_tokens": 15}}-TOOL_CALL_COUNT] _
+
+response = b'{"id": "resp-1", "model": "deepseek-flash", "system_fingerprint": "fp1", "choices": [{"finish_reason": "tool_calls",... {"role": "assistant", "content": null, "tool_calls": []}}], "usage": {"prompt_tokens": 100, "completion_tokens": 15}}'
+expected = 'TOOL_CALL_COUNT'
+
+    @pytest.mark.parametrize("response,expected", [
+        (_response({"action": "send_message", "text": "hello"}, finish="stop"), "NO_FORCED_TOOL_CALL"),
+        (_response({"action": "no_message", "text": ""}, calls=[]), "TOOL_CALL_COUNT"),
+        (_response({"action": "no_message", "text": ""}, content="action"), "FREE_TEXT_ACTION"),
+        (_response({"action": "no_message", "text": ""}, tool_name="wrong"), "TOOL_NAME_MISMATCH"),
+    ])
+    def test_strict_parser_rejects_non_contract_responses(response, expected):
+        name, schema = agent_tool("message")
+>       with pytest.raises(DeepSeekRequestError, match=expected):
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: 'TOOL_CALL_COUNT'
+E         Actual message: 'strict response must contain exactly one tool call'
+
+tests\test_deepseek_m4_v1.py:59: AssertionError
+_ test_strict_parser_rejects_non_contract_responses[{"id": "resp-1", "model": "deepseek-flash", "system_fingerprint": "fp1", "choices": [{"finish_reason": "tool_calls", "message": {"role": "assistant", "content": "action", "tool_calls": [{"id": "call-1", "type": "function", "function": {"name": "submit_message", "arguments": "{\"action\":\"no_message\",\"text\":\"\"}"}}]}}], "usage": {"prompt_tokens": 100, "completion_tokens": 15}}-FREE_TEXT_ACTION] _
+
+response = b'{"id": "resp-1", "model": "deepseek-flash", "system_fingerprint": "fp1", "choices": [{"finish_reason": "tool_calls",...: "{\\"action\\":\\"no_message\\",\\"text\\":\\"\\"}"}}]}}], "usage": {"prompt_tokens": 100, "completion_tokens": 15}}'
+expected = 'FREE_TEXT_ACTION'
+
+    @pytest.mark.parametrize("response,expected", [
+        (_response({"action": "send_message", "text": "hello"}, finish="stop"), "NO_FORCED_TOOL_CALL"),
+        (_response({"action": "no_message", "text": ""}, calls=[]), "TOOL_CALL_COUNT"),
+        (_response({"action": "no_message", "text": ""}, content="action"), "FREE_TEXT_ACTION"),
+        (_response({"action": "no_message", "text": ""}, tool_name="wrong"), "TOOL_NAME_MISMATCH"),
+    ])
+    def test_strict_parser_rejects_non_contract_responses(response, expected):
+        name, schema = agent_tool("message")
+>       with pytest.raises(DeepSeekRequestError, match=expected):
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: 'FREE_TEXT_ACTION'
+E         Actual message: 'strict action must be a tool call without free-text content'
+
+tests\test_deepseek_m4_v1.py:59: AssertionError
+_ test_strict_parser_rejects_non_contract_responses[{"id": "resp-1", "model": "deepseek-flash", "system_fingerprint": "fp1", "choices": [{"finish_reason": "tool_calls", "message": {"role": "assistant", "content": null, "tool_calls": [{"id": "call-1", "type": "function", "function": {"name": "wrong", "arguments": "{\"action\":\"no_message\",\"text\":\"\"}"}}]}}], "usage": {"prompt_tokens": 100, "completion_tokens": 15}}-TOOL_NAME_MISMATCH] _
+
+response = b'{"id": "resp-1", "model": "deepseek-flash", "system_fingerprint": "fp1", "choices": [{"finish_reason": "tool_calls",...: "{\\"action\\":\\"no_message\\",\\"text\\":\\"\\"}"}}]}}], "usage": {"prompt_tokens": 100, "completion_tokens": 15}}'
+expected = 'TOOL_NAME_MISMATCH'
+
+    @pytest.mark.parametrize("response,expected", [
+        (_response({"action": "send_message", "text": "hello"}, finish="stop"), "NO_FORCED_TOOL_CALL"),
+        (_response({"action": "no_message", "text": ""}, calls=[]), "TOOL_CALL_COUNT"),
+        (_response({"action": "no_message", "text": ""}, content="action"), "FREE_TEXT_ACTION"),
+        (_response({"action": "no_message", "text": ""}, tool_name="wrong"), "TOOL_NAME_MISMATCH"),
+    ])
+    def test_strict_parser_rejects_non_contract_responses(response, expected):
+        name, schema = agent_tool("message")
+>       with pytest.raises(DeepSeekRequestError, match=expected):
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: 'TOOL_NAME_MISMATCH'
+E         Actual message: 'strict response called the wrong function'
+
+tests\test_deepseek_m4_v1.py:59: AssertionError
+___________ test_duplicate_keys_and_invalid_ballot_are_not_repaired ___________
+
+    def test_duplicate_keys_and_invalid_ballot_are_not_repaired():
+        name, schema = agent_tool("message")
+        response = json.loads(_response({"action": "no_message", "text": ""}))
+        response["choices"][0]["message"]["tool_calls"][0]["function"]["arguments"] = (
+            '{"action":"no_message","action":"send_message","text":""}')
+>       with pytest.raises(DeepSeekRequestError, match="DUPLICATE_JSON_KEY"):
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: 'DUPLICATE_JSON_KEY'
+E         Actual message: 'duplicate JSON key: action'
+
+tests\test_deepseek_m4_v1.py:69: AssertionError
+___________ test_json_fallback_requires_stop_and_valid_json_object ____________
+
+    def test_json_fallback_requires_stop_and_valid_json_object():
+        schema = {"type": "object", "required": ["choice"], "additionalProperties": False,
+                  "properties": {"choice": {"type": "string", "enum": ["T1", "T2"]}}}
+        response = {"choices": [{"finish_reason": "stop", "message": {
+            "content": '{"choice":"T2"}', "tool_calls": []}}]}
+        args, _ = parse_completion(response, interface="json_object_fallback",
+                                   tool_name="submit_choice", schema=schema)
+        assert args == {"choice": "T2"}
+        response["choices"][0]["finish_reason"] = "length"
+>       with pytest.raises(DeepSeekRequestError, match="NONTERMINAL_JSON_OUTPUT"):
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: 'NONTERMINAL_JSON_OUTPUT'
+E         Actual message: "fallback response finish_reason='length'"
+
+tests\test_deepseek_m4_v1.py:93: AssertionError
+_______________ test_http_failure_is_terminal_and_never_retried _______________
+
+tmp_path = WindowsPath('D:/MyLab/colluscope/.pytest-tmp/test_http_failure_is_terminal_0')
+
+    def test_http_failure_is_terminal_and_never_retried(tmp_path):
+        calls = []
+        client = _client(tmp_path, lambda *args: (calls.append(1) or (500, b'{"error":"x"}', 0.01)))
+        name, schema = agent_tool("message")
+>       with pytest.raises(DeepSeekRequestError, match="HTTP_500"):
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: 'HTTP_500'
+E         Actual message: 'DeepSeek returned HTTP 500'
+
+tests\test_deepseek_m4_v1.py:122: AssertionError
+_______________ test_ambiguous_timeout_is_not_resent_on_resume ________________
+
+tmp_path = WindowsPath('D:/MyLab/colluscope/.pytest-tmp/test_ambiguous_timeout_is_not_0')
+
+    def test_ambiguous_timeout_is_not_resent_on_resume(tmp_path):
+        calls = []
+        def timeout(*args):
+            calls.append(1)
+            raise TimeoutError("connection timed out after dispatch")
+        client = _client(tmp_path, timeout)
+        name, schema = agent_tool("message")
+        call = lambda: client.call(request_id="uncertain", role="agent",
+            messages=[{"role": "user", "content": "x"}], tool_name=name, schema=schema,
+            semantic=lambda value: value)
+>       with pytest.raises(DeepSeekRequestError, match="INTERRUPTED_UNKNOWN"):
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: 'INTERRUPTED_UNKNOWN'
+E         Actual message: 'request may have been billed; never resent'
+
+tests\test_deepseek_m4_v1.py:141: AssertionError
+______________ test_provider_identity_drift_stops_without_retry _______________
+
+tmp_path = WindowsPath('D:/MyLab/colluscope/.pytest-tmp/test_provider_identity_drift_s0')
+
+    def test_provider_identity_drift_stops_without_retry(tmp_path):
+        calls = []
+        def transport(_endpoint, _body, _key, _timeout):
+            calls.append(1)
+            return 200, _response({"action": "no_message", "text": ""},
+                                  fingerprint="fp1" if len(calls) == 1 else "fp2"), 0.01
+        client = _client(tmp_path, transport)
+        name, schema = agent_tool("message")
+        for request_id in ("identity-1", "identity-2"):
+            if request_id == "identity-1":
+                client.call(request_id=request_id, role="agent", messages=[{"role": "user", "content": "x"}],
+                    tool_name=name, schema=schema, semantic=lambda value: validate_agent_arguments("message", value))
+            else:
+>               with pytest.raises(DeepSeekRequestError, match="PROVIDER_IDENTITY_DRIFT"):
+E               AssertionError: Regex pattern did not match.
+E                 Expected regex: 'PROVIDER_IDENTITY_DRIFT'
+E                 Actual message: 'provider model/fingerprint changed'
+
+tests\test_deepseek_m4_v1.py:161: AssertionError
+=========================== short test summary info ===========================
+FAILED tests/test_deepseek_m4_v1.py::test_strict_parser_rejects_non_contract_responses[{"id": "resp-1", "model": "deepseek-flash", "system_fingerprint": "fp1", "choices": [{"finish_reason": "stop", "message": {"role": "assistant", "content": null, "tool_calls": [{"id": "call-1", "type": "function", "function": {"name": "submit_message", "arguments": "{\"action\":\"send_message\",\"text\":\"hello\"}"}}]}}], "usage": {"prompt_tokens": 100, "completion_tokens": 15}}-NO_FORCED_TOOL_CALL]
+FAILED tests/test_deepseek_m4_v1.py::test_strict_parser_rejects_non_contract_responses[{"id": "resp-1", "model": "deepseek-flash", "system_fingerprint": "fp1", "choices": [{"finish_reason": "tool_calls", "message": {"role": "assistant", "content": null, "tool_calls": []}}], "usage": {"prompt_tokens": 100, "completion_tokens": 15}}-TOOL_CALL_COUNT]
+FAILED tests/test_deepseek_m4_v1.py::test_strict_parser_rejects_non_contract_responses[{"id": "resp-1", "model": "deepseek-flash", "system_fingerprint": "fp1", "choices": [{"finish_reason": "tool_calls", "message": {"role": "assistant", "content": "action", "tool_calls": [{"id": "call-1", "type": "function", "function": {"name": "submit_message", "arguments": "{\"action\":\"no_message\",\"text\":\"\"}"}}]}}], "usage": {"prompt_tokens": 100, "completion_tokens": 15}}-FREE_TEXT_ACTION]
+FAILED tests/test_deepseek_m4_v1.py::test_strict_parser_rejects_non_contract_responses[{"id": "resp-1", "model": "deepseek-flash", "system_fingerprint": "fp1", "choices": [{"finish_reason": "tool_calls", "message": {"role": "assistant", "content": null, "tool_calls": [{"id": "call-1", "type": "function", "function": {"name": "wrong", "arguments": "{\"action\":\"no_message\",\"text\":\"\"}"}}]}}], "usage": {"prompt_tokens": 100, "completion_tokens": 15}}-TOOL_NAME_MISMATCH]
+FAILED tests/test_deepseek_m4_v1.py::test_duplicate_keys_and_invalid_ballot_are_not_repaired
+FAILED tests/test_deepseek_m4_v1.py::test_json_fallback_requires_stop_and_valid_json_object
+FAILED tests/test_deepseek_m4_v1.py::test_http_failure_is_terminal_and_never_retried
+FAILED tests/test_deepseek_m4_v1.py::test_ambiguous_timeout_is_not_resent_on_resume
+FAILED tests/test_deepseek_m4_v1.py::test_provider_identity_drift_stops_without_retry
+9 failed, 4 passed in 0.48s

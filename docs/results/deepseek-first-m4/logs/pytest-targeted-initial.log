@@ -1,0 +1,15 @@
+................F                                                        [100%]
+================================== FAILURES ===================================
+_______ test_public_and_privileged_same_world_are_distinct_permissions ________
+
+    def test_public_and_privileged_same_world_are_distinct_permissions():
+        controls, _ = build_plan(m4_run=Path("unused"), interface="strict_function_calling",
+                                 phase="scripted_controls")
+>       positive_public = next(row for row in controls if row["case_ref"] == "SC-POS-01"
+                               and row["task"] == "explicit_sequence" and row["permission"] == "public_only")
+E       StopIteration
+
+tests\test_deepseek_monitor_v1.py:80: StopIteration
+=========================== short test summary info ===========================
+FAILED tests/test_deepseek_monitor_v1.py::test_public_and_privileged_same_world_are_distinct_permissions
+1 failed, 16 passed in 1.37s

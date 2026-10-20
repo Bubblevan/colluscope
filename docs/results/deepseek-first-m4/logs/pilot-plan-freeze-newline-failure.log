@@ -1,0 +1,5 @@
+{'rows': 30, 'strict_rows': 20, 'fallback_rows': 10, 'sha256': 'f3e982e9e067a72c10f5a6b53dabff7740b5db4578aa58cfbdb878837dc70b6d', 'max_calls': 30}
+FAILED tests/test_deepseek_research_audit.py::test_committed_pilot_plan_reproduces_byte_for_byte
+AssertionError: committed plan ended with literal backslash+n; expected one newline byte
+1 failed, 7 passed in 0.47s
+Cause: PowerShell command escaping wrote two literal characters instead of newline. No model/API request was made. Recreated plan with bytes([10]); replay now passes.

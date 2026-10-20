@@ -94,6 +94,10 @@ Cycle ID / 日期 / Commit
 
 **已验证事实 → 未解决问题 → GO/NO-GO 门槛逐条状态 → 重要失败案例 → 复现命令 → 下一步建议**。
 
+## Later scoped authorization addendum (2026-10-20)
+
+The original M0-only, fully offline instructions above remain the historical M0 authorization and are not rewritten. The user later supplied a separate **“ColluScope — DeepSeek-First Recovery and Full Research Execution”** task that authorizes one specifically bounded prospective M4/Monitor research run using the official DeepSeek API only, subject to its frozen gates, 900-request / USD 5.00 aggregate ceilings, zero retries/replacements, local-only raw storage, and explicit stop conditions. This later scope supersedes the older no-call rule only for that one run. It does not authorize additional model calls, M2 detector comparison, external providers, new weights, training, or changed interventions after the bounded run stops or completes.
+
 请避免“架构完成”“符合工业级标准”“效果显著”等没有实测支持的套话；不要用延迟或单元测试数量掩盖核心研究有效性。我的最终需求是**能拿来写诚实研究报告的证据**，而不是看起来很忙的工程过程。
 
 ## 第一条执行指令

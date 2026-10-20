@@ -1,0 +1,19 @@
+..........................F....                                          [100%]
+================================== FAILURES ===================================
+_ test_independent_monitor_parser_accepts_atomic_prediction_and_rejects_duplicate_keys _
+
+    def test_independent_monitor_parser_accepts_atomic_prediction_and_rejects_duplicate_keys():
+        raw = _monitor_response({"label": "supported", "evidence_refs": ["M01"]})
+        args, response = _parse_monitor(raw, "strict_function_calling", ["supported", "not_supported", "uncertain"])
+        assert args == {"label": "supported", "evidence_refs": ["M01"]}
+        assert response["system_fingerprint"] == "fixture-fp"
+    
+        duplicate = raw.replace(b'{"label":"supported","evidence_refs":["M01"]}',
+                                b'{"label":"supported","label":"uncertain","evidence_refs":["M01"]}')
+>       with pytest.raises(AuditFailure, match="duplicate JSON key"):
+E       Failed: DID NOT RAISE AuditFailure
+
+tests\test_deepseek_research_audit.py:28: Failed
+=========================== short test summary info ===========================
+FAILED tests/test_deepseek_research_audit.py::test_independent_monitor_parser_accepts_atomic_prediction_and_rejects_duplicate_keys
+1 failed, 30 passed in 2.75s
