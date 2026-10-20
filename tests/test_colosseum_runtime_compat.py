@@ -89,6 +89,24 @@ class ToolSchemaValidationTests(unittest.TestCase):
                     {"function": {"name": "assign_task", "arguments": value}}
                 ]}}]})
 
+    def test_decoded_python_object_is_rejected_before_upstream_json_loads(self):
+        client = FakeClient()
+        response = {"choices": [{"message": {"tool_calls": [
+            {"function": {"name": "assign_task", "arguments": {"task_id": "x"}}}
+        ]}}]}
+        with self.assertRaisesRegex(compat.CompatibilityProtocolError, "must be a JSON string"):
+            run_async(compat.strict_process_tool_calls(client, response, [], lambda *_: None))
+        self.assertEqual(client.callback_count, 0)
+
+    def test_tool_calls_with_stop_finish_reason_are_rejected_as_inconsistent(self):
+        response = {"choices": [{"finish_reason": "stop", "message": {
+            "tool_calls": [{"function": {"name": "post_message", "arguments": "{}"}}]
+        }}]}
+        self.assertEqual(
+            compat._validate_finish_reason(response),
+            "tool_calls_with_inconsistent_finish_reason:stop",
+        )
+
     def test_environment_tool_error_is_not_treated_as_success(self):
         class ErrorClient(FakeClient):
             async def _colluscope_original_process_tool_calls(self, response, context, callback):
@@ -183,12 +201,14 @@ class ContinuationStateTests(unittest.TestCase):
 
 
 class RawCaptureTests(unittest.TestCase):
+    OUTPUTS = ROOT / "reference" / "colosseum" / "experiments" / "collusion" / "outputs"
+
     def test_capture_keeps_exact_bodies_and_finish_reason_without_auth_header(self):
         class Response:
             status_code = 200
             content = b'{"choices":[{"finish_reason":"tool_calls","message":{"role":"assistant","tool_calls":[{"function":{"name":"post_message","arguments":"{\\"message\\":\\"x\\"}"}}]}}]}'
             def json(self): return json.loads(self.content)
-        with tempfile.TemporaryDirectory(dir=ROOT) as temp:
+        with tempfile.TemporaryDirectory(dir=self.OUTPUTS) as temp:
             recorder = pair.RawHttpCapture(Path(temp))
             recorder.episode_id = "seed1-local"
             response = recorder.request(
@@ -201,19 +221,37 @@ class RawCaptureTests(unittest.TestCase):
             directory = Path(temp) / "raw" / "http" / "seed1-local"
             request_bytes = (directory / "attempt-0001.request.bin").read_bytes()
             response_bytes = (directory / "attempt-0001.response.bin").read_bytes()
-            index = json.loads((directory / "index.jsonl").read_text().splitlines()[0])
+            index_rows = [json.loads(line) for line in (directory / "index.jsonl").read_text().splitlines()]
+            index = index_rows[0]
             self.assertEqual(request_bytes, b'{"messages":[{"role":"user","content":"private"}]}')
             self.assertEqual(response_bytes, Response.content)
-            self.assertEqual(index["finish_reason"], "tool_calls")
-            self.assertEqual(index["tool_names"], ["post_message"])
-            self.assertNotIn("MUST_NOT_BE_CAPTURED", (directory / "index.jsonl").read_text())
+            self.assertEqual(index["event"], "http_attempt_started")
+            self.assertEqual(index_rows[1]["event"], "http_attempt_terminal")
+            self.assertEqual(index_rows[1]["finish_reason"], "tool_calls")
+            self.assertEqual(index_rows[1]["tool_names"], ["post_message"])
+            saved = b"".join(path.read_bytes() for path in directory.iterdir() if path.is_file())
+            self.assertNotIn(b"MUST_NOT_BE_CAPTURED", saved)
+            self.assertTrue(pair.RawHttpCapture._assert_ignored_output(Path(temp)) is None)
+
+    def test_unignored_or_nonlocal_raw_capture_is_blocked_before_transport(self):
+        with self.assertRaises(pair.RawCapturePolicyError):
+            pair.RawHttpCapture(ROOT / "tests" / "unignored-raw-capture")
+        with tempfile.TemporaryDirectory(dir=self.OUTPUTS) as temp:
+            recorder = pair.RawHttpCapture(Path(temp))
+            called = []
+            with self.assertRaises(pair.RawCapturePolicyError):
+                recorder.request(
+                    lambda *a, **k: called.append(True), object(), "POST",
+                    "https://example.com/v1/chat/completions", data=b"private",
+                )
+            self.assertEqual(called, [])
 
     def test_pair_budget_is_exact_two_episode_call_graph(self):
         self.assertEqual(pair.PAIR_MAX_HTTP, 180)
         self.assertEqual(2 * 6 * (4 + 1) * 3, pair.PAIR_MAX_HTTP)
 
     def test_http_exception_keeps_exact_request_and_marks_no_response(self):
-        with tempfile.TemporaryDirectory(dir=ROOT) as temp:
+        with tempfile.TemporaryDirectory(dir=self.OUTPUTS) as temp:
             recorder = pair.RawHttpCapture(Path(temp))
             recorder.episode_id = "episode-error"
             def fail(*args, **kwargs):
@@ -222,9 +260,72 @@ class RawCaptureTests(unittest.TestCase):
                 recorder.request(fail, object(), "POST", "http://127.0.0.1:8081/v1/chat/completions", data=b"request-bytes")
             directory = Path(temp) / "raw" / "http" / "episode-error"
             self.assertEqual((directory / "attempt-0001.request.bin").read_bytes(), b"request-bytes")
-            row = json.loads((directory / "index.jsonl").read_text().splitlines()[0])
-            self.assertEqual(row["status"], "transport_exception")
-            self.assertEqual(row["exception_type"], "TimeoutError")
+            rows = [json.loads(line) for line in (directory / "index.jsonl").read_text().splitlines()]
+            self.assertEqual(rows[0]["event"], "http_attempt_started")
+            self.assertEqual(rows[1]["status"], "transport_or_capture_exception")
+            self.assertEqual(rows[1]["exception_type"], "TimeoutError")
+
+    def test_keyboard_interrupt_is_terminally_recorded_before_propagating(self):
+        with tempfile.TemporaryDirectory(dir=self.OUTPUTS) as temp:
+            recorder = pair.RawHttpCapture(Path(temp))
+            with self.assertRaises(KeyboardInterrupt):
+                recorder.request(
+                    lambda *a, **k: (_ for _ in ()).throw(KeyboardInterrupt()),
+                    object(), "POST", "http://127.0.0.1:8081/v1/chat/completions",
+                    data=b"body",
+                )
+            path = Path(temp) / "raw" / "http" / "bootstrap" / "index.jsonl"
+            rows = [json.loads(line) for line in path.read_text().splitlines()]
+            self.assertEqual([row["event"] for row in rows], ["http_attempt_started", "http_attempt_terminal"])
+            self.assertEqual(rows[-1]["exception_type"], "KeyboardInterrupt")
+
+    def test_real_guard_capture_composition_records_both_starts_before_transport(self):
+        import requests
+
+        class Response:
+            status_code = 200
+            content = b'{"choices":[]}'
+            def json(self): return json.loads(self.content)
+
+        with tempfile.TemporaryDirectory(dir=self.OUTPUTS) as temp:
+            root = Path(temp)
+            capture = pair.RawHttpCapture(root)
+            capture.episode_id = "precall-test"
+            runner = pair.load_runner()
+            ledger = root / "http_requests.jsonl"
+            original_global = requests.Session.request
+            transport_calls = []
+
+            def transport(session, method, url, **kwargs):
+                outer = [json.loads(line) for line in ledger.read_text().splitlines()]
+                raw_path = root / "raw" / "http" / "precall-test" / "index.jsonl"
+                raw = [json.loads(line) for line in raw_path.read_text().splitlines()]
+                self.assertEqual(outer[-1]["event"], "http_attempt_started")
+                self.assertEqual(raw[-1]["event"], "http_attempt_started")
+                self.assertNotIn("headers", outer[-1])
+                self.assertNotIn("Authorization", raw[-1])
+                transport_calls.append(1)
+                return Response()
+
+            def capture_wrapper(session, method, url, **kwargs):
+                return capture.request(transport, session, method, url, **kwargs)
+
+            requests.Session.request = capture_wrapper
+            guard = runner.RequestGuard(ledger, hard_cap=1)
+            guard.install()
+            guard.set_episode("precall-test")
+            try:
+                response = requests.Session().post(
+                    pair.LOCAL_CHAT_COMPLETIONS,
+                    data='{"messages":[]}',
+                    headers={"Authorization": "Bearer HEADER_SENTINEL"},
+                )
+            finally:
+                requests.Session.request = original_global
+            self.assertEqual(response.status_code, 200)
+            self.assertEqual(transport_calls, [1])
+            self.assertEqual(guard.attempts, 1)
+            self.assertNotIn("HEADER_SENTINEL", ledger.read_text())
 
 
 if __name__ == "__main__":

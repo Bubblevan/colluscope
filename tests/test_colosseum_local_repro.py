@@ -1,4 +1,5 @@
 import importlib.util
+from unittest import mock
 import sys
 import unittest
 from pathlib import Path
@@ -25,6 +26,11 @@ class ColosseumLocalReproTests(unittest.TestCase):
     def test_actual_upstream_call_graph_has_ninety_generation_upper_bound(self):
         self.assertEqual(6 * (4 + 1) * 3, MODULE.max_generation_bound())
         self.assertEqual(900, len(MODULE.assignments()) * MODULE.max_generation_bound())
+
+    def test_llama_server_path_resolution_uses_explicit_path_or_exact_path_lookup(self):
+        self.assertEqual(Path("E:/runtime/llama-server.exe"), MODULE.resolve_llama_server("E:/runtime/llama-server.exe"))
+        with mock.patch.object(MODULE.shutil, "which", side_effect=lambda name: "C:/tools/llama-server.exe" if name == "llama-server.exe" else None):
+            self.assertEqual(Path("C:/tools/llama-server.exe"), MODULE.resolve_llama_server(None))
 
 
 if __name__ == "__main__":

@@ -38,15 +38,19 @@ def _tool_calls(response: Any) -> list[dict[str, Any]]:
         if "arguments" not in function:
             raise CompatibilityProtocolError(f"tool call {index} has no arguments field")
         raw = function["arguments"]
-        if isinstance(raw, str):
-            try:
-                arguments = json.loads(raw)
-            except json.JSONDecodeError as exc:
-                raise CompatibilityProtocolError(
-                    f"tool call {index} arguments are not valid JSON"
-                ) from exc
-        else:
-            arguments = raw
+        # The pinned TogetherClient calls json.loads(arguments_raw). Accepting
+        # an already-decoded object here would pass validation and then fail
+        # inside the upstream processor (which expects the OpenAI wire type).
+        if not isinstance(raw, str):
+            raise CompatibilityProtocolError(
+                f"tool call {index} arguments must be a JSON string"
+            )
+        try:
+            arguments = json.loads(raw)
+        except json.JSONDecodeError as exc:
+            raise CompatibilityProtocolError(
+                f"tool call {index} arguments are not valid JSON"
+            ) from exc
         if not isinstance(arguments, dict):
             raise CompatibilityProtocolError(f"tool call {index} arguments must decode to an object")
         parsed.append({"name": function["name"], "arguments": arguments})
@@ -55,7 +59,7 @@ def _tool_calls(response: Any) -> list[dict[str, Any]]:
 
 async def strict_process_tool_calls(client: Any, response: dict[str, Any], context: list[dict[str, Any]], callback: Any):
     """Prevalidate every call before the upstream client can invoke any tool."""
-    _tool_calls(response)
+    calls = _tool_calls(response)
     before = len(context)
     result = client._colluscope_original_process_tool_calls(response, context, callback)
     if hasattr(result, "__await__"):
@@ -65,19 +69,35 @@ async def strict_process_tool_calls(client: Any, response: dict[str, Any], conte
     processed_context = result[1]
     if not isinstance(processed_context, list):
         raise CompatibilityProtocolError("upstream tool processor returned an invalid context")
+    executed_count = result[0]
+    if not isinstance(executed_count, int) or isinstance(executed_count, bool) or executed_count != len(calls):
+        raise CompatibilityProtocolError("upstream tool processor returned an inconsistent execution count")
     # TogetherClient serializes callback results into tool-role messages. An
     # upstream tool error is not a valid action and must terminate the episode.
     for item in processed_context[before:]:
-        if item.get("role") != "tool":
+        if not isinstance(item, dict) or item.get("role") != "tool":
             continue
         content = item.get("content")
         try:
             decoded = json.loads(content) if isinstance(content, str) else content
         except json.JSONDecodeError as exc:
             raise CompatibilityProtocolError("tool callback returned malformed JSON") from exc
-        if isinstance(decoded, dict) and decoded.get("error"):
+        if _tool_result_rejected(decoded):
             raise CompatibilityProtocolError("environment rejected a tool call")
     return result
+
+
+def _tool_result_rejected(value: Any) -> bool:
+    """Recognize explicit upstream tool refusal shapes without guessing intent."""
+    if isinstance(value, dict):
+        if "error" in value or str(value.get("status", "")).lower() in {
+            "error", "rejected", "invalid",
+        }:
+            return True
+        return any(_tool_result_rejected(child) for child in value.values())
+    if isinstance(value, list):
+        return any(_tool_result_rejected(child) for child in value)
+    return False
 
 
 def _finish_reason(response: dict[str, Any]) -> str | None:
@@ -97,6 +117,8 @@ def _validate_finish_reason(response: dict[str, Any]) -> str | None:
     calls = _tool_calls(response)
     if reason == "tool_calls" and not calls:
         return "tool_call_finish_reason_without_tool_calls"
+    if reason != "tool_calls" and calls:
+        return f"tool_calls_with_inconsistent_finish_reason:{reason}"
     return None
 
 

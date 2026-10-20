@@ -7,10 +7,13 @@ fails. No retries or replacement episodes are allowed.
 from __future__ import annotations
 
 import argparse
+import csv
 import hashlib
 import importlib.util
+import io
 import json
 import os
+import subprocess
 import sys
 from pathlib import Path
 from typing import Any
@@ -23,6 +26,11 @@ RUNNER_PATH = ROOT / "reproductions" / "colosseum_local" / "run_local_repro.py"
 COMPAT_PATH = ROOT / "reproductions" / "colosseum_local" / "runtime_compat.py"
 DEFAULT_OUT = ROOT / "reference" / "colosseum" / "experiments" / "collusion" / "outputs" / "colluscope-pair-v2-seed1-final3"
 PAIR_MAX_HTTP = 2 * 6 * (4 + 1) * 3
+LOCAL_CHAT_COMPLETIONS = "http://127.0.0.1:8081/v1/chat/completions"
+
+
+class RawCapturePolicyError(RuntimeError):
+    """Raw research data cannot be stored under the required local boundary."""
 
 
 def sha256_file(path: Path) -> str:
@@ -43,13 +51,27 @@ def load_runner():
     return module
 
 
+def load_episode_validator():
+    path = ROOT / "reproductions" / "colosseum_local" / "episode_validity.py"
+    spec = importlib.util.spec_from_file_location("colluscope_episode_validity", path)
+    if spec is None or spec.loader is None:
+        raise RuntimeError("could not load independent episode validator")
+    module = importlib.util.module_from_spec(spec)
+    sys.modules[spec.name] = module
+    spec.loader.exec_module(module)
+    return module
+
+
 class RawHttpCapture:
     """Store exact local request/response bytes without capturing auth headers."""
 
     def __init__(self, root: Path):
-        self.root = root
+        self.root = root.resolve()
+        self._assert_ignored_output(self.root)
+        (self.root / "raw" / "http").mkdir(parents=True, exist_ok=True)
+        self._secure_tree(self.root)
         self.episode_id = "bootstrap"
-        ledger = root / "http_requests.jsonl"
+        ledger = self.root / "http_requests.jsonl"
         self.count = 0
         if ledger.exists():
             for line_no, line in enumerate(ledger.read_text(encoding="utf-8").splitlines(), 1):
@@ -63,6 +85,93 @@ class RawHttpCapture:
                     self.count += 1
 
     @staticmethod
+    def _assert_ignored_output(root: Path) -> None:
+        allowed = (ROOT / "reference" / "colosseum" / "experiments" / "collusion" / "outputs").resolve()
+        try:
+            relative = root.relative_to(allowed)
+        except ValueError as exc:
+            raise RawCapturePolicyError(
+                "raw HTTP evidence must be under the pinned Colosseum ignored outputs directory"
+            ) from exc
+        repo_relative = root.relative_to(ROOT).as_posix()
+        checked = subprocess.run(
+            ["git", "-C", str(ROOT), "check-ignore", "--quiet", "--", repo_relative],
+            check=False, capture_output=True, text=True,
+        )
+        if checked.returncode != 0:
+            raise RawCapturePolicyError("raw HTTP evidence output is not Git-ignored")
+
+    @staticmethod
+    def _secure_directory(path: Path) -> None:
+        path.mkdir(parents=True, exist_ok=True)
+        if os.name == "nt":
+            identity = subprocess.run(
+                ["whoami", "/user", "/fo", "csv", "/nh"],
+                check=True, capture_output=True, text=True,
+            ).stdout.strip().splitlines()
+            if not identity:
+                raise RawCapturePolicyError("could not resolve current Windows SID")
+            try:
+                sid = next(csv.reader(io.StringIO(identity[-1])))[-1]
+            except (StopIteration, IndexError, csv.Error) as exc:
+                raise RawCapturePolicyError("could not parse current Windows SID") from exc
+            secured = subprocess.run(
+                ["icacls", str(path), "/inheritance:r", "/grant:r", f"*{sid}:(OI)(CI)F"],
+                check=False, capture_output=True, text=True,
+            )
+            if secured.returncode != 0:
+                raise RawCapturePolicyError("could not restrict raw evidence directory ACL")
+        else:
+            path.chmod(0o700)
+
+    @staticmethod
+    def _secure_tree(root: Path) -> None:
+        """Replace inherited ACLs throughout an existing run tree before use."""
+        if os.name == "nt":
+            identity = subprocess.run(
+                ["whoami", "/user", "/fo", "csv", "/nh"],
+                check=True, capture_output=True, text=True,
+            ).stdout.strip().splitlines()
+            if not identity:
+                raise RawCapturePolicyError("could not resolve current Windows SID")
+            try:
+                sid = next(csv.reader(io.StringIO(identity[-1])))[-1]
+            except (StopIteration, IndexError, csv.Error) as exc:
+                raise RawCapturePolicyError("could not parse current Windows SID") from exc
+            commands = [
+                ["icacls", str(root), "/reset", "/T", "/C"],
+                ["icacls", str(root), "/inheritance:r", "/T", "/C"],
+                ["icacls", str(root), "/grant:r", f"*{sid}:F", "/T", "/C"],
+                ["icacls", str(root), "/grant:r", f"*{sid}:(OI)(CI)F"],
+            ]
+            for command in commands:
+                result = subprocess.run(command, check=False, capture_output=True, text=True)
+                if result.returncode != 0:
+                    raise RawCapturePolicyError("could not restrict the complete run tree ACL")
+        else:
+            for path in sorted(root.rglob("*"), key=lambda item: len(item.parts), reverse=True):
+                path.chmod(0o700 if path.is_dir() else 0o600)
+            root.chmod(0o700)
+
+    @staticmethod
+    def _assert_local_endpoint(method: str, url: str) -> None:
+        from urllib.parse import urlsplit
+
+        parsed = urlsplit(str(url))
+        if (
+            str(method).upper() != "POST"
+            or parsed.scheme != "http"
+            or parsed.hostname != "127.0.0.1"
+            or parsed.port != 8081
+            or parsed.path != "/v1/chat/completions"
+            or parsed.query
+            or parsed.fragment
+            or parsed.username
+            or parsed.password
+        ):
+            raise RawCapturePolicyError("raw capture only permits the exact local completion endpoint")
+
+    @staticmethod
     def _body(kwargs: dict[str, Any]) -> bytes | None:
         body = kwargs.get("data")
         if body is None and kwargs.get("json") is not None:
@@ -74,37 +183,53 @@ class RawHttpCapture:
         return None
 
     def request(self, original, session, method, url, **kwargs):
+        self._assert_local_endpoint(str(method), str(url))
         self.count += 1
         attempt = self.count
         directory = self.root / "raw" / "http" / self.episode_id
-        directory.mkdir(parents=True, exist_ok=True)
+        self._secure_directory(directory)
         stem = f"attempt-{attempt:04d}"
         body = self._body(kwargs)
-        index: dict[str, Any] = {
+        if body is None:
+            raise RawCapturePolicyError("completion request body must be captured before sending")
+        request_path = directory / f"{stem}.request.bin"
+        _durable_replace(request_path, body)
+        append_index(directory / "index.jsonl", {
+            "event": "http_attempt_started",
             "attempt": attempt,
             "episode_id": self.episode_id,
             "method": str(method),
-            "url": str(url),
-            "request_body_sha256": hashlib.sha256(body).hexdigest().upper() if body is not None else None,
-            "request_body_recorded": body is not None,
-        }
-        if body is not None:
-            (directory / f"{stem}.request.bin").write_bytes(body)
+            "endpoint": LOCAL_CHAT_COMPLETIONS,
+            "request_body_sha256": hashlib.sha256(body).hexdigest().upper(),
+            "request_body_bytes": len(body),
+            "request_body_path": request_path.name,
+            "auth_headers_recorded": False,
+        })
         try:
             response = original(session, method, url, **kwargs)
-        except Exception as exc:
-            index.update({"status": "transport_exception", "exception_type": type(exc).__name__})
-            append_index(directory / "index.jsonl", index)
+            response_body = bytes(response.content)
+            response_path = directory / f"{stem}.response.bin"
+            _durable_replace(response_path, response_body)
+        except BaseException as exc:
+            append_index(directory / "index.jsonl", {
+                "event": "http_attempt_terminal",
+                "attempt": attempt,
+                "episode_id": self.episode_id,
+                "status": "transport_or_capture_exception",
+                "exception_type": type(exc).__name__,
+            })
             raise
-        response_body = bytes(response.content)
-        response_path = directory / f"{stem}.response.bin"
-        response_path.write_bytes(response_body)
-        index.update({
+
+        terminal: dict[str, Any] = {
+            "event": "http_attempt_terminal",
+            "attempt": attempt,
+            "episode_id": self.episode_id,
+            "status": "http_response",
             "status_code": int(response.status_code),
             "response_body_sha256": hashlib.sha256(response_body).hexdigest().upper(),
             "response_body_bytes": len(response_body),
             "response_body_path": response_path.name,
-        })
+        }
         try:
             payload = response.json()
             choices = payload.get("choices") or []
@@ -112,7 +237,7 @@ class RawHttpCapture:
                 choice = choices[0]
                 message = choice.get("message") or {}
                 calls = message.get("tool_calls") or []
-                index.update({
+                terminal.update({
                     "finish_reason": choice.get("finish_reason"),
                     "assistant_role": message.get("role"),
                     "tool_call_count": len(calls) if isinstance(calls, list) else None,
@@ -126,17 +251,27 @@ class RawHttpCapture:
                     ] if isinstance(calls, list) else None,
                 })
         except (ValueError, AttributeError, TypeError, KeyError):
-            index["finish_reason"] = None
-            index["response_json_parse"] = "failed_or_noncompletion_response"
-        append_index(directory / "index.jsonl", index)
+            terminal["finish_reason"] = None
+            terminal["response_json_parse"] = "failed_or_noncompletion_response"
+        append_index(directory / "index.jsonl", terminal)
         return response
 
 
 def append_index(path: Path, row: dict[str, Any]) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
     with path.open("a", encoding="utf-8", newline="\n") as stream:
         stream.write(json.dumps(row, ensure_ascii=False, sort_keys=True) + "\n")
         stream.flush()
         os.fsync(stream.fileno())
+
+
+def _durable_replace(path: Path, content: bytes) -> None:
+    temporary = path.with_name(path.name + ".partial")
+    with temporary.open("wb") as stream:
+        stream.write(content)
+        stream.flush()
+        os.fsync(stream.fileno())
+    os.replace(temporary, path)
 
 
 def configure_runner(runner: Any, seed: int, out: Path) -> None:
@@ -166,6 +301,12 @@ def freeze_pair(runner: Any, out: Path, seed: int) -> Path:
     manifest["pair_runner"] = {
         "source": str(Path(__file__).resolve().relative_to(ROOT)).replace("\\", "/"),
         "sha256": sha256_file(Path(__file__).resolve()),
+    }
+    validator_path = ROOT / "reproductions" / "colosseum_local" / "episode_validity.py"
+    manifest["episode_validity"] = {
+        "source": str(validator_path.relative_to(ROOT)).replace("\\", "/"),
+        "sha256": sha256_file(validator_path),
+        "acceptance": "requires complete stage coverage, six committed assignments, successful HTTP attempts and a one-to-one raw capture ledger",
     }
     manifest["raw_http_capture"] = {
         "request_and_response_bytes": "local-only, one file per physical attempt",
@@ -204,6 +345,9 @@ def verify_pair_freeze(runner: Any, out: Path, seed: int) -> dict[str, Any]:
         raise RuntimeError("pair HTTP cap is not the frozen 180")
     if manifest.get("pair_runner", {}).get("sha256") != sha256_file(Path(__file__).resolve()):
         raise RuntimeError("pair runner changed after freeze")
+    validator_path = ROOT / "reproductions" / "colosseum_local" / "episode_validity.py"
+    if manifest.get("episode_validity", {}).get("sha256") != sha256_file(validator_path):
+        raise RuntimeError("independent episode validator changed after freeze")
     if manifest.get("compatibility_adapter", {}).get("sha256") != sha256_file(COMPAT_PATH):
         raise RuntimeError("compatibility adapter changed after freeze")
     ids = [row["episode_id"] for row in manifest.get("frozen_configurations", [])]
@@ -211,6 +355,43 @@ def verify_pair_freeze(runner: Any, out: Path, seed: int) -> dict[str, Any]:
     if ids != expected:
         raise RuntimeError(f"frozen pair IDs/order mismatch: {ids}")
     return manifest
+
+
+def record_episode_validity(out: Path, runner: Any) -> list[dict[str, Any]]:
+    validator = load_episode_validator()
+    validity_dir = out / "episode_validity"
+    validity_dir.mkdir(parents=True, exist_ok=True)
+    validity_rows = []
+    for episode in runner.assignments():
+        try:
+            validity = validator.assess_episode(
+                episode_id=episode.episode_id,
+                output_root=out / "upstream_runs" / episode.episode_id,
+                progress_ledger=out / "progress.jsonl",
+                request_ledger=out / "http_requests.jsonl",
+                raw_capture_index=out / "raw" / "http" / episode.episode_id / "index.jsonl",
+                require_raw_capture=True,
+            )
+        except Exception as exc:
+            validity = {
+                "episode_id": episode.episode_id,
+                "status": "INDETERMINATE_EPISODE",
+                "valid_episode": False,
+                "reason_codes": ["validity_assessor_error"],
+                "assessor_error_type": type(exc).__name__,
+                "private_content_exported": False,
+            }
+        (validity_dir / f"{episode.episode_id}.json").write_text(
+            json.dumps(validity, indent=2, sort_keys=True) + "\n",
+            encoding="utf-8", newline="\n",
+        )
+        runner.append_jsonl(out / "progress.jsonl", {
+            "time": runner.utc_now(), "episode_id": episode.episode_id,
+            "event": "episode_validity_assessed", "status": validity["status"],
+            "reason_codes": validity.get("reason_codes", []),
+        })
+        validity_rows.append(validity)
+    return validity_rows
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -257,7 +438,16 @@ def main(argv: list[str] | None = None) -> int:
     finally:
         requests.Session.request = prior_request
         runner.RequestGuard.set_episode = original_set_episode
-    print(json.dumps({"status": "pair_finished_with_all_rows_preserved", "http_attempts": guard.attempts, "hard_cap": PAIR_MAX_HTTP, "output": str(out)}))
+        validity_rows = record_episode_validity(out, runner)
+    status_counts = {}
+    for row in validity_rows:
+        status_counts[row["status"]] = status_counts.get(row["status"], 0) + 1
+    print(json.dumps({
+        "status": "pair_finished_with_independent_episode_validity",
+        "http_attempts": guard.attempts, "hard_cap": PAIR_MAX_HTTP,
+        "episode_validity_counts": status_counts,
+        "output": str(out),
+    }))
     return 0
 
 

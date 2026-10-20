@@ -1,0 +1,70 @@
+{
+  "protocol_id": "colosseum-llama-tool-diagnostic-v1",
+  "purpose": "One direct, harmless local llama.cpp chat-completions tool-call compatibility probe; not an agent behavior or collusion experiment.",
+  "endpoint": "http://127.0.0.1:8081/v1/chat/completions",
+  "expected_model_alias": "colluscope-qwen3-8b-q4km-local",
+  "expected_model_sha256": "D98CDCBD03E17CE47681435B5150E34C1417F50B5C0019DD560E4882C5745785",
+  "expected_llama_cpp_build": "10068 / 571d0d540",
+  "request_budget": {
+    "logical_requests_max": 1,
+    "physical_http_attempts_max": 1,
+    "generated_completions_max": 1,
+    "max_tokens": 128,
+    "retries": 0,
+    "episode_replays": 0
+  },
+  "request": {
+    "model": "colluscope-qwen3-8b-q4km-local",
+    "messages": [
+      {
+        "role": "system",
+        "content": "This is a harmless local tool-interface diagnostic. Call the supplied compat_probe function exactly once with the requested probe_id. Do not provide a text answer."
+      },
+      {
+        "role": "user",
+        "content": "Invoke compat_probe with probe_id COLLUSCOPE-CANARY-1."
+      }
+    ],
+    "tools": [
+      {
+        "type": "function",
+        "function": {
+          "name": "compat_probe",
+          "description": "Harmless interface-only probe. The result is never sent back to the model.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "probe_id": {
+                "type": "string",
+                "enum": ["COLLUSCOPE-CANARY-1"]
+              }
+            },
+            "required": ["probe_id"],
+            "additionalProperties": false
+          }
+        }
+      }
+    ],
+    "tool_choice": {
+      "type": "function",
+      "function": {"name": "compat_probe"}
+    },
+    "temperature": 0,
+    "max_tokens": 128,
+    "seed": 20261020,
+    "n": 1,
+    "stream": false
+  },
+  "acceptance": {
+    "interface_pass": "HTTP 200; exactly one choice; finish_reason=tool_calls; exactly one compat_probe call; arguments are a JSON object exactly equal to {probe_id: COLLUSCOPE-CANARY-1}.",
+    "model_tool_argument_failure": "HTTP 200 completion exists but tool name, JSON syntax, object shape, or exact argument value is wrong.",
+    "server_or_template_failure": "Request is rejected before a completion object exists; retain server log and classify the exact server response without retry.",
+    "unresolved": "HTTP 500 with parser diagnostics but no completion body, timeout, interrupted request, or ambiguous evidence. Stop; no retry or replacement call.",
+    "adapter_check": "Replay any captured HTTP-200 response offline through the pinned TogetherClient processor with a no-side-effect mock callback; this replay makes zero HTTP/model calls."
+  },
+  "not_authorized_by_this_file": [
+    "running the one-call diagnostic",
+    "the 180-attempt paired episode experiment",
+    "monitor inference"
+  ]
+}

@@ -4,6 +4,7 @@ import argparse
 import hashlib
 import json
 import os
+import shutil
 import socket
 import subprocess
 import sys
@@ -29,7 +30,17 @@ MODEL_PATH = Path(os.environ.get(
     "COLLUSCOPE_MODEL_PATH",
     "Qwen3-8B-Q4_K_M.gguf",
 ))
-LLAMA_SERVER = Path(os.environ.get("COLLUSCOPE_LLAMA_SERVER", "llama-server"))
+
+
+def resolve_llama_server(configured: str | None = None) -> Path:
+    explicit = configured if configured is not None else os.environ.get("COLLUSCOPE_LLAMA_SERVER")
+    if explicit:
+        return Path(explicit).expanduser()
+    discovered = shutil.which("llama-server.exe") or shutil.which("llama-server")
+    return Path(discovered) if discovered else Path("llama-server")
+
+
+LLAMA_SERVER = resolve_llama_server()
 EXPECTED_UPSTREAM_SHA = "b077fe7e2f10566e92156cc12e06ffb2aac54790"
 EXPECTED_MODEL_SHA256 = "D98CDCBD03E17CE47681435B5150E34C1417F50B5C0019DD560E4882C5745785"
 EXPECTED_LOCK_SHA256 = "392C56D8448A2076E015A7A035D62FEDA51B77B3D58FB7747F1541F98C74F49E"
@@ -187,11 +198,11 @@ class RequestGuard:
                     "response_bytes": len(response_bytes),
                 })
                 return response
-            except Exception as exc:
+            except BaseException as exc:
                 append_jsonl(guard.ledger_path, {
                     "time": utc_now(), "episode_id": guard.episode_id,
                     "event": "http_exception", "attempt": attempt,
-                    "error_type": type(exc).__name__, "error": str(exc)[:800],
+                    "error_type": type(exc).__name__,
                 })
                 raise
 
@@ -509,17 +520,23 @@ def run_all(out_dir: Path, guard: RequestGuard, start_index: int = 0) -> None:
                 "upstream_output": str(out), "http_attempts_before": attempts_before,
                 "http_attempts_after": guard.attempts,
             })
-        except Exception as exc:
+        except BaseException as exc:
             append_jsonl(progress_path, {
                 "time": utc_now(), "episode_id": episode.episode_id,
                 "event": "episode_terminal",
-                "status": "failed_pre_generation_no_http" if guard.attempts == attempts_before else "failed_preserved",
+                "status": (
+                    "interrupted_preserved" if not isinstance(exc, Exception)
+                    else "failed_pre_generation_no_http" if guard.attempts == attempts_before
+                    else "failed_preserved"
+                ),
                 "attempt_no": attempt_no,
                 "http_attempts_before": attempts_before,
                 "error_type": type(exc).__name__, "error": str(exc)[:2000],
                 "traceback": traceback.format_exc()[-6000:],
                 "http_attempts_after": guard.attempts,
             })
+            if not isinstance(exc, Exception):
+                raise
             if isinstance(exc, (BudgetExceeded, LocalEndpointPolicyError)):
                 for remaining in assignments()[index + 1:]:
                     append_jsonl(progress_path, {
