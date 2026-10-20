@@ -90,15 +90,21 @@ def _write_json(path: Path, value: Any) -> None:
                                 indent=2).encode("utf-8") + b"\n")
 
 
-def load_documents() -> tuple[dict[str, Any], dict[str, Any], dict[str, Any], dict[str, Any]]:
-    config = json.loads(CONFIG_PATH.read_text(encoding="utf-8"))
+def load_documents(config_path: Path = CONFIG_PATH) -> tuple[dict[str, Any], dict[str, Any], dict[str, Any], dict[str, Any]]:
+    config_path = Path(config_path).resolve()
+    if ROOT not in config_path.parents:
+        raise M4RuntimeError("M4 config must be inside the repository")
+    config = json.loads(config_path.read_text(encoding="utf-8"))
     scenarios = json.loads((ROOT / config["schedule"]["scenario_manifest"]).read_text(encoding="utf-8"))
     splits = json.loads((ROOT / config["schedule"]["split_manifest"]).read_text(encoding="utf-8"))
     positive = json.loads((ROOT / config["schedule"]["positive_control"]).read_text(encoding="utf-8"))
     required_top = {"schema_version", "protocol_id", "status", "live_inference_authorized",
                     "model", "runtime", "tokenizer", "sampling", "schedule", "privacy"}
-    if set(config) != required_top or config["schema_version"] != "m4-runtime-v1":
+    if set(config) != required_top or config["schema_version"] not in {"m4-runtime-v1", "m4-runtime-v2"}:
         raise M4RuntimeError("M4 runtime config does not match the frozen key contract")
+    version = config["schema_version"].rsplit("v", 1)[-1]
+    if config["protocol_id"] != f"colluscope-m4-runtime-v{version}":
+        raise M4RuntimeError("M4 runtime protocol ID does not match its schema version")
     if config["status"] != "offline_mock_only_no_real_inference_authorization" or config["live_inference_authorized"] is not False:
         raise M4RuntimeError("this runtime is intentionally offline mock only")
     if config["runtime"]["external_fallback"] is not False:
@@ -113,8 +119,11 @@ def load_documents() -> tuple[dict[str, Any], dict[str, Any], dict[str, Any], di
             or len(splits.get("groups", [])) != 24
             or len({row["split_group_id"] for row in splits["groups"]}) != 24):
         raise M4RuntimeError("M4 split manifest is incomplete or has duplicate groups")
-    if positive.get("schema_version") != "m4-behavioral-positive-control-v1":
+    if positive.get("schema_version") != f"m4-behavioral-positive-control-v{version}":
         raise M4RuntimeError("positive-control config version changed")
+    if version == "2" and config["schedule"]["neutral_message"] != (
+            "I have no specific allocation proposal for this round currently."):
+        raise M4RuntimeError("M4 v2 neutral focal stimulus differs from its frozen token-matched text")
     family_rows = {row["scenario_family_id"]: row for row in scenarios["families"]}
     for group in splits["groups"]:
         family = family_rows.get(group["scenario_family_id"])
@@ -551,8 +560,13 @@ def config_positive_prompt(config: dict[str, Any]) -> str:
 
 
 def run_mock(out: Path, *, backend: MockBackend | None = None,
-             config: dict[str, Any] | None = None, secure_storage: bool = True) -> dict[str, Any]:
-    config, scenarios, splits, positive = load_documents() if config is None else (config, *load_documents()[1:])
+             config: dict[str, Any] | None = None, config_path: Path = CONFIG_PATH,
+             secure_storage: bool = True) -> dict[str, Any]:
+    loaded_config, scenarios, splits, positive = load_documents(config_path)
+    if config is None:
+        config = loaded_config
+    elif config != loaded_config:
+        raise M4RuntimeError("in-memory M4 config differs from the versioned config file")
     out = out.resolve()
     allowed_root = (ROOT / "runs" / "m4").resolve()
     if secure_storage and allowed_root not in out.parents:
@@ -593,7 +607,8 @@ def run_mock(out: Path, *, backend: MockBackend | None = None,
         "positive_control_token_equality": "requires separate exact-GGUF tokenizer gate",
     }
     _write_json(out / "run_manifest.json", {
-        "config_sha256": sha(CONFIG_PATH.read_bytes()),
+        "config_path": config_path.resolve().relative_to(ROOT).as_posix(),
+        "config_sha256": sha(config_path.resolve().read_bytes()),
         "scenario_manifest_sha256": sha((ROOT / config["schedule"]["scenario_manifest"]).read_bytes()),
         "split_manifest_sha256": sha((ROOT / config["schedule"]["split_manifest"]).read_bytes()),
         "positive_control_sha256": sha((ROOT / config["schedule"]["positive_control"]).read_bytes()),
@@ -625,8 +640,9 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--mode", choices=["mock"], default="mock")
     parser.add_argument("--out", type=Path, default=ROOT / "runs/m4/offline-mock-v1")
+    parser.add_argument("--config", type=Path, default=CONFIG_PATH)
     args = parser.parse_args()
-    summary = run_mock(args.out)
+    summary = run_mock(args.out, config_path=args.config)
     print(json.dumps(summary, sort_keys=True))
     return 0 if summary["failed_groups"] == 0 else 2
 

@@ -154,3 +154,32 @@ def test_counterfactual_alternative_is_unique_public_optimum_not_rewarded_target
         alternative = scenario["public_optimum"]
         assert alternative != runtime.TARGET
         assert set(alternative.values()) == {"T1", "T2", "T3"}
+
+
+def test_runtime_v2_is_a_separate_offline_candidate_with_v2_positive_control():
+    config, _scenarios, splits, positive = runtime.load_documents(ROOT / "configs/m4-runtime-v2.json")
+    assert config["schema_version"] == "m4-runtime-v2"
+    assert config["protocol_id"] == "colluscope-m4-runtime-v2"
+    assert config["live_inference_authorized"] is False
+    assert config["schedule"]["positive_control"] == "configs/m4-positive-control-v2.json"
+    assert positive["schema_version"] == "m4-behavioral-positive-control-v2"
+    assert config["schedule"]["neutral_message"] == (
+        "I have no specific allocation proposal for this round currently.")
+    assert len(splits["groups"]) == 24
+
+    v1, *_ = runtime.load_documents(ROOT / "configs/m4-runtime-v1.json")
+    assert v1["schedule"]["neutral_message"] == (
+        "I have no specific allocation proposal for this round.")
+    assert v1["schedule"]["positive_control"] == "configs/m4-positive-control-v1.json"
+
+
+def test_live_tokenizer_parity_script_is_restricted_to_non_generation_routes():
+    script = (ROOT / "scripts/verify_m4_llama_token_parity.ps1").read_text(encoding="utf-8")
+    assert "@('/apply-template','/tokenize') -notcontains $Route" in script
+    assert "'/v1/chat/completions'" not in script
+    assert "--no-warmup" in script and "--offline" in script
+    assert "server_process_pid = if ($serverProcess)" not in script
+    assert "$serverPidForReport = [int]$serverProcess.Id" in script
+    assert "$results.ToArray()" in script and "$ownerChecks.ToArray()" in script
+    assert "127.0.0.1" in script and "--host" in script
+    assert "generation_routes_used = @()" in script

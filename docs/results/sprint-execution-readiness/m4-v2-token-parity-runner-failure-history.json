@@ -1,0 +1,19 @@
+{
+  "cleanup_check_sha256": "96dcfcbe4c3abc82749ed8dd099b071efd55241867f325057e68c361b3d10eeb",
+  "error_message": "Argument types do not match",
+  "error_type": "ArgumentException",
+  "event": "final_report_serialization_failed_after_http_loop",
+  "external_network_requests": 0,
+  "generation_routes": [],
+  "http_200_count": 192,
+  "http_attempts_started": 192,
+  "http_terminal_records": 192,
+  "interpretation": "Preserved run failure. Independent raw-trace replay recovered the tokenizer parity result; runner finalizer fix was applied after this run and was not exercised by repeating its 192 HTTP attempts.",
+  "non_200_or_error_count": 0,
+  "post_run_cleanup_pass": true,
+  "raw_error_sha256": "df351f0ba1c60177791dc0da90dd059708812cacc92db37ed385cf44aad6e973",
+  "raw_run_id": "tokenizer-parity-v2-attempt07-20261020",
+  "real_model_generations": 0,
+  "schema_version": "m4-token-parity-runner-failure-history-v1",
+  "script_line": 321
+}

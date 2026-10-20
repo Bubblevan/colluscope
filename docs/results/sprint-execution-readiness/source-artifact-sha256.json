@@ -17,6 +17,11 @@
       "sha256": "45ddc41963a729047e9f27dcc0f40d4eed22e659eb743fdfe4974ecb142418ed"
     },
     {
+      "path": "configs/m4-runtime-v2.json",
+      "bytes": 3537,
+      "sha256": "bfe5e5562fcaef4d53bea78db6e872c6c48e4bee6ad9df84f527ce73b736a026"
+    },
+    {
       "path": "configs/sprint-monitor-runtime-v1.toml",
       "bytes": 1310,
       "sha256": "d6c41d412dc9b298e778ac6aa041668bd219dfff4ab15bba77e0d98f5b3ec079"
@@ -68,28 +73,28 @@
     },
     {
       "path": "docs/ITERATION_LOG.md",
-      "bytes": 220772,
-      "sha256": "30eefa968647630fd3fa67ba2ef1f2ecdf5d5f784febcd950d8270b088e96dec"
+      "bytes": 225925,
+      "sha256": "a8b7c3a0c65fbf723cab82ed9e6f27194d9fc98c50fa4cad6df78410ea4014a9"
     },
     {
       "path": "docs/M4_PROSPECTIVE_PROTOCOL.md",
-      "bytes": 10567,
-      "sha256": "3b6c7fe66924416136027f017b30a895bb71dd63f989016d996eb9f4826e5c1d"
+      "bytes": 13781,
+      "sha256": "f4551e5494c7f571220f9bb12dbd1c9429d10efe479c148101f83484b1764294"
     },
     {
       "path": "docs/RESEARCH_RISK_REGISTER.md",
-      "bytes": 91387,
-      "sha256": "42b2dc5edfc4fbd3f9f64e1c06d04ecc04fbbc1cbe5e1162d114acb301712a55"
+      "bytes": 93885,
+      "sha256": "e88ba2239e6bbc55b901b5c87ccc47ffa840e3e4cfa95f71ae98a13623ed4c45"
     },
     {
       "path": "docs/SPRINT_EXECUTION_READINESS_DECISION.md",
-      "bytes": 4750,
-      "sha256": "fff5bd82ccf550f0fde749e3ed3496639a9d0616174a929eb66c1d64f855de88"
+      "bytes": 8463,
+      "sha256": "f9f51ae5456e198b299535355d1e28a65ce0f1dcb37976e259e6e904a0dfe868"
     },
     {
       "path": "docs/SPRINT_EXECUTION_READINESS_EVIDENCE.md",
-      "bytes": 7738,
-      "sha256": "da8884b49b3c41ad593dc0953ec331481f17ae298696f139de459f9af012d2ce"
+      "bytes": 11903,
+      "sha256": "cea1b93b627edf033b79dfdb007c8394225a4f57e4ba6427773da5edc3373605"
     },
     {
       "path": "docs/SPRINT_EXECUTION_READINESS_PROTOCOL.md",
@@ -207,6 +212,51 @@
       "sha256": "ad303029992357e732ad9af1228bb7351ddb29fa62fbbd546721df720b091954"
     },
     {
+      "path": "docs/results/sprint-execution-readiness/m4-v2-finalizer-smoke.log",
+      "bytes": 114,
+      "sha256": "47180b04354e6173eab59e3a1e658cfc83238a39476f91b50523107ec2685b1f"
+    },
+    {
+      "path": "docs/results/sprint-execution-readiness/m4-v2-local-token-audit.log",
+      "bytes": 268,
+      "sha256": "43d9b1325b29cca46141a9ed651cb74d3ea34df01f88989dd77dfd274e50ce4e"
+    },
+    {
+      "path": "docs/results/sprint-execution-readiness/m4-v2-mock-audit.json",
+      "bytes": 584,
+      "sha256": "2b8e3ea510fb1568232d7629b67d228614901307bafdd3aba9e9b72f13756851"
+    },
+    {
+      "path": "docs/results/sprint-execution-readiness/m4-v2-mock-audit.log",
+      "bytes": 545,
+      "sha256": "2a3bfd82b6f21933bbfda0b60f9dce74c053f1afa05798c24bf738b1c81aeeaa"
+    },
+    {
+      "path": "docs/results/sprint-execution-readiness/m4-v2-server-parity-audit.log",
+      "bytes": 290,
+      "sha256": "20bbc745a5a31db43c4a02623dabeb3435563c96cc331f114dc17d37e9e28f06"
+    },
+    {
+      "path": "docs/results/sprint-execution-readiness/m4-v2-server-tokenizer-parity-audit.json",
+      "bytes": 2887,
+      "sha256": "f57438fbd87ec1b5e2afbc9b7f1d11b0646631a5c70698c3bddfca77c84c9bbc"
+    },
+    {
+      "path": "docs/results/sprint-execution-readiness/m4-v2-targeted-tests-final.log",
+      "bytes": 102,
+      "sha256": "aca0bb11dfd162a026ba026015f2a1000e7ea0b9071da5ca164c13828db8a041"
+    },
+    {
+      "path": "docs/results/sprint-execution-readiness/m4-v2-token-match-audit.json",
+      "bytes": 27632,
+      "sha256": "360d1f2fbb8d4688dc2d92c10c70e7f9ea9f7f9925e90fb66a1ec18acb073b6c"
+    },
+    {
+      "path": "docs/results/sprint-execution-readiness/m4-v2-token-parity-runner-failure-history.json",
+      "bytes": 967,
+      "sha256": "24bc18ca38092f55fd4274a3d2c53a77b3dd5a7493c0377e319ab45ad4264760"
+    },
+    {
       "path": "docs/results/sprint-execution-readiness/merge-python-version.log",
       "bytes": 14,
       "sha256": "84cb1f1bb612c0ff1c818047eb464813fb74f08e27eb19946389e10fd7ccbb36"
@@ -322,14 +372,29 @@
       "sha256": "4225e9705f88399041e76eb21938b77d03c6f73c28420619b9a9f0057a760f3c"
     },
     {
+      "path": "scripts/audit_m4_llama_token_parity.py",
+      "bytes": 18277,
+      "sha256": "d23df4ae840614e3bece03d109a551a492508e161329bc762f6703ddab6dd060"
+    },
+    {
       "path": "scripts/audit_m4_mock.py",
       "bytes": 11797,
       "sha256": "bb4d97691332552248a74de8f96ced64dbeab0bef33922f94bbef37d333e10d5"
     },
     {
+      "path": "scripts/audit_m4_v2_token_matching.py",
+      "bytes": 9731,
+      "sha256": "453cf02479fe709f0084cef7e8abb72d8f13bf0322c041e1350cd592d0f45a71"
+    },
+    {
       "path": "scripts/audit_sprint_monitor_mock.py",
       "bytes": 6756,
       "sha256": "6c92de8b349be1cc074cd1c4f857f660789e57770f501aeef4b5522f82845729"
+    },
+    {
+      "path": "scripts/export_m4_server_parity_inputs.py",
+      "bytes": 5455,
+      "sha256": "c3cf34538ddffb06b07b8e77a7a74397d4b0a301addeeeff9ecdbe0eb6408198"
     },
     {
       "path": "scripts/prepare_sprint_controls_v2.py",
@@ -338,13 +403,18 @@
     },
     {
       "path": "scripts/run_m4_offline.py",
-      "bytes": 33683,
-      "sha256": "5cacb8c6ab3c876adc0d29cdc4028e5bd74f1b637e7253d83eb6558324467097"
+      "bytes": 34740,
+      "sha256": "cf4215cf12f03edb7e3dafeeaa50e3e0b08f080a543c1f96e45216fe6bb81b19"
     },
     {
       "path": "scripts/run_sprint_monitor.py",
       "bytes": 38432,
       "sha256": "7a9719376889dba3aeb7e757bbb1412e49bd449633547f939dad07fc265b8353"
+    },
+    {
+      "path": "scripts/verify_m4_llama_token_parity.ps1",
+      "bytes": 18957,
+      "sha256": "0ca7f1f8a3cd98b6087186339b20710c63c96f4494704af662fb024c1e1e32f1"
     },
     {
       "path": "scripts/verify_m4_local_environment.py",
@@ -368,13 +438,13 @@
     },
     {
       "path": "tests/test_m4_runtime.py",
-      "bytes": 8743,
-      "sha256": "3b1e94f0c38e6a917f085c5f2276bb55e95cab0c7359ebd6faf2bf976bea54e5"
+      "bytes": 10403,
+      "sha256": "be5ffd472b843489c61f85ccf62b5035a5522041264b1d4c2c406eaa93558289"
     },
     {
       "path": "tests/test_m4_token_matching.py",
-      "bytes": 2086,
-      "sha256": "16d0e4fad368ec316fb48b3c25d9544f75bad8db779bdd9f1d1dd15d5b6a1420"
+      "bytes": 4744,
+      "sha256": "627ef942ba65cac3c284c06e7a4a1fb9f8eccc3feaceaf4bcbfcfad20c86b36a"
     },
     {
       "path": "tests/test_sprint_baselines.py",

@@ -1,8 +1,8 @@
 # Sprint Execution Readiness Evidence
 
 **Run date:** 2026-10-20 (Asia/Shanghai)
-**Scope:** offline artifact replay, deterministic/mock runtimes, local identity inspection.
-**Real model/API calls:** 0. **External inference calls:** 0. **llama-server launches:** 0.
+**Scope:** offline artifact replay, deterministic/mock runtimes, local identity inspection, and the dated M4 v2 local tokenizer/template parity diagnostic below.
+**Model generations / completion calls:** 0. **External inference calls:** 0. The complete 96-prompt token-only run used one server launch; earlier failed owner-detection/controller attempts are retained separately and some loaded the server without issuing HTTP requests.
 
 The committed `docs/results/sprint-execution-readiness/source-artifact-sha256.json` inventories SHA-256 hashes for the source, protocol, configuration, and captured evidence files in this readiness change. Local ignored Mock traces have separate manifests described below.
 
@@ -47,6 +47,28 @@ The mismatch was not edited away after inspection. The verifier returns `NO_GO_L
 The v1 failure is preserved. A separate candidate config changes only `XXXX` to `NONE` (`configs/m4-positive-control-v2.json`); both strings are four characters, and `NONE` is not mapped to either task action. `scripts/verify_m4_token_matching.py` uses the exact rendered system/user prompts, embedded GGUF tokenizer and frozen chat template to reproduce the old 0/24 match and test all 24 v2 groups. Result: v1 **0/24** (183 information vs 184 neutral tokens), v2 **24/24** (183 vs 183). Test result: **2 passed**, including the exact local GGUF integration gate. Receipt: `docs/results/sprint-execution-readiness/m4-positive-control-v2-token-match.json`; test log: `m4-token-match-tests-final.log`.
 
 This is not a live server parity result. It does not modify v1 or wire the candidate into the frozen v1 runtime. It establishes only that the prospective v2 positive-control pair has equal local-tokenizer prompt lengths. The separate focal Proposal/Neutral difference persists; overall M4 remains NO-GO for real inference.
+
+### M4 v2 candidate: live llama.cpp template/token-ID parity (2026-10-20)
+
+This bounded diagnostic loaded the already-frozen local Qwen3-8B Q4_K_M GGUF in llama.cpp build 10068, bound only to `127.0.0.1:8081`, disabled warmup and used `--offline`. It did **not** call any generation/completion endpoint. All prompts came from the versioned deterministic Mock run `runs/m4/offline-mock-v3-candidate`; this is a fixed-stimulus compatibility check, not an Agent behavior run.
+
+| Pair / endpoint comparison | Result |
+|---|---:|
+| Positive-control v1 information vs `XXXX` neutral, local GGUF tokenizer | 0/24 exact; 183 vs 184 tokens (the prior failure is reproduced) |
+| Positive-control v2 information vs `NONE` neutral, local GGUF tokenizer | 24/24 exact; 183 vs 183 tokens |
+| Focal Proposal vs v2 retained-history neutral, local GGUF tokenizer | 24/24 exact; family-specific pairs 528/528, 529/529, 530/530, and 533/533 |
+| Server-rendered prompts equal the frozen local chat-template strings | 96/96 exact |
+| llama.cpp server token-ID arrays equal the frozen local GGUF arrays | 96/96 exact |
+| Local HTTP accounting | 192 started / 192 terminal / 192 HTTP 200; 96 `/apply-template` + 96 `/tokenize`; zero other routes |
+| Server ownership and cleanup | 192 pre-request exact-owner checks plus 2 startup polls; post-run exact PID absent, no port-8081 listener, temporary API key absent |
+
+The local v1-to-v2 audit and server receipt record the frozen model SHA-256 `d98cdcbd03e17ce47681435b5150e34c1417f50b5c0019dd560e4882c5745785`, llama-server SHA-256 `3a8aea5f889c4b4c2ec41c98f4e1ed484bb7a40c4096883acb23d3cfe26b59fb`, runtime bundle SHA-256 `9559fd2af95a7e83e3cf4a04aab22b67e1d1a2ec032b1e983ce091a6283c7759`, tokenizer SHA-256 `06e72b9773cfad908874ae1a7aa92686068557c4aa624c857db88fe97052704f`, and chat-template SHA-256 `57f1fd00f0013a2be96aa79b857391f27e23df5b5f847072b524c897e24d0361`. The exact request/response ledger SHA-256 is in the machine-readable independent receipt.
+
+**Preserved runner failure:** after all 192 successful HTTP responses and normal server/key cleanup, Windows PowerShell 5.1 raised `ArgumentException: Argument types do not match` while constructing the final report's inline `if` value (`scripts/verify_m4_llama_token_parity.ps1`, line 321 in the run). The unhandled error and cleanup observations remain in the ignored local run directory. The independent auditor then compared all 96 raw template and tokenization responses against the frozen input manifest and verified all response-body hashes. The report writer was repaired by precomputing PowerShell arrays and scalar fields outside the ordered hashtable; parser and report-shape smoke checks passed. The 192-request run was not repeated, so the receipt status is explicitly `PASS_LLAMA_SERVER_TOKENIZER_PARITY_INDEPENDENT_REPLAY_RECOVERED`, not a runner-reported pass.
+
+This GO is narrow. M4 v2's fixed positive-control stimuli and fixed Mock focal stimuli now have exact local-server parity. Natural LLM-generated proposal text has not been generated or checked, so the focal token-count equality is not guaranteed for a future real Agent run. `NONE` remains an explicit no-valid-signal marker, not a no-message condition. No behavioral result, information-use result, collusion label, Monitor result, or permission to start the 264-generation pilot follows from this diagnostic.
+
+Committed sanitized receipts: `m4-v2-token-match-audit.json`, `m4-v2-server-tokenizer-parity-audit.json`, `m4-v2-mock-audit.json`, and `m4-v2-token-parity-runner-failure-history.json`. Captured command output is in `m4-v2-targeted-tests-final.log`, `m4-v2-local-token-audit.log`, `m4-v2-mock-audit.log`, `m4-v2-server-parity-audit.log`, and `m4-v2-finalizer-smoke.log`. Raw prompts, private Mock observations, response bodies, and the API key file (now removed) were not committed. The raw run tree remains ignored and ACL-restricted.
 
 ## Supplementary synthetic controls
 

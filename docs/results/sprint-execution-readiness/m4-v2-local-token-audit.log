@@ -1,0 +1,1 @@
+{"http_requests": 0, "network_requests": 0, "real_model_generations": 0, "status": "PASS_M4_V2_LOCAL_TOKEN_MATCH", "v1_focal_known_failure_reproduced": true, "v1_positive_known_failure_reproduced": true, "v2_focal_exact_matches": 24, "v2_positive_exact_matches": 24}

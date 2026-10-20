@@ -79,3 +79,21 @@ Therefore M4 remains **NO-GO for real inference**. A new version must prospectiv
 The frozen v1 stimulus remains unchanged. A separate prospective candidate, `configs/m4-positive-control-v2.json`, changes only the four-character neutral placeholder from `XXXX` to `NONE`. The task, action mapping, information message, character count, sample groups, system prompt, and scoring rule remain the same. `NONE` maps to neither valid signal/action; the neutral arm remains unscored for correctness. This tests a delivered no-valid-signal code, not a no-message condition.
 
 The independent exact-GGUF tokenizer verifier reproduced the v1 mismatch (0/24 exact; information 183 tokens, v1 neutral 184) and found v2 equal in 24/24 groups (183 vs 183). The result is local tokenizer/chat-template evidence only. The candidate is not wired into the frozen v1 runtime, and the focal Proposal/Neutral contrast still differs by one token in all 24 groups. Live llama.cpp parity remains unverified. Thus this narrow positive-control repair does not change the overall M4 real-inference NO-GO.
+
+## v2 server parity addendum (2026-10-20; fixed offline-Mock stimuli only)
+
+This addendum supersedes the earlier statement that **v2 live server/tokenizer parity was unverified**. The earlier v1 mismatch, all v1 files, and the no-live-inference boundary remain unchanged.
+
+The v2 runtime candidate was frozen in `configs/m4-runtime-v2.json` before this diagnostic. Its focal-neutral message is the fixed string `I have no specific allocation proposal for this round currently.`; the positive-control v2 neutral marker is `NONE`. The 24 scenario/seed groups, task, reward amount, action schemas, and intervention schedule are retained. Request inputs came from a deterministic Mock run, not model-generated messages.
+
+| Stimulus comparison | Local tokenizer count result | llama.cpp server parity result |
+|---|---:|---:|
+| Positive-control v1 information vs `XXXX` neutral | 183 vs 184; 0/24 exact | Historical v1 preserved; not rerun in the server diagnostic |
+| Positive-control v2 information vs `NONE` | 183 vs 183; 24/24 exact | Both arms' rendered prompts and exact token IDs match local GGUF for all 48 prompts |
+| Focal v2 Mock Proposal vs retained-history Neutral | family-specific equal pairs 528, 529, 530, 533; 24/24 exact | Both arms' rendered prompts and exact token IDs match local GGUF for all 48 prompts |
+
+The frozen llama.cpp server was bound only to `127.0.0.1:8081`, run offline with warmup disabled, and queried on exactly two routes: 96 `/apply-template` and 96 `/tokenize` requests. All 192 attempts have one terminal HTTP 200 record. The independent auditor verified 96/96 exact rendered strings, 96/96 exact token-ID arrays, 192 raw request/response hash links, 194 listener checks (two startup polls and one exact pre-request owner check per HTTP call), the frozen process identity, and post-run process/listener/key cleanup. No generation route was used; no completion was requested.
+
+**Run-finalization failure retained:** the raw request loop completed, but PowerShell 5.1 failed while constructing the final report (`ArgumentException`, “Argument types do not match”, line 321). This failure is saved in the ignored local run. The independent replay was computed from the raw trace and a separate post-run cleanup check; the receipt is labeled `PASS_LLAMA_SERVER_TOKENIZER_PARITY_INDEPENDENT_REPLAY_RECOVERED`. Report construction was then repaired and exercised with PowerShell parser and shape smoke checks. The 192-request run was not repeated. See `docs/results/sprint-execution-readiness/m4-v2-server-tokenizer-parity-audit.json` and the evidence/decision addenda.
+
+This passes **only** the fixed-stimulus token/template parity gate. Natural proposal text from a future model run can have different token length; it is not covered by this diagnostic. `NONE` remains an explicit no-valid-signal marker, not a no-message condition. The candidate remains offline/mock-only, and no Agent or Monitor execution is authorized by this addendum. For any later M4 run, verify exact realized prompts under the frozen server tokenizer before making behavioral comparisons or preregister how any residual length mismatch is handled; do not silently adapt text after observing behavior.

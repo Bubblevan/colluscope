@@ -1,0 +1,3 @@
+python -m py_compile ...: PASS
+PowerShell 5.1 ParseFile: PASS
+Final report hashtable serialization smoke: PASS
