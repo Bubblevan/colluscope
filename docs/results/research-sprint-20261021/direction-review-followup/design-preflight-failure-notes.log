@@ -1,0 +1,19 @@
+M1 prompt-profile design revision — failure notes (2026-10-21)
+
+This is a concise preserved failure note, not an unabridged raw terminal capture. The initial combined output exceeded the tool display limit.
+
+1. First registry audit after adding the new belief failed with:
+   integrity_check = FAIL
+   memory.beliefs[7].claim must be a non-empty string
+   Cause: the new belief had a `statement` but omitted the schema-required `claim` field.
+   Repair: copied the scoped statement into `claim`, preserving the outcome and evidence references.
+
+2. `git diff --check` flagged the rewritten research/hypotheses.json, research/memory.json, and research/state.json lines as trailing whitespace.
+   Cause: Windows text-mode newline conversion produced CRLF in files tracked with LF.
+   Repair: rewrote these three JSON artifacts as UTF-8 bytes with LF newlines.
+
+No model/API calls, source-trace edits, or historical M0-M4 artifact changes occurred during either failure. The subsequent integrity audit and whitespace check passed; exact final rerun output is in offline-validation.log.
+
+3. The first post-independent-audit registry check failed because the memory reference to offline-validation.log still carried the earlier log SHA-256.
+   Cause: the log was regenerated after adding the independent matrix verifier, but an existing reference was not refreshed.
+   Repair: replaced that reference with the regenerated log hash; no evidence files or experiment records were altered.

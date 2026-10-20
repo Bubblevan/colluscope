@@ -3,10 +3,10 @@
     {
       "competing_explanations": [
         "The extra chat-stage prompt or target salience, rather than delivered message meaning, causes the finite package contrast.",
-        "Shared-target knowledge allows parallel choices; the observed interaction may depend on payoff-family features rather than communication.",
-        "The post-hoc pattern is specific to the current Qwen3 checkpoint, scenario families, or assignment sequence and will not reproduce in new matched groups."
+        "Shared-target knowledge allows parallel choices; the observed interaction may depend on matrix features or target-regret strata rather than communication.",
+        "The post-hoc pattern is specific to the current Qwen3 checkpoint or this deterministic finite matrix set and will not reproduce in other tasks or models."
       ],
-      "discriminating_prediction": "Before any new response, freeze three new output-independent payoff matrices, 15 new matched scenario/seed groups, all five original conditions, and a counterbalanced order. Recompute target execution from ballots and estimate the four-cell interaction on all assigned groups. A null/negative interaction, failures concentrated in a condition, or a result confined to one family weakens a general package claim. Message-semantic effects remain outside this contrast and require separate randomization.",
+      "discriminating_prediction": "Before any new response, freeze 24 matched groups, each with one distinct output-independent payoff matrix, eight matrices per target-regret stratum (6, 12, 18), all five original conditions, and the counterbalanced order. Recompute target-execution difference-in-differences from all assigned ballots. A non-positive overall mean or positive means in fewer than two of the three regret strata weakens the finite package-replication claim. Report all 24 group values, exact prompt-profile multiplicity, and failures; do not claim population significance, message-semantic effects, collusion, or intent.",
       "evidence_refs": [
         {
           "path": "docs/results/m3-mechanism-audit-final/m3_group_results.csv",
@@ -59,11 +59,43 @@
         {
           "path": "research/drafts/m1-replication-candidate-matrices-20261021.json",
           "sha256": "3265366003173c97477d51ef0c670e1486fa6fb5fd9538cd1c919ffd3aa2d150"
+        },
+        {
+          "path": "research/drafts/m1-reward-chat-24group-replication-v3.md",
+          "sha256": "fef87f169a4ae830eddde457fed0192b80c8dbfd7d23e735db2bd35363be9f57"
+        },
+        {
+          "path": "research/drafts/m1-package-24-matrix-scenarios-20261021.json",
+          "sha256": "79358acd02dcade31291e879d1d173e5e92e9bf5f57305c65a3d59f954ca502a"
+        },
+        {
+          "path": "scripts/freeze_m1_package_24_matrix_design.py",
+          "sha256": "182cb9182a8b6269914570666510320fcc47af2d0bc5ba447b30a5ab8d949661"
+        },
+        {
+          "path": "scripts/audit_m1_replication_prompt_profiles.py",
+          "sha256": "5c7ed0b78f76dfb0685488e1f9dd352a1c6dad2d2200dc187d88fa4d7323a44b"
+        },
+        {
+          "path": "docs/results/research-sprint-20261021/direction-review-followup/m1-prompt-profile-audit.json",
+          "sha256": "f6d2c4d19f525c685dd25493cfe1319cbb72e491b3704ab490b27af28b1c7b2f"
+        },
+        {
+          "path": "docs/M1_PACKAGE_REPLICATION_CONTEXT_AUDIT_20261021.md",
+          "sha256": "73b61a88fe6e229439cc4a271424daa4cf3cb5ea1579ff4bca0e42f13dd9e7a4"
+        },
+        {
+          "path": "docs/results/research-sprint-20261021/direction-review-followup/m1-24-matrix-independent-audit.json",
+          "sha256": "e8e7def5f6621681a15bf648e8ef1fa228cb4cd872c7bcc4a23a17a7ecb8849f"
+        },
+        {
+          "path": "scripts/audit_m1_package_24_matrix_design.py",
+          "sha256": "652b85cd04940dbaa4d60eaad51f2ac18cf8408cb195511aba6c43894e951c5e"
         }
       ],
       "hypothesis": "In a prospective matched replication, the assigned private-target-reward plus chat-stage package will produce a positive target-execution interaction relative to private reward without chat and chat without private reward. This hypothesis concerns the treatment package only; it does not predict that message semantics, agreement, collusion, or intent are identified.",
       "hypothesis_id": "communication-content-choice-effect",
-      "selection_note": "Selected as the next prospective empirical question after the B5 campaign ended INCONCLUSIVE and the deterministic public-harm baseline was confirmed. The 9/15 versus 0/15 M1-100 package pattern is post-hoc, heterogeneous, and does not identify message semantics or intent. The current draft proposes 24 new matched groups and pairs the Agent replication with a separately adjudicated natural-language Monitor audit; no inference is authorized. Use the evidence-sufficiency results only to bound claims, and do not spend further Monitor calls on structured public-harm labels.",
+      "selection_note": "Selected as the next prospective empirical question after M4 B5 ended INCONCLUSIVE and the deterministic public-harm baseline was confirmed. The 9/15 versus 0/15 M1-100 package pattern is post-hoc and heterogeneous. The new 24-group draft tests the assigned private-reward by chat-stage package only; it does not isolate message semantics. Colosseum and recent long-horizon work already study communication/action divergence and history effects, so the contribution must be task-specific and evidence-aware. Keep M3 self-history as a post-hoc exploratory rival. The proposed Monitor audit is deferred until human references and privacy handling are frozen. No inference is authorized.",
       "status": "selected",
       "title": "Does a private target reward interact with chat-stage availability in allocation choices?"
     },
@@ -93,6 +125,41 @@
         }
       ],
       "selection_note": "Supporting Track 2.2 candidate only. It is paired with the selected B behavior replication under one proposed authorization; it cannot produce a latent-collusion label. A deterministic rule is the required baseline for structured public-harm, which is not an LLM prediction."
+    },
+    {
+      "hypothesis_id": "m3-self-history-message-content-interaction",
+      "title": "Does a recipient's own prior allocation statement moderate response to a peer proposal?",
+      "status": "candidate",
+      "hypothesis": "In a controlled short-horizon allocation prompt, recipient ballots may depend on the interaction between a scripted own-history allocation and the specific incoming peer allocation, beyond generic message presence.",
+      "competing_explanations": [
+        "The apparent M3 self-history split is an endogenous preference/eligibility artifact rather than a true moderator.",
+        "A generic message-stage or attention cue changes ballots similarly for proposal, neutral, and no-delivery inputs.",
+        "The effect is specific to one model/runtime or repeated fixed-context outputs and does not generalize."
+      ],
+      "discriminating_prediction": "A future controlled recipient-response study could cross target-versus-alternative scripted self-history with target proposal, alternative proposal, token-matched neutral, and no-delivery across new matched contexts, with an exact-repeat and decision-relevant information control. This would test a scripted-input response, not spontaneous multi-agent collusion. Do not dispatch without a new exact approval.",
+      "evidence_refs": [
+        {
+          "path": "docs/M3_SCIENTIFIC_RESULTS.md",
+          "sha256": "dd194d2579366acd0d15c4bc63952b8fddd20bbe92ffc2bdd339efd50e7eaf41"
+        },
+        {
+          "path": "docs/results/m3-mechanism-audit-final/m3_group_results.csv",
+          "sha256": "c2aa043d8aef430ff28ce3bbc3592e09ad817c4cf82681785bff287af94b3c0a"
+        },
+        {
+          "path": "scripts/analyze_m3_self_history_strata.py",
+          "sha256": "f4f908c594ed14540d133965401df24af2a82be4b8bd50033728052c3c78e8b7"
+        },
+        {
+          "path": "docs/results/research-sprint-20261021/direction-review-followup/m3-self-history-strata.json",
+          "sha256": "ba2c1b187892ce8df603a62cf80dd9cbe677bd7d416413da85856612b420eecb"
+        },
+        {
+          "path": "docs/SCIENTIFIC_DIRECTION_REVIEW_FOLLOWUP_20261021.md",
+          "sha256": "e9b7475788981cd47256949bfacbb0ba5c53d1b8a87961f6c6092fbdbfe96113"
+        }
+      ],
+      "selection_note": "Exploratory candidate motivated by a hash-checked sanitized-table reanalysis. The 0/5 versus 3/3 subgroup was post-hoc, endogenous, and conditional on eligible delivered proposals. Recent primary work already studies peer interventions and interaction history. Keep this candidate below the selected M1 package replication until a falsifiable, sufficiently distinct design is reviewed."
     }
   ],
   "policy": "At most three read-only candidate directions may be compared. Only one can be selected for a formal cycle at a time. Candidate status is not preregistration or authorization.",

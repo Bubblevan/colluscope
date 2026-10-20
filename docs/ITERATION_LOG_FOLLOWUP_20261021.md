@@ -1,0 +1,30 @@
+# Iteration Log Follow-up — 2026-10-21
+
+This addendum preserves the hash-pinned historical `docs/ITERATION_LOG.md`.
+
+## SCIENTIFIC-DIRECTION-FOLLOWUP-01 — M3 subgroup verification and novelty update
+
+- **INSPECT:** Started from `d451c1068e34987c6b521f511c377546d89c4da0`, current `research/state.json`, `research/memory.json`, `research/hypotheses.json`, budget, M3 results, and M1-100 factorial reanalysis. The closed 232-request M4 B5 campaign is the only current scoped authorization and its 232 call slots are fully consumed.
+- **HYPOTHESIZE:** The M3 self-history split could reflect (1) a true redundancy/consistency interaction, (2) endogenous self-preference and eligibility selection, or (3) generic message-stage/context effects rather than allocation meaning. A broad communication/history effect is already studied in recent primary work.
+- **PREREGISTER:** No new experiment was registered. A candidate 24-group M1 package replication draft is kept separate from authorization and from the deferred 216-request Monitor candidate.
+- **IMPLEMENT:** Added `scripts/analyze_m3_self_history_strata.py`, a hash-checking reanalysis of the sanitized M3 group table; added the M3-controlled-variable and literature-overlap review; created a single-primary-cycle M1 replication candidate with the 216-request Monitor batch removed. No frozen M0–M4 input or result was changed.
+- **RUN:** The script reproduced the M3 split: matching self-history 0/5 changed under Neutral, Masked, and No-delivery; no matching self-history 3/3 changed under Neutral and No-delivery, 0/3 under Masked. The same three groups changed in Neutral and No-delivery. No experimental model/API request occurred. The original raw M3 run directory is absent in this checkout, so this is not a raw trace replay.
+- **ADVERSARIAL REVIEW:** The stratum is post-hoc, endogenous, and conditional on eligible delivered literal proposals. No-delivery removes a mean 45.125 prompt tokens. Recent Colosseum and long-horizon peer/history work limit generic novelty claims. Prior separate reviewers disagree on whether A, B, or C is the best contribution; this follow-up is not an independent reviewer report.
+- **DECIDE:** Keep the M1 private-reward × chat-stage package as the selected next primary question because it is the strongest existing real-agent behavioral signal, while narrowing its claim and adding own-history only as exploratory. Defer new Monitor inference until human reference coding is actually available. No new calls are authorized by the consumed M4 scope.
+- **REPORT:** The exact follow-up evidence and draft are hash-pinned by the new commit. The single next action is to finish the offline runner/preregistration for `m1-reward-chat-24group-replication-v1` and then request a new exact user authorization before any Qwen generation.
+
+## M1-PROMPT-DUPLICATION-DESIGN-REVISION-01 — Exact-context falsification before inference
+
+- **INSPECT:** The candidate v2 design repeated three payoff matrices eight times each, with temperature zero. Seed and request IDs are not included in the agent-visible prompt. This could make 24 nominal groups substantially fewer distinct contexts.
+- **SPECIFY:** Falsify the concern by rendering every initial message prompt and every C ballot prompt with the frozen runtime. Exclude IDs/seeds because they are not rendered. Count exact SHA-256 prompt profiles without saving prompt text. A/B ballot prompts are response-conditioned and must not be guessed from a mock message.
+- **IMPLEMENT:** Kept the v2 matrix design unchanged as historical draft. Added an output-independent 24-matrix generator with eight unique matrices at each target-regret level; each matrix maps to one seed/group. Added an exact prompt profile auditor using the existing M1 renderer and a v3 candidate preregistration that labels repeated C inputs as a negative control. Added a separate payoff/schedule verifier that does not import the generator.
+- **RUN:** v2 produced 36 unique initial message prompts / 96 assigned and 18 unique C ballot prompts / 120 assigned. v3 produced 96 / 96 initial message prompts and 48 / 120 C ballot prompts. C's four no-public-bonus inputs were identical in 24 / 24 groups. Independent verification recomputed all 144 matrix-assignment scores, verified 24 unique canonical orbits and replayed the first-eight selection order per regret stratum. Generator, auditor, profile, registry, and whitespace checks passed; no model/API calls occurred.
+- **ADVERSARIAL REVIEW:** The correction removes known repeated payoff contexts but does not make the finite deterministic benchmark a population sample or its calls independent. C's duplicate inputs are intentional but only an input-invariance control. A/B ballot prompt profiles remain unknown until messages exist. Review is adversarial self-review, not blind independent confirmation.
+- **DECIDE:** Retire v2 for future approval review while retaining it unchanged. Keep v3 as the candidate primary package-replication design. Do not register or run it until a dedicated runtime/preflight is offline-validated and a fresh user authorization names exact generation/HTTP/cost/expiry bounds.
+- **REPORT:** See `docs/M1_PACKAGE_REPLICATION_CONTEXT_AUDIT_20261021.md`, the v3 candidate protocol, the generated 24-matrix schedule, and `m1-prompt-profile-audit.json`. The old three-matrix draft remains available to reproduce the counterexample.
+
+## Failed / unavailable work retained
+
+- `python scripts/audit_m3_mechanism.py --help` failed before argument parsing with `ModuleNotFoundError: No module named 'scripts.local_llama_security'`; the module-mode invocation `python -m scripts.audit_m3_mechanism --help` succeeded. This is invocation-path behavior, not a model or source-data result.
+- The frozen source run path `runs/m3/mechanism-20261020` is not present in the current checkout. No attempt was made to reconstruct raw private messages or infer values from outside the sanitized frozen table.
+- These observations are preserved in `docs/results/research-sprint-20261021/direction-review-followup/analysis-first-failures.log`.

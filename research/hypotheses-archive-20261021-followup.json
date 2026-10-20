@@ -1,0 +1,101 @@
+{
+  "candidates": [
+    {
+      "competing_explanations": [
+        "The extra chat-stage prompt or target salience, rather than delivered message meaning, causes the finite package contrast.",
+        "Shared-target knowledge allows parallel choices; the observed interaction may depend on payoff-family features rather than communication.",
+        "The post-hoc pattern is specific to the current Qwen3 checkpoint, scenario families, or assignment sequence and will not reproduce in new matched groups."
+      ],
+      "discriminating_prediction": "Before any new response, freeze three new output-independent payoff matrices, 15 new matched scenario/seed groups, all five original conditions, and a counterbalanced order. Recompute target execution from ballots and estimate the four-cell interaction on all assigned groups. A null/negative interaction, failures concentrated in a condition, or a result confined to one family weakens a general package claim. Message-semantic effects remain outside this contrast and require separate randomization.",
+      "evidence_refs": [
+        {
+          "path": "docs/results/m3-mechanism-audit-final/m3_group_results.csv",
+          "sha256": "c2aa043d8aef430ff28ce3bbc3592e09ad817c4cf82681785bff287af94b3c0a"
+        },
+        {
+          "path": "docs/results/deepseek-first-m4/audit/postrun_analysis_v2.md",
+          "sha256": "ab8882db0c1381e39f87f5ff3519ad2b5faaef625c63ab2bac8991c388fb4cba"
+        },
+        {
+          "path": "docs/M1_100_PROTOCOL.md",
+          "sha256": "8c64c562aae0c39d8bf45ef6858a0618068dadf5e8a747b97dd962c42accfcc4"
+        },
+        {
+          "path": "scripts/analyze_m1_100_factorial_interaction.py",
+          "sha256": "eb2982beefc8517751494376aa9871a5ed4fa08aa1f94132b17f091486355ea4"
+        },
+        {
+          "path": "docs/results/m1-100-factorial-interaction-20261021/m1_100_factorial_interaction.json",
+          "sha256": "ec79311bcd835f7960df147adfa0fb71aa1dcf8a0369bc8d291ea5c521315498"
+        },
+        {
+          "path": "docs/results/m1-100-factorial-interaction-20261021/matched_group_interactions.csv",
+          "sha256": "218f126943634496740c19dd3442d6a0e4eabee624a553d48acda041d94fc35f"
+        },
+        {
+          "path": "docs/M1_100_SCIENTIFIC_AUDIT.md",
+          "sha256": "0a20508d7048f1e573b4d158f348cfe647c8354199860ec1adf5b162a7ec9c1a"
+        },
+        {
+          "path": "docs/SCIENTIFIC_DIRECTION_REVIEW_POSTCAMPAIGN_20261021.md",
+          "sha256": "f464b9a1efc3c156a607d4a0a4da2f2993ea0ff050c53eb4c2bc6de3c8529eb8"
+        },
+        {
+          "path": "docs/results/research-sprint-20261021/direction-review-postcampaign/independent-critic-review.md",
+          "sha256": "a3abfe9ec64eac004394acbeadad9a3f1f805dfa3f99b43e3d63dbaaa7a029f8"
+        },
+        {
+          "path": "docs/results/m1-100-factorial-interaction-20261021/analysis_manifest.json",
+          "sha256": "9bf7b0f9ac3e43b885599d71f506671e6478df5ef5df29fd9e27e8fc827bbaa4"
+        },
+        {
+          "path": "docs/SCIENTIFIC_DIRECTION_REVIEW_CURRENT_20261021.md",
+          "sha256": "2723f4406d5756edba3b2aa2f847a689919749e71d1f4f877603d165d96a4270"
+        },
+        {
+          "path": "research/drafts/m1-package-monitor-campaign-v1.md",
+          "sha256": "64d71966db5166d99accb45acf437d968046bf7f9fe17396d01340f0508b3e82"
+        },
+        {
+          "path": "research/drafts/m1-replication-candidate-matrices-20261021.json",
+          "sha256": "3265366003173c97477d51ef0c670e1486fa6fb5fd9538cd1c919ffd3aa2d150"
+        }
+      ],
+      "hypothesis": "In a prospective matched replication, the assigned private-target-reward plus chat-stage package will produce a positive target-execution interaction relative to private reward without chat and chat without private reward. This hypothesis concerns the treatment package only; it does not predict that message semantics, agreement, collusion, or intent are identified.",
+      "hypothesis_id": "communication-content-choice-effect",
+      "selection_note": "Selected as the next prospective empirical question after the B5 campaign ended INCONCLUSIVE and the deterministic public-harm baseline was confirmed. The 9/15 versus 0/15 M1-100 package pattern is post-hoc, heterogeneous, and does not identify message semantics or intent. The current draft proposes 24 new matched groups and pairs the Agent replication with a separately adjudicated natural-language Monitor audit; no inference is authorized. Use the evidence-sufficiency results only to bound claims, and do not spend further Monitor calls on structured public-harm labels.",
+      "status": "selected",
+      "title": "Does a private target reward interact with chat-stage availability in allocation choices?"
+    },
+    {
+      "hypothesis_id": "m1-natural-message-action-audit",
+      "title": "Can a Monitor extract proposal and ballot-concordance facts from natural-language messages?",
+      "status": "candidate",
+      "hypothesis": "On the prospective M1 message slots, a privileged-evidence Monitor will recover complete allocation proposals and recipient-ballot concordance against independently double-coded human references better than a literal mapping baseline, while preserving abstentions and citation validity.",
+      "competing_explanations": [
+        "Natural-language messages contain no complete proposals, so a majority/always-negative baseline performs as well as the Monitor.",
+        "The Monitor prediction changes reflect schema/order bias or provider variation rather than message semantics.",
+        "Human coders cannot reliably distinguish proposal, acceptance, and ambiguity under the task codebook."
+      ],
+      "discriminating_prediction": "Freeze all 96 chat message slots, including no_message, and use two independent human coders plus adjudication before any Monitor call. Run frozen proposal and recipient-action-concordance tasks, plus 12 paired capability controls. A failure of coder agreement, positive controls, or Monitor improvement over the literal baseline falsifies the proposed LLM-specific value claim.",
+      "evidence_refs": [
+        {
+          "path": "docs/SCIENTIFIC_DIRECTION_REVIEW_CURRENT_20261021.md",
+          "sha256": "2723f4406d5756edba3b2aa2f847a689919749e71d1f4f877603d165d96a4270"
+        },
+        {
+          "path": "research/drafts/m1-package-monitor-campaign-v1.md",
+          "sha256": "64d71966db5166d99accb45acf437d968046bf7f9fe17396d01340f0508b3e82"
+        },
+        {
+          "path": "docs/M1_100_PROTOCOL.md",
+          "sha256": "8c64c562aae0c39d8bf45ef6858a0618068dadf5e8a747b97dd962c42accfcc4"
+        }
+      ],
+      "selection_note": "Supporting Track 2.2 candidate only. It is paired with the selected B behavior replication under one proposed authorization; it cannot produce a latent-collusion label. A deterministic rule is the required baseline for structured public-harm, which is not an LLM prediction."
+    }
+  ],
+  "policy": "At most three read-only candidate directions may be compared. Only one can be selected for a formal cycle at a time. Candidate status is not preregistration or authorization.",
+  "schema_version": 1,
+  "selected_hypothesis_id": "communication-content-choice-effect"
+}

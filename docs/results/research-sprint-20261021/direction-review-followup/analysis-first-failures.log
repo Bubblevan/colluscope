@@ -1,0 +1,15 @@
+This file preserves reanalysis availability and command failures. No model/API request was sent.
+
+1) Command: python scripts/audit_m3_mechanism.py --help
+   Exit: 1
+   Observed: import failed before argument parsing with `ModuleNotFoundError: No module named 'scripts.local_llama_security'` because direct-file execution did not put repository root on the module path.
+   Follow-up: `python -m scripts.audit_m3_mechanism --help` succeeded and showed the required `--run`/`--out` arguments.
+
+2) Source check: `runs/m3/mechanism-20261020`
+   Observed: path absent from the current worktree. The raw M3 audit was therefore not rerun; the follow-up analysis uses only the frozen, hash-checked `m3_group_results.csv`.
+
+3) Corrected permitted analysis:
+   Command: `python scripts/analyze_m3_self_history_strata.py --out docs/results/research-sprint-20261021/direction-review-followup/m3-self-history-strata.json`
+   Exit: 0
+   Result: `PASS_SANITIZED_GROUP_TABLE_RECOMPUTATION`; 12 assigned/completed, 8 eligible, self-history strata 5 and 3, Neutral changes 0/5 and 3/3, Masked changes 0/5 and 0/3, No-delivery changes 0/5 and 3/3.
+   This is not a raw trace audit or an independent replication.

@@ -1,0 +1,142 @@
+$ python scripts/freeze_m1_package_24_matrix_design.py --check
+exit_code=0
+stdout:
+{"episodes": 120, "generations": 456, "groups": 24, "matrices": 24, "model_outputs_consulted": false, "status": "PASS_FROZEN_24_MATRIX_DESIGN"}
+
+stderr:
+
+
+$ python scripts/audit_m1_package_24_matrix_design.py --check
+exit_code=0
+stdout:
+{"matrices": 24, "model_calls": 0, "permutations": 144, "status": "PASS_INDEPENDENT_M1_24_MATRIX_AUDIT"}
+
+stderr:
+
+
+$ python scripts/audit_m1_replication_prompt_profiles.py --check
+exit_code=0
+stdout:
+{"designs": 2, "model_calls": 0, "status": "PASS_PROMPT_PROFILE_RECOMPUTE"}
+
+stderr:
+
+
+$ python scripts/analyze_m3_self_history_strata.py --out docs/results/research-sprint-20261021/direction-review-followup/m3-self-history-strata.json
+exit_code=0
+stdout:
+{
+  "analysis": "post_hoc_exploratory_self_history_stratification",
+  "evidence_class": "offline_reanalysis",
+  "status": "PASS_SANITIZED_GROUP_TABLE_RECOMPUTATION",
+  "assigned_groups": 12,
+  "completed_groups": 12,
+  "eligible_groups": 8,
+  "eligible_baseline_proposal_concordance": 8,
+  "self_history_strata": {
+    "self_history_contains_focal": {
+      "eligible_groups": 5,
+      "ballot_changes": {
+        "neutral": {
+          "changed": 0,
+          "unchanged": 5
+        },
+        "masked": {
+          "changed": 0,
+          "unchanged": 5
+        },
+        "no_delivery": {
+          "changed": 0,
+          "unchanged": 5
+        }
+      }
+    },
+    "self_history_does_not_contain_focal": {
+      "eligible_groups": 3,
+      "ballot_changes": {
+        "neutral": {
+          "changed": 3,
+          "unchanged": 0
+        },
+        "masked": {
+          "changed": 0,
+          "unchanged": 3
+        },
+        "no_delivery": {
+          "changed": 3,
+          "unchanged": 0
+        }
+      }
+    }
+  },
+  "neutral_and_no_delivery_changed_same_groups": true,
+  "masked_changed_groups": 0,
+  "no_raw_private_messages_read": true,
+  "raw_run_directory_available": false,
+  "source_group_table_sha256": "c2aa043d8aef430ff28ce3bbc3592e09ad817c4cf82681785bff287af94b3c0a",
+  "source_artifact_manifest_sha256": "e2c139a4a5f5cacc8b7220a4ea273aae111c41d8d267516c951dc4d0358c3361",
+  "analysis_script_sha256": "f4f908c594ed14540d133965401df24af2a82be4b8bd50033728052c3c78e8b7",
+  "interpretation_limits": [
+    "The own-history split was post hoc and is not a randomized moderator.",
+    "Eligibility is conditional on a delivered literal complete allocation proposal.",
+    "Only eight focal contexts from one checkpoint are represented.",
+    "Neutral and no-delivery changed the same three ballots; that pattern does not identify message semantics.",
+    "No statement about latent collusion, agreement, or intent is supported.",
+    "This reanalysis trusts the frozen sanitized group table and is not a raw trace re-audit."
+  ]
+}
+
+stderr:
+
+
+$ python scripts/researchctl.py audit
+exit_code=0
+stdout:
+{
+  "integrity_check": "PASS",
+  "scientific_validity": "NOT_EVALUATED",
+  "registered_cycles": 4,
+  "open_experiments": [],
+  "new_iteration_usage": {
+    "model_calls": 352,
+    "external_cost_usd": 0.039167058
+  },
+  "usage_by_approval_id": {
+    "DS-FLASH-1200-2P50-20261020": {
+      "model_calls": 120,
+      "external_cost_usd": 0.01178532
+    },
+    "DS-FLASH-M4B5-CONTEXT-232-20261021": {
+      "model_calls": 232,
+      "external_cost_usd": 0.027381738
+    }
+  },
+  "project_limits": {
+    "max_model_calls": 1200,
+    "max_external_cost_usd": 2.5
+  },
+  "errors": []
+}
+
+stderr:
+
+
+$ python scripts/researchctl.py next
+exit_code=0
+stdout:
+{
+  "action_type": "select_and_preregister",
+  "next_action": "Review the scientific memory and up to three competing candidate hypotheses, select one, and preregister the smallest discriminating cycle.",
+  "goal_should_continue": true,
+  "dispatched": false,
+  "reason": "Scientific outcomes and phase gates do not complete the program Goal; only a separate completion review can do so."
+}
+
+stderr:
+
+
+$ git diff --check
+exit_code=0
+stdout:
+
+stderr:

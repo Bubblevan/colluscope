@@ -1,0 +1,3916 @@
+{
+  "conclusion": "The three-matrix v2 schedule offered only 36 unique pre-generation message prompts and 18 exact C-ballot prompts across 24 matched groups. The corrected 24-matrix v3 schedule has 96 unique message prompts and 48 exact C-ballot prompts; C's repeated identical input across four no-public-bonus conditions remains a deliberate matched negative control.",
+  "designs": [
+    {
+      "c_ballot_stage": {
+        "assigned_prompt_count": 120,
+        "duplicate_assignments": 102,
+        "profiles": [
+          {
+            "occurrences": [
+              {
+                "agent_id": "C",
+                "condition_id": "normal_cooperation",
+                "scenario_family_id": "m1_replication_family_3",
+                "seed_block_id": "seed-217"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "private_chat_no_side_bonus",
+                "scenario_family_id": "m1_replication_family_3",
+                "seed_block_id": "seed-217"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "coalition_incentive_no_private_chat",
+                "scenario_family_id": "m1_replication_family_3",
+                "seed_block_id": "seed-217"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "coalition_incentive_private_chat",
+                "scenario_family_id": "m1_replication_family_3",
+                "seed_block_id": "seed-217"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "coalition_incentive_private_chat",
+                "scenario_family_id": "m1_replication_family_3",
+                "seed_block_id": "seed-220"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "coalition_incentive_no_private_chat",
+                "scenario_family_id": "m1_replication_family_3",
+                "seed_block_id": "seed-220"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "private_chat_no_side_bonus",
+                "scenario_family_id": "m1_replication_family_3",
+                "seed_block_id": "seed-220"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "normal_cooperation",
+                "scenario_family_id": "m1_replication_family_3",
+                "seed_block_id": "seed-220"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "normal_cooperation",
+                "scenario_family_id": "m1_replication_family_3",
+                "seed_block_id": "seed-223"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "private_chat_no_side_bonus",
+                "scenario_family_id": "m1_replication_family_3",
+                "seed_block_id": "seed-223"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "coalition_incentive_no_private_chat",
+                "scenario_family_id": "m1_replication_family_3",
+                "seed_block_id": "seed-223"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "coalition_incentive_private_chat",
+                "scenario_family_id": "m1_replication_family_3",
+                "seed_block_id": "seed-223"
+              }
+            ],
+            "prompt_sha256": "0001fe59a6f46374ab274075da562aa8f4bf5a65c0c21f41bed9706c0da11efb"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "C",
+                "condition_id": "normal_cooperation",
+                "scenario_family_id": "m1_replication_family_1",
+                "seed_block_id": "seed-202"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "private_chat_no_side_bonus",
+                "scenario_family_id": "m1_replication_family_1",
+                "seed_block_id": "seed-202"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "coalition_incentive_no_private_chat",
+                "scenario_family_id": "m1_replication_family_1",
+                "seed_block_id": "seed-202"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "coalition_incentive_private_chat",
+                "scenario_family_id": "m1_replication_family_1",
+                "seed_block_id": "seed-202"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "coalition_incentive_private_chat",
+                "scenario_family_id": "m1_replication_family_1",
+                "seed_block_id": "seed-205"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "normal_cooperation",
+                "scenario_family_id": "m1_replication_family_1",
+                "seed_block_id": "seed-205"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "private_chat_no_side_bonus",
+                "scenario_family_id": "m1_replication_family_1",
+                "seed_block_id": "seed-205"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "coalition_incentive_no_private_chat",
+                "scenario_family_id": "m1_replication_family_1",
+                "seed_block_id": "seed-205"
+              }
+            ],
+            "prompt_sha256": "000697428ff847786c63866dbfb2a3d7ce90da9c9cb31389472ef03c92993962"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "C",
+                "condition_id": "common_incentive_parallel_behavior",
+                "scenario_family_id": "m1_replication_family_1",
+                "seed_block_id": "seed-201"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "common_incentive_parallel_behavior",
+                "scenario_family_id": "m1_replication_family_1",
+                "seed_block_id": "seed-204"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "common_incentive_parallel_behavior",
+                "scenario_family_id": "m1_replication_family_1",
+                "seed_block_id": "seed-207"
+              }
+            ],
+            "prompt_sha256": "178a6c21c3b9eebb87bcbdd4428bda63edfb9c157d65cbc9efa24db6bf6ae105"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "C",
+                "condition_id": "common_incentive_parallel_behavior",
+                "scenario_family_id": "m1_replication_family_2",
+                "seed_block_id": "seed-208"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "common_incentive_parallel_behavior",
+                "scenario_family_id": "m1_replication_family_2",
+                "seed_block_id": "seed-211"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "common_incentive_parallel_behavior",
+                "scenario_family_id": "m1_replication_family_2",
+                "seed_block_id": "seed-214"
+              }
+            ],
+            "prompt_sha256": "268f33db33ff9faea99f4745feddf76b204cecf326962311468b1d0c923a5951"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "C",
+                "condition_id": "normal_cooperation",
+                "scenario_family_id": "m1_replication_family_2",
+                "seed_block_id": "seed-210"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "private_chat_no_side_bonus",
+                "scenario_family_id": "m1_replication_family_2",
+                "seed_block_id": "seed-210"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "coalition_incentive_no_private_chat",
+                "scenario_family_id": "m1_replication_family_2",
+                "seed_block_id": "seed-210"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "coalition_incentive_private_chat",
+                "scenario_family_id": "m1_replication_family_2",
+                "seed_block_id": "seed-210"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "normal_cooperation",
+                "scenario_family_id": "m1_replication_family_2",
+                "seed_block_id": "seed-213"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "private_chat_no_side_bonus",
+                "scenario_family_id": "m1_replication_family_2",
+                "seed_block_id": "seed-213"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "coalition_incentive_no_private_chat",
+                "scenario_family_id": "m1_replication_family_2",
+                "seed_block_id": "seed-213"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "coalition_incentive_private_chat",
+                "scenario_family_id": "m1_replication_family_2",
+                "seed_block_id": "seed-213"
+              }
+            ],
+            "prompt_sha256": "3c64c25f6a71c31a1b8fa6a001aab6ad17c2a85869e29457abd9d9a778cd3c2b"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "C",
+                "condition_id": "common_incentive_parallel_behavior",
+                "scenario_family_id": "m1_replication_family_1",
+                "seed_block_id": "seed-202"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "common_incentive_parallel_behavior",
+                "scenario_family_id": "m1_replication_family_1",
+                "seed_block_id": "seed-205"
+              }
+            ],
+            "prompt_sha256": "50015d380cd4dda5597d2001224f9514b3d9f055709d9d7dc2643041149063d9"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "C",
+                "condition_id": "normal_cooperation",
+                "scenario_family_id": "m1_replication_family_2",
+                "seed_block_id": "seed-209"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "private_chat_no_side_bonus",
+                "scenario_family_id": "m1_replication_family_2",
+                "seed_block_id": "seed-209"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "coalition_incentive_no_private_chat",
+                "scenario_family_id": "m1_replication_family_2",
+                "seed_block_id": "seed-209"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "coalition_incentive_private_chat",
+                "scenario_family_id": "m1_replication_family_2",
+                "seed_block_id": "seed-209"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "private_chat_no_side_bonus",
+                "scenario_family_id": "m1_replication_family_2",
+                "seed_block_id": "seed-212"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "normal_cooperation",
+                "scenario_family_id": "m1_replication_family_2",
+                "seed_block_id": "seed-212"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "coalition_incentive_private_chat",
+                "scenario_family_id": "m1_replication_family_2",
+                "seed_block_id": "seed-212"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "coalition_incentive_no_private_chat",
+                "scenario_family_id": "m1_replication_family_2",
+                "seed_block_id": "seed-212"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "coalition_incentive_private_chat",
+                "scenario_family_id": "m1_replication_family_2",
+                "seed_block_id": "seed-215"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "coalition_incentive_no_private_chat",
+                "scenario_family_id": "m1_replication_family_2",
+                "seed_block_id": "seed-215"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "private_chat_no_side_bonus",
+                "scenario_family_id": "m1_replication_family_2",
+                "seed_block_id": "seed-215"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "normal_cooperation",
+                "scenario_family_id": "m1_replication_family_2",
+                "seed_block_id": "seed-215"
+              }
+            ],
+            "prompt_sha256": "66d1797451f884675f2a50f5c888a0f5083a34f6cd5823481404d34ccaa73aa2"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "C",
+                "condition_id": "coalition_incentive_private_chat",
+                "scenario_family_id": "m1_replication_family_2",
+                "seed_block_id": "seed-208"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "coalition_incentive_no_private_chat",
+                "scenario_family_id": "m1_replication_family_2",
+                "seed_block_id": "seed-208"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "private_chat_no_side_bonus",
+                "scenario_family_id": "m1_replication_family_2",
+                "seed_block_id": "seed-208"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "normal_cooperation",
+                "scenario_family_id": "m1_replication_family_2",
+                "seed_block_id": "seed-208"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "normal_cooperation",
+                "scenario_family_id": "m1_replication_family_2",
+                "seed_block_id": "seed-211"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "coalition_incentive_private_chat",
+                "scenario_family_id": "m1_replication_family_2",
+                "seed_block_id": "seed-211"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "coalition_incentive_no_private_chat",
+                "scenario_family_id": "m1_replication_family_2",
+                "seed_block_id": "seed-211"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "private_chat_no_side_bonus",
+                "scenario_family_id": "m1_replication_family_2",
+                "seed_block_id": "seed-211"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "coalition_incentive_no_private_chat",
+                "scenario_family_id": "m1_replication_family_2",
+                "seed_block_id": "seed-214"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "coalition_incentive_private_chat",
+                "scenario_family_id": "m1_replication_family_2",
+                "seed_block_id": "seed-214"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "normal_cooperation",
+                "scenario_family_id": "m1_replication_family_2",
+                "seed_block_id": "seed-214"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "private_chat_no_side_bonus",
+                "scenario_family_id": "m1_replication_family_2",
+                "seed_block_id": "seed-214"
+              }
+            ],
+            "prompt_sha256": "6853b6460b13f5d63f4592d3dacd9abd58fb10177ed03fd8feb98b13dc130f99"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "C",
+                "condition_id": "coalition_incentive_private_chat",
+                "scenario_family_id": "m1_replication_family_3",
+                "seed_block_id": "seed-218"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "coalition_incentive_no_private_chat",
+                "scenario_family_id": "m1_replication_family_3",
+                "seed_block_id": "seed-218"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "private_chat_no_side_bonus",
+                "scenario_family_id": "m1_replication_family_3",
+                "seed_block_id": "seed-218"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "normal_cooperation",
+                "scenario_family_id": "m1_replication_family_3",
+                "seed_block_id": "seed-218"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "coalition_incentive_no_private_chat",
+                "scenario_family_id": "m1_replication_family_3",
+                "seed_block_id": "seed-221"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "private_chat_no_side_bonus",
+                "scenario_family_id": "m1_replication_family_3",
+                "seed_block_id": "seed-221"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "normal_cooperation",
+                "scenario_family_id": "m1_replication_family_3",
+                "seed_block_id": "seed-221"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "coalition_incentive_private_chat",
+                "scenario_family_id": "m1_replication_family_3",
+                "seed_block_id": "seed-221"
+              }
+            ],
+            "prompt_sha256": "715e3cfc84194fb8dea76306bf42165cc74554fb6940927288b9e8c051b1f0a8"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "C",
+                "condition_id": "coalition_incentive_private_chat",
+                "scenario_family_id": "m1_replication_family_3",
+                "seed_block_id": "seed-216"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "coalition_incentive_no_private_chat",
+                "scenario_family_id": "m1_replication_family_3",
+                "seed_block_id": "seed-216"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "private_chat_no_side_bonus",
+                "scenario_family_id": "m1_replication_family_3",
+                "seed_block_id": "seed-216"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "normal_cooperation",
+                "scenario_family_id": "m1_replication_family_3",
+                "seed_block_id": "seed-216"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "private_chat_no_side_bonus",
+                "scenario_family_id": "m1_replication_family_3",
+                "seed_block_id": "seed-219"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "coalition_incentive_no_private_chat",
+                "scenario_family_id": "m1_replication_family_3",
+                "seed_block_id": "seed-219"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "coalition_incentive_private_chat",
+                "scenario_family_id": "m1_replication_family_3",
+                "seed_block_id": "seed-219"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "normal_cooperation",
+                "scenario_family_id": "m1_replication_family_3",
+                "seed_block_id": "seed-219"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "coalition_incentive_private_chat",
+                "scenario_family_id": "m1_replication_family_3",
+                "seed_block_id": "seed-222"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "coalition_incentive_no_private_chat",
+                "scenario_family_id": "m1_replication_family_3",
+                "seed_block_id": "seed-222"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "private_chat_no_side_bonus",
+                "scenario_family_id": "m1_replication_family_3",
+                "seed_block_id": "seed-222"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "normal_cooperation",
+                "scenario_family_id": "m1_replication_family_3",
+                "seed_block_id": "seed-222"
+              }
+            ],
+            "prompt_sha256": "7981576209eac12504db9d4d0f45110959ad883bd8ad521400d3a4be4a401322"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "C",
+                "condition_id": "common_incentive_parallel_behavior",
+                "scenario_family_id": "m1_replication_family_2",
+                "seed_block_id": "seed-209"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "common_incentive_parallel_behavior",
+                "scenario_family_id": "m1_replication_family_2",
+                "seed_block_id": "seed-212"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "common_incentive_parallel_behavior",
+                "scenario_family_id": "m1_replication_family_2",
+                "seed_block_id": "seed-215"
+              }
+            ],
+            "prompt_sha256": "7a026fb8286f2f30ad9a7f760d6982873389c568b83d7c42405c58634a4538f7"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "C",
+                "condition_id": "normal_cooperation",
+                "scenario_family_id": "m1_replication_family_1",
+                "seed_block_id": "seed-201"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "coalition_incentive_private_chat",
+                "scenario_family_id": "m1_replication_family_1",
+                "seed_block_id": "seed-201"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "coalition_incentive_no_private_chat",
+                "scenario_family_id": "m1_replication_family_1",
+                "seed_block_id": "seed-201"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "private_chat_no_side_bonus",
+                "scenario_family_id": "m1_replication_family_1",
+                "seed_block_id": "seed-201"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "private_chat_no_side_bonus",
+                "scenario_family_id": "m1_replication_family_1",
+                "seed_block_id": "seed-204"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "normal_cooperation",
+                "scenario_family_id": "m1_replication_family_1",
+                "seed_block_id": "seed-204"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "coalition_incentive_private_chat",
+                "scenario_family_id": "m1_replication_family_1",
+                "seed_block_id": "seed-204"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "coalition_incentive_no_private_chat",
+                "scenario_family_id": "m1_replication_family_1",
+                "seed_block_id": "seed-204"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "coalition_incentive_private_chat",
+                "scenario_family_id": "m1_replication_family_1",
+                "seed_block_id": "seed-207"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "coalition_incentive_no_private_chat",
+                "scenario_family_id": "m1_replication_family_1",
+                "seed_block_id": "seed-207"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "private_chat_no_side_bonus",
+                "scenario_family_id": "m1_replication_family_1",
+                "seed_block_id": "seed-207"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "normal_cooperation",
+                "scenario_family_id": "m1_replication_family_1",
+                "seed_block_id": "seed-207"
+              }
+            ],
+            "prompt_sha256": "abb3d46786e5a9060220f64f0f200b4bbe94d647d290bfa5574df6cfe5ac5c79"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "C",
+                "condition_id": "common_incentive_parallel_behavior",
+                "scenario_family_id": "m1_replication_family_3",
+                "seed_block_id": "seed-218"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "common_incentive_parallel_behavior",
+                "scenario_family_id": "m1_replication_family_3",
+                "seed_block_id": "seed-221"
+              }
+            ],
+            "prompt_sha256": "b529c5cc30259e1e6fba5fd1302abffe74cb164f5545ac225b6bac2f9fe9718a"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "C",
+                "condition_id": "common_incentive_parallel_behavior",
+                "scenario_family_id": "m1_replication_family_2",
+                "seed_block_id": "seed-210"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "common_incentive_parallel_behavior",
+                "scenario_family_id": "m1_replication_family_2",
+                "seed_block_id": "seed-213"
+              }
+            ],
+            "prompt_sha256": "c03d346b3c508bb7a50cc168899ec41792565190b11f7b4b500b83c3ad2770d6"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "C",
+                "condition_id": "coalition_incentive_no_private_chat",
+                "scenario_family_id": "m1_replication_family_1",
+                "seed_block_id": "seed-200"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "coalition_incentive_private_chat",
+                "scenario_family_id": "m1_replication_family_1",
+                "seed_block_id": "seed-200"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "normal_cooperation",
+                "scenario_family_id": "m1_replication_family_1",
+                "seed_block_id": "seed-200"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "private_chat_no_side_bonus",
+                "scenario_family_id": "m1_replication_family_1",
+                "seed_block_id": "seed-200"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "private_chat_no_side_bonus",
+                "scenario_family_id": "m1_replication_family_1",
+                "seed_block_id": "seed-203"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "coalition_incentive_no_private_chat",
+                "scenario_family_id": "m1_replication_family_1",
+                "seed_block_id": "seed-203"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "coalition_incentive_private_chat",
+                "scenario_family_id": "m1_replication_family_1",
+                "seed_block_id": "seed-203"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "normal_cooperation",
+                "scenario_family_id": "m1_replication_family_1",
+                "seed_block_id": "seed-203"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "private_chat_no_side_bonus",
+                "scenario_family_id": "m1_replication_family_1",
+                "seed_block_id": "seed-206"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "coalition_incentive_no_private_chat",
+                "scenario_family_id": "m1_replication_family_1",
+                "seed_block_id": "seed-206"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "coalition_incentive_private_chat",
+                "scenario_family_id": "m1_replication_family_1",
+                "seed_block_id": "seed-206"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "normal_cooperation",
+                "scenario_family_id": "m1_replication_family_1",
+                "seed_block_id": "seed-206"
+              }
+            ],
+            "prompt_sha256": "ec5face13db6bc0f243787b12d5248f20916b50464c943ff6632178a87ba24d7"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "C",
+                "condition_id": "common_incentive_parallel_behavior",
+                "scenario_family_id": "m1_replication_family_3",
+                "seed_block_id": "seed-216"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "common_incentive_parallel_behavior",
+                "scenario_family_id": "m1_replication_family_3",
+                "seed_block_id": "seed-219"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "common_incentive_parallel_behavior",
+                "scenario_family_id": "m1_replication_family_3",
+                "seed_block_id": "seed-222"
+              }
+            ],
+            "prompt_sha256": "f39e896af60d5d82ff66b69daa0124fd32749ab79cb8f297015000fd09a18e80"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "C",
+                "condition_id": "common_incentive_parallel_behavior",
+                "scenario_family_id": "m1_replication_family_1",
+                "seed_block_id": "seed-200"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "common_incentive_parallel_behavior",
+                "scenario_family_id": "m1_replication_family_1",
+                "seed_block_id": "seed-203"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "common_incentive_parallel_behavior",
+                "scenario_family_id": "m1_replication_family_1",
+                "seed_block_id": "seed-206"
+              }
+            ],
+            "prompt_sha256": "fc6a3415e75fde90aed4b288ec78cd092b507c7f6273944704d07870b3aee796"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "C",
+                "condition_id": "common_incentive_parallel_behavior",
+                "scenario_family_id": "m1_replication_family_3",
+                "seed_block_id": "seed-217"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "common_incentive_parallel_behavior",
+                "scenario_family_id": "m1_replication_family_3",
+                "seed_block_id": "seed-220"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "common_incentive_parallel_behavior",
+                "scenario_family_id": "m1_replication_family_3",
+                "seed_block_id": "seed-223"
+              }
+            ],
+            "prompt_sha256": "fde6f516c86ef43200b8fbbe984cf8b40dba46eedae4b852b25830f48326dd07"
+          }
+        ],
+        "unique_exact_prompt_count": 18
+      },
+      "c_identical_prompt_negative_control": {
+        "conditions_compared": [
+          "normal_cooperation",
+          "coalition_incentive_private_chat",
+          "coalition_incentive_no_private_chat",
+          "private_chat_no_side_bonus"
+        ],
+        "group_rows": [
+          {
+            "condition_count": 4,
+            "group_id": "old-1-1",
+            "same_c_prompt_across_four_no_public_bonus_conditions": true
+          },
+          {
+            "condition_count": 4,
+            "group_id": "old-1-2",
+            "same_c_prompt_across_four_no_public_bonus_conditions": true
+          },
+          {
+            "condition_count": 4,
+            "group_id": "old-1-3",
+            "same_c_prompt_across_four_no_public_bonus_conditions": true
+          },
+          {
+            "condition_count": 4,
+            "group_id": "old-1-4",
+            "same_c_prompt_across_four_no_public_bonus_conditions": true
+          },
+          {
+            "condition_count": 4,
+            "group_id": "old-1-5",
+            "same_c_prompt_across_four_no_public_bonus_conditions": true
+          },
+          {
+            "condition_count": 4,
+            "group_id": "old-1-6",
+            "same_c_prompt_across_four_no_public_bonus_conditions": true
+          },
+          {
+            "condition_count": 4,
+            "group_id": "old-1-7",
+            "same_c_prompt_across_four_no_public_bonus_conditions": true
+          },
+          {
+            "condition_count": 4,
+            "group_id": "old-1-8",
+            "same_c_prompt_across_four_no_public_bonus_conditions": true
+          },
+          {
+            "condition_count": 4,
+            "group_id": "old-2-1",
+            "same_c_prompt_across_four_no_public_bonus_conditions": true
+          },
+          {
+            "condition_count": 4,
+            "group_id": "old-2-2",
+            "same_c_prompt_across_four_no_public_bonus_conditions": true
+          },
+          {
+            "condition_count": 4,
+            "group_id": "old-2-3",
+            "same_c_prompt_across_four_no_public_bonus_conditions": true
+          },
+          {
+            "condition_count": 4,
+            "group_id": "old-2-4",
+            "same_c_prompt_across_four_no_public_bonus_conditions": true
+          },
+          {
+            "condition_count": 4,
+            "group_id": "old-2-5",
+            "same_c_prompt_across_four_no_public_bonus_conditions": true
+          },
+          {
+            "condition_count": 4,
+            "group_id": "old-2-6",
+            "same_c_prompt_across_four_no_public_bonus_conditions": true
+          },
+          {
+            "condition_count": 4,
+            "group_id": "old-2-7",
+            "same_c_prompt_across_four_no_public_bonus_conditions": true
+          },
+          {
+            "condition_count": 4,
+            "group_id": "old-2-8",
+            "same_c_prompt_across_four_no_public_bonus_conditions": true
+          },
+          {
+            "condition_count": 4,
+            "group_id": "old-3-1",
+            "same_c_prompt_across_four_no_public_bonus_conditions": true
+          },
+          {
+            "condition_count": 4,
+            "group_id": "old-3-2",
+            "same_c_prompt_across_four_no_public_bonus_conditions": true
+          },
+          {
+            "condition_count": 4,
+            "group_id": "old-3-3",
+            "same_c_prompt_across_four_no_public_bonus_conditions": true
+          },
+          {
+            "condition_count": 4,
+            "group_id": "old-3-4",
+            "same_c_prompt_across_four_no_public_bonus_conditions": true
+          },
+          {
+            "condition_count": 4,
+            "group_id": "old-3-5",
+            "same_c_prompt_across_four_no_public_bonus_conditions": true
+          },
+          {
+            "condition_count": 4,
+            "group_id": "old-3-6",
+            "same_c_prompt_across_four_no_public_bonus_conditions": true
+          },
+          {
+            "condition_count": 4,
+            "group_id": "old-3-7",
+            "same_c_prompt_across_four_no_public_bonus_conditions": true
+          },
+          {
+            "condition_count": 4,
+            "group_id": "old-3-8",
+            "same_c_prompt_across_four_no_public_bonus_conditions": true
+          }
+        ],
+        "groups_passing_exact_identity": 24,
+        "groups_total": 24,
+        "interpretation": "C is not shown private reward or the A/B channel. These repeated same-prompt ballots are an explicit input-invariance control, not independent prompt contexts."
+      },
+      "design_id": "three_matrices_eight_seeds_each_v2",
+      "distinct_matrix_count": 3,
+      "groups": 24,
+      "message_stage": {
+        "assigned_prompt_count": 96,
+        "duplicate_assignments": 60,
+        "profiles": [
+          {
+            "occurrences": [
+              {
+                "agent_id": "B",
+                "condition_id": "private_chat_no_side_bonus",
+                "scenario_family_id": "m1_replication_family_2",
+                "seed_block_id": "seed-209"
+              },
+              {
+                "agent_id": "B",
+                "condition_id": "private_chat_no_side_bonus",
+                "scenario_family_id": "m1_replication_family_2",
+                "seed_block_id": "seed-212"
+              },
+              {
+                "agent_id": "B",
+                "condition_id": "private_chat_no_side_bonus",
+                "scenario_family_id": "m1_replication_family_2",
+                "seed_block_id": "seed-215"
+              }
+            ],
+            "prompt_sha256": "0cb6cd7169c7ac6aa46b4cb5a9f38be9cc4b8a33e4b46ec4692bff5123df86dd"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "A",
+                "condition_id": "private_chat_no_side_bonus",
+                "scenario_family_id": "m1_replication_family_1",
+                "seed_block_id": "seed-200"
+              },
+              {
+                "agent_id": "A",
+                "condition_id": "private_chat_no_side_bonus",
+                "scenario_family_id": "m1_replication_family_1",
+                "seed_block_id": "seed-203"
+              },
+              {
+                "agent_id": "A",
+                "condition_id": "private_chat_no_side_bonus",
+                "scenario_family_id": "m1_replication_family_1",
+                "seed_block_id": "seed-206"
+              }
+            ],
+            "prompt_sha256": "13c4c5ebaf7d0a2521aeedfd0719953a0086e4d70eb87cee00bd7f83c14d5ec1"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "A",
+                "condition_id": "private_chat_no_side_bonus",
+                "scenario_family_id": "m1_replication_family_3",
+                "seed_block_id": "seed-218"
+              },
+              {
+                "agent_id": "A",
+                "condition_id": "private_chat_no_side_bonus",
+                "scenario_family_id": "m1_replication_family_3",
+                "seed_block_id": "seed-221"
+              }
+            ],
+            "prompt_sha256": "160e7cfa3b69a339bfc9a1194042555a029c943da1a71c381cd585b3f55ba552"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "A",
+                "condition_id": "private_chat_no_side_bonus",
+                "scenario_family_id": "m1_replication_family_2",
+                "seed_block_id": "seed-208"
+              },
+              {
+                "agent_id": "A",
+                "condition_id": "private_chat_no_side_bonus",
+                "scenario_family_id": "m1_replication_family_2",
+                "seed_block_id": "seed-211"
+              },
+              {
+                "agent_id": "A",
+                "condition_id": "private_chat_no_side_bonus",
+                "scenario_family_id": "m1_replication_family_2",
+                "seed_block_id": "seed-214"
+              }
+            ],
+            "prompt_sha256": "171848636b3201ece1c9d0fe4408e9e49ef5116b891876a0b821ecb927951ecd"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "A",
+                "condition_id": "private_chat_no_side_bonus",
+                "scenario_family_id": "m1_replication_family_3",
+                "seed_block_id": "seed-217"
+              },
+              {
+                "agent_id": "A",
+                "condition_id": "private_chat_no_side_bonus",
+                "scenario_family_id": "m1_replication_family_3",
+                "seed_block_id": "seed-220"
+              },
+              {
+                "agent_id": "A",
+                "condition_id": "private_chat_no_side_bonus",
+                "scenario_family_id": "m1_replication_family_3",
+                "seed_block_id": "seed-223"
+              }
+            ],
+            "prompt_sha256": "1b6cf2283d574bf5f39c3dc9b0d0d5b50824f891ded2ab79be13fe4b8df2ee92"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "A",
+                "condition_id": "coalition_incentive_private_chat",
+                "scenario_family_id": "m1_replication_family_1",
+                "seed_block_id": "seed-200"
+              },
+              {
+                "agent_id": "A",
+                "condition_id": "coalition_incentive_private_chat",
+                "scenario_family_id": "m1_replication_family_1",
+                "seed_block_id": "seed-203"
+              },
+              {
+                "agent_id": "A",
+                "condition_id": "coalition_incentive_private_chat",
+                "scenario_family_id": "m1_replication_family_1",
+                "seed_block_id": "seed-206"
+              }
+            ],
+            "prompt_sha256": "293054da33cced74da6734d05546b3b57c552d42a5bce877a892471a47fc80f4"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "A",
+                "condition_id": "coalition_incentive_private_chat",
+                "scenario_family_id": "m1_replication_family_2",
+                "seed_block_id": "seed-210"
+              },
+              {
+                "agent_id": "A",
+                "condition_id": "coalition_incentive_private_chat",
+                "scenario_family_id": "m1_replication_family_2",
+                "seed_block_id": "seed-213"
+              }
+            ],
+            "prompt_sha256": "2cc73acc4616f6d6184c3dd2e041d589a2f43bffb245aee3f1388f3ebce7fd87"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "A",
+                "condition_id": "private_chat_no_side_bonus",
+                "scenario_family_id": "m1_replication_family_2",
+                "seed_block_id": "seed-209"
+              },
+              {
+                "agent_id": "A",
+                "condition_id": "private_chat_no_side_bonus",
+                "scenario_family_id": "m1_replication_family_2",
+                "seed_block_id": "seed-212"
+              },
+              {
+                "agent_id": "A",
+                "condition_id": "private_chat_no_side_bonus",
+                "scenario_family_id": "m1_replication_family_2",
+                "seed_block_id": "seed-215"
+              }
+            ],
+            "prompt_sha256": "2d1e35dea508fe6e42a172257d076ca004d780f7583ca2529a42c21a84044624"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "B",
+                "condition_id": "coalition_incentive_private_chat",
+                "scenario_family_id": "m1_replication_family_1",
+                "seed_block_id": "seed-200"
+              },
+              {
+                "agent_id": "B",
+                "condition_id": "coalition_incentive_private_chat",
+                "scenario_family_id": "m1_replication_family_1",
+                "seed_block_id": "seed-203"
+              },
+              {
+                "agent_id": "B",
+                "condition_id": "coalition_incentive_private_chat",
+                "scenario_family_id": "m1_replication_family_1",
+                "seed_block_id": "seed-206"
+              }
+            ],
+            "prompt_sha256": "2ecff786c4fa595c620d157eefed00f7979cf5c5e31e5059b54d3160bc0a18ea"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "B",
+                "condition_id": "coalition_incentive_private_chat",
+                "scenario_family_id": "m1_replication_family_2",
+                "seed_block_id": "seed-210"
+              },
+              {
+                "agent_id": "B",
+                "condition_id": "coalition_incentive_private_chat",
+                "scenario_family_id": "m1_replication_family_2",
+                "seed_block_id": "seed-213"
+              }
+            ],
+            "prompt_sha256": "2f9374a352207ba8b9ed3760add4f701f3f25e3b80f86f23c11e5fb7b45e931d"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "B",
+                "condition_id": "coalition_incentive_private_chat",
+                "scenario_family_id": "m1_replication_family_3",
+                "seed_block_id": "seed-217"
+              },
+              {
+                "agent_id": "B",
+                "condition_id": "coalition_incentive_private_chat",
+                "scenario_family_id": "m1_replication_family_3",
+                "seed_block_id": "seed-220"
+              },
+              {
+                "agent_id": "B",
+                "condition_id": "coalition_incentive_private_chat",
+                "scenario_family_id": "m1_replication_family_3",
+                "seed_block_id": "seed-223"
+              }
+            ],
+            "prompt_sha256": "3d21733ad08d4b335ffed3e7dd596fc7c6080b004f05f6e19d163c74365e32b9"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "B",
+                "condition_id": "private_chat_no_side_bonus",
+                "scenario_family_id": "m1_replication_family_3",
+                "seed_block_id": "seed-217"
+              },
+              {
+                "agent_id": "B",
+                "condition_id": "private_chat_no_side_bonus",
+                "scenario_family_id": "m1_replication_family_3",
+                "seed_block_id": "seed-220"
+              },
+              {
+                "agent_id": "B",
+                "condition_id": "private_chat_no_side_bonus",
+                "scenario_family_id": "m1_replication_family_3",
+                "seed_block_id": "seed-223"
+              }
+            ],
+            "prompt_sha256": "46a524e6689870a8ec772894613dda7fc7b0a0faba58b16fa4c7088ebb86744f"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "A",
+                "condition_id": "coalition_incentive_private_chat",
+                "scenario_family_id": "m1_replication_family_2",
+                "seed_block_id": "seed-208"
+              },
+              {
+                "agent_id": "A",
+                "condition_id": "coalition_incentive_private_chat",
+                "scenario_family_id": "m1_replication_family_2",
+                "seed_block_id": "seed-211"
+              },
+              {
+                "agent_id": "A",
+                "condition_id": "coalition_incentive_private_chat",
+                "scenario_family_id": "m1_replication_family_2",
+                "seed_block_id": "seed-214"
+              }
+            ],
+            "prompt_sha256": "6378d3408bdb28a0c7bbee7e47b6f9ab088ef3e954606c522926f63f59d3055c"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "A",
+                "condition_id": "private_chat_no_side_bonus",
+                "scenario_family_id": "m1_replication_family_1",
+                "seed_block_id": "seed-202"
+              },
+              {
+                "agent_id": "A",
+                "condition_id": "private_chat_no_side_bonus",
+                "scenario_family_id": "m1_replication_family_1",
+                "seed_block_id": "seed-205"
+              }
+            ],
+            "prompt_sha256": "6c6caedc2ddbff6cf8beecc11f3cd9364042d00b2741e11bb06695a5e08763b5"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "A",
+                "condition_id": "coalition_incentive_private_chat",
+                "scenario_family_id": "m1_replication_family_3",
+                "seed_block_id": "seed-216"
+              },
+              {
+                "agent_id": "A",
+                "condition_id": "coalition_incentive_private_chat",
+                "scenario_family_id": "m1_replication_family_3",
+                "seed_block_id": "seed-219"
+              },
+              {
+                "agent_id": "A",
+                "condition_id": "coalition_incentive_private_chat",
+                "scenario_family_id": "m1_replication_family_3",
+                "seed_block_id": "seed-222"
+              }
+            ],
+            "prompt_sha256": "75a412ad41e9eeabba241efd4f6368a95a374a6be38bbcc970065452e3b5d1e8"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "A",
+                "condition_id": "private_chat_no_side_bonus",
+                "scenario_family_id": "m1_replication_family_2",
+                "seed_block_id": "seed-210"
+              },
+              {
+                "agent_id": "A",
+                "condition_id": "private_chat_no_side_bonus",
+                "scenario_family_id": "m1_replication_family_2",
+                "seed_block_id": "seed-213"
+              }
+            ],
+            "prompt_sha256": "799d8a0cd3593bee238674de39a0da429d4a4d76fd658a3fc1d70d417b7d3bf6"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "B",
+                "condition_id": "coalition_incentive_private_chat",
+                "scenario_family_id": "m1_replication_family_3",
+                "seed_block_id": "seed-216"
+              },
+              {
+                "agent_id": "B",
+                "condition_id": "coalition_incentive_private_chat",
+                "scenario_family_id": "m1_replication_family_3",
+                "seed_block_id": "seed-219"
+              },
+              {
+                "agent_id": "B",
+                "condition_id": "coalition_incentive_private_chat",
+                "scenario_family_id": "m1_replication_family_3",
+                "seed_block_id": "seed-222"
+              }
+            ],
+            "prompt_sha256": "79fe76cd30e45c39c5b213463021949ae5d3012f17cad22de752b06d832649eb"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "A",
+                "condition_id": "coalition_incentive_private_chat",
+                "scenario_family_id": "m1_replication_family_1",
+                "seed_block_id": "seed-202"
+              },
+              {
+                "agent_id": "A",
+                "condition_id": "coalition_incentive_private_chat",
+                "scenario_family_id": "m1_replication_family_1",
+                "seed_block_id": "seed-205"
+              }
+            ],
+            "prompt_sha256": "834a2336449f674ae29637c3f1d1ab0cc241c513f59da8045a162376f6dfce8f"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "A",
+                "condition_id": "private_chat_no_side_bonus",
+                "scenario_family_id": "m1_replication_family_3",
+                "seed_block_id": "seed-216"
+              },
+              {
+                "agent_id": "A",
+                "condition_id": "private_chat_no_side_bonus",
+                "scenario_family_id": "m1_replication_family_3",
+                "seed_block_id": "seed-219"
+              },
+              {
+                "agent_id": "A",
+                "condition_id": "private_chat_no_side_bonus",
+                "scenario_family_id": "m1_replication_family_3",
+                "seed_block_id": "seed-222"
+              }
+            ],
+            "prompt_sha256": "862ba671f984fd818a4ec46673c000b0a09a71de2bf183a028a59ca33852284e"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "B",
+                "condition_id": "coalition_incentive_private_chat",
+                "scenario_family_id": "m1_replication_family_1",
+                "seed_block_id": "seed-202"
+              },
+              {
+                "agent_id": "B",
+                "condition_id": "coalition_incentive_private_chat",
+                "scenario_family_id": "m1_replication_family_1",
+                "seed_block_id": "seed-205"
+              }
+            ],
+            "prompt_sha256": "884bda138326d022283f2ebaec6677ed836a03a5ee947b2c3323b3318d60cd67"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "B",
+                "condition_id": "private_chat_no_side_bonus",
+                "scenario_family_id": "m1_replication_family_2",
+                "seed_block_id": "seed-210"
+              },
+              {
+                "agent_id": "B",
+                "condition_id": "private_chat_no_side_bonus",
+                "scenario_family_id": "m1_replication_family_2",
+                "seed_block_id": "seed-213"
+              }
+            ],
+            "prompt_sha256": "89b97aaf43e6b4eeb19a684402c2bd60a469bc9701ecbedebeb771f2a60efd45"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "A",
+                "condition_id": "coalition_incentive_private_chat",
+                "scenario_family_id": "m1_replication_family_3",
+                "seed_block_id": "seed-217"
+              },
+              {
+                "agent_id": "A",
+                "condition_id": "coalition_incentive_private_chat",
+                "scenario_family_id": "m1_replication_family_3",
+                "seed_block_id": "seed-220"
+              },
+              {
+                "agent_id": "A",
+                "condition_id": "coalition_incentive_private_chat",
+                "scenario_family_id": "m1_replication_family_3",
+                "seed_block_id": "seed-223"
+              }
+            ],
+            "prompt_sha256": "9204228959539cff816c0b358da1f7836b9e45866459e13de5a681e422fd8b6b"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "B",
+                "condition_id": "private_chat_no_side_bonus",
+                "scenario_family_id": "m1_replication_family_3",
+                "seed_block_id": "seed-216"
+              },
+              {
+                "agent_id": "B",
+                "condition_id": "private_chat_no_side_bonus",
+                "scenario_family_id": "m1_replication_family_3",
+                "seed_block_id": "seed-219"
+              },
+              {
+                "agent_id": "B",
+                "condition_id": "private_chat_no_side_bonus",
+                "scenario_family_id": "m1_replication_family_3",
+                "seed_block_id": "seed-222"
+              }
+            ],
+            "prompt_sha256": "95e99b596ec41b0377bd6367a06e5ebe8fb86d760e8bd6f5f7f295e091556bc2"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "B",
+                "condition_id": "coalition_incentive_private_chat",
+                "scenario_family_id": "m1_replication_family_3",
+                "seed_block_id": "seed-218"
+              },
+              {
+                "agent_id": "B",
+                "condition_id": "coalition_incentive_private_chat",
+                "scenario_family_id": "m1_replication_family_3",
+                "seed_block_id": "seed-221"
+              }
+            ],
+            "prompt_sha256": "95fecfe5eaa506f5a0ca3d9728f125ece278ea73fd452ff116a1f9f1ee8e621e"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "B",
+                "condition_id": "coalition_incentive_private_chat",
+                "scenario_family_id": "m1_replication_family_1",
+                "seed_block_id": "seed-201"
+              },
+              {
+                "agent_id": "B",
+                "condition_id": "coalition_incentive_private_chat",
+                "scenario_family_id": "m1_replication_family_1",
+                "seed_block_id": "seed-204"
+              },
+              {
+                "agent_id": "B",
+                "condition_id": "coalition_incentive_private_chat",
+                "scenario_family_id": "m1_replication_family_1",
+                "seed_block_id": "seed-207"
+              }
+            ],
+            "prompt_sha256": "967006d669adef94abd8db3302e04187d9b3ea2ab6817f9953d3c7eb82367cfc"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "B",
+                "condition_id": "coalition_incentive_private_chat",
+                "scenario_family_id": "m1_replication_family_2",
+                "seed_block_id": "seed-208"
+              },
+              {
+                "agent_id": "B",
+                "condition_id": "coalition_incentive_private_chat",
+                "scenario_family_id": "m1_replication_family_2",
+                "seed_block_id": "seed-211"
+              },
+              {
+                "agent_id": "B",
+                "condition_id": "coalition_incentive_private_chat",
+                "scenario_family_id": "m1_replication_family_2",
+                "seed_block_id": "seed-214"
+              }
+            ],
+            "prompt_sha256": "9840cc674be86dff22f6b14b45c13b527c9cfe54d6ee59ee3ecbdb95c634d646"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "A",
+                "condition_id": "coalition_incentive_private_chat",
+                "scenario_family_id": "m1_replication_family_2",
+                "seed_block_id": "seed-209"
+              },
+              {
+                "agent_id": "A",
+                "condition_id": "coalition_incentive_private_chat",
+                "scenario_family_id": "m1_replication_family_2",
+                "seed_block_id": "seed-212"
+              },
+              {
+                "agent_id": "A",
+                "condition_id": "coalition_incentive_private_chat",
+                "scenario_family_id": "m1_replication_family_2",
+                "seed_block_id": "seed-215"
+              }
+            ],
+            "prompt_sha256": "9992dcd3c861c0092d9b2ef22487f40fd6dcd795b81f9abb05c408bef1cd9b7f"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "B",
+                "condition_id": "private_chat_no_side_bonus",
+                "scenario_family_id": "m1_replication_family_1",
+                "seed_block_id": "seed-200"
+              },
+              {
+                "agent_id": "B",
+                "condition_id": "private_chat_no_side_bonus",
+                "scenario_family_id": "m1_replication_family_1",
+                "seed_block_id": "seed-203"
+              },
+              {
+                "agent_id": "B",
+                "condition_id": "private_chat_no_side_bonus",
+                "scenario_family_id": "m1_replication_family_1",
+                "seed_block_id": "seed-206"
+              }
+            ],
+            "prompt_sha256": "a019c759789fac2a01e0460930eb694d182af5c357a99c1ef851d66054001d14"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "B",
+                "condition_id": "private_chat_no_side_bonus",
+                "scenario_family_id": "m1_replication_family_1",
+                "seed_block_id": "seed-201"
+              },
+              {
+                "agent_id": "B",
+                "condition_id": "private_chat_no_side_bonus",
+                "scenario_family_id": "m1_replication_family_1",
+                "seed_block_id": "seed-204"
+              },
+              {
+                "agent_id": "B",
+                "condition_id": "private_chat_no_side_bonus",
+                "scenario_family_id": "m1_replication_family_1",
+                "seed_block_id": "seed-207"
+              }
+            ],
+            "prompt_sha256": "aac1ce0988bde0d275199d4679be340c6d5bdc3490ca64bcbc0555e0d3fde90a"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "A",
+                "condition_id": "coalition_incentive_private_chat",
+                "scenario_family_id": "m1_replication_family_3",
+                "seed_block_id": "seed-218"
+              },
+              {
+                "agent_id": "A",
+                "condition_id": "coalition_incentive_private_chat",
+                "scenario_family_id": "m1_replication_family_3",
+                "seed_block_id": "seed-221"
+              }
+            ],
+            "prompt_sha256": "adfa644ce6069207e28a4edf3fb9d8600603a64a4315c63b616a6a3bad7103d5"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "B",
+                "condition_id": "private_chat_no_side_bonus",
+                "scenario_family_id": "m1_replication_family_1",
+                "seed_block_id": "seed-202"
+              },
+              {
+                "agent_id": "B",
+                "condition_id": "private_chat_no_side_bonus",
+                "scenario_family_id": "m1_replication_family_1",
+                "seed_block_id": "seed-205"
+              }
+            ],
+            "prompt_sha256": "b4a5aeca4ded5c9cd6e7381c7a7eae61f540148d670a338cfa78a2e855ff85c7"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "A",
+                "condition_id": "private_chat_no_side_bonus",
+                "scenario_family_id": "m1_replication_family_1",
+                "seed_block_id": "seed-201"
+              },
+              {
+                "agent_id": "A",
+                "condition_id": "private_chat_no_side_bonus",
+                "scenario_family_id": "m1_replication_family_1",
+                "seed_block_id": "seed-204"
+              },
+              {
+                "agent_id": "A",
+                "condition_id": "private_chat_no_side_bonus",
+                "scenario_family_id": "m1_replication_family_1",
+                "seed_block_id": "seed-207"
+              }
+            ],
+            "prompt_sha256": "b9a3ddf8d9893689758691836c08be22dbf353899d6b2a1631f7519ab90df728"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "B",
+                "condition_id": "private_chat_no_side_bonus",
+                "scenario_family_id": "m1_replication_family_3",
+                "seed_block_id": "seed-218"
+              },
+              {
+                "agent_id": "B",
+                "condition_id": "private_chat_no_side_bonus",
+                "scenario_family_id": "m1_replication_family_3",
+                "seed_block_id": "seed-221"
+              }
+            ],
+            "prompt_sha256": "bfa04f020f532de9f9d4a002a64902752c083ce2c3f20c63d3e2829306564eb2"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "A",
+                "condition_id": "coalition_incentive_private_chat",
+                "scenario_family_id": "m1_replication_family_1",
+                "seed_block_id": "seed-201"
+              },
+              {
+                "agent_id": "A",
+                "condition_id": "coalition_incentive_private_chat",
+                "scenario_family_id": "m1_replication_family_1",
+                "seed_block_id": "seed-204"
+              },
+              {
+                "agent_id": "A",
+                "condition_id": "coalition_incentive_private_chat",
+                "scenario_family_id": "m1_replication_family_1",
+                "seed_block_id": "seed-207"
+              }
+            ],
+            "prompt_sha256": "e95d2ad0d02598b1537e662ccbf3dfb79f79296545f2269b2665a20823d17b4e"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "B",
+                "condition_id": "coalition_incentive_private_chat",
+                "scenario_family_id": "m1_replication_family_2",
+                "seed_block_id": "seed-209"
+              },
+              {
+                "agent_id": "B",
+                "condition_id": "coalition_incentive_private_chat",
+                "scenario_family_id": "m1_replication_family_2",
+                "seed_block_id": "seed-212"
+              },
+              {
+                "agent_id": "B",
+                "condition_id": "coalition_incentive_private_chat",
+                "scenario_family_id": "m1_replication_family_2",
+                "seed_block_id": "seed-215"
+              }
+            ],
+            "prompt_sha256": "ef9117556311368c03df349c45d287cd3384a71d79867eed6219f37517fafada"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "B",
+                "condition_id": "private_chat_no_side_bonus",
+                "scenario_family_id": "m1_replication_family_2",
+                "seed_block_id": "seed-208"
+              },
+              {
+                "agent_id": "B",
+                "condition_id": "private_chat_no_side_bonus",
+                "scenario_family_id": "m1_replication_family_2",
+                "seed_block_id": "seed-211"
+              },
+              {
+                "agent_id": "B",
+                "condition_id": "private_chat_no_side_bonus",
+                "scenario_family_id": "m1_replication_family_2",
+                "seed_block_id": "seed-214"
+              }
+            ],
+            "prompt_sha256": "f03161322f1b8bac13f576f79a6cfb31a71c5d06c0ec52c9a4d7e675db81301b"
+          }
+        ],
+        "unique_exact_prompt_count": 36
+      },
+      "not_compiled_before_generation": [
+        "A/B ballot prompts that include future model-authored messages",
+        "Any exact response-conditioned prompt profile"
+      ],
+      "prompt_text_saved": false,
+      "request_ids_or_seeds_in_prompt_hash": false
+    },
+    {
+      "c_ballot_stage": {
+        "assigned_prompt_count": 120,
+        "duplicate_assignments": 72,
+        "profiles": [
+          {
+            "occurrences": [
+              {
+                "agent_id": "C",
+                "condition_id": "common_incentive_parallel_behavior",
+                "scenario_family_id": "m1_package_matrix_r18_05",
+                "seed_block_id": "seed-214"
+              }
+            ],
+            "prompt_sha256": "01eeeca5feb94dd8fe5da61c2c2153b1a95f37303245b6ac06e320f6324661e3"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "C",
+                "condition_id": "normal_cooperation",
+                "scenario_family_id": "m1_package_matrix_r12_05",
+                "seed_block_id": "seed-213"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "private_chat_no_side_bonus",
+                "scenario_family_id": "m1_package_matrix_r12_05",
+                "seed_block_id": "seed-213"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "coalition_incentive_no_private_chat",
+                "scenario_family_id": "m1_package_matrix_r12_05",
+                "seed_block_id": "seed-213"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "coalition_incentive_private_chat",
+                "scenario_family_id": "m1_package_matrix_r12_05",
+                "seed_block_id": "seed-213"
+              }
+            ],
+            "prompt_sha256": "0249eb387e8fde92dac079d5795e8db376d349e54b7ad108e1bba13f9bd5f7b0"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "C",
+                "condition_id": "coalition_incentive_private_chat",
+                "scenario_family_id": "m1_package_matrix_r18_03",
+                "seed_block_id": "seed-208"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "coalition_incentive_no_private_chat",
+                "scenario_family_id": "m1_package_matrix_r18_03",
+                "seed_block_id": "seed-208"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "private_chat_no_side_bonus",
+                "scenario_family_id": "m1_package_matrix_r18_03",
+                "seed_block_id": "seed-208"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "normal_cooperation",
+                "scenario_family_id": "m1_package_matrix_r18_03",
+                "seed_block_id": "seed-208"
+              }
+            ],
+            "prompt_sha256": "057e97238dd062363cbf932c6e291acc53999fbe1dd73544294231baa3a27036"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "C",
+                "condition_id": "common_incentive_parallel_behavior",
+                "scenario_family_id": "m1_package_matrix_r12_03",
+                "seed_block_id": "seed-207"
+              }
+            ],
+            "prompt_sha256": "058b6fefa61b134cfb967b153c0f8f4497fa740171ff51adbe922c374b788620"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "C",
+                "condition_id": "common_incentive_parallel_behavior",
+                "scenario_family_id": "m1_package_matrix_r18_06",
+                "seed_block_id": "seed-217"
+              }
+            ],
+            "prompt_sha256": "064441a7db0c285ef75285a2fa54beac999f95a10603f5b42de5ba242cfbe354"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "C",
+                "condition_id": "normal_cooperation",
+                "scenario_family_id": "m1_package_matrix_r18_08",
+                "seed_block_id": "seed-223"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "private_chat_no_side_bonus",
+                "scenario_family_id": "m1_package_matrix_r18_08",
+                "seed_block_id": "seed-223"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "coalition_incentive_no_private_chat",
+                "scenario_family_id": "m1_package_matrix_r18_08",
+                "seed_block_id": "seed-223"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "coalition_incentive_private_chat",
+                "scenario_family_id": "m1_package_matrix_r18_08",
+                "seed_block_id": "seed-223"
+              }
+            ],
+            "prompt_sha256": "0b0b518b59e664f5727c44b396cff8d4642a1feeff68701cd7408c4fec63e999"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "C",
+                "condition_id": "common_incentive_parallel_behavior",
+                "scenario_family_id": "m1_package_matrix_r18_01",
+                "seed_block_id": "seed-202"
+              }
+            ],
+            "prompt_sha256": "2451bec871882d9d26c42f448242bf3faa7c05efbe8a696583b2dfcceeb28666"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "C",
+                "condition_id": "common_incentive_parallel_behavior",
+                "scenario_family_id": "m1_package_matrix_r6_03",
+                "seed_block_id": "seed-206"
+              }
+            ],
+            "prompt_sha256": "2b7b15f58c17a923cc3d9d10e1d351fbf785c0619273bec75725bfbf776851ae"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "C",
+                "condition_id": "common_incentive_parallel_behavior",
+                "scenario_family_id": "m1_package_matrix_r12_08",
+                "seed_block_id": "seed-222"
+              }
+            ],
+            "prompt_sha256": "2d47cb4e3f95cceb67e88a7fc3a2cf701c912ef27d54c2835b7f97ace98b2b03"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "C",
+                "condition_id": "coalition_incentive_private_chat",
+                "scenario_family_id": "m1_package_matrix_r18_02",
+                "seed_block_id": "seed-205"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "normal_cooperation",
+                "scenario_family_id": "m1_package_matrix_r18_02",
+                "seed_block_id": "seed-205"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "private_chat_no_side_bonus",
+                "scenario_family_id": "m1_package_matrix_r18_02",
+                "seed_block_id": "seed-205"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "coalition_incentive_no_private_chat",
+                "scenario_family_id": "m1_package_matrix_r18_02",
+                "seed_block_id": "seed-205"
+              }
+            ],
+            "prompt_sha256": "3010013de403e73cf594bcbd6d1a4f53d42bae11dbfcd4b454355028e3c48610"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "C",
+                "condition_id": "coalition_incentive_private_chat",
+                "scenario_family_id": "m1_package_matrix_r12_03",
+                "seed_block_id": "seed-207"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "coalition_incentive_no_private_chat",
+                "scenario_family_id": "m1_package_matrix_r12_03",
+                "seed_block_id": "seed-207"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "private_chat_no_side_bonus",
+                "scenario_family_id": "m1_package_matrix_r12_03",
+                "seed_block_id": "seed-207"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "normal_cooperation",
+                "scenario_family_id": "m1_package_matrix_r12_03",
+                "seed_block_id": "seed-207"
+              }
+            ],
+            "prompt_sha256": "357d003e46de40eb103697ed1fa4e88bb16c26e0499cb25a248f090adfc0245b"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "C",
+                "condition_id": "common_incentive_parallel_behavior",
+                "scenario_family_id": "m1_package_matrix_r12_06",
+                "seed_block_id": "seed-216"
+              }
+            ],
+            "prompt_sha256": "37dd09b9c3d7675a7c5470fff80fc3c120b415be1dde7cc62d76aec4ecc29a98"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "C",
+                "condition_id": "common_incentive_parallel_behavior",
+                "scenario_family_id": "m1_package_matrix_r6_02",
+                "seed_block_id": "seed-203"
+              }
+            ],
+            "prompt_sha256": "413aa0d250a88dba55aea239335c76bca612202450882487ded2820906fe5a50"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "C",
+                "condition_id": "common_incentive_parallel_behavior",
+                "scenario_family_id": "m1_package_matrix_r12_04",
+                "seed_block_id": "seed-210"
+              }
+            ],
+            "prompt_sha256": "456fcb6654aa33c253a982caa0a98612b6fb8e7d69407faf24c57d55384c2b35"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "C",
+                "condition_id": "normal_cooperation",
+                "scenario_family_id": "m1_package_matrix_r12_01",
+                "seed_block_id": "seed-201"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "coalition_incentive_private_chat",
+                "scenario_family_id": "m1_package_matrix_r12_01",
+                "seed_block_id": "seed-201"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "coalition_incentive_no_private_chat",
+                "scenario_family_id": "m1_package_matrix_r12_01",
+                "seed_block_id": "seed-201"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "private_chat_no_side_bonus",
+                "scenario_family_id": "m1_package_matrix_r12_01",
+                "seed_block_id": "seed-201"
+              }
+            ],
+            "prompt_sha256": "56ab22307082333cadcc945f78bb26fe9d6465dfdbd1441b9fa7b733dea126bd"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "C",
+                "condition_id": "private_chat_no_side_bonus",
+                "scenario_family_id": "m1_package_matrix_r12_07",
+                "seed_block_id": "seed-219"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "coalition_incentive_no_private_chat",
+                "scenario_family_id": "m1_package_matrix_r12_07",
+                "seed_block_id": "seed-219"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "coalition_incentive_private_chat",
+                "scenario_family_id": "m1_package_matrix_r12_07",
+                "seed_block_id": "seed-219"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "normal_cooperation",
+                "scenario_family_id": "m1_package_matrix_r12_07",
+                "seed_block_id": "seed-219"
+              }
+            ],
+            "prompt_sha256": "59b4e56ce7622a72408582ea209b44aa3c1f4aa4dc153969d1d391c8a32d57ae"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "C",
+                "condition_id": "common_incentive_parallel_behavior",
+                "scenario_family_id": "m1_package_matrix_r6_05",
+                "seed_block_id": "seed-212"
+              }
+            ],
+            "prompt_sha256": "5ad4908873ad7866e2b212f411ce29c0854c34b74242f133347abd26edca4995"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "C",
+                "condition_id": "normal_cooperation",
+                "scenario_family_id": "m1_package_matrix_r18_06",
+                "seed_block_id": "seed-217"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "private_chat_no_side_bonus",
+                "scenario_family_id": "m1_package_matrix_r18_06",
+                "seed_block_id": "seed-217"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "coalition_incentive_no_private_chat",
+                "scenario_family_id": "m1_package_matrix_r18_06",
+                "seed_block_id": "seed-217"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "coalition_incentive_private_chat",
+                "scenario_family_id": "m1_package_matrix_r18_06",
+                "seed_block_id": "seed-217"
+              }
+            ],
+            "prompt_sha256": "5de4e0dff39904ce08d49b8d71d7e15fc3ad31b07523a6cee82575622e4249c3"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "C",
+                "condition_id": "coalition_incentive_private_chat",
+                "scenario_family_id": "m1_package_matrix_r18_07",
+                "seed_block_id": "seed-220"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "coalition_incentive_no_private_chat",
+                "scenario_family_id": "m1_package_matrix_r18_07",
+                "seed_block_id": "seed-220"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "private_chat_no_side_bonus",
+                "scenario_family_id": "m1_package_matrix_r18_07",
+                "seed_block_id": "seed-220"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "normal_cooperation",
+                "scenario_family_id": "m1_package_matrix_r18_07",
+                "seed_block_id": "seed-220"
+              }
+            ],
+            "prompt_sha256": "5e9f808c1f90a08f4352e32896042726b2e6e7bcb09895a6f25ce87d06bbbce6"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "C",
+                "condition_id": "common_incentive_parallel_behavior",
+                "scenario_family_id": "m1_package_matrix_r6_07",
+                "seed_block_id": "seed-218"
+              }
+            ],
+            "prompt_sha256": "6cac1c91658d2bf9f78e5521698e9213c7a1835ce51b40e02c6985887c90aa5a"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "C",
+                "condition_id": "coalition_incentive_private_chat",
+                "scenario_family_id": "m1_package_matrix_r6_07",
+                "seed_block_id": "seed-218"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "coalition_incentive_no_private_chat",
+                "scenario_family_id": "m1_package_matrix_r6_07",
+                "seed_block_id": "seed-218"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "private_chat_no_side_bonus",
+                "scenario_family_id": "m1_package_matrix_r6_07",
+                "seed_block_id": "seed-218"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "normal_cooperation",
+                "scenario_family_id": "m1_package_matrix_r6_07",
+                "seed_block_id": "seed-218"
+              }
+            ],
+            "prompt_sha256": "6ec44aff1dc713bf33edc7878e03ce7788fccfb02a5869290a7ff2b0c77bbf3c"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "C",
+                "condition_id": "normal_cooperation",
+                "scenario_family_id": "m1_package_matrix_r6_04",
+                "seed_block_id": "seed-209"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "private_chat_no_side_bonus",
+                "scenario_family_id": "m1_package_matrix_r6_04",
+                "seed_block_id": "seed-209"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "coalition_incentive_no_private_chat",
+                "scenario_family_id": "m1_package_matrix_r6_04",
+                "seed_block_id": "seed-209"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "coalition_incentive_private_chat",
+                "scenario_family_id": "m1_package_matrix_r6_04",
+                "seed_block_id": "seed-209"
+              }
+            ],
+            "prompt_sha256": "76d3a6f3cd0e9ae93e3516f2f1a3d6530eb8448d96767d00ae76416f52238d9c"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "C",
+                "condition_id": "common_incentive_parallel_behavior",
+                "scenario_family_id": "m1_package_matrix_r6_08",
+                "seed_block_id": "seed-221"
+              }
+            ],
+            "prompt_sha256": "77f1201de16057e8411741f90dd94c9064f4aa4098db5a6c18b31436f95d624e"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "C",
+                "condition_id": "common_incentive_parallel_behavior",
+                "scenario_family_id": "m1_package_matrix_r18_02",
+                "seed_block_id": "seed-205"
+              }
+            ],
+            "prompt_sha256": "79853a4add7adaa4cdc958f33cf5ed66d30595b2ff4c7357002c22c78b852a49"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "C",
+                "condition_id": "common_incentive_parallel_behavior",
+                "scenario_family_id": "m1_package_matrix_r18_04",
+                "seed_block_id": "seed-211"
+              }
+            ],
+            "prompt_sha256": "7fc7819dc330e0e7ef10e5c899c3eb6762acd24b843941d6613de736e59d67db"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "C",
+                "condition_id": "coalition_incentive_no_private_chat",
+                "scenario_family_id": "m1_package_matrix_r18_05",
+                "seed_block_id": "seed-214"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "coalition_incentive_private_chat",
+                "scenario_family_id": "m1_package_matrix_r18_05",
+                "seed_block_id": "seed-214"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "normal_cooperation",
+                "scenario_family_id": "m1_package_matrix_r18_05",
+                "seed_block_id": "seed-214"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "private_chat_no_side_bonus",
+                "scenario_family_id": "m1_package_matrix_r18_05",
+                "seed_block_id": "seed-214"
+              }
+            ],
+            "prompt_sha256": "8599c2d9547f7ca59ff0e9c313de858b2594ec1bb7e5176e9b2c3ee86f95431a"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "C",
+                "condition_id": "normal_cooperation",
+                "scenario_family_id": "m1_package_matrix_r18_01",
+                "seed_block_id": "seed-202"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "private_chat_no_side_bonus",
+                "scenario_family_id": "m1_package_matrix_r18_01",
+                "seed_block_id": "seed-202"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "coalition_incentive_no_private_chat",
+                "scenario_family_id": "m1_package_matrix_r18_01",
+                "seed_block_id": "seed-202"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "coalition_incentive_private_chat",
+                "scenario_family_id": "m1_package_matrix_r18_01",
+                "seed_block_id": "seed-202"
+              }
+            ],
+            "prompt_sha256": "8b2f73962a67aad15c8a7d41142dbd95b6ec9e0c789eeb905586830d1a512189"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "C",
+                "condition_id": "common_incentive_parallel_behavior",
+                "scenario_family_id": "m1_package_matrix_r18_08",
+                "seed_block_id": "seed-223"
+              }
+            ],
+            "prompt_sha256": "8fafbfdb238c0a8aa87d0f2efea17b428c2c4b5e3e95092c9ef3c3d34c13f9a3"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "C",
+                "condition_id": "common_incentive_parallel_behavior",
+                "scenario_family_id": "m1_package_matrix_r18_03",
+                "seed_block_id": "seed-208"
+              }
+            ],
+            "prompt_sha256": "94c47f743797fa4c78ee5c8acb84f148f82444924305df824e158b0abd6f411f"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "C",
+                "condition_id": "coalition_incentive_no_private_chat",
+                "scenario_family_id": "m1_package_matrix_r6_08",
+                "seed_block_id": "seed-221"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "private_chat_no_side_bonus",
+                "scenario_family_id": "m1_package_matrix_r6_08",
+                "seed_block_id": "seed-221"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "normal_cooperation",
+                "scenario_family_id": "m1_package_matrix_r6_08",
+                "seed_block_id": "seed-221"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "coalition_incentive_private_chat",
+                "scenario_family_id": "m1_package_matrix_r6_08",
+                "seed_block_id": "seed-221"
+              }
+            ],
+            "prompt_sha256": "94f0a2552746f82fee3549d7ef205362467699b8fd58150c059cf7c0ed14359e"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "C",
+                "condition_id": "private_chat_no_side_bonus",
+                "scenario_family_id": "m1_package_matrix_r6_02",
+                "seed_block_id": "seed-203"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "coalition_incentive_no_private_chat",
+                "scenario_family_id": "m1_package_matrix_r6_02",
+                "seed_block_id": "seed-203"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "coalition_incentive_private_chat",
+                "scenario_family_id": "m1_package_matrix_r6_02",
+                "seed_block_id": "seed-203"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "normal_cooperation",
+                "scenario_family_id": "m1_package_matrix_r6_02",
+                "seed_block_id": "seed-203"
+              }
+            ],
+            "prompt_sha256": "96677dd370241522dcf1b08a30f7af0672ae3ec0d0853f04b1848e486fa18631"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "C",
+                "condition_id": "coalition_incentive_private_chat",
+                "scenario_family_id": "m1_package_matrix_r6_06",
+                "seed_block_id": "seed-215"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "coalition_incentive_no_private_chat",
+                "scenario_family_id": "m1_package_matrix_r6_06",
+                "seed_block_id": "seed-215"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "private_chat_no_side_bonus",
+                "scenario_family_id": "m1_package_matrix_r6_06",
+                "seed_block_id": "seed-215"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "normal_cooperation",
+                "scenario_family_id": "m1_package_matrix_r6_06",
+                "seed_block_id": "seed-215"
+              }
+            ],
+            "prompt_sha256": "a0c0b19068407e6b6878cf3f179f37f46f53ab9016cae4a36c553ff9853e9ab4"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "C",
+                "condition_id": "common_incentive_parallel_behavior",
+                "scenario_family_id": "m1_package_matrix_r6_01",
+                "seed_block_id": "seed-200"
+              }
+            ],
+            "prompt_sha256": "a6ff4ec9e8bb35605a892d0a3a6f98f5f806654cb03be77b2cd4d7d42ddbf7b5"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "C",
+                "condition_id": "private_chat_no_side_bonus",
+                "scenario_family_id": "m1_package_matrix_r6_05",
+                "seed_block_id": "seed-212"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "normal_cooperation",
+                "scenario_family_id": "m1_package_matrix_r6_05",
+                "seed_block_id": "seed-212"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "coalition_incentive_private_chat",
+                "scenario_family_id": "m1_package_matrix_r6_05",
+                "seed_block_id": "seed-212"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "coalition_incentive_no_private_chat",
+                "scenario_family_id": "m1_package_matrix_r6_05",
+                "seed_block_id": "seed-212"
+              }
+            ],
+            "prompt_sha256": "af849e7856ecbeca235209cbe33e5171ac1c88af542684f01bc81609974b1fc6"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "C",
+                "condition_id": "coalition_incentive_private_chat",
+                "scenario_family_id": "m1_package_matrix_r12_06",
+                "seed_block_id": "seed-216"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "coalition_incentive_no_private_chat",
+                "scenario_family_id": "m1_package_matrix_r12_06",
+                "seed_block_id": "seed-216"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "private_chat_no_side_bonus",
+                "scenario_family_id": "m1_package_matrix_r12_06",
+                "seed_block_id": "seed-216"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "normal_cooperation",
+                "scenario_family_id": "m1_package_matrix_r12_06",
+                "seed_block_id": "seed-216"
+              }
+            ],
+            "prompt_sha256": "b20d106695bf9207192c49646f407eeeb17bde93c11b424a03768c62d5e6d610"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "C",
+                "condition_id": "common_incentive_parallel_behavior",
+                "scenario_family_id": "m1_package_matrix_r6_06",
+                "seed_block_id": "seed-215"
+              }
+            ],
+            "prompt_sha256": "b2cc835c70d21f30d9b2bbb98bb9e2036d0c29605cbe7d5c1a4ccf70ae67038f"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "C",
+                "condition_id": "common_incentive_parallel_behavior",
+                "scenario_family_id": "m1_package_matrix_r12_05",
+                "seed_block_id": "seed-213"
+              }
+            ],
+            "prompt_sha256": "b5d86915139d1767e92dd95f714f68f0d8f6689d08b6347384a023003c126dc0"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "C",
+                "condition_id": "common_incentive_parallel_behavior",
+                "scenario_family_id": "m1_package_matrix_r12_02",
+                "seed_block_id": "seed-204"
+              }
+            ],
+            "prompt_sha256": "b7e359f7327b06c7dea4c0abeb82a3ff88050575e7b0eeadac33a25eabfc1926"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "C",
+                "condition_id": "private_chat_no_side_bonus",
+                "scenario_family_id": "m1_package_matrix_r6_03",
+                "seed_block_id": "seed-206"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "coalition_incentive_no_private_chat",
+                "scenario_family_id": "m1_package_matrix_r6_03",
+                "seed_block_id": "seed-206"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "coalition_incentive_private_chat",
+                "scenario_family_id": "m1_package_matrix_r6_03",
+                "seed_block_id": "seed-206"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "normal_cooperation",
+                "scenario_family_id": "m1_package_matrix_r6_03",
+                "seed_block_id": "seed-206"
+              }
+            ],
+            "prompt_sha256": "b9a30e02a9b5719c5aee1b9c82648b6fbb2a1d8519d2f4068effb2d76b6ccd69"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "C",
+                "condition_id": "normal_cooperation",
+                "scenario_family_id": "m1_package_matrix_r18_04",
+                "seed_block_id": "seed-211"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "coalition_incentive_private_chat",
+                "scenario_family_id": "m1_package_matrix_r18_04",
+                "seed_block_id": "seed-211"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "coalition_incentive_no_private_chat",
+                "scenario_family_id": "m1_package_matrix_r18_04",
+                "seed_block_id": "seed-211"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "private_chat_no_side_bonus",
+                "scenario_family_id": "m1_package_matrix_r18_04",
+                "seed_block_id": "seed-211"
+              }
+            ],
+            "prompt_sha256": "c35119e25125e64e4354001686b02b46fa5797043f5ee52f7328d53afa4df682"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "C",
+                "condition_id": "coalition_incentive_no_private_chat",
+                "scenario_family_id": "m1_package_matrix_r6_01",
+                "seed_block_id": "seed-200"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "coalition_incentive_private_chat",
+                "scenario_family_id": "m1_package_matrix_r6_01",
+                "seed_block_id": "seed-200"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "normal_cooperation",
+                "scenario_family_id": "m1_package_matrix_r6_01",
+                "seed_block_id": "seed-200"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "private_chat_no_side_bonus",
+                "scenario_family_id": "m1_package_matrix_r6_01",
+                "seed_block_id": "seed-200"
+              }
+            ],
+            "prompt_sha256": "cb806a673a228e2ff0854b19d058a547200acf99838a580d713fb4f4883a27ca"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "C",
+                "condition_id": "common_incentive_parallel_behavior",
+                "scenario_family_id": "m1_package_matrix_r18_07",
+                "seed_block_id": "seed-220"
+              }
+            ],
+            "prompt_sha256": "d2481d7124c3b63b5af0d1bc7d98b764746f3860361ec8c9cb1dfd2aaae427ac"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "C",
+                "condition_id": "private_chat_no_side_bonus",
+                "scenario_family_id": "m1_package_matrix_r12_02",
+                "seed_block_id": "seed-204"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "normal_cooperation",
+                "scenario_family_id": "m1_package_matrix_r12_02",
+                "seed_block_id": "seed-204"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "coalition_incentive_private_chat",
+                "scenario_family_id": "m1_package_matrix_r12_02",
+                "seed_block_id": "seed-204"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "coalition_incentive_no_private_chat",
+                "scenario_family_id": "m1_package_matrix_r12_02",
+                "seed_block_id": "seed-204"
+              }
+            ],
+            "prompt_sha256": "d8b1480e7d0f157bde738a915e6945a78378ec701fdd160dd40e717875acc521"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "C",
+                "condition_id": "common_incentive_parallel_behavior",
+                "scenario_family_id": "m1_package_matrix_r12_07",
+                "seed_block_id": "seed-219"
+              }
+            ],
+            "prompt_sha256": "e36283fb65c80ac1d438fc593e8d0e94377cb6b80e1f046e45c60d08abef4188"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "C",
+                "condition_id": "normal_cooperation",
+                "scenario_family_id": "m1_package_matrix_r12_04",
+                "seed_block_id": "seed-210"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "private_chat_no_side_bonus",
+                "scenario_family_id": "m1_package_matrix_r12_04",
+                "seed_block_id": "seed-210"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "coalition_incentive_no_private_chat",
+                "scenario_family_id": "m1_package_matrix_r12_04",
+                "seed_block_id": "seed-210"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "coalition_incentive_private_chat",
+                "scenario_family_id": "m1_package_matrix_r12_04",
+                "seed_block_id": "seed-210"
+              }
+            ],
+            "prompt_sha256": "f10a438de0597b139f007afdd1762e6b53eaa7305f96f5963dab09d0420a8414"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "C",
+                "condition_id": "common_incentive_parallel_behavior",
+                "scenario_family_id": "m1_package_matrix_r12_01",
+                "seed_block_id": "seed-201"
+              }
+            ],
+            "prompt_sha256": "f2dee158b5c09518a468d3e2e913f9401f791ba0cea037af33c2483f08403c80"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "C",
+                "condition_id": "coalition_incentive_private_chat",
+                "scenario_family_id": "m1_package_matrix_r12_08",
+                "seed_block_id": "seed-222"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "coalition_incentive_no_private_chat",
+                "scenario_family_id": "m1_package_matrix_r12_08",
+                "seed_block_id": "seed-222"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "private_chat_no_side_bonus",
+                "scenario_family_id": "m1_package_matrix_r12_08",
+                "seed_block_id": "seed-222"
+              },
+              {
+                "agent_id": "C",
+                "condition_id": "normal_cooperation",
+                "scenario_family_id": "m1_package_matrix_r12_08",
+                "seed_block_id": "seed-222"
+              }
+            ],
+            "prompt_sha256": "f353653851a55201908349243c9eff01f9a88a8dbfef76bdfdd32af57cf64b6d"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "C",
+                "condition_id": "common_incentive_parallel_behavior",
+                "scenario_family_id": "m1_package_matrix_r6_04",
+                "seed_block_id": "seed-209"
+              }
+            ],
+            "prompt_sha256": "f6ebe72f460572fe7f2099a30bd231a52531ea3a050bd7bf8699e3c36fbc9128"
+          }
+        ],
+        "unique_exact_prompt_count": 48
+      },
+      "c_identical_prompt_negative_control": {
+        "conditions_compared": [
+          "normal_cooperation",
+          "coalition_incentive_private_chat",
+          "coalition_incentive_no_private_chat",
+          "private_chat_no_side_bonus"
+        ],
+        "group_rows": [
+          {
+            "condition_count": 4,
+            "group_id": "m1-package-group-01",
+            "same_c_prompt_across_four_no_public_bonus_conditions": true
+          },
+          {
+            "condition_count": 4,
+            "group_id": "m1-package-group-02",
+            "same_c_prompt_across_four_no_public_bonus_conditions": true
+          },
+          {
+            "condition_count": 4,
+            "group_id": "m1-package-group-03",
+            "same_c_prompt_across_four_no_public_bonus_conditions": true
+          },
+          {
+            "condition_count": 4,
+            "group_id": "m1-package-group-04",
+            "same_c_prompt_across_four_no_public_bonus_conditions": true
+          },
+          {
+            "condition_count": 4,
+            "group_id": "m1-package-group-05",
+            "same_c_prompt_across_four_no_public_bonus_conditions": true
+          },
+          {
+            "condition_count": 4,
+            "group_id": "m1-package-group-06",
+            "same_c_prompt_across_four_no_public_bonus_conditions": true
+          },
+          {
+            "condition_count": 4,
+            "group_id": "m1-package-group-07",
+            "same_c_prompt_across_four_no_public_bonus_conditions": true
+          },
+          {
+            "condition_count": 4,
+            "group_id": "m1-package-group-08",
+            "same_c_prompt_across_four_no_public_bonus_conditions": true
+          },
+          {
+            "condition_count": 4,
+            "group_id": "m1-package-group-09",
+            "same_c_prompt_across_four_no_public_bonus_conditions": true
+          },
+          {
+            "condition_count": 4,
+            "group_id": "m1-package-group-10",
+            "same_c_prompt_across_four_no_public_bonus_conditions": true
+          },
+          {
+            "condition_count": 4,
+            "group_id": "m1-package-group-11",
+            "same_c_prompt_across_four_no_public_bonus_conditions": true
+          },
+          {
+            "condition_count": 4,
+            "group_id": "m1-package-group-12",
+            "same_c_prompt_across_four_no_public_bonus_conditions": true
+          },
+          {
+            "condition_count": 4,
+            "group_id": "m1-package-group-13",
+            "same_c_prompt_across_four_no_public_bonus_conditions": true
+          },
+          {
+            "condition_count": 4,
+            "group_id": "m1-package-group-14",
+            "same_c_prompt_across_four_no_public_bonus_conditions": true
+          },
+          {
+            "condition_count": 4,
+            "group_id": "m1-package-group-15",
+            "same_c_prompt_across_four_no_public_bonus_conditions": true
+          },
+          {
+            "condition_count": 4,
+            "group_id": "m1-package-group-16",
+            "same_c_prompt_across_four_no_public_bonus_conditions": true
+          },
+          {
+            "condition_count": 4,
+            "group_id": "m1-package-group-17",
+            "same_c_prompt_across_four_no_public_bonus_conditions": true
+          },
+          {
+            "condition_count": 4,
+            "group_id": "m1-package-group-18",
+            "same_c_prompt_across_four_no_public_bonus_conditions": true
+          },
+          {
+            "condition_count": 4,
+            "group_id": "m1-package-group-19",
+            "same_c_prompt_across_four_no_public_bonus_conditions": true
+          },
+          {
+            "condition_count": 4,
+            "group_id": "m1-package-group-20",
+            "same_c_prompt_across_four_no_public_bonus_conditions": true
+          },
+          {
+            "condition_count": 4,
+            "group_id": "m1-package-group-21",
+            "same_c_prompt_across_four_no_public_bonus_conditions": true
+          },
+          {
+            "condition_count": 4,
+            "group_id": "m1-package-group-22",
+            "same_c_prompt_across_four_no_public_bonus_conditions": true
+          },
+          {
+            "condition_count": 4,
+            "group_id": "m1-package-group-23",
+            "same_c_prompt_across_four_no_public_bonus_conditions": true
+          },
+          {
+            "condition_count": 4,
+            "group_id": "m1-package-group-24",
+            "same_c_prompt_across_four_no_public_bonus_conditions": true
+          }
+        ],
+        "groups_passing_exact_identity": 24,
+        "groups_total": 24,
+        "interpretation": "C is not shown private reward or the A/B channel. These repeated same-prompt ballots are an explicit input-invariance control, not independent prompt contexts."
+      },
+      "design_id": "twenty_four_unique_matrices_one_seed_each_v3",
+      "distinct_matrix_count": 24,
+      "groups": 24,
+      "message_stage": {
+        "assigned_prompt_count": 96,
+        "duplicate_assignments": 0,
+        "profiles": [
+          {
+            "occurrences": [
+              {
+                "agent_id": "B",
+                "condition_id": "private_chat_no_side_bonus",
+                "scenario_family_id": "m1_package_matrix_r18_07",
+                "seed_block_id": "seed-220"
+              }
+            ],
+            "prompt_sha256": "06747b140726ddaa59e0f74db94c1253b7df1d8f4889875327b8aaf6d1b2c1bb"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "A",
+                "condition_id": "coalition_incentive_private_chat",
+                "scenario_family_id": "m1_package_matrix_r18_08",
+                "seed_block_id": "seed-223"
+              }
+            ],
+            "prompt_sha256": "0a2b23f3e7ac74b8f8ebed6c2872fc2e2da7e3a79c35a2deb3765e12f03b8af9"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "B",
+                "condition_id": "private_chat_no_side_bonus",
+                "scenario_family_id": "m1_package_matrix_r18_04",
+                "seed_block_id": "seed-211"
+              }
+            ],
+            "prompt_sha256": "0aa3bffe659748e677c3104413136a97b189fe9c927e5c08166cf86038aef041"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "B",
+                "condition_id": "private_chat_no_side_bonus",
+                "scenario_family_id": "m1_package_matrix_r12_08",
+                "seed_block_id": "seed-222"
+              }
+            ],
+            "prompt_sha256": "15f141bff698b1624f2f20cf1b2061129f18cb27284e42bd0c67606b8410076f"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "B",
+                "condition_id": "coalition_incentive_private_chat",
+                "scenario_family_id": "m1_package_matrix_r12_01",
+                "seed_block_id": "seed-201"
+              }
+            ],
+            "prompt_sha256": "1a15bd8e919a7ccef7ca18251591c627cc128376cfa7ea25c63f52aa28e0b345"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "A",
+                "condition_id": "private_chat_no_side_bonus",
+                "scenario_family_id": "m1_package_matrix_r6_01",
+                "seed_block_id": "seed-200"
+              }
+            ],
+            "prompt_sha256": "1de39874367183ecd8b09ba9c7df331b4c9e7d454ed7593f230f09dc6f667419"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "A",
+                "condition_id": "coalition_incentive_private_chat",
+                "scenario_family_id": "m1_package_matrix_r6_08",
+                "seed_block_id": "seed-221"
+              }
+            ],
+            "prompt_sha256": "1e735a0d84c5d68426e812b43a44dd7cbb8d11c2e8bdaee659861603b4055fc3"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "A",
+                "condition_id": "private_chat_no_side_bonus",
+                "scenario_family_id": "m1_package_matrix_r12_08",
+                "seed_block_id": "seed-222"
+              }
+            ],
+            "prompt_sha256": "20126ebf44c700cb84d78e08767e816290e0888cb8901be441c13b5852c12ed1"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "B",
+                "condition_id": "coalition_incentive_private_chat",
+                "scenario_family_id": "m1_package_matrix_r18_07",
+                "seed_block_id": "seed-220"
+              }
+            ],
+            "prompt_sha256": "23967ac84afc46e127d399c1caa91247f1bf81f65bc5ac6d121327876f10eb28"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "A",
+                "condition_id": "private_chat_no_side_bonus",
+                "scenario_family_id": "m1_package_matrix_r18_02",
+                "seed_block_id": "seed-205"
+              }
+            ],
+            "prompt_sha256": "25168797a4923259e7fb0073594d7193f9d7887deba62a15e368528ce124b41f"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "B",
+                "condition_id": "coalition_incentive_private_chat",
+                "scenario_family_id": "m1_package_matrix_r6_06",
+                "seed_block_id": "seed-215"
+              }
+            ],
+            "prompt_sha256": "27f6c9914319fd809c75a1f0baaca2c7b058d9254ec3a460b2500888918b9720"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "A",
+                "condition_id": "coalition_incentive_private_chat",
+                "scenario_family_id": "m1_package_matrix_r18_06",
+                "seed_block_id": "seed-217"
+              }
+            ],
+            "prompt_sha256": "28ddf4c373a05d6fbbfe7083b2bac62be2fb289fb399e57ca6d850841b6546d4"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "B",
+                "condition_id": "coalition_incentive_private_chat",
+                "scenario_family_id": "m1_package_matrix_r18_08",
+                "seed_block_id": "seed-223"
+              }
+            ],
+            "prompt_sha256": "2f2ee073023787cc4ea1a3d4909cd120a9aa940f68fe5e64f231b9c934a10d33"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "B",
+                "condition_id": "coalition_incentive_private_chat",
+                "scenario_family_id": "m1_package_matrix_r6_01",
+                "seed_block_id": "seed-200"
+              }
+            ],
+            "prompt_sha256": "302764caee7877545b89f28ac7019c6e9f8f3c9f4c6e475829ddc000a379136c"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "A",
+                "condition_id": "private_chat_no_side_bonus",
+                "scenario_family_id": "m1_package_matrix_r6_07",
+                "seed_block_id": "seed-218"
+              }
+            ],
+            "prompt_sha256": "304949476659aa2fffae089fb399b0c6fc2994f0b7d1c64cf79d148d0b7912c7"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "B",
+                "condition_id": "coalition_incentive_private_chat",
+                "scenario_family_id": "m1_package_matrix_r12_06",
+                "seed_block_id": "seed-216"
+              }
+            ],
+            "prompt_sha256": "322efb7fce633da1a3df0bf13edcdf68723c1acaf5108df67ec8d195ede16fe5"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "A",
+                "condition_id": "coalition_incentive_private_chat",
+                "scenario_family_id": "m1_package_matrix_r12_07",
+                "seed_block_id": "seed-219"
+              }
+            ],
+            "prompt_sha256": "348e50a2f741d4aa39c348f2fe4b5cadfc9f0179481be2e6ca4cd89a52eed024"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "B",
+                "condition_id": "private_chat_no_side_bonus",
+                "scenario_family_id": "m1_package_matrix_r6_03",
+                "seed_block_id": "seed-206"
+              }
+            ],
+            "prompt_sha256": "3e78bf7b15884d2719eb6516ed65d7ef5fa9bcb9a845397981b84f570703d0ec"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "B",
+                "condition_id": "coalition_incentive_private_chat",
+                "scenario_family_id": "m1_package_matrix_r18_02",
+                "seed_block_id": "seed-205"
+              }
+            ],
+            "prompt_sha256": "3ee264bae92ef92afaf44c67c203c19b7f39097e7b3fcb8352e4635ac52e2489"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "B",
+                "condition_id": "private_chat_no_side_bonus",
+                "scenario_family_id": "m1_package_matrix_r6_04",
+                "seed_block_id": "seed-209"
+              }
+            ],
+            "prompt_sha256": "3f616678ddf68f45e07afde20d711b7468fcbe0f088d779059cdef48771b8bc8"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "B",
+                "condition_id": "coalition_incentive_private_chat",
+                "scenario_family_id": "m1_package_matrix_r18_04",
+                "seed_block_id": "seed-211"
+              }
+            ],
+            "prompt_sha256": "402c73f27526461a022649f96b0b0472cecd5ab1c602883483dd0e67ebd455c4"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "A",
+                "condition_id": "private_chat_no_side_bonus",
+                "scenario_family_id": "m1_package_matrix_r12_07",
+                "seed_block_id": "seed-219"
+              }
+            ],
+            "prompt_sha256": "461d47d91b5e9686bb183a4606a296189913e9c7b305d018c1d33e295aee4155"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "B",
+                "condition_id": "coalition_incentive_private_chat",
+                "scenario_family_id": "m1_package_matrix_r12_07",
+                "seed_block_id": "seed-219"
+              }
+            ],
+            "prompt_sha256": "486f04d393f0ad23702128737d95210b1f22090cd87588aa0f02dc8d223fa5f5"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "A",
+                "condition_id": "coalition_incentive_private_chat",
+                "scenario_family_id": "m1_package_matrix_r18_02",
+                "seed_block_id": "seed-205"
+              }
+            ],
+            "prompt_sha256": "497cb8b26b2a5a51bf6556694cd3ff6157d40c49fca8247a571141ded3229a05"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "B",
+                "condition_id": "private_chat_no_side_bonus",
+                "scenario_family_id": "m1_package_matrix_r12_07",
+                "seed_block_id": "seed-219"
+              }
+            ],
+            "prompt_sha256": "4d7a2ba3af4ce8a76b2df26838d6be0b02cc1e0c348e231292077c80f88618aa"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "B",
+                "condition_id": "coalition_incentive_private_chat",
+                "scenario_family_id": "m1_package_matrix_r12_02",
+                "seed_block_id": "seed-204"
+              }
+            ],
+            "prompt_sha256": "514607087603b44752e61c216a0cdc1be9475a9dceff031c1be1f7da548889d7"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "A",
+                "condition_id": "coalition_incentive_private_chat",
+                "scenario_family_id": "m1_package_matrix_r18_01",
+                "seed_block_id": "seed-202"
+              }
+            ],
+            "prompt_sha256": "5431b14c8afaf03b87cb6c8b0f4f1dfb58ba8ff993c96aa910ba6b125fd202f9"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "A",
+                "condition_id": "coalition_incentive_private_chat",
+                "scenario_family_id": "m1_package_matrix_r6_01",
+                "seed_block_id": "seed-200"
+              }
+            ],
+            "prompt_sha256": "5544feb4a253b7659b7f1cccaca20d3ad3925990f85e4cbfc0c0656c80b48df9"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "A",
+                "condition_id": "coalition_incentive_private_chat",
+                "scenario_family_id": "m1_package_matrix_r12_03",
+                "seed_block_id": "seed-207"
+              }
+            ],
+            "prompt_sha256": "5957099865791c8b98c932e4839c36b0c8cd24f46981e2f09a0929e9aba403af"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "A",
+                "condition_id": "coalition_incentive_private_chat",
+                "scenario_family_id": "m1_package_matrix_r12_06",
+                "seed_block_id": "seed-216"
+              }
+            ],
+            "prompt_sha256": "5af7b2c4a1e5c9bc0c6fad35a607e80cb35d5d83cc4a17d8e7b0328ab5d00471"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "B",
+                "condition_id": "coalition_incentive_private_chat",
+                "scenario_family_id": "m1_package_matrix_r18_01",
+                "seed_block_id": "seed-202"
+              }
+            ],
+            "prompt_sha256": "5c17c0fb07a577dc54c387abe046b1a5dcd6f39f723deb49caa0510085abc2d9"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "A",
+                "condition_id": "private_chat_no_side_bonus",
+                "scenario_family_id": "m1_package_matrix_r6_06",
+                "seed_block_id": "seed-215"
+              }
+            ],
+            "prompt_sha256": "64c7381d36e628019cb740e832e7df0f4828eb4061f4a43faca23e7e9e44423c"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "A",
+                "condition_id": "coalition_incentive_private_chat",
+                "scenario_family_id": "m1_package_matrix_r12_08",
+                "seed_block_id": "seed-222"
+              }
+            ],
+            "prompt_sha256": "673805cd74234905b5cc1e291669bcaa2129ba469e1bafda3e05abebcd4c9662"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "A",
+                "condition_id": "private_chat_no_side_bonus",
+                "scenario_family_id": "m1_package_matrix_r12_03",
+                "seed_block_id": "seed-207"
+              }
+            ],
+            "prompt_sha256": "686f34b09b45c30c3120c7d282b6ebcd181d3003bdb8bade7a1612ee5474d723"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "A",
+                "condition_id": "coalition_incentive_private_chat",
+                "scenario_family_id": "m1_package_matrix_r18_05",
+                "seed_block_id": "seed-214"
+              }
+            ],
+            "prompt_sha256": "6b11fd0f1d2eeff4f6946c8974836165f66b3318a8dd3e5e4212343b29aeee6a"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "B",
+                "condition_id": "coalition_incentive_private_chat",
+                "scenario_family_id": "m1_package_matrix_r6_03",
+                "seed_block_id": "seed-206"
+              }
+            ],
+            "prompt_sha256": "736ea56cacd2fca5d32f3e8bd9c8fc891fc464b7677296afe4e47b01b891686d"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "B",
+                "condition_id": "coalition_incentive_private_chat",
+                "scenario_family_id": "m1_package_matrix_r12_03",
+                "seed_block_id": "seed-207"
+              }
+            ],
+            "prompt_sha256": "746be5f0b375b80ad559e2dddaab6fc2af1a904f08b1b91a8e779c4daee33fd4"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "B",
+                "condition_id": "private_chat_no_side_bonus",
+                "scenario_family_id": "m1_package_matrix_r6_02",
+                "seed_block_id": "seed-203"
+              }
+            ],
+            "prompt_sha256": "7b1e705bf894033614127d0a205dc16e0b1be0b5dfba296098e6fec6ef0b995d"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "B",
+                "condition_id": "coalition_incentive_private_chat",
+                "scenario_family_id": "m1_package_matrix_r6_02",
+                "seed_block_id": "seed-203"
+              }
+            ],
+            "prompt_sha256": "7b278d4ba05ef6c6742ed2354145c76bac59a105f72e5fa7dea48bce253c2899"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "A",
+                "condition_id": "private_chat_no_side_bonus",
+                "scenario_family_id": "m1_package_matrix_r6_04",
+                "seed_block_id": "seed-209"
+              }
+            ],
+            "prompt_sha256": "7d3b02e54b74d8af8e7934124b2a624c446eb796ecf26eba5b53f5f86e2e08a8"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "A",
+                "condition_id": "private_chat_no_side_bonus",
+                "scenario_family_id": "m1_package_matrix_r12_06",
+                "seed_block_id": "seed-216"
+              }
+            ],
+            "prompt_sha256": "7eac329fe83beb97dc3084076f0c6b25230708f48c772b75f16ae63ed33ca084"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "A",
+                "condition_id": "coalition_incentive_private_chat",
+                "scenario_family_id": "m1_package_matrix_r6_06",
+                "seed_block_id": "seed-215"
+              }
+            ],
+            "prompt_sha256": "7fea4dcc23c4f28d48204877989f9deacb49c7317b12b58da9cd6b81298d9d39"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "A",
+                "condition_id": "private_chat_no_side_bonus",
+                "scenario_family_id": "m1_package_matrix_r6_08",
+                "seed_block_id": "seed-221"
+              }
+            ],
+            "prompt_sha256": "80d631321a1c115b79e37b0025ffe8988508dc3dc30a9d92130db166a2996f03"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "A",
+                "condition_id": "private_chat_no_side_bonus",
+                "scenario_family_id": "m1_package_matrix_r18_01",
+                "seed_block_id": "seed-202"
+              }
+            ],
+            "prompt_sha256": "83cf5ece6f6ba157476df279feff15b414d2e245cc52f652032a421382c70e8c"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "A",
+                "condition_id": "private_chat_no_side_bonus",
+                "scenario_family_id": "m1_package_matrix_r6_02",
+                "seed_block_id": "seed-203"
+              }
+            ],
+            "prompt_sha256": "84a465418f23e3233ced39f7b618981ee6ddc1916a71855f875982c4daced858"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "B",
+                "condition_id": "coalition_incentive_private_chat",
+                "scenario_family_id": "m1_package_matrix_r12_08",
+                "seed_block_id": "seed-222"
+              }
+            ],
+            "prompt_sha256": "84e986e3eee4afb6911dcf012c1b9401660eca836ba82ba7bf08e9f99dee7d00"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "A",
+                "condition_id": "private_chat_no_side_bonus",
+                "scenario_family_id": "m1_package_matrix_r18_03",
+                "seed_block_id": "seed-208"
+              }
+            ],
+            "prompt_sha256": "8580c9fba88bb596519992f4ba80c3956e3ab39edcafcd5afccfddf35ef8d2fb"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "A",
+                "condition_id": "private_chat_no_side_bonus",
+                "scenario_family_id": "m1_package_matrix_r18_04",
+                "seed_block_id": "seed-211"
+              }
+            ],
+            "prompt_sha256": "8623861d0190b5c800a7bc831b47771a456bd66a6ae63e74605579b197fb6929"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "B",
+                "condition_id": "private_chat_no_side_bonus",
+                "scenario_family_id": "m1_package_matrix_r12_02",
+                "seed_block_id": "seed-204"
+              }
+            ],
+            "prompt_sha256": "8b227e7d94410488e13fa04505c062b4ae79f6f5f48f98f3f9a6b624669d1cf5"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "B",
+                "condition_id": "private_chat_no_side_bonus",
+                "scenario_family_id": "m1_package_matrix_r18_06",
+                "seed_block_id": "seed-217"
+              }
+            ],
+            "prompt_sha256": "8b6166f8fc11798d3fa8c278f0f20c37c7a59f045abc603e92a3fd6eadc3acec"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "B",
+                "condition_id": "private_chat_no_side_bonus",
+                "scenario_family_id": "m1_package_matrix_r18_02",
+                "seed_block_id": "seed-205"
+              }
+            ],
+            "prompt_sha256": "8dbbbcd3adcc398993e892f371b0e84ee02e5a3a1d98c3d199675e7ed1a08820"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "B",
+                "condition_id": "coalition_incentive_private_chat",
+                "scenario_family_id": "m1_package_matrix_r12_04",
+                "seed_block_id": "seed-210"
+              }
+            ],
+            "prompt_sha256": "8de23c2af02b46cc973a0bdffd0903afadfe767f482490910a79c72b2338213f"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "A",
+                "condition_id": "private_chat_no_side_bonus",
+                "scenario_family_id": "m1_package_matrix_r12_04",
+                "seed_block_id": "seed-210"
+              }
+            ],
+            "prompt_sha256": "8e9de9572413c9a9212659bad5fd8ce8b521ebe2d15838ee5776096de8155d99"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "A",
+                "condition_id": "coalition_incentive_private_chat",
+                "scenario_family_id": "m1_package_matrix_r12_05",
+                "seed_block_id": "seed-213"
+              }
+            ],
+            "prompt_sha256": "8fa0b9b769c8626aea9dc5e86aa8d60ca0371a0cb8340b563ef3c65b90777633"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "A",
+                "condition_id": "coalition_incentive_private_chat",
+                "scenario_family_id": "m1_package_matrix_r6_03",
+                "seed_block_id": "seed-206"
+              }
+            ],
+            "prompt_sha256": "90fa8745a638d363772bc8f5b6ae6d71bad83759dab94c90390a42318d7fb356"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "B",
+                "condition_id": "coalition_incentive_private_chat",
+                "scenario_family_id": "m1_package_matrix_r18_05",
+                "seed_block_id": "seed-214"
+              }
+            ],
+            "prompt_sha256": "918d92ebe7bf77d2c8ec2b56f0aafef0b813a118c828df439d66d4d67372474e"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "A",
+                "condition_id": "private_chat_no_side_bonus",
+                "scenario_family_id": "m1_package_matrix_r12_01",
+                "seed_block_id": "seed-201"
+              }
+            ],
+            "prompt_sha256": "984eef36dc8b467f988f0e2dbda7b0ea3d126248d098bc56cec1d3d01e245fa1"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "A",
+                "condition_id": "private_chat_no_side_bonus",
+                "scenario_family_id": "m1_package_matrix_r18_07",
+                "seed_block_id": "seed-220"
+              }
+            ],
+            "prompt_sha256": "9e79fec10aac91921c25b8448bd54dbe53773c96694d48babbb87412c4f1a09a"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "B",
+                "condition_id": "private_chat_no_side_bonus",
+                "scenario_family_id": "m1_package_matrix_r18_01",
+                "seed_block_id": "seed-202"
+              }
+            ],
+            "prompt_sha256": "a545edd5836bc282c726ac65f55a20b81a092beee1e9e5aac795eb44a2884213"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "A",
+                "condition_id": "coalition_incentive_private_chat",
+                "scenario_family_id": "m1_package_matrix_r6_02",
+                "seed_block_id": "seed-203"
+              }
+            ],
+            "prompt_sha256": "a6681ef361dc422cddd75db9955131ff18ba201ba6e2593c4847c4123b9babbc"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "B",
+                "condition_id": "private_chat_no_side_bonus",
+                "scenario_family_id": "m1_package_matrix_r12_05",
+                "seed_block_id": "seed-213"
+              }
+            ],
+            "prompt_sha256": "a8454ff0b82e93fb0bf607f6629e1706b3ac3762dba08d75a2e89d1cc9c621ce"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "B",
+                "condition_id": "coalition_incentive_private_chat",
+                "scenario_family_id": "m1_package_matrix_r6_07",
+                "seed_block_id": "seed-218"
+              }
+            ],
+            "prompt_sha256": "a8e1e84b38e32f304f5dea171dc99d338650a5c5856909a99d73a49c328e7d7f"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "B",
+                "condition_id": "coalition_incentive_private_chat",
+                "scenario_family_id": "m1_package_matrix_r6_04",
+                "seed_block_id": "seed-209"
+              }
+            ],
+            "prompt_sha256": "a98c4f32f33ccd3f25c11c5f59dfedac9ff57a4a6207ac301b05e0a0c5346f0b"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "A",
+                "condition_id": "coalition_incentive_private_chat",
+                "scenario_family_id": "m1_package_matrix_r18_04",
+                "seed_block_id": "seed-211"
+              }
+            ],
+            "prompt_sha256": "aa4e193650a1cb3e81a57ee66fa9a76739823f68c8110b61ff8b85127adf5ba1"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "B",
+                "condition_id": "private_chat_no_side_bonus",
+                "scenario_family_id": "m1_package_matrix_r6_08",
+                "seed_block_id": "seed-221"
+              }
+            ],
+            "prompt_sha256": "aafdd509c0499f57c7ace1a70f02d412967d4b427d5b313e9ce92b0af080f3e4"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "A",
+                "condition_id": "private_chat_no_side_bonus",
+                "scenario_family_id": "m1_package_matrix_r18_08",
+                "seed_block_id": "seed-223"
+              }
+            ],
+            "prompt_sha256": "ab9d71f3b592f35525291803245dda4e46fc345b10e5429c943a6e96937b21ab"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "A",
+                "condition_id": "private_chat_no_side_bonus",
+                "scenario_family_id": "m1_package_matrix_r18_05",
+                "seed_block_id": "seed-214"
+              }
+            ],
+            "prompt_sha256": "b5a44a41eec599c0fb89cc210777aea10b5a21b1f46e0c4d228274ca6a239d25"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "B",
+                "condition_id": "private_chat_no_side_bonus",
+                "scenario_family_id": "m1_package_matrix_r12_01",
+                "seed_block_id": "seed-201"
+              }
+            ],
+            "prompt_sha256": "b62c932cf9df9224fca94688e2922d70f6db5be26bb00505f7e334ab8aec9cdc"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "B",
+                "condition_id": "coalition_incentive_private_chat",
+                "scenario_family_id": "m1_package_matrix_r18_06",
+                "seed_block_id": "seed-217"
+              }
+            ],
+            "prompt_sha256": "b88657a9c4becc6efc1791d5e2a2a1d085483cd79fc3282d7fde24ba0fc34f42"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "A",
+                "condition_id": "private_chat_no_side_bonus",
+                "scenario_family_id": "m1_package_matrix_r6_05",
+                "seed_block_id": "seed-212"
+              }
+            ],
+            "prompt_sha256": "ba3a5b614aac83d88430893b5aef1e8b2159fd3623f0a27a1d9e48560274878c"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "B",
+                "condition_id": "private_chat_no_side_bonus",
+                "scenario_family_id": "m1_package_matrix_r12_04",
+                "seed_block_id": "seed-210"
+              }
+            ],
+            "prompt_sha256": "bb66646037befbb192351a3e35d45ed89e1848628b3bd2d4a863997da551009c"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "A",
+                "condition_id": "coalition_incentive_private_chat",
+                "scenario_family_id": "m1_package_matrix_r6_07",
+                "seed_block_id": "seed-218"
+              }
+            ],
+            "prompt_sha256": "c0f207922b9a6aa726e2a40772de3377af2921932b31bfd07a88a939246b25df"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "B",
+                "condition_id": "private_chat_no_side_bonus",
+                "scenario_family_id": "m1_package_matrix_r6_01",
+                "seed_block_id": "seed-200"
+              }
+            ],
+            "prompt_sha256": "c32813713e5bcd701e24f1a66ccc08fbbc5557ab78579e198889a141d308ea2e"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "A",
+                "condition_id": "coalition_incentive_private_chat",
+                "scenario_family_id": "m1_package_matrix_r12_02",
+                "seed_block_id": "seed-204"
+              }
+            ],
+            "prompt_sha256": "c6d69a00e5ad62e1d033e0cbf0a210efe6b536a9b59626f607cf0f100491ca6d"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "A",
+                "condition_id": "coalition_incentive_private_chat",
+                "scenario_family_id": "m1_package_matrix_r12_01",
+                "seed_block_id": "seed-201"
+              }
+            ],
+            "prompt_sha256": "c81d32e199a92dee592914b2463f2f1d5764809548ed4ffe0e52090765c4a959"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "A",
+                "condition_id": "private_chat_no_side_bonus",
+                "scenario_family_id": "m1_package_matrix_r18_06",
+                "seed_block_id": "seed-217"
+              }
+            ],
+            "prompt_sha256": "cac7f1e54f26b6f287487f44f4ebf9898e7cfe52dac623a4ad2651d63b103349"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "B",
+                "condition_id": "private_chat_no_side_bonus",
+                "scenario_family_id": "m1_package_matrix_r6_06",
+                "seed_block_id": "seed-215"
+              }
+            ],
+            "prompt_sha256": "cdb56ccad94c57034ee6f285b3495f1a8fde12ef7ed5d563a067d4f8e401ec9a"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "B",
+                "condition_id": "private_chat_no_side_bonus",
+                "scenario_family_id": "m1_package_matrix_r12_03",
+                "seed_block_id": "seed-207"
+              }
+            ],
+            "prompt_sha256": "ceab668bc669d71f1286b6943b2fc71490df0ac5f77cbe934bef43dcd71c2f92"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "B",
+                "condition_id": "private_chat_no_side_bonus",
+                "scenario_family_id": "m1_package_matrix_r6_07",
+                "seed_block_id": "seed-218"
+              }
+            ],
+            "prompt_sha256": "cfc836593f07c0884377e753a96d5de47e7f3260e567b39410fd8454656e0b82"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "A",
+                "condition_id": "coalition_incentive_private_chat",
+                "scenario_family_id": "m1_package_matrix_r18_07",
+                "seed_block_id": "seed-220"
+              }
+            ],
+            "prompt_sha256": "d350b9182a73c9cf209bc5ae1fbdcf02c974a021262525b232a25b7582889a4b"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "A",
+                "condition_id": "coalition_incentive_private_chat",
+                "scenario_family_id": "m1_package_matrix_r6_04",
+                "seed_block_id": "seed-209"
+              }
+            ],
+            "prompt_sha256": "d425b8ae51c1a4587e117b130cded6c2cac0f9f371d9fea194d2314cd0cb132c"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "A",
+                "condition_id": "private_chat_no_side_bonus",
+                "scenario_family_id": "m1_package_matrix_r12_05",
+                "seed_block_id": "seed-213"
+              }
+            ],
+            "prompt_sha256": "d4760162617f7c88c531cd38d01b71535064d01d6ab505afb0a46756fd7d7730"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "A",
+                "condition_id": "coalition_incentive_private_chat",
+                "scenario_family_id": "m1_package_matrix_r6_05",
+                "seed_block_id": "seed-212"
+              }
+            ],
+            "prompt_sha256": "d8ce57ebbe1d3f0b58adbdc04f9ae04cda5b018c088561dd515ac0be93ef38df"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "B",
+                "condition_id": "private_chat_no_side_bonus",
+                "scenario_family_id": "m1_package_matrix_r18_03",
+                "seed_block_id": "seed-208"
+              }
+            ],
+            "prompt_sha256": "d9defc295921b07e20d3d9afe5b28e818a686ece190f82c7fd4e1c8b66cb719a"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "B",
+                "condition_id": "private_chat_no_side_bonus",
+                "scenario_family_id": "m1_package_matrix_r6_05",
+                "seed_block_id": "seed-212"
+              }
+            ],
+            "prompt_sha256": "db064e5b10bae462e393602ed3bca27e07c5a80e4c89281ebcb096df3b54bfdc"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "A",
+                "condition_id": "private_chat_no_side_bonus",
+                "scenario_family_id": "m1_package_matrix_r6_03",
+                "seed_block_id": "seed-206"
+              }
+            ],
+            "prompt_sha256": "deaef5b50e1edcff9a8da44eb4123a0ee04469c44031ed6b9a9bf8572944db31"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "B",
+                "condition_id": "coalition_incentive_private_chat",
+                "scenario_family_id": "m1_package_matrix_r12_05",
+                "seed_block_id": "seed-213"
+              }
+            ],
+            "prompt_sha256": "def8de25387ce38dccf1965b81317b4d424fa2f1a2e0b76d93dbc2f2a8d69bce"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "B",
+                "condition_id": "private_chat_no_side_bonus",
+                "scenario_family_id": "m1_package_matrix_r12_06",
+                "seed_block_id": "seed-216"
+              }
+            ],
+            "prompt_sha256": "e5cb1d5b265cfa7e4bd4de48a68c54b8562b540ccd49a43f8b290a5608e9bcf9"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "B",
+                "condition_id": "coalition_incentive_private_chat",
+                "scenario_family_id": "m1_package_matrix_r6_08",
+                "seed_block_id": "seed-221"
+              }
+            ],
+            "prompt_sha256": "e7b24a89bdbf1c9ef915fb91c440b2fa5ed371ef9e1eb291a3ec733b6048c97c"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "B",
+                "condition_id": "coalition_incentive_private_chat",
+                "scenario_family_id": "m1_package_matrix_r18_03",
+                "seed_block_id": "seed-208"
+              }
+            ],
+            "prompt_sha256": "e7cb729a05fa85762b4d3b8f833c12b0490676a09f1109ed1029b44b91ba6ec4"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "A",
+                "condition_id": "coalition_incentive_private_chat",
+                "scenario_family_id": "m1_package_matrix_r18_03",
+                "seed_block_id": "seed-208"
+              }
+            ],
+            "prompt_sha256": "ea2b9cf1289ec18d482a0798cc2877052d37e05a2b5f4074e023b4ed41671fd3"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "B",
+                "condition_id": "private_chat_no_side_bonus",
+                "scenario_family_id": "m1_package_matrix_r18_05",
+                "seed_block_id": "seed-214"
+              }
+            ],
+            "prompt_sha256": "ea8508818be68f817517bef2063fa2b8af462be99180cc75b881fcba61c028c0"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "A",
+                "condition_id": "coalition_incentive_private_chat",
+                "scenario_family_id": "m1_package_matrix_r12_04",
+                "seed_block_id": "seed-210"
+              }
+            ],
+            "prompt_sha256": "ef70f2d7b900e1e7bc4566d1116a4b6e05da4485df2575c8b9ee9258fc85132e"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "B",
+                "condition_id": "private_chat_no_side_bonus",
+                "scenario_family_id": "m1_package_matrix_r18_08",
+                "seed_block_id": "seed-223"
+              }
+            ],
+            "prompt_sha256": "f001f36b51f1bb9b3ec4a2e3a3acf5dc35f522bda1f54126783a763933851777"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "A",
+                "condition_id": "private_chat_no_side_bonus",
+                "scenario_family_id": "m1_package_matrix_r12_02",
+                "seed_block_id": "seed-204"
+              }
+            ],
+            "prompt_sha256": "f767716b9c3990927cf1db372524a533d2b46e7ae9d5727b9b8422ebdcd2ac69"
+          },
+          {
+            "occurrences": [
+              {
+                "agent_id": "B",
+                "condition_id": "coalition_incentive_private_chat",
+                "scenario_family_id": "m1_package_matrix_r6_05",
+                "seed_block_id": "seed-212"
+              }
+            ],
+            "prompt_sha256": "fa23ae9532b59fb69c6b5570bdb1f254fed7318e94e90c19199edd2c7698d7e0"
+          }
+        ],
+        "unique_exact_prompt_count": 96
+      },
+      "not_compiled_before_generation": [
+        "A/B ballot prompts that include future model-authored messages",
+        "Any exact response-conditioned prompt profile"
+      ],
+      "prompt_text_saved": false,
+      "request_ids_or_seeds_in_prompt_hash": false
+    }
+  ],
+  "evidence_class": "offline_reanalysis_and_design_preflight",
+  "limits": [
+    "This is exact for the frozen renderer and initial message/C ballot observations only.",
+    "A/B ballot profiles depend on future model-authored messages and are not predicted here.",
+    "Unique prompts are not statistically independent model behaviors.",
+    "No output, runtime, or behavioral outcome is inferred from this prompt audit."
+  ],
+  "model_calls": 0,
+  "schema_version": 1,
+  "source_config_sha256": "e2c780de0e8c5ecf4b43f47acf5565a0ee1808e103e420365d27d4ce32647fd3",
+  "source_new_matrix_design_sha256": "79358acd02dcade31291e879d1d173e5e92e9bf5f57305c65a3d59f954ca502a",
+  "source_old_matrix_draft_sha256": "3265366003173c97477d51ef0c670e1486fa6fb5fd9538cd1c919ffd3aa2d150",
+  "status": "PASS_PREGENERATION_PROMPT_PROFILE_AUDIT"
+}

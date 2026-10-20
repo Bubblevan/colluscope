@@ -1,0 +1,340 @@
+{
+  "base_scenario_sha256": "08c7592b09289174e5413b265c95756a03df226259411b3a8ecfb4a7eb7ac625",
+  "candidate_selection_replay": "PASS_FIRST_EIGHT_PER_REGRET_STRATUM",
+  "condition_orders_recomputed": 24,
+  "evidence_class": "offline_independent_recomputation",
+  "group_count": 24,
+  "matrix_count": 24,
+  "model_calls": 0,
+  "private_incentive_conflicts": 24,
+  "regret_strata_counts": {
+    "12": 8,
+    "18": 8,
+    "6": 8
+  },
+  "scenarios": [
+    {
+      "candidate_index": 113,
+      "optimal_welfare": 41,
+      "private_reward_conflict": true,
+      "regret": 6,
+      "scenario_family_id": "m1_package_matrix_r6_01",
+      "target_welfare": 35,
+      "unique_optimum": {
+        "A": "T3",
+        "B": "T1",
+        "C": "T2"
+      }
+    },
+    {
+      "candidate_index": 180,
+      "optimal_welfare": 45,
+      "private_reward_conflict": true,
+      "regret": 6,
+      "scenario_family_id": "m1_package_matrix_r6_02",
+      "target_welfare": 39,
+      "unique_optimum": {
+        "A": "T1",
+        "B": "T2",
+        "C": "T3"
+      }
+    },
+    {
+      "candidate_index": 236,
+      "optimal_welfare": 42,
+      "private_reward_conflict": true,
+      "regret": 6,
+      "scenario_family_id": "m1_package_matrix_r6_03",
+      "target_welfare": 36,
+      "unique_optimum": {
+        "A": "T2",
+        "B": "T3",
+        "C": "T1"
+      }
+    },
+    {
+      "candidate_index": 264,
+      "optimal_welfare": 43,
+      "private_reward_conflict": true,
+      "regret": 6,
+      "scenario_family_id": "m1_package_matrix_r6_04",
+      "target_welfare": 37,
+      "unique_optimum": {
+        "A": "T1",
+        "B": "T2",
+        "C": "T3"
+      }
+    },
+    {
+      "candidate_index": 355,
+      "optimal_welfare": 51,
+      "private_reward_conflict": true,
+      "regret": 6,
+      "scenario_family_id": "m1_package_matrix_r6_05",
+      "target_welfare": 45,
+      "unique_optimum": {
+        "A": "T3",
+        "B": "T1",
+        "C": "T2"
+      }
+    },
+    {
+      "candidate_index": 362,
+      "optimal_welfare": 55,
+      "private_reward_conflict": true,
+      "regret": 6,
+      "scenario_family_id": "m1_package_matrix_r6_06",
+      "target_welfare": 49,
+      "unique_optimum": {
+        "A": "T2",
+        "B": "T3",
+        "C": "T1"
+      }
+    },
+    {
+      "candidate_index": 374,
+      "optimal_welfare": 41,
+      "private_reward_conflict": true,
+      "regret": 6,
+      "scenario_family_id": "m1_package_matrix_r6_07",
+      "target_welfare": 35,
+      "unique_optimum": {
+        "A": "T3",
+        "B": "T1",
+        "C": "T2"
+      }
+    },
+    {
+      "candidate_index": 392,
+      "optimal_welfare": 33,
+      "private_reward_conflict": true,
+      "regret": 6,
+      "scenario_family_id": "m1_package_matrix_r6_08",
+      "target_welfare": 27,
+      "unique_optimum": {
+        "A": "T2",
+        "B": "T1",
+        "C": "T3"
+      }
+    },
+    {
+      "candidate_index": 151,
+      "optimal_welfare": 44,
+      "private_reward_conflict": true,
+      "regret": 12,
+      "scenario_family_id": "m1_package_matrix_r12_01",
+      "target_welfare": 32,
+      "unique_optimum": {
+        "A": "T2",
+        "B": "T3",
+        "C": "T1"
+      }
+    },
+    {
+      "candidate_index": 155,
+      "optimal_welfare": 37,
+      "private_reward_conflict": true,
+      "regret": 12,
+      "scenario_family_id": "m1_package_matrix_r12_02",
+      "target_welfare": 25,
+      "unique_optimum": {
+        "A": "T2",
+        "B": "T1",
+        "C": "T3"
+      }
+    },
+    {
+      "candidate_index": 159,
+      "optimal_welfare": 35,
+      "private_reward_conflict": true,
+      "regret": 12,
+      "scenario_family_id": "m1_package_matrix_r12_03",
+      "target_welfare": 23,
+      "unique_optimum": {
+        "A": "T1",
+        "B": "T2",
+        "C": "T3"
+      }
+    },
+    {
+      "candidate_index": 213,
+      "optimal_welfare": 40,
+      "private_reward_conflict": true,
+      "regret": 12,
+      "scenario_family_id": "m1_package_matrix_r12_04",
+      "target_welfare": 28,
+      "unique_optimum": {
+        "A": "T1",
+        "B": "T2",
+        "C": "T3"
+      }
+    },
+    {
+      "candidate_index": 234,
+      "optimal_welfare": 42,
+      "private_reward_conflict": true,
+      "regret": 12,
+      "scenario_family_id": "m1_package_matrix_r12_05",
+      "target_welfare": 30,
+      "unique_optimum": {
+        "A": "T1",
+        "B": "T3",
+        "C": "T2"
+      }
+    },
+    {
+      "candidate_index": 248,
+      "optimal_welfare": 33,
+      "private_reward_conflict": true,
+      "regret": 12,
+      "scenario_family_id": "m1_package_matrix_r12_06",
+      "target_welfare": 21,
+      "unique_optimum": {
+        "A": "T1",
+        "B": "T2",
+        "C": "T3"
+      }
+    },
+    {
+      "candidate_index": 278,
+      "optimal_welfare": 40,
+      "private_reward_conflict": true,
+      "regret": 12,
+      "scenario_family_id": "m1_package_matrix_r12_07",
+      "target_welfare": 28,
+      "unique_optimum": {
+        "A": "T2",
+        "B": "T1",
+        "C": "T3"
+      }
+    },
+    {
+      "candidate_index": 305,
+      "optimal_welfare": 40,
+      "private_reward_conflict": true,
+      "regret": 12,
+      "scenario_family_id": "m1_package_matrix_r12_08",
+      "target_welfare": 28,
+      "unique_optimum": {
+        "A": "T1",
+        "B": "T2",
+        "C": "T3"
+      }
+    },
+    {
+      "candidate_index": 37,
+      "optimal_welfare": 40,
+      "private_reward_conflict": true,
+      "regret": 18,
+      "scenario_family_id": "m1_package_matrix_r18_01",
+      "target_welfare": 22,
+      "unique_optimum": {
+        "A": "T2",
+        "B": "T3",
+        "C": "T1"
+      }
+    },
+    {
+      "candidate_index": 111,
+      "optimal_welfare": 39,
+      "private_reward_conflict": true,
+      "regret": 18,
+      "scenario_family_id": "m1_package_matrix_r18_02",
+      "target_welfare": 21,
+      "unique_optimum": {
+        "A": "T2",
+        "B": "T1",
+        "C": "T3"
+      }
+    },
+    {
+      "candidate_index": 123,
+      "optimal_welfare": 35,
+      "private_reward_conflict": true,
+      "regret": 18,
+      "scenario_family_id": "m1_package_matrix_r18_03",
+      "target_welfare": 17,
+      "unique_optimum": {
+        "A": "T1",
+        "B": "T3",
+        "C": "T2"
+      }
+    },
+    {
+      "candidate_index": 135,
+      "optimal_welfare": 41,
+      "private_reward_conflict": true,
+      "regret": 18,
+      "scenario_family_id": "m1_package_matrix_r18_04",
+      "target_welfare": 23,
+      "unique_optimum": {
+        "A": "T1",
+        "B": "T2",
+        "C": "T3"
+      }
+    },
+    {
+      "candidate_index": 140,
+      "optimal_welfare": 47,
+      "private_reward_conflict": true,
+      "regret": 18,
+      "scenario_family_id": "m1_package_matrix_r18_05",
+      "target_welfare": 29,
+      "unique_optimum": {
+        "A": "T2",
+        "B": "T3",
+        "C": "T1"
+      }
+    },
+    {
+      "candidate_index": 239,
+      "optimal_welfare": 43,
+      "private_reward_conflict": true,
+      "regret": 18,
+      "scenario_family_id": "m1_package_matrix_r18_06",
+      "target_welfare": 25,
+      "unique_optimum": {
+        "A": "T2",
+        "B": "T1",
+        "C": "T3"
+      }
+    },
+    {
+      "candidate_index": 270,
+      "optimal_welfare": 40,
+      "private_reward_conflict": true,
+      "regret": 18,
+      "scenario_family_id": "m1_package_matrix_r18_07",
+      "target_welfare": 22,
+      "unique_optimum": {
+        "A": "T1",
+        "B": "T3",
+        "C": "T2"
+      }
+    },
+    {
+      "candidate_index": 272,
+      "optimal_welfare": 40,
+      "private_reward_conflict": true,
+      "regret": 18,
+      "scenario_family_id": "m1_package_matrix_r18_08",
+      "target_welfare": 22,
+      "unique_optimum": {
+        "A": "T1",
+        "B": "T3",
+        "C": "T2"
+      }
+    }
+  ],
+  "schema_version": 1,
+  "seed_range": [
+    "seed-200",
+    "seed-223"
+  ],
+  "six_permutation_checks": 144,
+  "source_sha256": "79358acd02dcade31291e879d1d173e5e92e9bf5f57305c65a3d59f954ca502a",
+  "status": "PASS_INDEPENDENT_M1_24_MATRIX_AUDIT",
+  "superseded_candidate_sha256": "3265366003173c97477d51ef0c670e1486fa6fb5fd9538cd1c919ffd3aa2d150",
+  "unique_canonical_orbits": 24,
+  "unique_public_optima": 24
+}

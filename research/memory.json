@@ -139,6 +139,69 @@
         }
       ],
       "review_scope": "Independent critic reviewed the sanitized reanalysis and direction ranking; it did not independently replay raw T/B."
+    },
+    {
+      "claim_id": "m1-replication-prompt-context-multiplicity-audit-v3",
+      "evidence_class": "offline_reanalysis",
+      "evidence_refs": [
+        {
+          "path": "docs/M1_PACKAGE_REPLICATION_CONTEXT_AUDIT_20261021.md",
+          "sha256": "73b61a88fe6e229439cc4a271424daa4cf3cb5ea1579ff4bca0e42f13dd9e7a4"
+        },
+        {
+          "path": "docs/results/research-sprint-20261021/direction-review-followup/m1-prompt-profile-audit.json",
+          "sha256": "f6d2c4d19f525c685dd25493cfe1319cbb72e491b3704ab490b27af28b1c7b2f"
+        },
+        {
+          "path": "research/drafts/m1-reward-chat-24group-replication-v2.md",
+          "sha256": "3e75dca2a8408bb7b4273feb54999a9f71da4ed3c398e3057598021d56f11337"
+        },
+        {
+          "path": "research/drafts/m1-reward-chat-24group-replication-v3.md",
+          "sha256": "fef87f169a4ae830eddde457fed0192b80c8dbfd7d23e735db2bd35363be9f57"
+        },
+        {
+          "path": "research/drafts/m1-package-24-matrix-scenarios-20261021.json",
+          "sha256": "79358acd02dcade31291e879d1d173e5e92e9bf5f57305c65a3d59f954ca502a"
+        },
+        {
+          "path": "scripts/freeze_m1_package_24_matrix_design.py",
+          "sha256": "182cb9182a8b6269914570666510320fcc47af2d0bc5ba447b30a5ab8d949661"
+        },
+        {
+          "path": "scripts/audit_m1_replication_prompt_profiles.py",
+          "sha256": "5c7ed0b78f76dfb0685488e1f9dd352a1c6dad2d2200dc187d88fa4d7323a44b"
+        },
+        {
+          "path": "docs/results/research-sprint-20261021/direction-review-followup/design-preflight-failure-notes.log",
+          "sha256": "9adb6bc6626e40b8de75d28a3929cd8f0e94c61467a46e55b0b1e68ec1ceed4e"
+        },
+        {
+          "path": "docs/results/research-sprint-20261021/direction-review-followup/offline-validation.log",
+          "sha256": "c8419c972bc6a3af16e790cf1b65b3e467665e3525b340298d45a1c52e55f306"
+        },
+        {
+          "path": "docs/ITERATION_LOG_FOLLOWUP_20261021.md",
+          "sha256": "b8a73601e82f85af0f666294073169119ad331fb697c26b539220b906801a1fa"
+        },
+        {
+          "path": "docs/RESEARCH_RISK_REGISTER_ADDENDUM_DIRECTION_FOLLOWUP_20261021.md",
+          "sha256": "b1c32601e2a5d63a470daafdd8541a4d5a819f0ea20dfc4801e3bc157d351919"
+        },
+        {
+          "path": "docs/results/research-sprint-20261021/direction-review-followup/m1-24-matrix-independent-audit.json",
+          "sha256": "e8e7def5f6621681a15bf648e8ef1fa228cb4cd872c7bcc4a23a17a7ecb8849f"
+        },
+        {
+          "path": "scripts/audit_m1_package_24_matrix_design.py",
+          "sha256": "652b85cd04940dbaa4d60eaad51f2ac18cf8408cb195511aba6c43894e951c5e"
+        }
+      ],
+      "interpretation": "The exact frozen renderer found that the former three-matrix draft had 36 unique initial message prompts and 18 unique C ballot prompts across 24 nominal groups. A revised output-independent 24-matrix draft has 96 unique initial message prompts and 48 unique C ballot prompts. C still receives the same input in four no-public-bonus cells per group; that is an intentional negative control, not independent contexts.",
+      "outcome": "INCONCLUSIVE",
+      "scope": "Offline prompt-profile audit and pre-outcome redesign only; no model output or behavioral effect was observed.",
+      "statement": "The M1 v2 three-matrix draft undercounted semantic input multiplicity; v3 improves payoff-context diversity while preserving its finite descriptive, non-causal claim boundary.",
+      "claim": "The M1 v2 three-matrix draft undercounted semantic input multiplicity; v3 improves payoff-context diversity while preserving its finite descriptive, non-causal claim boundary."
     }
   ],
   "cycle_updates": [
@@ -348,6 +411,37 @@
       "outcome": "INCONCLUSIVE",
       "scope": "Direction selection after the completed M4 B5 campaign; finite M4 public-harm and synthetic A2 evidence only.",
       "statement": "Keep the M1 private-reward × chat-stage package as the next primary prospective question, use C as the evidence/claim boundary, and reserve Monitor inference for human-referenced natural-language proposal/action extraction. No new experiment is registered or authorized."
+    },
+    {
+      "claim_id": "m3-self-history-strata-recheck-20261021",
+      "evidence_class": "offline_reanalysis",
+      "evidence_refs": [
+        {
+          "path": "docs/M3_SCIENTIFIC_RESULTS.md",
+          "sha256": "dd194d2579366acd0d15c4bc63952b8fddd20bbe92ffc2bdd339efd50e7eaf41"
+        },
+        {
+          "path": "docs/results/m3-mechanism-audit-final/m3_group_results.csv",
+          "sha256": "c2aa043d8aef430ff28ce3bbc3592e09ad817c4cf82681785bff287af94b3c0a"
+        },
+        {
+          "path": "scripts/analyze_m3_self_history_strata.py",
+          "sha256": "f4f908c594ed14540d133965401df24af2a82be4b8bd50033728052c3c78e8b7"
+        },
+        {
+          "path": "docs/results/research-sprint-20261021/direction-review-followup/m3-self-history-strata.json",
+          "sha256": "ba2c1b187892ce8df603a62cf80dd9cbe677bd7d416413da85856612b420eecb"
+        },
+        {
+          "path": "docs/SCIENTIFIC_DIRECTION_REVIEW_FOLLOWUP_20261021.md",
+          "sha256": "aef6878a91fed0dc56912cbf05db8ef9234168029295636cae94a91617db8158"
+        }
+      ],
+      "independent_review_confirmed": false,
+      "interpretation": "A separate script reproduces the 5/3 subgroup arithmetic from the frozen sanitized M3 group table: Neutral and No-delivery changes are 0/5 for matching self-history and 3/3 otherwise; Masked is 0/8. This does not re-audit raw traces because the ignored M3 source run is absent from this checkout. The split remains post-hoc, endogenous, eligibility-selected, and non-causal.",
+      "outcome": "INCONCLUSIVE",
+      "scope": "Exploratory M3 self-history stratum arithmetic only; no raw private messages read and no model calls.",
+      "statement": "The sanitized M3 table supports the descriptive 0/5 versus 3/3 pattern, but not a causal self-history effect."
     }
   ],
   "purpose": "Claim-level memory for future cycle selection. This is a scoped summary of historical artifacts, not a universal scientific score.",
