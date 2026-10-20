@@ -7,6 +7,11 @@
       "sha256": "0cdc321f500ef1a942bb528fc7fc5fb0f46c071f17e2d776315ab842f449d562"
     },
     {
+      "path": "configs/m4-positive-control-v2.json",
+      "bytes": 1875,
+      "sha256": "1be8e7b38d188fdee3f11df4061712df278cdbe9784ad5c499517b6aa0b90937"
+    },
+    {
       "path": "configs/m4-runtime-v1.json",
       "bytes": 2919,
       "sha256": "45ddc41963a729047e9f27dcc0f40d4eed22e659eb743fdfe4974ecb142418ed"
@@ -63,28 +68,28 @@
     },
     {
       "path": "docs/ITERATION_LOG.md",
-      "bytes": 218508,
-      "sha256": "f8a01a373307afe67a2992da03669a3be4fdbe61297df332b6817028e8bf0bb5"
+      "bytes": 220772,
+      "sha256": "30eefa968647630fd3fa67ba2ef1f2ecdf5d5f784febcd950d8270b088e96dec"
     },
     {
       "path": "docs/M4_PROSPECTIVE_PROTOCOL.md",
-      "bytes": 9492,
-      "sha256": "7a3f1ae6ae4e665b5310c36850d2a62c781cd5f949b289bc800d35fb4f5d5b9d"
+      "bytes": 10567,
+      "sha256": "3b6c7fe66924416136027f017b30a895bb71dd63f989016d996eb9f4826e5c1d"
     },
     {
       "path": "docs/RESEARCH_RISK_REGISTER.md",
-      "bytes": 90493,
-      "sha256": "7856eb4daf0f133898fe5cad254348454c3509c7e080d67c725d6faf0e47fb6d"
+      "bytes": 91387,
+      "sha256": "42b2dc5edfc4fbd3f9f64e1c06d04ecc04fbbc1cbe5e1162d114acb301712a55"
     },
     {
       "path": "docs/SPRINT_EXECUTION_READINESS_DECISION.md",
-      "bytes": 4301,
-      "sha256": "f7ebf0cd15c5df637739bf1e7f49d4947400c98c0527a9fe0aae555a971e8016"
+      "bytes": 4750,
+      "sha256": "fff5bd82ccf550f0fde749e3ed3496639a9d0616174a929eb66c1d64f855de88"
     },
     {
       "path": "docs/SPRINT_EXECUTION_READINESS_EVIDENCE.md",
-      "bytes": 6677,
-      "sha256": "766f355855de9a93692a4890b254269ac2ca70552dd9cf5595acdce7b996a273"
+      "bytes": 7738,
+      "sha256": "da8884b49b3c41ad593dc0953ec331481f17ae298696f139de459f9af012d2ce"
     },
     {
       "path": "docs/SPRINT_EXECUTION_READINESS_PROTOCOL.md",
@@ -177,6 +182,16 @@
       "sha256": "b21357425df8519f179d4c3b457ab6143c3938754a99f832e1122fc8052e0047"
     },
     {
+      "path": "docs/results/sprint-execution-readiness/m4-positive-control-v2-token-match.json",
+      "bytes": 10558,
+      "sha256": "a3cde3eb9751962f881e9f6be6b09224b14bb2e60482de95321420899a9cbc07"
+    },
+    {
+      "path": "docs/results/sprint-execution-readiness/m4-positive-control-v2-token-match.log",
+      "bytes": 341,
+      "sha256": "2e11aab2c28a4068568d390148af998c9c091d471e730a17d69bb16cdfdb6b23"
+    },
+    {
       "path": "docs/results/sprint-execution-readiness/m4-runtime-tests-initial.log",
       "bytes": 943,
       "sha256": "3bf3dcfa6d72cd35538d2ea53dab766339ba8b655fb3ae1d57542e9796a7fef8"
@@ -185,6 +200,11 @@
       "path": "docs/results/sprint-execution-readiness/m4-runtime-tests-second.log",
       "bytes": 683,
       "sha256": "504d7f21e60ef4d78dc99d1a137db61d5dcd3287da82b542747c2373661b3952"
+    },
+    {
+      "path": "docs/results/sprint-execution-readiness/m4-token-match-tests-final.log",
+      "bytes": 100,
+      "sha256": "ad303029992357e732ad9af1228bb7351ddb29fa62fbbd546721df720b091954"
     },
     {
       "path": "docs/results/sprint-execution-readiness/merge-python-version.log",
@@ -332,6 +352,11 @@
       "sha256": "fd38d267a4a2e4b69ec9d0a81fea17524357a1b3cc067b090290a941fbfb4ea8"
     },
     {
+      "path": "scripts/verify_m4_token_matching.py",
+      "bytes": 6759,
+      "sha256": "ddf158fc320c8d185f5b1c9475702e58250c8f33ffcd9f1f32defc15a7ccd7c6"
+    },
+    {
       "path": "src/colluscope/sprint_baselines.py",
       "bytes": 26476,
       "sha256": "e5e24b749f2303d5bbf5feb6b925311f8b5970d4eba535bdf509f6189d960c90"
@@ -345,6 +370,11 @@
       "path": "tests/test_m4_runtime.py",
       "bytes": 8743,
       "sha256": "3b1e94f0c38e6a917f085c5f2276bb55e95cab0c7359ebd6faf2bf976bea54e5"
+    },
+    {
+      "path": "tests/test_m4_token_matching.py",
+      "bytes": 2086,
+      "sha256": "16d0e4fad368ec316fb48b3c25d9544f75bad8db779bdd9f1d1dd15d5b6a1420"
     },
     {
       "path": "tests/test_sprint_baselines.py",

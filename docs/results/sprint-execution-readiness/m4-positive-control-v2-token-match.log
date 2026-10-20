@@ -1,0 +1,2 @@
+{"groups": 24, "information_token_counts": [183], "network_calls": 0, "real_model_calls": 0, "server_launched": false, "status": "PASS_POSITIVE_CONTROL_V2_LOCAL_TOKEN_MATCH", "v1_exact_matches": 0, "v1_known_failure_reproduced": true, "v1_neutral_token_counts": [184], "v2_exact_matches": 24, "v2_neutral_token_counts": [183]}
+exit_code=0

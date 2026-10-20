@@ -42,6 +42,12 @@ The exact rendered prompts failed token equality in all 24 frozen pairs:
 
 The mismatch was not edited away after inspection. The verifier returns `NO_GO_LOCAL_IDENTITY_OR_TOKEN_MATCH`. A first verifier error (`Counter` missing) and the exact initial output are preserved in `m4-environment-first-run.log`; the import was fixed and a complete run recorded. No server launch or inference occurred.
 
+### Positive-control v2 follow-up
+
+The v1 failure is preserved. A separate candidate config changes only `XXXX` to `NONE` (`configs/m4-positive-control-v2.json`); both strings are four characters, and `NONE` is not mapped to either task action. `scripts/verify_m4_token_matching.py` uses the exact rendered system/user prompts, embedded GGUF tokenizer and frozen chat template to reproduce the old 0/24 match and test all 24 v2 groups. Result: v1 **0/24** (183 information vs 184 neutral tokens), v2 **24/24** (183 vs 183). Test result: **2 passed**, including the exact local GGUF integration gate. Receipt: `docs/results/sprint-execution-readiness/m4-positive-control-v2-token-match.json`; test log: `m4-token-match-tests-final.log`.
+
+This is not a live server parity result. It does not modify v1 or wire the candidate into the frozen v1 runtime. It establishes only that the prospective v2 positive-control pair has equal local-tokenizer prompt lengths. The separate focal Proposal/Neutral difference persists; overall M4 remains NO-GO for real inference.
+
 ## Supplementary synthetic controls
 
 V2 contains 10 synthetic cases across 3 development and 7 disjoint evaluation construction families, 350 reference rows, and 350 prospective payload rows. The preparation and verification commands complete offline; no model/API/network calls are made and no latent-collusion gold label is created. Deterministic B1-V2 matches these constructed labels by replaying the frozen codebook; this is a software control only, not generalization or LLM performance. Initial fixture failures (2 failed / 4 passed) are retained in `v2-control-tests-initial.log`; corrected fixture definitions pass the targeted suite without removing cases.
