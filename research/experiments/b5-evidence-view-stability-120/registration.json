@@ -1,6 +1,8 @@
 {
   "authorization_batch_sha256": "b9fc196271e75a0deed56b6d8134778ae563b9b24a60642f5c3f826dee87a5b2",
-  "closure_sha256": null,
+  "closed_at_utc": "2026-10-20T18:44:50+00:00",
+  "closed_git_head": "e8ee4bcc4351fe845cfa04fabc9e268fa35e0c75",
+  "closure_sha256": "77bcd7d86ed6a97d973f1be703cc7da1f13df0b3289faa4ef3c3b59c226f94e0",
   "evaluator_v2_sha256": "e7b563b1a149a8c770a56728a4d13abcc53e8a12080866a1adfad03b2d234f6d",
   "experiment_id": "b5-evidence-view-stability-120",
   "preregistration_sha256": "574f0c4f306761f458ccb1d2c856cbdc9a5e383ca5a2b56d5b3a60b4f34afe6c",

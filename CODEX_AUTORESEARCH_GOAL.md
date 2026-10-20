@@ -90,12 +90,17 @@ larger batches that only add rows. Before spending calls, record which claim
 could change, what existing evidence already answers, the minimum calls and
 wall time, and the likely confounders.
 
-The current authorization is zero new model/API calls and zero external spend.
-No past approval carries forward. A new user approval must name experiment IDs,
-scope, total call and cost ceilings, and expiry. Keep one immutable record per
-approval ID, separate its cumulative usage from other approvals, and preserve a
-separate project-wide limit. The preregistration reserves its full ceiling;
-each physical attempt must be accounted in a sanitized request ledger.
+The latest approval `DS-FLASH-1200-2P50-20261020` is time-valid through
+`2026-10-21T01:00:00Z`, but it names only the now-closed
+`b5-evidence-view-stability-120` diagnostic. That registered cycle had a 120-call
+/ $0.25 ceiling and consumed all 120 call slots. The unused project-wide balance
+does not authorize another experiment, so there is no callable scope for a new
+cycle. No past approval carries forward. A new user approval must name
+experiment IDs, scope, total call and cost ceilings, and expiry. Keep one
+immutable record per approval ID, separate its cumulative usage from other
+approvals, and preserve a separate project-wide limit. The preregistration
+reserves its full ceiling; each physical attempt must be accounted in a
+sanitized request ledger.
 
 The present harness audits those timestamps and totals after a cycle. It cannot
 enforce a request before transport because there is no dispatcher. A future

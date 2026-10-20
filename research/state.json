@@ -1,13 +1,13 @@
 {
-  "active_experiment_id": "b5-evidence-view-stability-120",
-  "active_hypothesis_id": "b5-evidence-view-stability",
+  "active_experiment_id": null,
+  "active_hypothesis_id": null,
   "claim_level_status": {
     "B4_B5_superiority": "INCONCLUSIVE",
     "causal_communication_effect": "INCONCLUSIVE",
     "cross_model_generalization": "INCONCLUSIVE",
     "latent_collusion_or_intent": "NOT_IDENTIFIED"
   },
-  "consecutive_cycles_without_new_uncertainty_reduction": 0,
+  "consecutive_cycles_without_new_uncertainty_reduction": 1,
   "current_branch": "codex/deepseek-first-m4-research-20261020",
   "current_round": {
     "authorization_status": "consumed_and_never_reusable",
@@ -27,10 +27,11 @@
     "terminal_artifact": "research/handoffs/DEEPSEEK-FIRST-RESEARCH-01.json"
   },
   "historical_approvals_reusable": false,
-  "latest_decision": "PREREGISTERED",
+  "latest_closed_experiment_id": "b5-evidence-view-stability-120",
+  "latest_decision": "AMBIGUOUS",
   "latest_decision_type": "operational",
-  "latest_scientific_outcome": null,
-  "next_action": "Implement the frozen protocol and proceed only through an existing entry point within current authorization; the CLI does not dispatch.",
+  "latest_scientific_outcome": "INCONCLUSIVE",
+  "next_action": "Select and preregister a new observable-event evidence task with deterministic positive and negative controls; do not dispatch without a new scope-specific user approval.",
   "preexisting_untracked_paths_preserved": [
     "docs/COLOSSEUM_LOCAL_REPRO_PROTOCOL.md",
     "docs/results/colosseum-local-audit-20261020/",
@@ -48,6 +49,6 @@
   "program_status": "active",
   "schema_version": 2,
   "state_recorded_at_head": "0deb01b31b02fb8678172d9f82648f46d49ac499",
-  "status": "iteration_preregistered",
-  "updated_at": "2026-10-20"
+  "status": "ready_for_next_cycle",
+  "updated_at": "2026-10-21"
 }

@@ -1,0 +1,200 @@
+{
+  "closure_time_manifest": {
+    "note": "Immutable point-in-time inventory captured when the registered cycle was closed; current hashes and post-close additions are in this manifest.",
+    "path": "docs/results/research-sprint-20261021/b5-invariance-run-artifact-manifest.json",
+    "sha256": "7043130cd1821a884d8f9196f938333582d952bff3d0b4b35942737e4524b098"
+  },
+  "experiment_id": "b5-evidence-view-stability-120",
+  "local_raw_run_artifacts": [
+    {
+      "path": "runs\\sprint-monitor\\b5-evidence-view-stability-v1\\schedule.json",
+      "sha256": "fb9614b879433243226393d9e50e1a51c7710b683605f47e598f238a95b0a845",
+      "tracked": false
+    },
+    {
+      "path": "runs\\sprint-monitor\\b5-evidence-view-stability-v1\\attempts.jsonl",
+      "sha256": "5d42ca50899cba402b5a4862790c34234693ea65d10c0a88ac5c257cd658d18a",
+      "tracked": false
+    },
+    {
+      "path": "runs\\sprint-monitor\\b5-evidence-view-stability-v1\\results.jsonl",
+      "sha256": "802314b988d455f27d15070bf28d2e6f32d3133c6b27611d66fb181af8f91de9",
+      "tracked": false
+    },
+    {
+      "path": "runs\\sprint-monitor\\b5-evidence-view-stability-v1\\runner-dispatch-summary.json",
+      "sha256": "90b02de999815c265a8cfc7d9afa0d4aeb45756fdbf09463ad781b2530b6a91e",
+      "tracked": false
+    }
+  ],
+  "raw_request_response_payloads_public": false,
+  "raw_run_git_ignored": true,
+  "schema_version": 1,
+  "snapshot": "post-close offline audit package",
+  "tracked_artifacts": [
+    {
+      "path": "research/experiments/b5-evidence-view-stability-120/preregistration.json",
+      "sha256": "574f0c4f306761f458ccb1d2c856cbdc9a5e383ca5a2b56d5b3a60b4f34afe6c"
+    },
+    {
+      "path": "research/experiments/b5-evidence-view-stability-120/closure.json",
+      "sha256": "77bcd7d86ed6a97d973f1be703cc7da1f13df0b3289faa4ef3c3b59c226f94e0"
+    },
+    {
+      "path": "research/experiments/b5-evidence-view-stability-120/registration.json",
+      "sha256": "981ec1a9013e9ceb822ce215ddd506a9c3509acdc52afaf92012a14a990c39da"
+    },
+    {
+      "path": "research/authorizations/DS-FLASH-1200-2P50-20261020.json",
+      "sha256": "b9fc196271e75a0deed56b6d8134778ae563b9b24a60642f5c3f826dee87a5b2"
+    },
+    {
+      "path": "research/budget.json",
+      "sha256": "adfdbf488d9fd8745ad9017d44ef0c7b40f383993810bac99be27b94bbb17a40"
+    },
+    {
+      "path": "research/state.json",
+      "sha256": "64274b47fc4768bdfc9969b0913155ebf3896a2b8c37c35193d8459cbd97a093"
+    },
+    {
+      "path": "research/memory.json",
+      "sha256": "5949c27c1f2237ab1043e6969af9cce9134c010ad7bce3435e590b924edea023"
+    },
+    {
+      "path": "research/hypotheses.json",
+      "sha256": "fa90d9a696a459982bd82f9e2aea922fac31ea2983ffac5835aa46da1cabace8"
+    },
+    {
+      "path": "RESEARCH_PROGRAM.md",
+      "sha256": "eaf6ee4ba069ff352494e18e4a37bd856592a4cc3ff6d8bc75c7d4773a3a6b45"
+    },
+    {
+      "path": "CODEX_AUTORESEARCH_GOAL.md",
+      "sha256": "f3e3aa261913e47d9557aa11659be3b1c4a9969d97bd33d1aa5d238573985f3d"
+    },
+    {
+      "path": "docs/B5_EVIDENCE_VIEW_STABILITY_PROTOCOL.md",
+      "sha256": "2b01797789497128a98309a1826c95ecd391aa00aa53e49673cdebf99c006c63"
+    },
+    {
+      "path": "docs/B5_EVIDENCE_VIEW_STABILITY_DECISION.md",
+      "sha256": "390ec5a16f6c69519ec63a1d1c70f47e616eb44a5253d9aa1173204308481c6a"
+    },
+    {
+      "path": "docs/ITERATION_LOG.md",
+      "sha256": "960d52bc5c72c004f1a649503dddce5456125aaa8de8cdaf942a4709597be8d7"
+    },
+    {
+      "path": "docs/RESEARCH_RISK_REGISTER.md",
+      "sha256": "dd153a92beb579af781c3b9d0cfe1e5eb75e50170672659a7e259ede0fff5b96"
+    },
+    {
+      "path": "docs/results/research-sprint-20261021/B5_EVIDENCE_VIEW_STABILITY_EVIDENCE.md",
+      "sha256": "9a281c7052269f961167edbeeeaf871d882dc6898696907a01386a5dc620b507"
+    },
+    {
+      "path": "docs/results/research-sprint-20261021/B5_POSTCLOSE_RULE_BASELINE_AUDIT.md",
+      "sha256": "be534c19e05aa540fcc52cd82f969cc63ffca3e871d402c23d2163ce03facb1e"
+    },
+    {
+      "path": "docs/results/research-sprint-20261021/B5_DATE_CORRIGENDUM.md",
+      "sha256": "f0e53d6c9f847db44d0689f16a145462c2059f5000a3b42b4e05d742cee664ce"
+    },
+    {
+      "path": "docs/results/research-sprint-20261021/b5-invariance-score.json",
+      "sha256": "e8d00fa8d4d9b9ea716eaef822ca81c2715f8e3bef16d999695f2b6a5e0565d1"
+    },
+    {
+      "path": "docs/results/research-sprint-20261021/b5-invariance-score.stdout.json",
+      "sha256": "70b0ffeaf4844b26cedcc5a809238bba1008b379a720617ae9701382e2c1d9d6"
+    },
+    {
+      "path": "docs/results/research-sprint-20261021/b5-model-request-ledger-sanitized.json",
+      "sha256": "419cd0e522b761e9a15fcb7be79879f19777721393bb627e5fcbd4a1a8a603d6"
+    },
+    {
+      "path": "docs/results/research-sprint-20261021/b5-ledger-export-summary.json",
+      "sha256": "0a4528c1d12512eb47ae0c34ee3df23f9efe8ea084b54e0fbf0a90a2b372186e"
+    },
+    {
+      "path": "docs/results/research-sprint-20261021/b5-registry-audit.json",
+      "sha256": "007ed60e872c411f5757171f8fb92fc0792ef65a0de240875ec01b08b0f0eb07"
+    },
+    {
+      "path": "docs/results/research-sprint-20261021/b5-invariance-run-artifact-manifest.json",
+      "sha256": "7043130cd1821a884d8f9196f938333582d952bff3d0b4b35942737e4524b098"
+    },
+    {
+      "path": "docs/results/research-sprint-20261021/b5-deterministic-rule-baseline.json",
+      "sha256": "e2538cfb2b8711de054964151993a6340a40c55804d569d8455c8cdfb7e53ce6"
+    },
+    {
+      "path": "docs/results/research-sprint-20261021/b5-invariance-schedule-120.json",
+      "sha256": "fb9614b879433243226393d9e50e1a51c7710b683605f47e598f238a95b0a845"
+    },
+    {
+      "path": "docs/results/evidence-invariance/synthetic-invariance-groups-v2.json",
+      "sha256": "0cc0dd9fd543761d0369e68eb7f151f1223aefec614e415046de8b8c019b8d20"
+    },
+    {
+      "path": "prompts/m4-deepseek-agent-v1/monitor-system.txt",
+      "sha256": "10ba3341c905c87e8334a6dc8426cb05329ce5e675ce337cf2169a6ed9a137dd"
+    },
+    {
+      "path": "scripts/export_b5_request_ledger.py",
+      "sha256": "0ca277c03690502417797da0a3c26360538ea6a9d913105648ba869bb505ecf9"
+    },
+    {
+      "path": "scripts/audit_b5_deterministic_rule_baseline.py",
+      "sha256": "f94b6e0971ab3029354f3f948d6ab1fcb9fab3897c47abf8170098ec34797384"
+    },
+    {
+      "path": "scripts/freeze_b5_invariance_schedule.py",
+      "sha256": "51139f080118094212b8a2aafd8b5bc9c510721e4bb22e59958136cf86fa28f5"
+    },
+    {
+      "path": "scripts/freeze_synthetic_invariance_groups_v2.py",
+      "sha256": "471e2a0fb46fe91f7c648b6b22573094d3ded67202e657e6c4578eb245ed88aa"
+    },
+    {
+      "path": "scripts/project_monitor_http_request_v2.py",
+      "sha256": "76b03a02efdf0cc04152ed108d17d49320fffeae4cd7f5052da115c431b01a82"
+    },
+    {
+      "path": "scripts/audit_public_harm_invariance.py",
+      "sha256": "e79e8cd82bad7eb8a0df06bb23094556523e6c117832c524640eb3ea1d94c7ea"
+    },
+    {
+      "path": "scripts/run_b5_invariance.py",
+      "sha256": "f807b958a65477aaa48780dbf8a6f18495eff85c159c1ed7e36b86d4499c65ac"
+    },
+    {
+      "path": "scripts/score_b5_invariance_run.py",
+      "sha256": "7d0bae8dbc5bef998d9a4b6678af948920e651b5d4a16d7bdabdb3f7984e61ac"
+    },
+    {
+      "path": "docs/results/research-sprint-20261021/offline-failure-history.jsonl",
+      "sha256": "86f00688eae318404dc49bad9225b7378fbf8f2f11bd82e4e6bb32a739b9a343"
+    },
+    {
+      "path": "docs/results/research-sprint-20261021/raw-failure-log-manifest.json",
+      "sha256": "a0336af43a5662c64188c77518ae03216ea46f5c22ed35e3723242ea03e257da"
+    },
+    {
+      "path": "docs/results/research-sprint-20261021/raw-failure-logs-20261021.zip",
+      "sha256": "9372413f839a2af3ba7d8fd81a0267a4075736f750140d63f047630bda4d1e56"
+    },
+    {
+      "path": "docs/results/research-sprint-20261021/preflight-offline-suite.log",
+      "sha256": "efc30ca6efd2479fe43bf70f97e2bb0d891213110e1099fd2f1dbc1b1bd58fcf"
+    },
+    {
+      "path": "docs/results/research-sprint-20261021/failures/pre-run-module-path-import.log",
+      "sha256": "9600c322fe825b6d58cf58bfb42fdaf9144ba77269a25c01665412a457c9462d"
+    },
+    {
+      "path": "docs/results/research-sprint-20261021/failures/closure-missing-evidence-class.log",
+      "sha256": "b307ee6a52938ae68cbe6e279dcf691ec9bd30e56d4073362b8c66927135037a"
+    }
+  ]
+}

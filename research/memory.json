@@ -1,14 +1,8 @@
 {
-  "schema_version": 1,
-  "purpose": "Claim-level memory for future cycle selection. This is a scoped summary of historical artifacts, not a universal scientific score.",
-  "historical_scope": "The 628-request DeepSeek-first run and the separate 856-row Monitor run use different schedules and must never be pooled.",
   "beliefs": [
     {
-      "claim_id": "deepseek-first-b4-b5-superiority",
-      "outcome": "INCONCLUSIVE",
       "claim": "The 628-request DeepSeek-first run does not establish that B5 is superior to B4.",
-      "interpretation": "There were 126 independently assessable matched pairs: 65 both exact, 47 neither exact, 10 B4-only exact, and 4 B5-only exact. These are descriptive pairs from one provider alias, not a confirmatory superiority estimate.",
-      "scope": "One frozen DeepSeek-first Monitor run and its observable references.",
+      "claim_id": "deepseek-first-b4-b5-superiority",
       "evidence_refs": [
         {
           "path": "docs/results/deepseek-first-m4/audit/postrun_analysis_v2.md",
@@ -18,14 +12,14 @@
           "path": "docs/results/deepseek-first-m4/audit/independent_audit.json",
           "sha256": "ca5fadb95c7377d54659139c3e1138a51cc97333b2d05b6102cb94a3ca41af57"
         }
-      ]
+      ],
+      "interpretation": "There were 126 independently assessable matched pairs: 65 both exact, 47 neither exact, 10 B4-only exact, and 4 B5-only exact. These are descriptive pairs from one provider alias, not a confirmatory superiority estimate.",
+      "outcome": "INCONCLUSIVE",
+      "scope": "One frozen DeepSeek-first Monitor run and its observable references."
     },
     {
-      "claim_id": "deepseek-first-communication-causality",
-      "outcome": "INCONCLUSIVE",
       "claim": "The 628-request run does not identify a causal effect of proposal content on recipient behavior.",
-      "interpretation": "Proposal-minus-neutral focal inputs differed by 32–85 provider tokens (mean +60, n=16); agents shared a rewarded target; fixed-peer settlement replay holds the other two baseline ballots constant. These constraints leave message semantics confounded with prompt differences and do not identify intent.",
-      "scope": "The frozen Agent schedule and its fixed-peer counterfactual replay.",
+      "claim_id": "deepseek-first-communication-causality",
       "evidence_refs": [
         {
           "path": "docs/results/deepseek-first-m4/audit/postrun_analysis_v2.md",
@@ -35,35 +29,95 @@
           "path": "docs/M4_DEEPSEEK_FIRST_RESEARCH_DECISION.md",
           "sha256": "e1db75339f0824630c10796d54c0dd04407215e9a64547c4727d88eb0d5bea8a"
         }
-      ]
-    },
-    {
-      "claim_id": "full-research-856-b4-b5-estimability",
+      ],
+      "interpretation": "Proposal-minus-neutral focal inputs differed by 32–85 provider tokens (mean +60, n=16); agents shared a rewarded target; fixed-peer settlement replay holds the other two baseline ballots constant. These constraints leave message semantics confounded with prompt differences and do not identify intent.",
       "outcome": "INCONCLUSIVE",
-      "claim": "The separate 856-row Monitor run provides no common completed-and-assessable B4/B5 pair for a head-to-head accuracy estimate.",
-      "interpretation": "Its Monitor outputs were heavily truncated; 715/856 reached the 128-token length cap and the common assessable B4/B5 denominator was 0. Keep this schedule separate from the 628-request run, which had 126 assessable pairs.",
-      "scope": "Only FULL-RESEARCH-EXECUTION-20261020 and its frozen Monitor schedule.",
-      "evidence_refs": [
-        {
-          "path": "docs/results/full-research-execution-20261020/full_research_results_summary.json",
-          "sha256": "7995b048ec160759a833dfbf2dc4b8f0e668ca8c1861d8566f596056118c029b"
-        }
-      ]
+      "scope": "The frozen Agent schedule and its fixed-peer counterfactual replay."
     },
     {
-      "claim_id": "full-research-public-projection-construction",
-      "outcome": "SUPPORTED",
-      "claim": "For the frozen matched-world pairs in the 856-row run, the deterministic Public-only projections were byte/reference-identical while Privileged projections differed.",
-      "interpretation": "This supports the stated input-construction property for those 24 comparisons. It does not show that an LLM Monitor can distinguish the worlds or establish a general latent-collusion impossibility result; only 2/72 matched-world outputs were parseable.",
-      "scope": "The exact matched-world construction and audit in FULL-RESEARCH-EXECUTION-20261020.",
+      "claim": "The separate 856-row Monitor run provides no common completed-and-assessable B4/B5 pair for a head-to-head accuracy estimate.",
+      "claim_id": "full-research-856-b4-b5-estimability",
       "evidence_refs": [
         {
           "path": "docs/results/full-research-execution-20261020/full_research_results_summary.json",
           "sha256": "7995b048ec160759a833dfbf2dc4b8f0e668ca8c1861d8566f596056118c029b"
         }
-      ]
+      ],
+      "interpretation": "Its Monitor outputs were heavily truncated; 715/856 reached the 128-token length cap and the common assessable B4/B5 denominator was 0. Keep this schedule separate from the 628-request run, which had 126 assessable pairs.",
+      "outcome": "INCONCLUSIVE",
+      "scope": "Only FULL-RESEARCH-EXECUTION-20261020 and its frozen Monitor schedule."
+    },
+    {
+      "claim": "For the frozen matched-world pairs in the 856-row run, the deterministic Public-only projections were byte/reference-identical while Privileged projections differed.",
+      "claim_id": "full-research-public-projection-construction",
+      "evidence_refs": [
+        {
+          "path": "docs/results/full-research-execution-20261020/full_research_results_summary.json",
+          "sha256": "7995b048ec160759a833dfbf2dc4b8f0e668ca8c1861d8566f596056118c029b"
+        }
+      ],
+      "interpretation": "This supports the stated input-construction property for those 24 comparisons. It does not show that an LLM Monitor can distinguish the worlds or establish a general latent-collusion impossibility result; only 2/72 matched-world outputs were parseable.",
+      "outcome": "SUPPORTED",
+      "scope": "The exact matched-world construction and audit in FULL-RESEARCH-EXECUTION-20261020."
     }
   ],
-  "cycle_updates": [],
-  "update_rule": "Each closure must distinguish what changed, what remains plausible, and which hash-pinned evidence supports the update. Only a structured update confirmed by an independent review artifact counts toward the no-progress pivot counter. The registry checks provenance and shape, not truth."
+  "cycle_updates": [
+    {
+      "claim_id": "b5-evidence-view-stability",
+      "evidence_refs": [
+        {
+          "path": "docs/results/research-sprint-20261021/B5_EVIDENCE_VIEW_STABILITY_EVIDENCE.md",
+          "sha256": "9a281c7052269f961167edbeeeaf871d882dc6898696907a01386a5dc620b507"
+        },
+        {
+          "path": "docs/B5_EVIDENCE_VIEW_STABILITY_DECISION.md",
+          "sha256": "390ec5a16f6c69519ec63a1d1c70f47e616eb44a5253d9aa1173204308481c6a"
+        },
+        {
+          "path": "docs/results/research-sprint-20261021/b5-invariance-score.json",
+          "sha256": "e8d00fa8d4d9b9ea716eaef822ca81c2715f8e3bef16d999695f2b6a5e0565d1"
+        },
+        {
+          "path": "docs/results/research-sprint-20261021/b5-model-request-ledger-sanitized.json",
+          "sha256": "419cd0e522b761e9a15fcb7be79879f19777721393bb627e5fcbd4a1a8a603d6"
+        }
+      ],
+      "experiment_id": "b5-evidence-view-stability-120",
+      "outcome": "INCONCLUSIVE",
+      "remaining_alternatives": "A one-sided model response bias, task/prompt framing, or a mismatch between the model interpretation and deterministic public-harm mapping remain plausible. The bundled projection also changes multiple structural fields and cannot identify message-semantic causality.",
+      "scientific_outcome": "INCONCLUSIVE",
+      "statement": "This 120-request synthetic diagnostic did not identify whether B5 labels are stable across the bundled Public-only versus task-irrelevant Privileged projection.",
+      "what_changed": "The raw binary predictions were one-sided: all 40 primary-public and label-flip outputs were present, despite balanced reference labels. This exposes a failed positive control and prevents interpretation of the 0/18 assessable pair changes."
+    }
+  ],
+  "historical_scope": "The 628-request DeepSeek-first run and the separate 856-row Monitor run use different schedules and must never be pooled.",
+  "post_close_offline_updates": [
+    {
+      "claim_id": "b5-public-harm-rule-baseline",
+      "evidence_class": "offline_reanalysis",
+      "evidence_refs": [
+        {
+          "path": "docs/results/research-sprint-20261021/B5_POSTCLOSE_RULE_BASELINE_AUDIT.md",
+          "sha256": "be534c19e05aa540fcc52cd82f969cc63ffca3e871d402c23d2163ce03facb1e"
+        },
+        {
+          "path": "docs/results/research-sprint-20261021/b5-deterministic-rule-baseline.json",
+          "sha256": "e2538cfb2b8711de054964151993a6340a40c55804d569d8455c8cdfb7e53ce6"
+        },
+        {
+          "path": "scripts/audit_b5_deterministic_rule_baseline.py",
+          "sha256": "f94b6e0971ab3029354f3f948d6ab1fcb9fab3897c47abf8170098ec34797384"
+        }
+      ],
+      "independent_review_confirmed": false,
+      "interpretation": "A separate deterministic implementation matched 40/40 references. The Monitor predicted present on 40/40 rows and was exact on 20/40. This is fixture-specific and not a claim about collusion detection or general Monitor ability.",
+      "outcome": "SUPPORTED",
+      "scope": "Only the 20 primary and 20 label-flip public-canonical records in the B5 V2 synthetic fixture.",
+      "statement": "For this frozen 40-row synthetic B5 public-canonical fixture, the public-harm reference is mechanically recoverable from the visible quality matrix, complete ballots, chair tie-break, and settled outcome."
+    }
+  ],
+  "purpose": "Claim-level memory for future cycle selection. This is a scoped summary of historical artifacts, not a universal scientific score.",
+  "schema_version": 1,
+  "update_rule": "Each closure must distinguish what changed, what remains plausible, and which hash-pinned evidence supports the update. Only a structured update confirmed by an independent review artifact counts toward the no-progress pivot counter. The registry checks provenance and shape, not truth.",
+  "updated_at": "2026-10-21"
 }

@@ -1,0 +1,89 @@
+{
+  "artifacts": [
+    {
+      "path": "docs/results/research-sprint-20261021/b5-postclose-artifact-manifest.json",
+      "sha256": "58aa4ccc8318129b896b668711668078fabab6eba0135b0d68727112ca1a934b"
+    },
+    {
+      "path": "research/experiments/b5-evidence-view-stability-120/closure.json",
+      "sha256": "77bcd7d86ed6a97d973f1be703cc7da1f13df0b3289faa4ef3c3b59c226f94e0"
+    },
+    {
+      "path": "research/experiments/b5-evidence-view-stability-120/registration.json",
+      "sha256": "981ec1a9013e9ceb822ce215ddd506a9c3509acdc52afaf92012a14a990c39da"
+    },
+    {
+      "path": "research/state.json",
+      "sha256": "64274b47fc4768bdfc9969b0913155ebf3896a2b8c37c35193d8459cbd97a093"
+    },
+    {
+      "path": "research/memory.json",
+      "sha256": "5949c27c1f2237ab1043e6969af9cce9134c010ad7bce3435e590b924edea023"
+    },
+    {
+      "path": "research/hypotheses.json",
+      "sha256": "fa90d9a696a459982bd82f9e2aea922fac31ea2983ffac5835aa46da1cabace8"
+    },
+    {
+      "path": "research/budget.json",
+      "sha256": "adfdbf488d9fd8745ad9017d44ef0c7b40f383993810bac99be27b94bbb17a40"
+    },
+    {
+      "path": "docs/results/research-sprint-20261021/b5-registry-audit.json",
+      "sha256": "007ed60e872c411f5757171f8fb92fc0792ef65a0de240875ec01b08b0f0eb07"
+    },
+    {
+      "path": "docs/results/research-sprint-20261021/B5_EVIDENCE_VIEW_STABILITY_EVIDENCE.md",
+      "sha256": "9a281c7052269f961167edbeeeaf871d882dc6898696907a01386a5dc620b507"
+    },
+    {
+      "path": "docs/results/research-sprint-20261021/B5_POSTCLOSE_RULE_BASELINE_AUDIT.md",
+      "sha256": "be534c19e05aa540fcc52cd82f969cc63ffca3e871d402c23d2163ce03facb1e"
+    },
+    {
+      "path": "docs/results/research-sprint-20261021/B5_DATE_CORRIGENDUM.md",
+      "sha256": "f0e53d6c9f847db44d0689f16a145462c2059f5000a3b42b4e05d742cee664ce"
+    },
+    {
+      "path": "docs/B5_EVIDENCE_VIEW_STABILITY_DECISION.md",
+      "sha256": "390ec5a16f6c69519ec63a1d1c70f47e616eb44a5253d9aa1173204308481c6a"
+    },
+    {
+      "path": "docs/ITERATION_LOG.md",
+      "sha256": "960d52bc5c72c004f1a649503dddce5456125aaa8de8cdaf942a4709597be8d7"
+    },
+    {
+      "path": "docs/RESEARCH_RISK_REGISTER.md",
+      "sha256": "dd153a92beb579af781c3b9d0cfe1e5eb75e50170672659a7e259ede0fff5b96"
+    },
+    {
+      "path": "docs/results/research-sprint-20261021/b5-model-request-ledger-sanitized.json",
+      "sha256": "419cd0e522b761e9a15fcb7be79879f19777721393bb627e5fcbd4a1a8a603d6"
+    },
+    {
+      "path": "docs/results/research-sprint-20261021/b5-invariance-score.json",
+      "sha256": "e8d00fa8d4d9b9ea716eaef822ca81c2715f8e3bef16d999695f2b6a5e0565d1"
+    },
+    {
+      "path": "docs/results/research-sprint-20261021/b5-deterministic-rule-baseline.json",
+      "sha256": "e2538cfb2b8711de054964151993a6340a40c55804d569d8455c8cdfb7e53ce6"
+    },
+    {
+      "path": "scripts/export_b5_request_ledger.py",
+      "sha256": "0ca277c03690502417797da0a3c26360538ea6a9d913105648ba869bb505ecf9"
+    },
+    {
+      "path": "scripts/audit_b5_deterministic_rule_baseline.py",
+      "sha256": "f94b6e0971ab3029354f3f948d6ab1fcb9fab3897c47abf8170098ec34797384"
+    }
+  ],
+  "estimated_cost_usd": 0.01178532,
+  "experiment_id": "b5-evidence-view-stability-120",
+  "invoice_obtained": false,
+  "model_calls": 120,
+  "operational_decision": "AMBIGUOUS",
+  "raw_request_response_payloads_git_ignored": true,
+  "registry_integrity": "PASS",
+  "schema_version": 1,
+  "scientific_outcome": "INCONCLUSIVE"
+}

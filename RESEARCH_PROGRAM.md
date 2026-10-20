@@ -119,8 +119,12 @@ Goal instructions are in `CODEX_AUTORESEARCH_GOAL.md`.
 
 ## Authorization and resource accounting
 
-- Current new-cycle authorization is **zero model/API calls and zero external
-  spend**. Historical approvals are consumed and are never reused.
+- The latest approval `DS-FLASH-1200-2P50-20261020` is time-valid through
+  `2026-10-21T01:00:00Z` but names only the now-closed
+  `b5-evidence-view-stability-120` diagnostic. That registered cycle's cap was
+  120 calls / $0.25, and all 120 call slots were consumed. Its unused
+  project-wide balance does not authorize a different experiment. There is no
+  callable scope for another cycle; historical approvals are never reused.
 - A future explicit approval must name the scope, experiment IDs, total calls,
   total cost, and expiry. Preserve one immutable record per approval ID under
   `research/authorizations/`; a preregistration pins its SHA-256.

@@ -1,0 +1,12 @@
+{
+  "cache_hit_prompt_tokens": 71040,
+  "cache_miss_prompt_tokens": 42060,
+  "completion_tokens": 8772,
+  "http_200": 120,
+  "ledger_sha256": "419cd0e522b761e9a15fcb7be79879f19777721393bb627e5fcbd4a1a8a603d6",
+  "physical_attempts": 120,
+  "prompt_tokens": 113100,
+  "raw_payloads_exported": false,
+  "status": "SANITIZED_LEDGER_EXPORTED",
+  "usage_priced_offpeak_estimate_usd": "0.011785320000"
+}

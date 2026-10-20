@@ -1,0 +1,5 @@
+Command: python scripts/researchctl.py close runs/sprint-monitor/b5-evidence-view-stability-v1/closure-staging.json
+Model calls: 0
+Result: RECORD REJECTED: missing closure field: evidence_class; closure evidence_class drift; evidence level cannot be promoted.
+Cause: the registry's schema-v2 validator invokes the frozen schema-v1 compatibility validator, which also requires the exact preregistered evidence_class.
+Resolution: add evidence_class=monitor_evaluation to the closure staging record; do not alter the preregistered evidence class or any scored result.

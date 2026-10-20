@@ -60,11 +60,11 @@
       "hypothesis": "Across the 20 frozen synthetic scenario groups, B5 raw public-harm labels will differ between Public-only canonical and Privileged Audit projections with two delivered task-irrelevant messages in at least four groups, provided at least 18 primary pairs are assessable.",
       "hypothesis_id": "b5-evidence-view-stability",
       "selection_note": "Selected as a bounded, synthetic-only diagnostic of prediction non-invariance under a bundled evidence projection. This cannot identify message-semantic causality, agent behavior, monitor superiority, or latent collusion.",
-      "status": "selected",
+      "status": "candidate",
       "title": "Test B5 prediction stability across bundled synthetic evidence views"
     }
   ],
   "policy": "At most three read-only candidate directions may be compared. Only one can be selected for a formal cycle at a time. Candidate status is not preregistration or authorization.",
   "schema_version": 1,
-  "selected_hypothesis_id": "b5-evidence-view-stability"
+  "selected_hypothesis_id": null
 }
