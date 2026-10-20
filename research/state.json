@@ -31,17 +31,18 @@
   "latest_decision": "PASS",
   "latest_decision_type": "operational",
   "latest_review": {
-    "authorization_status": "none_awaiting_scope_specific_user_approval",
-    "evidence": "docs/results/research-sprint-20261021/direction-review/campaign-preflight-evidence-index.json",
+    "authorization_status": "no_current_scope_for_new_agent_inference",
+    "evidence": "docs/results/m1-100-factorial-interaction-20261021/analysis_manifest.json",
+    "evidence_sha256": "9bf7b0f9ac3e43b885599d71f506671e6478df5ef5df29fd9e27e8fc827bbaa4",
     "experiment_registered": false,
     "new_model_api_attempts": 0,
     "new_model_calls": 0,
-    "proposed_campaign_id": "m4-b5-context-sensitivity-campaign-v1",
-    "status": "offline_draft_and_sanitized_schedule_validated_no_calls"
+    "selected_next_hypothesis_id": "communication-content-choice-effect",
+    "status": "offline_direction_review_complete_replication_requires_fresh_scope_specific_approval"
   },
-  "latest_review_id": "m4-b5-campaign-preflight-20261021",
+  "latest_review_id": "m1-reward-chat-direction-review-20261021",
   "latest_scientific_outcome": "SUPPORTED",
-  "next_action": "Continue offline. If B5 remains a priority, preregister an interleaved repeatability design that varies evidence-view components separately. Do not dispatch or reuse the closed 232-request authorization; new model inference needs separate scope-specific approval.",
+  "next_action": "Preregister a confirmatory replication of the M1 private-reward by chat-stage package interaction using new matched scenario/seed groups. The present result is post-hoc and does not isolate message semantics. No Agent calls are authorized by the consumed 232-request DeepSeek Monitor approval; obtain a new experiment-specific scope before execution.",
   "preexisting_untracked_paths_preserved": [
     "docs/COLOSSEUM_LOCAL_REPRO_PROTOCOL.md",
     "docs/results/colosseum-local-audit-20261020/",
@@ -60,5 +61,5 @@
   "schema_version": 2,
   "state_recorded_at_head": "75fbfe7a718addeb21b1bb38b8e328f7bd717f24",
   "status": "ready_for_next_cycle",
-  "updated_at": "2026-10-20"
+  "updated_at": "2026-10-21"
 }

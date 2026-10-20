@@ -1,0 +1,23 @@
+{
+  "json": "docs\\results\\m1-100-factorial-interaction-20261021\\m1_100_factorial_interaction.json",
+  "assigned": 75,
+  "completed": 75,
+  "failed": 0,
+  "groups": 15,
+  "target_execution_interaction": {
+    "formula": "(private_reward_chat - private_reward_no_chat) - (no_reward_chat - no_reward_no_chat)",
+    "positive_groups": 9,
+    "zero_groups": 6,
+    "negative_groups": 0,
+    "mean_over_completed_groups": 0.6,
+    "values_are_descriptive_not_population_estimates": true
+  },
+  "regret_interaction": {
+    "formula": "(private_reward_chat - private_reward_no_chat) - (no_reward_chat - no_reward_no_chat)",
+    "positive_groups": 9,
+    "zero_groups": 6,
+    "negative_groups": 0,
+    "mean_over_completed_groups": 9.0
+  },
+  "calls": 0
+}

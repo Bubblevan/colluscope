@@ -97,6 +97,48 @@
       "interpretation": "The synthetic projector omits mechanical_ledger, explicit allowed-label/incomplete-record prompt text, and stream=false. This is a plausible explanation for protocol-dependent predictions, not a proven cause of all-present outputs.",
       "outcome": "SUPPORTED",
       "scope": "The exact frozen synthetic projector and production B5 request compiler source paths reviewed on 2026-10-21."
+    },
+    {
+      "claim_id": "m1-private-reward-chat-package-interaction-descriptive",
+      "claim": "In the 15 post-hoc M1-100 matched groups, target execution occurred in 9/15 private-reward plus chat-stage episodes and 0/15 in each of the other three cells of the four-cell contrast.",
+      "interpretation": "Independent ballot-level replay supports this finite descriptive pattern. The interaction and regret summaries are post-hoc and come from the same groups; this is one fixed Qwen3-8B temperature-zero corpus, with family rates 1/5, 5/5, and 3/5. Shared-target incentives and the extra chat-stage prompt prevent attribution to message semantics, agreement, collusion, or intent.",
+      "outcome": "SUPPORTED",
+      "scope": "Only the 15 completed F1-F3 matched groups in the frozen M1-100 extension run; not a population estimate or confirmatory hypothesis test.",
+      "evidence_refs": [
+        {
+          "path": "docs/SCIENTIFIC_DIRECTION_REVIEW_POSTCAMPAIGN_20261021.md",
+          "sha256": "f464b9a1efc3c156a607d4a0a4da2f2993ea0ff050c53eb4c2bc6de3c8529eb8"
+        },
+        {
+          "path": "scripts/analyze_m1_100_factorial_interaction.py",
+          "sha256": "eb2982beefc8517751494376aa9871a5ed4fa08aa1f94132b17f091486355ea4"
+        },
+        {
+          "path": "docs/results/m1-100-factorial-interaction-20261021/m1_100_factorial_interaction.json",
+          "sha256": "ec79311bcd835f7960df147adfa0fb71aa1dcf8a0369bc8d291ea5c521315498"
+        },
+        {
+          "path": "docs/results/m1-100-factorial-interaction-20261021/matched_group_interactions.csv",
+          "sha256": "218f126943634496740c19dd3442d6a0e4eabee624a553d48acda041d94fc35f"
+        },
+        {
+          "path": "docs/M1_100_PROTOCOL.md",
+          "sha256": "8c64c562aae0c39d8bf45ef6858a0618068dadf5e8a747b97dd962c42accfcc4"
+        },
+        {
+          "path": "docs/M1_100_SCIENTIFIC_AUDIT.md",
+          "sha256": "0a20508d7048f1e573b4d158f348cfe647c8354199860ec1adf5b162a7ec9c1a"
+        },
+        {
+          "path": "docs/results/research-sprint-20261021/direction-review-postcampaign/independent-critic-review.md",
+          "sha256": "a3abfe9ec64eac004394acbeadad9a3f1f805dfa3f99b43e3d63dbaaa7a029f8"
+        },
+        {
+          "path": "docs/results/m1-100-factorial-interaction-20261021/analysis_manifest.json",
+          "sha256": "9bf7b0f9ac3e43b885599d71f506671e6478df5ef5df29fd9e27e8fc827bbaa4"
+        }
+      ],
+      "review_scope": "Independent critic reviewed the sanitized reanalysis and direction ranking; it did not independently replay raw T/B."
     }
   ],
   "cycle_updates": [
@@ -276,5 +318,5 @@
   "purpose": "Claim-level memory for future cycle selection. This is a scoped summary of historical artifacts, not a universal scientific score.",
   "schema_version": 1,
   "update_rule": "Each closure must distinguish what changed, what remains plausible, and which hash-pinned evidence supports the update. Only a structured update confirmed by an independent review artifact counts toward the no-progress pivot counter. The registry checks provenance and shape, not truth.",
-  "updated_at": "2026-10-20"
+  "updated_at": "2026-10-21"
 }

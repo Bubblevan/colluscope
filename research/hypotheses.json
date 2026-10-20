@@ -29,11 +29,11 @@
     },
     {
       "competing_explanations": [
-        "Shared-target incentives cause parallel choices without communication.",
-        "Role, seed, payoff matrix, chair rule, prior expressed choices, or token/salience differences explain ballot changes.",
-        "The agent may not follow the intended message protocol, making the causal contrast non-identifiable."
+        "The extra chat-stage prompt or target salience, rather than delivered message meaning, causes the finite package contrast.",
+        "Shared-target knowledge allows parallel choices; the observed interaction may depend on payoff-family features rather than communication.",
+        "The post-hoc pattern is specific to the current Qwen3 checkpoint, scenario families, or assignment sequence and will not reproduce in new matched groups."
       ],
-      "discriminating_prediction": "Freeze new payoff contexts and the complete assigned denominator; randomize actual versus neutral delivered content within matched contexts before votes; report failures, all assigned groups, and predeclared own-history strata. A null contrast or control failure falsifies/blocks the narrow content-effect claim.",
+      "discriminating_prediction": "Before any new response, freeze three new output-independent payoff matrices, 15 new matched scenario/seed groups, all five original conditions, and a counterbalanced order. Recompute target execution from ballots and estimate the four-cell interaction on all assigned groups. A null/negative interaction, failures concentrated in a condition, or a result confined to one family weakens a general package claim. Message-semantic effects remain outside this contrast and require separate randomization.",
       "evidence_refs": [
         {
           "path": "docs/results/m3-mechanism-audit-final/m3_group_results.csv",
@@ -46,13 +46,41 @@
         {
           "path": "docs/M1_100_PROTOCOL.md",
           "sha256": "8c64c562aae0c39d8bf45ef6858a0618068dadf5e8a747b97dd962c42accfcc4"
+        },
+        {
+          "path": "scripts/analyze_m1_100_factorial_interaction.py",
+          "sha256": "eb2982beefc8517751494376aa9871a5ed4fa08aa1f94132b17f091486355ea4"
+        },
+        {
+          "path": "docs/results/m1-100-factorial-interaction-20261021/m1_100_factorial_interaction.json",
+          "sha256": "ec79311bcd835f7960df147adfa0fb71aa1dcf8a0369bc8d291ea5c521315498"
+        },
+        {
+          "path": "docs/results/m1-100-factorial-interaction-20261021/matched_group_interactions.csv",
+          "sha256": "218f126943634496740c19dd3442d6a0e4eabee624a553d48acda041d94fc35f"
+        },
+        {
+          "path": "docs/M1_100_SCIENTIFIC_AUDIT.md",
+          "sha256": "0a20508d7048f1e573b4d158f348cfe647c8354199860ec1adf5b162a7ec9c1a"
+        },
+        {
+          "path": "docs/SCIENTIFIC_DIRECTION_REVIEW_POSTCAMPAIGN_20261021.md",
+          "sha256": "f464b9a1efc3c156a607d4a0a4da2f2993ea0ff050c53eb4c2bc6de3c8529eb8"
+        },
+        {
+          "path": "docs/results/research-sprint-20261021/direction-review-postcampaign/independent-critic-review.md",
+          "sha256": "a3abfe9ec64eac004394acbeadad9a3f1f805dfa3f99b43e3d63dbaaa7a029f8"
+        },
+        {
+          "path": "docs/results/m1-100-factorial-interaction-20261021/analysis_manifest.json",
+          "sha256": "9bf7b0f9ac3e43b885599d71f506671e6478df5ef5df29fd9e27e8fc827bbaa4"
         }
       ],
-      "hypothesis": "In a prospective matched design, replacing actual private allocation content with a frozen neutral message while holding task, incentive, message opportunity, and event structure fixed may change recipient ballot choice; own prior target expression may moderate the response.",
+      "hypothesis": "In a prospective matched replication, the assigned private-target-reward plus chat-stage package will produce a positive target-execution interaction relative to private reward without chat and chat without private reward. This hypothesis concerns the treatment package only; it does not predict that message semantics, agreement, collusion, or intent are identified.",
       "hypothesis_id": "communication-content-choice-effect",
-      "selection_note": "Tier 2 for the current turn. Existing M3 evidence has only 8 proposal-eligible contexts (CSV: Neutral 3/8, Masked 0/8, No-delivery 3/8); M4 shared-target design and message/token confounds prevent causal inference.",
-      "status": "candidate",
-      "title": "Does private message content change a recipient vote under a shared target incentive?"
+      "selection_note": "Selected as the next prospective scientific question after the post-hoc M1-100 factorial reanalysis: the assigned private-reward/chat-stage package had target execution in 9/15 matched groups versus 0/15 in each other 2x2 cell. This is finite descriptive evidence only; it is heterogeneous by payoff family, does not isolate message semantics, and is not confirmatory. A prospective replication protocol and fresh experiment-specific approval are required before any Agent call.",
+      "status": "selected",
+      "title": "Does a private target reward interact with chat-stage availability in allocation choices?"
     },
     {
       "competing_explanations": [
@@ -81,5 +109,5 @@
   ],
   "policy": "At most three read-only candidate directions may be compared. Only one can be selected for a formal cycle at a time. Candidate status is not preregistration or authorization.",
   "schema_version": 1,
-  "selected_hypothesis_id": null
+  "selected_hypothesis_id": "communication-content-choice-effect"
 }

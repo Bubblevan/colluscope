@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "analysis_id": "m1-100-factorial-interaction-20261021",
+  "evidence_class": "post_hoc_offline_reanalysis",
+  "new_model_calls": 0,
+  "command": "python scripts/analyze_m1_100_factorial_interaction.py",
+  "raw_run_directory": "runs/m1_100/extension-75-20261019-run02",
+  "inputs": [
+    {
+      "path": "runs/m1_100/extension-75-20261019-run02/researcher/T.jsonl",
+      "sha256": "8b87aac873f403909b34b9a94fc13a2f7924968e370f320bbb293d53cef2cafb"
+    },
+    {
+      "path": "runs/m1_100/extension-75-20261019-run02/researcher/B.jsonl",
+      "sha256": "4d176ceb4d49abe60cde1a0159e1de21b3f603ac7f264b23bc544f3e686dfc87"
+    },
+    {
+      "path": "runs/m1_100/extension-75-20261019-run02/assignment-schedule.json",
+      "sha256": "b3c8a223dd8f1c5cfee25a997fc23e4460c6dc6d244c87f4b5879d9eb1bfde0b"
+    },
+    {
+      "path": "runs/m1_100/extension-75-20261019-run02/frozen_protocol/m1-100.toml",
+      "sha256": "f4bdc56254785b82e2d0a03748e65a49cf096b6e8602c1eec0d8786316277bad"
+    },
+    {
+      "path": "runs/m1_100/extension-75-20261019-run02/frozen_protocol/m1-100-scenarios.json",
+      "sha256": "08c7592b09289174e5413b265c95756a03df226259411b3a8ecfb4a7eb7ac625"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "scripts/analyze_m1_100_factorial_interaction.py",
+      "sha256": "eb2982beefc8517751494376aa9871a5ed4fa08aa1f94132b17f091486355ea4"
+    },
+    {
+      "path": "docs/results/m1-100-factorial-interaction-20261021/m1_100_factorial_interaction.json",
+      "sha256": "ec79311bcd835f7960df147adfa0fb71aa1dcf8a0369bc8d291ea5c521315498"
+    },
+    {
+      "path": "docs/results/m1-100-factorial-interaction-20261021/matched_group_interactions.csv",
+      "sha256": "218f126943634496740c19dd3442d6a0e4eabee624a553d48acda041d94fc35f"
+    },
+    {
+      "path": "docs/results/m1-100-factorial-interaction-20261021/episode_outcomes.csv",
+      "sha256": "3a2e1da298c5885fd667946e66f9e1281f9a44119d44f0af26321a93213c1730"
+    },
+    {
+      "path": "docs/results/m1-100-factorial-interaction-20261021/reproduction.log",
+      "sha256": "9aee4fee9f5bfba1fcf577e3308e5d02ca137ab90648cad7e7f993fe2fffc892"
+    },
+    {
+      "path": "docs/results/m1-100-factorial-interaction-20261021/environment.json",
+      "sha256": "13734c0aae2376187f9233cdc4b73a43ee1da608fc957962b73b0ea6f61d4180"
+    },
+    {
+      "path": "docs/SCIENTIFIC_DIRECTION_REVIEW_POSTCAMPAIGN_20261021.md",
+      "sha256": "f464b9a1efc3c156a607d4a0a4da2f2993ea0ff050c53eb4c2bc6de3c8529eb8"
+    },
+    {
+      "path": "docs/results/research-sprint-20261021/direction-review-postcampaign/independent-critic-review.md",
+      "sha256": "a3abfe9ec64eac004394acbeadad9a3f1f805dfa3f99b43e3d63dbaaa7a029f8"
+    },
+    {
+      "path": "docs/M1_100_PROTOCOL.md",
+      "sha256": "8c64c562aae0c39d8bf45ef6858a0618068dadf5e8a747b97dd962c42accfcc4"
+    },
+    {
+      "path": "docs/M1_100_SCIENTIFIC_AUDIT.md",
+      "sha256": "0a20508d7048f1e573b4d158f348cfe647c8354199860ec1adf5b162a7ec9c1a"
+    }
+  ]
+}

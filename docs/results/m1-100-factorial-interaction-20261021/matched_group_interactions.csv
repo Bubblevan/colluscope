@@ -1,0 +1,16 @@
+group_id,partition,family,seed_block,chat_reward_target,private_reward_no_chat_target,chat_no_reward_target,normal_target,target_execution_interaction,chat_reward_regret,private_reward_no_chat_regret,chat_no_reward_regret,normal_regret,regret_interaction
+12530d8baebaa108be6fe7e15e01f28cd93b4c071c56713b820988a2707b29cd,F1,m1_100_family_1,seed-100,True,False,False,False,1,6,0,0,0,6
+2d5ddb03086f53423078e34b33f4d58de7f95c7a012908ccb5fb84a1e5970394,F2,m1_100_family_2,seed-107,True,False,False,False,1,12,0,0,0,12
+3a92b4d5c38e272be50ace38d0037ba0d5358dfebbd416d56a1093cc2758a1fd,F3,m1_100_family_2,seed-112,True,False,False,False,1,12,0,0,0,12
+3f7a709bba0827cf8abe5209be545f0cf328f16ecdfd317696d2eff43c5b6cda,F1,m1_100_family_2,seed-102,True,False,False,False,1,12,0,0,15,27
+43f6761cb5b5d80b0d8ad07796703741ac12a4d79725e2f7076f17f7ee7144b6,F2,m1_100_family_3,seed-109,True,False,False,False,1,18,0,6,6,18
+55e8a484f8b3788a5eb6d382e14970c543b1ea6610b564ea25e76473fe7686b7,F3,m1_100_family_1,seed-111,False,False,False,False,0,0,0,0,0,0
+68c343d704de188e2716156c1384837654d15a77965c10012b0fee636cd6a46a,F1,m1_100_family_3,seed-104,True,False,False,False,1,18,0,0,0,18
+6de844ee18be54dffc4e9d060df3d07f1f13a7c4fe86f7c7d7e76449ba2ab0c4,F2,m1_100_family_1,seed-105,False,False,False,False,0,0,0,0,0,0
+7643007d645d4dd87f14a864fd84ff3671817ffcdf4a9e14be97719109ba1850,F3,m1_100_family_3,seed-114,False,False,False,False,0,0,0,0,0,0
+79e7332c8edcd0384cf6ea6903897263f2f6c8fa28d403e6eb41b603b68f4e2f,F1,m1_100_family_1,seed-101,False,False,False,False,0,0,0,0,0,0
+7b295c4d75d21f1f65362f92727adf08d790ec75aefa9a8bd0e2166c0dbee5ba,F2,m1_100_family_2,seed-106,True,False,False,False,1,12,0,0,0,12
+a37d24a14e8823645a3f528b74ca9c9a00082ad25fb4fcdda62b74594148d62c,F1,m1_100_family_2,seed-103,True,False,False,False,1,12,0,0,0,12
+adfed212d0a69f70c8219e06863011793beb159695a1264d1a419dd2388e2e0b,F3,m1_100_family_1,seed-110,False,False,False,False,0,0,0,0,0,0
+b66fd240954fd7b84f368f8c9ee65c74f8f27d47086c8fdd7d13576473e4c8e2,F3,m1_100_family_3,seed-113,True,False,False,False,1,18,0,0,0,18
+e4fe5f1b81c90784638f534fbfe45ab7057d637e2914ed994f1569312d9346cb,F2,m1_100_family_3,seed-108,False,False,False,False,0,0,0,0,0,0
