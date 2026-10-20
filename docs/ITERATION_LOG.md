@@ -61,3 +61,16 @@
 - **DECIDE — M0 gate:** TRD M0 gates **GO** for the offline research scaffold and evidence package, with the qualification that upstream experiment reproduction and real-LLM behavior remain unverified/not run. **M1 has not started and is not authorized by this decision.**
 - **Next single highest-value action:** Human review of the M0 decision and limitations; only after explicit user approval should a bounded real-LLM pilot be designed or run.
 - **Blockers/limitations:** Four script seeds per mechanism support integrity checks only. The fixed 3-agent/3-task matrix and chair tie-break are toy assumptions. No real LLM, provider, paid API, bank system, real user data, or ICBC/FTEC5660 source was used.
+
+## COLOSSEUM-R-00 — pinned-source preflight (no inference)
+
+- **Date:** 2026-10-20 (Asia/Shanghai)
+- **Base commit:** `190ea3cb4e5803bea3fede9a0eddbf8e4d57fe51`; Colosseum source `b077fe7e2f10566e92156cc12e06ffb2aac54790`; pinned CoLLAB submodule `018c9e4229d2c5d980285f25be3cca8d1508140f`.
+- **INSPECT — highest risk:** Executing a nominal “quick” config can launch 60 episodes and thousands of generations, including hidden retries; the local Qwen3 checkpoint is not the model/runtime in the upstream configs.
+- **SPECIFY — falsifier:** Resolve the exact pinned environment, compile/import the runner, independently expand config settings and per-episode call bounds, construct only a local adapter with a placeholder key, and verify zero model HTTP calls.
+- **IMPLEMENT:** Initialized only the exact pinned CoLLAB submodule and the reference clone's ignored `.venv`; no tracked reference code or M0/M1 artifacts changed. An initial setuptools packaging failure is preserved; the README's `--no-install-project` setup succeeded.
+- **RUN:** Runner `--help`, collusion-source `compileall`, Jira environment-class resolution, config expansion, and local adapter construction passed. Config counts are 60 episodes/2,700 max calls for the 3-agent “small” config and 60/5,400 for the 6-agent Jira sweep. `pytest` is not installed in the locked venv; the global `pytest` found no tests (exit 5). Model SHA256 `D98CDCBD03E17CE47681435B5150E34C1417F50B5C0019DD560E4882C5745785`.
+- **ADVERSARIAL REVIEW:** `TogetherClient` auto-loads dotenv with override and defaults to six retries; both can invalidate privacy/call-budget assumptions unless explicitly disabled. The local model differs from Qwen2.5/Kimi configurations. The paper reports 5 seeds generally, but Figure 4 uses 10 seeds and two runs per seed, temperature .7, and 1,500 output tokens. No result from this preflight is behavioral evidence.
+- **DECIDE:** GO for offline preflight. NO-GO for inference until model/runtime/sampling/budget are confirmed. A bounded 5-paired-seed, 10-episode, local Qwen3 protocol-level replication is proposed with a 900-request ceiling; it is not an exact model replication and is underpowered versus Figure 4. User input is pending.
+- **Next highest-value action:** If approved, implement a run-level request cap and deterministic local request recording before launching the paired Jira conditions; otherwise stop at the preflight report.
+- **Evidence:** `docs/COLOSSEUM_REPRO_PREFLIGHT.md`. External inference/API calls: 0. Local model generations: 0. `.env` was not read or staged.
