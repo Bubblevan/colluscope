@@ -1,0 +1,2 @@
+COMMAND FAILURE RECORD - 2026-10-20
+A PowerShell-quoted Python one-liner intended to print manifest-verification.json fields was rejected by the PowerShell parser. Exact reported message: "python.exe: ScriptBlock should only be specified as a value of the Command parameter." The manifest build and verifier had already succeeded with 112 files and status PASS; the failed summary command made no file changes. The final status was read with native PowerShell JSON parsing instead.

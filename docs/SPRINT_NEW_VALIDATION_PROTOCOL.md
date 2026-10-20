@@ -5,6 +5,8 @@
 **Track:** 2.3 evidence standards; secondary relevance to 2.2 only if a later separately authorized monitor analysis is defined.<br>
 **Purpose:** a narrow, independent validation of the post-hoc M3 self-history split on new payoff matrices and seeds.
 
+**Review addendum:** `docs/EXPANSION_REVIEW_2026-10-20.md` adds a positive-control-first gate based on current Apart guidance. It does not edit this protocol's frozen samples or authorize execution. Treat this 24-group design as a later optional stage; first identify and reproduce an approved positive control, or document why the upstream control is incompatible.
+
 ## Question and limits
 
 Among a recipient whose A/B peer has sent a delivered, complete literal allocation, do counterfactual ballots differ between the original proposal prompt and a token-matched neutral prompt, and is that within-context difference descriptively different when the recipient's own earlier mapping-bearing message matched the incoming mapping?

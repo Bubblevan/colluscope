@@ -55,3 +55,15 @@ The preceding records are retained as earlier build history. An initial rerun ex
 - Byte-reproducibility logs for the final source are `pdf-final-repro-build-a.log`, `pdf-final-repro-build-b.log`, and `pdf-final-repro-check.log` in `docs/results/submission-prep/`; final validation and page-render parity are in `pdf-validation-final-frozen.log` and `pdf-render-final-frozen-parity.log`. The malformed one-off comparison command is retained in `pdf-render-final-r3.log`; its corrected reusable script is `scripts/compare_submission_page_renders.py`.
 
 This corrects the earlier hash/size above without deleting the prior build record. Exact official-template matching and author fields remain unresolved; this remains a review candidate, not a submission file.
+
+## Positive-control disclosure revision (2026-10-20)
+
+The Limitations appendix now states that M0-M3 contains no behavior or reference positive-control condition and that a synthetic audit canary would validate code only. This follows the current official page's Results guidance; it does not claim that an unrun control was completed.
+
+- Current PDF SHA-256: `1c4ff8ff98f94d28209e012d7ca18d3f7327e1e24cdf0fa28b37ed3a1878bfea` (419,915 bytes).
+- Canonical Markdown SHA-256: `3add96d61c0eb7da131bbc0a14d9018089a6be1f6bedbe7a289466ce2b14f32c`.
+- Editable LaTeX source SHA-256: `f28ae3c2909388bafee5815b58bfc1269e9597b00276005d5f8afbc6e7220cd6`; the desktop editor compiler reported success.
+- Structural validation: `PASS_STRUCTURAL_CHECKS`; 5 US Letter pages, 138 abstract words, 4 images, 5 links. Two deterministic PDF builds were byte-identical.
+- Visual QA: all five pages were rendered and inspected. A second render matched all five page images pixel-for-pixel. The appendix fits on page 5; no clipping or new page break was introduced. Poppler still reports missing display fonts for Symbol and ArialUnicode, but all rendered text is legible.
+- Evidence logs: `expansion-review-pdf-build-a.log`, `expansion-review-pdf-build-b.log`, `expansion-review-pdf-validation.log`, `expansion-review-render.log`, `expansion-review-page-parity.log`, `expansion-review-claim-audit.log`, `expansion-review-scenario-check.log`, and `expansion-review-group-check.log` under `docs/results/submission-prep/`.
+- The refreshed evidence manifest contains 112 inventoried files and passed independent hash/size/privacy-path verification with `model_calls=0`; its manifest hash is recorded in the companion, intentionally excluded `manifest-verification.json`.

@@ -8,17 +8,22 @@
 
 - **GO:** retain this package as a reviewable, evidence-linked pre-sprint paper candidate and as a frozen proposal for a small new validation. The five-page PDF passes structural checks and visual review; the headline metrics were independently recomputed from sanitized audit tables without model calls.
 - **NO-GO:** submit the current PDF or represent it as an official-template-compliant or entrant-authored final paper. The exact template could not be inspected, the official page simultaneously says the submission window is closed and gives a future 25 October deadline, author/team and signup facts are missing, and all current results predate the Sprint. The manuscript is AI-assisted and needs entrant verification and rewriting.
+- **NO-GO:** treat the candidate as methodologically complete for submission. The official Results guidance says to always include a positive control; M0-M3 has no behavior or reference positive-control result. A synthetic code canary cannot substitute for that result.
 - **NO-GO:** run the proposed validation or any Agent/Monitor inference under this task. Its sample schedule and protocol are frozen offline only; `model_calls_authorized=false`.
 - **NO-GO:** infer latent collusion, agreement, communication-induced coordination, or population causal effects from M0-M3. Observable sequences and counterfactual prompt responses support only the operational descriptions stated in the paper.
 
 ## Evidence supporting the candidate
 
 1. `scripts/audit_submission_claims.py` returns `PASS` with `model_calls=0`; its input hashes and all recomputed headline counts are recorded in `docs/results/submission-prep/claim-audit.json`.
-2. The current PDF is 5 US Letter pages, 138 abstract words, 419,761 bytes, four evidence figures, and five clickable reference links. `scripts/validate_submission_pdf.py` returns `PASS_STRUCTURAL_CHECKS`; two builds were byte-identical and all five final page renders matched the individually inspected pages pixel-for-pixel.
+2. The current PDF is 5 US Letter pages, 138 abstract words, 419,915 bytes, four evidence figures, and five clickable reference links. `scripts/validate_submission_pdf.py` returns `PASS_STRUCTURAL_CHECKS`; the latest two builds were byte-identical and all five rendered page images matched pixel-for-pixel.
 3. Scenario and group freeze checks reproduce the three proposed new payoff families and 24-group schedule. These are design artifacts, not results.
 4. The paper distinguishes observed M1 behavior, M2 model predictions, M3 counterfactual responses, deterministic settlements, and unknown latent intent. Its 0/5 vs 3/3 self-history split is explicitly post-hoc exploratory; Masked structural cues and the 45.125-token No-delivery gap are disclosed.
 5. M0-M3 raw runs, hashes, timestamps, and historical failure records were not edited. M3 private prompts/messages remain excluded from the public package and ACL restricted locally.
 6. `scripts/verify_submission_manifest.py` checked all recorded file hashes and sizes, confirmed the PDF hash matches its structural-validation record, and found no private M3 raw paths or model calls.
+
+## Expansion-review update (2026-10-20)
+
+The positive-control guidance is now explicit in the paper's Limitations and Dual-Use / Ethical Considerations appendix. Current revised PDF SHA-256: `1c4ff8ff98f94d28209e012d7ca18d3f7327e1e24cdf0fa28b37ed3a1878bfea`; the exact source hashes, manifest hash and latest page-render check are recorded in `docs/results/submission-prep/` and the appended format record. No results or model outputs were added. The candidate remains **NO-GO for submission readiness** until the entrant has an approved positive-control result, resolves the form/template blockers, supplies truthful author details, and rewrites the AI-assisted draft.
 
 ## Unresolved submission blockers
 
@@ -27,6 +32,7 @@
 - Confirm actual eligibility/signup status, team name/location fields, and truthful author/affiliation details.
 - Entrant(s) must independently verify and rewrite the AI-assisted draft in their own words, approve every claim and citation, and identify any new Sprint-time result separately.
 - The proposed new validation remains unrun. The Sprint schedule does not authorize inference by itself.
+- The pasted 48-group M4 suggestion is unapproved and its 336/480 budget figures do not reconcile to a complete call graph. `docs/EXPANSION_REVIEW_2026-10-20.md` records a positive-control-first recommendation without changing frozen group files.
 
 ## Reproduction
 

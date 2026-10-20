@@ -40,3 +40,5 @@ The final pre-existing audit/reproduction reports are:
 ## Raw-data boundary
 
 The public candidate bundle contains sanitized summaries, code, source hashes and manifest references. It cannot reproduce every M3 row from the pushed repository alone because the complete raw prompts, private messages and responses are excluded and ACL restricted. Controlled reviewer access must be arranged explicitly; private text is not published as a convenience. Historical M0-M3 run outputs and hashes are not rewritten by submission preparation.
+
+The latest expansion review and positive-control decision are recorded in `docs/EXPANSION_REVIEW_2026-10-20.md`. It is planning documentation only: no M4 or reference baseline was run, and the 24-group validation freeze remains unchanged.

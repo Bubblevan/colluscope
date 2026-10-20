@@ -1,0 +1,4 @@
+status=PASS
+output=D:\MyLab\colluscope\reference\m1-p0-local-qwen-integration\docs\results\submission-prep\claim-audit.json
+output_sha256=1731f48d4956f732b956c3b90dac87766fd00a4ed0f939c43deb1cec37c1db64
+model_calls=0

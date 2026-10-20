@@ -21,6 +21,7 @@ EXACT_PATHS = (
     "configs/sprint-validation-groups.json",
     "docs/ITERATION_LOG.md",
     "docs/RESEARCH_RISK_REGISTER.md",
+    "docs/EXPANSION_REVIEW_2026-10-20.md",
     "docs/PRE_SPRINT_WORK_DISCLOSURE.md",
     "docs/SPRINT_NEW_VALIDATION_PROTOCOL.md",
     "docs/SUBMISSION_CLAIM_EVIDENCE_AUDIT.md",
