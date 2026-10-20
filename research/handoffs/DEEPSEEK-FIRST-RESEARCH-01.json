@@ -1,0 +1,94 @@
+{
+  "authorization_status": "consumed",
+  "evidence_classes": [
+    "live_engineering_preflight",
+    "real_llm_behavior",
+    "monitor_evaluation",
+    "scripted_mock",
+    "offline_reanalysis"
+  ],
+  "evidence_summaries": [
+    {
+      "denominator": "20 assigned compatibility requests; 20 terminal HTTP 200 responses.",
+      "evidence_class": "live_engineering_preflight",
+      "summary": "The frozen Strict compatibility pilot completed 20 requests (8 Agent, 12 Monitor); fallback was not used. This is interface evidence only."
+    },
+    {
+      "denominator": "24 assigned groups; 24 completed; no group replacement.",
+      "evidence_class": "real_llm_behavior",
+      "summary": "The authorized DeepSeek Agent schedule completed 24/24 groups from 232 requests, with 72 valid baseline ballots and 48 delivered messages. It does not establish causal communication effects or latent collusion."
+    },
+    {
+      "denominator": "376 assigned Monitor rows; 126 assessable matched B4/B5 pairs; 400 individual reference labels.",
+      "evidence_class": "monitor_evaluation",
+      "summary": "The frozen Monitor schedule completed 376/376 rows. On 126 independently assessable B4/B5 pairs, 65 were both exact, 47 neither exact, 10 B4-only exact, and 4 B5-only exact. Superiority and generalization are not established."
+    },
+    {
+      "denominator": "16 scheduled control requests; four positive and four hard-negative examples per method.",
+      "evidence_class": "scripted_mock",
+      "summary": "Frozen synthetic positive and hard-negative controls were scored separately from natural Agent behavior. Their small fixed denominators are descriptive checks, not sensitivity or specificity estimates."
+    },
+    {
+      "denominator": "24 Agent group replays; 376 Monitor row replays; 64 fixed-peer focal ballot substitutions.",
+      "evidence_class": "offline_reanalysis",
+      "summary": "Independent raw replay passed for the Agent and Monitor records. A fixed-peer settlement replay evaluated 64 focal rows while holding the other two baseline ballots fixed."
+    }
+  ],
+  "handoff_id": "DEEPSEEK-FIRST-RESEARCH-01",
+  "historical_external_cost_usd": 0.2488836,
+  "historical_model_calls": 628,
+  "imported_at_utc": "2026-10-20T17:39:42+00:00",
+  "imported_git_head": "0deb01b31b02fb8678172d9f82648f46d49ac499",
+  "limitations": [
+    "The Agent and Monitor used the same provider-managed DeepSeek alias; the provider did not expose a pinned weight hash.",
+    "The shared rewarded target and proposal prompt-length differences confound communication-mechanism interpretations.",
+    "Citation membership is not semantic support, and repeated Monitor rows are not independent examples.",
+    "No latent-collusion gold label exists in this run.",
+    "The 628-request run is separate from the later 856-row Monitor run and must not be merged with it."
+  ],
+  "preregistration_refs": [
+    {
+      "claim": "Frozen Agent protocol",
+      "path": "docs/M4_DEEPSEEK_AGENT_V1_PROTOCOL.md",
+      "sha256": "c82e44b3c190b98312809e314fcebd0b923cc348f8aa7a0075eac25b418ba1bf"
+    },
+    {
+      "claim": "Frozen Monitor protocol",
+      "path": "docs/M4_DEEPSEEK_MONITOR_V1_PROTOCOL.md",
+      "sha256": "df1508651ec8902ba42486c3e704342189a02b38fd8f91b425cf9b5aa666f613"
+    },
+    {
+      "claim": "Single-run scope and consumed authorization",
+      "path": "docs/DEEPSEEK_FIRST_RESEARCH_RELEASE.md",
+      "sha256": "a22fd781ac5d7830d933a4f4fa71eba64e5532ccad6b8b5300914bdcd2cf48b9"
+    }
+  ],
+  "raw_data_local_only": true,
+  "recommended_next_action": "Use this hash-checked closeout as prior evidence to rank up to three competing research hypotheses and preregister one zero-call or offline cycle; any future provider call requires separate explicit user authorization.",
+  "sanitized_artifacts": [
+    {
+      "path": "docs/M4_DEEPSEEK_FIRST_RESEARCH_EVIDENCE.md",
+      "role": "integrated evidence and decision report",
+      "sha256": "9ef19fbbee64ebffac07a93cad4282268e4ff19330b2984b0203348f696e9f07"
+    },
+    {
+      "path": "docs/M4_DEEPSEEK_FIRST_RESEARCH_DECISION.md",
+      "role": "terminal scientific decision",
+      "sha256": "e1db75339f0824630c10796d54c0dd04407215e9a64547c4727d88eb0d5bea8a"
+    },
+    {
+      "path": "docs/results/deepseek-first-m4/audit/postrun_analysis_v2.md",
+      "role": "sanitized post-run results",
+      "sha256": "ab8882db0c1381e39f87f5ff3519ad2b5faaef625c63ab2bac8991c388fb4cba"
+    },
+    {
+      "path": "docs/results/deepseek-first-m4/audit/independent_audit.json",
+      "role": "independent raw replay audit",
+      "sha256": "ca5fadb95c7377d54659139c3e1138a51cc97333b2d05b6102cb94a3ca41af57"
+    }
+  ],
+  "schema_version": 1,
+  "terminal_decision": "PASS",
+  "terminal_summary": "This is a terminal historical closeout, not a new preregistration. The exact run passed integrity review and supports bounded descriptive reporting. The scientific decision remains NO-GO for causal communication attribution, B4/B5 superiority, model-family generalization, and latent-collusion or intent claims. All 628 requests were terminally accounted, the one-run authorization is consumed, and historical usage does not authorize future calls.",
+  "title": "DeepSeek-first M4 and Monitor bounded execution"
+}

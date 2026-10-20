@@ -24,6 +24,8 @@ __pycache__/
 /runs/full-research-execution-20261020/
 # Local runtime logs may contain private prompts or model output.
 /logs/
+# The research registry uses this transient cross-process write lock.
+/research/.registry.lock
 # Colosseum local reproduction raw traces remain outside published results.
 /runs/colosseum_local/
 # M4 Agent runs contain private prompts, generated messages, and action traces.

@@ -1,60 +1,75 @@
 # Research registry
 
-`state.json` is the current handoff projection. `budget.json` is the current
-authorization snapshot. New experiments are stored as
-`experiments/<ID>/preregistration.json` and, after a terminal review,
-`experiments/<ID>/closure.json`. The CLI never starts an experiment.
+The registry supports a persistent Codex `/goal` research cycle. The Goal is
+the reasoning and continuation driver; this CLI records state and checks
+provenance. It never executes an experiment, a registered command, a model call,
+or arbitrary shell code.
 
-The registry is intentionally empty at bootstrap: the separate in-progress
-Codex task named by the user has no verified terminal artifact in this
-checkout. Import only its sanitized closeout after it finishes; do not invent
-a starting hypothesis from a provisional result.
+## Current state
 
-Use `python scripts/researchctl.py status` to inspect state,
-`python scripts/researchctl.py import-closeout <file>` to import a terminal
-sanitized result from the separate in-progress Codex task,
-`python scripts/researchctl.py register <file>` to validate and freeze a
-preregistration, `python scripts/researchctl.py close <file>` to validate and
-record a terminal review, and `python scripts/researchctl.py audit` to check
-the ledger and hashes. The frozen evaluator checks protocol/record integrity;
-it does not certify scientific validity.
+- `state.json` records the active cycle and continuation step.
+- `memory.json` preserves claim-level beliefs, scope, and hash-pinned evidence.
+- `hypotheses.json` holds at most three competing read-only candidate
+  directions; only one can be selected for a formal cycle.
+- `budget.json` holds the zero-call current authorization and project-wide
+  ceiling. Immutable approval records, if separately authorized in the future,
+  belong in `authorizations/<APPROVAL_ID>.json`.
+- `handoffs/DEEPSEEK-FIRST-RESEARCH-01.json` is the terminal historical
+  628-request closeout. Its approval is consumed. The separate 856-row Monitor
+  result remains linked from state and research memory; neither run is merged
+  with new cycles or with each other.
 
-`import-closeout` records a completed prior run without falsely preregistering
-it after the fact. Its historical calls are explicitly excluded from the new
-cycle authorization. The imported packet must point to hash-pinned sanitized
-protocol, result, and independent-audit files; raw data paths are rejected.
-The packet uses `schema_version`, `handoff_id`, `title`, `terminal_decision`,
-`evidence_classes`, one `evidence_summaries` entry per class (each with a
-summary and denominator), `terminal_summary`, `preregistration_refs`,
-`sanitized_artifacts` (role/path/SHA-256), historical call/cost totals,
-`authorization_status`, `raw_data_local_only: true`, limitations, and one
-recommended next action. The evaluator rejects summaries that combine or omit
-an evidence class.
+## Cycle records
 
-## Record fields
+New experiments are stored as
+`experiments/<ID>/preregistration.json` and, after terminal review,
+`experiments/<ID>/closure.json`; a `registration.json` sidecar pins their
+preregistration hash and, after closure, its terminal hash. CLI writes are
+serialized through an ignored cross-process registry lock. Current preregistration and closure records
+use schema version 2 and the versioned evaluator
+`frozen_eval/evaluate_cycle_v2.py`. The original schema v1 evaluator remains
+unchanged at `frozen_eval/evaluate_cycle.py` for prior records and handoff
+imports.
 
-A preregistration JSON uses schema version 1 and includes:
+Scientific outcomes (`SUPPORTED`, `REFUTED`, `INCONCLUSIVE`,
+`INVALID_EXPERIMENT`, `EXECUTION_BLOCKED`, `RESOURCE_BLOCKED`) are stored
+separately from operational review disposition. A normal scientific outcome
+does not complete the Goal. Closure records carry claim-level belief updates;
+`memory.json` mirrors those updates and can be rebuilt from closed cycles.
 
-- `experiment_id`, `title`, `evidence_class`, research question, hypothesis,
-  at least one competing explanation, and hash-pinned prior evidence;
-- `protocol`: sample selection, intervention, held-constant factors, primary
-  outcome, denominator, success/failure/ambiguous gates, analysis plan,
-  reproducible command, runtime identity, and hash-pinned frozen inputs;
-- `budget`: maximum calls, external spend, and wall-clock minutes; and
-  `authorization`: whether approval is required, its ID if already granted,
-  and the exact scope. A registration is never approval.
-- optionally `closes_current_handoff: true` when the registered artifact is the
-  terminal closeout for the separate task recorded in `state.json`.
+Each approval batch has its own call/cost cap and expiry. A cycle's full
+preregistered ceiling reserves capacity within that batch and within the
+project-wide cumulative limit. Closures with physical model/API attempts must
+include a hash-pinned sanitized request ledger, with a row for every attempt,
+including failures. The evaluator verifies ledger row counts, costs, grant
+scope, and per-attempt expiry timestamps. These are record checks, not
+pre-dispatch controls; there is no runner today.
 
-A closure JSON must preserve the evidence class and record the decision,
-observations, denominator, scientific update, actual calls/cost, retained
-failures, actual wall-clock time, review mode/finding, hash-pinned sanitized
-outputs, and exactly one next action with its evidence class, budget, and
-approval requirement. For
-`review_mode: independent`, include a hash-pinned `review_artifact`.
+## Commands
 
-Paths under `runs/`, `logs/`, `reference/`, `.git/`, `.aws/`, `.codex/`, or
-`.env` are rejected. Store raw requests, private messages, credentials, and local identity records only in
-the existing ignored and access-controlled locations; register sanitized
-reviewable artifacts instead. Historical calls do not count as current
-authorization and must remain linked to their existing run records.
+```powershell
+python scripts/researchctl.py status
+python scripts/researchctl.py next
+python scripts/researchctl.py import-closeout <sanitized-packet.json>
+python scripts/researchctl.py register <preregistration-v2.json>
+python scripts/researchctl.py close <closure-v2.json>
+python scripts/researchctl.py audit
+python scripts/researchctl.py sync-memory
+```
+
+`next` prints one required continuation step and does not dispatch it.
+`sync-memory` rebuilds the cycle-memory projection from terminal closure files;
+it does not change scientific outcomes. `audit` validates registry integrity,
+hashes, denominators, grants, request ledgers, memory links, and total ceilings.
+None of these commands certifies a scientific conclusion.
+
+`protocol.reproduction_command` is inert audit text. A future runner may only
+call an explicitly allowlisted experiment entry point; the current CLI does not
+interpret command strings. Any runner must add an atomic pre-request budget
+reservation before it can make paid or live calls.
+
+Store raw requests, private messages, credentials, and local identity records
+only in existing ignored and ACL-restricted locations. Register reviewed,
+sanitized artifacts. Never promote evidence class or infer collusion/intent
+from treatment, agreement, channel availability, welfare harm, or monitor
+scores alone.

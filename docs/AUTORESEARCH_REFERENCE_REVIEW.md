@@ -41,8 +41,14 @@ and `TraceGuard` include MIT license files in the inspected snapshots.
 
 ## Decision
 
-Use Codex `/goal` as the research director, repository instructions and skills
-as the method, and the local CLI as a record/hash/budget consistency gate.
-Do not add a background scheduler, autonomous shell runner, multi-branch
-search tree, or model API adapter. Those systems would add risk without
-resolving the current scientific uncertainty.
+Use Codex `/goal` as the reasoning and continuation driver, repository skills
+as the method, and the local CLI as a record/hash/budget consistency gate. The
+revised registry allows up to three competing hypothesis candidates for
+read-only comparison, while one formal experiment remains open at a time.
+
+Do not add a background scheduler, arbitrary shell runner, or model API adapter
+until a separate design can enforce an immutable allowlist, pre-request budget
+reservation, authorization expiry, identity, privacy, and crash recovery. The
+current `/goal` coordinator is not a self-dispatching AutoResearch engine; its
+limits and next implementation gate are recorded in
+`docs/AUTORESEARCH_DESIGN_REVIEW.md`.

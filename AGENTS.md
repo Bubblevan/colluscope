@@ -24,9 +24,25 @@ single highest-value next uncertainty-reducing experiment.
 ## Autoresearch harness
 
 For ongoing research iterations, read `RESEARCH_PROGRAM.md` and the relevant
-skill under `.agents/skills/` before acting. Use `research/state.json` and
-`research/budget.json` as the current handoff and authorization snapshot, and
-`python scripts/researchctl.py` to register/audit cycles. The harness is a
-ledger and gate checker; it does not authorize or dispatch model calls.
-`research/frozen_eval/` is versioned evaluation policy. Any change to it needs
-a new version and an explicit audit trail; never edit it to improve a result.
+skills under `.agents/skills/` before acting. Start from `research/state.json`,
+`research/memory.json`, `research/hypotheses.json`, and `research/budget.json`.
+Use `python scripts/researchctl.py next` for the next lifecycle step and
+`register`, `close`, `audit`, and `sync-memory` for the corresponding record
+operations.
+
+Treat scientific outcomes (`SUPPORTED`, `REFUTED`, `INCONCLUSIVE`,
+`INVALID_EXPERIMENT`, `EXECUTION_BLOCKED`, `RESOURCE_BLOCKED`) separately from
+operational gate decisions. An ordinary `GO/NO-GO` or a failed hypothesis does
+not by itself complete the research Goal. After each cycle, interpret the
+result, update evidence-backed memory, and continue with one next action if
+permitted work remains.
+
+The harness is a Goal-driven coordinator and record gate; it does not authorize
+or dispatch experiments. The `reproduction_command` field is inert text. Keep
+per-approval budgets separate from the project-wide limit, and never reuse a
+historical approval. Up to three hypotheses may be compared through read-only
+work; keep only one formal experiment open in the shared checkout.
+
+`research/frozen_eval/` is versioned evaluation policy. Version 1 stays
+unchanged; changes use a new evaluator version, a hash pin, and an explicit
+audit trail. Never edit an evaluator to make a result pass.

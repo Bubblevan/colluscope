@@ -1,24 +1,53 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "program": "ColluScope Autoresearch",
-  "status": "bootstrap_waiting_for_current_round_closeout",
+  "program_status": "active",
+  "status": "ready_for_hypothesis_selection",
   "current_branch": "codex/deepseek-first-m4-research-20261020",
-  "current_checkout_head": "cacc5db",
+  "state_recorded_at_head": "0deb01b31b02fb8678172d9f82648f46d49ac499",
+  "active_experiment_id": null,
+  "active_hypothesis_id": null,
+  "current_round": {
+    "owner": "DEEPSEEK-FIRST-RESEARCH-01",
+    "terminal_artifact": "research/handoffs/DEEPSEEK-FIRST-RESEARCH-01.json",
+    "status": "terminal_historical_closeout_reconciled",
+    "integrity_decision": "PASS",
+    "evidence_classes": [
+      "live_engineering_preflight",
+      "real_llm_behavior",
+      "monitor_evaluation",
+      "scripted_mock",
+      "offline_reanalysis"
+    ],
+    "historical_model_calls": 628,
+    "historical_external_cost_usd": 0.2488836,
+    "authorization_status": "consumed_and_never_reusable",
+    "note": "This imported historical run is separate from all later experiments and from new cycles. It is not a preregistration or authorization."
+  },
+  "prior_runs_kept_separate": [
+    {
+      "run_id": "FULL-RESEARCH-EXECUTION-20261020",
+      "summary_artifact": "docs/results/full-research-execution-20261020/full_research_results_summary.json",
+      "summary_sha256": "7995b048ec160759a833dfbf2dc4b8f0e668ca8c1861d8566f596056118c029b",
+      "note": "Separate 856-row Monitor schedule and 24-group local M4 run; never pool its denominators with the 628-request DeepSeek-first run."
+    }
+  ],
+  "latest_decision": "PASS",
+  "latest_decision_type": "historical_integrity",
+  "latest_scientific_outcome": null,
+  "claim_level_status": {
+    "causal_communication_effect": "INCONCLUSIVE",
+    "B4_B5_superiority": "INCONCLUSIVE",
+    "cross_model_generalization": "INCONCLUSIVE",
+    "latent_collusion_or_intent": "NOT_IDENTIFIED"
+  },
+  "next_action": "Review the hash-pinned memory and three candidate hypotheses, then preregister one zero-call or offline cycle; no live model/API call is currently authorized.",
+  "consecutive_cycles_without_new_uncertainty_reduction": 0,
+  "historical_approvals_reusable": false,
   "preexisting_untracked_paths_preserved": [
     "docs/COLOSSEUM_LOCAL_REPRO_PROTOCOL.md",
     "docs/results/colosseum-local-audit-20261020/",
     "docs/results/colosseum-runtime-hardening-20261020/"
   ],
-  "active_experiment_id": null,
-  "current_round": {
-    "owner": "separate Codex task reported by user",
-    "terminal_artifact": null,
-    "status": "awaiting terminal result and independent audit",
-    "note": "This checkout does not contain a verified closeout packet for the separate in-progress task. Do not infer its result."
-  },
-  "latest_decision": "NOT_ASSESSED_BY_AUTORESEARCH_HARNESS",
-  "next_action": "After the separate task reaches a terminal decision, import its sanitized result and audit references with exact hashes, then choose one offline or separately authorized next uncertainty-reducing cycle.",
-  "consecutive_cycles_without_new_uncertainty_reduction": 0,
-  "historical_approvals_reusable": false,
   "updated_at": "2026-10-21"
 }

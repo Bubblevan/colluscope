@@ -4,10 +4,11 @@ An offline, CPU-only scripted research scaffold for the Apart Research AI Collus
 
 This README's run commands describe the historical M0 scaffold. The repository
 now also contains later M1–M4 protocols and evidence. For continued research,
-start with [RESEARCH_PROGRAM.md](RESEARCH_PROGRAM.md), inspect the handoff in
-`research/state.json`, and check the zero-call authorization snapshot in
-`research/budget.json`. The record-only registry CLI is documented in
-[`research/README.md`](research/README.md); it does not run experiments.
+start with [RESEARCH_PROGRAM.md](RESEARCH_PROGRAM.md), inspect the state and
+claim-level memory in `research/`, and check the zero-call authorization
+snapshot in `research/budget.json`. The Goal-driven coordinator is documented
+in [`research/README.md`](research/README.md); its CLI records and checks
+research cycles but does not run experiments.
 
 ## Run M0
 

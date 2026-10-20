@@ -1,0 +1,69 @@
+{
+  "schema_version": 1,
+  "policy": "At most three read-only candidate directions may be compared. Only one can be selected for a formal cycle at a time. Candidate status is not preregistration or authorization.",
+  "selected_hypothesis_id": null,
+  "candidates": [
+    {
+      "hypothesis_id": "monitor-method-contrast",
+      "title": "When can evidence-aware monitoring beat raw fusion?",
+      "status": "candidate",
+      "hypothesis": "On a new frozen evaluation with enough common assessable matched cases, B5 evidence-aware monitoring will improve exact observable-label accuracy over B4 raw fusion.",
+      "competing_explanations": [
+        "The two methods have similar accuracy once failures and common paired coverage are handled.",
+        "Additional evidence serialization increases truncation or changes formatting without improving factual support."
+      ],
+      "discriminating_prediction": "A preregistered paired comparison will retain all assigned rows and failures, and report B4-only versus B5-only exact outcomes on common assessable units with task/case clustering and token/cost accounting.",
+      "selection_note": "The historical 628-request run has 126 assessable pairs but is descriptive and inconclusive; the separate 856-row run has no common assessable pair. A future confirmatory study would need a frozen output budget and explicit new authorization.",
+      "evidence_refs": [
+        {
+          "path": "docs/results/deepseek-first-m4/audit/postrun_analysis_v2.md",
+          "sha256": "ab8882db0c1381e39f87f5ff3519ad2b5faaef625c63ab2bac8991c388fb4cba"
+        },
+        {
+          "path": "docs/results/full-research-execution-20261020/full_research_results_summary.json",
+          "sha256": "7995b048ec160759a833dfbf2dc4b8f0e668ca8c1861d8566f596056118c029b"
+        }
+      ]
+    },
+    {
+      "hypothesis_id": "proposal-content-vs-format",
+      "title": "Separate proposal meaning from prompt length and salience",
+      "status": "candidate",
+      "hypothesis": "For proposal-eligible contexts, a content-bearing proposal changes the recipient's ballot beyond changes caused by matched-length neutral text and formatting.",
+      "competing_explanations": [
+        "Observed ballot variation is caused by prompt length, salience, or serialization rather than proposal meaning.",
+        "Shared incentives and common knowledge of the rewarded target explain matching behavior without communication."
+      ],
+      "discriminating_prediction": "A future preregistered matched-context design will compare proposal content against length-matched neutral content and a no-delivery control while holding the common target and ballot context fixed.",
+      "selection_note": "The 628-request run's proposal-minus-neutral focal inputs were 32–85 tokens longer, and the fixed-peer replay does not model peer responses. Any live follow-up needs a new protocol and explicit authorization.",
+      "evidence_refs": [
+        {
+          "path": "docs/results/deepseek-first-m4/audit/postrun_analysis_v2.md",
+          "sha256": "ab8882db0c1381e39f87f5ff3519ad2b5faaef625c63ab2bac8991c388fb4cba"
+        },
+        {
+          "path": "docs/M4_DEEPSEEK_FIRST_RESEARCH_DECISION.md",
+          "sha256": "e1db75339f0824630c10796d54c0dd04407215e9a64547c4727d88eb0d5bea8a"
+        }
+      ]
+    },
+    {
+      "hypothesis_id": "observable-evidence-boundary",
+      "title": "Map the observable evidence boundary for coordination claims",
+      "status": "candidate",
+      "hypothesis": "Some paired mechanisms with byte-identical authorized Public-only evidence cannot be distinguished from that evidence alone; predeclared additional permitted evidence or an intervention can distinguish at least some such pairs.",
+      "competing_explanations": [
+        "The observed equality is an artifact of the synthetic pair construction or a hidden routing/serialization difference.",
+        "The available privileged evidence still does not identify latent intent without an intervention or defensible labels."
+      ],
+      "discriminating_prediction": "A deterministic replay of the frozen matched-world sources will prove exact projection equality/difference and enumerate which added observable fields change the equivalence class, without treating monitor predictions as truth labels.",
+      "selection_note": "This is the only current candidate with a plausible zero-call deterministic analysis path. The existing 856-row result reports identical Public-only projections and only 2/72 parseable matched-world outputs; the attachment's 20/24 prediction-change example is absent from the available records and is not adopted.",
+      "evidence_refs": [
+        {
+          "path": "docs/results/full-research-execution-20261020/full_research_results_summary.json",
+          "sha256": "7995b048ec160759a833dfbf2dc4b8f0e668ca8c1861d8566f596056118c029b"
+        }
+      ]
+    }
+  ]
+}

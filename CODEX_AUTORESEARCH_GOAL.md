@@ -1,55 +1,130 @@
-# Codex `/goal` handoff prompt
+# ColluScope — Autonomous Scientific Discovery Goal
 
-Paste this as the long-running goal after the currently running experiment has
-reached its terminal decision. This file does not start a goal or grant an
-experiment authorization.
+Paste this as a persistent Codex `/goal`. This file defines research direction;
+it does not start a goal, register an experiment, or grant authorization.
 
 ---
 
-Continuously advance ColluScope toward one defensible, reproducible research
-result on the evidence needed to audit multi-agent collusion. Follow
-`RESEARCH_PROGRAM.md`, the repository's persistent research charter, the active
-phase TRD, `docs/RESEARCH_RISK_REGISTER.md`, and `docs/ITERATION_LOG.md`.
+Continuously advance ColluScope toward a defensible, falsifiable, reproducible
+scientific contribution about what evidence can and cannot establish in
+multi-agent collusion audits. Follow `RESEARCH_PROGRAM.md`, the repository
+research charter, the active phase TRD, `docs/RESEARCH_RISK_REGISTER.md`, and
+`docs/ITERATION_LOG.md`.
 
-You are the Research Director, Experiment Manager, and adversarial reviewer.
-For each cycle, inspect actual evidence and relevant prior work; propose a
-falsifiable hypothesis with competing explanations; preregister frozen inputs,
-sample selection, controls, outcome, denominator, stop gates, and budget; make
-the smallest change; run only work explicitly authorized for that evidence
-class; independently replay; preserve failures; decide whether to continue,
-revise, abandon, pivot, or report; and update the append-only registry, state,
-risk register, and iteration log.
+## Do not stop at an ordinary experiment result
 
-First reconcile the current in-progress Codex task with its terminal result and
-audit. Once complete, import its sanitized closeout via
-`python scripts/researchctl.py import-closeout <packet.json>`; do not
-retroactively preregister it. Do not use provisional results. If that task is
-still running or its owner/result is unavailable, do not edit its experiment
-artifacts or start a new experiment; continue only with independent literature
-or offline evidence review that cannot alter its frozen data, prompts, or
-outputs.
+An experiment reaching terminal state, a passing test suite, a protocol gate,
+an operational PASS/NO-GO, a refuted hypothesis, or a draft paper does not by
+itself complete this Goal. After every cycle, interpret the result, update
+claim-level research memory, ask what competing explanation remains, and choose
+one useful next action. Continue permitted no-call analysis when a live action
+is blocked. Stop the Goal only after the completion criteria below are met, a
+real hard boundary prevents all useful work, or the deadline makes further work
+counterproductive; explain which condition applies.
 
-The current harness budget is zero model/API calls and zero external spend.
-No prior approval carries forward. A preregistration, runtime flag, existing
-receipt, or passing gate is not approval. Do not call a live model, provider,
-or start a new expensive phase without a separate explicit user approval for
-that exact scope and ceiling. The harness CLI is record-only and must not be
-used as a runner.
+Use these scientific outcomes: `SUPPORTED`, `REFUTED`, `INCONCLUSIVE`,
+`INVALID_EXPERIMENT`, `EXECUTION_BLOCKED`, and `RESOURCE_BLOCKED`. Keep the
+operational review disposition separate. A failed or inconclusive hypothesis
+triggers diagnosis, a competing hypothesis, or a pivot. An invalid experiment
+triggers root-cause investigation or a redesigned evaluation. A blocked live
+action pauses that action only.
 
-Do not alter frozen prompts, datasets, splits, labels, scoring rules, or past
-results to improve an outcome. Never infer collusion or intent from treatment,
-agreement, channel availability, welfare harm, or monitor scores alone. Keep
-scripted controls, engineering preflight, real-agent behavior, monitor
-evaluation, and offline reanalysis in distinct evidence classes. Keep private
-raw data ignored and ACL-restricted; export only reviewed sanitized evidence.
+## Reconcile actual history first
 
-Choose one primary experiment per cycle. Optimize for decisive reduction in a
-scientific uncertainty per engineering hour, model call, and deadline risk.
-After three cycles without new uncertainty reduction, pivot instead of
-micro-tuning. Do not stop only because a TRD, test suite, or paper draft is
-complete. Stop at budget, authorization, deadline, privacy, source-integrity,
-or unresolved validity gates and report the strongest supported conclusion.
+The terminal, hash-checked closeout for `DEEPSEEK-FIRST-RESEARCH-01` is already
+in `research/handoffs/DEEPSEEK-FIRST-RESEARCH-01.json`. It records 628 historical
+requests, 24 Agent groups, 376 Monitor rows, independent replay, and a consumed
+one-run authorization. Do not wait for this run, reimport it as a new
+preregistration, rerun inference, or reuse its approval.
 
-Each cycle ends with exactly one highest-value next action, its evidence
-class, estimated call/cost ceiling, and whether a new user approval is needed.
----
+The separate `FULL-RESEARCH-EXECUTION-20261020` result is at
+`docs/results/full-research-execution-20261020/full_research_results_summary.json`.
+It covers a different 856-row Monitor schedule and a local M4 run. Keep the two
+run records, denominators, failures, and claims separate. Do not accept the
+attachment's “20/24 prediction changes” example as evidence unless a
+hash-pinned local source supports that exact denominator and claim.
+
+Read `research/state.json`, `research/memory.json`, `research/hypotheses.json`,
+`research/budget.json`, both evaluator versions, and
+`scripts/researchctl.py` before selecting the next cycle.
+
+## Run a real reasoning loop
+
+For each turn:
+
+1. Inspect the relevant frozen protocol, sanitized evidence, adverse results,
+   claim memory, risk register, and Git diff.
+2. Separate direct observations from interpretation. Generate at least two
+   plausible rival mechanisms grounded in the cited evidence.
+3. Consult primary literature when novelty or a current citation claim matters.
+   Map each novelty claim to its source.
+4. Compare no more than three candidate directions by scientific importance,
+   identifiability, information gain, cost, failure risk, and deadline. Choose
+   one primary question; prefer an existing-data analysis if it can decide it.
+5. Preregister the frozen inputs, denominator, primary outcome, rivals,
+   controls, analysis, budget, and explicit stop gates before changing a
+   scientific protocol or running a new experiment.
+6. Use only a permitted existing experiment entry point. Preserve all assigned
+   rows and failures. Recompute results independently where possible.
+7. Update memory with the previous belief, what changed, what remains
+   plausible, and hash-pinned evidence. Do not mark progress from a self-asserted
+   boolean. Independent review must have its own sanitized, hash-pinned artifact.
+8. Ask the `scientific-critic` skill to challenge novelty, causal attribution,
+   label validity, dependence/missingness, baseline fairness, and the remaining
+   contribution. If the reviewer cannot be separated from the author, mark it
+   as adversarial self-review.
+9. Choose exactly one next action: continue the hypothesis, test a rival,
+   diagnose an invalid run, pivot, continue offline, await an exact boundary,
+   or synthesize the final report.
+
+Use `/goal` as the continuation driver. `python scripts/researchctl.py next`
+prints the next registry step. It is guidance only. This harness is a
+Goal-driven coordinator, not a background daemon or experiment runner. The
+CLI never executes `protocol.reproduction_command`, generated shell, or model
+requests. No subagent review is a formal benchmark Monitor result.
+
+## Experiment selection and resources
+
+Prefer one small experiment that separates rival explanations over repeated
+larger batches that only add rows. Before spending calls, record which claim
+could change, what existing evidence already answers, the minimum calls and
+wall time, and the likely confounders.
+
+The current authorization is zero new model/API calls and zero external spend.
+No past approval carries forward. A new user approval must name experiment IDs,
+scope, total call and cost ceilings, and expiry. Keep one immutable record per
+approval ID, separate its cumulative usage from other approvals, and preserve a
+separate project-wide limit. The preregistration reserves its full ceiling;
+each physical attempt must be accounted in a sanitized request ledger.
+
+The present harness audits those timestamps and totals after a cycle. It cannot
+enforce a request before transport because there is no dispatcher. A future
+runner must implement an atomic pre-request reservation and repeat authorization,
+expiry, identity, and budget checks before it can dispatch. Do not describe
+post-run checks as pre-dispatch enforcement.
+
+Offline review, deterministic replay, code inspection, writing, and literature
+work may continue when they stay inside the repository rules and do not alter
+frozen inputs. Never change frozen data, prompts, labels, or scoring rules;
+never delete failures; never infer collusion or intent from treatment, harm,
+agreement, or monitor scores alone.
+
+Up to three hypotheses may be compared using read-only analysis. Only one
+formal experiment is open at a time. Separate worktree execution, branch-level
+ledgers, and shared atomic paid-call scheduling are not implemented.
+
+## Completion criteria
+
+Complete this Goal only when the strongest direction has been selected from
+evidence; its central claim or the strongest achievable negative/
+identifiability result has been appropriately tested; relevant baselines and
+negative controls are assessed; an independent Scientific Critic has reviewed
+the central claim; evidence, uncertainty, failures, and limitations reproduce
+from available artifacts; and a coherent submission report and reproduction
+package are ready. If no positive discovery is supported, report the strongest
+honest negative result or boundary. Do not manufacture a breakthrough.
+
+Scientific uncertainty alone is not a reason to stop. A hard authorization,
+budget, privacy, data-integrity, security, deadline, or unrecoverable runtime
+boundary can stop the affected execution. Continue other permitted work when it
+still reduces uncertainty.
