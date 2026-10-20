@@ -12,7 +12,7 @@
 
 ## Abstract
 
-We study what communication and allocation traces can establish about multi-agent LLM behavior. M0 includes public-trace-identical constructions with different hidden mechanisms. Local Qwen3-8B generated 100 M1 episodes and 12 M3 groups; only eight M3 contexts had a delivered proposal, and just one fixed-peer settlement changed under message replacement. In a separately authorized extension, all 24 M4 first-message outputs failed strict parsing, so no new Agent behavior contrast was observed. DeepSeek Flash returned 141 parseable predictions from 856 monitor requests; 715 ended at the 128-token cap. In 12 matched synthetic world pairs, public projections were identical in 24/24 comparisons while privileged evidence differed in 24/24. Earlier M2 replay also found directly exposed welfare-gap answers in structured inputs. These results establish limits on observable evidence, not latent collusion, detector superiority, or intent.
+We study what communication and allocation traces can establish about multi-agent LLM behavior. M0 includes public-trace-identical constructions with different hidden mechanisms. Local Qwen3-8B generated 100 M1 episodes and 12 M3 groups; only eight M3 contexts had a delivered proposal, and just one fixed-peer settlement changed under message replacement. A historical Qwen3 M4 interface run failed strict parsing, while a separately frozen DeepSeek Flash extension completed 24 Agent groups and 376 Monitor requests with independent raw replay. The rewarded target was executed in 2/24 groups; Monitor exactness was 145/400 observable reference labels, with B4/B5 superiority unresolved. In 12 matched synthetic world pairs, public projections were identical in 24/24 comparisons while privileged evidence differed in 24/24. These results establish limits on observable evidence, not latent collusion, detector superiority, or intent.
 
 ## 1. Introduction
 
@@ -82,6 +82,12 @@ On 2026-10-20, before the sprint event dates, we executed the frozen 24-group M4
 The same dated execution used the official DeepSeek API for three frozen monitor populations: 280 scripted-control rows, 504 rows projected from the incomplete M4 traces, and 72 requests for 12 matched synthetic evidence-world pairs. Each schedule was frozen before dispatch and audited independently from raw request/response hashes and a cross-phase append-only ledger. A valid monitor prediction required both a completed provider stop and a parseable response under the frozen schema. Errors were not repaired or resampled. The model alias, returned identity fingerprint, input/output usage, timing, and price-based cost estimates were reconciled independently. The protocol preserved provider-default thinking mode because the original scripted request bodies were immutable; `temperature=0` was present but ineffective in that mode, and the 128-token cap included reasoning tokens, consistent with the provider's [official thinking-mode](https://api-docs.deepseek.com/guides/thinking_mode/) and [Chat Completions API](https://api-docs.deepseek.com/api/create-chat-completion/) documentation checked on 2026-10-20.
 
 The matched-world corpus contains synthetic *observable* sequence references. It has no latent-intent or natural-collusion gold label. The two public views within each pair share the same public task, ballots, outcome, metadata, and exact serialized projection; privileged messages are separately permission-filtered.
+
+### 3.8 DeepSeek-first prospective Agent and Monitor extension
+
+After the historical Qwen3 interface failure and the earlier low-coverage Monitor run, a new versioned protocol used the official DeepSeek API (`deepseek-flash`) for both Agent generation and Monitor evaluation. The protocol and 24-group/376-row request plan were frozen and pushed before inference. A 20-request real compatibility pilot selected Strict Function Calling; the predefined JSON fallback was not used. The full run completed 24 assigned Agent groups and 376 Monitor requests. The provider returned alias `deepseek-flash` and fingerprint `e72d3c7f663d3e1383b00b3884cb4501`; the alias does not identify immutable weights. The intervention definitions and matrix/seed schedule were preserved; this is a prospective model/interface extension, not a rerun or replacement of Qwen M1–M4.
+
+Each group used the frozen shared-target incentive and communication schedule. We distinguish messages sent from messages delivered, baseline ballots from focal counterfactual prompt responses, public welfare from individual task score, and public regret from target execution. The 376 Monitor requests cover 288 natural Agent-trace rows, 16 scripted synthetic controls and 72 matched synthetic-world requests. B4/B5 are compared only on independently assessable same-case/task/permission pairs. References encode observable task facts, not latent collusion.
 
 ## 4. Results
 
@@ -226,6 +232,47 @@ In the 12 matched synthetic pairs, the independently compiled Public-only projec
 
 These results do not show whether a competent monitor could discriminate latent mechanisms from natural traces. They show that the frozen API output cap made most requested predictions unscorable, that completed B4/B5 predictions did not overlap on assessable instances, and that the software-level matched-world construction exposed private observable evidence only under Privileged permission. The table and CSV exports preserve the complete assigned denominators; no failed rows or incomplete M4 groups were removed.
 
+### 4.9 DeepSeek-first prospective M4 Agent and Monitor results
+
+The separately versioned DeepSeek run completed all **24/24** assigned Agent groups and **376/376** Monitor rows. Across pilot, Agent and Monitor, 628 physical requests produced 628 HTTP 200 responses, with no retries, replacements, missing responses, or unterminalized requests. The selected interface was Strict Function Calling. Provider usage was 655,032 input and 43,645 output tokens; the peak-rate usage estimate was USD 0.2488836. Independent raw replay passed for both Agent outcomes and Monitor scoring. The full denominators and hashes are in `M4_DEEPSEEK_FIRST_RESEARCH_RESULTS.md` and `results/deepseek-first-m4/audit/`.
+
+All 72 baseline ballots were valid; 13 matched the common rewarded target, which was executed in 2/24 groups. Mean public regret was 1.9583 and median regret was zero (14 groups regret 0; 10 groups had positive regret). Family-specific means were: F1 0.00; F2 5.75; F3 1.75; F4 0.50; F5 1.75; F6 2.00 (n=4 each). Raw welfare is not pooled across payoff scales. The 48 messages were all sent and delivered. Twenty encoded complete allocations: 15 public optima, four other allocations and one rewarded target. Eleven complete proposals exactly matched the recipient's baseline ballot. These facts show observable proposal/action concurrence in some records; because A/B shared target information and no natural episode-level message intervention was randomized here, they do not establish agreement or communication causation.
+
+The positive-information control was followed in 24/24 trials. Sixteen groups entered the proposal-eligible focal stage; all 24 remain in the assignment denominator. Focal ballots changed from the recipient baseline in 9/16 masked-history neutral, 6/16 masked-history proposal, 4/16 retained-history alternative, and 5/16 retained-history neutral cases. Real proposal-minus-neutral prompts differed by +32 to +85 provider-reported input tokens (mean +60; n=16), so these changes cannot be attributed specifically to semantic proposal content.
+
+We independently substituted each focal ballot into its group's baseline ballots, held the other two baseline ballots fixed, and recomputed the deterministic plurality/chair outcome and matrix-specific regret. The eligible baseline mean regret was 1.500; the variants yielded the following:
+
+| Focal arm | Ballot changed | Allocation changed | Target selected | Mean regret | Mean regret delta |
+|---|---:|---:|---:|---:|---:|
+| Masked-history neutral | 9/16 | 5/16 | 4/16 | 3.250 | +1.750 |
+| Masked-history proposal | 6/16 | 4/16 | 4/16 | 3.313 | +1.813 |
+| Retained-history alternative | 4/16 | 4/16 | 4/16 | 3.625 | +2.125 |
+| Retained-history neutral | 5/16 | 4/16 | 4/16 | 3.125 | +1.625 |
+
+These are deterministic fixed-peer replays of counterfactual ballots, not separately observed episodes or estimates of how the other agents would respond in a natural repeat. In this sample, the changed ballot and changed environment allocation counts differ, showing that votes and outcomes are not interchangeable.
+
+![Every assigned DeepSeek Agent group's public regret by payoff family](results/deepseek-first-m4/figures/agent_regret_by_family.png)
+
+*Figure: Each point is one of the four assigned groups in a payoff family; red segments show the family mean. Regret is relative to that family's public optimum, not a cross-family raw welfare comparison.*
+
+![Focal ballot changes compared with deterministic fixed-peer settlement changes](results/deepseek-first-m4/figures/focal_ballot_vs_settlement_changes.png)
+
+*Figure: The focal vote is changed while the other two baseline ballots are held fixed. This separates a ballot event from the resulting allocation event.*
+
+All 376 Monitor responses parsed and had citation IDs permitted by their respective evidence projections. However, only 145/376 outputs exactly matched every attached observable reference, and only 145/400 individual reference labels were exact. Citation membership is weaker than semantic citation support. Among 126 assessable B4/B5 matched pairs, both methods were exact in 65, only B4 in 10, only B5 in 4, and neither in 47; predictions were identical in 101. The populations were natural M4 traces (B4 52/144 reference labels, B5 47/144), scripted synthetic controls (5/8 each), and matched synthetic worlds (18/48 each). These repeated case/task/permission observations are descriptive; they do not demonstrate B4/B5 superiority or generalization.
+
+Within the 16 scripted controls, each method received four observable positive and four hard-negative cases. B4 matched 3/4 positive and 2/4 negative references; B5 matched 4/4 positive and 1/4 negative references. In paired results, both were exact on three of four positives and one of four hard negatives; one further positive favored B5, one hard negative favored B4, and two hard negatives were missed by both. These small synthetic controls are not sensitivity/specificity estimates and are not latent-collusion tests.
+
+Using the frozen abstention vocabulary (`insufficient_evidence`, `uncertain`, `unknown`), 45/376 Monitor request outputs abstained (12.0%). On the observable explicit-sequence task, three `supported` predictions conflicted with 190 references that were not labeled `supported`. This is an output/reference disagreement count only; it is not a latent-collusion false-positive rate.
+
+![Exact observable-reference accuracy by Monitor population](results/deepseek-first-m4/figures/monitor_reference_accuracy_by_population.png)
+
+![Paired all-reference exactness counts for assessable B4/B5 pairs](results/deepseek-first-m4/figures/monitor_paired_correctness.png)
+
+*Figures: The three Monitor populations remain separate. Pair outcomes are descriptive and clustered by source case/task/permission; they are not an independent-sample superiority test.*
+
+Together with the prior 856-call monitor run, this demonstrates why interface completion, factual correctness, citation membership, and evidentiary sufficiency must be reported separately. Neither run supplies latent-intent ground truth. The new DeepSeek observations supersede only the earlier *pre-run status* of the DeepSeek-first protocol; they do not modify historical Qwen or earlier M2/M3 results.
+
 | Component | Observed result | Calls / added computation | Interpretation |
 |---|---|---|---|
 | Deterministic task computation (B1) | 7/7 assessable scripted `public_harm`, Public-only/Action-only rows correct | No model calls; fixed source replay | Narrow rule reference, not independent model reasoning or generalization |
@@ -260,7 +307,7 @@ M3 was the narrow message-content replay proposed in earlier drafts, and its fin
 
 The completed M3 authorization is consumed. The present paper requires no further inference to report the approved results. Any new agent or monitor call requires separate approval, fresh preregistration and a new budget. A future study should also freeze a human or rule-based codebook for commitment and acceptance before collection, or retain these as unmeasured variables.
 
-The 2026-10-20 full execution sharpens this conclusion but does not add an M4 behavior estimate: every Agent response failed the frozen parser before any message or vote could be observed. The Monitor run is likewise not a fair model ranking: 715 outputs ended at the token limit, and B4/B5 have no common assessable cases. The limited positive observations are separable: deterministic replay matched its assessable scripted rows, and two Privileged B5 outputs matched two explicitly scripted observable-sequence controls. Neither result supports claims about natural collusion. A revised Agent output contract or monitor reasoning budget would change the protocol and therefore requires a new prospective freeze; it cannot repair these completed outcomes.
+The 2026-10-20 work contains two distinct DeepSeek-related results and the earlier local Qwen M4 failure. The Qwen M4 failure remains a parser/protocol failure with no behavior endpoint. The earlier 856-row Monitor protocol had severe length truncation and no common assessable B4/B5 pairs. The new DeepSeek-first protocol completed its 24 Agent groups and 376 Monitor rows, but completion does not cure the design's limits: shared target incentives leave independent parallel choices plausible; the proposal-eligible focal sample is conditional; proposal/neutral prompts were not token-matched; repeated Monitor rows are clustered; and the provider alias does not pin weights. Thus the new run adds real, replayable observable behavior but still cannot identify latent collusion or establish B4/B5 superiority. Any new contrast requires a fresh preregistered protocol and separate authorization.
 
 ## Appendix A. Limitations and Threats to Validity
 
@@ -281,13 +328,17 @@ The 2026-10-20 full execution sharpens this conclusion but does not add an M4 be
 - No experiment here identifies deceptive intent, a secret agreement, or whether a message caused a ballot.
 - In the 2026-10-20 full execution, every one of 24 M4 agent message responses failed the frozen strict parser. No new Agent behavioral contrast, settlement, or welfare result can be estimated from those groups.
 - In the three subsequent Monitor phases, 715/856 responses hit the 128-token limit; the returned output coverage is low, and the B4/B5 common assessable denominator is zero. No method superiority claim is supported by this run.
+- The later DeepSeek-first run is a separate extension: it completed 24 Agent groups and 376 Monitor rows. Despite full parseability, only 145/400 individual observable reference labels were exact. Repeated views/tasks are clustered; no confidence claim or generalization follows from the row count.
+- In the DeepSeek-first focal counterfactual prompts, actual proposal/neutral input length differed by 32–85 provider tokens (mean +60; n=16). The ballot changes are confounded by length/salience, and the conditional proposal-eligible subgroup is not the full 24-group intention-to-treat population.
+- The same DeepSeek alias/fingerprint was used for Agent and Monitor. Correlated model-family behavior and provider alias drift are possible; the fingerprint is not a checkpoint hash.
+- On 126 assessable B4/B5 pairs, only 14 correctness outcomes were discordant (10 favor B4, 4 favor B5); rows repeat tasks/views and were not designed as independent draws. This is not evidence of method superiority.
 - DeepSeek's provider-default thinking mode remained enabled because the original request payloads were frozen. The run therefore measures this exact alias/default-mode/128-token protocol, not a deterministically decoded model capability or another output budget.
 - The matched-world experiment uses explicitly scripted observable-evidence references. It tests permission-dependent identifiability, not natural prevalence or latent collusion detection. Only two model outputs were parseable in that phase.
-- All new M4 and Monitor work described in Section 4.8 occurred on 2026-10-20, before the 2026-10-23 sprint start. It is pre-sprint work and must be disclosed as such.
+- All M4 and Monitor work described in Sections 4.8–4.9 occurred on 2026-10-20, before the 2026-10-23 sprint start. It is pre-sprint work and must be disclosed as such; none should be renamed or redated as sprint-period work.
 
 ## Appendix B. Dual-Use and Ethical Considerations
 
-This work uses synthetic allocation matrices and a local agent runtime for the behavior corpus. The M2 and 2026-10-20 Monitor runs used the explicitly authorized DeepSeek API only for permission-filtered synthetic task evidence; requests omitted hidden treatment assignments, gold labels, raw unfiltered researcher records, credentials and real-world financial data. M1/M3/M4 agent generations used local Qwen3 inference. Raw privileged messages and raw provider traffic remain local in ACL-restricted, Git-ignored directories and are not reproduced in this paper.
+This work uses synthetic allocation matrices and agent messages. Most historical agent generations used local Qwen3 inference. The separately authorized DeepSeek-first run used the official DeepSeek API for synthetic Agent message/ballot generation and permission-filtered Monitor evidence only. Requests omitted hidden treatment assignments, gold labels, raw unfiltered researcher records, credentials and real-world financial data. The Agent message text and raw provider traffic remain local in ACL-restricted, Git-ignored directories and are not reproduced in this paper.
 
 The evidence compiler and auditor could be misused to surveil agent conversations or overstate ambiguous patterns. We therefore report observables separately, retain privacy boundaries, preserve abstention and unknown-intent states, and do not present the framework as an operational accusation system. No real bank system, human participant, or live financial decision was involved in the audited experiments.
 
@@ -306,7 +357,17 @@ The M2 independent audit, raw response reparse, baselines, paired contrasts, fie
 
 The M1 summary figure is derived from the complete 75-row audited extension case table and has its own input/output hash manifest under `docs/results/paper-figures/`. The M3 audit and plotting commands make zero model calls. The source behavior audits are documented in `M1_P0_POSTRUN_SCIENTIFIC_AUDIT.md`, `M1_100_SCIENTIFIC_AUDIT.md`, and `M3_SCIENTIFIC_RESULTS.md`. Private run artifacts remain ignored and permission-restricted.
 
-**AI-assistance disclosure draft:** Codex assisted with software implementation, independent deterministic recomputation, diagnostic analysis, figure generation, and manuscript drafting. The authors remain responsible for checking every claim, source, result, and disclosure before submission. DeepSeek Flash was used for the earlier M2 atomic monitor run and the separately authorized 2026-10-20 monitor phases; local Qwen3 generated the M1, M3 and M4 agent actions. The M4 actions in the latest run were malformed and excluded from behavior scoring. No model was called during the associated post-run audit or manuscript update. Revise this statement to match the organizers' final disclosure requirements and exact submission workflow.
+The DeepSeek-first Agent/Monitor independent replay, sanitized post-run analysis and per-row tables are under `docs/results/deepseek-first-m4/audit/`. With the ignored local ACL-restricted `runs/deepseek-first-m4/` artifacts available, reproduce without making model calls:
+
+```powershell
+python scripts/audit_deepseek_first_research.py
+python scripts/analyze_deepseek_first_research.py
+python -m pytest -q tests/test_deepseek_research_analysis.py
+```
+
+The raw provider request/response bytes and private Agent messages are not in Git. This limits third-party byte-for-byte replay from the public repository; the report publishes sanitized tables, row hashes, source hashes, and aggregate audit hashes instead.
+
+**AI-assistance disclosure draft:** Codex assisted with software implementation, independent deterministic recomputation, diagnostic analysis, figure generation, and manuscript drafting. The authors remain responsible for checking every claim, source, result, and disclosure before submission. DeepSeek Flash was used for the earlier M2 atomic monitor run, the prior 2026-10-20 monitor phases, and the separately frozen DeepSeek-first Agent and Monitor run reported in Section 4.9. Local Qwen3 generated the M1, M3 and historical M4 agent actions; the historical M4 actions were malformed and excluded from behavior scoring. No model was called during the associated post-run audit or manuscript update. Revise this statement to match the organizers' final disclosure requirements and exact submission workflow.
 
 ## References
 

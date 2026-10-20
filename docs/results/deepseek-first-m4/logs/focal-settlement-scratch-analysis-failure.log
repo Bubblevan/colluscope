@@ -1,0 +1,5 @@
+Traceback (most recent call last):
+  File "<stdin>", line 21, in <module>
+  File "<stdin>", line 11, in settle
+NameError: name 'x' is not defined
+Cause: independent focal replay scratch calculation used an undefined loop variable while constructing ballot tuples. No run artifact or model data was changed; no model calls were made.

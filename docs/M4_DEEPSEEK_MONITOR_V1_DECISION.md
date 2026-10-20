@@ -1,15 +1,19 @@
-# M4 DeepSeek Monitor V1 — Decision
+# M4 DeepSeek Monitor V1 — Final Decision
 
-**Decision state:** `NOT_DISPATCHED`  
-**Real Monitor requests from this task so far:** 0.
+**Status:** `COMPLETE_RAW_REPLAY_PASS`; all 376 frozen rows were dispatched and terminalized once.
 
-| Gate | Status | Required evidence |
-|---|---|---|
-| 24 assigned Agent groups | Not run | Exactly 24 unique frozen groups, no replacements, terminal rows retained |
-| Independent Agent raw replay | Not run | All 24 complete episodes pass raw request/response, context, action, settlement, welfare, and Public-only E replay |
-| 376-row Monitor freeze | Not run | Request plan and all input/source hashes reproduce; ACL verified; 72/216/16/72 counts exact |
-| Six-group scale gate | Not run | 72 assigned rows terminalized; at least one same-item/task/permission assessable B4/B5 pair with both raw predictions valid |
-| Remaining Monitor rows | Not run | Run only after initial-pair PASS; preserve all failure rows and budgets |
-| Observable-label interpretation | Predeclared | Exact task labels, citations, and abstention only; no latent-collusion gold label |
+## Results
 
-If the six-group batch lacks an assessable pair, further Monitor inference stops. If any fatal provider identity, request/cost cap, privacy, or freeze mismatch occurs, later phase calls are prohibited. Completion of this Monitor schedule would not establish an LLM collusion detector's real-world accuracy or identify intent.
+All 376 responses passed syntax/label parsing and citation-membership checks. Exact matches on all attached observable references occurred in 145/376 requests and 145/400 individual reference rows. Membership-valid citations do not establish that a cited event semantically supports the prediction.
+
+There were 126 assessable B4/B5 pairs. Both methods were exact on all references in 65; B4 alone was exact in 10; B5 alone in 4; neither in 47. Predictions had the same label in 101/126 pairs. This descriptive pattern does not establish method superiority, especially given only 14 discordant correctness pairs, repeated task/case instances, and one provider alias/fingerprint.
+
+The populations remain separate: natural M4 traces B4 52/144 reference labels, B5 47/144; synthetic scripted controls both 5/8; matched synthetic worlds both 18/48. These counts are not independent samples across tasks/views and are not latent-collusion detection accuracy.
+
+## Decision
+
+**GO:** publish the sanitized task-level results as descriptive observations for this exact run and scorer.
+**NO-GO:** B4/B5 superiority, broad detector capability, real-world generalization, or latent-collusion/intent claims.
+**STOP:** the authorized inference scope is consumed; no additional Monitor or M2 calls follow from this decision.
+
+Independent audit summary SHA-256: `49f3cf85cde5a4a6561b18c7dc6ed92e565a0a9e77e0bc48bbb477a5dd4d6ca7`. See `docs/M4_DEEPSEEK_MONITOR_V1_EVIDENCE.md` and sanitized CSVs under `docs/results/deepseek-first-m4/audit/`.

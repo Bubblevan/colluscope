@@ -1,0 +1,9 @@
+Traceback (most recent call last):
+  File "D:\MyLab\colluscope\scripts\plot_deepseek_first_research.py", line 128, in <module>
+    raise SystemExit(main())
+  File "D:\MyLab\colluscope\scripts\plot_deepseek_first_research.py", line 122, in main
+    hashes = render(args.audit, args.out)
+  File "D:\MyLab\colluscope\scripts\plot_deepseek_first_research.py", line 66, in render
+    row = rows[(population, method)]
+KeyError: ('scripted_controls', 'B4_raw_fusion')
+Cause: sanitized analysis population key is 'scripted_synthetic_controls'; plot used a display shorthand instead of the frozen key. No model calls or raw artifacts changed.

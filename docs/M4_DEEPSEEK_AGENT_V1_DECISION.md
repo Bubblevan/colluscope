@@ -1,24 +1,23 @@
-# M4 DeepSeek Agent V1 — Decision
+# M4 DeepSeek Agent V1 — Final Decision
 
-**Decision state:** `PRE_INFERENCE_NO_GO_PENDING_FREEZE_REVIEW`  
-**No real requests authorized by this document alone.** The user separately authorized the bounded DeepSeek-first run through the attached task; this file records implementation status and does not expand that scope.
+**Status:** `COMPLETE_INDEPENDENT_REPLAY_PASS`. This is one prospective run of the frozen DeepSeek interface, not a replacement or rewrite of the historical Qwen/llama.cpp run.
 
-## Gate status
+## Verified execution
 
-| Gate | Pre-inference status | Evidence needed to change status |
-|---|---|---|
-| Model/API identity and credential | Offline preflight passed; credential value was not displayed or written | Pilot HTTP response must return an allowlisted model alias and nonempty stable fingerprint |
-| Strict/fallback interface | Not run | Pilot must validate all required Agent action types and Monitor threshold; fallback only after explicit capability rejection |
-| Raw evidence persistence and privacy ACL | Temporary current-user ACL preflight passed | Actual run directory ACL and every request/response/ledger entry must verify; auth headers must remain absent |
-| Per-request and aggregate budget | Implemented and unit-tested | Attempt ledger must remain ≤264 Agent, ≤376 Monitor, ≤900 global, reserved cost ≤USD 5 |
-| First two Agent gate groups | Not run | Both assigned groups must complete and independently replay from raw requests/responses |
-| Full 24-group Agent corpus | Not run | Only gate PASS unlocks bulk; any failed group stops remaining Agent calls and remains in denominator |
-| Scientific inference | Not available | Even a complete run supports only this alias/interface and observable behavior; no latent collusion label |
+- 24 assigned groups; 24 completed and independently replayed; 0 failed or unstarted.
+- 232 physical Agent generation requests; 0 retries; 0 replacement groups.
+- Strict Function Calling was selected by the 20-request compatibility pilot. The formal run used the same single interface.
+- All 48 messages were sent and delivered. All 72 baseline ballots passed action validation and settlement replay.
+- Independent audit status: `PASS_INDEPENDENT_AGENT_REPLAY`; audit summary SHA-256 `9fd50cb250cc3867b26ad45b14c035a3f1fb3652fe36defa061b69b5a44031e0`.
 
-## Decision rule
+## Scientific interpretation
 
-No Agent bulk inference until the compatibility pilot passes and both gate groups independently replay. No Monitor schedule until all 24 assigned Agent groups are present, independently audited, and the Monitor plan freeze reproduces byte-for-byte. Any fatal identity, privacy, cap, or source-integrity mismatch is an immediate stop. Invalid model actions are retained as failures; `no_message`, target disagreement, or no welfare loss are ordinary behavioral outcomes, not interface failures.
+The common rewarded target received 13/72 baseline ballots and was executed in 2/24 groups. This is compatible with multiple explanations: independent response to a shared incentive, task/matrix variation, and communication. The design does not isolate a causal effect of communication on natural ballots.
 
-## Current call count
+Twenty messages contained complete allocation proposals. Eleven exactly matched the recipient's baseline ballot. This temporal concurrence does not itself establish acceptance, agreement, intent, or communication causation. In the focal counterfactual prompts, Proposal and Neutral differed by 32–85 provider-reported input tokens; observed ballot-change contrasts are confounded by prompt length/salience and are not a clean semantic-content estimate.
 
-Real model/API calls in this task as of the frozen candidate: **0**. Offline tests and injected fake HTTP responses are not model behavior evidence.
+**GO:** integrity and descriptive analysis for this 24-group run.
+**NO-GO:** causal communication, latent-collusion, or generalization claims.
+**STOP:** no additional Agent inference is authorized by the consumed one-run approval.
+
+See `docs/M4_DEEPSEEK_AGENT_V1_EVIDENCE.md` and `docs/results/deepseek-first-m4/audit/` for replay and sanitized rows.

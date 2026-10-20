@@ -1,0 +1,14 @@
+Traceback (most recent call last):
+  File "D:\MyLab\colluscope\scripts\analyze_deepseek_first_research.py", line 278, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "D:\MyLab\colluscope\scripts\analyze_deepseek_first_research.py", line 266, in main
+    result = analyze(args.run, args.audit)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\MyLab\colluscope\scripts\analyze_deepseek_first_research.py", line 234, in analyze
+    "monitor": summarize_monitor(monitor_requests, monitor_pairs),
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\MyLab\colluscope\scripts\analyze_deepseek_first_research.py", line 110, in summarize_monitor
+    by_stratum[(row["phase_id"], row["population"], row["baseline_id"],
+                                 ~~~^^^^^^^^^^^^^^
+KeyError: 'population'

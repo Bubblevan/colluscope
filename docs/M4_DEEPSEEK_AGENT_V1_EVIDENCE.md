@@ -1,6 +1,6 @@
 # M4 DeepSeek Agent V1 — Evidence Record
 
-**State:** pre-inference freeze candidate; no DeepSeek API request has been made by this task yet.  
+**State:** frozen protocol executed once; 24 assigned groups independently replayed.
 **Protocol:** `M4-DEEPSEEK-AGENT-V1`  
 **Pilot plan:** `configs/m4-deepseek-pilot-plan-v1.json`  
 **Pilot plan SHA-256:** `63a04a7874132bfa91fa758f9a864f2516f8fc3bff8fa4e59099049248380bba` (regenerate after any frozen source change).
@@ -26,4 +26,22 @@
 
 The formal gate auditor in `src/colluscope/deepseek_m4_audit.py` reads raw request/response bytes, independently parses action fields, checks request and response hashes, reconstructs the expected private/public contexts, validates the A/B-only delivery barrier, and recomputes the plurality/tie-break, public welfare, regret, private bonus, realized task scores, and Public-only E. The two preselected groups must both pass this replay before bulk M4 can start. A gate or group failure stops the next Agent phase; failures are not replaced.
 
-After live execution, append the final private run manifest hash, selected interface, returned provider model/fingerprint, assigned/completed/failed counts, physical attempts/HTTP 200/unknown outcomes, token usage, reserved and provider-reported cost, audit result, and exact replay commands below. Do not copy private message text into this tracked evidence file.
+## Live run and independent replay
+
+- Freeze commit: `550bf1361609e405dc50aa60d5d77b9c502e5bf0`.
+- Interface: Strict Function Calling; the JSON fallback was not invoked. The 8 Agent compatibility actions all passed, covering the frozen action types and both `send_message` and `no_message`.
+- Assigned groups: 24; completed and independently replayed: 24; failed/unstarted: 0. Physical Agent requests: 232/264; no retries or replacement groups.
+- Every assigned group retained in the denominator. All 72 baseline ballots were valid. All 48 message actions were sent and delivered. The independently replayed target allocation was executed in 2/24 groups; no agreement or intent label was created.
+- Each formal group passed raw request/response hash, agent context reconstruction, A/B-only delivery boundary, sealed ballot, independently recomputed plurality/welfare/regret, and Public-only E checks.
+- The independent Agent summary is `docs/results/deepseek-first-m4/audit/agent_audit_summary.json`, SHA-256 `9fd50cb250cc3867b26ad45b14c035a3f1fb3652fe36defa061b69b5a44031e0`. Sanitized group outcomes are in `agent_group_outcomes.csv`; private messages and raw request/response bodies remain under the ignored local run root.
+- Group-level descriptive outcomes: 13/72 baseline ballots matched the shared rewarded target; 20/48 delivered messages contained a complete allocation (15 public-optimum, 4 other, 1 rewarded-target); 11/20 complete proposals matched the recipient's baseline ballot. Mean regret 1.9583, median 0, with per-family distributions in the post-run analysis.
+- The information positive control was followed in 24/24 trials. Real proposal-versus-neutral focal prompt lengths differed by a mean of +60 provider tokens (range +32 to +85, n=16); this blocks a clean content-only interpretation of those ballot changes.
+
+Reproduce the independent replay and aggregate analysis with:
+
+```powershell
+python scripts/audit_deepseek_first_research.py
+python scripts/analyze_deepseek_first_research.py
+```
+
+Passing replay supports integrity and observable episode reconstruction for this run. It does not establish communication-induced coordination, latent collusion, or generalization from one provider alias/fingerprint.

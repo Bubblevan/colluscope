@@ -43,3 +43,7 @@ Pre-sprint work (M0–M4 and preparation through 2026-10-20) must be disclosed a
 ## Frozen artifacts
 
 The pilot plan binds the 30 compatibility slots to the frozen Agent/Monitor source, prompt, protocol, config, schedule, control, runtime and tests. Its SHA256 is recorded in `docs/M4_DEEPSEEK_FIRST_RESEARCH_EVIDENCE.md` and the run manifest. M4 and Monitor source manifests are verified before dispatch and on replay. A candidate change after this release requires re-freezing and re-running offline validation before any request; it is not silently folded into this run.
+
+## Completed-run state
+
+The single authorized execution completed on 2026-10-20: 628/628 requests, 24/24 Agent groups, and 376/376 Monitor rows. The authorization is consumed; the launch command above is a reproduction record, not permission to run again. Independent scoring and final decision are in `M4_DEEPSEEK_FIRST_RESEARCH_RESULTS.md` and `M4_DEEPSEEK_FIRST_RESEARCH_DECISION.md`. The corrected pre-inference freeze commit was `550bf1361609e405dc50aa60d5d77b9c502e5bf0`; the final analysis commit is recorded in Git after review.

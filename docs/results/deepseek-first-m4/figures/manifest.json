@@ -1,0 +1,16 @@
+{
+  "figures_sha256": {
+    "agent_regret_by_family.png": "98341b6c50c0076539aaa482d52568f3386fc55c4b714525fc8b89514c3e3fe6",
+    "focal_ballot_vs_settlement_changes.png": "ca61910bd6685b84530362ad774152f76605d091de6a522d9ccea6785f6e0c1b",
+    "monitor_paired_correctness.png": "aaeae5fefe5447b13c161c5b6a61ab3c408e6db2d5d16c4915c560a38ffc9121",
+    "monitor_reference_accuracy_by_population.png": "e083bb61d0382c01ff811644b442f7120162cd0cd068395f1a985852a691714d"
+  },
+  "interpretation": "Descriptive figures from sanitized independent audit outputs; no latent-collusion or method-superiority claim.",
+  "raw_message_text_or_provider_payloads_used": false,
+  "schema_version": "deepseek-first-figures-v1",
+  "source_sha256": {
+    "agent_group_outcomes.csv": "4a1caa0ced27a33dcb22ccd4f833851597ed88d6b0b9b4178e5fd8df4f28b015",
+    "plot_deepseek_first_research.py": "73f5cf6d1de68130db6ad0106b61ea03573482a5f3c6a8d1fb4cb4157d54651b",
+    "postrun_analysis_v2.json": "6cff80e9ee675b9b09e723228183b3901977c4bdc12f43b415fa50db34311cb4"
+  }
+}
