@@ -1,0 +1,15 @@
+M3 pre-generation recovery evidence (sanitized)
+Date: 2026-10-20 Asia/Shanghai
+Frozen design/source baseline: 2da217c2ea81d90a5783b5ea67c63d26a5803d86
+
+Attempt 1: local llama-server printed that it was listening on 127.0.0.1:8081, but the default sandbox could not confirm the listening PID from the Windows TCP table. The runner failed closed after its bounded wait. HTTP attempts: 0. Identity requests: 0. Generations: 0. API key cleanup and owned-process shutdown were recorded.
+
+Attempt 2: resumed the same ignored run directory with local process-table access. Listener ownership matched the launched llama-server PID. Authenticated /v1/models returned HTTP 200 and the expected frozen model alias. Environment export then failed with AttributeError: GGUFChatTokenCounter has no attribute tokenizer_metadata. The owned server was terminated and the temporary API-key file was removed. HTTP attempts: 1 identity probe. Generations: 0.
+
+Correction: environment export now reads the already frozen and verified JSON-safe tokenizer metadata from backend_config.tokenizer_metadata. A regression test intentionally gives the tokenizer counter no tokenizer_metadata attribute. The first run of that test had a test-fixture placement error (NameError from existing settlement assertions); the assertions were restored to their original test. Targeted result: 2 passed.
+
+No model-facing request, prompt, treatment, arm order, sample, reward, sampling setting, or parser changed. Both runtime failures remain in runs/m3/mechanism-20261020/, which is ignored and ACL-restricted. The run had 12 assigned groups, 0 terminal groups, 0 logical generations, and 1 total HTTP attempt at this point.
+
+Resume source-hash rejection: a later --resume attempt stopped before launching a server or making HTTP calls because the source commit differed from design-freeze.json. Its exact failure timestamp was not captured. The local append-only record preserves the refusal and a correction marks the time unknown; the recording time of that correction is not presented as the failure time.
+
+Budget validator failure: 2026-10-19T18:40:31.135902Z, `ValueError: full run request budget must match a frozen ColluScope study ceiling`. The attempt stopped before starting another llama-server. The prior authenticated identity probe remains the only HTTP attempt; generation calls remain zero. Correction keeps the backend's authorized 191-attempt safety cap and enforces the remaining 190 through the outer RequestBudget. Two focused test-fixture errors exposed the separate logical cap and a missing empty errata field; both were fixed without changing runtime prompts or conditions.

@@ -13,3 +13,5 @@ __pycache__/
 /runs/m2-v2/
 # M2-V3 offline response tables remain local research evidence; do not publish rows by default.
 /runs/m2-v3/
+# M3 stores actual synthetic private messages and complete prompts locally.
+/runs/m3/

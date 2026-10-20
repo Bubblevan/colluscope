@@ -1,0 +1,66 @@
+Preserved initial independent-audit failure (no model calls were made by the audit):
+
+- UTC recorded: 2026-10-19T18:53:29+00:00
+- Command: `python -m scripts.audit_m3_mechanism --run runs/m3/mechanism-20261020 --out docs/results/m3-mechanism`
+- Stage: `_load_episode_records`
+- Failure: `AuditFailure: duplicate episode IDs in B`
+- Assigned / terminal groups at failure: 12 / 12
+- Generation calls after failure: 0
+
+The error was caused by the auditor requiring a top-level `episode_id` in B rows. The frozen runtime writes B and public-E projections without that field. The corrected audit links each projection to the schedule using terminal progress order and checks exact canonical equality against the corresponding immutable per-episode envelope. Raw run files and this original failure record were not changed.
+
+Second preserved failure, before any model calls:
+
+- UTC detected: 2026-10-19 18:55:49 UTC (the local append-only ledger also contains a mistyped placeholder timestamp, followed by an explicit correction event; neither line was rewritten).
+- Command: `python -m scripts.audit_m3_mechanism --run runs/m3/mechanism-20261020 --out docs/results/m3-mechanism`
+- Stage: episode behavior-event reconciliation
+- Failure: `UnboundLocalError: cannot access local variable 'cf_events' where it is not associated with a value`
+- Cause: the audit expression read the counterfactual event list before its later assignment.
+- Repair: centralize message, baseline-ballot, and counterfactual-ballot aggregation in `_behavior_action_events`; the counterexample test covers both empty and populated records.
+- The first failed audit left partial derived files under `docs/results/m3-mechanism`; they are preserved. The next audit will use a new output directory.
+
+Third preserved failure:
+
+- UTC detected: 2026-10-19 18:56:53 UTC.
+- Command: `python -m scripts.audit_m3_mechanism --run runs/m3/mechanism-20261020 --out docs/results/m3-mechanism-audit-v2`
+- Stage: T incentive-delivery ledger reconciliation.
+- Failure: `AuditFailure: T incentive-delivery ledger differs from recorded response delivery for m3-1-seed-115/A`.
+- Cause: the audit compared T's confirmation list, which the runtime freezes after the initial message and baseline-ballot stages, against counterfactual requests that occur later. The complete behavior-event check still covers those counterfactual requests separately.
+- Repair: split all-action observation/request verification from the T initial-delivery confirmation projection. Regression test verifies counterfactuals are included in behavior reconciliation and excluded from the initial T confirmation list.
+- No raw experiment data or model-facing behavior changed; no model calls were made by the failed audit.
+- The partial second audit output under `docs/results/m3-mechanism-audit-v2` is preserved. Retry uses a new directory.
+
+Fourth preserved failure:
+
+- UTC detected: 2026-10-19 18:57:40 UTC.
+- Command: `python -m scripts.audit_m3_mechanism --run runs/m3/mechanism-20261020 --out docs/results/m3-mechanism-audit-v3`
+- Failure: `AuditFailure: T incentive-delivery ledger differs from recorded response delivery for m3-1-seed-115/C`.
+- Cause: the verifier inferred private-reward delivery from C's public ballot response, despite the frozen M3 treatment assigning no private reward to C.
+- Repair: explicitly give `not_applicable` precedence for C's unassigned private reward while checking C's public-incentive delivery independently; added regression assertions.
+- No model calls or source data modifications. Partial output is preserved under `docs/results/m3-mechanism-audit-v3`; retry uses a new directory.
+
+Fifth preserved failure:
+
+- UTC detected: 2026-10-19 18:58:42 UTC.
+- Command: `python -m scripts.audit_m3_mechanism --run runs/m3/mechanism-20261020 --out docs/results/m3-mechanism-audit-v4`
+- Failure: stored baseline settlement tie-break diagnostics differed from the independent replay.
+- Inspection showed the frozen runtime result intentionally stores selected allocation and scores, but omits optional `chair_tiebreak` and `ballot_tally` fields. The audit independently recalculates those from ballots; it incorrectly required the runtime projection to duplicate them.
+- Repair: continue comparing every stored outcome field; recompute tie-break/tally from raw votes, and compare those diagnostics only when the recorded projection supplies both. A partial diagnostic pair remains an explicit error.
+- No generation calls occurred. Partial output remains preserved in `docs/results/m3-mechanism-audit-v4`.
+
+Sixth preserved failure:
+
+- UTC detected: 2026-10-19 18:59:25 UTC.
+- Command: `python -m scripts.audit_m3_mechanism --run runs/m3/mechanism-20261020 --out docs/results/m3-mechanism-audit-v5`
+- Failure: stored fixed-peer settlement compared unequal to independent replay for `m3-1-seed-115/no_delivery`.
+- The diagnostic showed identical allocation, welfare, welfare gap and realized scores. As with the baseline projection, runtime counterfactual settlement omits optional tie-break and tally diagnostics.
+- Repair: require matching settlement availability, compare all persisted outcome fields through `_same_public_result`, and independently calculate tie/tally from raw ballots; this also rejects partially recorded diagnostics.
+- No model calls or raw data changes. Partial output is preserved in `docs/results/m3-mechanism-audit-v5`.
+
+Seventh preserved failure:
+
+- UTC detected: 2026-10-19 18:59:58 UTC.
+- Command: `python -m scripts.audit_m3_mechanism --run runs/m3/mechanism-20261020 --out docs/results/m3-mechanism-audit-v6`
+- Failure: `NameError: name 'write_json' is not defined`, after calculations and CSV exports.
+- Repair: add a deterministic UTF-8 JSON writer used by the already implemented summary and manifest export path; regression test checks exact serialized bytes.
+- No model calls or raw-data changes. Partial output remains preserved in `docs/results/m3-mechanism-audit-v6`; retry uses a new output directory.

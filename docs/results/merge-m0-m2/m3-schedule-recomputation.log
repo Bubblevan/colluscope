@@ -1,0 +1,7 @@
+{
+  "groups": 12,
+  "canonical_schedule_sha256": "380e5556f1e822a2e7f5e5a4eef31c41fd0a15aaffb9f37adb53e48b31951d75",
+  "schedule_file_sha256": "BF0E51302C932772B435827767AEE7867DCE2A9E63989C8710ABA96D1E63E3E0",
+  "status": "BYTE_IDENTICAL",
+  "recomputed_json_retained_in_ignored_local_preflight_evidence": true
+}

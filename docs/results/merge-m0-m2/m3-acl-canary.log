@@ -1,0 +1,6 @@
+{
+  "status": "PASS",
+  "verified_object_count": 3,
+  "acl_output_sha256": "0b649f2c0e9b9f259de7edb1bb68b4f841a7fc2059a57c45c64951ba59c40cff",
+  "raw_sid_and_local_path_retained_under_ignored_runs": true
+}

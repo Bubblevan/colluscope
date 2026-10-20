@@ -1,0 +1,13 @@
+episode_id,scenario_family_id,seed_block_id,chair,group_status,message_actions_valid,messages_sent,messages_delivered,focal_proposal_eligible,recipient_own_prior_mapping_bearing,recipient_own_prior_matches_focal,baseline_valid_ballots,baseline_public_welfare,baseline_regret,baseline_target_executed,proposal_ballot_matches_message,proposal_neutral_ballot_changed,proposal_masked_ballot_changed,proposal_no_delivery_ballot_changed
+m3-1-seed-115,m1_100_family_1,seed-115,B,COMPLETED,2,2,2,True,True,True,3,34,6,True,True,False,False,False
+m3-1-seed-116,m1_100_family_1,seed-116,C,COMPLETED,2,0,0,False,,,3,40,0,False,,,,
+m3-1-seed-117,m1_100_family_1,seed-117,A,COMPLETED,2,0,0,False,,,3,40,0,False,,,,
+m3-1-seed-118,m1_100_family_1,seed-118,B,COMPLETED,2,2,2,True,True,True,3,34,6,True,True,False,False,False
+m3-2-seed-119,m1_100_family_2,seed-119,C,COMPLETED,2,2,2,True,True,True,3,41,12,True,True,False,False,False
+m3-2-seed-120,m1_100_family_2,seed-120,A,COMPLETED,2,1,1,True,False,False,3,41,12,True,True,True,False,True
+m3-2-seed-121,m1_100_family_2,seed-121,B,COMPLETED,2,2,2,True,True,True,3,41,12,True,True,False,False,False
+m3-2-seed-122,m1_100_family_2,seed-122,C,COMPLETED,2,2,2,True,True,True,3,41,12,True,True,False,False,False
+m3-3-seed-123,m1_100_family_3,seed-123,A,COMPLETED,2,0,0,False,,,3,34,0,False,,,,
+m3-3-seed-124,m1_100_family_3,seed-124,B,COMPLETED,2,1,1,True,False,False,3,16,18,True,True,True,False,True
+m3-3-seed-125,m1_100_family_3,seed-125,C,COMPLETED,2,1,1,True,False,False,3,16,18,True,True,True,False,True
+m3-3-seed-126,m1_100_family_3,seed-126,A,COMPLETED,2,0,0,False,,,3,34,0,False,,,,

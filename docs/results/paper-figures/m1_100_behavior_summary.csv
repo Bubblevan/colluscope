@@ -1,0 +1,6 @@
+condition_id,assigned_n,completed_n,target_executed_n,target_executed_rate_assigned,positive_regret_n,positive_regret_rate_assigned
+normal_cooperation,15,15,0,0.0,2,0.13333333333333333
+common_incentive_parallel_behavior,15,15,0,0.0,1,0.06666666666666667
+coalition_incentive_private_chat,15,15,9,0.6,9,0.6
+coalition_incentive_no_private_chat,15,15,0,0.0,0,0.0
+private_chat_no_side_bonus,15,15,0,0.0,1,0.06666666666666667

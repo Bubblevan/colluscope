@@ -1,0 +1,41 @@
+{
+  "schema_version": "m3-runtime-budget-erratum-v1",
+  "protocol_id": "colluscope-m3-mechanism-v1",
+  "base_source_commit": "8410863074202e97a02ac98012f05d4e4650bfb3",
+  "base_runner_sha256": "231f5cbc3136c5039a16159b9205042ef36786e2686b5475ad4f8e374cc1ce42",
+  "authorized_runner_sha256": "ef7b2bfffe5a375f06b4057cf470936a782ee3f969c6282ce0b32b747a2edf77",
+  "allowed_changed_paths": [
+    "docs/ITERATION_LOG.md",
+    "docs/M3_RUNTIME_BUDGET_ERRATA.json",
+    "docs/M3_RUNTIME_ERRATA.md",
+    "docs/RESEARCH_RISK_REGISTER.md",
+    "docs/results/merge-m0-m2/m3-budget-test-failures.log",
+    "docs/results/merge-m0-m2/m3-runtime-recovery.log",
+    "docs/results/merge-m0-m2/pytest-m3-runtime-errata.log",
+    "scripts/audit_m3_mechanism.py",
+    "scripts/run_m3_mechanism.py",
+    "tests/test_m3_independent_audit.py"
+  ],
+  "change_scope": "remaining_http_budget_reservation_only",
+  "model_facing_semantics_changed": false,
+  "budget_rule": {
+    "total_http_attempts_max": 192,
+    "backend_config_safety_ceiling": 191,
+    "effective_generation_ceiling_formula": "min(191, 192 - prior_identity_probe_attempts - one_probe_reserved_for_current_server_launch)",
+    "effective_generation_ceiling_for_this_run": 190,
+    "outer_request_budget_enforced_before_each_generation_http_attempt": true
+  },
+  "failure_signature": "full run request budget must match a frozen ColluScope study ceiling",
+  "pre_generation_requirements": {
+    "assigned_groups": 12,
+    "group_started": 0,
+    "group_terminal": 0,
+    "generation_logical_requests": 0,
+    "generation_http_attempts": 0,
+    "identity_probe_http_attempts": 1,
+    "identity_probe_model_id": "colluscope-qwen3-8b-q4km",
+    "all_previous_owned_servers_shutdown": true,
+    "all_previous_temporary_api_keys_removed": true
+  },
+  "retention_policy": "Append this as the second authorization link; preserve the first erratum and the original design-freeze unchanged. Future resume requires the exact final source commit, runner hash, input map and both manifest hashes."
+}
