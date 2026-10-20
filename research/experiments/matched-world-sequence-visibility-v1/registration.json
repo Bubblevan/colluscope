@@ -1,0 +1,10 @@
+{
+  "authorization_batch_sha256": null,
+  "closure_sha256": null,
+  "evaluator_v2_sha256": "e7b563b1a149a8c770a56728a4d13abcc53e8a12080866a1adfad03b2d234f6d",
+  "experiment_id": "matched-world-sequence-visibility-v1",
+  "preregistration_sha256": "e11ab6a8cdded5306ecc3df082ca6fb452c371380adf9a85164bf0187adb343b",
+  "registered_at_utc": "2026-10-20T18:56:58+00:00",
+  "registered_git_head": "83318a5a925fc72072e2e631fc792862807ff8d0",
+  "schema_version": 1
+}

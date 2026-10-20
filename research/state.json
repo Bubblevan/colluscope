@@ -1,6 +1,6 @@
 {
-  "active_experiment_id": null,
-  "active_hypothesis_id": null,
+  "active_experiment_id": "matched-world-sequence-visibility-v1",
+  "active_hypothesis_id": "observable-evidence-boundary",
   "claim_level_status": {
     "B4_B5_superiority": "INCONCLUSIVE",
     "causal_communication_effect": "INCONCLUSIVE",
@@ -28,10 +28,10 @@
   },
   "historical_approvals_reusable": false,
   "latest_closed_experiment_id": "b5-evidence-view-stability-120",
-  "latest_decision": "AMBIGUOUS",
+  "latest_decision": "PREREGISTERED",
   "latest_decision_type": "operational",
   "latest_scientific_outcome": "INCONCLUSIVE",
-  "next_action": "Select and preregister a new observable-event evidence task with deterministic positive and negative controls; do not dispatch without a new scope-specific user approval.",
+  "next_action": "Implement the frozen protocol and proceed only through an existing entry point within current authorization; the CLI does not dispatch.",
   "preexisting_untracked_paths_preserved": [
     "docs/COLOSSEUM_LOCAL_REPRO_PROTOCOL.md",
     "docs/results/colosseum-local-audit-20261020/",
@@ -49,6 +49,6 @@
   "program_status": "active",
   "schema_version": 2,
   "state_recorded_at_head": "0deb01b31b02fb8678172d9f82648f46d49ac499",
-  "status": "ready_for_next_cycle",
-  "updated_at": "2026-10-21"
+  "status": "iteration_preregistered",
+  "updated_at": "2026-10-20"
 }

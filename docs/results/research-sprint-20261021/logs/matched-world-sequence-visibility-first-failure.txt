@@ -1,0 +1,5 @@
+{
+  "status": "FAIL",
+  "error_type": "AuditError",
+  "error": "frozen projection/request verification count mismatch"
+}

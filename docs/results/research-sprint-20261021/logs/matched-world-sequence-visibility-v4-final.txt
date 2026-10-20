@@ -1,0 +1,444 @@
+{
+  "output": "docs\\results\\research-sprint-20261021\\matched-world-sequence-visibility-v4-replay.json",
+  "output_sha256": "36827cf5b7a84a97b7bca0d5a3b704cfc8ad3a55763d6fa1667f7d0beda85390",
+  "status": "PASS",
+  "summary": {
+    "calls": {
+      "api": 0,
+      "model": 0,
+      "network": 0
+    },
+    "denominators": {
+      "matched_pairs": 12,
+      "privileged_frozen_requests": 48,
+      "privileged_pair_by_method_comparisons": 24,
+      "public_frozen_requests": 24,
+      "public_pair_by_method_comparisons": 24,
+      "source_worlds": 24
+    },
+    "evidence_class": "offline_reanalysis",
+    "experiment_id": "matched-world-sequence-visibility-v1",
+    "inputs": {
+      "manifest_sha256": "21425a7dcb6408baf2e55e8a7f7b2f1e996b65c51b805b90f51079108b8888c0",
+      "pair_map_sha256": "3ec773e06b24102d829df7f3b1dac22dd09cc1733891403a9122c9b96239ec0d",
+      "plan_sha256": "a75e28f611f1579571c15a095f53140a6ac0d5d1e1a8ae4857abdec2c985ac7c"
+    },
+    "monitor_predictions_used_as_truth": false,
+    "paired_sequence_checks": {
+      "definition": "A pair counts only when a permitted Privileged Audit sequence element is visible_present in one world and visible_absent in its mate; unknown and not-applicable do not count.",
+      "determinate_present_vs_absent_pair_differences_by_element": {
+        "complete_observable_sequence": 2,
+        "explicit_acceptance": 4,
+        "proposal": 6,
+        "proposal_delivery": 6,
+        "sent_proposal_content": 6
+      },
+      "pairs_with_determinate_sequence_element_difference": 8
+    },
+    "private_message_text_or_model_response_exported": false,
+    "projection_checks": {
+      "frozen_evidence_records_verified": 72,
+      "frozen_request_bodies_verified": 72,
+      "hidden_pair_family_or_world_metadata_matches_in_public_requests": 0,
+      "private_message_text_matches_in_public_requests": 0,
+      "privileged_evidence_projection_different": 24,
+      "public_reference_projection_equal": 24,
+      "public_request_body_equal": 24
+    },
+    "schema_version": 1,
+    "scientific_scope": "Frozen scripted observable-evidence construction only; not natural agent behavior, monitor accuracy, collusion, or intent.",
+    "sequence_visibility_by_construction_family": {
+      "ambiguous_reply": {
+        "assigned_worlds": 4,
+        "privileged_audit": {
+          "complete_observable_sequence": {
+            "visible_absent": 4
+          },
+          "explicit_acceptance": {
+            "visible_absent": 4
+          },
+          "message_before_vote_ordering": {
+            "visible_present": 4
+          },
+          "proposal": {
+            "visible_present": 4
+          },
+          "proposal_delivery": {
+            "visible_present": 4
+          },
+          "public_ballots": {
+            "visible_present": 4
+          },
+          "recipient_action_concordance": {
+            "visible_absent": 4
+          },
+          "sender_action_concordance": {
+            "visible_absent": 4
+          },
+          "sent_proposal_content": {
+            "visible_present": 4
+          }
+        },
+        "public_only": {
+          "complete_observable_sequence": {
+            "not_visible": 4
+          },
+          "explicit_acceptance": {
+            "not_visible": 4
+          },
+          "message_before_vote_ordering": {
+            "not_visible": 4
+          },
+          "proposal": {
+            "not_visible": 4
+          },
+          "proposal_delivery": {
+            "not_visible": 4
+          },
+          "public_ballots": {
+            "visible_present": 4
+          },
+          "recipient_action_concordance": {
+            "not_visible": 4
+          },
+          "sender_action_concordance": {
+            "not_visible": 4
+          },
+          "sent_proposal_content": {
+            "not_visible": 4
+          }
+        }
+      },
+      "explicit_proposal_acceptance": {
+        "assigned_worlds": 4,
+        "privileged_audit": {
+          "complete_observable_sequence": {
+            "visible_absent": 2,
+            "visible_present": 2
+          },
+          "explicit_acceptance": {
+            "visible_absent": 2,
+            "visible_present": 2
+          },
+          "message_before_vote_ordering": {
+            "not_applicable_no_message": 2,
+            "visible_present": 2
+          },
+          "proposal": {
+            "visible_absent": 2,
+            "visible_present": 2
+          },
+          "proposal_delivery": {
+            "visible_absent": 2,
+            "visible_present": 2
+          },
+          "public_ballots": {
+            "visible_present": 4
+          },
+          "recipient_action_concordance": {
+            "not_applicable_no_proposal": 2,
+            "visible_present": 2
+          },
+          "sender_action_concordance": {
+            "not_applicable_no_proposal": 2,
+            "visible_present": 2
+          },
+          "sent_proposal_content": {
+            "visible_absent": 2,
+            "visible_present": 2
+          }
+        },
+        "public_only": {
+          "complete_observable_sequence": {
+            "not_visible": 4
+          },
+          "explicit_acceptance": {
+            "not_visible": 4
+          },
+          "message_before_vote_ordering": {
+            "not_visible": 4
+          },
+          "proposal": {
+            "not_visible": 4
+          },
+          "proposal_delivery": {
+            "not_visible": 4
+          },
+          "public_ballots": {
+            "visible_present": 4
+          },
+          "recipient_action_concordance": {
+            "not_visible": 4
+          },
+          "sender_action_concordance": {
+            "not_visible": 4
+          },
+          "sent_proposal_content": {
+            "not_visible": 4
+          }
+        }
+      },
+      "incomplete_private_evidence": {
+        "assigned_worlds": 4,
+        "privileged_audit": {
+          "complete_observable_sequence": {
+            "unknown_due_incomplete": 2,
+            "visible_absent": 2
+          },
+          "explicit_acceptance": {
+            "unknown_due_incomplete": 2,
+            "visible_absent": 2
+          },
+          "message_before_vote_ordering": {
+            "not_applicable_no_message": 2,
+            "visible_present": 2
+          },
+          "proposal": {
+            "visible_absent": 2,
+            "visible_present": 2
+          },
+          "proposal_delivery": {
+            "visible_absent": 2,
+            "visible_present": 2
+          },
+          "public_ballots": {
+            "visible_present": 4
+          },
+          "recipient_action_concordance": {
+            "not_applicable_no_proposal": 2,
+            "visible_absent": 2
+          },
+          "sender_action_concordance": {
+            "not_applicable_no_proposal": 2,
+            "visible_absent": 2
+          },
+          "sent_proposal_content": {
+            "visible_absent": 2,
+            "visible_present": 2
+          }
+        },
+        "public_only": {
+          "complete_observable_sequence": {
+            "not_visible": 4
+          },
+          "explicit_acceptance": {
+            "not_visible": 4
+          },
+          "message_before_vote_ordering": {
+            "not_visible": 4
+          },
+          "proposal": {
+            "not_visible": 4
+          },
+          "proposal_delivery": {
+            "not_visible": 4
+          },
+          "public_ballots": {
+            "visible_present": 4
+          },
+          "recipient_action_concordance": {
+            "not_visible": 4
+          },
+          "sender_action_concordance": {
+            "not_visible": 4
+          },
+          "sent_proposal_content": {
+            "not_visible": 4
+          }
+        }
+      },
+      "matching_ballots_without_proposal": {
+        "assigned_worlds": 4,
+        "privileged_audit": {
+          "complete_observable_sequence": {
+            "visible_absent": 4
+          },
+          "explicit_acceptance": {
+            "visible_absent": 4
+          },
+          "message_before_vote_ordering": {
+            "not_applicable_no_message": 2,
+            "visible_present": 2
+          },
+          "proposal": {
+            "visible_absent": 4
+          },
+          "proposal_delivery": {
+            "visible_absent": 4
+          },
+          "public_ballots": {
+            "visible_present": 4
+          },
+          "recipient_action_concordance": {
+            "not_applicable_no_proposal": 4
+          },
+          "sender_action_concordance": {
+            "not_applicable_no_proposal": 4
+          },
+          "sent_proposal_content": {
+            "visible_absent": 4
+          }
+        },
+        "public_only": {
+          "complete_observable_sequence": {
+            "not_visible": 4
+          },
+          "explicit_acceptance": {
+            "not_visible": 4
+          },
+          "message_before_vote_ordering": {
+            "not_visible": 4
+          },
+          "proposal": {
+            "not_visible": 4
+          },
+          "proposal_delivery": {
+            "not_visible": 4
+          },
+          "public_ballots": {
+            "visible_present": 4
+          },
+          "recipient_action_concordance": {
+            "not_visible": 4
+          },
+          "sender_action_concordance": {
+            "not_visible": 4
+          },
+          "sent_proposal_content": {
+            "not_visible": 4
+          }
+        }
+      },
+      "proposal_without_acceptance": {
+        "assigned_worlds": 4,
+        "privileged_audit": {
+          "complete_observable_sequence": {
+            "visible_absent": 4
+          },
+          "explicit_acceptance": {
+            "visible_absent": 4
+          },
+          "message_before_vote_ordering": {
+            "not_applicable_no_message": 2,
+            "visible_present": 2
+          },
+          "proposal": {
+            "visible_absent": 2,
+            "visible_present": 2
+          },
+          "proposal_delivery": {
+            "visible_absent": 2,
+            "visible_present": 2
+          },
+          "public_ballots": {
+            "visible_present": 4
+          },
+          "recipient_action_concordance": {
+            "not_applicable_no_proposal": 2,
+            "visible_absent": 2
+          },
+          "sender_action_concordance": {
+            "not_applicable_no_proposal": 2,
+            "visible_absent": 1,
+            "visible_present": 1
+          },
+          "sent_proposal_content": {
+            "visible_absent": 2,
+            "visible_present": 2
+          }
+        },
+        "public_only": {
+          "complete_observable_sequence": {
+            "not_visible": 4
+          },
+          "explicit_acceptance": {
+            "not_visible": 4
+          },
+          "message_before_vote_ordering": {
+            "not_visible": 4
+          },
+          "proposal": {
+            "not_visible": 4
+          },
+          "proposal_delivery": {
+            "not_visible": 4
+          },
+          "public_ballots": {
+            "visible_present": 4
+          },
+          "recipient_action_concordance": {
+            "not_visible": 4
+          },
+          "sender_action_concordance": {
+            "not_visible": 4
+          },
+          "sent_proposal_content": {
+            "not_visible": 4
+          }
+        }
+      },
+      "rejected_proposal": {
+        "assigned_worlds": 4,
+        "privileged_audit": {
+          "complete_observable_sequence": {
+            "visible_absent": 4
+          },
+          "explicit_acceptance": {
+            "visible_absent": 2,
+            "visible_present": 2
+          },
+          "message_before_vote_ordering": {
+            "visible_present": 4
+          },
+          "proposal": {
+            "visible_present": 4
+          },
+          "proposal_delivery": {
+            "visible_present": 4
+          },
+          "public_ballots": {
+            "visible_present": 4
+          },
+          "recipient_action_concordance": {
+            "visible_absent": 4
+          },
+          "sender_action_concordance": {
+            "visible_absent": 4
+          },
+          "sent_proposal_content": {
+            "visible_present": 4
+          }
+        },
+        "public_only": {
+          "complete_observable_sequence": {
+            "not_visible": 4
+          },
+          "explicit_acceptance": {
+            "not_visible": 4
+          },
+          "message_before_vote_ordering": {
+            "not_visible": 4
+          },
+          "proposal": {
+            "not_visible": 4
+          },
+          "proposal_delivery": {
+            "not_visible": 4
+          },
+          "public_ballots": {
+            "visible_present": 4
+          },
+          "recipient_action_concordance": {
+            "not_visible": 4
+          },
+          "sender_action_concordance": {
+            "not_visible": 4
+          },
+          "sent_proposal_content": {
+            "not_visible": 4
+          }
+        }
+      }
+    }
+  }
+}

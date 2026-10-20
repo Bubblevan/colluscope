@@ -37,7 +37,7 @@
       "hypothesis": "Some paired mechanisms with byte-identical authorized Public-only evidence cannot be distinguished from that evidence alone; predeclared additional permitted evidence or an intervention can distinguish at least some such pairs.",
       "hypothesis_id": "observable-evidence-boundary",
       "selection_note": "This is the only current candidate with a plausible zero-call deterministic analysis path. The existing 856-row result reports identical Public-only projections and only 2/72 parseable matched-world outputs; the attachment's 20/24 prediction-change example is absent from the available records and is not adopted.",
-      "status": "candidate",
+      "status": "selected",
       "title": "Map the observable evidence boundary for coordination claims"
     },
     {
@@ -66,5 +66,5 @@
   ],
   "policy": "At most three read-only candidate directions may be compared. Only one can be selected for a formal cycle at a time. Candidate status is not preregistration or authorization.",
   "schema_version": 1,
-  "selected_hypothesis_id": null
+  "selected_hypothesis_id": "observable-evidence-boundary"
 }
