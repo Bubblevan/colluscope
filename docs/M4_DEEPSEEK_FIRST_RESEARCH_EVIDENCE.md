@@ -23,9 +23,15 @@ There are zero retries and zero replacement groups. Every assigned group and req
 - Python 3.12.4, Windows 11. Temporary current-user-only ACL setup and verification passed.
 - `.env` endpoint/model preflight passed; credential content was not printed or copied.
 - Synthetic raw-response and injected fake-HTTP tests exercised both output interfaces, complete Agent group execution, context isolation, send/delivery distinction, settlement replay, monitor parsing, citation/input freeze, hard request cap, gate stopping, and error retention.
-- Targeted suite: **35 passed** in the latest run, including byte-for-byte reproduction of the committed 30-slot plan. Final full repository suite on the freeze candidate: **547 passed, 1 skipped in 137.34s**; the skip is the opt-in host-dependent Windows listener-owner-table check. The complete output is `docs/results/deepseek-first-m4/logs/pytest-full-offline-final.log`.
+- Corrected candidate targeted suite: **36 passed**, including byte-for-byte reproduction of the regenerated 30-slot plan. Corrected candidate full repository suite: **548 passed, 1 skipped in 137.09s**; the skip is the opt-in host-dependent Windows listener-owner-table check. The complete output is `docs/results/deepseek-first-m4/logs/pytest-full-offline-post-launcher-fix.log`.
 - Historical M0–M4 raw artifacts and earlier failures remain unchanged. All M0–M3 research and current preparation date 2026-10-20, before the Apart Sprint starts on 2026-10-23; this work is pre-sprint work.
 - Real model/API calls: 0 at freeze time.
+
+## Preserved pre-dispatch launch failure
+
+After the freeze candidate was pushed, the first invocation of the authorized orchestrator stopped in pilot setup with `UnboundLocalError` caused by a function-local `write_once` import shadowing its module import. It occurred before a client call. `runs/deepseek-first-m4/global_budget_ledger.jsonl` was absent after the invocation, confirming zero physical request-start records. The complete reproduced traceback is preserved at `docs/results/deepseek-first-m4/logs/orchestrator-preflight-unbound-write-once.log`. The fix removes the shadowing import and adds a mocked pilot-run regression test. The run has not been resumed and no model request has been sent.
+
+The corrected pilot-plan bytes match the source-generated schedule at SHA256 `21bddaccd2385bf730dd367085aaad804ce7fb43a0dc33080b41ce3219d7b935` (30 slots: 20 Strict, 10 preassigned fallback). The corrected candidate passed 548 full-suite tests with one opt-in host check skipped. This evidence remains pre-inference evidence only.
 
 ## Required post-run append
 

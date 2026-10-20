@@ -1,6 +1,6 @@
 # DeepSeek-First M4 / Monitor — Integrated Decision
 
-**Current state:** `GO_COMPATIBILITY_PILOT_AFTER_FREEZE_PUSH_AND_OFFICIAL_PREFLIGHT`  
+**Current state:** `GO_COMPATIBILITY_PILOT_AFTER_REFREEZE_PUSH_AND_OFFICIAL_PREFLIGHT`  
 **Real model/API calls:** 0 at the time of the current freeze candidate.  
 **Scope:** the user's later explicit one-run authorization in the attached DeepSeek-first execution task; no approval is inferred for anything beyond that exact bounded schedule.
 
@@ -14,6 +14,6 @@
 
 ## Current GO/NO-GO status
 
-The offline implementation has passed its final full repository suite (**547 passed, 1 opt-in host-dependent check skipped in 137.34s**) and the targeted frozen-plan suite (**35 passed**). The committed 30-slot plan must still reproduce byte-for-byte after staging. This is **GO for the authorized compatibility pilot only after** the source freeze is committed and pushed and the official pricing, identity, endpoint and credential-presence preflight passes. These are software and interface gates, not behavioral evidence. No model result has been observed, so the current scientific evidence state remains **NO-GO for any behavioral claim**. Any failed pilot or later stage gate stops the single run at that boundary.
+The first launcher invocation after commit `8c06ef5c5f73e0a221b4fe20305dbf68ab9f5e15` stopped with `UnboundLocalError` while creating the local pilot plan. The global request ledger was absent, so zero physical model/API requests were started. The traceback is retained at `docs/results/deepseek-first-m4/logs/orchestrator-preflight-unbound-write-once.log`. The shadowing import was removed and a mocked end-to-end pilot-startup regression test was added. The corrected candidate now passes **36 targeted tests and 548 full-suite tests (1 opt-in host check skipped)**; the regenerated plan matches byte-for-byte with SHA256 `21bddaccd2385bf730dd367085aaad804ce7fb43a0dc33080b41ce3219d7b935`. This is **GO for the authorized compatibility pilot only after** this corrected freeze is committed and pushed and official preflight is repeated. No model result has been observed; all behavioral claims remain NO-GO.
 
-After execution, replace this status only with the exact gate outcomes, raw-audit SHA256s, assigned/completed/failed call counts, usage/cost, and reproduction commands. If any gate fails, record the precise stop and do not continue later phases. This decision does not authorize a second run.
+After the corrected freeze is pushed, repeat official identity/pricing/endpoint/credential-presence preflight before dispatch. After execution, replace this decision with exact gate outcomes, raw-audit SHA256s, assigned/completed/failed call counts, usage/cost, and reproduction commands. If any gate fails, record the precise stop and do not continue later phases. This decision does not authorize an additional run.

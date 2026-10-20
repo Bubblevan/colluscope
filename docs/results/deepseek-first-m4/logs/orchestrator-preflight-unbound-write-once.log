@@ -1,0 +1,14 @@
+Traceback (most recent call last):
+  File "D:\MyLab\colluscope\scripts\run_deepseek_first_research.py", line 161, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "D:\MyLab\colluscope\scripts\run_deepseek_first_research.py", line 155, in main
+    result = run()
+             ^^^^^
+  File "D:\MyLab\colluscope\scripts\run_deepseek_first_research.py", line 44, in run
+    pilot_result = pilot.run()
+                   ^^^^^^^^^^^
+  File "D:\MyLab\colluscope\scripts\run_deepseek_first_pilot.py", line 351, in run
+    write_once(PLAN_PATH, plan_bytes)
+    ^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'write_once' where it is not associated with a value

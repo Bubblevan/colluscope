@@ -383,7 +383,6 @@ def run() -> dict[str, Any]:
     summary["source_commit"] = subprocess.check_output(
         ["git", "-C", str(ROOT), "rev-parse", "HEAD"], text=True).strip()
     summary["privacy_note"] = "raw prompts/responses remain local; public summary omits message content"
-    from colluscope.deepseek_m4_v1 import write_once
     write_once(PILOT_ROOT / "pilot-summary.json", canonical(summary) + b"\n")
     if summary["status"] == "PASS":
         write_once(PILOT_ROOT / "selected_interface.json", canonical({
