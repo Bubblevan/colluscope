@@ -12,6 +12,7 @@ from scripts import run_sprint_monitor as runtime
 from scripts import audit_sprint_monitor_live as live_auditor
 from colluscope.sprint_controls import scripted_cases
 from scripts.prepare_sprint_baselines import _make_llm_schedule
+from colluscope.monitor_aggregate_budget import AggregateBudget
 
 
 def _config_with_request_cap(tmp_path: Path, cap: int = 1) -> Path:
@@ -178,6 +179,56 @@ def test_live_fake_transport_accounts_for_usage_and_keeps_raw_gated_and_auth_sep
     audit = live_auditor.audit(out, config_path=config_path, allow_fake_test_run=True)
     assert audit["status"] == "PASS_FAKE_TRANSPORT_REPLAY_ONLY"
     assert audit["completed_predictions_independently_rescored"] == 1
+
+
+def test_live_dispatch_reserves_shared_budget_before_transport(tmp_path, monkeypatch):
+    monkeypatch.setenv("DEEPSEEK_API_KEY", "test-secret-never-persist")
+    config_path = _live_config_with_request_cap(tmp_path, cap=1)
+    request = runtime.build_schedule()[0]
+    budget = AggregateBudget(tmp_path / "aggregate.jsonl", "TEST-EXECUTION")
+    calls = []
+
+    def provider(endpoint, body, api_key, timeout):
+        rows = budget.rows()
+        assert len(rows) == 1 and rows[0]["event"] == "request_reserved"
+        assert rows[0]["request_id"] == request.request_id
+        calls.append((endpoint, body, api_key, timeout))
+        return _response('{"label":"not_visible","evidence_refs":[]}',
+                         usage={"prompt_tokens": 100, "completion_tokens": 20, "total_tokens": 120})
+
+    out = tmp_path / "run"
+    summary = runtime.run_schedule(
+        out, mode="live", config_path=config_path, approval_id="TEST-APPROVED",
+        transport=provider, secure_storage=False, test_mode=True,
+        requests_override=[request], budget_ledger=budget, phase_id="scripted_controls",
+    )
+    assert len(calls) == 1
+    assert [row["event"] for row in budget.rows()] == ["request_reserved", "request_terminal"]
+    assert summary["aggregate_budget"]["reserved_requests"] == 1
+    assert summary["aggregate_budget"]["terminal_requests"] == 1
+    assert summary["physical_http_attempts"] == 0
+
+
+def test_orphan_global_reservation_is_terminalized_without_transport_replay(tmp_path, monkeypatch):
+    monkeypatch.setenv("DEEPSEEK_API_KEY", "test-secret-never-persist")
+    config_path = _live_config_with_request_cap(tmp_path, cap=1)
+    request = runtime.build_schedule()[0]
+    budget = AggregateBudget(tmp_path / "aggregate.jsonl", "TEST-EXECUTION")
+    budget.reserve(phase_id="scripted_controls", request_id=request.request_id,
+                   body_sha256=request.body_sha256, reserve_usd=request.reserve_usd,
+                   phase_request_cap=1, phase_cost_cap_usd=1.0)
+    calls = []
+
+    summary = runtime.run_schedule(
+        tmp_path / "run", mode="live", config_path=config_path, approval_id="TEST-APPROVED",
+        transport=lambda *args: calls.append(args), secure_storage=False, test_mode=True,
+        requests_override=[request], budget_ledger=budget, phase_id="scripted_controls",
+    )
+    progress = runtime._read_jsonl(tmp_path / "run" / "progress.jsonl")
+    assert calls == []
+    assert progress[0]["status"] == "GLOBAL_RESERVED_NO_LOCAL_ATTEMPT_NO_REPLAY"
+    assert summary["aggregate_budget"]["reserved_requests"] == 1
+    assert summary["aggregate_budget"]["terminal_requests"] == 0
 
 
 def test_live_monitor_independent_auditor_rejects_tampered_gated_prediction(tmp_path, monkeypatch):

@@ -94,7 +94,9 @@ def audit(run: Path, *, config_path: Path = monitor.CONFIG_PATH,
     elif mode != "live":
         raise AuditFailure("auditor accepts only live or explicitly allowed fake-live traces")
     if (manifest.get("runtime_revision") != "sprint-monitor-runtime-v1.2"
-            or manifest.get("requested_mode") != "live"
+            and manifest.get("runtime_revision") != "sprint-monitor-runtime-v1.3"):
+        raise AuditFailure("unsupported live Monitor runtime revision")
+    if (manifest.get("requested_mode") != "live"
             or manifest.get("protocol_id") != monitor.PROTOCOL
             or manifest.get("runtime_config_sha256") != monitor._sha(config_path.read_bytes())
             or manifest.get("request_count") != 280
@@ -114,6 +116,13 @@ def audit(run: Path, *, config_path: Path = monitor.CONFIG_PATH,
     expected = {request.request_id: request for request in schedule}
     if len(expected) != 280:
         raise AuditFailure("independent schedule reconstruction did not produce 280 unique rows")
+    schedule_sha = monitor._sha(monitor._json_bytes([
+        {"request_id": request.request_id, "body_sha256": request.body_sha256}
+        for request in schedule
+    ]))
+    if (manifest.get("runtime_revision") == "sprint-monitor-runtime-v1.3"
+            and manifest.get("request_schedule_sha256") != schedule_sha):
+        raise AuditFailure("run manifest request-schedule digest differs from independent reconstruction")
     progress = _unique(_read_jsonl(run / "progress.jsonl"), "request_id", "progress")
     if set(progress) != set(expected):
         raise AuditFailure("progress ledger does not contain all 280 assigned terminal rows")

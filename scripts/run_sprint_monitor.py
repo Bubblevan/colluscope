@@ -38,6 +38,9 @@ from colluscope.sprint_baselines import (  # noqa: E402
 from colluscope.sprint_controls import scripted_cases  # noqa: E402
 from colluscope.sprint_metrics import score_one  # noqa: E402
 from colluscope.sprint_replay import reference_for_case  # noqa: E402
+from colluscope.monitor_aggregate_budget import (  # noqa: E402
+    AggregateBudget, AggregateBudgetError,
+)
 from scripts.prepare_sprint_baselines import (  # noqa: E402
     LLM_CELLS,
     PROTOCOL,
@@ -160,11 +163,11 @@ def _load_config(path: Path = CONFIG_PATH) -> dict[str, Any]:
             or raw["external_fallback"] is not False
             or raw["expected_response_models"] != ["deepseek-flash", "DeepSeek-V4.1-Flash-1017"]):
         raise RuntimeIntegrityError("model or endpoint differs from the only configured provider target")
-    if (not 1 <= raw["max_logical_requests"] <= 280
-            or not 1 <= raw["max_http_attempts"] <= 280
+    if (not 1 <= raw["max_logical_requests"] <= 856
+            or not 1 <= raw["max_http_attempts"] <= 856
             or raw["max_attempts_per_logical_request"] != 1
             or raw["max_output_tokens"] != 128
-            or not 0 < raw["hard_estimated_cost_usd"] <= 1.0):
+            or not 0 < raw["hard_estimated_cost_usd"] <= 3.0):
         raise RuntimeIntegrityError("call/token/cost budget differs from the frozen ceiling")
     if raw["retry_policy"] != "zero retries; interrupted/failed requests are terminal and never replaced":
         raise RuntimeIntegrityError("retry policy is not the frozen no-retry policy")
@@ -293,7 +296,9 @@ def _ensure_private_run_root(out: Path, config: dict[str, Any], *, create: bool)
     return acl
 
 
-def _read_existing_state(out: Path, requests: list[BuiltRequest]) -> tuple[dict[str, dict[str, Any]], set[str], dict[str, dict[str, Any]]]:
+def _read_existing_state(out: Path, requests: list[BuiltRequest], *,
+                         max_attempts: int = 280
+                         ) -> tuple[dict[str, dict[str, Any]], set[str], dict[str, dict[str, Any]]]:
     progress = _read_jsonl(out / "progress.jsonl")
     attempts = _read_jsonl(out / "attempts.jsonl")
     terminal: dict[str, dict[str, Any]] = {}
@@ -339,8 +344,8 @@ def _read_existing_state(out: Path, requests: list[BuiltRequest]) -> tuple[dict[
         event = terminal_events.get(request_id)
         if event is not None and row.get("status") != event.get("transport_status"):
             raise RuntimeIntegrityError("progress terminal status differs from the append-only HTTP terminal")
-    if len(started) > 280:
-        raise RuntimeIntegrityError("restored HTTP attempt count exceeds hard cap")
+    if len(started) > max_attempts:
+        raise RuntimeIntegrityError("restored HTTP attempt count exceeds configured phase cap")
     # A terminal HTTP ledger with no progress row means the process stopped between
     # the two durable appends. It must be recovered as terminal and never resent.
     terminal_without_progress = {
@@ -461,7 +466,10 @@ def _score_response(request: BuiltRequest, raw_text: str, *, baseline_label: str
 def run_schedule(out: Path, *, mode: str = "mock", config_path: Path = CONFIG_PATH,
                  transport: Callable[[str, bytes, str, int], HTTPResult] | None = None,
                  approval_id: str | None = None, secure_storage: bool = True,
-                 test_mode: bool = False) -> dict[str, Any]:
+                 test_mode: bool = False,
+                 requests_override: list[BuiltRequest] | None = None,
+                 budget_ledger: AggregateBudget | None = None,
+                 phase_id: str | None = None) -> dict[str, Any]:
     config = _load_config(config_path)
     if mode not in {"mock", "live"}:
         raise ValueError("mode must be mock or live")
@@ -475,6 +483,10 @@ def run_schedule(out: Path, *, mode: str = "mock", config_path: Path = CONFIG_PA
             raise LiveDispatchDisabled("test-mode live path requires an injected fake transport")
         if not test_mode and (transport is not None or not secure_storage):
             raise LiveDispatchDisabled("production live dispatch forbids injected transports and ACL bypass")
+        if not test_mode and (budget_ledger is None or phase_id is None):
+            raise LiveDispatchDisabled("production live dispatch requires the shared aggregate request/cost ledger")
+        if budget_ledger is not None and phase_id is None:
+            raise LiveDispatchDisabled("aggregate budget use requires an explicit approved phase ID")
         verified = datetime.strptime(config["pricing_verified_date"], "%Y-%m-%d").date()
         if (datetime.now(timezone.utc).date() - verified).days > 7:
             raise LiveDispatchDisabled("official pricing check is older than seven days; refresh it before approval")
@@ -484,7 +496,21 @@ def run_schedule(out: Path, *, mode: str = "mock", config_path: Path = CONFIG_PA
     if transport is None:
         transport = mock_transport if mode == "mock" else urllib_transport
 
-    requests = build_schedule(config)
+    requests = requests_override if requests_override is not None else build_schedule(config)
+    request_ids = [item.request_id for item in requests]
+    if not requests or len(request_ids) != len(set(request_ids)):
+        raise RuntimeIntegrityError("request schedule must be nonempty and use unique request IDs")
+    if requests_override is not None:
+        if len(requests) > config["max_logical_requests"]:
+            raise RuntimeIntegrityError("frozen override schedule exceeds its phase request ceiling")
+        for request in requests:
+            if _sha(_json_bytes(request.http_payload)) != request.body_sha256:
+                raise RuntimeIntegrityError("frozen override HTTP body does not match its stored hash")
+            _validate_payload(request.http_payload, {
+                "case_ref": request.case_ref,
+                "split_group_id": request.source.get("split_group_id", request.case_ref),
+                "scenario_family_id": request.family_id,
+            })
     if secure_storage:
         acl = _ensure_private_run_root(out, config, create=True)
     else:
@@ -492,7 +518,8 @@ def run_schedule(out: Path, *, mode: str = "mock", config_path: Path = CONFIG_PA
         out.mkdir(parents=True, exist_ok=True)
 
     expected_ids = {item.request_id for item in requests}
-    existing, incomplete, terminal_without_progress = _read_existing_state(out, requests)
+    existing, incomplete, terminal_without_progress = _read_existing_state(
+        out, requests, max_attempts=config["max_http_attempts"])
     if not set(existing).issubset(expected_ids):
         raise RuntimeIntegrityError("progress ledger includes an evaluation outside the frozen schedule")
     for request_id, event in sorted(terminal_without_progress.items()):
@@ -517,20 +544,52 @@ def run_schedule(out: Path, *, mode: str = "mock", config_path: Path = CONFIG_PA
         existing[request_id] = {"request_id": request_id,
                                 "status": "INTERRUPTED_UNKNOWN_NO_RETRY"}
 
+    budget_orphan_stop_reason: str | None = None
+    if budget_ledger is not None and phase_id is not None:
+        try:
+            orphan_ids = budget_ledger.reconcile_phase(
+                phase_id=phase_id,
+                local_attempts=_read_jsonl(out / "attempts.jsonl"),
+                local_progress=_read_jsonl(out / "progress.jsonl"),
+            )
+        except AggregateBudgetError as exc:
+            raise RuntimeIntegrityError(f"aggregate budget reconciliation failed: {exc}") from exc
+        if orphan_ids:
+            budget_orphan_stop_reason = "durable global reservation lacks a local attempt; no replay"
+            by_id = {item.request_id: item for item in requests}
+            for request_id in orphan_ids:
+                if request_id not in by_id:
+                    raise RuntimeIntegrityError("aggregate budget orphan is outside the frozen request schedule")
+                _terminalize(out, by_id[request_id], "GLOBAL_RESERVED_NO_LOCAL_ATTEMPT_NO_REPLAY",
+                             retry_count=0, no_replay=True)
+                existing[request_id] = {"request_id": request_id,
+                                        "status": "GLOBAL_RESERVED_NO_LOCAL_ATTEMPT_NO_REPLAY"}
+
     frozen_manifest = {
         "schema_version": "sprint-monitor-runtime-v1",
-        "runtime_revision": "sprint-monitor-runtime-v1.2",
+        "runtime_revision": "sprint-monitor-runtime-v1.3",
         "mode": "live_fake_transport_test" if test_mode else mode,
         "requested_mode": mode,
         "fake_transport_only": test_mode or mode == "mock",
         "protocol_id": PROTOCOL,
         "runtime_config_sha256": _sha(config_path.read_bytes()),
         "request_count": len(requests),
+        "request_schedule_sha256": _sha(_json_bytes([
+            {"request_id": item.request_id, "body_sha256": item.body_sha256}
+            for item in requests
+        ])),
         "max_http_attempts": config["max_http_attempts"],
         "planned_full_schedule_cost_upper_bound_usd": round(sum(r.reserve_usd for r in requests), 12),
         "cost_policy": "reserve peak cache-miss input and peak output before dispatch",
         "endpoint": config["endpoint"],
         "model_alias": config["model_alias"],
+        "aggregate_budget": ({
+            "execution_id": budget_ledger.execution_id,
+            "phase_id": phase_id,
+            "ledger_path": str(budget_ledger.ledger_path),
+            "global_request_cap": 856,
+            "global_cost_cap_usd": 3.0,
+        } if budget_ledger is not None else None),
         "prompt_hashes": {
             path: _sha((ROOT / path).read_bytes()) for path in (
                 "prompts/sprint-baseline-v1/system.txt",
@@ -549,6 +608,10 @@ def run_schedule(out: Path, *, mode: str = "mock", config_path: Path = CONFIG_PA
                 "src/colluscope/sprint_controls.py",
                 "src/colluscope/sprint_metrics.py",
                 "src/colluscope/sprint_replay.py",
+                "src/colluscope/monitor_aggregate_budget.py",
+                "scripts/prepare_full_research_monitor.py",
+                "scripts/run_full_research_monitor.py",
+                "scripts/audit_full_research_monitor.py",
             )
         },
         "private_storage_acl": acl,
@@ -560,7 +623,8 @@ def run_schedule(out: Path, *, mode: str = "mock", config_path: Path = CONFIG_PA
     if manifest_path.exists():
         old = json.loads(manifest_path.read_text(encoding="utf-8"))
         for key in ("schema_version", "runtime_revision", "mode", "protocol_id", "runtime_config_sha256",
-                    "request_count", "endpoint", "model_alias", "prompt_hashes", "runtime_code_sha256"):
+                    "request_count", "request_schedule_sha256", "endpoint", "model_alias",
+                    "aggregate_budget", "prompt_hashes", "runtime_code_sha256"):
             if old.get(key) != frozen_manifest.get(key):
                 raise RuntimeIntegrityError(f"resume manifest mismatch for {key}")
     else:
@@ -579,7 +643,7 @@ def run_schedule(out: Path, *, mode: str = "mock", config_path: Path = CONFIG_PA
     logical_started = attempts_started
     reserved_usd = sum(float(row.get("reserve_usd", 0.0)) for row in _read_jsonl(out / "attempts.jsonl")
                        if row.get("event") == "attempt_started")
-    fatal_reason: str | None = None
+    fatal_reason: str | None = budget_orphan_stop_reason
     terminal_count = len(existing)
 
     for request in requests:
@@ -613,6 +677,17 @@ def run_schedule(out: Path, *, mode: str = "mock", config_path: Path = CONFIG_PA
         body_bytes = request_path.read_bytes()
         if _sha(body_bytes) != request.body_sha256:
             raise RuntimeIntegrityError("request bytes changed after persistence")
+
+        if budget_ledger is not None and phase_id is not None:
+            try:
+                budget_ledger.reserve(
+                    phase_id=phase_id, request_id=request.request_id,
+                    body_sha256=request.body_sha256, reserve_usd=request.reserve_usd,
+                    phase_request_cap=config["max_logical_requests"],
+                    phase_cost_cap_usd=config["hard_estimated_cost_usd"],
+                )
+            except AggregateBudgetError as exc:
+                raise RuntimeIntegrityError(f"aggregate budget denied dispatch: {exc}") from exc
 
         _append_jsonl(out / "attempts.jsonl", {
             "event": "attempt_started", "request_id": request.request_id,
@@ -650,6 +725,12 @@ def run_schedule(out: Path, *, mode: str = "mock", config_path: Path = CONFIG_PA
                          "INTERRUPTED_UNKNOWN_NO_RETRY" if isinstance(exc, (KeyboardInterrupt, SystemExit)) else "TRANSPORT_ERROR",
                          body_sha256=request.body_sha256, response_sha256=response_hash,
                          error_type=error_kind, retry_count=0)
+            if budget_ledger is not None and phase_id is not None:
+                budget_ledger.terminal(
+                    phase_id=phase_id, request_id=request.request_id,
+                    status="INTERRUPTED_UNKNOWN_NO_RETRY" if isinstance(exc, (KeyboardInterrupt, SystemExit)) else "TRANSPORT_ERROR",
+                    actual_cost_usd=None, http_status=None,
+                )
             existing[request.request_id] = {"request_id": request.request_id, "status": "TRANSPORT_ERROR"}
             terminal_count += 1
             fatal_reason = error_kind
@@ -753,6 +834,22 @@ def run_schedule(out: Path, *, mode: str = "mock", config_path: Path = CONFIG_PA
         })
         _terminalize(out, request, terminal_status, body_sha256=request.body_sha256,
                      response_path=f"responses/{request.request_id}.json", **details)
+        if budget_ledger is not None and phase_id is not None:
+            usage_obj = parsed.get("usage") if isinstance(parsed, dict) else None
+            has_valid_usage = (
+                isinstance(usage_obj, dict)
+                and type(usage_obj.get("prompt_tokens", usage_obj.get("input_tokens"))) is int
+                and type(usage_obj.get("completion_tokens", usage_obj.get("output_tokens"))) is int
+                and usage_obj.get("prompt_tokens", usage_obj.get("input_tokens")) >= 0
+                and usage_obj.get("completion_tokens", usage_obj.get("output_tokens")) >= 0
+                and terminal_status != "INVALID_USAGE_ACCOUNTING"
+            )
+            budget_ledger.terminal(
+                phase_id=phase_id, request_id=request.request_id,
+                status=terminal_status,
+                actual_cost_usd=(details.get("cost_upper_peak_usd") if has_valid_usage else None),
+                http_status=result.status,
+            )
         existing[request.request_id] = {"request_id": request.request_id, "status": terminal_status}
         terminal_count += 1
         if terminal_status != "COMPLETED" and fatal_reason is None and terminal_status.startswith(("HTTP_ERROR", "MODEL_", "TOKEN_")):
@@ -821,6 +918,7 @@ def run_schedule(out: Path, *, mode: str = "mock", config_path: Path = CONFIG_PA
         ),
         "returned_model_identity": list(run_identity) if run_identity else None,
         "mock_is_behavior_evidence": False,
+        "aggregate_budget": budget_ledger.summary() if budget_ledger is not None else None,
     }
     if secure_storage:
         final_acl = verify_private_directory_acl(out)

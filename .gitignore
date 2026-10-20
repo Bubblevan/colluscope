@@ -19,5 +19,9 @@ __pycache__/
 # Sprint monitor runs contain complete prompts, private synthetic messages,
 # responses, API errors, and scoring references; keep them local and ACL-restricted.
 /runs/sprint-monitor/
+# Full research execution: local raw model/provider traffic, privileged inputs,
+# private scoring references, authorization receipt, and aggregate budget ledger.
+/runs/full-research-execution-20261020/monitor/
+/runs/full-research-execution-20261020/authorization_receipt.json
 # M4 Agent runs contain private prompts, generated messages, and action traces.
 /runs/m4/

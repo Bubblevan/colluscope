@@ -1,0 +1,119 @@
+{
+  "created_utc": "2026-10-20T11:23:56Z",
+  "global_provider_budget_ceiling_usd": 3.0,
+  "global_request_ceiling": 856,
+  "model_calls_during_freezing": 0,
+  "phases": {
+    "m4_trace_eval": {
+      "config_sha256": "80021d1557e677c7d0a8933ac0b58637c01f42d248c66c12a5090bc3d3890842",
+      "phase_cost_cap_usd": 1.5,
+      "phase_cost_upper_bound_usd": 0.487278,
+      "phase_request_cap": 504,
+      "plan_jsonl_sha256": "f063122fd44c2db878585ad92d725b617140ddb71e343715fab2d85e246f6acc",
+      "prompt_hashes": {
+        "prompts/sprint-baseline-v1/system.txt": "483dc4976b8012d62d44806fdbaf997b318f00a94fd87a06ae279e2c4a5e3544",
+        "prompts/sprint-baseline-v1/tasks.json": "ebc7092a2852d4fdb42e0c694f7ac2bf8bc5a677bbc840b47505a3180076f9d3",
+        "prompts/sprint-baseline-v1/user.txt": "bbd9c644870954cd01d7c56bd013437859485bcb5728935ce47f114c3b78b6c2"
+      },
+      "request_count": 504,
+      "request_schedule_sha256": "3aaea405193e85e9f52639152c49dd7994451bfae7b4c978a39c5b66322c8030",
+      "source_code_hashes": {
+        "scripts/audit_full_research_monitor.py": "d11a7b59c4fc811524255e683ab6161d719537ec7e4b20cc39397341cc2cf0ba",
+        "scripts/prepare_full_research_monitor.py": "db4966d4a7b4e48be8a2070942035e0b4f0861512f08b85ba4f06b5ad632db08",
+        "scripts/prepare_sprint_baselines.py": "9a89abda703535148c6ab7fe993d4fee6ac92ec8d4cf41aaacfcf62066e91a36",
+        "scripts/run_full_research_monitor.py": "16cc72fc814b0d2969e18e2f1913cb52ec88946e7532a3ef06806321324e37fe",
+        "scripts/run_m4_offline.py": "cf4215cf12f03edb7e3dafeeaa50e3e0b08f080a543c1f96e45216fe6bb81b19",
+        "scripts/run_sprint_monitor.py": "96ad52d76b89c3b9d25e89ea7a4b3f2fb5d2819ce07c3c8ac8c624da7b78e223",
+        "src/colluscope/m4_live_runtime.py": "c21a8e983b1caeada900ee10975a0d18ec3292edae232594f8135ec85a1220f2",
+        "src/colluscope/monitor_aggregate_budget.py": "eef0a8a7190e236ce98db9e6ace984a3e68a5213bebf3f659845b2bb6c1fee20",
+        "src/colluscope/sprint_baselines.py": "e5e24b749f2303d5bbf5feb6b925311f8b5970d4eba535bdf509f6189d960c90",
+        "src/colluscope/sprint_controls.py": "a909cc7b3973f3e0aab9d795d06c578bceeddfe3cc51e9db5bc168797bc6736b",
+        "src/colluscope/sprint_metrics.py": "13cfd175c0b6a857364c237c781f6e7154539090088edb0bea8cbe70a7591ec1",
+        "src/colluscope/sprint_replay.py": "0dcdad02bd5b402fe23c5379b77332882d4302fd61e9eab970675b5a990c743b"
+      },
+      "source_metadata": {
+        "source_episode_count": 24,
+        "source_response_is_raw_and_local_only": true,
+        "source_run_manifest_sha256": "872ed46a42ceb3b3a8c25e949c24ca9ba31a3cd8e1808bce46c6bc3ee0e4b9b8",
+        "source_run_path": "runs/m4/full-research-execution-20261020-run03",
+        "terminal_status_counts": {
+          "FAILED": 24
+        }
+      }
+    },
+    "matched_worlds": {
+      "config_sha256": "0250a1916defe3a914ace2d589fd70980def7e13f9c16707d6b9078ff33e88a1",
+      "phase_cost_cap_usd": 0.5,
+      "phase_cost_upper_bound_usd": 0.1265646,
+      "phase_request_cap": 72,
+      "plan_jsonl_sha256": "a75e28f611f1579571c15a095f53140a6ac0d5d1e1a8ae4857abdec2c985ac7c",
+      "prompt_hashes": {
+        "prompts/sprint-baseline-v1/system.txt": "483dc4976b8012d62d44806fdbaf997b318f00a94fd87a06ae279e2c4a5e3544",
+        "prompts/sprint-baseline-v1/tasks.json": "ebc7092a2852d4fdb42e0c694f7ac2bf8bc5a677bbc840b47505a3180076f9d3",
+        "prompts/sprint-baseline-v1/user.txt": "bbd9c644870954cd01d7c56bd013437859485bcb5728935ce47f114c3b78b6c2"
+      },
+      "request_count": 72,
+      "request_schedule_sha256": "9e2f5cbb150c76d79b4b99e13335727b1685e4e4b199183018a0038bea8977b2",
+      "source_code_hashes": {
+        "scripts/audit_full_research_monitor.py": "d11a7b59c4fc811524255e683ab6161d719537ec7e4b20cc39397341cc2cf0ba",
+        "scripts/prepare_full_research_monitor.py": "db4966d4a7b4e48be8a2070942035e0b4f0861512f08b85ba4f06b5ad632db08",
+        "scripts/prepare_sprint_baselines.py": "9a89abda703535148c6ab7fe993d4fee6ac92ec8d4cf41aaacfcf62066e91a36",
+        "scripts/run_full_research_monitor.py": "16cc72fc814b0d2969e18e2f1913cb52ec88946e7532a3ef06806321324e37fe",
+        "scripts/run_m4_offline.py": "cf4215cf12f03edb7e3dafeeaa50e3e0b08f080a543c1f96e45216fe6bb81b19",
+        "scripts/run_sprint_monitor.py": "96ad52d76b89c3b9d25e89ea7a4b3f2fb5d2819ce07c3c8ac8c624da7b78e223",
+        "src/colluscope/m4_live_runtime.py": "c21a8e983b1caeada900ee10975a0d18ec3292edae232594f8135ec85a1220f2",
+        "src/colluscope/monitor_aggregate_budget.py": "eef0a8a7190e236ce98db9e6ace984a3e68a5213bebf3f659845b2bb6c1fee20",
+        "src/colluscope/sprint_baselines.py": "e5e24b749f2303d5bbf5feb6b925311f8b5970d4eba535bdf509f6189d960c90",
+        "src/colluscope/sprint_controls.py": "a909cc7b3973f3e0aab9d795d06c578bceeddfe3cc51e9db5bc168797bc6736b",
+        "src/colluscope/sprint_metrics.py": "13cfd175c0b6a857364c237c781f6e7154539090088edb0bea8cbe70a7591ec1",
+        "src/colluscope/sprint_replay.py": "0dcdad02bd5b402fe23c5379b77332882d4302fd61e9eab970675b5a990c743b"
+      },
+      "source_metadata": {
+        "pair_count": 12,
+        "privileged_requests": 48,
+        "unique_public_requests": 24
+      }
+    },
+    "scripted_controls": {
+      "config_sha256": "d44cb0dac94ebd64d6ee137e76cdba8e7e1abb60823f55e4baafd6d14af39a20",
+      "phase_cost_cap_usd": 1.0,
+      "phase_cost_upper_bound_usd": 0.4086309,
+      "phase_request_cap": 280,
+      "plan_jsonl_sha256": "78cab67e6b2196506d36e0e3ee05f37559266c40317422fe0ae6c83dc7955ee0",
+      "prompt_hashes": {
+        "prompts/sprint-baseline-v1/system.txt": "483dc4976b8012d62d44806fdbaf997b318f00a94fd87a06ae279e2c4a5e3544",
+        "prompts/sprint-baseline-v1/tasks.json": "ebc7092a2852d4fdb42e0c694f7ac2bf8bc5a677bbc840b47505a3180076f9d3",
+        "prompts/sprint-baseline-v1/user.txt": "bbd9c644870954cd01d7c56bd013437859485bcb5728935ce47f114c3b78b6c2"
+      },
+      "request_count": 280,
+      "request_schedule_sha256": "65c1b5583b8b2a21c6b13adcd95b13d6c74a1f2248ce4d414345b01cf7847deb",
+      "source_code_hashes": {
+        "scripts/audit_full_research_monitor.py": "d11a7b59c4fc811524255e683ab6161d719537ec7e4b20cc39397341cc2cf0ba",
+        "scripts/prepare_full_research_monitor.py": "db4966d4a7b4e48be8a2070942035e0b4f0861512f08b85ba4f06b5ad632db08",
+        "scripts/prepare_sprint_baselines.py": "9a89abda703535148c6ab7fe993d4fee6ac92ec8d4cf41aaacfcf62066e91a36",
+        "scripts/run_full_research_monitor.py": "16cc72fc814b0d2969e18e2f1913cb52ec88946e7532a3ef06806321324e37fe",
+        "scripts/run_m4_offline.py": "cf4215cf12f03edb7e3dafeeaa50e3e0b08f080a543c1f96e45216fe6bb81b19",
+        "scripts/run_sprint_monitor.py": "96ad52d76b89c3b9d25e89ea7a4b3f2fb5d2819ce07c3c8ac8c624da7b78e223",
+        "src/colluscope/m4_live_runtime.py": "c21a8e983b1caeada900ee10975a0d18ec3292edae232594f8135ec85a1220f2",
+        "src/colluscope/monitor_aggregate_budget.py": "eef0a8a7190e236ce98db9e6ace984a3e68a5213bebf3f659845b2bb6c1fee20",
+        "src/colluscope/sprint_baselines.py": "e5e24b749f2303d5bbf5feb6b925311f8b5970d4eba535bdf509f6189d960c90",
+        "src/colluscope/sprint_controls.py": "a909cc7b3973f3e0aab9d795d06c578bceeddfe3cc51e9db5bc168797bc6736b",
+        "src/colluscope/sprint_metrics.py": "13cfd175c0b6a857364c237c781f6e7154539090088edb0bea8cbe70a7591ec1",
+        "src/colluscope/sprint_replay.py": "0dcdad02bd5b402fe23c5379b77332882d4302fd61e9eab970675b5a990c743b"
+      },
+      "source_metadata": {
+        "original_schedule_rows": 280,
+        "original_schedule_sha256": "95ed339974d0d75ff70a10b9114b26d14a618340791dc94c108f2b1ec70c86f9"
+      }
+    }
+  },
+  "planned_cost_reserve_usd": 1.0224735,
+  "preflight_failure_retained": {
+    "count": 4,
+    "events": [
+      "three initial phase preparation commands (scripted_controls, m4_trace_eval, matched_worlds) rejected before writing files because preparer authorization ID differed from enabled config",
+      "one scripted_controls freeze wrote private plan files but failed self-verification because prompt hash basenames resolved from repository root; failed freeze remains under old ignored freezes/ root; no model/API calls"
+    ]
+  },
+  "schema_version": "colluscope-full-research-input-freeze-evidence-v1"
+}
