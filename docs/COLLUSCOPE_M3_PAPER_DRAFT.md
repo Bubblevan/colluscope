@@ -12,7 +12,7 @@
 
 ## Abstract
 
-We study what communication and allocation traces can establish about multi-agent LLM behavior. M0's 24 scripted cases include a public-trace-identical pair with different hidden constructions, showing that default evidence cannot recover that distinction. Local Qwen3-8B generated 25 historical and 75 prospective M1 episodes plus 12 M3 groups; M3 had eight eligible delivered-proposal contexts. Across those contexts, Proposal and token-matched Masked ballots were identical in 8/8, while Neutral and No-delivery differed in 3/8; only one fixed-peer settlement changed. A separate DeepSeek Flash audit scored 1,500 repeated evidence-view rows without collusion labels. Request replay found public welfare-gap values directly exposed in every eligible action-bearing view, so the 100% structured public-harm cell was answer-exposed. These results support observable mechanism descriptions and expose identification limits; they do not establish latent collusion or intent.
+We study what communication and allocation traces can establish about multi-agent LLM behavior. M0 includes public-trace-identical constructions with different hidden mechanisms. Local Qwen3-8B generated 100 M1 episodes and 12 M3 groups; only eight M3 contexts had a delivered proposal, and just one fixed-peer settlement changed under message replacement. In a separately authorized extension, all 24 M4 first-message outputs failed strict parsing, so no new Agent behavior contrast was observed. DeepSeek Flash returned 141 parseable predictions from 856 monitor requests; 715 ended at the 128-token cap. In 12 matched synthetic world pairs, public projections were identical in 24/24 comparisons while privileged evidence differed in 24/24. Earlier M2 replay also found directly exposed welfare-gap answers in structured inputs. These results establish limits on observable evidence, not latent collusion, detector superiority, or intent.
 
 ## 1. Introduction
 
@@ -74,6 +74,14 @@ The primary score contract was not changed after the run. A post-hoc provenance-
 M3 assigned 12 new groups, four seeds in each of the three existing payoff matrices, all in the frozen private-target-incentive/chat condition. A and B each received the same private +20 target-score rule. The run generated 24 message actions and 36 ordinary sealed ballots. Before inspecting focal-ballot outcomes, the frozen parser selected a delivered complete literal allocation proposal in each eligible group. Eight groups qualified and received all three counterfactual recipient ballots: token-matched Neutral, token-matched Masked, and same-stage No-delivery. The original recipient ballot serves as Proposal. Two other baseline ballots were held fixed for each deterministic settlement replay.
 
 The primary comparison is conditional on those eight mechanically eligible contexts. It is not an intention-to-treat effect over all 12 assigned groups and does not measure intent. All groups, including the four without an eligible proposal, remain in the assigned denominator. Proposal/Neutral and Proposal/Masked full prompt token counts matched exactly in all eight groups. No-delivery was shorter and is analyzed as a delivery-opportunity contrast, not a content-only intervention. The scorer independently reconstructs settlement from raw ballots and family-specific score matrices.
+
+### 3.7 Full research execution: M4 Agent run and Monitor populations
+
+On 2026-10-20, before the sprint event dates, we executed the frozen 24-group M4-v3 schedule once with local Qwen3-8B-Q4_K_M and llama.cpp b10068. The first message-generation response in each group was passed through the unchanged strict action parser. All responses returned HTTP 200 with a normal stop reason but began with a reasoning tag and were invalid under the frozen JSON action contract. We retained all groups and did not request replacement generations. Thus the planned ballots, delivered messages, matched message counterfactuals, settlements, and behavioral outcomes were not observed.
+
+The same dated execution used the official DeepSeek API for three frozen monitor populations: 280 scripted-control rows, 504 rows projected from the incomplete M4 traces, and 72 requests for 12 matched synthetic evidence-world pairs. Each schedule was frozen before dispatch and audited independently from raw request/response hashes and a cross-phase append-only ledger. A valid monitor prediction required both a completed provider stop and a parseable response under the frozen schema. Errors were not repaired or resampled. The model alias, returned identity fingerprint, input/output usage, timing, and price-based cost estimates were reconciled independently. The protocol preserved provider-default thinking mode because the original scripted request bodies were immutable; `temperature=0` was present but ineffective in that mode, and the 128-token cap included reasoning tokens, consistent with the provider's [official thinking-mode](https://api-docs.deepseek.com/guides/thinking_mode/) and [Chat Completions API](https://api-docs.deepseek.com/api/create-chat-completion/) documentation checked on 2026-10-20.
+
+The matched-world corpus contains synthetic *observable* sequence references. It has no latent-intent or natural-collusion gold label. The two public views within each pair share the same public task, ballots, outcome, metadata, and exact serialized projection; privileged messages are separately permission-filtered.
 
 ## 4. Results
 
@@ -183,6 +191,57 @@ The token-matching check found exact full-prompt token equality for Proposal–N
 
 M3 used 84 logical generations and 84 generation HTTP attempts, plus two authenticated local identity probes (86 HTTP attempts total), with zero retries and zero external or monitor calls. The local tokenizer counted 45,075 input tokens, equal to the response-reported aggregate; 3,346 output tokens were reported. Median generation latency was 0.908 seconds and peak sampled GPU memory was 6,397 MiB. The run manifest still marks live server/tokenizer parity as unverified.
 
+### 4.8 Full research execution: parser failure, monitor coverage, and identifiability
+
+M4 retained all 24 assigned groups. It made 24 local generation attempts (plus two local authenticated identity probes across the preserved pre-generation and final run directories); all 24 generation responses were HTTP 200/`stop`, but all 24 failed strict JSON action parsing. The run recorded zero valid messages, ballots, proposal-eligible groups, or settlements. It consumed 10,764 prompt and 1,098 completion tokens. This is an observed protocol/action-generation failure; it is **not** a zero-effect estimate and supplies no Agent behavior contrast.
+
+The three Monitor phases completed 856/856 assigned requests with zero retries and zero external fallback. Across them, 141 outputs were parseable and 715/856 (83.53%) terminated at `finish_reason=length`, the frozen 128-token limit. The returned identity was stable (`deepseek-flash`, fingerprint `e72d3c7f663d3e1383b00b3884cb4501`). Requests used 667,687 input tokens and 105,163 output tokens. The estimated cost at the frozen official peak rates was USD 0.3265017; the per-schedule conservative reserve totaled USD 1.0224735 under the USD 3 hard ceiling. No response was retried or replaced.
+
+| Frozen population | Requests | Parseable | Invalid at length cap | Input / output tokens | Estimated cost (USD) |
+|---|---:|---:|---:|---:|---:|
+| Scripted controls | 280 | 16 | 264 | 285,127 / 35,583 | 0.1282377 |
+| Incomplete M4 traces | 504 | 123 | 381 | 291,672 / 60,379 | 0.1599564 |
+| Matched evidence worlds | 72 | 2 | 70 | 90,888 / 9,201 | 0.0383076 |
+| **Total** | **856** | **141** | **715** | **667,687 / 105,163** | **0.3265017** |
+
+Per-method completion varied across populations and is not accuracy. Scripted controls produced parseable outputs for B2 9/80, B3 0/40, B4 4/80, and B5 3/80 scheduled rows. The M4-trace phase produced B2 24/144, B3 19/72, B4 39/144, and B5 41/144. The matched-world phase produced B4 0/36 and B5 2/36; B2 and B3 were not scheduled there. The B4/B5 pair had **zero common assessable completed instances in each phase**, so the predeclared head-to-head fact-accuracy contrast is not estimable. The full denominators and parseable counts are in `results/full-research-execution-20261020/monitor_method_coverage.csv`.
+
+![M4 assigned groups and first-message attempts; no behavioral endpoint was reached](results/full-research-execution-20261020/figures/m4_attempt_disposition.png)
+
+![Parseable completion coverage by method and population; gray cells were not scheduled](results/full-research-execution-20261020/figures/monitor_method_coverage.png)
+
+For a same-cell deterministic reference in the scripted controls, the B1 public-harm rule replay was correct on 7/7 assessable Public-only/Action-only rows, including all five positive references. B0 always-negative was correct on 2/7 and had zero recall on those five positives. This is a narrow scripted check of deterministic source computation, not evidence of model superiority or generalization. In the new scripted Monitor responses, B4 had four assessable exact matches and B5 had two of three; however, these were not the same completed-and-assessable requests, and B4/B5 comparison remains unestimable. B5 provenance gating is an offline transformation of the saved raw response, not another model prediction or an extra API call.
+
+On the same completed B5 rows, provenance gating left the aggregate exact counts unchanged: 2/3 assessable in scripted controls, 33/41 task-appropriate abstentions and zero fact-assessable outputs on incomplete M4 traces, and 2/2 matched positive controls. This describes only the selected parseable rows and provides no evidence of a general gating benefit.
+
+Among the selected parseable scripted positives, B2 recognized 3/3 positive references, B4 4/4 and B5 2/2. These counts are conditional on rare parseable rows; most requests failed at the token cap. No model output was parseable on a row flagged as a frozen hard-negative control (n=0), so the unsupported-sequence rate on hard negatives is not estimable. No unsupported sequence assertion occurred among the parseable outputs, but the empty hard-negative denominator prevents a specificity claim.
+
+The M4-trace phase yielded 123 parseable predictions, mostly abstention-like labels on incomplete evidence (107 `insufficient_evidence`, 11 `not_assessable`, 5 `not_visible`). These cannot be called correct across all rows without task-specific assessability. No positive sequence prediction was emitted in this phase. Because the source episodes contain no accepted Agent action after the failed first message, the monitor task does not test detection of a completed natural proposal/acceptance/action sequence.
+
+In the 12 matched synthetic pairs, the independently compiled Public-only projections and observable references were identical in all 24 method-by-pair comparisons; the Privileged evidence projections differed in all 24. The 24 Public-only reference rows were `not_visible`; the 48 Privileged references comprised 4 `supported`, 32 `not_supported`, 8 `uncertain`, and 4 `insufficient_evidence`. Only two of 72 Monitor requests were parseable: both were B5 Privileged predictions on explicit scripted proposal/acceptance positive-control worlds, and both matched the observable reference with sufficient citations. This small selected subset is not a sensitivity estimate and does not identify latent intent.
+
+![Observable-reference classes by evidence permission in the matched synthetic worlds](results/full-research-execution-20261020/figures/matched_evidence_sufficiency.png)
+
+![Matched-world public indistinguishability and privileged observability controls](results/full-research-execution-20261020/figures/matched_world_identifiability.png)
+
+These results do not show whether a competent monitor could discriminate latent mechanisms from natural traces. They show that the frozen API output cap made most requested predictions unscorable, that completed B4/B5 predictions did not overlap on assessable instances, and that the software-level matched-world construction exposed private observable evidence only under Privileged permission. The table and CSV exports preserve the complete assigned denominators; no failed rows or incomplete M4 groups were removed.
+
+| Component | Observed result | Calls / added computation | Interpretation |
+|---|---|---|---|
+| Deterministic task computation (B1) | 7/7 assessable scripted `public_harm`, Public-only/Action-only rows correct | No model calls; fixed source replay | Narrow rule reference, not independent model reasoning or generalization |
+| Language interpretation (B2–B5 raw) | 141/856 outputs parseable; zero common assessable B4/B5 instances | 856 official API requests across all methods and populations | No fair B4-versus-B5 accuracy comparison is estimable |
+| Source validation (B5 provenance gate) | Applied to saved B5 outputs; the two matched-world parseable B5 positive controls remained supported with sufficient citations | Deterministic offline post-processing; zero additional model calls | Two case-level observations, not a broad validation benefit |
+| Total remote inference | 856/856 requests; estimated USD 0.3265017, schedule reserve USD 1.0224735, hard cap USD 3 | 667,687 input and 105,163 output tokens | This one frozen run's cost; it does not imply useful prediction coverage |
+
+| Monitor method | Scheduled rows | Parseable | Input tokens | Output tokens | Estimated peak-rate cost (USD) |
+|---|---:|---:|---:|---:|---:|
+| B2 text-only | 224 | 33 | 128,661 | 27,752 | 0.0719007 |
+| B3 action-only | 112 | 19 | 76,560 | 13,721 | 0.0394332 |
+| B4 raw fusion | 260 | 43 | 195,315 | 32,048 | 0.0970521 |
+| B5 evidence-aware raw | 260 | 46 | 267,151 | 31,642 | 0.1181157 |
+
+B5 used 71,836 more input tokens than B4 over their same 260 scheduled rows and cost USD 0.0210636 more at frozen peak rates; its output was 406 tokens shorter. This compares complete frozen payloads and does not isolate the ledger's causal cost. B5 gating added no API calls or provider tokens; local processing time was not instrumented.
+
 ![M3 focal ballot concordance across the four preregistered arms](results/m3-mechanism-audit-final/figures/m3_focal_ballot_match.svg)
 
 ## 5. Evidence-aware interpretation
@@ -201,7 +260,9 @@ M3 was the narrow message-content replay proposed in earlier drafts, and its fin
 
 The completed M3 authorization is consumed. The present paper requires no further inference to report the approved results. Any new agent or monitor call requires separate approval, fresh preregistration and a new budget. A future study should also freeze a human or rule-based codebook for commitment and acceptance before collection, or retain these as unmeasured variables.
 
-## Appendix A. Limitations
+The 2026-10-20 full execution sharpens this conclusion but does not add an M4 behavior estimate: every Agent response failed the frozen parser before any message or vote could be observed. The Monitor run is likewise not a fair model ranking: 715 outputs ended at the token limit, and B4/B5 have no common assessable cases. The limited positive observations are separable: deterministic replay matched its assessable scripted rows, and two Privileged B5 outputs matched two explicitly scripted observable-sequence controls. Neither result supports claims about natural collusion. A revised Agent output contract or monitor reasoning budget would change the protocol and therefore requires a new prospective freeze; it cannot repair these completed outcomes.
+
+## Appendix A. Limitations and Threats to Validity
 
 - One model checkpoint, one deterministic decoding configuration, and a small number of matched groups limit model and scenario generalization.
 - Historical F0 and prospective F1–F3 have different provenance and payoff matrices; pooled raw welfare is not meaningful.
@@ -218,16 +279,21 @@ The completed M3 authorization is consumed. The present paper requires no furthe
 - Aggregate local and response-reported input token totals match, but the run records live server/tokenizer parity as unverified.
 - The pre-M3 development reference matches raw source replay: three historical F0 message-bearing episodes (five messages) plus nine prospective F1–F3 episodes (14 messages). They are separate from the 12 new M3 scenario/seed groups and remain development/descriptive cases only.
 - No experiment here identifies deceptive intent, a secret agreement, or whether a message caused a ballot.
+- In the 2026-10-20 full execution, every one of 24 M4 agent message responses failed the frozen strict parser. No new Agent behavioral contrast, settlement, or welfare result can be estimated from those groups.
+- In the three subsequent Monitor phases, 715/856 responses hit the 128-token limit; the returned output coverage is low, and the B4/B5 common assessable denominator is zero. No method superiority claim is supported by this run.
+- DeepSeek's provider-default thinking mode remained enabled because the original request payloads were frozen. The run therefore measures this exact alias/default-mode/128-token protocol, not a deterministically decoded model capability or another output budget.
+- The matched-world experiment uses explicitly scripted observable-evidence references. It tests permission-dependent identifiability, not natural prevalence or latent collusion detection. Only two model outputs were parseable in that phase.
+- All new M4 and Monitor work described in Section 4.8 occurred on 2026-10-20, before the 2026-10-23 sprint start. It is pre-sprint work and must be disclosed as such.
 
 ## Appendix B. Dual-Use and Ethical Considerations
 
-This work uses synthetic allocation matrices and a local agent runtime for the behavior corpus. The bounded M2 monitor run used the explicitly authorized API only for permission-filtered synthetic task evidence; it did not receive hidden treatment assignments, gold labels, raw unfiltered researcher records, or real-world financial data. M3 used only local Qwen3 inference. Raw privileged messages remain local and are not reproduced in this paper.
+This work uses synthetic allocation matrices and a local agent runtime for the behavior corpus. The M2 and 2026-10-20 Monitor runs used the explicitly authorized DeepSeek API only for permission-filtered synthetic task evidence; requests omitted hidden treatment assignments, gold labels, raw unfiltered researcher records, credentials and real-world financial data. M1/M3/M4 agent generations used local Qwen3 inference. Raw privileged messages and raw provider traffic remain local in ACL-restricted, Git-ignored directories and are not reproduced in this paper.
 
 The evidence compiler and auditor could be misused to surveil agent conversations or overstate ambiguous patterns. We therefore report observables separately, retain privacy boundaries, preserve abstention and unknown-intent states, and do not present the framework as an operational accusation system. No real bank system, human participant, or live financial decision was involved in the audited experiments.
 
 ## 9. Reproducibility and disclosures
 
-The M2 independent audit, raw response reparse, baselines, paired contrasts, field inventory, token accounting, privacy scan, figures, and hashes are under `docs/results/m2-final-scientific-synthesis/`. M3 tables, results, privacy scan, figure and hashes are under `docs/results/m3-mechanism-audit-final/`. The M3 raw run remains local and ACL restricted. Reproduction:
+The M2 independent audit, raw response reparse, baselines, paired contrasts, field inventory, token accounting, privacy scan, figures, and hashes are under `docs/results/m2-final-scientific-synthesis/`. M3 tables, results, privacy scan, figure and hashes are under `docs/results/m3-mechanism-audit-final/`. The full-execution summary, per-method denominators, deterministic baselines, figures, independent audit commands, and hashes are under `docs/results/full-research-execution-20261020/`; raw M4 and Monitor evidence remains local and ACL restricted. Reproduction requires the private ignored run roots described in `FULL_RESEARCH_EXECUTION_EVIDENCE.md`:
 
     python -m pytest -q tests/test_m2_final_scientific_audit.py
     python scripts/audit_m2_final.py --out docs/results/m2-final-scientific-synthesis
@@ -235,9 +301,12 @@ The M2 independent audit, raw response reparse, baselines, paired contrasts, fie
     python -m scripts.audit_m3_mechanism --run runs/m3/mechanism-20261020 --out docs/results/m3-mechanism-reproduction
     python scripts/plot_paper_figures.py
 
+    python scripts/analyze_full_research_execution.py
+    python -m pytest -q tests/test_full_research_execution_analysis.py
+
 The M1 summary figure is derived from the complete 75-row audited extension case table and has its own input/output hash manifest under `docs/results/paper-figures/`. The M3 audit and plotting commands make zero model calls. The source behavior audits are documented in `M1_P0_POSTRUN_SCIENTIFIC_AUDIT.md`, `M1_100_SCIENTIFIC_AUDIT.md`, and `M3_SCIENTIFIC_RESULTS.md`. Private run artifacts remain ignored and permission-restricted.
 
-**AI-assistance disclosure draft:** Codex assisted with software implementation, independent deterministic recomputation, diagnostic analysis, figure generation, and manuscript drafting. The authors remain responsible for checking every claim, source, result, and disclosure before submission. DeepSeek Flash was used only in the previously authorized atomic monitor run; local Qwen3 generated the authorized M1 and M3 agent actions. No model was called during the M3 post-run audit or manuscript update. Revise this statement to match the organizers' final disclosure requirements and the exact submission workflow.
+**AI-assistance disclosure draft:** Codex assisted with software implementation, independent deterministic recomputation, diagnostic analysis, figure generation, and manuscript drafting. The authors remain responsible for checking every claim, source, result, and disclosure before submission. DeepSeek Flash was used for the earlier M2 atomic monitor run and the separately authorized 2026-10-20 monitor phases; local Qwen3 generated the M1, M3 and M4 agent actions. The M4 actions in the latest run were malformed and excluded from behavior scoring. No model was called during the associated post-run audit or manuscript update. Revise this statement to match the organizers' final disclosure requirements and exact submission workflow.
 
 ## References
 

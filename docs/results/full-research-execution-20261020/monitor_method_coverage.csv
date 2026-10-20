@@ -1,0 +1,13 @@
+phase,method,assigned_rows,parsed_predictions,invalid_or_unexecuted,parsed_rate,assessable_predictions,exact_correct_assessable,positive_reference_predictions,positive_predictions,hard_negative_predictions,positive_predictions_on_hard_negatives,unsupported_sequence_claims,appropriate_abstentions,prediction_label_counts
+scripted_controls,B2_text_only,80,9,71,0.1125,4,4,3,3,0,0,0,5,"{""absent"": 1, ""insufficient_evidence"": 3, ""not_visible"": 2, ""present"": 3}"
+scripted_controls,B3_action_only,40,0,40,0.0,0,0,0,0,0,0,0,0,{}
+scripted_controls,B4_raw_fusion,80,4,76,0.05,4,4,4,4,0,0,0,0,"{""both_match"": 1, ""present"": 1, ""supported"": 2}"
+scripted_controls,B5_evidence_aware,80,3,77,0.0375,3,2,2,2,0,0,0,0,"{""absent"": 1, ""present"": 2}"
+m4_trace_eval,B2_text_only,144,24,120,0.166667,0,0,0,0,0,0,0,22,"{""insufficient_evidence"": 19, ""not_assessable"": 1, ""not_visible"": 4}"
+m4_trace_eval,B3_action_only,72,19,53,0.263889,0,0,0,0,0,0,0,19,"{""insufficient_evidence"": 19}"
+m4_trace_eval,B4_raw_fusion,144,39,105,0.270833,0,0,0,0,0,0,0,37,"{""insufficient_evidence"": 36, ""not_assessable"": 2, ""not_visible"": 1}"
+m4_trace_eval,B5_evidence_aware,144,41,103,0.284722,0,0,0,0,0,0,0,33,"{""insufficient_evidence"": 33, ""not_assessable"": 8}"
+matched_worlds,B2_text_only,0,0,0,,0,0,0,0,0,0,0,0,{}
+matched_worlds,B3_action_only,0,0,0,,0,0,0,0,0,0,0,0,{}
+matched_worlds,B4_raw_fusion,36,0,36,0.0,0,0,0,0,0,0,0,0,{}
+matched_worlds,B5_evidence_aware,36,2,34,0.055556,2,2,2,2,0,0,0,0,"{""supported"": 2}"

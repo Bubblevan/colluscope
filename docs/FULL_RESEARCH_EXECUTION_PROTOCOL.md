@@ -71,3 +71,16 @@ For matched worlds, scripted generation provenance is retained as synthetic cons
 6. Run a reviewer-style adversarial audit and push the sanitized evidence package. Raw Agent private messages, exact privileged prompt bodies, raw model responses and API credentials remain local and Git-ignored.
 
 No new M2 detector comparison beyond these explicitly authorized baselines, no external Agent inference, no model training, and no source-artifact overwrite is in scope.
+
+## Execution status and post-run result (2026-10-20)
+
+The authorized sequence is complete; no further M4, Agent, or Monitor inference is authorized by this completed request.
+
+- M4 assigned all 24 frozen groups and made 24 local generation attempts (plus two local authenticated identity-probe GETs across preserved pre-generation/final run folders). All 24 generation responses were HTTP 200/`stop` but invalid under the unchanged strict JSON action parser because they began with `<think>`. No valid message, ballot, proposal-eligible group, or settlement was recorded; no retry/replacement occurred. M4 behavioral outcomes are not estimable.
+- DeepSeek Monitor phases completed 280 scripted-control, 504 M4-trace, and 72 matched-world physical requests: 856 total, zero retries, 141 parseable outputs, and 715 `finish_reason=length` invalid outputs at the 128-token cap. Returned alias/fingerprint were stable (`deepseek-flash`, `e72d3c7f663d3e1383b00b3884cb4501`). Usage was 667,687 input and 105,163 output tokens; price-based estimate was USD 0.3265017 against USD 1.0224735 schedule reserve and USD 3 hard ceiling.
+- Independent phase audits passed their raw request/response, reference, identity, usage, and ledger replay checks. The matched-world audit found 24/24 identical Public-only projection/reference comparisons and 24/24 differing Privileged observable-evidence comparisons. Only two outputs parsed in that phase, both B5 Privileged predictions on scripted positive controls.
+- B4 and B5 had zero common completed-and-assessable rows in all three phases. No B4/B5 accuracy comparison or superiority claim is estimable. No corpus contains latent-collusion gold labels.
+- A post-run review found the initial draft coverage chart used only completed scorer rows as its denominator and rendered some unscheduled 0/0 cells as zero. That draft was corrected before publication to join all frozen progress rows and score output; the experiment schedules and raw records were untouched. Targeted regression tests ensure schedule denominators and distinguish unscheduled cells.
+- The legacy phase-auditor JSON elapsed sum remains preserved as originally emitted. Since its progress schema had no elapsed values, the new post-run analyzer recomputes latency from raw attempt start/terminal timestamps. It reports the phase means as 1.445885, 1.399261, and 1.431824 seconds for scripted, M4 trace, and matched-world phases.
+
+See [FULL_RESEARCH_EXECUTION_EVIDENCE.md](FULL_RESEARCH_EXECUTION_EVIDENCE.md) and [FULL_RESEARCH_EXECUTION_DECISION.md](FULL_RESEARCH_EXECUTION_DECISION.md) for denominators, claims, reproduction commands, and boundaries. The final decision is **GO for reporting the audited runtime/evidence-boundary observations; NO-GO for M4 behavioral-effect estimation, B4/B5 superiority, or latent-collusion detection**.

@@ -1,0 +1,13 @@
+phase,method,assigned_rows,parseable_rows,http_attempts,input_tokens,output_tokens,peak_rate_cost_usd,mean_latency_seconds,mean_input_tokens_per_assigned,mean_output_tokens_per_assigned
+scripted_controls,B2_text_only,80,9,80,48957,10061,0.0267603,1.443937,611.962,125.763
+scripted_controls,B3_action_only,40,0,40,36456,5120,0.0170808,1.462213,911.4,128.0
+scripted_controls,B4_raw_fusion,80,4,80,78477,10195,0.0357771,1.45439,980.962,127.438
+scripted_controls,B5_evidence_aware,80,3,80,121237,10207,0.0486195,1.431166,1515.463,127.588
+m4_trace_eval,B2_text_only,144,24,144,79704,17691,0.0451404,1.429908,553.5,122.854
+m4_trace_eval,B3_action_only,72,19,72,40104,8601,0.0223524,1.415171,557.0,119.458
+m4_trace_eval,B4_raw_fusion,144,39,144,81000,17245,0.044994,1.395145,562.5,119.757
+m4_trace_eval,B5_evidence_aware,144,41,144,90864,16842,0.0474696,1.364775,631.0,116.958
+matched_worlds,B2_text_only,0,0,0,0,0,0,,,
+matched_worlds,B3_action_only,0,0,0,0,0,0,,,
+matched_worlds,B4_raw_fusion,36,0,36,35838,4608,0.016281,1.427379,995.5,128.0
+matched_worlds,B5_evidence_aware,36,2,36,55050,4593,0.0220266,1.43627,1529.167,127.583
