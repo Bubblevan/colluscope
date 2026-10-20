@@ -1,0 +1,20 @@
+Command:
+python -m pytest -q tests/test_sprint_baselines.py::test_negated_acceptance_phrase_does_not_complete_the_observable_sequence
+
+Captured output from the first counterexample run:
+F                                                                        [100%]
+================================== FAILURES ===================================
+__ test_negated_acceptance_phrase_does_not_complete_the_observable_sequence ___
+
+    assert reference["label"] == "not_supported"
+E   AssertionError: assert 'uncertain' == 'not_supported'
+E     - not_supported
+E     + uncertain
+
+tests/test_sprint_baselines.py:224: AssertionError
+1 failed in 0.21s
+
+Interpretation:
+The new negation detector correctly prevented the refusal from counting as explicit acceptance. The independent reference then returned `uncertain`, because the frozen acceptance rule treats a recipient reply without an acceptance as ambiguous. The next test version asserts this predeclared abstention instead of a hard negative.
+
+This file preserves the compact failure output captured in the task transcript; it is not a full byte-for-byte terminal transcript.

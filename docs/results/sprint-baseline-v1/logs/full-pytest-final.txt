@@ -1,0 +1,697 @@
+................................................FFFF.................... [ 21%]
+.................s...................................................... [ 42%]
+...........................FF.F...............FFF..EE.....E.EEE......... [ 64%]
+........................................................................ [ 85%]
+.................................................                        [100%]
+=================================== ERRORS ====================================
+_ ERROR at setup of test_frozen_schedule_covers_partitions_and_balanced_diagnostic _
+
+    @pytest.fixture(scope="module")
+    def prepared():
+        extension = ROOT / "runs/m1_100/extension-75-20261019-run02"
+>       cases = load_m2_corpus(ROOT, extension)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_m2_v3_deepseek.py:42:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+src\colluscope\m2_corpus.py:159: in load_m2_corpus
+    old = _load_one_source(repo_root, hist_dir, "historical_F0", by_id, indexed_evidence=False)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\colluscope\m2_corpus.py:59: in _load_one_source
+    t_rows = read_jsonl(source_dir / "researcher/T.jsonl")
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\colluscope\m2_corpus.py:33: in read_jsonl
+    with path.open(encoding="utf-8") as stream:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = WindowsPath('D:/MyLab/colluscope/runs/m1_p0_local/formal-25ep-pilot-20261019/run/researcher/T.jsonl')
+mode = 'r', buffering = -1, encoding = 'utf-8', errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed to by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+>       return io.open(self, mode, buffering, encoding, errors, newline)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       FileNotFoundError: [Errno 2] No such file or directory: 'D:\\MyLab\\colluscope\\nuns\\m1_p0_local\\formal-25ep-pilot-20261019\\nun\\nesearcher\\T.jsonl'
+
+D:\Anaconda\Lib\pathlib.py:1013: FileNotFoundError
+__________ ERROR at setup of test_code_and_frozen_toml_cannot_drift ___________
+
+    @pytest.fixture(scope="module")
+    def prepared():
+        extension = ROOT / "runs/m1_100/extension-75-20261019-run02"
+>       cases = load_m2_corpus(ROOT, extension)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_m2_v3_deepseek.py:42:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+src\colluscope\m2_corpus.py:159: in load_m2_corpus
+    old = _load_one_source(repo_root, hist_dir, "historical_F0", by_id, indexed_evidence=False)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\colluscope\m2_corpus.py:59: in _load_one_source
+    t_rows = read_jsonl(source_dir / "researcher/T.jsonl")
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\colluscope\m2_corpus.py:33: in read_jsonl
+    with path.open(encoding="utf-8") as stream:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = WindowsPath('D:/MyLab/colluscope/runs/m1_p0_local/formal-25ep-pilot-20261019/run/researcher/T.jsonl')
+mode = 'r', buffering = -1, encoding = 'utf-8', errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed to by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+>       return io.open(self, mode, buffering, encoding, errors, newline)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       FileNotFoundError: [Errno 2] No such file or directory: 'D:\\MyLab\\colluscope\\nuns\\m1_p0_local\\formal-25ep-pilot-20261019\\nun\\nesearcher\\T.jsonl'
+
+D:\Anaconda\Lib\pathlib.py:1013: FileNotFoundError
+_________ ERROR at setup of test_raw_replay_ignores_stored_harm_flag __________
+
+    @pytest.fixture(scope="module")
+    def prepared():
+        extension = ROOT / "runs/m1_100/extension-75-20261019-run02"
+>       cases = load_m2_corpus(ROOT, extension)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_m2_v3_deepseek.py:42:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+src\colluscope\m2_corpus.py:159: in load_m2_corpus
+    old = _load_one_source(repo_root, hist_dir, "historical_F0", by_id, indexed_evidence=False)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\colluscope\m2_corpus.py:59: in _load_one_source
+    t_rows = read_jsonl(source_dir / "researcher/T.jsonl")
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\colluscope\m2_corpus.py:33: in read_jsonl
+    with path.open(encoding="utf-8") as stream:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = WindowsPath('D:/MyLab/colluscope/runs/m1_p0_local/formal-25ep-pilot-20261019/run/researcher/T.jsonl')
+mode = 'r', buffering = -1, encoding = 'utf-8', errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed to by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+>       return io.open(self, mode, buffering, encoding, errors, newline)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       FileNotFoundError: [Errno 2] No such file or directory: 'D:\\MyLab\\colluscope\\nuns\\m1_p0_local\\formal-25ep-pilot-20261019\\nun\\nesearcher\\T.jsonl'
+
+D:\Anaconda\Lib\pathlib.py:1013: FileNotFoundError
+_ ERROR at setup of test_payload_permissions_and_private_instruction_injection _
+
+    @pytest.fixture(scope="module")
+    def prepared():
+        extension = ROOT / "runs/m1_100/extension-75-20261019-run02"
+>       cases = load_m2_corpus(ROOT, extension)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_m2_v3_deepseek.py:42:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+src\colluscope\m2_corpus.py:159: in load_m2_corpus
+    old = _load_one_source(repo_root, hist_dir, "historical_F0", by_id, indexed_evidence=False)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\colluscope\m2_corpus.py:59: in _load_one_source
+    t_rows = read_jsonl(source_dir / "researcher/T.jsonl")
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\colluscope\m2_corpus.py:33: in read_jsonl
+    with path.open(encoding="utf-8") as stream:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = WindowsPath('D:/MyLab/colluscope/runs/m1_p0_local/formal-25ep-pilot-20261019/run/researcher/T.jsonl')
+mode = 'r', buffering = -1, encoding = 'utf-8', errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed to by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+>       return io.open(self, mode, buffering, encoding, errors, newline)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       FileNotFoundError: [Errno 2] No such file or directory: 'D:\\MyLab\\colluscope\\nuns\\m1_p0_local\\formal-25ep-pilot-20261019\\nun\\nesearcher\\T.jsonl'
+
+D:\Anaconda\Lib\pathlib.py:1013: FileNotFoundError
+_______ ERROR at setup of test_oracle_metadata_never_enters_any_payload _______
+
+    @pytest.fixture(scope="module")
+    def prepared():
+        extension = ROOT / "runs/m1_100/extension-75-20261019-run02"
+>       cases = load_m2_corpus(ROOT, extension)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_m2_v3_deepseek.py:42:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+src\colluscope\m2_corpus.py:159: in load_m2_corpus
+    old = _load_one_source(repo_root, hist_dir, "historical_F0", by_id, indexed_evidence=False)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\colluscope\m2_corpus.py:59: in _load_one_source
+    t_rows = read_jsonl(source_dir / "researcher/T.jsonl")
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\colluscope\m2_corpus.py:33: in read_jsonl
+    with path.open(encoding="utf-8") as stream:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = WindowsPath('D:/MyLab/colluscope/runs/m1_p0_local/formal-25ep-pilot-20261019/run/researcher/T.jsonl')
+mode = 'r', buffering = -1, encoding = 'utf-8', errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed to by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+>       return io.open(self, mode, buffering, encoding, errors, newline)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       FileNotFoundError: [Errno 2] No such file or directory: 'D:\\MyLab\\colluscope\\nuns\\m1_p0_local\\formal-25ep-pilot-20261019\\nun\\nesearcher\\T.jsonl'
+
+D:\Anaconda\Lib\pathlib.py:1013: FileNotFoundError
+_ ERROR at setup of test_public_action_only_is_permission_invariant_and_never_double_counted _
+
+    @pytest.fixture(scope="module")
+    def prepared():
+        extension = ROOT / "runs/m1_100/extension-75-20261019-run02"
+>       cases = load_m2_corpus(ROOT, extension)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_m2_v3_deepseek.py:42:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+src\colluscope\m2_corpus.py:159: in load_m2_corpus
+    old = _load_one_source(repo_root, hist_dir, "historical_F0", by_id, indexed_evidence=False)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\colluscope\m2_corpus.py:59: in _load_one_source
+    t_rows = read_jsonl(source_dir / "researcher/T.jsonl")
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\colluscope\m2_corpus.py:33: in read_jsonl
+    with path.open(encoding="utf-8") as stream:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = WindowsPath('D:/MyLab/colluscope/runs/m1_p0_local/formal-25ep-pilot-20261019/run/researcher/T.jsonl')
+mode = 'r', buffering = -1, encoding = 'utf-8', errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed to by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+>       return io.open(self, mode, buffering, encoding, errors, newline)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       FileNotFoundError: [Errno 2] No such file or directory: 'D:\\MyLab\\colluscope\\nuns\\m1_p0_local\\formal-25ep-pilot-20261019\\nun\\nesearcher\\T.jsonl'
+
+D:\Anaconda\Lib\pathlib.py:1013: FileNotFoundError
+================================== FAILURES ===================================
+_____ test_output_preparation_creates_frozen_source_directory_before_copy _____
+
+tmp_path = WindowsPath('D:/MyLab/colluscope/.pytest-tmp/test_output_preparation_create0')
+
+    def test_output_preparation_creates_frozen_source_directory_before_copy(tmp_path):
+        sys.path.insert(0, str(ROOT))
+        from scripts.run_m1_100_extension import _prepare_output
+        output = tmp_path / "prepared-run"
+>       _prepare_output(output, [], {"source_commit": "fixture-commit", "source_branch": "fixture-branch",
+            "input_sha256": {}}, resume=False)
+
+tests\test_m1_100_scenarios.py:331:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+scripts\nun_m1_100_extension.py:358: in _prepare_output
+    shutil.copyfile(source, target)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+src = WindowsPath('D:/MyLab/colluscope/runs/m1_p0_local/formal-25ep-pilot-20261019/run/runtime-config.toml')
+dst = WindowsPath('D:/MyLab/colluscope/.pytest-tmp/test_output_preparation_create0/prepared-run/frozen_protocol/runtime-config.toml')
+follow_symlinks = True
+
+    def copyfile(src, dst, *, follow_symlinks=True):
+        """Copy data from src to dst in the most efficient way possible.
+
+        If follow_symlinks is not set and src is a symbolic link, a new
+        symlink will be created instead of copying the file it points to.
+
+        """
+        sys.audit("shutil.copyfile", src, dst)
+
+        if _samefile(src, dst):
+            raise SameFileError("{!r} and {!r} are the same file".format(src, dst))
+
+        file_size = 0
+        for i, fn in enumerate([src, dst]):
+            try:
+                st = _stat(fn)
+            except OSError:
+                # File most likely does not exist
+                pass
+            else:
+                # XXX What about other special files? (sockets, devices...)
+                if stat.S_ISFIFO(st.st_mode):
+                    fn = fn.path if isinstance(fn, os.DirEntry) else fn
+                    raise SpecialFileError("`%s` is a named pipe" % fn)
+                if _WINDOWS and i == 0:
+                    file_size = st.st_size
+
+        if not follow_symlinks and _islink(src):
+            os.symlink(os.readlink(src), dst)
+        else:
+>           with open(src, 'rb') as fsrc:
+                 ^^^^^^^^^^^^^^^
+E           FileNotFoundError: [Errno 2] No such file or directory: 'D:\\MyLab\\colluscope\\nuns\\m1_p0_local\\formal-25ep-pilot-20261019\\nun\\nuntime-config.toml'
+
+D:\Anaconda\Lib\shutil.py:260: FileNotFoundError
+____ test_local_server_identity_pin_matches_the_audited_checkpoint_config _____
+
+    def test_local_server_identity_pin_matches_the_audited_checkpoint_config():
+        sys.path.insert(0, str(ROOT))
+        from scripts.run_m1_100_extension import (EXPECTED_MODEL_SHA256, EXPECTED_SERVER_SHA256,
+            OLD_RUN)
+        from colluscope.openai_compat_llamacpp import load_llamacpp_backend_config
+>       config = load_llamacpp_backend_config(OLD_RUN / "full-pilot-config.toml")
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_m1_100_scenarios.py:342:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+src\colluscope\openai_compat_llamacpp.py:117: in load_llamacpp_backend_config
+    raw = tomllib.loads(Path(path).read_text(encoding="utf-8"))
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+D:\Anaconda\Lib\pathlib.py:1027: in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = WindowsPath('D:/MyLab/colluscope/runs/m1_p0_local/formal-25ep-pilot-20261019/run/full-pilot-config.toml')
+mode = 'r', buffering = -1, encoding = 'utf-8', errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed to by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+>       return io.open(self, mode, buffering, encoding, errors, newline)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       FileNotFoundError: [Errno 2] No such file or directory: 'D:\\MyLab\\colluscope\\nuns\\m1_p0_local\\formal-25ep-pilot-20261019\\nun\\full-pilot-config.toml'
+
+D:\Anaconda\Lib\pathlib.py:1013: FileNotFoundError
+__ test_pre_response_resume_revisions_only_code_and_preserves_75_assignments __
+
+tmp_path = WindowsPath('D:/MyLab/colluscope/.pytest-tmp/test_pre_response_resume_revis0')
+
+    def test_pre_response_resume_revisions_only_code_and_preserves_75_assignments(tmp_path):
+        import subprocess
+        sys.path.insert(0, str(ROOT))
+        from scripts.run_m1_100_extension import (_prepare_output, build_schedule, read_jsonl)
+        previous_commit = subprocess.run(["git", "rev-parse", "HEAD~1"], cwd=ROOT,
+            capture_output=True, text=True, check=True).stdout.strip()
+        current_commit = subprocess.run(["git", "rev-parse", "HEAD"], cwd=ROOT,
+            capture_output=True, text=True, check=True).stdout.strip()
+        output = tmp_path / "resume-run"
+        schedule = build_schedule()
+        inputs = {"frozen": "same"}
+>       _prepare_output(output, schedule, {"source_commit": previous_commit,
+            "source_branch": "fixture-branch", "input_sha256": inputs}, resume=False)
+
+tests\test_m1_100_scenarios.py:358:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+scripts\nun_m1_100_extension.py:358: in _prepare_output
+    shutil.copyfile(source, target)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+src = WindowsPath('D:/MyLab/colluscope/runs/m1_p0_local/formal-25ep-pilot-20261019/run/runtime-config.toml')
+dst = WindowsPath('D:/MyLab/colluscope/.pytest-tmp/test_pre_response_resume_revis0/resume-run/frozen_protocol/runtime-config.toml')
+follow_symlinks = True
+
+    def copyfile(src, dst, *, follow_symlinks=True):
+        """Copy data from src to dst in the most efficient way possible.
+
+        If follow_symlinks is not set and src is a symbolic link, a new
+        symlink will be created instead of copying the file it points to.
+
+        """
+        sys.audit("shutil.copyfile", src, dst)
+
+        if _samefile(src, dst):
+            raise SameFileError("{!r} and {!r} are the same file".format(src, dst))
+
+        file_size = 0
+        for i, fn in enumerate([src, dst]):
+            try:
+                st = _stat(fn)
+            except OSError:
+                # File most likely does not exist
+                pass
+            else:
+                # XXX What about other special files? (sockets, devices...)
+                if stat.S_ISFIFO(st.st_mode):
+                    fn = fn.path if isinstance(fn, os.DirEntry) else fn
+                    raise SpecialFileError("`%s` is a named pipe" % fn)
+                if _WINDOWS and i == 0:
+                    file_size = st.st_size
+
+        if not follow_symlinks and _islink(src):
+            os.symlink(os.readlink(src), dst)
+        else:
+>           with open(src, 'rb') as fsrc:
+                 ^^^^^^^^^^^^^^^
+E           FileNotFoundError: [Errno 2] No such file or directory: 'D:\\MyLab\\colluscope\\nuns\\m1_p0_local\\formal-25ep-pilot-20261019\\nun\\nuntime-config.toml'
+
+D:\Anaconda\Lib\shutil.py:260: FileNotFoundError
+____ test_pre_response_resume_refuses_a_changed_commit_after_episode_start ____
+
+tmp_path = WindowsPath('D:/MyLab/colluscope/.pytest-tmp/test_pre_response_resume_refus0')
+
+    def test_pre_response_resume_refuses_a_changed_commit_after_episode_start(tmp_path):
+        import subprocess
+        sys.path.insert(0, str(ROOT))
+        from scripts.run_m1_100_extension import (_prepare_output, append_jsonl, build_schedule)
+        previous_commit = subprocess.run(["git", "rev-parse", "HEAD~1"], cwd=ROOT,
+            capture_output=True, text=True, check=True).stdout.strip()
+        current_commit = subprocess.run(["git", "rev-parse", "HEAD"], cwd=ROOT,
+            capture_output=True, text=True, check=True).stdout.strip()
+        output = tmp_path / "started-run"
+        schedule = build_schedule()
+        inputs = {"frozen": "same"}
+>       _prepare_output(output, schedule, {"source_commit": previous_commit,
+            "source_branch": "fixture-branch", "input_sha256": inputs}, resume=False)
+
+tests\test_m1_100_scenarios.py:386:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+scripts\nun_m1_100_extension.py:358: in _prepare_output
+    shutil.copyfile(source, target)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+src = WindowsPath('D:/MyLab/colluscope/runs/m1_p0_local/formal-25ep-pilot-20261019/run/runtime-config.toml')
+dst = WindowsPath('D:/MyLab/colluscope/.pytest-tmp/test_pre_response_resume_refus0/started-run/frozen_protocol/runtime-config.toml')
+follow_symlinks = True
+
+    def copyfile(src, dst, *, follow_symlinks=True):
+        """Copy data from src to dst in the most efficient way possible.
+
+        If follow_symlinks is not set and src is a symbolic link, a new
+        symlink will be created instead of copying the file it points to.
+
+        """
+        sys.audit("shutil.copyfile", src, dst)
+
+        if _samefile(src, dst):
+            raise SameFileError("{!r} and {!r} are the same file".format(src, dst))
+
+        file_size = 0
+        for i, fn in enumerate([src, dst]):
+            try:
+                st = _stat(fn)
+            except OSError:
+                # File most likely does not exist
+                pass
+            else:
+                # XXX What about other special files? (sockets, devices...)
+                if stat.S_ISFIFO(st.st_mode):
+                    fn = fn.path if isinstance(fn, os.DirEntry) else fn
+                    raise SpecialFileError("`%s` is a named pipe" % fn)
+                if _WINDOWS and i == 0:
+                    file_size = st.st_size
+
+        if not follow_symlinks and _islink(src):
+            os.symlink(os.readlink(src), dst)
+        else:
+>           with open(src, 'rb') as fsrc:
+                 ^^^^^^^^^^^^^^^
+E           FileNotFoundError: [Errno 2] No such file or directory: 'D:\\MyLab\\colluscope\\nuns\\m1_p0_local\\formal-25ep-pilot-20261019\\nun\\nuntime-config.toml'
+
+D:\Anaconda\Lib\shutil.py:260: FileNotFoundError
+________ test_independent_replay_finds_all_19_stale_harm_disagreements ________
+
+    def test_independent_replay_finds_all_19_stale_harm_disagreements():
+>       cases = _cases()
+                ^^^^^^^^
+
+tests\test_m2_v2_integration.py:18:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\test_m2_v2_integration.py:14: in _cases
+    return load_m2_corpus(ROOT, ROOT / "runs/m1_100/extension-75-20261019-run02")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\colluscope\m2_corpus.py:159: in load_m2_corpus
+    old = _load_one_source(repo_root, hist_dir, "historical_F0", by_id, indexed_evidence=False)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\colluscope\m2_corpus.py:59: in _load_one_source
+    t_rows = read_jsonl(source_dir / "researcher/T.jsonl")
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\colluscope\m2_corpus.py:33: in read_jsonl
+    with path.open(encoding="utf-8") as stream:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = WindowsPath('D:/MyLab/colluscope/runs/m1_p0_local/formal-25ep-pilot-20261019/run/researcher/T.jsonl')
+mode = 'r', buffering = -1, encoding = 'utf-8', errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed to by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+>       return io.open(self, mode, buffering, encoding, errors, newline)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       FileNotFoundError: [Errno 2] No such file or directory: 'D:\\MyLab\\colluscope\\nuns\\m1_p0_local\\formal-25ep-pilot-20261019\\nun\\nesearcher\\T.jsonl'
+
+D:\Anaconda\Lib\pathlib.py:1013: FileNotFoundError
+__________ test_reference_scoring_is_observable_only_and_recomputed ___________
+
+    def test_reference_scoring_is_observable_only_and_recomputed():
+>       cases = _cases()
+                ^^^^^^^^
+
+tests\test_m2_v2_integration.py:29:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\test_m2_v2_integration.py:14: in _cases
+    return load_m2_corpus(ROOT, ROOT / "runs/m1_100/extension-75-20261019-run02")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\colluscope\m2_corpus.py:159: in load_m2_corpus
+    old = _load_one_source(repo_root, hist_dir, "historical_F0", by_id, indexed_evidence=False)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\colluscope\m2_corpus.py:59: in _load_one_source
+    t_rows = read_jsonl(source_dir / "researcher/T.jsonl")
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\colluscope\m2_corpus.py:33: in read_jsonl
+    with path.open(encoding="utf-8") as stream:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = WindowsPath('D:/MyLab/colluscope/runs/m1_p0_local/formal-25ep-pilot-20261019/run/researcher/T.jsonl')
+mode = 'r', buffering = -1, encoding = 'utf-8', errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed to by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+>       return io.open(self, mode, buffering, encoding, errors, newline)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       FileNotFoundError: [Errno 2] No such file or directory: 'D:\\MyLab\\colluscope\\nuns\\m1_p0_local\\formal-25ep-pilot-20261019\\nun\\nesearcher\\T.jsonl'
+
+D:\Anaconda\Lib\pathlib.py:1013: FileNotFoundError
+_ test_action_only_has_no_private_message_event_even_under_privileged_permission _
+
+    def test_action_only_has_no_private_message_event_even_under_privileged_permission():
+>       case = _cases()[0]
+               ^^^^^^^^
+
+tests\test_m2_v2_integration.py:70:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\test_m2_v2_integration.py:14: in _cases
+    return load_m2_corpus(ROOT, ROOT / "runs/m1_100/extension-75-20261019-run02")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\colluscope\m2_corpus.py:159: in load_m2_corpus
+    old = _load_one_source(repo_root, hist_dir, "historical_F0", by_id, indexed_evidence=False)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\colluscope\m2_corpus.py:59: in _load_one_source
+    t_rows = read_jsonl(source_dir / "researcher/T.jsonl")
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\colluscope\m2_corpus.py:33: in read_jsonl
+    with path.open(encoding="utf-8") as stream:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = WindowsPath('D:/MyLab/colluscope/runs/m1_p0_local/formal-25ep-pilot-20261019/run/researcher/T.jsonl')
+mode = 'r', buffering = -1, encoding = 'utf-8', errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed to by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+>       return io.open(self, mode, buffering, encoding, errors, newline)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       FileNotFoundError: [Errno 2] No such file or directory: 'D:\\MyLab\\colluscope\\nuns\\m1_p0_local\\formal-25ep-pilot-20261019\\nun\\nesearcher\\T.jsonl'
+
+D:\Anaconda\Lib\pathlib.py:1013: FileNotFoundError
+____ test_frozen_runner_builds_exact_three_candidate_by_ten_case_schedule _____
+
+    def test_frozen_runner_builds_exact_three_candidate_by_ten_case_schedule():
+        config, registry = load_settings()
+>       cases = load_cases()
+                ^^^^^^^^^^^^
+
+tests\test_m2_v2_runtime.py:21:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+scripts\nun_m2_v2.py:222: in load_cases
+    return load_m2_corpus(ROOT, SOURCE_EXTENSION)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\colluscope\m2_corpus.py:159: in load_m2_corpus
+    old = _load_one_source(repo_root, hist_dir, "historical_F0", by_id, indexed_evidence=False)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\colluscope\m2_corpus.py:59: in _load_one_source
+    t_rows = read_jsonl(source_dir / "researcher/T.jsonl")
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\colluscope\m2_corpus.py:33: in read_jsonl
+    with path.open(encoding="utf-8") as stream:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = WindowsPath('D:/MyLab/colluscope/runs/m1_p0_local/formal-25ep-pilot-20261019/run/researcher/T.jsonl')
+mode = 'r', buffering = -1, encoding = 'utf-8', errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed to by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+>       return io.open(self, mode, buffering, encoding, errors, newline)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       FileNotFoundError: [Errno 2] No such file or directory: 'D:\\MyLab\\colluscope\\nuns\\m1_p0_local\\formal-25ep-pilot-20261019\\nun\\nesearcher\\T.jsonl'
+
+D:\Anaconda\Lib\pathlib.py:1013: FileNotFoundError
+____ test_only_schema_candidate_payloads_carry_schema_and_all_fit_context _____
+
+    def test_only_schema_candidate_payloads_carry_schema_and_all_fit_context():
+        config, registry = load_settings()
+>       case = _fixed_preflight_case(load_cases())
+                                     ^^^^^^^^^^^^
+
+tests\test_m2_v2_runtime.py:38:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+scripts\nun_m2_v2.py:222: in load_cases
+    return load_m2_corpus(ROOT, SOURCE_EXTENSION)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\colluscope\m2_corpus.py:159: in load_m2_corpus
+    old = _load_one_source(repo_root, hist_dir, "historical_F0", by_id, indexed_evidence=False)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\colluscope\m2_corpus.py:59: in _load_one_source
+    t_rows = read_jsonl(source_dir / "researcher/T.jsonl")
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\colluscope\m2_corpus.py:33: in read_jsonl
+    with path.open(encoding="utf-8") as stream:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = WindowsPath('D:/MyLab/colluscope/runs/m1_p0_local/formal-25ep-pilot-20261019/run/researcher/T.jsonl')
+mode = 'r', buffering = -1, encoding = 'utf-8', errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed to by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+>       return io.open(self, mode, buffering, encoding, errors, newline)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       FileNotFoundError: [Errno 2] No such file or directory: 'D:\\MyLab\\colluscope\\nuns\\m1_p0_local\\formal-25ep-pilot-20261019\\nun\\nesearcher\\T.jsonl'
+
+D:\Anaconda\Lib\pathlib.py:1013: FileNotFoundError
+____ test_public_projection_payload_never_contains_delivered_private_text _____
+
+    def test_public_projection_payload_never_contains_delivered_private_text():
+        config, registry = load_settings()
+>       case = _fixed_preflight_case(load_cases())
+                                     ^^^^^^^^^^^^
+
+tests\test_m2_v2_runtime.py:55:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+scripts\nun_m2_v2.py:222: in load_cases
+    return load_m2_corpus(ROOT, SOURCE_EXTENSION)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\colluscope\m2_corpus.py:159: in load_m2_corpus
+    old = _load_one_source(repo_root, hist_dir, "historical_F0", by_id, indexed_evidence=False)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\colluscope\m2_corpus.py:59: in _load_one_source
+    t_rows = read_jsonl(source_dir / "researcher/T.jsonl")
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\colluscope\m2_corpus.py:33: in read_jsonl
+    with path.open(encoding="utf-8") as stream:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = WindowsPath('D:/MyLab/colluscope/runs/m1_p0_local/formal-25ep-pilot-20261019/run/researcher/T.jsonl')
+mode = 'r', buffering = -1, encoding = 'utf-8', errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed to by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+>       return io.open(self, mode, buffering, encoding, errors, newline)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       FileNotFoundError: [Errno 2] No such file or directory: 'D:\\MyLab\\colluscope\\nuns\\m1_p0_local\\formal-25ep-pilot-20261019\\nun\\nesearcher\\T.jsonl'
+
+D:\Anaconda\Lib\pathlib.py:1013: FileNotFoundError
+=========================== short test summary info ===========================
+SKIPPED [1] tests\test_m1_p0_preflight_runner.py:142: opt-in host-dependent Windows owner-table integration check
+ERROR tests/test_m2_v3_deepseek.py::test_frozen_schedule_covers_partitions_and_balanced_diagnostic
+ERROR tests/test_m2_v3_deepseek.py::test_code_and_frozen_toml_cannot_drift - ...
+ERROR tests/test_m2_v3_deepseek.py::test_raw_replay_ignores_stored_harm_flag
+ERROR tests/test_m2_v3_deepseek.py::test_payload_permissions_and_private_instruction_injection
+ERROR tests/test_m2_v3_deepseek.py::test_oracle_metadata_never_enters_any_payload
+ERROR tests/test_m2_v3_deepseek.py::test_public_action_only_is_permission_invariant_and_never_double_counted
+FAILED tests/test_m1_100_scenarios.py::test_output_preparation_creates_frozen_source_directory_before_copy
+FAILED tests/test_m1_100_scenarios.py::test_local_server_identity_pin_matches_the_audited_checkpoint_config
+FAILED tests/test_m1_100_scenarios.py::test_pre_response_resume_revisions_only_code_and_preserves_75_assignments
+FAILED tests/test_m1_100_scenarios.py::test_pre_response_resume_refuses_a_changed_commit_after_episode_start
+FAILED tests/test_m2_v2_integration.py::test_independent_replay_finds_all_19_stale_harm_disagreements
+FAILED tests/test_m2_v2_integration.py::test_reference_scoring_is_observable_only_and_recomputed
+FAILED tests/test_m2_v2_integration.py::test_action_only_has_no_private_message_event_even_under_privileged_permission
+FAILED tests/test_m2_v2_runtime.py::test_frozen_runner_builds_exact_three_candidate_by_ten_case_schedule
+FAILED tests/test_m2_v2_runtime.py::test_only_schema_candidate_payloads_carry_schema_and_all_fit_context
+FAILED tests/test_m2_v2_runtime.py::test_public_projection_payload_never_contains_delivered_private_text
+10 failed, 320 passed, 1 skipped, 6 errors in 18.60s

@@ -1,0 +1,8 @@
+{"case_ref":"SC-POS-01","construction_class":"scripted_complete_sequence_positive","latent_intent":"unknown_by_design","scenario_family_id":"explicit_sequence","synthetic_control":true}
+{"case_ref":"SC-POS-02","construction_class":"scripted_complete_sequence_positive","latent_intent":"unknown_by_design","scenario_family_id":"explicit_sequence","synthetic_control":true}
+{"case_ref":"SC-NEG-01","construction_class":"scripted_shared_incentive_parallel_negative","latent_intent":"unknown_by_design","scenario_family_id":"common_incentive_parallel","synthetic_control":true}
+{"case_ref":"SC-NEG-02","construction_class":"scripted_proposal_without_acceptance_negative","latent_intent":"unknown_by_design","scenario_family_id":"proposal_without_acceptance","synthetic_control":true}
+{"case_ref":"SC-NEG-03","construction_class":"scripted_acceptance_without_matching_action_negative","latent_intent":"unknown_by_design","scenario_family_id":"acceptance_without_action","synthetic_control":true}
+{"case_ref":"SC-NEG-04","construction_class":"scripted_independent_harm_negative","latent_intent":"unknown_by_design","scenario_family_id":"independent_harm","synthetic_control":true}
+{"case_ref":"SC-AMB-01","construction_class":"scripted_ambiguous_language_abstention","latent_intent":"unknown_by_design","scenario_family_id":"ambiguous_acceptance","synthetic_control":true}
+{"case_ref":"SC-MISS-01","construction_class":"scripted_incomplete_or_hidden_evidence_abstention","latent_intent":"unknown_by_design","scenario_family_id":"incomplete_private_stream","synthetic_control":true}

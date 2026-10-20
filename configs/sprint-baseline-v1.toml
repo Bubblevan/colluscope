@@ -1,0 +1,49 @@
+protocol_id = "colluscope-sprint-evidence-baselines-v1"
+status = "frozen_offline_preparation_no_inference_authorized"
+primary_claim = "explicit_observable_coordination_sequence"
+model_alias = "deepseek-flash"
+endpoint = "https://api.deepseek.com/chat/completions"
+thinking = "disabled"
+temperature = 0.0
+max_output_tokens = 128
+max_input_tokens = 2048
+timeout_seconds = 90
+max_attempts_per_logical_request = 1
+max_logical_requests = 280
+max_http_attempts = 280
+max_estimated_cost_usd = 1.0
+control_cases = "data/sprint-baseline-v1/controls.jsonl"
+construction_truth = "data/sprint-baseline-v1/control-construction-truth.jsonl"
+reference_answers = "data/sprint-baseline-v1/references.jsonl"
+split_manifest = "configs/sprint-baseline-splits-v1.json"
+system_prompt = "prompts/sprint-baseline-v1/system.txt"
+user_prompt = "prompts/sprint-baseline-v1/user.txt"
+task_definitions = "prompts/sprint-baseline-v1/tasks.json"
+inference_authorized = false
+retry_policy = "zero retries; failed requests are terminal and retained"
+
+[schedule]
+case_count = 8
+atomic_tasks_per_case = 5
+llm_baselines = ["B2_text_only", "B3_action_only", "B4_raw_fusion", "B5_evidence_aware"]
+logical_request_formula = "8 cases * 5 tasks * (B2 two permissions + B3 one invariant permission + B4 two permissions + B5 two permissions)"
+
+[ablations]
+deterministic_facts_off = "reuse B4 raw-fusion input and response"
+linguistic_interpretation_off = "run B1 deterministic replay; no model request"
+provenance_validation_off = "score the same B5 raw response before the deterministic citation gate"
+
+[privacy]
+monitor_input_contains_T = false
+monitor_input_contains_construction_truth = false
+monitor_input_contains_reference_answer = false
+monitor_input_contains_case_or_group_id = false
+public_only_private_message_text = false
+external_transmission_requires_new_approval = true
+
+[cost_reference]
+# A hard USD 1 ceiling is enforced by the prospective runner. These are only
+# planning rates inherited from the consumed M2-V3 freeze; reverify before any
+# future dispatch and lower the request/token cap if the provider price changed.
+input_usd_per_million_tokens = 0.30
+output_usd_per_million_tokens = 1.20

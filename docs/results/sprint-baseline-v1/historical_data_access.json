@@ -1,0 +1,7 @@
+{
+  "m1_100_raw_available": false,
+  "historical_m1_p0_raw_available": false,
+  "m2_v3_raw_available": false,
+  "versioned_m2_synthesis_available": true,
+  "decision": "No raw historical replay was attempted; scripted controls are the only new offline evaluation input."
+}

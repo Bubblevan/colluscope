@@ -1,0 +1,81 @@
+{
+  "schema_version": "sprint-baseline-splits-v1",
+  "unit": "scenario_family_id; all cases, tasks, permissions, views, and ablations move together",
+  "development_sources": {
+    "m0_m3": "historical/development/descriptive only",
+    "m1_f0_f3": "previously exposed; no new evaluation score",
+    "m2_v3": "previously exposed and answer-leaked in public-harm views; no new evaluation score"
+  },
+  "prospective_control_evaluation": [
+    {
+      "scenario_family_id": "acceptance_without_action",
+      "split_group_id": "a6d314e5110adc49fe5543be395ba2671f9cefe7636913cbcadf25cef80c2b08",
+      "case_refs": [
+        "SC-NEG-03"
+      ],
+      "partition": "prospective_control_evaluation",
+      "synthetic_only": true
+    },
+    {
+      "scenario_family_id": "ambiguous_acceptance",
+      "split_group_id": "e0b4db6a83073cbc300b986bb99ac03073c9d8d425f7ccb66469c0b11eef740a",
+      "case_refs": [
+        "SC-AMB-01"
+      ],
+      "partition": "prospective_control_evaluation",
+      "synthetic_only": true
+    },
+    {
+      "scenario_family_id": "common_incentive_parallel",
+      "split_group_id": "88437f332adafb972edd74b933bfd06e8e809ea2429427aa3a46844d00db149d",
+      "case_refs": [
+        "SC-NEG-01"
+      ],
+      "partition": "prospective_control_evaluation",
+      "synthetic_only": true
+    },
+    {
+      "scenario_family_id": "explicit_sequence",
+      "split_group_id": "61bdb38969ac3abe5b5453562981c95e43b5ba89b9cddcf6b8b4782504f272fc",
+      "case_refs": [
+        "SC-POS-01",
+        "SC-POS-02"
+      ],
+      "partition": "prospective_control_evaluation",
+      "synthetic_only": true
+    },
+    {
+      "scenario_family_id": "incomplete_private_stream",
+      "split_group_id": "9b90f5af1d2d234ca1cb417ba1285eb82a14b3ea7533e2d19fd34d88ed42aa5f",
+      "case_refs": [
+        "SC-MISS-01"
+      ],
+      "partition": "prospective_control_evaluation",
+      "synthetic_only": true
+    },
+    {
+      "scenario_family_id": "independent_harm",
+      "split_group_id": "5e3658f9dd812ec09204a46b3bc63c6b0fc81fccae1e9089171d083030e60810",
+      "case_refs": [
+        "SC-NEG-04"
+      ],
+      "partition": "prospective_control_evaluation",
+      "synthetic_only": true
+    },
+    {
+      "scenario_family_id": "proposal_without_acceptance",
+      "split_group_id": "e4c75113bbd364f771702644250d2a90373169a64c170433a6b2587e1603412b",
+      "case_refs": [
+        "SC-NEG-02"
+      ],
+      "partition": "prospective_control_evaluation",
+      "synthetic_only": true
+    }
+  ],
+  "leakage_constraints": [
+    "all views, permissions, task rows, and B5 ablations of a family stay in one partition",
+    "construction truth and reference answers are stored separately from monitor inputs",
+    "historical M1/M2/M3 are development/descriptive evidence, not a held-out test",
+    "no prediction-based tuning, case removal, or sample replacement"
+  ]
+}

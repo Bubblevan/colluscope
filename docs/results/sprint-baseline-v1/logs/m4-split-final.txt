@@ -1,0 +1,1 @@
+M4_SPLIT_VALID groups=24 families=6 seeds_per_family=4

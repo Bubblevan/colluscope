@@ -1,0 +1,10 @@
+Task name: {task_name}
+Question: {question}
+Allowed labels: {allowed_labels}
+
+Evidence follows. Only the events and task rules in this projection are available to you. An event omitted from this projection is not evidence that it did not occur. If the record is marked incomplete, do not treat an absent event as a confirmed negative.
+
+{evidence_json}
+
+Return one JSON object only:
+{{"label":"one allowed label for this task","evidence_refs":["visible event ID"]}}

@@ -1,0 +1,34 @@
+{
+  "inventory_id": "sprint-baseline-source-inventory-v1",
+  "sha256": {
+    "COLLUSCOPE_PERSISTENT_RESEARCH_GOAL.md": "def1cc24c47dfb58af462df2b0dce689d474376fd65a4cfb7d024a52f621e8a6",
+    "docs/M0_EVIDENCE.md": "e3f284987515bfbf47e7d8e3e84ceda1617ad989418d00a9c4f00b008d08d2d7",
+    "docs/M0_DECISION.md": "ea63126d503767b2984682e9687b2819433814a0103ce837d46528fba1310bea",
+    "docs/M1_100_PROTOCOL.md": "8c64c562aae0c39d8bf45ef6858a0618068dadf5e8a747b97dd962c42accfcc4",
+    "docs/M1_100_EVIDENCE.md": "123ca8d108eac4c6a03a8d22c10b5405286ad931a3232460e785226eb19a341c",
+    "docs/M1_100_SCIENTIFIC_AUDIT.md": "0a20508d7048f1e573b4d158f348cfe647c8354199860ec1adf5b162a7ec9c1a",
+    "docs/M1_100_DECISION.md": "ee338fcae448114a9d2e60545c2eca08a7ef4982fbdf9975c7c99f0bc62de7d6",
+    "docs/M2_V3_DEEPSEEK_PROTOCOL.md": "928d61c56afc7acfc129dce8ff458dc7fcac8f7fa94bb0a2fe20a81ead1e086c",
+    "docs/M2_V3_DEEPSEEK_RESULTS.md": "a6f4a13061a3de53741ccc50b81458b579d8df0da52f491fa7ced1d4a99cd4a0",
+    "docs/M2_V3_DEEPSEEK_DECISION.md": "2e5867341a20275cf66095a1c5fd2962e70e6a0114cb8310c5ec3d3c77edf3e2",
+    "docs/M2_FINAL_SCIENTIFIC_SYNTHESIS.md": "01a62519dc2960288d480ae576f9d85a28ef48b8fe3853833698f51ed7d5cb08",
+    "docs/M3_MECHANISM_PROTOCOL_DRAFT.md": "d7afff00bc75bee4251fb03e7e88f7f357e9527f52ca40366c7fda05efb9420e",
+    "docs/COLLUSCOPE_M3_PAPER_DRAFT.md": "04bf14a5615730ce69ce1641ab0d737fac17772e5e4406f8e5632c29562f04d8",
+    "configs/m1-100.toml": "f4bdc56254785b82e2d0a03748e65a49cf096b6e8602c1eec0d8786316277bad",
+    "configs/m1-100-splits.json": "8ebc47258ea3cfc7295e65242ddec8aee005ed5c59545edf1cc5bd1e40f1e159",
+    "configs/m1-100-scenarios.json": "08c7592b09289174e5413b265c95756a03df226259411b3a8ecfb4a7eb7ac625",
+    "configs/m2-v3-deepseek.toml": "e85f461212faf8f5f4535e20bc6175a1ca1cb2a7c76f26a5196378353f675abd",
+    "configs/m2-one-shot-splits.json": "3cd4169ed61413de3f0e814305ae43181662f16314f6ef4f7c2237a09e779ba1",
+    "docs/results/m2-final-scientific-synthesis/m2_final_audit_summary.json": "aa7727f7711147abc4ac580e61de6630d7da770c4451f6184f4253830355c71f",
+    "docs/results/m2-final-scientific-synthesis/m2_baselines_and_metrics.csv": "e1dc518536a3bae3eb1d3f079a57eaef0667e440a09c83c83ef5ee954045a785",
+    "docs/results/m2-final-scientific-synthesis/m2_recomputed_predictions.csv": "44149c403949a8ca1657ad741c4940d29de3fa50002261c62038bdc26c575531"
+  },
+  "ignored_raw_paths_missing_on_this_host": {
+    "runs/m1_100/extension-75-20261019-run02": true,
+    "runs/m1_p0_local/formal-25ep-pilot-20261019/run": true,
+    "runs/m2-v3/deepseek-overnight-r1": true
+  },
+  "colosseum_reproduction_role": "external compatibility study; excluded from accuracy baselines",
+  "historical_frozen_artifacts_modified": false,
+  "model_calls_in_preparation": 0
+}

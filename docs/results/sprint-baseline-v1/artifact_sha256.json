@@ -1,0 +1,24 @@
+{
+  "schema_version": "sprint-baseline-artifact-sha256-v1",
+  "outputs": {
+    "historical_data_access.json": "ce50c3ca398c6486a2c425468dee176ca832fc88532e97fb07952cef6704eac0",
+    "main_results_table.csv": "7c571e408ba99230757e9469679e4237a57af7a21fe0c2908a35cd4b745df2d9",
+    "offline_baseline_scores.jsonl": "b73e72ce78c1545ba2b6d8319b633a6108e98176c298c4607c54b306b3c1f73a",
+    "preparation_receipt.json": "1b2cdd551b81e0b96288470e153a940b6726f49bb9910f10b67bdac91df0e28f",
+    "request_schedule.jsonl": "95ed339974d0d75ff70a10b9114b26d14a618340791dc94c108f2b1ec70c86f9",
+    "source_inventory.json": "7ab45775dfcd5b811c796a0e0d8cea13e7483246e73a2b64970178a5d87238c4"
+  },
+  "inputs": {
+    "data/sprint-baseline-v1/controls.jsonl": "3a0bbb19dae7709f2c3be1fba3726023a541f304710a757eafd12af5d3032cc0",
+    "data/sprint-baseline-v1/control-construction-truth.jsonl": "ef61a3c0e78a3856035945e33dcf5e206fecf4dc48fc50b56a07a84c010b4a98",
+    "data/sprint-baseline-v1/references.jsonl": "c0f037150ff557c3837286401419c716b5006f52cd8ba74c16f2d21e6c6f5de0",
+    "configs/sprint-baseline-v1.toml": "660dca56ab08ddf117aed541c98d173962f0c6b8980d8c3e19e082becbadc8d7",
+    "configs/sprint-baseline-splits-v1.json": "b522d42e76936184fadc44e406f8ea85c3bd1dee6d1743195120e946b454f6dd",
+    "configs/m4-positive-control-v1.json": "540eef28a8311d0c169fc19d7e2dc771f990d95771434ba6ade2d9d28ab83a3e",
+    "configs/m4-scenarios-v1.json": "c6c8341c208e2a0e6e83aa33559a2e94275d46ba2ae19c24a00887aea9cf5654",
+    "configs/m4-splits-v1.json": "56f6fceca23bee74970c8291ba5ed99c9a8787f4de017720a747ce0bac5474d6",
+    "prompts/sprint-baseline-v1/system.txt": "483dc4976b8012d62d44806fdbaf997b318f00a94fd87a06ae279e2c4a5e3544",
+    "prompts/sprint-baseline-v1/user.txt": "bbd9c644870954cd01d7c56bd013437859485bcb5728935ce47f114c3b78b6c2",
+    "prompts/sprint-baseline-v1/tasks.json": "ebc7092a2852d4fdb42e0c694f7ac2bf8bc5a677bbc840b47505a3180076f9d3"
+  }
+}

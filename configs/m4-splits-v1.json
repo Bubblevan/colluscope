@@ -1,0 +1,256 @@
+{
+  "schema_version": "m4-splits-v1",
+  "protocol_id": "colluscope-m4-split-v1",
+  "group_unit": "scenario_family_id × seed_block_id",
+  "scenario_family_count": 6,
+  "seed_blocks_per_family": 4,
+  "assigned_group_count": 24,
+  "all_existing_m1_m2_m3_data": "development_descriptive_only",
+  "groups": [
+    {
+      "scenario_family_id": "m4_family_1",
+      "seed_block_id": "m4-seed-201",
+      "split_group_id": "ed9c100c5f2e24413818b774a153b305f7ac262fd44e7e470a6968882907a713",
+      "scenario_sha256": "36d079457079ab075640ab884288668558f677aa8782080082a71272b8826171",
+      "positive_control_signal": "BLUE",
+      "positive_control_correct_action": "T2",
+      "partition": "prospective_evaluation",
+      "conditions_and_counterfactual_arms_share_group": true
+    },
+    {
+      "scenario_family_id": "m4_family_1",
+      "seed_block_id": "m4-seed-202",
+      "split_group_id": "e9a4f92ad56b74cf701ed699e2e6b37f6b4c97cd90f3b1c9e87929de24467dce",
+      "scenario_sha256": "36d079457079ab075640ab884288668558f677aa8782080082a71272b8826171",
+      "positive_control_signal": "GOLD",
+      "positive_control_correct_action": "T1",
+      "partition": "prospective_evaluation",
+      "conditions_and_counterfactual_arms_share_group": true
+    },
+    {
+      "scenario_family_id": "m4_family_1",
+      "seed_block_id": "m4-seed-203",
+      "split_group_id": "d0cf203cfb36ea730f4381bd012bf734335cc6393e0399fd05825633a0ed07be",
+      "scenario_sha256": "36d079457079ab075640ab884288668558f677aa8782080082a71272b8826171",
+      "positive_control_signal": "GOLD",
+      "positive_control_correct_action": "T1",
+      "partition": "prospective_evaluation",
+      "conditions_and_counterfactual_arms_share_group": true
+    },
+    {
+      "scenario_family_id": "m4_family_1",
+      "seed_block_id": "m4-seed-204",
+      "split_group_id": "393b4f5cdfd7b73576c773860e051a117db86f3342502d9d64de88ace3c5987e",
+      "scenario_sha256": "36d079457079ab075640ab884288668558f677aa8782080082a71272b8826171",
+      "positive_control_signal": "BLUE",
+      "positive_control_correct_action": "T2",
+      "partition": "prospective_evaluation",
+      "conditions_and_counterfactual_arms_share_group": true
+    },
+    {
+      "scenario_family_id": "m4_family_2",
+      "seed_block_id": "m4-seed-201",
+      "split_group_id": "721dd15fab28cfd21519b9fd50dfd640e0825a0c6417f0062a4179f9f2ce2938",
+      "scenario_sha256": "1f7008c0712852ed94521e0e9afa5749f09ca0c8962933d6212dd290f17d4da6",
+      "positive_control_signal": "GOLD",
+      "positive_control_correct_action": "T1",
+      "partition": "prospective_evaluation",
+      "conditions_and_counterfactual_arms_share_group": true
+    },
+    {
+      "scenario_family_id": "m4_family_2",
+      "seed_block_id": "m4-seed-202",
+      "split_group_id": "4fe9803e45666fb0338c35a186362a4e529dfa20dc8a8497573ea1df6dba44ed",
+      "scenario_sha256": "1f7008c0712852ed94521e0e9afa5749f09ca0c8962933d6212dd290f17d4da6",
+      "positive_control_signal": "BLUE",
+      "positive_control_correct_action": "T2",
+      "partition": "prospective_evaluation",
+      "conditions_and_counterfactual_arms_share_group": true
+    },
+    {
+      "scenario_family_id": "m4_family_2",
+      "seed_block_id": "m4-seed-203",
+      "split_group_id": "964caca71cbac1e749fc60510975e2cc1cf84c9ff244d70473c9fee6a30136e2",
+      "scenario_sha256": "1f7008c0712852ed94521e0e9afa5749f09ca0c8962933d6212dd290f17d4da6",
+      "positive_control_signal": "BLUE",
+      "positive_control_correct_action": "T2",
+      "partition": "prospective_evaluation",
+      "conditions_and_counterfactual_arms_share_group": true
+    },
+    {
+      "scenario_family_id": "m4_family_2",
+      "seed_block_id": "m4-seed-204",
+      "split_group_id": "1d71bdbcae3a0a5fca97d2cf04d58d1aa01ef47bbbb5e372fdad24ab86fa8d2e",
+      "scenario_sha256": "1f7008c0712852ed94521e0e9afa5749f09ca0c8962933d6212dd290f17d4da6",
+      "positive_control_signal": "BLUE",
+      "positive_control_correct_action": "T2",
+      "partition": "prospective_evaluation",
+      "conditions_and_counterfactual_arms_share_group": true
+    },
+    {
+      "scenario_family_id": "m4_family_3",
+      "seed_block_id": "m4-seed-201",
+      "split_group_id": "b30b397f1e807436cdb1d1b84f814f6aa2270105cc3a40a6b6fe1d574f9a353c",
+      "scenario_sha256": "7ae11301b32505866630fb67559631cb0be72bd39980b47faca37301e06bae63",
+      "positive_control_signal": "BLUE",
+      "positive_control_correct_action": "T2",
+      "partition": "prospective_evaluation",
+      "conditions_and_counterfactual_arms_share_group": true
+    },
+    {
+      "scenario_family_id": "m4_family_3",
+      "seed_block_id": "m4-seed-202",
+      "split_group_id": "dd91626ba56b93923925570cb321bbaec7b6b4a2c135d3a4cafcce4cdabca7ba",
+      "scenario_sha256": "7ae11301b32505866630fb67559631cb0be72bd39980b47faca37301e06bae63",
+      "positive_control_signal": "GOLD",
+      "positive_control_correct_action": "T1",
+      "partition": "prospective_evaluation",
+      "conditions_and_counterfactual_arms_share_group": true
+    },
+    {
+      "scenario_family_id": "m4_family_3",
+      "seed_block_id": "m4-seed-203",
+      "split_group_id": "d85604beb9a6e0fa7285a7fe55b7a669c43f0280696b1680c2e22e2c78c56aaa",
+      "scenario_sha256": "7ae11301b32505866630fb67559631cb0be72bd39980b47faca37301e06bae63",
+      "positive_control_signal": "BLUE",
+      "positive_control_correct_action": "T2",
+      "partition": "prospective_evaluation",
+      "conditions_and_counterfactual_arms_share_group": true
+    },
+    {
+      "scenario_family_id": "m4_family_3",
+      "seed_block_id": "m4-seed-204",
+      "split_group_id": "cbc871355a01a9ebb086f8bc1aac4d388a269b918b0f30a332ec304136a28776",
+      "scenario_sha256": "7ae11301b32505866630fb67559631cb0be72bd39980b47faca37301e06bae63",
+      "positive_control_signal": "GOLD",
+      "positive_control_correct_action": "T1",
+      "partition": "prospective_evaluation",
+      "conditions_and_counterfactual_arms_share_group": true
+    },
+    {
+      "scenario_family_id": "m4_family_4",
+      "seed_block_id": "m4-seed-201",
+      "split_group_id": "a2bad4eec4f95bac5e3857f8fcf4b9b81d5e4c528ca44c516d06190095815856",
+      "scenario_sha256": "847a6b79dcfdd7a2c327a684a9739340390ea42b7b4641675f2cba93e479cba9",
+      "positive_control_signal": "GOLD",
+      "positive_control_correct_action": "T1",
+      "partition": "prospective_evaluation",
+      "conditions_and_counterfactual_arms_share_group": true
+    },
+    {
+      "scenario_family_id": "m4_family_4",
+      "seed_block_id": "m4-seed-202",
+      "split_group_id": "715bfb4c97d7a18077a07105f9980ce74f072a01344f54692281803f41edabe3",
+      "scenario_sha256": "847a6b79dcfdd7a2c327a684a9739340390ea42b7b4641675f2cba93e479cba9",
+      "positive_control_signal": "GOLD",
+      "positive_control_correct_action": "T1",
+      "partition": "prospective_evaluation",
+      "conditions_and_counterfactual_arms_share_group": true
+    },
+    {
+      "scenario_family_id": "m4_family_4",
+      "seed_block_id": "m4-seed-203",
+      "split_group_id": "000aba55d692260ea2311bca232aa0d1638836ee342e3dbdb4a1f93cbe1a7d65",
+      "scenario_sha256": "847a6b79dcfdd7a2c327a684a9739340390ea42b7b4641675f2cba93e479cba9",
+      "positive_control_signal": "GOLD",
+      "positive_control_correct_action": "T1",
+      "partition": "prospective_evaluation",
+      "conditions_and_counterfactual_arms_share_group": true
+    },
+    {
+      "scenario_family_id": "m4_family_4",
+      "seed_block_id": "m4-seed-204",
+      "split_group_id": "9503863d8b6a9e70a2e89080fb9106bc90948f880a2eb75926b4b252d65866c5",
+      "scenario_sha256": "847a6b79dcfdd7a2c327a684a9739340390ea42b7b4641675f2cba93e479cba9",
+      "positive_control_signal": "GOLD",
+      "positive_control_correct_action": "T1",
+      "partition": "prospective_evaluation",
+      "conditions_and_counterfactual_arms_share_group": true
+    },
+    {
+      "scenario_family_id": "m4_family_5",
+      "seed_block_id": "m4-seed-201",
+      "split_group_id": "18eec4054ef21274ef29f3c82070d3384739f9a5eb35b5885d33b4174d03e846",
+      "scenario_sha256": "884f3fd4ccbea8f04aff1fa17028988dcd2d9ec8edd0fd7110876c43b616cee0",
+      "positive_control_signal": "GOLD",
+      "positive_control_correct_action": "T1",
+      "partition": "prospective_evaluation",
+      "conditions_and_counterfactual_arms_share_group": true
+    },
+    {
+      "scenario_family_id": "m4_family_5",
+      "seed_block_id": "m4-seed-202",
+      "split_group_id": "54712e73561a80281ffd8225288734ca34d83e77254f3d8912f1b34f257bcb33",
+      "scenario_sha256": "884f3fd4ccbea8f04aff1fa17028988dcd2d9ec8edd0fd7110876c43b616cee0",
+      "positive_control_signal": "BLUE",
+      "positive_control_correct_action": "T2",
+      "partition": "prospective_evaluation",
+      "conditions_and_counterfactual_arms_share_group": true
+    },
+    {
+      "scenario_family_id": "m4_family_5",
+      "seed_block_id": "m4-seed-203",
+      "split_group_id": "9bc9462892c5598c5fa84ff209418be9407f9feee15fb5e11debc7d695ceab62",
+      "scenario_sha256": "884f3fd4ccbea8f04aff1fa17028988dcd2d9ec8edd0fd7110876c43b616cee0",
+      "positive_control_signal": "GOLD",
+      "positive_control_correct_action": "T1",
+      "partition": "prospective_evaluation",
+      "conditions_and_counterfactual_arms_share_group": true
+    },
+    {
+      "scenario_family_id": "m4_family_5",
+      "seed_block_id": "m4-seed-204",
+      "split_group_id": "140661ee3acf3d73c3bfe561960597f2221315e3114564445d3f54d22283d3d6",
+      "scenario_sha256": "884f3fd4ccbea8f04aff1fa17028988dcd2d9ec8edd0fd7110876c43b616cee0",
+      "positive_control_signal": "BLUE",
+      "positive_control_correct_action": "T2",
+      "partition": "prospective_evaluation",
+      "conditions_and_counterfactual_arms_share_group": true
+    },
+    {
+      "scenario_family_id": "m4_family_6",
+      "seed_block_id": "m4-seed-201",
+      "split_group_id": "fa81a5b6f8ccab5e84e9ec1e5c2c76e763b66268ddeca84478d8d968d08f3c62",
+      "scenario_sha256": "d36e5f7e9c7b9de29d3bd50989083547f97ef9f8865569121c218cac6c6238bd",
+      "positive_control_signal": "GOLD",
+      "positive_control_correct_action": "T1",
+      "partition": "prospective_evaluation",
+      "conditions_and_counterfactual_arms_share_group": true
+    },
+    {
+      "scenario_family_id": "m4_family_6",
+      "seed_block_id": "m4-seed-202",
+      "split_group_id": "8eaf6a4fa675b0ea3634d6aff71029e0309f280825597b1880e20610f7354ced",
+      "scenario_sha256": "d36e5f7e9c7b9de29d3bd50989083547f97ef9f8865569121c218cac6c6238bd",
+      "positive_control_signal": "GOLD",
+      "positive_control_correct_action": "T1",
+      "partition": "prospective_evaluation",
+      "conditions_and_counterfactual_arms_share_group": true
+    },
+    {
+      "scenario_family_id": "m4_family_6",
+      "seed_block_id": "m4-seed-203",
+      "split_group_id": "820dbc550ba1153cce880f97b3a1734e9de57e16d360f24d3707def15818d691",
+      "scenario_sha256": "d36e5f7e9c7b9de29d3bd50989083547f97ef9f8865569121c218cac6c6238bd",
+      "positive_control_signal": "GOLD",
+      "positive_control_correct_action": "T1",
+      "partition": "prospective_evaluation",
+      "conditions_and_counterfactual_arms_share_group": true
+    },
+    {
+      "scenario_family_id": "m4_family_6",
+      "seed_block_id": "m4-seed-204",
+      "split_group_id": "d5a5e07cd8269a15c3ed1d433654dca0fc5e2e4fb1c41b162738146ae702d8a0",
+      "scenario_sha256": "d36e5f7e9c7b9de29d3bd50989083547f97ef9f8865569121c218cac6c6238bd",
+      "positive_control_signal": "BLUE",
+      "positive_control_correct_action": "T2",
+      "partition": "prospective_evaluation",
+      "conditions_and_counterfactual_arms_share_group": true
+    }
+  ],
+  "leakage_constraints": [
+    "all within-group arms, messages, ballots, tasks and derived views remain in one partition",
+    "no prompt, matrix, label, or threshold changes after any M4 model output",
+    "every assigned group remains in the denominator, including no-proposal and failed groups"
+  ]
+}
