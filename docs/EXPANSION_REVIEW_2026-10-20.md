@@ -1,7 +1,7 @@
 # M3 expansion recommendation: adversarial review
 
-**Review date:** 2026-10-20  
-**Scope:** review of the new expansion recommendation against the frozen M3 audit and current submission plan.  
+**Review date:** 2026-10-20
+**Scope:** review of the new expansion recommendation against the frozen M3 audit and current submission plan.
 **Execution status:** documentation and planning only; no model calls, baseline runs, M4 generation, detector evaluation, or artifact changes to M0-M3.
 
 ## What M3 supports

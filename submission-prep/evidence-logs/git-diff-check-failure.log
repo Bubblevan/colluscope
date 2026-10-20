@@ -1,0 +1,2 @@
+GIT DIFF CHECK FAILURE RECORD - 2026-10-20
+Before commit cd86a52, git diff --cached --check reported two trailing-whitespace lines in docs/EXPANSION_REVIEW_2026-10-20.md (the date and scope lines). The commit was created because the PowerShell script did not stop on that nonzero command. The spaces were removed immediately afterward. No research source, protocol, or data changed. See follow-up clean diff check and refreshed manifest.
