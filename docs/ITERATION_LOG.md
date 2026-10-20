@@ -836,3 +836,14 @@ Exact pytest failure transcripts and schedule-generation JSON are preserved unde
 - **ADVERSARIAL REVIEW:** current asset hashes pass, but the old verifier is stale for v3; its failure remains a real failed command and is not overwritten. DeepSeek official docs currently say Flash thinking defaults enabled/high and temperature has no effect in thinking mode. Because exact 280-row payload hashes are frozen and must remain unchanged, this task preserves the existing `temperature: 0` body and records the actual provider-default decoding as a non-determinism limitation; all phases use the same unchanged parameter policy. Official peak rates yield a theoretical 856-call maximum of USD 2.2351872 at 8,192 input + 128 output tokens/request, below the USD 3 cap.
 - **DECIDE:** current M4 asset gate **PASS**; stale M4 v1 diagnostic **FAIL, retained and scoped**; no behavior claim yet. The explicit user request authorizes M4 and the defined DeepSeek phases, but no inference occurs until this freeze is committed and an aggregate no-retry budget ledger is enforced.
 - **REPORT / next action:** finalize and commit the M4 authorization-provenance fix plus protocol/risk addenda; then run the one authorized 24-group M4 schedule once. Do not tune the protocol from early outcomes.
+
+## FULL-RESEARCH-M4-STARTUP-REPAIR-01 — create protected server log directory before launch
+
+- **Date:** 2026-10-20; one authorized pre-generation startup attempt only.
+- **INSPECT:** M4 failed opening `logs/llama-server.stdout.log` because the nested directory was not created. The preserved original run shows 24 `group_assigned`, zero `group_started`, zero episodes, zero generation attempts, `server_stopped/NOT_STARTED`, `NO_KEY_CREATED`, and no 127.0.0.1:8081 listener. Exact local failure record: `runs/m4/full-research-execution-20261020/failure-history/preflight-startup-failure-01.log`.
+- **SPECIFY:** regression falsifier: with a fresh output path lacking `logs/`, the server-log path factory must create the directory and both appendable paths; the previously failed output is immutable and the retry must use a separate directory with the same frozen group IDs.
+- **IMPLEMENT:** add `_server_log_paths` and call it before opening server stdout/stderr; no change to task, prompts, model, server flags, sampling, groups, or recovery policy.
+- **RUN:** `PYTHONPATH=src python -m pytest -q tests/test_m4_live_runtime.py`: **31 passed in 38.26s**. This includes fresh nested-directory creation and appendability; fake HTTP tests remained offline and made zero model generations.
+- **ADVERSARIAL REVIEW:** first attempt consumed no generation request and started no server. It remains preserved; do not treat its 24 assignments as completed episodes or replace any group.
+- **DECIDE:** this is a bounded startup defect with a narrow repair and a targeted regression test; continue only if tests pass, then use a new output directory.
+

@@ -980,6 +980,13 @@ def _llama_server_command(config: dict[str, Any], key_path: Path) -> list[str]:
             "--api-key-file", str(key_path.resolve())]
 
 
+def _server_log_paths(out: Path) -> tuple[Path, Path]:
+    """Create and return the private stdout/stderr log paths before server launch."""
+    log_dir = out / "logs"
+    log_dir.mkdir(parents=True, exist_ok=True)
+    return log_dir / "llama-server.stdout.log", log_dir / "llama-server.stderr.log"
+
+
 def _start_server(out: Path, config: dict[str, Any]) -> tuple[Any, str, Path, list[Any], dict[str, Any]]:
     import subprocess
     from scripts.local_llama_security import create_api_key_file
@@ -992,8 +999,9 @@ def _start_server(out: Path, config: dict[str, Any]) -> tuple[Any, str, Path, li
     if listeners:
         raise M4LiveError(f"frozen llama.cpp port is already occupied: {listeners}")
     key, key_path, key_info = create_api_key_file(out)
-    stdout = (out / "logs" / "llama-server.stdout.log").open("ab")
-    stderr = (out / "logs" / "llama-server.stderr.log").open("ab")
+    stdout_path, stderr_path = _server_log_paths(out)
+    stdout = stdout_path.open("ab")
+    stderr = stderr_path.open("ab")
     process = None
     try:
         command = _llama_server_command(config, key_path)

@@ -11,6 +11,21 @@ import pytest
 from colluscope import m4_live_runtime as live
 
 
+def test_server_log_paths_create_nested_private_log_directory(tmp_path):
+    out = tmp_path / "fresh-run"
+    stdout, stderr = live._server_log_paths(out)
+
+    assert stdout == out / "logs" / "llama-server.stdout.log"
+    assert stderr == out / "logs" / "llama-server.stderr.log"
+    assert stdout.parent.is_dir()
+    with stdout.open("ab") as stream:
+        stream.write(b"stdout-canary\n")
+    with stderr.open("ab") as stream:
+        stream.write(b"stderr-canary\n")
+    assert stdout.read_bytes() == b"stdout-canary\n"
+    assert stderr.read_bytes() == b"stderr-canary\n"
+
+
 class FakeLlamaState:
     def __init__(self, mode: str = "success", *, send_proposal: bool = True):
         self.mode = mode
