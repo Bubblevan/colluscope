@@ -47,3 +47,9 @@ The compatibility runtime changes no upstream Colosseum or frozen M4 environment
 - A and B share the same informed rewarded target. Agreement on that target without a communication intervention cannot identify communication-induced coordination.
 - The M4 design estimates observable ballot responses, not latent collusion intent. Target execution, private reward, welfare regret, chat availability or ballot agreement alone are not collusion labels.
 - Local file hashes and append-only code paths detect ordinary corruption; they are not a signed or tamper-proof external timestamp.
+
+## Current user-authorized execution receipt addendum (2026-10-20)
+
+The current full-research task explicitly authorizes the 24-group M4 local run within the existing 264 physical-generation cap. This does not change the v3 intervention or experiment schedule. The CLI now additionally requires `--authorization-receipt`, verifies its attachment-scope fields, source hash, matching approval ID, allowed restricted path and Windows ACL, and binds its path/hash into the v4 run manifest. The old manifest field `live_inference_authorized_by_this_task=false` remains the invariant that the runtime cannot authorize itself; `explicit_user_authorization_received` records the current run-specific fact independently.
+
+The local receipt is `runs/full-research-execution-20261020/authorization_receipt.json` (Git-ignored, current-user ACL only). Its reference and hash are written in the private run manifest. This schema change is provenance-only: it does not alter model prompts, endpoint, groups, matrices, incentives, seeds, schemas, sampling, or call count. Focused fake-server tests verify the receipt scope/tamper rejection and that a fake run does not claim user authorization. Current exact M4 v3 asset verification passes; the stale v1 identity-verifier NO-GO is retained as an out-of-scope historical check and is not evidence about current v3 identity.

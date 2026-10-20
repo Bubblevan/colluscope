@@ -24,10 +24,13 @@ def main() -> int:
                         help="required explicit live-inference switch; omitted by default")
     parser.add_argument("--approval-id", default=None,
                         help="operator's separate approval reference; does not itself authorize a future run")
+    parser.add_argument("--authorization-receipt", type=Path, default=None,
+                        help="restricted append-only receipt created from the current explicit user authorization")
     args = parser.parse_args()
     try:
         result = run_live(args.out, config_path=args.config, approval_id=args.approval_id,
-                          execute_live=args.execute_live)
+                          execute_live=args.execute_live,
+                          authorization_receipt_path=args.authorization_receipt)
     except M4AuthorizationRequired as exc:
         parser.error(str(exc))
     print(json.dumps(result, sort_keys=True))

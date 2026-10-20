@@ -807,7 +807,8 @@ def execute_group(out: Path, group: dict[str, Any], scenario: dict[str, Any],
 
 def _freeze_manifest(out: Path, config_path: Path, config: dict[str, Any],
                      groups: list[dict[str, Any]], *, test_mode: bool,
-                     endpoint: str, approval_id: str) -> dict[str, Any]:
+                     endpoint: str, approval_id: str,
+                     authorization_record: dict[str, str] | None = None) -> dict[str, Any]:
     from scripts.run_m4_offline import (SYSTEM_PATH, MESSAGE_PATH, BALLOT_PATH, POSITIVE_PATH,
                                          COMM_SCHEMA_PATH, BALLOT_SCHEMA_PATH, POSITIVE_SCHEMA_PATH)
     artifact_paths = [config_path, BASE_CONFIG, ROOT / "configs/m4-scenarios-v1.json",
@@ -822,9 +823,14 @@ def _freeze_manifest(out: Path, config_path: Path, config: dict[str, Any],
                       ROOT / "scripts/audit_m4_live.py", ROOT / "scripts/local_llama_security.py",
                       ROOT / "scripts/run_m1_p0_local_preflight.py"]
     hashes = {p.relative_to(ROOT).as_posix(): sha_file(p) for p in artifact_paths}
-    return {"schema_version": "m4-live-run-manifest-v3", "protocol_id": config["protocol_id"],
+    return {"schema_version": "m4-live-run-manifest-v4", "protocol_id": config["protocol_id"],
             "mode": "fake_http_integration_test" if test_mode else "live_local_llama_cpp",
+            # The runner never authorizes itself. This legacy field describes that
+            # invariant; the explicit per-run user authorization is recorded below.
             "live_inference_authorized_by_this_task": False,
+            "explicit_user_authorization_received": authorization_record is not None,
+            "authorization_receipt_path": authorization_record.get("path") if authorization_record else None,
+            "authorization_receipt_sha256": authorization_record.get("sha256") if authorization_record else None,
             "approval_id": approval_id,
             "assigned_group_ids": [g["split_group_id"] for g in groups],
             "assigned_group_count": len(groups), "hard_physical_generation_attempts": 264,
@@ -841,7 +847,10 @@ def _validate_existing(out: Path, expected_manifest: dict[str, Any], groups: lis
     manifest_path = out / "run_manifest.json"
     if manifest_path.exists():
         prior = json.loads(manifest_path.read_text(encoding="utf-8"))
-        for key in ("protocol_id", "mode", "approval_id", "assigned_group_ids", "artifact_sha256", "model", "runtime", "tokenizer", "sampling"):
+        for key in ("schema_version", "protocol_id", "mode", "approval_id",
+                    "explicit_user_authorization_received", "authorization_receipt_path",
+                    "authorization_receipt_sha256", "assigned_group_ids", "artifact_sha256",
+                    "model", "runtime", "tokenizer", "sampling"):
             if prior.get(key) != expected_manifest.get(key):
                 raise M4LiveError(f"resume refused: run manifest mismatch in {key}")
     else:
@@ -1066,9 +1075,11 @@ def _run_groups(out: Path, config: dict[str, Any], base: dict[str, Any],
                 groups: list[dict[str, Any]], *, approval_id: str, endpoint: str,
                 api_key: str, token_counter: Any, transport: Callable[..., HTTPResult],
                 test_mode: bool, acl: dict[str, Any],
-                listener_guard: Callable[[], bool] | None = None) -> dict[str, Any]:
+                listener_guard: Callable[[], bool] | None = None,
+                authorization_record: dict[str, str] | None = None) -> dict[str, Any]:
     manifest = _freeze_manifest(out, LIVE_CONFIG, config, groups, test_mode=test_mode,
-                                endpoint=endpoint, approval_id=approval_id)
+                                endpoint=endpoint, approval_id=approval_id,
+                                authorization_record=authorization_record)
     manifest["private_storage_acl_initial"] = acl
     expected_terminal, interrupted_groups = _validate_existing(out, manifest, groups)
     family = {row["scenario_family_id"]: row for row in scenarios["families"]}
@@ -1155,6 +1166,7 @@ def _run_groups(out: Path, config: dict[str, Any], base: dict[str, Any],
 
 def run_live(out: Path, *, config_path: Path = LIVE_CONFIG, approval_id: str | None,
              execute_live: bool, secure_storage: bool = True,
+             authorization_receipt_path: Path | None = None,
              test_mode: bool = False, test_endpoint: str | None = None,
              transport: Callable[..., HTTPResult] | None = None,
              token_counter: Any = None,
@@ -1163,6 +1175,11 @@ def run_live(out: Path, *, config_path: Path = LIVE_CONFIG, approval_id: str | N
     if not execute_live or not isinstance(approval_id, str) or not approval_id.strip():
         raise M4AuthorizationRequired("live M4 runtime is disabled unless explicitly approved and enabled")
     config, base, scenarios, splits, positive = load_live_config(config_path)
+    authorization_record = None
+    if not test_mode:
+        if authorization_receipt_path is None:
+            raise M4AuthorizationRequired("production M4 execution requires the append-only authorization receipt")
+        authorization_record = load_authorization_receipt(authorization_receipt_path, approval_id)
     if test_mode:
         if not test_endpoint:
             raise M4LiveError("test-only integration run requires an injected loopback endpoint")
@@ -1209,12 +1226,14 @@ def run_live(out: Path, *, config_path: Path = LIVE_CONFIG, approval_id: str | N
         return _run_groups(out, config, base, scenarios, splits, positive, groups,
                            approval_id=approval_id, endpoint=test_endpoint,
                            api_key="test-only-key", token_counter=token_counter,
-                           transport=transport or local_http, test_mode=True, acl=acl)
+                           transport=transport or local_http, test_mode=True, acl=acl,
+                           authorization_record=None)
 
     from scripts.local_llama_security import remove_api_key_file, verify_private_directory_acl
     from scripts.run_m1_p0_local_preflight import _stop_own_process
     preflight_manifest = _freeze_manifest(out, LIVE_CONFIG, config, groups, test_mode=False,
-                                          endpoint=config["runtime"]["endpoint"], approval_id=approval_id)
+                                          endpoint=config["runtime"]["endpoint"], approval_id=approval_id,
+                                          authorization_record=authorization_record)
     preflight_manifest["private_storage_acl_initial"] = acl
     _validate_existing(out, preflight_manifest, groups)
     process = None
@@ -1232,7 +1251,8 @@ def run_live(out: Path, *, config_path: Path = LIVE_CONFIG, approval_id: str | N
                              approval_id=approval_id, endpoint=config["runtime"]["endpoint"],
                              api_key=key, token_counter=token_counter,
                              transport=local_http, test_mode=False, acl=acl,
-                             listener_guard=server_identity["process_guard"])
+                             listener_guard=server_identity["process_guard"],
+                             authorization_record=authorization_record)
         return result
     finally:
         shutdown = _stop_own_process(process) if process is not None else {"status": "NOT_STARTED"}
@@ -1251,6 +1271,54 @@ class _CharacterTokenCounter:
         return sum(len(row["content"]) for row in messages)
 
 
+def load_authorization_receipt(path: Path, approval_id: str) -> dict[str, str]:
+    """Verify the local, sanitized, append-only user authorization receipt."""
+    path = Path(path).resolve()
+    approved_root = (ROOT / "runs/full-research-execution-20261020").resolve()
+    if approved_root not in path.parents or not path.is_file():
+        raise M4AuthorizationRequired("authorization receipt must be present in the restricted full-research run root")
+    raw = path.read_bytes()
+    try:
+        receipt = json.loads(raw)
+    except (json.JSONDecodeError, UnicodeDecodeError) as exc:
+        raise M4AuthorizationRequired("authorization receipt is not valid UTF-8 JSON") from exc
+    if not isinstance(receipt, dict):
+        raise M4AuthorizationRequired("authorization receipt root must be an object")
+    local = receipt.get("local_m4", {})
+    remote = receipt.get("remote_monitor", {})
+    if not isinstance(local, dict) or not isinstance(remote, dict):
+        raise M4AuthorizationRequired("authorization receipt scope sections must be objects")
+    caps = remote.get("phase_request_caps")
+    source_hash = receipt.get("source_attachment_sha256")
+    try:
+        valid_source_hash = (isinstance(source_hash, str) and len(source_hash) == 64
+                             and int(source_hash, 16) >= 0)
+    except ValueError:
+        valid_source_hash = False
+    from scripts.local_llama_security import verify_private_directory_acl
+    receipt_acl = verify_private_directory_acl(approved_root)
+    if receipt_acl.get("verified") is not True:
+        raise M4AuthorizationRequired("authorization receipt root is not ACL-restricted")
+    if (receipt.get("schema_version") != "colluscope-explicit-user-authorization-receipt-v1"
+            or receipt.get("authorization_id") != approval_id
+            or receipt.get("receipt_created_by") != "Codex from current user-authorized attachment"
+            or not valid_source_hash
+            or local.get("model") != "Qwen3-8B-Q4_K_M.gguf"
+            or local.get("endpoint") != "127.0.0.1:8081"
+            or local.get("assigned_groups") != 24
+            or local.get("maximum_physical_generation_attempts") != MAX_GENERATION_ATTEMPTS
+            or local.get("retries") != 0 or local.get("replacements") != 0
+            or remote.get("provider") != "official DeepSeek API"
+            or remote.get("model") != "deepseek-flash"
+            or remote.get("maximum_physical_requests") != 856
+            or remote.get("maximum_cost_usd") != 3.0
+            or remote.get("retries") != 0 or remote.get("replacements") != 0):
+        raise M4AuthorizationRequired("authorization receipt does not match the current bounded execution scope")
+    if caps != {"scripted_controls": 280, "actual_m4_trace": 504, "matched_worlds": 72}:
+        raise M4AuthorizationRequired("authorization receipt phase request allocations differ from the frozen budget")
+    return {"path": path.relative_to(ROOT).as_posix(), "sha256": sha(raw)}
+
+
 def verify_live_run(out: Path, scenarios: dict[str, Any], splits: dict[str, Any],
                     *, token_counter: Any = None) -> dict[str, Any]:
     """Read-only replay of request hashes, model actions, settlements and welfare."""
@@ -1262,7 +1330,7 @@ def verify_live_run(out: Path, scenarios: dict[str, Any], splits: dict[str, Any]
     manifest = json.loads((out / "run_manifest.json").read_text(encoding="utf-8"))
     assigned_ids = set(manifest.get("assigned_group_ids", []))
     run_mode = manifest.get("mode")
-    if (manifest.get("schema_version") != "m4-live-run-manifest-v3"
+    if (manifest.get("schema_version") != "m4-live-run-manifest-v4"
             or manifest.get("protocol_id") != "colluscope-m4-live-runtime-v3"
             or run_mode not in {"fake_http_integration_test", "live_local_llama_cpp"}
             or not assigned_ids or not assigned_ids <= assignments
@@ -1272,8 +1340,23 @@ def verify_live_run(out: Path, scenarios: dict[str, Any], splits: dict[str, Any]
             or manifest.get("retry_count") != 0
             or manifest.get("replacement_group_count") != 0
             or manifest.get("auth_header_saved") is not False
-            or manifest.get("live_inference_authorized_by_this_task") is not False):
+            or manifest.get("live_inference_authorized_by_this_task") is not False
+            or manifest.get("explicit_user_authorization_received") is not (run_mode == "live_local_llama_cpp")):
         raise M4LiveError("run manifest assignment or hard generation ceiling is invalid")
+    receipt_path = manifest.get("authorization_receipt_path")
+    receipt_hash = manifest.get("authorization_receipt_sha256")
+    if run_mode == "live_local_llama_cpp":
+        if (not isinstance(receipt_path, str) or not isinstance(receipt_hash, str)
+                or len(receipt_hash) != 64):
+            raise M4LiveError("live run lacks the explicit authorization receipt link")
+        receipt_file = (ROOT / receipt_path).resolve()
+        approved_root = (ROOT / "runs/full-research-execution-20261020").resolve()
+        if (approved_root not in receipt_file.parents or not receipt_file.is_file()
+                or sha_file(receipt_file) != receipt_hash):
+            raise M4LiveError("authorization receipt is missing, outside its restricted root or changed")
+        load_authorization_receipt(receipt_file, manifest.get("approval_id", ""))
+    elif receipt_path is not None or receipt_hash is not None:
+        raise M4LiveError("fake HTTP run must not claim a real user authorization receipt")
     validate_local_endpoint(manifest.get("endpoint", ""),
                             test_loopback_port=run_mode == "fake_http_integration_test")
     artifact_hashes = manifest.get("artifact_sha256")

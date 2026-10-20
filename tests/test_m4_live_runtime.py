@@ -126,6 +126,39 @@ def test_live_entrypoint_fails_closed_without_explicit_flag_or_approval(tmp_path
     assert not (tmp_path / "run").exists()
 
 
+def test_live_authorization_receipt_is_scope_checked_and_hashed(tmp_path, monkeypatch):
+    from scripts import local_llama_security
+    monkeypatch.setattr(local_llama_security, "verify_private_directory_acl",
+                        lambda _path: {"verified": True})
+    monkeypatch.setattr(live, "ROOT", tmp_path.resolve())
+    receipt_path = tmp_path / "runs/full-research-execution-20261020/authorization_receipt.json"
+    receipt_path.parent.mkdir(parents=True)
+    receipt = {
+        "schema_version": "colluscope-explicit-user-authorization-receipt-v1",
+        "receipt_created_by": "Codex from current user-authorized attachment",
+        "authorization_id": "TEST-RECEIPT",
+        "source_attachment_sha256": "a" * 64,
+        "local_m4": {"model": "Qwen3-8B-Q4_K_M.gguf", "endpoint": "127.0.0.1:8081",
+                     "assigned_groups": 24, "maximum_physical_generation_attempts": 264,
+                     "retries": 0, "replacements": 0},
+        "remote_monitor": {"provider": "official DeepSeek API", "model": "deepseek-flash",
+                           "maximum_physical_requests": 856, "maximum_cost_usd": 3.0,
+                           "phase_request_caps": {"scripted_controls": 280,
+                                                  "actual_m4_trace": 504,
+                                                  "matched_worlds": 72},
+                           "retries": 0, "replacements": 0},
+    }
+    data = json.dumps(receipt, sort_keys=True, separators=(",", ":")).encode() + b"\n"
+    receipt_path.write_bytes(data)
+    record = live.load_authorization_receipt(receipt_path, "TEST-RECEIPT")
+    assert record["path"] == "runs/full-research-execution-20261020/authorization_receipt.json"
+    assert record["sha256"] == live.sha(data)
+    receipt["remote_monitor"]["maximum_cost_usd"] = 300.0
+    receipt_path.write_text(json.dumps(receipt), encoding="utf-8")
+    with pytest.raises(live.M4AuthorizationRequired, match="scope"):
+        live.load_authorization_receipt(receipt_path, "TEST-RECEIPT")
+
+
 def test_fake_http_server_executes_complete_proposal_group_and_independent_replay(tmp_path):
     state = FakeLlamaState()
     summary, _endpoint, server, thread = _run(tmp_path, state)
@@ -136,6 +169,12 @@ def test_fake_http_server_executes_complete_proposal_group_and_independent_repla
         assert summary["attempts_with_terminal_event"] == 11
         assert len(state.requests) == 11
         assert all(value == "Bearer test-only-key" for value in state.auth_headers)
+        manifest = json.loads((out / "run_manifest.json").read_text(encoding="utf-8"))
+        assert manifest["schema_version"] == "m4-live-run-manifest-v4"
+        assert manifest["live_inference_authorized_by_this_task"] is False
+        assert manifest["explicit_user_authorization_received"] is False
+        assert manifest["authorization_receipt_path"] is None
+        assert manifest["authorization_receipt_sha256"] is None
         episode = live.read_jsonl(out / "episodes.jsonl")[0]
         assert episode["real_model_evidence"] is False
         assert episode["response_source"] == "fake_openai_compatible_server"
