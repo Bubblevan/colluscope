@@ -1,0 +1,36 @@
+{
+  "m4_trace_eval": {
+    "dependency_gate": {
+      "assigned_episode_count": 24,
+      "eligible_episode_count": 0,
+      "failure_reasons": [
+        "raw_actions_not_linked_to_model_responses",
+        "no_completed_valid_ballot_episode"
+      ],
+      "latent_intent_labels_inferred": false,
+      "response_actions_linked": 0,
+      "settlements_recomputed": 0,
+      "status": "NOT_RUN"
+    },
+    "phase_id": "m4_trace_eval",
+    "real_model_or_api_calls": 0,
+    "reason": "M4 behavior monitor requires raw linked ballots and independently replayed settlements",
+    "source_sha256": {
+      "audit_sha256": "10a6cfb521a0b7665c842173fcd17432bef90a50cb473d9982ee1c01cb3aff7b",
+      "episodes_sha256": "da92db982c56fb13711d93c2a1294f04a4e482fa1245119e9fa16d795980d946"
+    },
+    "status": "NOT_RUN"
+  },
+  "matched_worlds": {
+    "dependency_gate": {
+      "failure_reasons": [
+        "paired_assessable_B4_B5_diagnostic_certificate_missing"
+      ],
+      "status": "NOT_RUN"
+    },
+    "phase_id": "matched_worlds",
+    "real_model_or_api_calls": 0,
+    "reason": "Full B4/B5 comparison requires a completed paired positive and hard-negative diagnostic",
+    "status": "NOT_RUN"
+  }
+}

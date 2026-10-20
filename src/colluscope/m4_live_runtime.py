@@ -23,6 +23,7 @@ from typing import Any, Callable
 ROOT = Path(__file__).resolve().parents[2]
 BASE_CONFIG = ROOT / "configs/m4-runtime-v2.json"
 LIVE_CONFIG = ROOT / "configs/m4-live-runtime-v3.json"
+LIVE_CONFIG_V4 = ROOT / "configs/m4-live-runtime-v4.json"
 AGENTS = ("A", "B", "C")
 TASKS = ("T1", "T2", "T3")
 TARGET = {"A": "T3", "B": "T2", "C": "T1"}
@@ -120,20 +121,31 @@ def load_live_config(path: Path = LIVE_CONFIG) -> tuple[dict[str, Any], dict[str
                 "base_runtime_config_sha256", "execution_enabled_by_default", "model",
                 "runtime", "tokenizer", "sampling", "schedule", "frozen_inputs",
                 "authorization", "storage"}
-    if set(live) != required or live["schema_version"] != "m4-live-runtime-v3":
-        raise M4LiveError("M4 live v3 config key/schema contract mismatch")
-    if (live["protocol_id"] != "colluscope-m4-live-runtime-v3"
+    protocol_v4 = live.get("schema_version") == "m4-live-runtime-v4"
+    expected_keys = required | ({"action_interface"} if protocol_v4 else set())
+    if set(live) != expected_keys or live.get("schema_version") not in {"m4-live-runtime-v3", "m4-live-runtime-v4"}:
+        raise M4LiveError("M4 live config key/schema contract mismatch")
+    expected_protocol = "colluscope-m4-live-runtime-v4" if protocol_v4 else "colluscope-m4-live-runtime-v3"
+    if (live["protocol_id"] != expected_protocol
             or live["status"] != "live-capable_offline-by-default_separate-approval-required"
             or live["execution_enabled_by_default"] is not False
             or live["authorization"].get("requires_explicit_cli_live_flag") is not True
             or live["authorization"].get("requires_nonempty_operator_approval_id") is not True):
         raise M4LiveError("M4 live runner must remain explicitly disabled by default")
+    if protocol_v4 and live["action_interface"] != {
+            "version": "m4-action-interface-v4",
+            "reasoning_format": "deepseek",
+            "wrapper_fallback": "one_exact_leading_think_wrapper_then_json",
+            "wrapper_fallback_enabled": True,
+        }:
+        raise M4LiveError("M4 v4 action-interface settings differ from their freeze")
     if live["runtime"].get("endpoint") != "http://127.0.0.1:8081/v1" or live["runtime"].get("external_fallback") is not False:
         raise M4LiveError("only the frozen local loopback endpoint without fallback is permitted")
     expected_runtime = {"host": "127.0.0.1", "port": 8081, "offline": True,
                         "authenticated": True, "context_length": 4096, "parallel_slots": 1,
                         "gpu_device": "Vulkan1", "gpu_layers": "all", "fit": "off",
-                        "reasoning": "off", "reasoning_format": "none"}
+                        "reasoning": "off",
+                        "reasoning_format": ("deepseek" if protocol_v4 else "none")}
     if any(live["runtime"].get(key) != value for key, value in expected_runtime.items()):
         raise M4LiveError("llama.cpp launch identity/settings differ from the frozen local runtime")
     if (live["sampling"].get("temperature") != 0.0 or live["sampling"].get("top_p") != 1.0
@@ -159,6 +171,8 @@ def load_live_config(path: Path = LIVE_CONFIG) -> tuple[dict[str, Any], dict[str
         source = base[section]
         target = live[section]
         for key in source:
+            if protocol_v4 and section == "runtime" and key == "reasoning_format":
+                continue
             if key in target and target[key] != source[key]:
                 raise M4LiveError(f"live runtime changes frozen M4-v2 {section}.{key}")
     if live["schedule"]["assigned_groups"] != len(splits["groups"]):
@@ -311,7 +325,7 @@ def _request_body(config: dict[str, Any], messages: list[dict[str, str]], action
         "cache_prompt": False,
         "response_format": {"type": "json_schema", "schema": _schema(action_kind)},
         "chat_template_kwargs": {"enable_thinking": False},
-        "reasoning_format": "none",
+        "reasoning_format": ("deepseek" if config.get("schema_version") == "m4-live-runtime-v4" else "none"),
     }
     return canonical(payload)
 
@@ -353,11 +367,15 @@ class GenerationClient:
                  token_counter: Any, endpoint: str,
                  transport: Callable[..., HTTPResult] = local_http,
                  test_loopback_port: bool = False,
-                 listener_guard: Callable[[], bool] | None = None):
+                 listener_guard: Callable[[], bool] | None = None,
+                 max_generation_attempts: int = MAX_GENERATION_ATTEMPTS):
+        if type(max_generation_attempts) is not int or not 1 <= max_generation_attempts <= MAX_GENERATION_ATTEMPTS:
+            raise M4LiveError("generation client attempt cap must be within the frozen M4 hard ceiling")
         self.out, self.config, self.api_key = out, config, api_key
         self.token_counter, self.endpoint, self.transport = token_counter, endpoint, transport
         self.test_loopback_port = test_loopback_port
         self.listener_guard = listener_guard
+        self.max_generation_attempts = max_generation_attempts
         self.request_ids: set[str] = set()
 
     def generate(self, request_id: str, group_id: str, action_kind: str, agent: str,
@@ -369,7 +387,7 @@ class GenerationClient:
             raise M4LiveError("duplicate logical request ID in one assigned run")
         self.request_ids.add(request_id)
         count = _count_started(self.out)
-        if count >= MAX_GENERATION_ATTEMPTS:
+        if count >= self.max_generation_attempts:
             raise M4RequestFailure("HARD_CAP_REACHED", "hard M4 physical-generation-attempt ceiling reached")
         _validate_agent_observation(observation)
         messages = _messages(prompt)
@@ -434,6 +452,7 @@ class GenerationClient:
             parsed: dict[str, Any] | None = None
             status = f"HTTP_ERROR_{http_status}" if http_status != 200 else "RESPONSE_RECEIVED"
             assistant_text: str | None = None
+            action_interface_receipt: dict[str, Any] | None = None
             if http_status == 200:
                 try:
                     parsed = json.loads(raw_body)
@@ -467,9 +486,22 @@ class GenerationClient:
                         else:
                             assistant_text = message["content"]
                             try:
-                                action = _validate_action(assistant_text, action_kind)
+                                if self.config.get("schema_version") == "m4-live-runtime-v4":
+                                    from colluscope.m4_action_interface_v4 import parse_action
+                                    action, action_interface_receipt = parse_action(
+                                        message, action_kind, _validate_action)
+                                    try:
+                                        import jsonschema
+                                        jsonschema.validate(action, _schema(action_kind))
+                                    except Exception as exc:
+                                        raise M4RequestFailure("SCHEMA_VALIDATION_FAILED",
+                                                               "extracted action violates the frozen JSON Schema") from exc
+                                else:
+                                    action = _validate_action(assistant_text, action_kind)
                             except M4RequestFailure as exc:
                                 status, parse_error = exc.status, str(exc)
+                            except ValueError as exc:
+                                status, parse_error = "INVALID_ACTION_INTERFACE", str(exc)
                             else:
                                 status, parse_error = "COMPLETED", None
             else:
@@ -483,6 +515,8 @@ class GenerationClient:
                                          if usage else None),
                        "elapsed_seconds": elapsed, "parse_error": parse_error,
                        "assistant_content": assistant_text,
+                       **({"action_interface": action_interface_receipt}
+                          if self.config.get("schema_version") == "m4-live-runtime-v4" else {}),
                        "usage_audit": {
                            "locally_counted_input_tokens": input_tokens,
                            "server_reported_input_tokens": (usage.get("prompt_tokens", usage.get("input_tokens"))
@@ -822,6 +856,8 @@ def _freeze_manifest(out: Path, config_path: Path, config: dict[str, Any],
                       ROOT / "scripts/run_m4_offline.py", ROOT / "scripts/run_m4_live.py",
                       ROOT / "scripts/audit_m4_live.py", ROOT / "scripts/local_llama_security.py",
                       ROOT / "scripts/run_m1_p0_local_preflight.py"]
+    if config.get("schema_version") == "m4-live-runtime-v4":
+        artifact_paths.append(ROOT / "src/colluscope/m4_action_interface_v4.py")
     hashes = {p.relative_to(ROOT).as_posix(): sha_file(p) for p in artifact_paths}
     return {"schema_version": "m4-live-run-manifest-v4", "protocol_id": config["protocol_id"],
             "mode": "fake_http_integration_test" if test_mode else "live_local_llama_cpp",
@@ -1084,14 +1120,14 @@ def _start_server(out: Path, config: dict[str, Any]) -> tuple[Any, str, Path, li
         raise
 
 
-def _run_groups(out: Path, config: dict[str, Any], base: dict[str, Any],
+def _run_groups(out: Path, config_path: Path, config: dict[str, Any], base: dict[str, Any],
                 scenarios: dict[str, Any], splits: dict[str, Any], positive: dict[str, Any],
                 groups: list[dict[str, Any]], *, approval_id: str, endpoint: str,
                 api_key: str, token_counter: Any, transport: Callable[..., HTTPResult],
                 test_mode: bool, acl: dict[str, Any],
                 listener_guard: Callable[[], bool] | None = None,
                 authorization_record: dict[str, str] | None = None) -> dict[str, Any]:
-    manifest = _freeze_manifest(out, LIVE_CONFIG, config, groups, test_mode=test_mode,
+    manifest = _freeze_manifest(out, config_path, config, groups, test_mode=test_mode,
                                 endpoint=endpoint, approval_id=approval_id,
                                 authorization_record=authorization_record)
     manifest["private_storage_acl_initial"] = acl
@@ -1212,8 +1248,8 @@ def run_live(out: Path, *, config_path: Path = LIVE_CONFIG, approval_id: str | N
     groups = assigned_groups if test_mode else splits["groups"]
     if not groups or (not test_mode and len(groups) != 24):
         raise M4LiveError("production execution must include all 24 assigned frozen groups")
-    if not test_mode and Path(config_path).resolve() != LIVE_CONFIG.resolve():
-        raise M4LiveError("production execution must use the checked-in M4 live v3 config exactly")
+    if not test_mode and Path(config_path).resolve() not in {LIVE_CONFIG.resolve(), LIVE_CONFIG_V4.resolve()}:
+        raise M4LiveError("production execution must use a checked-in versioned M4 live config")
     out = Path(out).resolve()
     private_root = (ROOT / config["storage"]["raw_run_root"]).resolve()
     if not test_mode and private_root not in out.parents:
@@ -1237,7 +1273,7 @@ def run_live(out: Path, *, config_path: Path = LIVE_CONFIG, approval_id: str | N
     if (out / "run_manifest.json").exists() is False and any(out.iterdir()):
         raise M4LiveError("refusing to adopt a nonempty output directory without a frozen run manifest")
     if test_mode:
-        return _run_groups(out, config, base, scenarios, splits, positive, groups,
+        return _run_groups(out, Path(config_path).resolve(), config, base, scenarios, splits, positive, groups,
                            approval_id=approval_id, endpoint=test_endpoint,
                            api_key="test-only-key", token_counter=token_counter,
                            transport=transport or local_http, test_mode=True, acl=acl,
@@ -1245,7 +1281,7 @@ def run_live(out: Path, *, config_path: Path = LIVE_CONFIG, approval_id: str | N
 
     from scripts.local_llama_security import remove_api_key_file, verify_private_directory_acl
     from scripts.run_m1_p0_local_preflight import _stop_own_process
-    preflight_manifest = _freeze_manifest(out, LIVE_CONFIG, config, groups, test_mode=False,
+    preflight_manifest = _freeze_manifest(out, Path(config_path).resolve(), config, groups, test_mode=False,
                                           endpoint=config["runtime"]["endpoint"], approval_id=approval_id,
                                           authorization_record=authorization_record)
     preflight_manifest["private_storage_acl_initial"] = acl
@@ -1261,7 +1297,7 @@ def run_live(out: Path, *, config_path: Path = LIVE_CONFIG, approval_id: str | N
                                    "runtime": {k: v for k, v in config["runtime"].items()
                                                if k not in {"binary_path"}},
                                    "at_utc": utc_now()})
-        result = _run_groups(out, config, base, scenarios, splits, positive, groups,
+        result = _run_groups(out, Path(config_path).resolve(), config, base, scenarios, splits, positive, groups,
                              approval_id=approval_id, endpoint=config["runtime"]["endpoint"],
                              api_key=key, token_counter=token_counter,
                              transport=local_http, test_mode=False, acl=acl,
@@ -1333,6 +1369,22 @@ def load_authorization_receipt(path: Path, approval_id: str) -> dict[str, str]:
     return {"path": path.relative_to(ROOT).as_posix(), "sha256": sha(raw)}
 
 
+def _is_json_value_for_audit(text: str) -> bool:
+    def unique_object(pairs):
+        value = {}
+        for key, item in pairs:
+            if key in value:
+                raise ValueError("duplicate JSON key")
+            value[key] = item
+        return value
+
+    try:
+        json.loads(text, object_pairs_hook=unique_object)
+    except (json.JSONDecodeError, TypeError, ValueError):
+        return False
+    return True
+
+
 def verify_live_run(out: Path, scenarios: dict[str, Any], splits: dict[str, Any],
                     *, token_counter: Any = None) -> dict[str, Any]:
     """Read-only replay of request hashes, model actions, settlements and welfare."""
@@ -1344,8 +1396,9 @@ def verify_live_run(out: Path, scenarios: dict[str, Any], splits: dict[str, Any]
     manifest = json.loads((out / "run_manifest.json").read_text(encoding="utf-8"))
     assigned_ids = set(manifest.get("assigned_group_ids", []))
     run_mode = manifest.get("mode")
+    protocol_id = manifest.get("protocol_id")
     if (manifest.get("schema_version") != "m4-live-run-manifest-v4"
-            or manifest.get("protocol_id") != "colluscope-m4-live-runtime-v3"
+            or protocol_id not in {"colluscope-m4-live-runtime-v3", "colluscope-m4-live-runtime-v4"}
             or run_mode not in {"fake_http_integration_test", "live_local_llama_cpp"}
             or not assigned_ids or not assigned_ids <= assignments
             or (run_mode == "live_local_llama_cpp" and assigned_ids != assignments)
@@ -1461,8 +1514,10 @@ def verify_live_run(out: Path, scenarios: dict[str, Any], splits: dict[str, Any]
         required_body_keys = {"model", "messages", "temperature", "top_p", "top_k", "min_p", "seed",
                               "max_tokens", "stream", "cache_prompt", "response_format",
                               "chat_template_kwargs", "reasoning_format"}
+        expected_reasoning_format = "deepseek" if protocol_id == "colluscope-m4-live-runtime-v4" else "none"
         if (set(payload) != required_body_keys
                 or payload.get("model") != manifest.get("model", {}).get("id")
+                or payload.get("reasoning_format") != expected_reasoning_format
                 or "authorization" in canonical(payload).decode("utf-8").casefold()):
             raise M4LiveError("wire request body contains an unapproved field or credential marker")
         observation = request_meta.get("agent_visible_observation")
@@ -1544,9 +1599,54 @@ def verify_live_run(out: Path, scenarios: dict[str, Any], splits: dict[str, Any]
         choices = raw.get("choices")
         if not isinstance(choices, list) or len(choices) != 1:
             raise M4LiveError("raw response does not contain one choice")
-        content = choices[0].get("message", {}).get("content")
+        message = choices[0].get("message", {})
+        content = message.get("content") if isinstance(message, dict) else None
+        request_payload = json.loads((out / "requests" / f"{request_id}.json").read_bytes())
         if choices[0].get("finish_reason") != "stop" or not isinstance(content, str):
             raise M4LiveError("raw response is truncated or lacks assistant content")
+        if protocol_id == "colluscope-m4-live-runtime-v4":
+            action_text = content
+            source = "content_json"
+            wrapper_count = 0
+            wrapper_reasoning = None
+            if not _is_json_value_for_audit(action_text):
+                if (not content.startswith("<think>") or content.count("<think>") != 1
+                        or content.count("</think>") != 1):
+                    raise M4LiveError("v4 raw content is not valid JSON and lacks the exact wrapper form")
+                end = content.find("</think>")
+                if end < len("<think>"):
+                    raise M4LiveError("v4 reasoning wrapper is malformed")
+                inner = content[len("<think>"):end]
+                wrapper_reasoning = inner
+                action_text = content[end + len("</think>"):].strip()
+                if "<think>" in inner or "</think>" in inner or not _is_json_value_for_audit(action_text):
+                    raise M4LiveError("v4 wrapper does not end in exactly one JSON value")
+                source, wrapper_count = "single_leading_think_wrapper", 1
+            try:
+                action = json.loads(action_text)
+            except json.JSONDecodeError as exc:
+                raise M4LiveError("v4 extracted action is not JSON") from exc
+            response_receipt = json.loads((out / "responses" / f"{request_id}.meta.json").read_bytes())
+            parser_receipt = response_receipt.get("action_interface")
+            reasoning_text = message.get("reasoning_content") if isinstance(message.get("reasoning_content"), str) else wrapper_reasoning
+            expected_receipt = {
+                "interface_version": "m4-action-interface-v4", "source": source,
+                "wrapper_count": wrapper_count, "action_text_sha256": sha(action_text.encode("utf-8")),
+                "action_text_characters": len(action_text),
+                "reasoning_content_present": reasoning_text is not None,
+                "reasoning_content_sha256": sha(reasoning_text.encode("utf-8")) if reasoning_text is not None else None,
+                "reasoning_content_characters": len(reasoning_text) if reasoning_text is not None else None,
+            }
+            if not isinstance(parser_receipt, dict) or any(parser_receipt.get(k) != v
+                                                           for k, v in expected_receipt.items()):
+                raise M4LiveError("v4 stored parser decision differs from independent raw-response replay")
+            action = _validate_action(action_text, request_meta_by_id[request_id]["action_kind"])
+            try:
+                import jsonschema
+                jsonschema.validate(action, request_payload["response_format"]["schema"])
+            except Exception as exc:
+                raise M4LiveError("v4 independently extracted action violates the frozen schema") from exc
+            return action
         try:
             action = json.loads(content)
         except json.JSONDecodeError as exc:

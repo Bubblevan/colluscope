@@ -14,12 +14,56 @@ sys.path.insert(0, str(ROOT / "src"))
 sys.path.insert(0, str(ROOT))
 
 from colluscope.monitor_aggregate_budget import AggregateBudget  # noqa: E402
+from colluscope.recovery_gates import m4_behavior_dependency, monitor_pair_gate  # noqa: E402
 from scripts import prepare_full_research_monitor as freeze  # noqa: E402
 from scripts import run_sprint_monitor as monitor  # noqa: E402
 from scripts.local_llama_security import verify_private_directory_acl  # noqa: E402
 
 RUN_ROOT = ROOT / "runs/full-research-execution-20261020/monitor"
 LEDGER_PATH = RUN_ROOT / "global_budget_ledger.jsonl"
+M4_SOURCE_RUN = ROOT / "runs/m4/full-research-execution-20261020-run03"
+M4_AUDIT = ROOT / "docs/results/full-research-execution-20261020/m4_independent_trace_audit.json"
+RECOVERY_MONITOR_SCHEDULE = ROOT / "configs/monitor-recovery-diagnostic-v1.json"
+RECOVERY_MONITOR_CERTIFICATE = RUN_ROOT / "recovery_diagnostic/monitor_certificate.json"
+
+
+def _dependency_result(phase: str) -> dict | None:
+    """Fail closed before credential loading or transport on unusable upstream evidence."""
+    if phase == "m4_trace_eval":
+        if not M4_SOURCE_RUN.is_dir() or not M4_AUDIT.is_file():
+            gate = {"status": "NOT_RUN", "failure_reasons": ["independent_m4_trace_audit_missing"]}
+            source_hashes = {}
+        else:
+            episodes = monitor._read_jsonl(M4_SOURCE_RUN / "episodes.jsonl")
+            audit = json.loads(M4_AUDIT.read_bytes())
+            completed = [row for row in episodes if row.get("terminal_status") == "COMPLETED"
+                         and len([ballot for ballot in row.get("researcher_B", {}).get("ballots", [])
+                                  if ballot.get("stage") == "baseline"]) == 3
+                         and isinstance(row.get("researcher_B", {}).get("settlement"), dict)]
+            gate = m4_behavior_dependency(audit, assigned_episode_count=len(episodes),
+                                          completed_valid_ballot_episodes=len(completed))
+            source_hashes = {"episodes_sha256": __import__("hashlib").sha256(
+                (M4_SOURCE_RUN / "episodes.jsonl").read_bytes()).hexdigest(),
+                "audit_sha256": __import__("hashlib").sha256(M4_AUDIT.read_bytes()).hexdigest()}
+        if gate["status"] != "GO":
+            return {"phase_id": phase, "status": "NOT_RUN", "real_model_or_api_calls": 0,
+                    "dependency_gate": gate, "source_sha256": source_hashes,
+                    "reason": "M4 behavior monitor requires raw linked ballots and independently replayed settlements"}
+    elif phase == "matched_worlds":
+        if not RECOVERY_MONITOR_CERTIFICATE.is_file():
+            return {"phase_id": phase, "status": "NOT_RUN", "real_model_or_api_calls": 0,
+                    "dependency_gate": {"status": "NOT_RUN",
+                                         "failure_reasons": ["paired_assessable_B4_B5_diagnostic_certificate_missing"]},
+                    "reason": "Full B4/B5 comparison requires a completed paired positive and hard-negative diagnostic"}
+        schedule = json.loads(RECOVERY_MONITOR_SCHEDULE.read_bytes())
+        cert = json.loads(RECOVERY_MONITOR_CERTIFICATE.read_bytes())
+        schedule_hash = __import__("hashlib").sha256(RECOVERY_MONITOR_SCHEDULE.read_bytes()).hexdigest()
+        gate = monitor_pair_gate(cert, schedule["rows"], schedule_sha256=schedule_hash)
+        if gate["status"] != "GO":
+            return {"phase_id": phase, "status": "NOT_RUN", "real_model_or_api_calls": 0,
+                    "dependency_gate": gate,
+                    "reason": "Full B4/B5 comparison remains blocked until paired diagnostic rows pass"}
+    return None
 
 
 def _read_env_file(path: Path) -> dict[str, str]:
@@ -64,6 +108,9 @@ def _install_secret_in_memory() -> str:
 def execute(phase: str, freeze_dir: Path, out: Path) -> dict:
     config_path = freeze.PHASE_CONFIGS[phase]
     config = monitor._load_config(config_path)
+    dependency = _dependency_result(phase)
+    if dependency is not None:
+        return dependency
     if config["authorization_id"] != freeze.EXECUTION_ID:
         raise RuntimeError("enabled Monitor config does not carry the explicit task authorization ID")
     if not config["live_dispatch_enabled"]:
@@ -136,6 +183,8 @@ def main() -> int:
     out = args.out or (RUN_ROOT / phase)
     result = execute(phase, freeze_dir, out)
     print(json.dumps(result, sort_keys=True))
+    if result.get("status") == "NOT_RUN":
+        return 3
     return 0 if result["failed_or_unexecuted_rows"] == 0 else 2
 
 

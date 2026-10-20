@@ -1,0 +1,207 @@
+{
+  "files": [
+    {
+      "bytes": 6937,
+      "path": "configs/m4-interface-diagnostic-v1.json",
+      "sha256": "9bacaf294b0e0be6a1e06d59b307bde2963157539ca58d6ef25715994b07a18b"
+    },
+    {
+      "bytes": 4534,
+      "path": "configs/m4-live-runtime-v4.json",
+      "sha256": "3ac766d0167b2a7e515d06b60db79dc0102ca6e48dc93b90858ed6952b8e151e"
+    },
+    {
+      "bytes": 6584,
+      "path": "configs/monitor-recovery-diagnostic-v1.json",
+      "sha256": "8d047caffa049ca9d5e7fa2e881fe6c4ba17bc60f0e416da167362a054674dbc"
+    },
+    {
+      "bytes": 1563,
+      "path": "configs/monitor-recovery-v2.toml",
+      "sha256": "0ea8c52ffd183dba470df7bd5e2387b6fb9e4b3ef1d5df5ca595d3efcfd0381d"
+    },
+    {
+      "bytes": 255978,
+      "path": "docs/ITERATION_LOG.md",
+      "sha256": "43c92971c4cecfbdd1e165ff14ad32715d5aab954471e23057dad44c87cca915"
+    },
+    {
+      "bytes": 5555,
+      "path": "docs/M4_ACTION_INTERFACE_V4.md",
+      "sha256": "2f3373431991f8370c8403439d86b487db7136dfbf8517e5be5bba1df6c633d2"
+    },
+    {
+      "bytes": 6131,
+      "path": "docs/M4_MONITOR_RECOVERY_DECISION.md",
+      "sha256": "7d327bbe72443e973e668b8d1d94e72aa8b4be51c21ccc9279ec1fcb122c63b0"
+    },
+    {
+      "bytes": 10020,
+      "path": "docs/M4_MONITOR_RECOVERY_FORENSIC_REPORT.md",
+      "sha256": "ea67777bc6f6c3907b4857602c3d8e9953af929397c55a09b29acdc34293a8d5"
+    },
+    {
+      "bytes": 5211,
+      "path": "docs/MONITOR_DEEPSEEK_V2_PROTOCOL.md",
+      "sha256": "2a59eb9af591846c045c9c137cd3c0049d2507e660fb712988fd01746b2d119e"
+    },
+    {
+      "bytes": 112858,
+      "path": "docs/RESEARCH_RISK_REGISTER.md",
+      "sha256": "85152d3d03752b5ff6bf37f2b179cdbf7f92160244aec0beb95bb165629244ba"
+    },
+    {
+      "bytes": 4459,
+      "path": "docs/results/m4-monitor-recovery-20261020/failure-history-20261020.md",
+      "sha256": "be11b0f015ab5c454350c7f0730bc4155192c4929459c3a21e5a470a6e8a4ac0"
+    },
+    {
+      "bytes": 719194,
+      "path": "docs/results/m4-monitor-recovery-20261020/historical_forensic_audit-v2.json",
+      "sha256": "58086078a53e25d595d0f24da845579cb46a5a8c864170a9a6dcb9bce02122e8"
+    },
+    {
+      "bytes": 718689,
+      "path": "docs/results/m4-monitor-recovery-20261020/historical_forensic_audit.json",
+      "sha256": "fb983a2d4891a9e3649e7bf8a0592176a69be1c7f542850ad0a4927e301fc095"
+    },
+    {
+      "bytes": 1234,
+      "path": "docs/results/m4-monitor-recovery-20261020/recovery_dependency_gate.json",
+      "sha256": "c7db91d5caf95749ddd8e0edd41e65136b54c0a2b3fb634e9bfcc1eb840f3f39"
+    },
+    {
+      "bytes": 888,
+      "path": "docs/results/m4-monitor-recovery-20261020/test_logs/full-suite-after-hash-binding.log",
+      "sha256": "dd446b7beeb541d1ff5d37e8bb22b1241a55d676fab748229452a4c9b860f4d3"
+    },
+    {
+      "bytes": 888,
+      "path": "docs/results/m4-monitor-recovery-20261020/test_logs/full-suite-final.log",
+      "sha256": "3cc7677a93646e2737b0c1661c0faebca168900df73f48e14c1985353ccb9374"
+    },
+    {
+      "bytes": 888,
+      "path": "docs/results/m4-monitor-recovery-20261020/test_logs/full-suite.log",
+      "sha256": "b951fd17c2cd544a2f13617208cc1fbd7f200d958eebb9d96a0d14e1937a4d21"
+    },
+    {
+      "bytes": 249,
+      "path": "docs/results/m4-monitor-recovery-20261020/test_logs/historical-forensic-replay.log",
+      "sha256": "8eaa64275e69350b7f78d701ec345280ed7922f05206314609638c7c834db781"
+    },
+    {
+      "bytes": 748,
+      "path": "docs/results/m4-monitor-recovery-20261020/test_logs/historical-m4-independent-audit.log",
+      "sha256": "160dfe58c99fd7947fcae0185fb89659085e61af5e1c1c269be1b90f581814dd"
+    },
+    {
+      "bytes": 102,
+      "path": "docs/results/m4-monitor-recovery-20261020/test_logs/m4-live-runtime.log",
+      "sha256": "02e590c78452f62adcf877f830d15d33962d559d4350ffa33c2648a3efe9d127"
+    },
+    {
+      "bytes": 101,
+      "path": "docs/results/m4-monitor-recovery-20261020/test_logs/targeted-after-hash-binding.log",
+      "sha256": "2f7e3f6d61ba35021df91449b1ac576852d134d9eb5b09489a07182dc6e3d044"
+    },
+    {
+      "bytes": 101,
+      "path": "docs/results/m4-monitor-recovery-20261020/test_logs/targeted-after-launch-reasoning-format.log",
+      "sha256": "d9b086547687824cc98d1d38a0c0f9ffac1fc2cfeccf7f4bcffb45ffc6d83366"
+    },
+    {
+      "bytes": 101,
+      "path": "docs/results/m4-monitor-recovery-20261020/test_logs/targeted-offline.log",
+      "sha256": "3d59e83ccd09392be090909a188d5d48ed2d1f9ed198f3f6d6e5e7c9f80755d1"
+    },
+    {
+      "bytes": 718,
+      "path": "prompts/sprint-baseline-v2/system.txt",
+      "sha256": "3980f7e5a2b2f86fa8826a369abd5769ca8fbe2f73d222f745d744b0c2f4b695"
+    },
+    {
+      "bytes": 325,
+      "path": "prompts/sprint-baseline-v2/user.txt",
+      "sha256": "a47c6dd0198646c296b8d04f37e617b25f6d20b9aaac243a4be564590be74659"
+    },
+    {
+      "bytes": 12108,
+      "path": "scripts/audit_m4_interface_diagnostic.py",
+      "sha256": "71415e19ea4dbf6a601438c85e17465e1e0fa11d751ae2317607d0c6340405b3"
+    },
+    {
+      "bytes": 1435,
+      "path": "scripts/audit_m4_live.py",
+      "sha256": "c8011bd28654df1bb26fb6f77f375ffc942ad127747fd15cc01daada70dcaef8"
+    },
+    {
+      "bytes": 10831,
+      "path": "scripts/audit_monitor_recovery_diagnostic.py",
+      "sha256": "f54a8839739ab9f31cc551e65088a3405ae80a55c953d10052a0726fb329eb60"
+    },
+    {
+      "bytes": 11820,
+      "path": "scripts/audit_protocol_failures.py",
+      "sha256": "ebed0e16472a9541bf6642ab8d24d52ac7da4fa987f78d0cae91fd855248e37d"
+    },
+    {
+      "bytes": 10104,
+      "path": "scripts/run_full_research_monitor.py",
+      "sha256": "0c66a11ada904faca1016311ddb56d589d71ddef080980e54b4678929752378a"
+    },
+    {
+      "bytes": 14286,
+      "path": "scripts/run_m4_interface_diagnostic.py",
+      "sha256": "f7a0825e05249a296488c49241ac3b93aaaae6afb337774e120e24a25f570936"
+    },
+    {
+      "bytes": 21498,
+      "path": "scripts/run_monitor_recovery_diagnostic.py",
+      "sha256": "97af7c32700e8a93e413827c6e9367e99561dc818a7c12b70bc0e279267dd57d"
+    },
+    {
+      "bytes": 4115,
+      "path": "src/colluscope/m4_action_interface_v4.py",
+      "sha256": "7aa2cd34df602619cbe1b135186019f2deb44324f22cf08c2e31b83499ce7fab"
+    },
+    {
+      "bytes": 109160,
+      "path": "src/colluscope/m4_live_runtime.py",
+      "sha256": "6efa94185a80df4b85e987765754bf315d9befc69bf1261c8c56f1f1841b5e98"
+    },
+    {
+      "bytes": 7351,
+      "path": "src/colluscope/recovery_gates.py",
+      "sha256": "f436fb71a2078c83931c01d3c6903bf871b05b8f3cbe9df706a65325522e7efe"
+    },
+    {
+      "bytes": 7493,
+      "path": "tests/test_m4_action_interface_v4.py",
+      "sha256": "1aab738eec68eb4750522a894adc01aec1b93f601453dfd4c56a1642a29b69f9"
+    },
+    {
+      "bytes": 37201,
+      "path": "tests/test_m4_live_runtime.py",
+      "sha256": "bfd5bf4de492d444f648dd180ee0fb4098728a6ff8ddab2b45b8b8fce118f6ae"
+    },
+    {
+      "bytes": 2946,
+      "path": "tests/test_monitor_recovery_protocol.py",
+      "sha256": "dcd514d622e5a3f32a44fd222d1f36cc3e0a435481f80ee83f6caf3a1cedf42c"
+    },
+    {
+      "bytes": 5618,
+      "path": "tests/test_recovery_gates.py",
+      "sha256": "228577bb30b1576c0b759aed7bfa88d3cb04095f3537a26798a4c5ac16abbef9"
+    },
+    {
+      "bytes": 2476,
+      "path": "tests/test_run_full_research_monitor_gate.py",
+      "sha256": "47ea502a13d293769f6937539c51e95a945879c4f79400a3670acff085d56526"
+    }
+  ],
+  "generated_by": "Python hashlib.sha256",
+  "schema_version": "m4-monitor-recovery-artifact-manifest-v1",
+  "self_hash_excluded": true
+}

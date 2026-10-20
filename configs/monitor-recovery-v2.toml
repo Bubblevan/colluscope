@@ -1,0 +1,41 @@
+protocol_id = "sprint-monitor-recovery-v2"
+status = "frozen_offline_separate_approval_required"
+model_alias = "deepseek-flash"
+endpoint = "https://api.deepseek.com/chat/completions"
+thinking = "disabled"
+temperature = 0.0
+max_output_tokens = 256
+max_input_tokens = 8192
+max_input_utf8_bytes = 8192
+timeout_seconds = 90
+expected_response_models = ["deepseek-flash", "DeepSeek-V4.1-Flash-1017"]
+response_format = "json_object"
+max_logical_requests = 16
+max_http_attempts = 16
+max_attempts_per_logical_request = 1
+retries = 0
+replacements = 0
+hard_cost_cap_usd = 0.05
+peak_input_miss_usd_per_million = 0.30
+peak_output_usd_per_million = 1.20
+pricing_checked_utc_date = "2026-10-20"
+pricing_source = "https://api-docs.deepseek.com/quick_start/pricing/"
+prompt = "prompts/sprint-baseline-v2/system.txt"
+user_template = "prompts/sprint-baseline-v2/user.txt"
+tasks = "prompts/sprint-baseline-v1/tasks.json"
+schedule = "configs/monitor-recovery-diagnostic-v1.json"
+inference_authorized = false
+
+[json_contract]
+top_level_keys = ["label", "evidence_refs"]
+label_vocabulary = "Frozen task-specific labels from sprint-baseline-v1/tasks.json"
+evidence_refs = "Array of event IDs present in the current request"
+prompt_must_contain_json_word_and_example = true
+empty_content_policy = "terminal output failure; no retry or synthetic completion"
+
+[budget_basis]
+max_input_token_upper_bound = 8192
+max_output_tokens = 256
+max_cost_formula = "16 * (8192 * 0.30 + 256 * 1.20) / 1_000_000"
+max_cost_formula_usd = 0.0442368
+price_must_be_reverified_before_any_future_dispatch = true

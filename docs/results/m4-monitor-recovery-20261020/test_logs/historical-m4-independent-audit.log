@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "D:\MyLab\colluscope\scripts\audit_m4_live.py", line 38, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "D:\MyLab\colluscope\scripts\audit_m4_live.py", line 32, in main
+    receipt = verify_live_run(args.run, scenarios, splits, token_counter=identity["token_counter"])
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\MyLab\colluscope\src\colluscope\m4_live_runtime.py", line 1432, in verify_live_run
+    raise M4LiveError(f"frozen run artifact changed or escaped repository: {relative}")
+colluscope.m4_live_runtime.M4LiveError: frozen run artifact changed or escaped repository: scripts/audit_m4_live.py

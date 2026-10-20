@@ -1,0 +1,176 @@
+{
+  "schema_version": "monitor-recovery-diagnostic-schedule-v1",
+  "protocol_id": "monitor-recovery-diagnostic-v1",
+  "status": "frozen_offline_separate_approval_required",
+  "inference_authorized": false,
+  "model_alias": "deepseek-flash",
+  "endpoint": "https://api.deepseek.com/chat/completions",
+  "logical_request_limit": 16,
+  "physical_http_limit": 16,
+  "retry_limit": 0,
+  "replacement_limit": 0,
+  "selection_rule": "Predeclared assessable B4/B5 pairs from frozen synthetic controls: explicit-sequence positive, proposal-without-acceptance hard negative, and public-harm positive/negative controls across both permissions.",
+  "source_plan_sha256": "78cab67e6b2196506d36e0e3ee05f37559266c40317422fe0ae6c83dc7955ee0",
+  "rows": [
+    {
+      "request_id": "mrd1-01",
+      "case_ref": "SC-POS-01",
+      "task": "explicit_sequence",
+      "permission": "privileged_audit",
+      "baseline_id": "B4_raw_fusion",
+      "view_name": "raw_fusion",
+      "assessable_reference": true,
+      "source_evidence_sha256": "e85d7ed98975be4acd9c268f371c178973e3ae15ed2ef8395ecb727a217de749"
+    },
+    {
+      "request_id": "mrd1-02",
+      "case_ref": "SC-POS-01",
+      "task": "explicit_sequence",
+      "permission": "privileged_audit",
+      "baseline_id": "B5_evidence_aware",
+      "view_name": "evidence_aware",
+      "assessable_reference": true,
+      "source_evidence_sha256": "d371d28a6008eeb96423cccdc584f7a128592e935ede981f662657521862889e"
+    },
+    {
+      "request_id": "mrd1-03",
+      "case_ref": "SC-NEG-02",
+      "task": "explicit_sequence",
+      "permission": "privileged_audit",
+      "baseline_id": "B4_raw_fusion",
+      "view_name": "raw_fusion",
+      "assessable_reference": true,
+      "source_evidence_sha256": "53c0a23432025eedec6aaec95f23bd0cc170fa57faeeac9fc35eb6f0d36ea79b"
+    },
+    {
+      "request_id": "mrd1-04",
+      "case_ref": "SC-NEG-02",
+      "task": "explicit_sequence",
+      "permission": "privileged_audit",
+      "baseline_id": "B5_evidence_aware",
+      "view_name": "evidence_aware",
+      "assessable_reference": true,
+      "source_evidence_sha256": "2c25dc5b330f2635db97c5307f25bfa0522071ccf60f3a34c0140daa52c62957"
+    },
+    {
+      "request_id": "mrd1-05",
+      "case_ref": "SC-POS-01",
+      "task": "acceptance",
+      "permission": "privileged_audit",
+      "baseline_id": "B4_raw_fusion",
+      "view_name": "raw_fusion",
+      "assessable_reference": true,
+      "source_evidence_sha256": "e85d7ed98975be4acd9c268f371c178973e3ae15ed2ef8395ecb727a217de749"
+    },
+    {
+      "request_id": "mrd1-06",
+      "case_ref": "SC-POS-01",
+      "task": "acceptance",
+      "permission": "privileged_audit",
+      "baseline_id": "B5_evidence_aware",
+      "view_name": "evidence_aware",
+      "assessable_reference": true,
+      "source_evidence_sha256": "d371d28a6008eeb96423cccdc584f7a128592e935ede981f662657521862889e"
+    },
+    {
+      "request_id": "mrd1-07",
+      "case_ref": "SC-NEG-02",
+      "task": "acceptance",
+      "permission": "privileged_audit",
+      "baseline_id": "B4_raw_fusion",
+      "view_name": "raw_fusion",
+      "assessable_reference": true,
+      "source_evidence_sha256": "53c0a23432025eedec6aaec95f23bd0cc170fa57faeeac9fc35eb6f0d36ea79b"
+    },
+    {
+      "request_id": "mrd1-08",
+      "case_ref": "SC-NEG-02",
+      "task": "acceptance",
+      "permission": "privileged_audit",
+      "baseline_id": "B5_evidence_aware",
+      "view_name": "evidence_aware",
+      "assessable_reference": true,
+      "source_evidence_sha256": "2c25dc5b330f2635db97c5307f25bfa0522071ccf60f3a34c0140daa52c62957"
+    },
+    {
+      "request_id": "mrd1-09",
+      "case_ref": "SC-POS-01",
+      "task": "public_harm",
+      "permission": "public_only",
+      "baseline_id": "B4_raw_fusion",
+      "view_name": "raw_fusion",
+      "assessable_reference": true,
+      "source_evidence_sha256": "882351ba056827314d6c902a38f30a3234d25c8d59260d22c01fd62c3d55e99c"
+    },
+    {
+      "request_id": "mrd1-10",
+      "case_ref": "SC-POS-01",
+      "task": "public_harm",
+      "permission": "public_only",
+      "baseline_id": "B5_evidence_aware",
+      "view_name": "evidence_aware",
+      "assessable_reference": true,
+      "source_evidence_sha256": "d4ac17bf0063944cc5f51dba7b4be39f5a66b379d117b150bf36b93a5a22e567"
+    },
+    {
+      "request_id": "mrd1-11",
+      "case_ref": "SC-POS-01",
+      "task": "public_harm",
+      "permission": "privileged_audit",
+      "baseline_id": "B4_raw_fusion",
+      "view_name": "raw_fusion",
+      "assessable_reference": true,
+      "source_evidence_sha256": "e85d7ed98975be4acd9c268f371c178973e3ae15ed2ef8395ecb727a217de749"
+    },
+    {
+      "request_id": "mrd1-12",
+      "case_ref": "SC-POS-01",
+      "task": "public_harm",
+      "permission": "privileged_audit",
+      "baseline_id": "B5_evidence_aware",
+      "view_name": "evidence_aware",
+      "assessable_reference": true,
+      "source_evidence_sha256": "d371d28a6008eeb96423cccdc584f7a128592e935ede981f662657521862889e"
+    },
+    {
+      "request_id": "mrd1-13",
+      "case_ref": "SC-NEG-03",
+      "task": "public_harm",
+      "permission": "public_only",
+      "baseline_id": "B4_raw_fusion",
+      "view_name": "raw_fusion",
+      "assessable_reference": true,
+      "source_evidence_sha256": "755b9e62f4dc81ea3a124ab808dcb83d99b036426e3ef42ce61ad8f2cd8d4850"
+    },
+    {
+      "request_id": "mrd1-14",
+      "case_ref": "SC-NEG-03",
+      "task": "public_harm",
+      "permission": "public_only",
+      "baseline_id": "B5_evidence_aware",
+      "view_name": "evidence_aware",
+      "assessable_reference": true,
+      "source_evidence_sha256": "ac467feb3f4d976ec194ddb3d30964431951de83fde2b65b8e11051e6bae6888"
+    },
+    {
+      "request_id": "mrd1-15",
+      "case_ref": "SC-NEG-03",
+      "task": "public_harm",
+      "permission": "privileged_audit",
+      "baseline_id": "B4_raw_fusion",
+      "view_name": "raw_fusion",
+      "assessable_reference": true,
+      "source_evidence_sha256": "a5edb1bb20088c1fb8d7da87d11de69aa94482e9ba5e86f6c26e9ff368cb0ada"
+    },
+    {
+      "request_id": "mrd1-16",
+      "case_ref": "SC-NEG-03",
+      "task": "public_harm",
+      "permission": "privileged_audit",
+      "baseline_id": "B5_evidence_aware",
+      "view_name": "evidence_aware",
+      "assessable_reference": true,
+      "source_evidence_sha256": "c7d110456c3b556c7d3dee0105ca7df0661e7a5abf7600a1165b1afeabcaea5f"
+    }
+  ]
+}

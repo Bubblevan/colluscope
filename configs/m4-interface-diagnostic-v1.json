@@ -1,0 +1,177 @@
+{
+  "schema_version": "m4-interface-diagnostic-schedule-v1",
+  "protocol_id": "m4-interface-diagnostic-v1",
+  "status": "frozen_offline_separate_approval_required",
+  "historical_behavioral_episode": false,
+  "maximum_logical_requests": 18,
+  "maximum_physical_generation_attempts": 18,
+  "retry_count": 0,
+  "replacement_groups": 0,
+  "selection_rule": "First listed frozen split group for each lexicographically sorted scenario_family_id; selected before any new model output.",
+  "condition_note": "These are isolated action-interface probes, not complete behavior episodes and not settlement evidence.",
+  "source_split_sha256": "56f6fceca23bee74970c8291ba5ed99c9a8787f4de017720a747ce0bac5474d6",
+  "rows": [
+    {
+      "request_id": "m4d1-m4_family_1-message",
+      "split_group_id": "ed9c100c5f2e24413818b774a153b305f7ac262fd44e7e470a6968882907a713",
+      "scenario_family_id": "m4_family_1",
+      "seed_block_id": "m4-seed-201",
+      "action_kind": "message",
+      "agent": "A",
+      "stimulus": "frozen_agent_task"
+    },
+    {
+      "request_id": "m4d1-m4_family_1-ballot",
+      "split_group_id": "ed9c100c5f2e24413818b774a153b305f7ac262fd44e7e470a6968882907a713",
+      "scenario_family_id": "m4_family_1",
+      "seed_block_id": "m4-seed-201",
+      "action_kind": "ballot",
+      "agent": "B",
+      "stimulus": "frozen_agent_task"
+    },
+    {
+      "request_id": "m4d1-m4_family_1-positive_control",
+      "split_group_id": "ed9c100c5f2e24413818b774a153b305f7ac262fd44e7e470a6968882907a713",
+      "scenario_family_id": "m4_family_1",
+      "seed_block_id": "m4-seed-201",
+      "action_kind": "positive_control",
+      "agent": null,
+      "stimulus": "frozen_information_positive_control"
+    },
+    {
+      "request_id": "m4d1-m4_family_2-message",
+      "split_group_id": "721dd15fab28cfd21519b9fd50dfd640e0825a0c6417f0062a4179f9f2ce2938",
+      "scenario_family_id": "m4_family_2",
+      "seed_block_id": "m4-seed-201",
+      "action_kind": "message",
+      "agent": "A",
+      "stimulus": "frozen_agent_task"
+    },
+    {
+      "request_id": "m4d1-m4_family_2-ballot",
+      "split_group_id": "721dd15fab28cfd21519b9fd50dfd640e0825a0c6417f0062a4179f9f2ce2938",
+      "scenario_family_id": "m4_family_2",
+      "seed_block_id": "m4-seed-201",
+      "action_kind": "ballot",
+      "agent": "B",
+      "stimulus": "frozen_agent_task"
+    },
+    {
+      "request_id": "m4d1-m4_family_2-positive_control",
+      "split_group_id": "721dd15fab28cfd21519b9fd50dfd640e0825a0c6417f0062a4179f9f2ce2938",
+      "scenario_family_id": "m4_family_2",
+      "seed_block_id": "m4-seed-201",
+      "action_kind": "positive_control",
+      "agent": null,
+      "stimulus": "frozen_information_positive_control"
+    },
+    {
+      "request_id": "m4d1-m4_family_3-message",
+      "split_group_id": "b30b397f1e807436cdb1d1b84f814f6aa2270105cc3a40a6b6fe1d574f9a353c",
+      "scenario_family_id": "m4_family_3",
+      "seed_block_id": "m4-seed-201",
+      "action_kind": "message",
+      "agent": "A",
+      "stimulus": "frozen_agent_task"
+    },
+    {
+      "request_id": "m4d1-m4_family_3-ballot",
+      "split_group_id": "b30b397f1e807436cdb1d1b84f814f6aa2270105cc3a40a6b6fe1d574f9a353c",
+      "scenario_family_id": "m4_family_3",
+      "seed_block_id": "m4-seed-201",
+      "action_kind": "ballot",
+      "agent": "B",
+      "stimulus": "frozen_agent_task"
+    },
+    {
+      "request_id": "m4d1-m4_family_3-positive_control",
+      "split_group_id": "b30b397f1e807436cdb1d1b84f814f6aa2270105cc3a40a6b6fe1d574f9a353c",
+      "scenario_family_id": "m4_family_3",
+      "seed_block_id": "m4-seed-201",
+      "action_kind": "positive_control",
+      "agent": null,
+      "stimulus": "frozen_information_positive_control"
+    },
+    {
+      "request_id": "m4d1-m4_family_4-message",
+      "split_group_id": "a2bad4eec4f95bac5e3857f8fcf4b9b81d5e4c528ca44c516d06190095815856",
+      "scenario_family_id": "m4_family_4",
+      "seed_block_id": "m4-seed-201",
+      "action_kind": "message",
+      "agent": "A",
+      "stimulus": "frozen_agent_task"
+    },
+    {
+      "request_id": "m4d1-m4_family_4-ballot",
+      "split_group_id": "a2bad4eec4f95bac5e3857f8fcf4b9b81d5e4c528ca44c516d06190095815856",
+      "scenario_family_id": "m4_family_4",
+      "seed_block_id": "m4-seed-201",
+      "action_kind": "ballot",
+      "agent": "B",
+      "stimulus": "frozen_agent_task"
+    },
+    {
+      "request_id": "m4d1-m4_family_4-positive_control",
+      "split_group_id": "a2bad4eec4f95bac5e3857f8fcf4b9b81d5e4c528ca44c516d06190095815856",
+      "scenario_family_id": "m4_family_4",
+      "seed_block_id": "m4-seed-201",
+      "action_kind": "positive_control",
+      "agent": null,
+      "stimulus": "frozen_information_positive_control"
+    },
+    {
+      "request_id": "m4d1-m4_family_5-message",
+      "split_group_id": "18eec4054ef21274ef29f3c82070d3384739f9a5eb35b5885d33b4174d03e846",
+      "scenario_family_id": "m4_family_5",
+      "seed_block_id": "m4-seed-201",
+      "action_kind": "message",
+      "agent": "A",
+      "stimulus": "frozen_agent_task"
+    },
+    {
+      "request_id": "m4d1-m4_family_5-ballot",
+      "split_group_id": "18eec4054ef21274ef29f3c82070d3384739f9a5eb35b5885d33b4174d03e846",
+      "scenario_family_id": "m4_family_5",
+      "seed_block_id": "m4-seed-201",
+      "action_kind": "ballot",
+      "agent": "B",
+      "stimulus": "frozen_agent_task"
+    },
+    {
+      "request_id": "m4d1-m4_family_5-positive_control",
+      "split_group_id": "18eec4054ef21274ef29f3c82070d3384739f9a5eb35b5885d33b4174d03e846",
+      "scenario_family_id": "m4_family_5",
+      "seed_block_id": "m4-seed-201",
+      "action_kind": "positive_control",
+      "agent": null,
+      "stimulus": "frozen_information_positive_control"
+    },
+    {
+      "request_id": "m4d1-m4_family_6-message",
+      "split_group_id": "fa81a5b6f8ccab5e84e9ec1e5c2c76e763b66268ddeca84478d8d968d08f3c62",
+      "scenario_family_id": "m4_family_6",
+      "seed_block_id": "m4-seed-201",
+      "action_kind": "message",
+      "agent": "A",
+      "stimulus": "frozen_agent_task"
+    },
+    {
+      "request_id": "m4d1-m4_family_6-ballot",
+      "split_group_id": "fa81a5b6f8ccab5e84e9ec1e5c2c76e763b66268ddeca84478d8d968d08f3c62",
+      "scenario_family_id": "m4_family_6",
+      "seed_block_id": "m4-seed-201",
+      "action_kind": "ballot",
+      "agent": "B",
+      "stimulus": "frozen_agent_task"
+    },
+    {
+      "request_id": "m4d1-m4_family_6-positive_control",
+      "split_group_id": "fa81a5b6f8ccab5e84e9ec1e5c2c76e763b66268ddeca84478d8d968d08f3c62",
+      "scenario_family_id": "m4_family_6",
+      "seed_block_id": "m4-seed-201",
+      "action_kind": "positive_control",
+      "agent": null,
+      "stimulus": "frozen_information_positive_control"
+    }
+  ]
+}

@@ -108,7 +108,9 @@ def _server(state: FakeLlamaState):
                 elif "choice" in schema.get("properties", {}):
                     action = {"choice": "T1"}
                 else:
-                    if state.mode == "tie" and index in {3, 4, 5}:
+                    if state.mode == "invalid_ballot" and index >= 3:
+                        ballot = {"A": "T1", "B": "T1", "C": "T3"}
+                    elif state.mode == "tie" and index in {3, 4, 5}:
                         assignments = [
                             {"A": "T1", "B": "T2", "C": "T3"},
                             {"A": "T2", "B": "T3", "C": "T1"},
@@ -119,12 +121,23 @@ def _server(state: FakeLlamaState):
                         ballot = {"A": "T3", "B": "T2", "C": "T1"}
                     action = {"type": "ballot", "assignment": ballot}
                 content = json.dumps(action, separators=(",", ":"))
+            if state.mode == "reasoning_wrapper":
+                content = f"<think>\nmock reasoning\n</think>\n{content}"
+            elif state.mode == "missing_closing_tag":
+                content = f"<think>mock reasoning\n{content}"
+            elif state.mode == "multiple_reasoning_wrappers":
+                content = f"<think>one</think><think>two</think>{content}"
+            elif state.mode == "contradictory_action":
+                content = '{"type":"no_message","text":"contradictory extra field"}'
+            message = {"role": "assistant", "content": content}
+            if state.mode == "reasoning_separated":
+                message["reasoning_content"] = "mock separated reasoning"
             response = {
                 "model": ("wrong-model" if state.mode == "wrong_model" and index == 1
                           else "colluscope-qwen3-8b-q4km"),
                 "choices": [{"index": 0,
                              "finish_reason": "length" if state.mode == "truncated" and index == 1 else "stop",
-                             "message": {"role": "assistant", "content": content}}],
+                             "message": message}],
                 "usage": {"prompt_tokens": 17, "completion_tokens": 8, "total_tokens": 25},
             }
             self._send(200, json.dumps(response, separators=(",", ":")).encode())
@@ -135,12 +148,14 @@ def _server(state: FakeLlamaState):
     return server, thread, f"http://127.0.0.1:{server.server_port}/v1"
 
 
-def _run(tmp_path: Path, state: FakeLlamaState, *, transport=None, group_index: int = 0):
+def _run(tmp_path: Path, state: FakeLlamaState, *, transport=None, group_index: int = 0,
+         config_path: Path = live.LIVE_CONFIG):
     server, thread, endpoint = _server(state)
     try:
         _config, _base, _scenarios, splits, _positive = live.load_live_config()
         summary = live.run_live(
-            tmp_path / "run", approval_id="TEST-ONLY-NOT-AUTHORIZATION", execute_live=True,
+            tmp_path / "run", config_path=config_path,
+            approval_id="TEST-ONLY-NOT-AUTHORIZATION", execute_live=True,
             secure_storage=False, test_mode=True, test_endpoint=endpoint,
             transport=transport or live.local_http,
             assigned_groups=[splits["groups"][group_index]],
@@ -251,6 +266,105 @@ def test_no_proposal_is_valid_and_does_not_get_replaced_by_focal_calls(tmp_path)
         neutral = next(row for row in episode["researcher_B"]["positive_control"] if row["arm"] == "neutral")
         assert neutral["stimulus_text"] == "Signal code: NONE."
         assert neutral["delivery_status"] == "delivered" and neutral["no_delivery"] is False
+    finally:
+        server.shutdown(); server.server_close(); thread.join(timeout=2)
+
+
+def test_v4_wrapper_recovery_runs_through_real_http_path_and_independent_replay(tmp_path):
+    state = FakeLlamaState(mode="reasoning_wrapper")
+    summary, _endpoint, server, thread = _run(
+        tmp_path, state, config_path=live.LIVE_CONFIG_V4)
+    try:
+        out = tmp_path / "run"
+        assert summary["completed_groups"] == 1
+        assert summary["logical_generation_requests"] == summary["physical_generation_attempts"] == 11
+        assert all(request["reasoning_format"] == "deepseek" for request in state.requests)
+        receipts = [json.loads(path.read_bytes()) for path in (out / "responses").glob("*.meta.json")]
+        assert len(receipts) == 11
+        assert all(receipt["action_interface"]["source"] == "single_leading_think_wrapper"
+                   for receipt in receipts)
+        assert all(receipt["action_interface"]["wrapper_count"] == 1 for receipt in receipts)
+        manifest = json.loads((out / "run_manifest.json").read_bytes())
+        assert manifest["protocol_id"] == "colluscope-m4-live-runtime-v4"
+        assert "src/colluscope/m4_action_interface_v4.py" in manifest["artifact_sha256"]
+        _, _, scenarios, splits, _ = live.load_live_config(live.LIVE_CONFIG_V4)
+        audited = live.verify_live_run(out, scenarios, splits)
+        assert audited["settlements_recomputed"] == 1
+        assert audited["response_actions_linked"] == 11
+        assert all(row["status"] == "COMPLETED" for row in live.read_jsonl(out / "attempts.jsonl")
+                   if row.get("event") == "attempt_terminal")
+    finally:
+        server.shutdown(); server.server_close(); thread.join(timeout=2)
+
+
+def test_v4_explicit_reasoning_field_is_separate_from_action_content(tmp_path):
+    state = FakeLlamaState(mode="reasoning_separated")
+    summary, _endpoint, server, thread = _run(
+        tmp_path, state, config_path=live.LIVE_CONFIG_V4)
+    try:
+        assert summary["completed_groups"] == 1
+        receipts = [json.loads(path.read_bytes()) for path in (tmp_path / "run" / "responses").glob("*.meta.json")]
+        assert all(receipt["action_interface"]["source"] == "content_json" for receipt in receipts)
+        assert all(receipt["action_interface"]["reasoning_content_present"] is True for receipt in receipts)
+        assert all("mock separated reasoning" not in json.dumps(receipt) for receipt in receipts)
+        _, _, scenarios, splits, _ = live.load_live_config(live.LIVE_CONFIG_V4)
+        assert live.verify_live_run(tmp_path / "run", scenarios, splits)["settlements_recomputed"] == 1
+    finally:
+        server.shutdown(); server.server_close(); thread.join(timeout=2)
+
+
+def test_v4_no_message_is_valid_wrapped_action_and_never_replaced(tmp_path):
+    state = FakeLlamaState(mode="reasoning_wrapper", send_proposal=False)
+    summary, _endpoint, server, thread = _run(
+        tmp_path, state, config_path=live.LIVE_CONFIG_V4)
+    try:
+        out = tmp_path / "run"
+        episode = live.read_jsonl(out / "episodes.jsonl")[0]
+        assert episode["terminal_status"] == "COMPLETED"
+        assert episode["proposal_eligible"] is False
+        assert summary["logical_generation_requests"] == 7
+        assert all(row["action_interface"]["source"] == "single_leading_think_wrapper"
+                   for row in (json.loads(path.read_bytes()) for path in (out / "responses").glob("*.meta.json")))
+        assert all(not message["sent"] for message in episode["researcher_B"]["messages"])
+        _, _, scenarios, splits, _ = live.load_live_config(live.LIVE_CONFIG_V4)
+        assert live.verify_live_run(out, scenarios, splits)["settlements_recomputed"] == 1
+    finally:
+        server.shutdown(); server.server_close(); thread.join(timeout=2)
+
+
+def test_v4_invalid_ballot_is_recorded_as_failed_without_repair_or_retry(tmp_path):
+    state = FakeLlamaState(mode="invalid_ballot")
+    summary, _endpoint, server, thread = _run(
+        tmp_path, state, config_path=live.LIVE_CONFIG_V4)
+    try:
+        out = tmp_path / "run"
+        terminal = {row["request_id"]: row for row in live.read_jsonl(out / "attempts.jsonl")
+                    if row.get("event") == "attempt_terminal"}
+        ballot_id = next(rid for rid in terminal if rid.endswith("baseline-ballot-A"))
+        assert terminal[ballot_id]["status"] == "MISSING_ACTION"
+        assert summary["failed_groups"] == 1
+        assert summary["retry_count"] == 0
+        assert len(state.requests) == len(terminal) == 3
+        assert (out / "responses" / f"{ballot_id}.body").is_file()
+    finally:
+        server.shutdown(); server.server_close(); thread.join(timeout=2)
+
+
+@pytest.mark.parametrize("mode", ["missing_closing_tag", "multiple_reasoning_wrappers", "contradictory_action"])
+def test_v4_wrapper_and_action_counterexamples_fail_without_repair_or_retry(tmp_path, mode):
+    state = FakeLlamaState(mode=mode)
+    summary, _endpoint, server, thread = _run(
+        tmp_path, state, config_path=live.LIVE_CONFIG_V4)
+    try:
+        out = tmp_path / "run"
+        first = next(row for row in live.read_jsonl(out / "attempts.jsonl")
+                     if row.get("event") == "attempt_terminal")
+        assert first["status"] in {"INVALID_ACTION_INTERFACE", "MISSING_ACTION"}
+        assert summary["failed_groups"] == 1
+        assert summary["retry_count"] == 0
+        assert len(state.requests) == 1
+        assert len(live.read_jsonl(out / "attempts.jsonl")) == 2
+        assert (out / "responses" / f"{first['request_id']}.body").is_file()
     finally:
         server.shutdown(); server.server_close(); thread.join(timeout=2)
 
