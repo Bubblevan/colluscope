@@ -1,16 +1,16 @@
 {
   "authorization": {
     "schema_version": 1,
-    "approval_id": "DS-FLASH-REAL-COORD-V2-40-20261021",
-    "approved_at_utc": "2026-10-21T04:48:54Z",
-    "expires_at_utc": "2026-10-26T10:00:00Z",
+    "approval_id": "DS-FLASH-REAL-COORD-V4-40-20261021",
+    "approved_at_utc": "2026-10-21T05:18:36Z",
+    "expires_at_utc": "2026-10-23T01:00:00Z",
     "authorized_experiment_ids": [
-      "deepseek-real-coordination-40-v2"
+      "deepseek-real-coordination-40-v4"
     ],
     "max_model_calls": 40,
     "max_external_cost_usd": 0.5,
-    "scope": "One corrected V2 frozen DeepSeek Flash real two-agent message-routing pilot: four fact-delivery controls first, then at most 36 requests across three fixed matrices and three matched routing arms; 40 physical requests maximum, zero retries and replacements, USD 0.50 peak-safe hard cost cap. Official DeepSeek endpoint only; no Qwen, third-party API, Monitor inference, training, probes, external fallback, or additional model calls. Stop all game dispatch if any control fails. Expires 2026-10-26T10:00:00Z.",
-    "source": "The user explicitly authorized the DeepSeek batch, clarified that authorization covered the proposed batch rather than one request, rejected Qwen, and directed continuation of the 40-request DeepSeek real two-agent pilot. The approved scope is this frozen 40-request batch only. approved_at_utc records authorization materialization in the registry, not an assertion about exact UI reply time. V1 registration closed before dispatch with zero requests because its preregistration path did not match the experiment ID. This versioned batch re-materializes the same user-approved 40-request scope for the corrected V2 registration; it does not add budget or request count.",
+    "scope": "One V4 DeepSeek Flash two-agent behavior pilot under the user's instruction to continue the approved 40-request research batch after pre-dispatch interface repairs. Official DeepSeek strict endpoint only; four fact-delivery controls first, then 36 fixed game requests across three matrices and three matched message-routing arms; 40 physical attempts maximum, zero retries/replacements, USD 0.50 peak-rate hard cost cap. No Qwen, third-party provider, monitor inference, training, probes, or additional model calls. Stop immediately on any failed control or transport/identity/privacy/budget gate. Expires 2026-10-23T01:00:00Z.",
+    "source": "The user directed continuation of the same 40-request DeepSeek real two-agent pilot after correcting the preflight issues and before any formal requests had been made. V3 was closed with zero calls; this separate V4 identity preserves the same maximum of 40 requests and USD 0.50 cost. The V3 approval is not reused, and the total assigned capacity remains within the 43 attempts left under the 1,200 project cap.",
     "status": "active"
   },
   "authorization_records_directory": "research/authorizations",

@@ -1,0 +1,9 @@
+{
+  "command": "python scripts/researchctl.py audit",
+  "integrity_check": "FAIL",
+  "cause": "A V3 risk section was appended to docs/RESEARCH_RISK_REGISTER.md after that file had been hash-pinned by the closed m4-b5-context-sensitivity-campaign-v1 registration.",
+  "reported_error": "m4-b5-context-sensitivity-campaign-v1: outputs[10] hash mismatch: docs/RESEARCH_RISK_REGISTER.md",
+  "model_calls": 0,
+  "resolution": "Restored docs/RESEARCH_RISK_REGISTER.md byte-for-byte from the current HEAD; kept V3 risks in the separate follow-up document; reran audit and obtained PASS.",
+  "preserved_at_utc": "2026-10-21"
+}

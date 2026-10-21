@@ -1,0 +1,33 @@
+{
+  "retrieved_at_utc": "2026-10-21T05:11:33Z",
+  "sources": [
+    {
+      "url": "https://api-docs.deepseek.com/quick_start/pricing/",
+      "claims_used": [
+        "The requested model alias is deepseek-flash.",
+        "The current model version is DeepSeek-V4.1-Flash-1017.",
+        "Peak cache-miss input price is USD 0.30 per million tokens and peak output price is USD 1.20 per million tokens.",
+        "Off-peak prices are half the peak rates."
+      ],
+      "runtime_consequence": "The request-cost reservation uses the official peak input/output rates; this is conservative for off-peak calls and assumes cache-miss input."
+    },
+    {
+      "url": "https://api-docs.deepseek.com/guides/tool_calls/",
+      "claims_used": [
+        "Strict function calling requires the https://api.deepseek.com/beta base URL.",
+        "Strict mode supports object, string, number, integer, boolean, array, enum, and anyOf schema constructs.",
+        "maxLength is explicitly unsupported."
+      ],
+      "runtime_consequence": "The strict endpoint is frozen as https://api.deepseek.com/beta/chat/completions. V4 uses string sentinels rather than null-valued unions, omits unsupported length keywords, and checks the message length locally."
+    }
+  ],
+  "v3_counterexample": {
+    "found_before_dispatch": true,
+    "unsupported_constructs": [
+      "type: [string, null]",
+      "maxLength"
+    ],
+    "fact_control_schema_was_equivalent_to_game_schema": false,
+    "v3_model_requests": 0
+  }
+}

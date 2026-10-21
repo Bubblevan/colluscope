@@ -1,0 +1,95 @@
+{
+  "schema_version": 2,
+  "experiment_id": "deepseek-real-coordination-40-v3",
+  "evidence_class": "real_llm_behavior",
+  "decision": "BLOCKED",
+  "scientific_outcome": "INVALID_EXPERIMENT",
+  "outcome_rationale": "Before any dispatch, official DeepSeek strict-mode docs showed the frozen game schemas used a null union and maxLength, both outside the documented strict subset; the four fact-control schemas did not cover those constructs. The registered endpoint also differed from the strict client's actual beta endpoint. V3 therefore could not validly execute its registered interface. Zero model requests were sent; the behavior hypothesis remains untested.",
+  "results_summary": "V3 closed before dispatch: 0/40 physical attempts, 0 HTTP responses, 0 model generations, USD 0 actual cost. The strict-schema and endpoint mismatch are preserved as pre-dispatch evidence. V4 is a separate prospective correction.",
+  "denominator_summary": "40 assigned V3 requests; 0 attempted; all 40 remain unattempted; no behavioral rows are assessable.",
+  "scientific_update": "UNCHANGED: no evidence was generated about message use, incentives, ballots, coordination, or intent. The failure concerns the V3 interface freeze, not the model's behavior.",
+  "belief_updates": [
+    {
+      "claim_id": "deepseek-real-coordination-v1",
+      "outcome": "UNCHANGED",
+      "statement": "Whether actual peer-message delivery changes joint ballots remains untested.",
+      "what_changed": "V3 was invalidated before dispatch by an unsupported strict JSON schema and inaccurate endpoint metadata; no behavior was observed.",
+      "remaining_alternatives": "Shared incentives, prompt effects, model capacity, and communication-mediated behavior remain unmeasured.",
+      "evidence_refs": []
+    }
+  ],
+  "material_update": {
+    "claim_id": "deepseek-v3-strict-schema-compatibility",
+    "what_changed": "A documented schema incompatibility was found before dispatch and a prospective compatible encoding was prepared in V4.",
+    "remaining_alternatives": "The official schema subset may evolve; V4 can still encounter provider-specific errors, which must stop the batch without retries.",
+    "evidence_refs": [
+      {
+        "path": "docs/DEEPSEEK_REAL_COORDINATION_V3_SCHEMA_AUDIT.md",
+        "sha256": "367864744a79a5b39be5be72912ada7b56838295ccb958e0f08d572f14d95237"
+      },
+      {
+        "path": "docs/DEEPSEEK_REAL_COORDINATION_V3_EVIDENCE.md",
+        "sha256": "b8d06cd317363d9f1340eff83a89c40bf2c7ab75800e528918b70103f2d2b4c9"
+      },
+      {
+        "path": "docs/DEEPSEEK_REAL_COORDINATION_V3_DECISION.md",
+        "sha256": "830fb0fb80664df74102e034311d2428a431ec307b283a3383d1d70bbf20f992"
+      },
+      {
+        "path": "docs/ITERATION_LOG_FOLLOWUP_20261021_REAL_COORDINATION_V3.md",
+        "sha256": "ff97afaf0afa8a6fd478aaa4a09b60955de18ba8d6e0d0ab9443d59ecff85aef"
+      },
+      {
+        "path": "docs/RESEARCH_RISK_REGISTER_FOLLOWUP_20261021_REAL_COORDINATION_V3.md",
+        "sha256": "8f78648cd22e36c91bd6e973c47e2d7497c30e086a3eaabe2e933800a1245adf"
+      },
+      {
+        "path": "docs/results/deepseek-real-coordination-v3/pre_dispatch_schema_failure.json",
+        "sha256": "ffd2b21fcf5ebe7e3b4c94c07d4af4a78d2c8122f143d166564126d269249988"
+      }
+    ],
+    "independent_critic_confirmed": false
+  },
+  "review_mode": "adversarial_self_review",
+  "review_finding": "The source schemas were compared with official strict-mode documentation. V3's simple fact-control schema could have passed while game schemas failed. The exact V3 config endpoint also disagreed with the shared client's strict route. These issues were detected before model request construction or dispatch.",
+  "review_artifact": null,
+  "outputs": [
+    {
+      "path": "docs/DEEPSEEK_REAL_COORDINATION_V3_SCHEMA_AUDIT.md",
+      "sha256": "367864744a79a5b39be5be72912ada7b56838295ccb958e0f08d572f14d95237"
+    },
+    {
+      "path": "docs/DEEPSEEK_REAL_COORDINATION_V3_EVIDENCE.md",
+      "sha256": "b8d06cd317363d9f1340eff83a89c40bf2c7ab75800e528918b70103f2d2b4c9"
+    },
+    {
+      "path": "docs/DEEPSEEK_REAL_COORDINATION_V3_DECISION.md",
+      "sha256": "830fb0fb80664df74102e034311d2428a431ec307b283a3383d1d70bbf20f992"
+    },
+    {
+      "path": "docs/ITERATION_LOG_FOLLOWUP_20261021_REAL_COORDINATION_V3.md",
+      "sha256": "ff97afaf0afa8a6fd478aaa4a09b60955de18ba8d6e0d0ab9443d59ecff85aef"
+    },
+    {
+      "path": "docs/RESEARCH_RISK_REGISTER_FOLLOWUP_20261021_REAL_COORDINATION_V3.md",
+      "sha256": "8f78648cd22e36c91bd6e973c47e2d7497c30e086a3eaabe2e933800a1245adf"
+    },
+    {
+      "path": "docs/results/deepseek-real-coordination-v3/pre_dispatch_schema_failure.json",
+      "sha256": "ffd2b21fcf5ebe7e3b4c94c07d4af4a78d2c8122f143d166564126d269249988"
+    }
+  ],
+  "actual_model_calls": 0,
+  "actual_external_cost_usd": 0.0,
+  "actual_wallclock_minutes": 0,
+  "failures_retained": true,
+  "new_uncertainty_reduced": false,
+  "next_action": "Use the separately frozen V4 interface package and run its four capability controls first, then proceed only if all controls pass; keep the same 40-attempt and USD 0.50 ceilings, and stop on the first invalid or incorrect output.",
+  "next_action_evidence_class": "real_llm_behavior",
+  "next_action_kind": "diagnose_invalid",
+  "next_action_max_model_calls": 0,
+  "next_action_max_external_cost_usd": 0.0,
+  "approval_required_for_next_action": false,
+  "authorization_id": "DS-FLASH-REAL-COORD-V3-40-20261021",
+  "model_request_ledger": null
+}

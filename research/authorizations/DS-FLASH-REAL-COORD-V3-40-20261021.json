@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "approval_id": "DS-FLASH-REAL-COORD-V3-40-20261021",
+  "approved_at_utc": "2026-10-21T05:05:36Z",
+  "expires_at_utc": "2026-10-23T01:00:00Z",
+  "authorized_experiment_ids": [
+    "deepseek-real-coordination-40-v3"
+  ],
+  "max_model_calls": 40,
+  "max_external_cost_usd": 0.5,
+  "scope": "One new V3 DeepSeek Flash two-agent behavior pilot under the user's active goal to test real multi-agent coordination. Official DeepSeek endpoint only; four fact-delivery controls first, then 36 fixed game requests across three matrices and three matched message-routing arms; 40 physical attempts maximum, zero retries/replacements, USD 0.50 peak-safe hard cost cap. No Qwen, third-party provider, monitor inference, training, probes, or additional model calls. Stop immediately on any failed control or transport/identity/privacy/budget gate. Expires 2026-10-23T01:00:00Z.",
+  "source": "The user explicitly instructed the active persistent Goal to start model calls to validate the proposal until real multi-agent coordination or latent-collusion-intent claims can be supported or falsified. The experiment ID, exact cap, cost ceiling and expiry are a conservative bounded implementation of that instruction, using no more than the project capacity remaining after the closed V2 attempt. The previous V2 authorization is not reused; V2 remains closed and unchanged. This approval does not authorize any inference after this single V3 batch stops or completes."
+}

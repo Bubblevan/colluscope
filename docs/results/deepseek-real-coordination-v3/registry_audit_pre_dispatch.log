@@ -1,0 +1,39 @@
+{
+  "integrity_check": "PASS",
+  "scientific_validity": "NOT_EVALUATED",
+  "registered_cycles": 8,
+  "open_experiments": [
+    "deepseek-real-coordination-40-v3"
+  ],
+  "new_iteration_usage": {
+    "model_calls": 1157,
+    "external_cost_usd": 0.133568658
+  },
+  "usage_by_approval_id": {
+    "DS-FLASH-1200-2P50-20261020": {
+      "model_calls": 120,
+      "external_cost_usd": 0.01178532
+    },
+    "DS-FLASH-REAL-COORD-40-20261021": {
+      "model_calls": 0,
+      "external_cost_usd": 0.0
+    },
+    "DS-FLASH-REAL-COORD-V2-40-20261021": {
+      "model_calls": 1,
+      "external_cost_usd": 0.0
+    },
+    "DS-FLASH-RECIPIENT-804-20261021": {
+      "model_calls": 804,
+      "external_cost_usd": 0.0944016
+    },
+    "DS-FLASH-M4B5-CONTEXT-232-20261021": {
+      "model_calls": 232,
+      "external_cost_usd": 0.027381738
+    }
+  },
+  "project_limits": {
+    "max_external_cost_usd": 2.5,
+    "max_model_calls": 1200
+  },
+  "errors": []
+}

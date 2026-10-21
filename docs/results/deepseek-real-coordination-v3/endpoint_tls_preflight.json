@@ -1,0 +1,13 @@
+{
+  "host": "api.deepseek.com",
+  "observation_time_upper_bound_utc": "2026-10-21T05:02:45Z",
+  "dns": "RESOLVED",
+  "tcp_tls": "PASS",
+  "tls_version": "TLSv1.3",
+  "elapsed_seconds": 0.14,
+  "http_request_sent": false,
+  "api_key_sent": false,
+  "experiment_prompt_sent": false,
+  "model_inference": false,
+  "scope": "Official-host socket/TLS check only; does not establish API-key validity or completion endpoint behavior."
+}

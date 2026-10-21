@@ -380,6 +380,16 @@
       "what_changed": "The authorized V2 execution was blocked before receiving any provider response by local DNS resolution failure."
     },
     {
+      "claim_id": "deepseek-real-coordination-v1",
+      "evidence_refs": [],
+      "experiment_id": "deepseek-real-coordination-40-v3",
+      "outcome": "UNCHANGED",
+      "remaining_alternatives": "Shared incentives, prompt effects, model capacity, and communication-mediated behavior remain unmeasured.",
+      "scientific_outcome": "INVALID_EXPERIMENT",
+      "statement": "Whether actual peer-message delivery changes joint ballots remains untested.",
+      "what_changed": "V3 was invalidated before dispatch by an unsupported strict JSON schema and inaccurate endpoint metadata; no behavior was observed."
+    },
+    {
       "claim_id": "deepseek-recipient-cue-following-v1",
       "evidence_refs": [
         {

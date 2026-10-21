@@ -1,0 +1,11 @@
+{
+  "approved_attempt_cap": 40,
+  "assigned_requests": 40,
+  "endpoint": "https://api.deepseek.com/chat/completions",
+  "model_alias": "deepseek-flash",
+  "model_calls": 0,
+  "peak_reserved_cost_cap_usd": "0.50",
+  "schedule_sha256": "8543f5272bcbfcefadb85717d9fad91977a47754fb5e2f62a33f591a6c99f980",
+  "status": "PASS_OFFLINE_PREFLIGHT",
+  "tokenizer_sha256": "81f64d1248a68ce3663e07ab3ee48b851e5df0e32d27cb98e4c9a268151e8d99"
+}

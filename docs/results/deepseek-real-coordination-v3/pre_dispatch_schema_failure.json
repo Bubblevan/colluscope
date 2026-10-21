@@ -1,0 +1,32 @@
+{
+  "experiment_id": "deepseek-real-coordination-40-v3",
+  "status": "NO_GO_INVALID_EXPERIMENT_BEFORE_DISPATCH",
+  "assigned_requests": 40,
+  "physical_attempts": 0,
+  "http_responses": 0,
+  "model_generations": 0,
+  "actual_external_cost_usd": 0,
+  "counterexamples": [
+    {
+      "request_classes": ["proposal", "reply"],
+      "schema_construct": "type: [string, null]",
+      "official_documentation": "DeepSeek strict-mode supported types omit null and union types.",
+      "expected_risk": "Schema validation may reject the request before generation."
+    },
+    {
+      "request_classes": ["proposal", "reply"],
+      "schema_construct": "maxLength: 240",
+      "official_documentation": "DeepSeek strict-mode documentation lists maxLength as unsupported.",
+      "expected_risk": "Schema validation may reject the request before generation."
+    },
+    {
+      "request_classes": ["all strict_function_calling requests"],
+      "metadata": "Frozen config: https://api.deepseek.com/chat/completions; shared strict client: https://api.deepseek.com/beta/chat/completions.",
+      "official_documentation": "Strict mode requires the Beta API base URL.",
+      "expected_risk": "Registered endpoint metadata does not match the actual route."
+    }
+  ],
+  "control_gap": "The four fact-control schemas do not contain the proposal/reply schema constructs and would not detect them.",
+  "source": "Official DeepSeek Tool Calls documentation, retrieved 2026-10-21T05:11:33Z; frozen V3 source and config.",
+  "resolution": "V3 closed without dispatch; V4 has a separately frozen string sentinel, local length check, strict schema whitelist, and exact Beta endpoint."
+}

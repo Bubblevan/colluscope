@@ -1,0 +1,10 @@
+{
+  "authorization_batch_sha256": "60b8d2cff51b804fd90d6a2e76cd93702c68330eb86dcf2223523543511acfc6",
+  "closure_sha256": null,
+  "evaluator_v2_sha256": "e7b563b1a149a8c770a56728a4d13abcc53e8a12080866a1adfad03b2d234f6d",
+  "experiment_id": "deepseek-real-coordination-40-v4",
+  "preregistration_sha256": "3dd6773fb9923bc256e46bb86a6b8a45cd793f4ddd82c42c8a77dd4326c70b8c",
+  "registered_at_utc": "2026-10-21T05:19:42+00:00",
+  "registered_git_head": "d83268c4e0896f71f4d7a4a935b65fdfb187c30d",
+  "schema_version": 1
+}

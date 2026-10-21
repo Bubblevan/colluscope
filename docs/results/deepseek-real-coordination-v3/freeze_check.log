@@ -1,0 +1,8 @@
+{
+  "assigned_requests": 40,
+  "config_sha256": "4f5987585255a8aef4fb6c19d8919dd53db59bafe43bb540f1191fa27df82a6d",
+  "peak_cost_cap_usd": "0.50",
+  "physical_attempt_cap": 40,
+  "schedule_sha256": "8543f5272bcbfcefadb85717d9fad91977a47754fb5e2f62a33f591a6c99f980",
+  "status": "PASS_FREEZE_CHECK"
+}
