@@ -1,0 +1,4 @@
+Second run: python scripts/analyze_b5_task_difficulty.py --out docs/results/research-sprint-20261021/scientific-direction-review-followup-20261021/b5-task-difficulty-distribution.json
+Exit: 1
+Observed: ValueError: public evidence object with task_spec/events not found
+Cause: the request prompt contains nested JSON objects; the first parser searched only the brace nearest the task_spec key, which can point inside nested quality data. This was an offline selector/parser defect; no request or response was modified.

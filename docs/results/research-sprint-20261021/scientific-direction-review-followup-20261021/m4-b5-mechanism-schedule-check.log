@@ -1,0 +1,17 @@
+{
+  "status": "PASS_OFFLINE_SCHEDULE_REBUILD",
+  "experiment_id": "m4-b5-mechanism-factorial-v1",
+  "assigned_rows": 728,
+  "phase_counts": {
+    "synthetic_factorial": 480,
+    "synthetic_exact_duplicate": 40,
+    "synthetic_explicit_definition": 40,
+    "m4_scale_invariance": 24,
+    "m4_view_repeatability": 144
+  },
+  "schedule_sha256": "9329234b8afde015cddcff99c2ab606f130ffbf8f3101d837f36aaac8620b046",
+  "model_calls": 0,
+  "private_text_exported": false,
+  "registered": false,
+  "authorized": false
+}

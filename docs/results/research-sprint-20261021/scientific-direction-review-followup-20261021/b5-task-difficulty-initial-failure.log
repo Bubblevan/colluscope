@@ -1,0 +1,4 @@
+Initial run: python scripts/analyze_b5_task_difficulty.py --out docs/results/research-sprint-20261021/scientific-direction-review-followup-20261021/b5-task-difficulty-distribution.json
+Exit: 1
+Observed: ValueError: expected all 24 unique B5 M4 Public-only public_harm cases
+Cause: first implementation filtered phase_id == m4_six, but the fixed 24 natural-trace cases span m4_six and m4_remaining. This was an analysis-selector defect; no source row or frozen artifact was modified.

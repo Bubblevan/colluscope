@@ -479,6 +479,85 @@
       "outcome": "INCONCLUSIVE",
       "scope": "Exploratory M3 self-history stratum arithmetic only; no raw private messages read and no model calls.",
       "statement": "The sanitized M3 table supports the descriptive 0/5 versus 3/3 pattern, but not a causal self-history effect."
+    },
+    {
+      "claim_id": "m4-b5-mechanism-direction-review-20261021",
+      "evidence_class": "offline_reanalysis",
+      "evidence_refs": [
+        {
+          "path": "docs/BRANCH_A_EVIDENCE_INVARIANCE.md",
+          "sha256": "56381dee01cacdd49735c878b4c130a9b8c2059a4d4c4fa5b01e0cadf407dd34"
+        },
+        {
+          "path": "docs/results/deepseek-first-m4/audit/monitor_per_reference_scores.csv",
+          "sha256": "ebfc472cb615fc351d35099e2f61469396a3f1d08d82534fe3daf4ebd9cc48a7"
+        },
+        {
+          "path": "docs/results/research-sprint-20261021/m4-b5-context-sensitivity-independent-audit.json",
+          "sha256": "6e5278737d9550d547ef4895ef9ed9bc6aa85fafdb1a26087fdbc4011a11041c"
+        },
+        {
+          "path": "docs/results/research-sprint-20261021/scientific-direction-review-followup-20261021/b5-rule-baseline-rerun.json",
+          "sha256": "e2538cfb2b8711de054964151993a6340a40c55804d569d8455c8cdfb7e53ce6"
+        },
+        {
+          "path": "docs/results/research-sprint-20261021/scientific-direction-review-followup-20261021/b5-task-difficulty-distribution-v2.json",
+          "sha256": "c36cf97644e5a4620383a1541573954d7ee1ee11c769a7fad0d24a931fa4bb5d"
+        },
+        {
+          "path": "docs/results/research-sprint-20261021/scientific-direction-review-followup-20261021/independent-scientific-critic-review.md",
+          "sha256": "46d34be1b3441d2762cf234ce12f5926413cb63a79290142421c25b1e1b958b8"
+        },
+        {
+          "path": "docs/SCIENTIFIC_DIRECTION_RESPONSE_20261021.md",
+          "sha256": "877a35d79a6b920b06ee0f70bb697b37a8df51afdacc63d224494178d4df9c96"
+        },
+        {
+          "path": "research/drafts/m4-b5-mechanism-campaign-v1-schedule.json",
+          "sha256": "44c6bb0c86d0dc0c6d8432cc514ba90655b29fc15ea232608b809774f70f5c8a"
+        },
+        {
+          "path": "research/drafts/m4-b5-mechanism-campaign-v1.md",
+          "sha256": "fe3c2a82b56cede756ff60dcf3180dcbe2cc97017e2899d92a3aa09e1e9eab31"
+        },
+        {
+          "path": "scripts/freeze_m4_b5_mechanism_campaign.py",
+          "sha256": "c09f7264d2d2cf6227a7f88e07b5f786a4df330fa3a7b56f906618a67dce8e44"
+        },
+        {
+          "path": "docs/ITERATION_LOG_FOLLOWUP_20261021_DIRECTION.md",
+          "sha256": "e1d7a4109ac58460cae5d7abf721f11101d764d3b8dc60408b23c53b34d0dc30"
+        },
+        {
+          "path": "docs/RESEARCH_RISK_REGISTER_FOLLOWUP_20261021_DIRECTION.md",
+          "sha256": "45441b0df87d6ba633f59344047a56e11d482d478ef9e6199ce8318974c132cf"
+        },
+        {
+          "path": "docs/results/research-sprint-20261021/scientific-direction-review-followup-20261021/branch-a-final-rerun.log",
+          "sha256": "03826a99c21a4ba6a99440f9c8c2f23f098bc884120683911a6b8a626f770b5e"
+        },
+        {
+          "path": "docs/results/research-sprint-20261021/scientific-direction-review-followup-20261021/b5-rule-baseline-rerun.log",
+          "sha256": "e2538cfb2b8711de054964151993a6340a40c55804d569d8455c8cdfb7e53ce6"
+        },
+        {
+          "path": "docs/results/research-sprint-20261021/scientific-direction-review-followup-20261021/b5-task-difficulty-analysis-v2.log",
+          "sha256": "c36cf97644e5a4620383a1541573954d7ee1ee11c769a7fad0d24a931fa4bb5d"
+        },
+        {
+          "path": "docs/results/research-sprint-20261021/scientific-direction-review-followup-20261021/m4-b5-mechanism-schedule-check.log",
+          "sha256": "ed63e238615ef5e4fee1fd1e91e5bfddbecee1a4f7fe5dc09aafec177d0224f6"
+        },
+        {
+          "path": "docs/results/research-sprint-20261021/scientific-direction-review-followup-20261021/researchctl-audit-final.log",
+          "sha256": "6579ebb2c9c55e443cd53ebe98e731a61fc72781d39677af167da38a694d0ec6"
+        }
+      ],
+      "independent_review_confirmed": false,
+      "interpretation": "The blinded desk critic ranked C for low cost but warned it is not a standalone contribution; it found A and B inconclusive. The coordinator selects A only as the direct next diagnostic for the real anomaly. New schedule is assignment-only, not registered or authorized. The corrected matrix analysis found M4 and synthetic task scales/regret separation differ substantially. Exact labels remain outputs, not collusion truth.",
+      "outcome": "INCONCLUSIVE",
+      "scope": "No-call replay/reanalysis and candidate design only; no new model behavior observed.",
+      "statement": "For the frozen M4 B5 evidence views, prediction changes are verified and reference labels remain invariant; for the frozen 40-row synthetic public-canonical set, B5 answered present 40/40 while the public-harm rule matched 40/40. The mechanism, LLM-specific value, and paper-level novelty remain unresolved."
     }
   ],
   "purpose": "Claim-level memory for future cycle selection. This is a scoped summary of historical artifacts, not a universal scientific score.",

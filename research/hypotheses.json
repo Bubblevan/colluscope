@@ -95,7 +95,7 @@
       ],
       "hypothesis": "In a prospective matched replication, the assigned private-target-reward plus chat-stage package will produce a positive target-execution interaction relative to private reward without chat and chat without private reward. This hypothesis concerns the treatment package only; it does not predict that message semantics, agreement, collusion, or intent are identified.",
       "hypothesis_id": "communication-content-choice-effect",
-      "selection_note": "Retained as the highest-potential prospective paper question, but not the next diagnostic. The 9/15 package interaction is post-hoc, heterogeneous, and confounded by shared target knowledge and an extra chat stage. Reconsider after the bounded B5 validity gate; no inference is authorized.",
+      "selection_note": "Retained as the leading alternative behavior question. The 9/15 M1 package pattern is post-hoc and does not isolate delivered message semantics; revisit after the B5 mechanism diagnostic rather than using it to divert attention from the verified monitor anomaly.",
       "status": "candidate",
       "title": "Does a private target reward interact with chat-stage availability in allocation choices?"
     },
@@ -124,52 +124,72 @@
           "sha256": "8c64c562aae0c39d8bf45ef6858a0618068dadf5e8a747b97dd962c42accfcc4"
         }
       ],
-      "selection_note": "Supporting Track 2.2 candidate only. It is paired with the selected B behavior replication under one proposed authorization; it cannot produce a latent-collusion label. A deterministic rule is the required baseline for structured public-harm, which is not an LLM prediction."
+      "selection_note": "Supporting Track 2.2 candidate only. Defer until blinded human codebook/adjudication is available. It cannot create a latent-collusion label; structured public harm remains a deterministic rule output."
     },
     {
-      "hypothesis_id": "m4-b5-view-repeatability-v2",
-      "title": "Do repeated exact evidence views produce a stable Public-only versus Privileged-original B5 contrast?",
+      "hypothesis_id": "m4-b5-mechanism-factorial-v1",
+      "title": "Which request factors explain B5's all-present output and M4 evidence-view instability?",
       "status": "selected",
-      "hypothesis": "Across the 24 fixed contexts, when each view is repeated three times with byte-identical requests, the Public-only versus Privileged-original unique-mode difference will occur in more contexts than within-view output disagreement.",
+      "hypothesis": "On the frozen balanced public-harm fixture, at least one isolated presentation or computation intervention changes the one-sided B5 output pattern; on the fixed M4 cases, the cross-view majority contrast can be distinguished from within-view repeated-response variation.",
       "competing_explanations": [
-        "The historical view differences are mostly within-view output variation and do not recur as stable view-majority differences.",
-        "A stable difference recurs, but it is caused by the bundled evidence package (permission, event structure, metadata, wording, and token length), not message semantics.",
-        "A mutable provider alias or hidden serving-state changes account for differences even when the reported fingerprint is unchanged.",
-        "Request compilation or serialization changes among nominal repeats, so the intended exact-input comparison was not implemented."
+        "Prose label ordering or tool-enum ordering independently drives the all-present pattern.",
+        "Correct welfare arithmetic helps while irrelevant numbers do not; apparent arithmetic gains are not just extra length or salience.",
+        "Explicitly defining public-harm as positive welfare regret changes the response independently of evidence content.",
+        "Numeric payoff scale drives model responses even when welfare ordering and regret sign remain invariant.",
+        "The historical cross-view changes are no more stable than ordinary same-view response variation or provider-alias drift."
       ],
-      "discriminating_prediction": "On all 24 fixed M4 contexts, issue three byte-identical Public-only and three byte-identical Privileged-original requests per context in a frozen interleaved schedule. A descriptive stable-package pattern requires at least 18/24 contexts with unique modes in both views, at least 6 cross-view mode changes, and more cross-view changes than contexts with any within-view disagreement. No inference about semantic comprehension, intent, or population effects.",
+      "discriminating_prediction": "Cross the two label-order factors with three arithmetic forms on all 40 frozen balanced units, then report paired per-unit present rates and exact accuracy; add one explicit-definition arm and a byte-identical repeat for every unit. On all 24 M4 cases, compare three repeated requests per Public-only and Privileged-original view and compare their unique-majority transitions with within-view disagreement. If no isolated presentation/computation arm changes or improves the one-sided behavior, the corresponding mechanism is weakened; if within-view variation equals or exceeds cross-view majority changes, the historical 20/24 single-call contrast is not evidence of a stable view effect. This is finite fixed-corpus inference only.",
       "evidence_refs": [
         {
-          "path": "docs/M4_B5_VIEW_REPEATABILITY_V2_DECISION.md",
-          "sha256": "5c9e1639eb0929b1eead5407b63c0ed993db061b7183b31b4252c78d04b66a62",
-          "claim": "Offline canary decision and no-live-dispatch boundary."
+          "path": "docs/BRANCH_A_EVIDENCE_INVARIANCE.md",
+          "sha256": "56381dee01cacdd49735c878b4c130a9b8c2059a4d4c4fa5b01e0cadf407dd34"
         },
         {
-          "path": "docs/results/research-sprint-20261021/m4-b5-view-repeatability-v2-offline-canary/offline-canary-summary.json",
-          "sha256": "687e94313fb76f5d0759eaedb4a89f931575c99f185f24b41a3a58040ca692d1",
-          "claim": "Sanitized local canary counts and failure history."
+          "path": "docs/results/deepseek-first-m4/audit/monitor_per_reference_scores.csv",
+          "sha256": "ebfc472cb615fc351d35099e2f61469396a3f1d08d82534fe3daf4ebd9cc48a7"
         },
         {
-          "path": "scripts/run_m4_b5_view_repeatability_v2.py",
-          "sha256": "4a1caafd3c4d5c1f17c4255c27c18ee6c6a5e0b5f9b5b682c78504078c01c092",
-          "claim": "Versioned repeatability runner."
+          "path": "docs/results/research-sprint-20261021/m4-b5-context-sensitivity-independent-audit.json",
+          "sha256": "6e5278737d9550d547ef4895ef9ed9bc6aa85fafdb1a26087fdbc4011a11041c"
         },
         {
-          "path": "tests/test_m4_b5_view_repeatability_v2.py",
-          "sha256": "0eee5b8e5dbce29bbc781909c89db8e4cab990c49ecc9dee7a258e5ce6ebabd6",
-          "claim": "Six offline transport and lifecycle checks."
+          "path": "docs/results/research-sprint-20261021/scientific-direction-review-followup-20261021/b5-task-difficulty-distribution-v2.json",
+          "sha256": "c36cf97644e5a4620383a1541573954d7ee1ee11c769a7fad0d24a931fa4bb5d"
         },
         {
-          "path": "docs/M4_B5_REPEATABILITY_SCOPE_REFOCUS_20261021.md",
-          "sha256": "f5b2c4061fd41a17dacd102a197fc79a7c0c2603a717099d8413a656889bf8c9",
-          "claim": "Frozen scope, schedule, and claim boundary."
+          "path": "docs/SCIENTIFIC_DIRECTION_RESPONSE_20261021.md",
+          "sha256": "877a35d79a6b920b06ee0f70bb697b37a8df51afdacc63d224494178d4df9c96"
+        },
+        {
+          "path": "research/drafts/m4-b5-mechanism-campaign-v1.md",
+          "sha256": "fe3c2a82b56cede756ff60dcf3180dcbe2cc97017e2899d92a3aa09e1e9eab31"
+        },
+        {
+          "path": "research/drafts/m4-b5-mechanism-campaign-v1-schedule.json",
+          "sha256": "44c6bb0c86d0dc0c6d8432cc514ba90655b29fc15ea232608b809774f70f5c8a"
+        },
+        {
+          "path": "docs/results/research-sprint-20261021/scientific-direction-review-followup-20261021/independent-scientific-critic-review.md",
+          "sha256": "46d34be1b3441d2762cf234ce12f5926413cb63a79290142421c25b1e1b958b8"
+        },
+        {
+          "path": "scripts/freeze_m4_b5_mechanism_campaign.py",
+          "sha256": "c09f7264d2d2cf6227a7f88e07b5f786a4df330fa3a7b56f906618a67dce8e44"
+        },
+        {
+          "path": "docs/results/research-sprint-20261021/scientific-direction-review-followup-20261021/m4-b5-mechanism-schedule-check.log",
+          "sha256": "ed63e238615ef5e4fee1fd1e91e5bfddbecee1a4f7fe5dc09aafec177d0224f6"
+        },
+        {
+          "path": "docs/results/research-sprint-20261021/scientific-direction-review-followup-20261021/researchctl-audit-final.log",
+          "sha256": "6579ebb2c9c55e443cd53ebe98e731a61fc72781d39677af167da38a694d0ec6"
         }
       ],
-      "selection_note": "Selected as a bounded B5 validity diagnostic only. The versioned runner passed six offline loopback canary checks and offline request preparation. The candidate remains unregistered and unauthorized; the prior 232-call approval is consumed. Before any provider request, obtain new explicit approval for 144 attempts / USD 0.35, off-peak DeepSeek Flash only, zero retries/replacements, expiry, and 144 private-message event appearances."
+      "selection_note": "Selected for the next diagnostic because it addresses the hash-pinned real M4 anomaly and B5's all-present failure rather than extending the synthetic sequence control. This selection does not establish paper-worthiness: the independent critic ranked C as cheaper and warned A has limited novelty unless isolated factors discriminate and the LLM has a validated nontrivial role. The 728-call draft is not registered or authorized; exact request bodies and all privacy/token/cost preflights remain required."
     }
   ],
   "policy": "At most three read-only candidate directions may be compared. Only one can be selected for a formal cycle at a time. Candidate status is not preregistration or authorization.",
   "schema_version": 1,
-  "selected_hypothesis_id": "m4-b5-view-repeatability-v2",
+  "selected_hypothesis_id": "m4-b5-mechanism-factorial-v1",
   "updated_at": "2026-10-21"
 }
