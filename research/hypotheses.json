@@ -75,36 +75,44 @@
       "title": "Peer source or generic recommendation?"
     },
     {
+      "hypothesis_id": "track23-counterfactual-delivery-v2",
+      "title": "Does a delivered agent-authored proposal change a recipient action?",
+      "status": "candidate",
+      "selection_note": "Fresh v2 candidate following a closed DNS-blocked v1 cycle. It uses the user-authorized new cycle and is not a continuation or reuse of v1 authorization. The contrast isolates delivery, neutral-message presence, and matched source attribution under fixed recipient history.",
+      "hypothesis": "Across 40 preregistered contexts with complete legal actions, verified delivery, and independent settlement replay, showing B a model-generated A proposal as a peer will produce at least 0.15 higher context-mean proposal adoption than both no-message and neutral-message conditions on the 20 held-out contexts; both paired context-bootstrap 95% intervals must exclude zero, and both contrasts must be positive in at least 24/40 contexts overall. This finite pattern supports only a message-to-action effect for these prompts; it does not identify collusion, intent, autonomous negotiation, or a population effect.",
+      "discriminating_prediction": "On 20 held-out contexts, PEER proposal adoption exceeds both N and NEUTRAL by at least 0.15 at the context mean, both paired 95% context-bootstrap intervals are above zero, and both contrasts are positive in at least 24/40 contexts overall. Similar PEER and AIDE effects favor generic advice following; no PEER advantage over N/NEUTRAL weakens a delivery-effect account. Cluster inference by context, never by repeated calls.",
       "competing_explanations": [
-        "Independent choice under shared incentives and public scores: delivered recommendations do not change B’s action beyond the identical no-message/withheld input variability; public-welfare loss can occur without message delivery.",
-        "Message-mediated response: when a fixed public-score recommendation is delivered before revision, B follows it more often than in byte-identical N/P− branches, sometimes changing plurality settlement and payoff.",
-        "Prompt/serving instability: exact-input N/P− branches disagree often, or the delivered-action pattern is inconsistent across contexts, leaving causal attribution unresolved."
+        "Independent choice under common incentives and task information: B adopts or changes toward A’s proposal at similar rates in N or NEUTRAL; matching actions and public harm can occur without informative delivery.",
+        "Generic recommendation following: PEER and the content-identical AIDE attribution affect B similarly, so the result does not show a peer-source-specific coordination mechanism.",
+        "Serving or prompt variability: within-context repeated responses and time effects explain apparent arm differences, or the effect fails to recur across distinct payoff contexts."
       ],
-      "discriminating_prediction": "After all eight pilot gates pass, at least half of assessable held-out main contexts will show P+ following the pre-treatment-selected recommendation while both N and P− remain at B’s initial ballot, and that count will exceed N/P− action discordance by at least eight contexts. Finite controlled message-exposure evidence only; no inference about autonomous collusion, intent, or population effects.",
       "evidence_refs": [
         {
           "path": "docs/M1_100_SCIENTIFIC_AUDIT.md",
-          "sha256": "0a20508d7048f1e573b4d158f348cfe647c8354199860ec1adf5b162a7ec9c1a"
+          "sha256": "0a20508d7048f1e573b4d158f348cfe647c8354199860ec1adf5b162a7ec9c1a",
+          "claim": "M1 9/15 target outcomes are a bundled private-reward-plus-chat observation, not communication causality."
         },
         {
           "path": "docs/M3_SCIENTIFIC_RESULTS.md",
-          "sha256": "dd194d2579366acd0d15c4bc63952b8fddd20bbe92ffc2bdd339efd50e7eaf41"
+          "sha256": "dd194d2579366acd0d15c4bc63952b8fddd20bbe92ffc2bdd339efd50e7eaf41",
+          "claim": "M3 has finite message-conditioned behavior but shared target and history leave communication causality unresolved."
         },
         {
           "path": "docs/DEEPSEEK_RECIPIENT_MECHANISM_V1_EVIDENCE.md",
-          "sha256": "625004fe315d2bf148de18370ea9c4fcb079139fa1bad5fb4fa37e29e71cf90d"
+          "sha256": "625004fe315d2bf148de18370ea9c4fcb079139fa1bad5fb4fa37e29e71cf90d",
+          "claim": "The 804-request recipient experiment failed its delivered-fact action positive control and has truncated downstream outputs."
         },
         {
           "path": "docs/M4_B5_CONTEXT_SENSITIVITY_EVIDENCE.md",
-          "sha256": "906891199731c2b9a0a9a0f6822dd7c572896c29b41620fbf53e85e42bf37402"
+          "sha256": "906891199731c2b9a0a9a0f6822dd7c572896c29b41620fbf53e85e42bf37402",
+          "claim": "M4 evidence-monitor labels are sensitive to presentation and some exact-request outputs vary."
+        },
+        {
+          "path": "docs/results/shared-target-message-content-v1/interpretation.md",
+          "sha256": "97a846f8612fb141a8d8890f723123867a481226bad4da8292fc6db4003472e8",
+          "claim": "The 24-request message-content result is a narrow researcher-authored mapping response, not autonomous communication or collusion."
         }
-      ],
-      "hypothesis": "After the registered eight-context pilot passes all validity gates, in the 40 new preregistered contexts with complete legal actions, verified recipient delivery, and settlement replay, the primary pattern (P+ follows the pre-treatment-selected recommendation while both byte-identical N/P− outputs remain at B’s initial ballot) will occur in at least half of assessable contexts and exceed N/P− action discordance by at least eight contexts. This finite pattern supports a message-delivery effect for these prompts; it does not identify intent, autonomous collusion, or a population effect.",
-      "hypothesis_id": "track23-counterfactual-delivery-v1",
-      "retirement_note": null,
-      "selection_note": "Selected for one bounded Track 2.3 cycle after the user approved a new DeepSeek study and raised the project lifetime call ceiling to 4,800. A separate immutable grant caps this study at 900 attempts/$1.80; the frozen conditional schedule assigns at most 840 attempts. The pilot is the first dispatched phase, and main/monitor calls occur only if preregistered gates pass.",
-      "status": "candidate",
-      "title": "Does controlled message delivery shift a recipient action beyond exact-input variability?"
+      ]
     }
   ],
   "policy": "At most three read-only candidate directions may be compared. Only one can be selected for a formal cycle at a time. Candidate status is not preregistration or authorization.",

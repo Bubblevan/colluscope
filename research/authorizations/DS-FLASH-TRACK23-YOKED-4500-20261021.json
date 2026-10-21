@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "approval_id": "DS-FLASH-TRACK23-YOKED-4500-20261021",
+  "scope": "One fresh Track 2.3 v2 counterfactual-delivery cycle using DeepSeek Flash only: first an 8-context/64-request pilot; only if all preregistered validity and behavior-feasibility gates pass, then a 40-context/4,000-request main stage; only after complete integrity-passing main data, then 384 frozen monitor calls (80 researcher bundles and 304 ordinary single-branch views). Maximum frozen schedule 4,448 physical requests and grant ceiling 4,500; cost ceiling $1.95 at official weekday peak uncached prices. Official DeepSeek API endpoint and the existing standard resolver/TLS client only; no Qwen, provider fallback, custom DNS/HTTPS/SNI, retries, replacements, resumption, or resampling. Temperature 0, thinking disabled, output maximum 64 tokens; pinned tokenizer bounds input to 1,200 tokens including framing. Stop immediately on the frozen failure gates; six-hour cycle cap and 60-minute pilot cap. Authorization expires 2026-10-23T00:00:00Z.",
+  "authorized_experiment_ids": [
+    "track23-counterfactual-delivery-v2"
+  ],
+  "max_model_calls": 4500,
+  "max_external_cost_usd": 1.95,
+  "approved_at_utc": "2026-10-21T10:20:54Z",
+  "expires_at_utc": "2026-10-23T00:00:00Z",
+  "source": "Explicit user authorization in this conversation: start a new bounded DeepSeek research cycle, raise the cumulative project cap to about 6,500 calls, retain the user-set $1 minimum/$3 maximum, and continue the already approved Track 2.3 study after preregistration. This is a new immutable approval batch, not reuse of any historical authorization."
+}
