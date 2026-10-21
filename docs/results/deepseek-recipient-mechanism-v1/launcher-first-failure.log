@@ -1,0 +1,13 @@
+Exit code: 1
+Physical HTTP attempts: 0 (the run directory contains no attempts.jsonl or global_budget_ledger.jsonl)
+
+Traceback (most recent call last):
+  File "scripts/run_deepseek_recipient_mechanism_v1.py", line 385, in <module>
+    raise SystemExit(main())
+  File "scripts/run_deepseek_recipient_mechanism_v1.py", line 379, in main
+    result = run(check_only=args.check_only)
+  File "scripts/run_deepseek_recipient_mechanism_v1.py", line 199, in run
+    "tokenizer_source_commit": config["tokenizer_source_commit"],
+KeyError: 'tokenizer_source_commit'
+
+Root cause: manifest builder expected a top-level key; the frozen config stores the same pinned value under config["tokenizer"]["repository_commit"]. Failure occurred before manifest write and before the client call path.
