@@ -31,106 +31,74 @@
   "latest_decision": "INCONCLUSIVE",
   "latest_decision_type": "scientific",
   "latest_review": {
-    "status": "offline_mechanism_candidate_waiting_new_scope_authorization",
-    "authorization_status": "The DS-FLASH-M4B5-CONTEXT-232-20261021 authorization is consumed and cannot be reused. No authorization exists for m4-b5-mechanism-factorial-v1.",
+    "status": "offline_prepared_waiting_new_scope_authorization",
+    "authorization_status": "The DS-FLASH-M4B5-CONTEXT-232-20261021 approval is consumed and cannot be reused. No authorization exists for m4-b5-view-repeatability-v2.",
     "experiment_registered": false,
     "new_model_api_attempts": 0,
     "new_model_calls": 0,
-    "selected_next_hypothesis_id": "m4-b5-mechanism-factorial-v1",
-    "candidate_experiment_id": "m4-b5-mechanism-factorial-v1",
+    "selected_next_hypothesis_id": "m4-b5-view-repeatability-v2",
+    "candidate_experiment_id": "m4-b5-view-repeatability-v2",
     "candidate_ceiling": {
-      "physical_attempts": 728,
-      "external_cost_usd": 1.95,
+      "physical_attempts": 144,
+      "external_cost_usd": 0.35,
       "retries": 0,
       "replacements": 0,
-      "model": "official DeepSeek Flash off-peak only",
-      "expires_at_utc": "2026-10-25T23:59:00Z",
+      "model": "official DeepSeek Flash only; off-peak only",
+      "expires_at_utc_proposed": "2026-10-25T23:59:00Z",
       "private_message_event_appearances": 144
     },
     "remaining_project_budget_before_candidate": {
       "physical_attempts": 848,
       "external_cost_usd": 2.460832942
     },
-    "offline_prepare": {
-      "assigned": 728,
-      "schedule_sha256": "9329234b8afde015cddcff99c2ab606f130ffbf8f3101d837f36aaac8620b046",
-      "max_input_tokens_per_request": 15000,
-      "max_output_tokens_per_request": 512,
-      "worst_case_offpeak_cost_usd": "1.8616416"
+    "remaining_project_budget_if_candidate_ceiling_reserved": {
+      "physical_attempts": 704,
+      "external_cost_usd": 2.110832942,
+      "reservation_status": "planning_only_not_reserved"
     },
-    "review_mode": "offline_raw_reference_replay_and_matrix_reanalysis_plus_separate-context_blind_desk_review; no provider inference",
-    "parent_head_reviewed": "30a9e692fdb7d88e2bc53c87b4540ae2002ab95a",
-    "evidence": "docs/SCIENTIFIC_DIRECTION_RESPONSE_20261021.md",
-    "evidence_sha256": "89d5fc687df6211d3814d47e483d646a35b4fe65dbbf0ad21e9744548b330487",
+    "offline_prepare": {
+      "assigned": 144,
+      "request_profiles": 48,
+      "repeats_per_profile": 3,
+      "request_manifest_sha256": "6d26f48244bd06d93b29d58d02d69f03fe49d6db967b74cae0618ccfdfaf760a",
+      "schedule_file_sha256": "08e9b6d72862629f1e3e2fa3f02f3dcaee41a6356ad874cdd7cecc6d9ac93f3e",
+      "schedule_object_sha256": "37cce3e98a0493cb26e6610cdc823aa5cc7a1303086f7943ed269b895441e099",
+      "max_conservative_input_bound_units": 12104,
+      "input_bound_is_provider_tokenizer_count": false,
+      "max_output_tokens_per_request": 512,
+      "offpeak_worst_case_cost_usd": "0.2658564",
+      "model_calls": 0,
+      "local_acl_verified_objects": 304,
+      "raw_run_directory_git_ignored": true
+    },
+    "review_mode": "offline B5 evidence review plus sanitized independent preparation audit; no provider inference",
+    "parent_head_reviewed": "2dd1f45288f059b583372659ab7536f68e0dcf92",
+    "evidence": "docs/AUTORESEARCH_CONTINUATION_20261021.md",
+    "evidence_sha256": "94255f7091d978552db2475c3a9b3f93d6febec0d76677810248aa6b438d2257",
     "evidence_refs": [
       {
-        "path": "docs/SCIENTIFIC_DIRECTION_RESPONSE_20261021.md",
-        "sha256": "877a35d79a6b920b06ee0f70bb697b37a8df51afdacc63d224494178d4df9c96"
+        "path": "docs/AUTORESEARCH_CONTINUATION_20261021.md",
+        "sha256": "94255f7091d978552db2475c3a9b3f93d6febec0d76677810248aa6b438d2257"
       },
       {
-        "path": "docs/results/research-sprint-20261021/scientific-direction-review-followup-20261021/independent-scientific-critic-review.md",
-        "sha256": "46d34be1b3441d2762cf234ce12f5926413cb63a79290142421c25b1e1b958b8"
+        "path": "docs/ITERATION_LOG_FOLLOWUP_20261021_AUTORESEARCH.md",
+        "sha256": "c31426f3572896f1ebfe304d6e7d205cbc526fca54095dad60f456e122bbbdcb"
       },
       {
-        "path": "research/drafts/m4-b5-mechanism-campaign-v1.md",
-        "sha256": "fe3c2a82b56cede756ff60dcf3180dcbe2cc97017e2899d92a3aa09e1e9eab31"
+        "path": "docs/RESEARCH_RISK_REGISTER_FOLLOWUP_20261021_AUTORESEARCH.md",
+        "sha256": "ffacbd30bc29b4fc32c755b7b481fb4c42f4a3a042407808f001ce46911868b6"
       },
       {
-        "path": "research/drafts/m4-b5-mechanism-campaign-v1-schedule.json",
-        "sha256": "44c6bb0c86d0dc0c6d8432cc514ba90655b29fc15ea232608b809774f70f5c8a"
-      },
-      {
-        "path": "scripts/freeze_m4_b5_mechanism_campaign.py",
-        "sha256": "c09f7264d2d2cf6227a7f88e07b5f786a4df330fa3a7b56f906618a67dce8e44"
-      },
-      {
-        "path": "docs/ITERATION_LOG_FOLLOWUP_20261021_DIRECTION.md",
-        "sha256": "e1d7a4109ac58460cae5d7abf721f11101d764d3b8dc60408b23c53b34d0dc30"
-      },
-      {
-        "path": "docs/RESEARCH_RISK_REGISTER_FOLLOWUP_20261021_DIRECTION.md",
-        "sha256": "45441b0df87d6ba633f59344047a56e11d482d478ef9e6199ce8318974c132cf"
-      },
-      {
-        "path": "docs/results/research-sprint-20261021/scientific-direction-review-followup-20261021/branch-a-final-rerun.json",
-        "sha256": "a9c18403862640c9fcf0f12c911466796c18aff718a20f258194452b782b5b55"
-      },
-      {
-        "path": "docs/results/research-sprint-20261021/scientific-direction-review-followup-20261021/branch-a-final-rerun.log",
-        "sha256": "03826a99c21a4ba6a99440f9c8c2f23f098bc884120683911a6b8a626f770b5e"
-      },
-      {
-        "path": "docs/results/research-sprint-20261021/scientific-direction-review-followup-20261021/b5-rule-baseline-rerun.json",
-        "sha256": "e2538cfb2b8711de054964151993a6340a40c55804d569d8455c8cdfb7e53ce6"
-      },
-      {
-        "path": "docs/results/research-sprint-20261021/scientific-direction-review-followup-20261021/b5-rule-baseline-rerun.log",
-        "sha256": "e2538cfb2b8711de054964151993a6340a40c55804d569d8455c8cdfb7e53ce6"
-      },
-      {
-        "path": "docs/results/research-sprint-20261021/scientific-direction-review-followup-20261021/b5-task-difficulty-distribution-v2.json",
-        "sha256": "c36cf97644e5a4620383a1541573954d7ee1ee11c769a7fad0d24a931fa4bb5d"
-      },
-      {
-        "path": "docs/results/research-sprint-20261021/scientific-direction-review-followup-20261021/b5-task-difficulty-analysis-v2.log",
-        "sha256": "c36cf97644e5a4620383a1541573954d7ee1ee11c769a7fad0d24a931fa4bb5d"
-      },
-      {
-        "path": "docs/results/research-sprint-20261021/scientific-direction-review-followup-20261021/m4-b5-mechanism-schedule-check.log",
-        "sha256": "ed63e238615ef5e4fee1fd1e91e5bfddbecee1a4f7fe5dc09aafec177d0224f6"
-      },
-      {
-        "path": "docs/results/research-sprint-20261021/scientific-direction-review-followup-20261021/researchctl-audit-final.log",
-        "sha256": "6579ebb2c9c55e443cd53ebe98e731a61fc72781d39677af167da38a694d0ec6"
+        "path": "docs/results/research-sprint-20261021/m4-b5-autoresearch-continuation-20261021/repeatability-preparation-audit-v3.json",
+        "sha256": "b172ebb606583fa504847df5e9e6fe84b057c5f935b68516dbebd4dca9304374"
       }
     ],
-    "blind_critic": "ranked C above B above A for near-term effort; selected A remains contested and not paper-ready",
-    "next_gate": "Obtain one new named campaign authorization; then freeze exact request bodies offline and register only if model/provider identity, token, privacy, and worst-case cost checks pass. No calls before explicit approval.",
-    "private_evidence_transfer": "72 Privileged-original requests, each with two historical private-message events; 144 event appearances total, if later approved."
+    "next_gate": "Obtain one new named approval for at most 144 physical attempts and USD 0.35, official DeepSeek Flash off-peak only, zero retries/replacements, expiry 2026-10-25T23:59:00Z, and external transfer of 144 private-message event appearances. Only then register the exact protocol and rerun all dispatch gates.",
+    "private_evidence_transfer": "72 Privileged-original requests, each with two historical private-message events; 144 event appearances total if separately approved."
   },
-  "latest_review_id": "m4-b5-mechanism-factorial-v1-offline-direction-20261021",
+  "latest_review_id": "m4-b5-view-repeatability-v2-offline-preparation-20261021",
   "latest_scientific_outcome": "INCONCLUSIVE",
-  "next_action": "Seek explicit authorization for m4-b5-mechanism-factorial-v1 at no more than 728 attempts and USD 1.95, official DeepSeek Flash off-peak only, zero retries/replacements, expiry 2026-10-25T23:59:00Z, and 144 private-message event appearances. Before any dispatch, freeze exact request bodies offline and pass all identity/token/privacy/cost gates. Do not reuse the consumed 232-call approval.",
+  "next_action": "Seek explicit scope-specific approval for m4-b5-view-repeatability-v2 at no more than 144 physical attempts and USD 0.35, official DeepSeek Flash off-peak only, zero retries/replacements, expiry 2026-10-25T23:59:00Z, and 144 private-message event appearances transferred to the provider. Do not register or dispatch before approval; after approval, register the frozen protocol and recheck model/price/window/token/identity/privacy/budget gates immediately before any call.",
   "preexisting_untracked_paths_preserved": [
     "docs/COLOSSEUM_LOCAL_REPRO_PROTOCOL.md (pre-existing untracked; preserved, not part of this review)",
     "docs/results/colosseum-local-audit-20261020/ (pre-existing untracked; preserved, not part of this review)",
@@ -148,7 +116,7 @@
   "program": "ColluScope Autoresearch",
   "program_status": "active",
   "schema_version": 2,
-  "state_recorded_at_head": "30a9e692fdb7d88e2bc53c87b4540ae2002ab95a",
-  "status": "offline_mechanism_candidate_waiting_scope_authorization",
+  "state_recorded_at_head": "2dd1f45288f059b583372659ab7536f68e0dcf92",
+  "status": "repeatability_candidate_waiting_scope_authorization",
   "updated_at": "2026-10-21"
 }

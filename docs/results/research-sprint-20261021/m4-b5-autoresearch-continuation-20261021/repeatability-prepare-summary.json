@@ -1,0 +1,28 @@
+{
+  "prepared_at_utc": "2026-10-21T01:23:11Z",
+  "status": "PREPARED_OFFLINE_NO_CALLS",
+  "experiment_id": "m4-b5-view-repeatability-v2",
+  "evidence_class": "offline_reanalysis",
+  "model_calls": 0,
+  "assigned_physical_attempts": 144,
+  "context_view_profiles": 48,
+  "repeat_requests_per_profile": 3,
+  "view_counts": {
+    "public_only": 72,
+    "privileged_original": 72
+  },
+  "maximum_conservative_input_upper_bound": 12104,
+  "input_bound_definition": "2 * serialized UTF-8 request bytes + 256 framing tokens; not provider tokenizer output",
+  "maximum_output_tokens": 512,
+  "offpeak_worst_case_cost_reserve_usd": "0.2658564",
+  "request_manifest_sha256": "6d26f48244bd06d93b29d58d02d69f03fe49d6db967b74cae0618ccfdfaf760a",
+  "schedule_file_sha256": "08e9b6d72862629f1e3e2fa3f02f3dcaee41a6356ad874cdd7cecc6d9ac93f3e",
+  "schedule_object_sha256": "37cce3e98a0493cb26e6610cdc823aa5cc7a1303086f7943ed269b895441e099",
+  "raw_run_directory_git_ignored": true,
+  "acl_verified": true,
+  "acl_verified_object_count": 304,
+  "acl_identity_material_published": false,
+  "private_message_text_published": false,
+  "offpeak_dispatch_check": "not performed; observation time 01:23 UTC is within the published weekday peak interval 01:00-04:00 UTC",
+  "authorization": "none for this experiment; prior 232-call approval belongs to the completed experiment and is consumed"
+}

@@ -1,0 +1,30 @@
+{
+  "status": "PASS_OFFLINE_PREPARATION_INDEPENDENT_AUDIT",
+  "experiment_id": "m4-b5-view-repeatability-v2",
+  "evidence_class": "offline_reanalysis",
+  "model_calls": 0,
+  "assigned_physical_attempts": 144,
+  "request_bodies_hash_checked": 144,
+  "context_view_profiles": 48,
+  "identical_repeat_profiles": 48,
+  "view_counts": {
+    "public_only": 72,
+    "privileged_original": 72
+  },
+  "maximum_conservative_input_upper_bound": 12104,
+  "input_bound_definition": "2 * serialized UTF-8 request bytes + 256 framing tokens; not provider tokenizer output",
+  "maximum_output_tokens": 512,
+  "offpeak_worst_case_cost_reserve_usd": "0.2658564",
+  "raw_run_directory_git_ignored": true,
+  "raw_private_payloads_printed": false,
+  "request_manifest_sha256": "6d26f48244bd06d93b29d58d02d69f03fe49d6db967b74cae0618ccfdfaf760a",
+  "source_hashes": {
+    "m4_episodes_sha256": "e243adae992ae222bb12bd707e55980fff70a08a38f77603d5ebdbea45fc2765",
+    "m4_run_manifest_sha256": "9ab42c327b5f915337480628c42e99620b57513e00e8771dafeef1d6cb56554f",
+    "m4_system_prompt_sha256": "10ba3341c905c87e8334a6dc8426cb05329ce5e675ce337cf2169a6ed9a137dd",
+    "monitor_compiler_sha256": "e29fede57ce8c2edadccdcef3545bc6a51d02f5185f4007763be0b8516637975",
+    "provider_runtime_sha256": "1388d3792d19856baef804984b67a1eb44574511a0948df48395768eb4f6ce31"
+  },
+  "schedule_file_sha256": "08e9b6d72862629f1e3e2fa3f02f3dcaee41a6356ad874cdd7cecc6d9ac93f3e",
+  "schedule_object_sha256": "37cce3e98a0493cb26e6610cdc823aa5cc7a1303086f7943ed269b895441e099"
+}

@@ -1,0 +1,3 @@
+usage: freeze_m4_b5_view_repeatability_v2.py [-h] [--out OUT]
+freeze_m4_b5_view_repeatability_v2.py: error: unrecognized arguments: --check
+exit_code=2

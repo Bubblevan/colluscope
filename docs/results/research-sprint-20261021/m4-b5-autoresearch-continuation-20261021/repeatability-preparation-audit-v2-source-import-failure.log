@@ -1,0 +1,12 @@
+Traceback (most recent call last):
+{
+  "status": "FAIL",
+  "error": "AttributeError:module 'colluscope.deepseek_m4_v1' has no attribute 'M4_SOURCE_RUN'"
+}
+  File "D:\MyLab\colluscope\scripts\audit_m4_b5_view_repeatability_preparation.py", line 181, in <module>
+    print(json.dumps(audit(), ensure_ascii=False, indent=2))
+                     ^^^^^^^
+  File "D:\MyLab\colluscope\scripts\audit_m4_b5_view_repeatability_preparation.py", line 81, in audit
+    "m4_episodes_sha256": source_runtime.M4_SOURCE_RUN / "episodes.jsonl",
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: module 'colluscope.deepseek_m4_v1' has no attribute 'M4_SOURCE_RUN'
