@@ -98,5 +98,16 @@
   "schema_version": 2,
   "state_recorded_at_head": "2dcca164235cf2254dba65b2307a75edb973d292",
   "status": "m1-v3-awaiting-exact-user-authorization-r3",
-  "updated_at": "2026-10-21"
+  "updated_at": "2026-10-21",
+  "latest_integrity_followup": {
+    "status": "RESTORED_HASH_PINNED_AUDIT; REGISTRY_PASS",
+    "iteration_log": "docs/ITERATION_LOG_FOLLOWUP_20261021_POSTPUSH_AUDIT_RESTORE.md",
+    "iteration_log_sha256": "039cb40b705c942238bd3cb838fea5c2c7b88fcd67fb78b7eebb32db817fe2ff",
+    "risk_addendum": "docs/RESEARCH_RISK_REGISTER_FOLLOWUP_20261021_AUDIT_SIDE_EFFECT.md",
+    "risk_addendum_sha256": "4b15c73bf5cb4b7bf746f836881df0aafeae8727fc11c74352cf957981ec84ef",
+    "frozen_audit_path": "docs/results/research-sprint-20261021/m4-b5-context-sensitivity-independent-audit.json",
+    "frozen_audit_sha256": "6e5278737d9550d547ef4895ef9ed9bc6aa85fafdb1a26087fdbc4011a11041c",
+    "transient_regeneration_sha256": "cec9057abfc78a6cb26cb9c338fd8c0ce93dd59cbc2a9d18fb5ede395ef9d818",
+    "model_calls": 0
+  }
 }
