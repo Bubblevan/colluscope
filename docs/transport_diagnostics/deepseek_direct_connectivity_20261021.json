@@ -1,0 +1,15 @@
+{
+  "diagnostic": "unauthenticated HTTPS GET; no model inference",
+  "timestamp_utc": "2026-10-21T05:29:53.9724188Z",
+  "endpoint": "https://api.deepseek.com/beta/chat/completions",
+  "method": "GET",
+  "proxy_disabled_by": "urllib.request.ProxyHandler({})",
+  "proxy_environment_variables_present": false,
+  "authorization_header_sent": false,
+  "prompt_or_experiment_payload_sent": false,
+  "http_status": 401,
+  "response_body_saved": false,
+  "v4_retry_performed": false,
+  "interpretation": "Direct DNS/TCP/TLS/HTTP reached the official endpoint at diagnostic time. HTTP 401 is expected without authentication and is not a model or experiment result. The earlier Windows getaddrinfo error was a resolver failure before HTTP, not evidence of a proxy failure or provider outage.",
+  "source_check": "src/colluscope/deepseek_m4_v1.py constructs urllib.request.ProxyHandler({}), so the V4 client already disables proxy discovery."
+}

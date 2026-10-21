@@ -1,0 +1,10 @@
+{
+  "event": "attempted post-run append to hash-frozen V4 evidence report",
+  "timestamp_utc": "2026-10-21T05:30:40.7621225Z",
+  "audit_command": "python scripts/researchctl.py audit",
+  "observed_result": "FAIL",
+  "exact_error": "deepseek-real-coordination-40-v4: outputs[2] hash mismatch: docs/DEEPSEEK_REAL_COORDINATION_V4_EVIDENCE.md",
+  "remediation": "Restored docs/DEEPSEEK_REAL_COORDINATION_V4_EVIDENCE.md from HEAD and moved the connectivity diagnostic to separate sidecar files.",
+  "experiment_artifacts_modified_after_restore": false,
+  "model_calls": 0
+}
