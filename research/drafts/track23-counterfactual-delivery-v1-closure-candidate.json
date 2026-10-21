@@ -1,0 +1,67 @@
+{
+  "schema_version": 2,
+  "experiment_id": "track23-counterfactual-delivery-v1",
+  "evidence_class": "real_llm_behavior",
+  "decision": "BLOCKED",
+  "scientific_outcome": "EXECUTION_BLOCKED",
+  "outcome_rationale": "The first assigned request entered the client attempt ledger but failed before DNS resolution, HTTP status, or a provider response. No model behavior was observed. The pilot was stopped under its no-retry rule; this is an execution block, not a behavioral null or a hypothesis result.",
+  "results_summary": "Track 2.3 pilot stopped at request 1: 1 physical attempt started, 1 terminal TRANSPORT_ERROR, 0 provider responses, 0 valid actions, 0 assessable contexts. Python socket.getaddrinfo failed although the PowerShell system DNS command returned records. No retry or transport workaround was made.",
+  "denominator_summary": "56 pilot requests assigned; 1 started; 1 terminal; 0 completed model responses; 0 valid actions; 0 assessable contexts; 55 assigned requests unstarted. Actual provider cost recorded as $0.00; conservative peak-rate reserve for the started request was $0.00128436.",
+  "scientific_update": "No scientific update to the message-mediated action hypothesis. Existing behavioral evidence remains as previously bounded; this cycle yielded only an execution boundary.",
+  "actual_model_calls": 1,
+  "actual_external_cost_usd": 0.0,
+  "actual_wallclock_minutes": 1,
+  "failures_retained": true,
+  "review_mode": "adversarial_self_review",
+  "review_finding": "The endpoint was not reached. PowerShell name resolution succeeded while the Python socket resolver used by the registered client failed. Retrying the assigned prompt would violate the frozen no-retry rule, and changing DNS/transport would leave the registered path. Stop this authorization and switch to offline evidence integration.",
+  "review_artifact": {},
+  "belief_updates": [
+    {
+      "claim_id": "deepseek-first-communication-causality",
+      "outcome": "UNCHANGED",
+      "statement": "Prior evidence about communication causality remains inconclusive; this run observed no model action.",
+      "what_changed": "No scientific evidence changed. The registered DeepSeek execution path is blocked by a Python resolver failure in the current environment.",
+      "remaining_alternatives": "Independent shared-incentive choice, message-mediated action response, and monitor evidence sensitivity remain unresolved by this blocked attempt.",
+      "evidence_refs": [
+        {
+          "path": "docs/results/track23-counterfactual-delivery-v1/pilot-execution-blocked.json",
+          "sha256": "a393ad59163aa42bd48a45a4f983672f2006c8d279fe5687254356f55ddb6f71"
+        }
+      ]
+    }
+  ],
+  "material_update": {
+    "claim_id": "deepseek-first-communication-causality",
+    "what_changed": "No material scientific belief update. One authorized API attempt failed before provider contact; the observed resolver discrepancy is operational evidence only.",
+    "remaining_alternatives": "The behavioral mechanisms remain unresolved; offline manuscript integration is still available.",
+    "evidence_refs": [
+      {
+        "path": "docs/results/track23-counterfactual-delivery-v1/pilot-execution-blocked.json",
+        "sha256": "a393ad59163aa42bd48a45a4f983672f2006c8d279fe5687254356f55ddb6f71"
+      }
+    ],
+    "independent_critic_confirmed": false
+  },
+  "next_action_kind": "continue_offline",
+  "next_action": "Continue offline Track 2.3 paper integration using the existing M1/M3/M4 and source-framing evidence, explicitly recording this blocked pilot. Do not retry this assigned request. Any future live experiment requires the default Python resolver to work and a fresh exact-scope approval.",
+  "next_action_evidence_class": "offline_reanalysis",
+  "next_action_max_model_calls": 0,
+  "next_action_max_external_cost_usd": 0.0,
+  "new_uncertainty_reduced": false,
+  "approval_required_for_next_action": false,
+  "authorization_id": "DS-FLASH-TRACK23-900-20261021",
+  "model_request_ledger": {
+    "path": "docs/results/track23-counterfactual-delivery-v1/model-request-ledger.json",
+    "sha256": "b48be6c89ee1a4dfa2e07e8f7d997047760fe07fb2dbcea718acfcd9779704ff"
+  },
+  "outputs": [
+    {
+      "path": "docs/results/track23-counterfactual-delivery-v1/pilot-execution-blocked.json",
+      "sha256": "a393ad59163aa42bd48a45a4f983672f2006c8d279fe5687254356f55ddb6f71"
+    },
+    {
+      "path": "docs/results/track23-counterfactual-delivery-v1/model-request-ledger.json",
+      "sha256": "b48be6c89ee1a4dfa2e07e8f7d997047760fe07fb2dbcea718acfcd9779704ff"
+    }
+  ]
+}

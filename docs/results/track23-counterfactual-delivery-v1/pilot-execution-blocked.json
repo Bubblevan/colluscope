@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "experiment_id": "track23-counterfactual-delivery-v1",
+  "authorization_id": "DS-FLASH-TRACK23-900-20261021",
+  "scientific_outcome": "EXECUTION_BLOCKED",
+  "phase": "pilot",
+  "schedule_sha256": "398379bb396126c1e92683dfc42d4861a4a8fd48bb41e72c9d908794b4cc7645",
+  "registered_preregistration_sha256": "4bf6693fd0f7bc8b4cabf80a39876614ea0d1041a2c3a6ab505eb3326d09db22",
+  "source_scenario_sha256": "79358acd02dcade31291e879d1d173e5e92e9bf5f57305c65a3d59f954ca502a",
+  "assigned_requests": 56,
+  "physical_attempts_started": 1,
+  "terminal_attempts": 1,
+  "completed_model_responses": 0,
+  "valid_actions": 0,
+  "assessable_contexts": 0,
+  "unstarted_assigned_requests": 55,
+  "attempt": {
+    "request_id_sha256": "414ecbee08e88b79c35f5dfc7801d4f2eabb69062ab03b2a69ebb6ecb6f7b4f6",
+    "request_sha256": "cf142b45215f952ece0f484606cbc809d479bb26ad93173eeed7e753fffc9b6b",
+    "started_at_utc": "2026-10-21T09:19:13.376333+00:00",
+    "terminal_at_utc": "2026-10-21T09:19:13.637657+00:00",
+    "status": "TRANSPORT_ERROR",
+    "http_status": null,
+    "response_sha256": null,
+    "returned_model": "none",
+    "system_fingerprint": "none"
+  },
+  "resolver_diagnostic": {
+    "python_socket_getaddrinfo": "FAILED: [Errno 11001] getaddrinfo failed",
+    "powershell_Resolve_DnsName": "SUCCEEDED: returned DeepSeek hostname CNAME and A records",
+    "interpretation": "The API client’s Python resolver path remains unusable in this execution environment; the discrepancy was not repaired or worked around."
+  },
+  "actual_external_cost_usd": 0.0,
+  "maximum_reservation_for_started_attempt_usd": "0.00128436",
+  "retry_or_replacement_attempts": 0,
+  "network_transport_changes": 0,
+  "model_behavior_evidence": "none",
+  "interpretation": "Execution boundary only. This is not a behavioral null, not a failed hypothesis, and not evidence for or against message-mediated action effects.",
+  "recorded_at_utc": "2026-10-21T09:20:40.346396+00:00"
+}

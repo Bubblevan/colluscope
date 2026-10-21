@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "experiment_id": "track23-counterfactual-delivery-v1",
+  "requests": [
+    {
+      "experiment_id": "track23-counterfactual-delivery-v1",
+      "attempt_id_sha256": "414ecbee08e88b79c35f5dfc7801d4f2eabb69062ab03b2a69ebb6ecb6f7b4f6",
+      "started_at_utc": "2026-10-21T09:19:13.376333+00:00",
+      "terminal_status": "TRANSPORT_ERROR",
+      "external_cost_usd": 0.0
+    }
+  ]
+}

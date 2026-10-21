@@ -648,6 +648,21 @@
       "scientific_outcome": "INCONCLUSIVE",
       "statement": "Whether an actual sender message changes recipient target choice beyond a neutral message under the frozen shared-target contexts remains unresolved.",
       "what_changed": "The only complete context yielded 2/2 target choices in each of four arms; 23 requests remained unattempted after the first schema-invalid response."
+    },
+    {
+      "claim_id": "deepseek-first-communication-causality",
+      "evidence_refs": [
+        {
+          "path": "docs/results/track23-counterfactual-delivery-v1/pilot-execution-blocked.json",
+          "sha256": "a393ad59163aa42bd48a45a4f983672f2006c8d279fe5687254356f55ddb6f71"
+        }
+      ],
+      "experiment_id": "track23-counterfactual-delivery-v1",
+      "outcome": "UNCHANGED",
+      "remaining_alternatives": "Independent shared-incentive choice, message-mediated action response, and monitor evidence sensitivity remain unresolved by this blocked attempt.",
+      "scientific_outcome": "EXECUTION_BLOCKED",
+      "statement": "Prior evidence about communication causality remains inconclusive; this run observed no model action.",
+      "what_changed": "No scientific evidence changed. The registered DeepSeek execution path is blocked by a Python resolver failure in the current environment."
     }
   ],
   "historical_scope": "The 628-request DeepSeek-first run and the separate 856-row Monitor run use different schedules and must never be pooled.",

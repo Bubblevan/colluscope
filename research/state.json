@@ -1,6 +1,6 @@
 {
-  "active_experiment_id": "track23-counterfactual-delivery-v1",
-  "active_hypothesis_id": "track23-counterfactual-delivery-v1",
+  "active_experiment_id": null,
+  "active_hypothesis_id": null,
   "candidate_hypotheses": [
     "track23-counterfactual-delivery-v1"
   ],
@@ -10,7 +10,7 @@
     "cross_model_generalization": "INCONCLUSIVE",
     "latent_collusion_or_intent": "NOT_IDENTIFIED"
   },
-  "consecutive_cycles_without_new_uncertainty_reduction": 9,
+  "consecutive_cycles_without_new_uncertainty_reduction": 10,
   "current_branch": "codex/deepseek-real-coordination-v5-20261021",
   "current_round": {
     "authorization_status": "consumed_and_never_reusable",
@@ -30,8 +30,8 @@
     "terminal_artifact": "research/handoffs/DEEPSEEK-FIRST-RESEARCH-01.json"
   },
   "historical_approvals_reusable": false,
-  "latest_closed_experiment_id": "shared-target-message-source-v1",
-  "latest_decision": "PREREGISTERED",
+  "latest_closed_experiment_id": "track23-counterfactual-delivery-v1",
+  "latest_decision": "BLOCKED",
   "latest_decision_type": "operational",
   "latest_integrity_followup": {
     "frozen_audit_path": "docs/results/research-sprint-20261021/m4-b5-context-sensitivity-independent-audit.json",
@@ -103,7 +103,7 @@
     "status": "m1_v3_raw_response_ballot_review_complete"
   },
   "latest_review_id": "m1-v3-raw-response-ballot-audit-20261021",
-  "latest_scientific_outcome": "REFUTED",
+  "latest_scientific_outcome": "EXECUTION_BLOCKED",
   "latest_user_decision": {
     "date": "2026-10-21",
     "decision": "DECLINED_QWEN_SCOPE",
@@ -124,11 +124,11 @@
       "runtime_inputs_verified": 23
     }
   },
-  "next_action": "Execute only the registered 56-request Track 2.3 pilot through scripts/run_track23_counterfactual_v1.py --pilot, then apply the frozen pilot gate; do not begin the 40-context main phase unless every gate passes.",
-  "next_action_evidence_class": "real_llm_behavior",
-  "next_action_kind": "resume_or_close_registered_cycle",
-  "next_action_max_external_cost_usd": 1.8,
-  "next_action_max_model_calls": 900,
+  "next_action": "Continue offline Track 2.3 paper integration using the existing M1/M3/M4 and source-framing evidence, explicitly recording this blocked pilot. Do not retry this assigned request. Any future live experiment requires the default Python resolver to work and a fresh exact-scope approval.",
+  "next_action_evidence_class": "offline_reanalysis",
+  "next_action_kind": "continue_offline",
+  "next_action_max_external_cost_usd": 0.0,
+  "next_action_max_model_calls": 0,
   "preexisting_untracked_paths_preserved": [
     "docs/COLOSSEUM_LOCAL_REPRO_PROTOCOL.md (pre-existing untracked; preserved, not part of this review)",
     "docs/results/colosseum-local-audit-20261020/ (pre-existing untracked; preserved, not part of this review)",
@@ -146,6 +146,6 @@
   "program_status": "active",
   "schema_version": 2,
   "state_recorded_at_head": "2dcca164235cf2254dba65b2307a75edb973d292",
-  "status": "iteration_preregistered",
+  "status": "continuing_after_execution_boundary",
   "updated_at": "2026-10-21"
 }

@@ -103,12 +103,12 @@
       "hypothesis_id": "track23-counterfactual-delivery-v1",
       "retirement_note": null,
       "selection_note": "Selected for one bounded Track 2.3 cycle after the user approved a new DeepSeek study and raised the project lifetime call ceiling to 4,800. A separate immutable grant caps this study at 900 attempts/$1.80; the frozen conditional schedule assigns at most 840 attempts. The pilot is the first dispatched phase, and main/monitor calls occur only if preregistered gates pass.",
-      "status": "selected",
+      "status": "candidate",
       "title": "Does controlled message delivery shift a recipient action beyond exact-input variability?"
     }
   ],
   "policy": "At most three read-only candidate directions may be compared. Only one can be selected for a formal cycle at a time. Candidate status is not preregistration or authorization.",
   "schema_version": 1,
-  "selected_hypothesis_id": "track23-counterfactual-delivery-v1",
+  "selected_hypothesis_id": null,
   "updated_at": "2026-10-21"
 }
