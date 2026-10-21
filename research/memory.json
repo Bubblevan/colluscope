@@ -711,6 +711,10 @@
         {
           "path": "research/drafts/m1-package-monitor-campaign-v2.md",
           "sha256": "92ee7a7fd5571c95a7166e2a963b2ef0c6cc93630c5a1b2f0ea7aecddf077291"
+        },
+        {
+          "path": "docs/results/research-sprint-20261021/direction-review-final/m1-monitor-candidate-audit-postcommit-51564f6.json",
+          "sha256": "ef6cd883bf9ca111fff9f57811f9a1ad6b1f8fad95a0c7021a9644859d413ea7"
         }
       ],
       "independent_review_confirmed": false,

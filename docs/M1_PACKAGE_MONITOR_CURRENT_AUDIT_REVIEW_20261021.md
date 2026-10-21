@@ -18,7 +18,7 @@ I reran `python scripts/audit_m1_monitor_candidate_v1.py` and saved the complete
 - 672 maximum generations and 696 maximum physical HTTP requests; 696 correctly includes 24 local identity checks in addition to 672 generation requests.
 - Current codebook SHA-256 `486a523df9fc66f4b9008cac6618f69d46447c9e220548efe11974b461206399` and campaign SHA-256 `92ee7a7fd5571c95a7166e2a963b2ef0c6cc93630c5a1b2f0ea7aecddf077291`.
 
-The audited candidate files and their code/tests were uncommitted when this audit ran. The JSON is a current-byte audit, not proof that a released Git commit was audited. Re-run the command after committing the candidate package and retain the post-commit output before treating the audit as release evidence.
+The first audit ran before the candidate files were committed. I committed the candidate package and review records at `51564f673611592d93565e42b5bb179a1d9013df`, then reran the same command from that HEAD. The post-commit output is preserved at `docs/results/research-sprint-20261021/direction-review-final/m1-monitor-candidate-audit-postcommit-51564f6.json` (SHA-256 `ef6cd883bf9ca111fff9f57811f9a1ad6b1f8fad95a0c7021a9644859d413ea7`); it is byte-identical to the first current-byte output. The audit script SHA-256 is `dc29581966c00f2a6712e72cc44017798a2e5925deec5624a9101b6ee4bc438a`. This now ties the structural PASS to a committed candidate snapshot, but still does not validate live dispatch or scientific performance.
 
 ## Scientific-direction review
 

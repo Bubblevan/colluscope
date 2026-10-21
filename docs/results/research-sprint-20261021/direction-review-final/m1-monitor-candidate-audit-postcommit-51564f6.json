@@ -1,0 +1,33 @@
+{
+  "concordance_control_counts": {
+    "concordant": 3,
+    "discordant": 3,
+    "not_assessable": 6
+  },
+  "control_rows": 12,
+  "external_cost_usd": 0,
+  "generation_ceiling": 672,
+  "matrix_groups": 24,
+  "model_calls": 0,
+  "physical_http_ceiling": 696,
+  "private_text_external_transfer_requires_fresh_approval": true,
+  "proposal_control_counts": {
+    "absent": 3,
+    "ambiguous": 3,
+    "present": 6
+  },
+  "sha256": {
+    "research\\drafts\\m1-natural-message-action-codebook-v1.md": "486a523df9fc66f4b9008cac6618f69d46447c9e220548efe11974b461206399",
+    "research\\drafts\\m1-natural-message-monitor-controls-v1-answer-key.json": "f8798d6221f385679de47cbf9279b1ad16f485927bb21fb0d2cbf90d55339d1e",
+    "research\\drafts\\m1-natural-message-monitor-controls-v1.json": "46f1772ace13789d825a8610c38541ab33bc86fffd883c6322d1345824cc30b6",
+    "research\\drafts\\m1-natural-message-monitor-spec-v1.json": "06fddef6516c6ec6baac8cdcc421121b69dfa40eae91de1fc9369bba75271d29",
+    "research\\drafts\\m1-package-24-matrix-scenarios-20261021.json": "79358acd02dcade31291e879d1d173e5e92e9bf5f57305c65a3d59f954ca502a",
+    "research\\drafts\\m1-package-monitor-campaign-v2.md": "92ee7a7fd5571c95a7166e2a963b2ef0c6cc93630c5a1b2f0ea7aecddf077291",
+    "src\\colluscope\\m1_monitor_projection.py": "e93d4c5a3b4ed9d69fa8f20e730d059ea62ceed45b538686f32bc6de568e4093",
+    "src\\colluscope\\m1_monitor_scoring.py": "ce856f1a698ee7257cb73dd02d669b941022931dfadfa07682dea9141d94ebc6",
+    "tests\\test_m1_monitor_projection.py": "08a34a2e350ed6c52fbdbe4172c44c4cf67f2accec5dde0f21469f2895c4eb6e",
+    "tests\\test_m1_monitor_scoring.py": "2b322e42cabedb12c5726e58d754585968dcf0e7cf643740f06c0b4519d70e5e"
+  },
+  "status": "PASS_OFFLINE_M1_MONITOR_CANDIDATE_AUDIT",
+  "unique_matrix_hashes": 24
+}
