@@ -1,16 +1,16 @@
 {
   "authorization": {
-    "schema_version": 1,
-    "approval_id": "DS-FLASH-REAL-COORD-V4-40-20261021",
-    "approved_at_utc": "2026-10-21T05:18:36Z",
-    "expires_at_utc": "2026-10-23T01:00:00Z",
+    "approval_id": "DS-FLASH-REAL-COORD-V5-40-20261021",
+    "approved_at_utc": "2026-10-21T05:34:54Z",
     "authorized_experiment_ids": [
-      "deepseek-real-coordination-40-v4"
+      "deepseek-real-coordination-40-v5"
     ],
-    "max_model_calls": 40,
+    "expires_at_utc": "2026-10-23T01:00:00Z",
     "max_external_cost_usd": 0.5,
-    "scope": "One V4 DeepSeek Flash two-agent behavior pilot under the user's instruction to continue the approved 40-request research batch after pre-dispatch interface repairs. Official DeepSeek strict endpoint only; four fact-delivery controls first, then 36 fixed game requests across three matrices and three matched message-routing arms; 40 physical attempts maximum, zero retries/replacements, USD 0.50 peak-rate hard cost cap. No Qwen, third-party provider, monitor inference, training, probes, or additional model calls. Stop immediately on any failed control or transport/identity/privacy/budget gate. Expires 2026-10-23T01:00:00Z.",
-    "source": "The user directed continuation of the same 40-request DeepSeek real two-agent pilot after correcting the preflight issues and before any formal requests had been made. V3 was closed with zero calls; this separate V4 identity preserves the same maximum of 40 requests and USD 0.50 cost. The V3 approval is not reused, and the total assigned capacity remains within the 43 attempts left under the 1,200 project cap.",
+    "max_model_calls": 40,
+    "schema_version": 1,
+    "scope": "One separately registered V5 DeepSeek Flash two-agent behavior run; 4 fact-delivery controls followed by 36 fixed game-stage requests over the three frozen matrices and three message-routing arms. Official DeepSeek strict endpoint only, direct connection with proxies and redirects disabled, maximum 40 physical requests, zero retries/replacements, USD 0.50 peak-rate cost cap, 90-minute wall-clock cap. No Qwen, external fallback, Monitor inference, training, extra probes, or resampling. Stop on any control, HTTP/transport, identity, privacy, integrity, or budget failure. Expires 2026-10-23T01:00:00Z.",
+    "source": "User-provided active goal on 2026-10-21 directs starting model calls to test actual multi-agent coordination; the user also specifically directed a direct/no-proxy test after the V4 resolver failure. This record scopes that instruction to one fresh V5 batch using the previously reviewed 40-request experiment ceiling. It does not reopen V4 or pool V4 outcomes.",
     "status": "active"
   },
   "authorization_records_directory": "research/authorizations",

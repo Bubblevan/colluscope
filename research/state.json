@@ -1,6 +1,6 @@
 {
-  "active_experiment_id": null,
-  "active_hypothesis_id": null,
+  "active_experiment_id": "deepseek-real-coordination-40-v5",
+  "active_hypothesis_id": "deepseek-real-coordination-v1",
   "candidate_hypotheses": [
     "m1-natural-message-action-audit",
     "deepseek-real-coordination-v1"
@@ -32,7 +32,7 @@
   },
   "historical_approvals_reusable": false,
   "latest_closed_experiment_id": "deepseek-real-coordination-40-v4",
-  "latest_decision": "BLOCKED",
+  "latest_decision": "PREREGISTERED",
   "latest_decision_type": "operational",
   "latest_integrity_followup": {
     "frozen_audit_path": "docs/results/research-sprint-20261021/m4-b5-context-sensitivity-independent-audit.json",
@@ -129,7 +129,7 @@
       "runtime_inputs_verified": 23
     }
   },
-  "next_action": "Keep this V4 cycle closed and do not retry or replace the request. If another real-model batch is proposed, first diagnose the local DNS path, then create a new preregistration and obtain fresh authorization; no further call is scheduled here.",
+  "next_action": "Implement the frozen protocol and proceed only through an existing entry point within current authorization; the CLI does not dispatch.",
   "preexisting_untracked_paths_preserved": [
     "docs/COLOSSEUM_LOCAL_REPRO_PROTOCOL.md (pre-existing untracked; preserved, not part of this review)",
     "docs/results/colosseum-local-audit-20261020/ (pre-existing untracked; preserved, not part of this review)",
@@ -147,6 +147,6 @@
   "program_status": "active",
   "schema_version": 2,
   "state_recorded_at_head": "2dcca164235cf2254dba65b2307a75edb973d292",
-  "status": "continuing_after_execution_boundary",
+  "status": "iteration_preregistered",
   "updated_at": "2026-10-21"
 }

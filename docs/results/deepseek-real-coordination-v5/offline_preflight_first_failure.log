@@ -1,0 +1,89 @@
+COMMAND: D:\Anaconda\python.exe -m py_compile src/colluscope/deepseek_real_coordination_v5.py scripts/run_deepseek_real_coordination_v5.py scripts/analyze_deepseek_real_coordination_v5.py scripts/freeze_deepseek_real_coordination_v5.py
+EXIT: 0
+
+
+COMMAND: D:\Anaconda\python.exe -m pytest -q tests/test_deepseek_real_coordination_v5.py tests/test_deepseek_real_coordination_v2.py tests/test_deepseek_real_coordination_analysis_v2.py
+EXIT: 0
+.................................                                        [100%]
+33 passed in 1.35s
+
+
+COMMAND: D:\Anaconda\python.exe scripts/freeze_deepseek_real_coordination_v5.py --check
+EXIT: 0
+{
+  "assigned_requests": 40,
+  "config_sha256": "622f260817772c5b83efc64d4025cb92a97790388e66f9ea96eef87d2eb2cfe9",
+  "peak_cost_cap_usd": "0.50",
+  "physical_attempt_cap": 40,
+  "schedule_sha256": "00e32bc095ed923679608166c8837f3a8c8b4a9bac8e220a326700ec633dcc8a",
+  "status": "PASS_FREEZE_CHECK"
+}
+
+
+COMMAND: D:\Anaconda\python.exe scripts/run_deepseek_real_coordination_v5.py --check-only
+EXIT: 0
+{
+  "approved_attempt_cap": 40,
+  "assigned_requests": 40,
+  "endpoint": "https://api.deepseek.com/beta/chat/completions",
+  "model_alias": "deepseek-flash",
+  "model_calls": 0,
+  "peak_reserved_cost_cap_usd": "0.50",
+  "schedule_sha256": "00e32bc095ed923679608166c8837f3a8c8b4a9bac8e220a326700ec633dcc8a",
+  "status": "PASS_OFFLINE_PREFLIGHT",
+  "tokenizer_sha256": "81f64d1248a68ce3663e07ab3ee48b851e5df0e32d27cb98e4c9a268151e8d99"
+}
+
+
+COMMAND: D:\Anaconda\python.exe scripts/researchctl.py audit
+EXIT: 1
+{
+  "integrity_check": "FAIL",
+  "scientific_validity": "NOT_EVALUATED",
+  "registered_cycles": 10,
+  "open_experiments": [
+    "deepseek-real-coordination-40-v5"
+  ],
+  "new_iteration_usage": {
+    "model_calls": 1158,
+    "external_cost_usd": 0.133568658
+  },
+  "usage_by_approval_id": {
+    "DS-FLASH-1200-2P50-20261020": {
+      "model_calls": 120,
+      "external_cost_usd": 0.01178532
+    },
+    "DS-FLASH-REAL-COORD-40-20261021": {
+      "model_calls": 0,
+      "external_cost_usd": 0.0
+    },
+    "DS-FLASH-REAL-COORD-V2-40-20261021": {
+      "model_calls": 1,
+      "external_cost_usd": 0.0
+    },
+    "DS-FLASH-REAL-COORD-V3-40-20261021": {
+      "model_calls": 0,
+      "external_cost_usd": 0.0
+    },
+    "DS-FLASH-REAL-COORD-V4-40-20261021": {
+      "model_calls": 1,
+      "external_cost_usd": 0.0
+    },
+    "DS-FLASH-RECIPIENT-804-20261021": {
+      "model_calls": 804,
+      "external_cost_usd": 0.0944016
+    },
+    "DS-FLASH-M4B5-CONTEXT-232-20261021": {
+      "model_calls": 232,
+      "external_cost_usd": 0.027381738
+    }
+  },
+  "project_limits": {
+    "max_external_cost_usd": 2.5,
+    "max_model_calls": 1200
+  },
+  "errors": [
+    "m4-b5-context-sensitivity-campaign-v1: outputs[9] hash mismatch: docs/ITERATION_LOG.md",
+    "m4-b5-context-sensitivity-campaign-v1: outputs[10] hash mismatch: docs/RESEARCH_RISK_REGISTER.md"
+  ]
+}
