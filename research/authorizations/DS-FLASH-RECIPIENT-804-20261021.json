@@ -1,0 +1,13 @@
+{
+  "approval_id": "DS-FLASH-RECIPIENT-804-20261021",
+  "approved_at_utc": "2026-10-21T03:53:20Z",
+  "authorized_experiment_ids": [
+    "deepseek-recipient-mechanism-v1"
+  ],
+  "expires_at_utc": "2026-10-26T10:00:00Z",
+  "max_external_cost_usd": 1.4,
+  "max_model_calls": 804,
+  "schema_version": 1,
+  "scope": "One DeepSeek recipient-side cue-response experiment using the frozen 20-context schedule; official DeepSeek Flash only; maximum 804 physical requests and USD 1.40 at peak rates; zero retries and replacements; no off-peak waiting requirement; no Qwen, third-party API, fine-tuning, Monitor inference, or external fallback; expires 2026-10-26T10:00:00Z.",
+  "source": "The user explicitly clarified that approval covered the proposed batch, not one request: “不是只能做一次模型调用，是批准你这一批方案的模型调用。” The approved batch is the preceding frozen proposal: up to 804 physical DeepSeek Flash requests and USD 1.40 peak-safe cost, zero retries/replacements. The user rejected Qwen and directed DeepSeek use. approved_at_utc is when this authorization was materialized in the registry, not the exact UI reply time."
+}

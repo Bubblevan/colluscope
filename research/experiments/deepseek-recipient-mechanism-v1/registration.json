@@ -1,0 +1,10 @@
+{
+  "authorization_batch_sha256": "3a8721a6411b4d5e47e4ef5c12cd1f2a3cf245576b10ce26fc4587a428851537",
+  "closure_sha256": null,
+  "evaluator_v2_sha256": "e7b563b1a149a8c770a56728a4d13abcc53e8a12080866a1adfad03b2d234f6d",
+  "experiment_id": "deepseek-recipient-mechanism-v1",
+  "preregistration_sha256": "afd348ff2d58d9b28ba95d3f5112992703a541b76a9f535af3c6085c593fe299",
+  "registered_at_utc": "2026-10-21T03:53:24+00:00",
+  "registered_git_head": "299c490a08e2cb9f632653f125983d40fdbeda87",
+  "schema_version": 1
+}

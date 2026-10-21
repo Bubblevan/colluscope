@@ -1,34 +1,34 @@
 {
-  "schema_version": 2,
-  "scope": "new autoresearch cycles only; historical usage is preserved in source run records and never re-authorized here",
   "authorization": {
-    "status": "active",
-    "approval_id": "DS-FLASH-M4B5-CONTEXT-232-20261021",
-    "scope": "One M4 B5 context-sensitivity monitor campaign (A1: all 24 M4 cases across three evidence views; A2: all 40 balanced synthetic rows across four request forms); official DeepSeek Flash only; maximum 232 physical attempts and USD 0.90; zero retries/replacements; off-peak only; expiry 2026-10-23T01:00:00Z.",
+    "approval_id": "DS-FLASH-RECIPIENT-804-20261021",
+    "approved_at_utc": "2026-10-21T03:53:20Z",
     "authorized_experiment_ids": [
-      "m4-b5-context-sensitivity-campaign-v1"
+      "deepseek-recipient-mechanism-v1"
     ],
-    "max_model_calls": 232,
-    "max_external_cost_usd": 0.9,
-    "source": "User approval received in this active ColluScope task in reply to the explicit campaign-scope prompt: “批准此范围”. It authorizes up to 232 physical requests, USD 0.90, official DeepSeek Flash, off-peak only, zero retries/replacements, through 2026-10-23T01:00:00Z. Exact UI reply timestamp was not exposed to the task; approved_at_utc records the time this authorization was materialized in the research registry, not a claim about the exact reply instant.",
-    "approved_at_utc": "2026-10-20T20:50:46Z",
-    "expires_at_utc": "2026-10-23T01:00:00Z"
+    "expires_at_utc": "2026-10-26T10:00:00Z",
+    "max_external_cost_usd": 1.4,
+    "max_model_calls": 804,
+    "scope": "One DeepSeek recipient-side cue-response experiment using the frozen 20-context schedule; official DeepSeek Flash only; maximum 804 physical requests and USD 1.40 at peak rates; zero retries and replacements; no off-peak waiting requirement; no Qwen, third-party API, fine-tuning, Monitor inference, or external fallback; expires 2026-10-26T10:00:00Z.",
+    "source": "The user explicitly clarified that approval covered the proposed batch, not one request: “不是只能做一次模型调用，是批准你这一批方案的模型调用。” The approved batch is the preceding frozen proposal: up to 804 physical DeepSeek Flash requests and USD 1.40 peak-safe cost, zero retries/replacements. The user rejected Qwen and directed DeepSeek use. approved_at_utc is when this authorization was materialized in the registry, not the exact UI reply time.",
+    "status": "active"
   },
   "authorization_records_directory": "research/authorizations",
-  "project_limits": {
-    "max_model_calls": 1200,
-    "max_external_cost_usd": 2.5
-  },
   "policy": {
-    "registration_does_not_authorize_execution": true,
-    "historical_approval_is_not_reusable": true,
     "approval_batches_are_immutable_and_hash_pinned_at_registration": true,
+    "arbitrary_shell_commands_are_never_executed": true,
+    "harness_dispatches_experiments": false,
+    "historical_approval_is_not_reusable": true,
     "preregistration_reserves_the_full_cycle_ceiling": true,
     "project_limits_are_cumulative_across_new_approval_batches": true,
+    "raw_run_data_may_be_tracked": false,
+    "registration_does_not_authorize_execution": true,
     "request_ledger_required_for_every_physical_model_or_api_attempt": true,
-    "harness_dispatches_experiments": false,
-    "arbitrary_shell_commands_are_never_executed": true,
-    "retries_or_replacements": 0,
-    "raw_run_data_may_be_tracked": false
-  }
+    "retries_or_replacements": 0
+  },
+  "project_limits": {
+    "max_external_cost_usd": 2.5,
+    "max_model_calls": 1200
+  },
+  "schema_version": 2,
+  "scope": "new autoresearch cycles only; historical usage is preserved in source run records and never re-authorized here"
 }
