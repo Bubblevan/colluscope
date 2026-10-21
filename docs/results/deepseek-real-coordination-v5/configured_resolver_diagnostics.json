@@ -1,0 +1,58 @@
+[
+  {
+    "adapter": "WLAN",
+    "dns_id": "1EE9A1981054",
+    "ok": true,
+    "answers": 2,
+    "error": null
+  },
+  {
+    "adapter": "WLAN",
+    "dns_id": "C1A9F8171F78",
+    "ok": true,
+    "answers": 2,
+    "error": null
+  },
+  {
+    "adapter": "VMware Network Adapter VMnet8",
+    "dns_id": "D47B9B6C2422",
+    "ok": false,
+    "answers": 0,
+    "error": "Win32Exception"
+  },
+  {
+    "adapter": "VMware Network Adapter VMnet8",
+    "dns_id": "F0013024F95E",
+    "ok": false,
+    "answers": 0,
+    "error": "Win32Exception"
+  },
+  {
+    "adapter": "VMware Network Adapter VMnet8",
+    "dns_id": "CFF102EE317F",
+    "ok": false,
+    "answers": 0,
+    "error": "Win32Exception"
+  },
+  {
+    "adapter": "VMware Network Adapter VMnet1",
+    "dns_id": "D47B9B6C2422",
+    "ok": false,
+    "answers": 0,
+    "error": "Win32Exception"
+  },
+  {
+    "adapter": "VMware Network Adapter VMnet1",
+    "dns_id": "F0013024F95E",
+    "ok": false,
+    "answers": 0,
+    "error": "Win32Exception"
+  },
+  {
+    "adapter": "VMware Network Adapter VMnet1",
+    "dns_id": "CFF102EE317F",
+    "ok": false,
+    "answers": 0,
+    "error": "Win32Exception"
+  }
+]

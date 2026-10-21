@@ -400,6 +400,44 @@
       "what_changed": "No behavioral observation was made; the first local transport attempt failed before an HTTP response and the preregistered stop rule prevented further requests."
     },
     {
+      "claim_id": "deepseek-real-coordination-v1",
+      "evidence_refs": [
+        {
+          "path": "docs/DEEPSEEK_REAL_COORDINATION_V5_EVIDENCE.md",
+          "sha256": "7b313be0a71426a30e36a963d974b0e50f7fcb5db354053fd70ab396d6433d69"
+        }
+      ],
+      "experiment_id": "deepseek-real-coordination-40-v5",
+      "outcome": "UNCHANGED",
+      "remaining_alternatives": "Model capability, shared incentives, message use, task framing, and communication-mediated behavior remain unmeasured.",
+      "scientific_outcome": "EXECUTION_BLOCKED",
+      "statement": "Whether actual peer-message delivery changes joint ballots remains untested.",
+      "what_changed": "V5 received no model response, so no behavior observation was added."
+    },
+    {
+      "claim_id": "deepseek-direct-resolver-intermittency",
+      "evidence_refs": [
+        {
+          "path": "docs/results/deepseek-real-coordination-v5/transport_failure_audit.json",
+          "sha256": "f2fdc231a5887b594f00353044f892d8a199565c480e1cfa1bf894f1af892b50"
+        },
+        {
+          "path": "docs/results/deepseek-real-coordination-v5/direct_dns_http_diagnostics.json",
+          "sha256": "b2d0ad3bf19ba4db4601d84e07bf80d5507e429f8716ff16017eb1ceebb032d0"
+        },
+        {
+          "path": "docs/results/deepseek-real-coordination-v5/configured_resolver_diagnostics.json",
+          "sha256": "a97ef161b158935f09e90bece76e7fb22f07524a52f7e74f20bc753d06a3a7a3"
+        }
+      ],
+      "experiment_id": "deepseek-real-coordination-40-v5",
+      "outcome": "INCONCLUSIVE",
+      "remaining_alternatives": "The exact Windows resolver, adapter selection, DNS server, sandbox, or network cause is not identified.",
+      "scientific_outcome": "EXECUTION_BLOCKED",
+      "statement": "The V5 failure occurred before HTTP at getaddrinfo, while subsequent no-proxy DNS/HTTP diagnostics succeeded.",
+      "what_changed": "This pattern is consistent with an intermittent local resolver path rather than a proxy failure or model response failure."
+    },
+    {
       "claim_id": "deepseek-recipient-cue-following-v1",
       "evidence_refs": [
         {

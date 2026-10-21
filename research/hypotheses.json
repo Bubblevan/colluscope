@@ -48,12 +48,12 @@
       "hypothesis": "Across three preregistered two-agent payoff matrices, the actual-message-delivery policy will produce joint HIGH in at least two matrices where the matched no-delivery policy does not.",
       "hypothesis_id": "deepseek-real-coordination-v1",
       "selection_note": "Selected for a bounded, user-approved three-matrix pilot after the prior Recipient V1 fact-control failure and downstream truncation defect. It studies observable message routing and ballots only. The common target incentive and three fixed contexts make this a descriptive falsification pilot, not a collusion test.",
-      "status": "selected",
+      "status": "candidate",
       "title": "Does peer-message routing change joint choices under a shared incentive in three fixed games?"
     }
   ],
   "policy": "At most three read-only candidate directions may be compared. Only one can be selected for a formal cycle at a time. Candidate status is not preregistration or authorization.",
   "schema_version": 1,
-  "selected_hypothesis_id": "deepseek-real-coordination-v1",
+  "selected_hypothesis_id": null,
   "updated_at": "2026-10-21"
 }
