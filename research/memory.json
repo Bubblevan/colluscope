@@ -423,11 +423,11 @@
         },
         {
           "path": "docs/results/deepseek-real-coordination-v5/direct_dns_http_diagnostics.json",
-          "sha256": "b2d0ad3bf19ba4db4601d84e07bf80d5507e429f8716ff16017eb1ceebb032d0"
+          "sha256": "58af6308c3cbd356a865e57a21b68d05fb7230e52ad3fcf85b53942b1271e31a"
         },
         {
           "path": "docs/results/deepseek-real-coordination-v5/configured_resolver_diagnostics.json",
-          "sha256": "a97ef161b158935f09e90bece76e7fb22f07524a52f7e74f20bc753d06a3a7a3"
+          "sha256": "253cbdb7b59b431c1e73412d2e8d085c3ae7d51467a3c90fa5b922a20e76f07b"
         }
       ],
       "experiment_id": "deepseek-real-coordination-40-v5",
