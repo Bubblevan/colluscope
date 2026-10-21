@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "decision": "DECLINED_QWEN_SCOPE",
+  "date": "2026-10-21",
+  "model_calls_dispatched_for_declined_scope": 0,
+  "experiment_registered": false,
+  "state_status": "awaiting-new-model-specific-scope-after-qwen-decline",
+  "r3_snapshot": {
+    "path": "research/drafts/m1-package-replication-v3-review-manifest-r3-20261021.json",
+    "sha256": "7f37e3a66ef54e4ace03a6f20bb4349bea1b2aff035b7f5dae2074c85bc44ee9",
+    "verification_status": "PASS_M1_V3_REVIEW_SNAPSHOT_HASHES",
+    "runtime_inputs_verified": 23,
+    "review_artifacts_verified": 36,
+    "approval_present": false
+  },
+  "registry_audit_final": {
+    "integrity_check": "PASS",
+    "registered_cycles": 4,
+    "open_experiments": [],
+    "new_iteration_usage": {
+      "model_calls": 352,
+      "external_cost_usd": 0.039167058
+    },
+    "usage_by_approval_id": {
+      "DS-FLASH-1200-2P50-20261020": {
+        "model_calls": 120,
+        "external_cost_usd": 0.01178532
+      },
+      "DS-FLASH-M4B5-CONTEXT-232-20261021": {
+        "model_calls": 232,
+        "external_cost_usd": 0.027381738
+      }
+    },
+    "errors": []
+  },
+  "preserved_integrity_failure": {
+    "path": "docs/results/research-sprint-20261021/qwen-scope-declined/researchctl-audit-frozen-output-guard-failure.json",
+    "summary": "Temporary append to two pinned canonical outputs caused hash mismatch; files were restored exactly from HEAD and final audit passed."
+  },
+  "source_receipts": {
+    "decision_record_sha256": "eb5d32343258f593158780c300d1aac6c4c18ce51e8818f3cc23944696a71560",
+    "r3_verification_sha256": "ed3e3fdcb0a3baef42e2fa78cb607aa68c23e1a1e0ebad2a0c3cecf93ad750c4",
+    "researchctl_audit_sha256": "5d05c4e47127e058556b26958c0624fabc4775b9641a43edcc4ddef7d8fa8f92",
+    "integrity_failure_sha256": "6a12376c5f5f883dbbc10a8130b2a2c029309036f383db0a80a54329f27de9f1",
+    "iteration_followup_sha256": "2dac9c0ffa3bae40e64ef4445208cff1ad3c72c314f7808eb1ed6a51e933bad3",
+    "risk_followup_sha256": "b3cd0bf253c3f897bf06ca3630f7e6dcea53f6bc085f18c80799c6956c99a99e"
+  },
+  "interpretation": "Authorization decision only; no scientific outcome was generated. Existing DeepSeek approvals are closed and cannot be reassigned."
+}
