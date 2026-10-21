@@ -33,3 +33,7 @@ __pycache__/
 # DeepSeek-first M4 stores authorized synthetic private messages, exact provider
 # requests/responses, API errors, and scoring references locally under ACL controls.
 /runs/deepseek-first-m4/
+# Shared-target recipient runs contain exact prompts and provider responses; keep
+# both raw run roots local and ACL-restricted.
+/runs/shared-target-message-content-v1-run/
+/runs/shared-target-message-source-v1-run/
