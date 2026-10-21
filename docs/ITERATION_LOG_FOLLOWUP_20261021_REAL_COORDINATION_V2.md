@@ -22,8 +22,8 @@ Same-call-count arms do not remove prompt-length, wording, salience, or call-ord
 
 ## DECIDE
 
-The corrected V2 freeze is eligible for the already approved 40-request batch, subject to pushing this exact commit first. After push, execute the four fact controls first; any wrong, invalid, truncated, interrupted, non-200 or identity-mismatched control stops the remaining 36. No Qwen, retry, replacement, extra probe, or external fallback.
+The exact freeze was pushed as `31b7ebf3aa82b7dd656b3b944183fa0a92a23fc3` before the authorized invocation. The first control could not reach the provider because local DNS resolution failed. The frozen zero-retry/no-replacement rule and first-control gate require stopping; no other request may be dispatched under this batch.
 
-## REPORT
+## REPORT — live attempt
 
-Current V2 status: frozen and registered, offline checks PASS, no real model calls yet. Next action: push the freeze, then run the bounded DeepSeek batch immediately and preserve raw provider evidence locally.
+One request was reserved and handed to transport; it failed before HTTP connection (`getaddrinfo failed`, Windows error 11001). The request bytes match the start-row hash. There is no HTTP response, model output, or billed cost. Thirty-nine assigned requests remain unattempted. The runner's follow-on validation error was caused by a missing `request_sha256` field on the transport terminal row; this is preserved as a distinct runtime defect rather than repaired in the frozen code. See the V2 evidence, decision, and `ATTEMPT_001_TRANSPORT_FAILURE.md`. No behavioral hypothesis update is warranted.

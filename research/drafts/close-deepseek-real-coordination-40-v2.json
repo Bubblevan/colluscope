@@ -1,0 +1,70 @@
+{
+  "schema_version": 2,
+  "experiment_id": "deepseek-real-coordination-40-v2",
+  "evidence_class": "real_llm_behavior",
+  "decision": "BLOCKED",
+  "scientific_outcome": "EXECUTION_BLOCKED",
+  "outcome_rationale": "The first assigned fact-control request was recorded but the local resolver could not resolve api.deepseek.com before HTTP connection. No response or model generation was received. The frozen first-control stop rule and zero-retry policy prohibit continuing the remaining 39 assigned requests under this batch.",
+  "results_summary": "One physical request attempt was started and terminalized as TRANSPORT_ERROR; zero HTTP responses, zero returned model generations, and USD 0.00 actual cost. The provider-host DNS failure is an execution boundary, not evidence about model capability or the behavioral hypothesis.",
+  "denominator_summary": "1/40 physical request attempts started; 1 transport failure; 39 assigned requests unattempted; 0/4 fact controls behaviorally assessable; 0/9 game arms executed.",
+  "scientific_update": "UNCHANGED: there is no behavioral evidence about fact delivery, peer-message routing, incentives, observed allocation, or collusion. The pilot hypothesis remains untested.",
+  "actual_model_calls": 1,
+  "actual_external_cost_usd": 0.0,
+  "actual_wallclock_minutes": 1,
+  "failures_retained": true,
+  "review_mode": "adversarial_self_review",
+  "review_finding": "The request bytes match the attempt-start hash and remain in ignored local storage; no response bytes exist and auth_header_saved is false. The transport-error terminal row omits request_sha256, causing the runner's post-error recovery verifier to fail despite a matching hash in the start row. This second defect prevented progress-ledger terminalization. The frozen runtime was not altered after dispatch.",
+  "review_artifact": null,
+  "outputs": [
+    {
+      "path": "docs/DEEPSEEK_REAL_COORDINATION_V2_EVIDENCE.md",
+      "sha256": "2e1e53c6f0c9421db7169dc56b10a06f7524a098d029ab92985ad36b9c6a0f95"
+    },
+    {
+      "path": "docs/DEEPSEEK_REAL_COORDINATION_V2_DECISION.md",
+      "sha256": "3d5c6c4c0ba43eabb5da25b935d558c9878e282c1d5a9df9501b1cc3986520b2"
+    },
+    {
+      "path": "docs/ITERATION_LOG_FOLLOWUP_20261021_REAL_COORDINATION_V2.md",
+      "sha256": "db1ce753f68f425f13ff2121710d4db13ca406d5059116fe3a26f47a45901df9"
+    },
+    {
+      "path": "docs/results/deepseek-real-coordination-v2/ATTEMPT_001_TRANSPORT_FAILURE.md",
+      "sha256": "d98c4d37707e466a9702776b8ad2a68629348da06227fa5ac3c02a025b6986a6"
+    }
+  ],
+  "belief_updates": [
+    {
+      "claim_id": "deepseek-real-coordination-v1",
+      "outcome": "UNCHANGED",
+      "statement": "Whether real peer-message delivery changes allocation behavior remains untested.",
+      "what_changed": "The authorized V2 execution was blocked before receiving any provider response by local DNS resolution failure.",
+      "remaining_alternatives": "No behavioral observation exists; model ability, shared-incentive effects, message use, and game behavior remain unobserved.",
+      "evidence_refs": []
+    }
+  ],
+  "material_update": {
+    "claim_id": "deepseek-real-coordination-transport-runtime",
+    "what_changed": "Observed and retained one transport failure plus a missing terminal request-hash defect in the runner recovery check.",
+    "remaining_alternatives": "The DNS cause is not identified beyond failure to resolve the configured provider hostname; the behavioral hypothesis remains untested.",
+    "independent_critic_confirmed": false,
+    "evidence_refs": [
+      {
+        "path": "docs/results/deepseek-real-coordination-v2/ATTEMPT_001_TRANSPORT_FAILURE.md",
+        "sha256": "d98c4d37707e466a9702776b8ad2a68629348da06227fa5ac3c02a025b6986a6"
+      }
+    ]
+  },
+  "authorization_id": "DS-FLASH-REAL-COORD-V2-40-20261021",
+  "model_request_ledger": {
+    "path": "docs/results/deepseek-real-coordination-v2/model-request-ledger-sanitized.json",
+    "sha256": "116c1580bfe2dafccfdd383a607dbba55f9aa645fae4ef86f29d14f4237f7351"
+  },
+  "new_uncertainty_reduced": false,
+  "next_action": "Continue offline by diagnosing local DNS/connectivity and versioning a regression-tested transport-error terminal hash fix. Do not retry the first request or dispatch the remaining schedule under this consumed authorization; any new live batch requires explicit user authorization.",
+  "next_action_kind": "continue_offline",
+  "next_action_evidence_class": "offline_reanalysis",
+  "next_action_max_model_calls": 0,
+  "next_action_max_external_cost_usd": 0,
+  "approval_required_for_next_action": false
+}

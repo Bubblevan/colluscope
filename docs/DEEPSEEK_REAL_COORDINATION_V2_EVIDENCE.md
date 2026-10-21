@@ -1,6 +1,6 @@
 # DeepSeek Real Coordination Pilot V2 — Evidence
 
-**State:** pre-run evidence package; no V2 model/API request has been sent. Update this file from the independent replay after the bounded run.
+**State:** terminal transport failure on the first authorized request; no model response was received and the remaining schedule was not run.
 
 ## Frozen registration
 
@@ -34,4 +34,16 @@ All local source/model/control checks were completed without a model request. `r
 
 The run schedule starts with four authoritative delivered/absent fact controls. Any incorrect answer, invalid or truncated output, HTTP/transport failure, provider identity mismatch or interrupted request stops all remaining calls. A valid control is not evidence of game-task capability; it only allows the frozen 36 game requests to proceed. Raw prompts, responses and private messages stay local in the ignored ACL-restricted logs directory.
 
-The CLI exit-code defect is operationally misleading but does not change the preflight result or the live execution path. It is disclosed here and in the preserved log. The live batch is ready for the already authorized dispatch after the exact freeze is pushed. No result may be described as proof of collusion, intent, or a general causal effect.
+The CLI exit-code defect is operationally misleading but did not change the preflight payload. The frozen batch was pushed at `31b7ebf3aa82b7dd656b3b944183fa0a92a23fc3` before dispatch.
+
+## Live execution outcome
+
+The first scheduled request (`C1-delivered`) was handed to the HTTP transport at `2026-10-21T04:53:40.218509+00:00`. Local hostname resolution failed for `api.deepseek.com` with Windows error 11001 (`getaddrinfo failed`) before any HTTP connection was established.
+
+- One physical request attempt is recorded against the 40-request batch; there were **0 HTTP responses**, **0 returned model generations**, and **USD 0.00 actual external cost**. The conservative reserved peak cost for this attempt was USD 0.0009816; this is not a charge.
+- The other 39 assigned requests remain unattempted. The four-control gate was not passed; the 36 game requests did not run. No retry or replacement was made.
+- The raw request is 996 bytes and matches the `attempt_started` SHA-256 `e80ed1e34d72e8056fc1a572af2f29778b9ce2aa2a8bc0ad94409c523744bd9f`. There is no response `.bin`; the error metadata has null HTTP status/hash and `auth_header_saved: false`.
+- Run artifacts remain local at `logs/deepseek-real-coordination-v2/`, ignored by Git and ACL-restricted to the local `bubblevan` account.
+- The runner then hit a secondary recovery validation defect: the transport-error terminal row omits `request_sha256`, while `_attempt_rows()` requires it on the terminal row rather than falling back to the already matching start row. This caused a process exit before remaining assigned rows could be progress-terminalized. The original frozen source and raw files were not modified.
+
+This is an execution failure, not a failed model capability control. It gives no evidence about fact use, peer communication, incentives, coordination, or collusion. The full attempt record and stop decision are in `docs/results/deepseek-real-coordination-v2/ATTEMPT_001_TRANSPORT_FAILURE.md` and `docs/DEEPSEEK_REAL_COORDINATION_V2_DECISION.md`. The terminal one-row sanitized request ledger is `docs/results/deepseek-real-coordination-v2/model-request-ledger-sanitized.json`.

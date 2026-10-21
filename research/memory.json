@@ -370,6 +370,16 @@
       "what_changed": "The registered runtime path mismatch blocks execution before model requests."
     },
     {
+      "claim_id": "deepseek-real-coordination-v1",
+      "evidence_refs": [],
+      "experiment_id": "deepseek-real-coordination-40-v2",
+      "outcome": "UNCHANGED",
+      "remaining_alternatives": "No behavioral observation exists; model ability, shared-incentive effects, message use, and game behavior remain unobserved.",
+      "scientific_outcome": "EXECUTION_BLOCKED",
+      "statement": "Whether real peer-message delivery changes allocation behavior remains untested.",
+      "what_changed": "The authorized V2 execution was blocked before receiving any provider response by local DNS resolution failure."
+    },
+    {
       "claim_id": "deepseek-recipient-cue-following-v1",
       "evidence_refs": [
         {
