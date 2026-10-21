@@ -552,6 +552,48 @@
       "scientific_outcome": "SUPPORTED",
       "statement": "For this frozen set of 12 scripted matched-world pairs, the authorized Public-only request/reference projections are identical while at least one determinate privileged proposal/acceptance/action sequence element differs in 8 pairs.",
       "what_changed": "The corrected independent source-event replay now tests the preregistered per-pair sequence distinction gate directly; 8/12 pairs have a determinate sequence-element difference, including 2/12 with a complete proposal-acceptance-both-actions sequence difference."
+    },
+    {
+      "claim_id": "shared-target-message-content-v1",
+      "evidence_refs": [
+        {
+          "path": "docs/results/shared-target-message-content-v1/analysis.json",
+          "sha256": "fa07e29427d2d5b3db96f4211522efc3a425e1af0cb679277a44edc92f04b344"
+        },
+        {
+          "path": "docs/results/shared-target-message-content-v1/interpretation.md",
+          "sha256": "97a846f8612fb141a8d8890f723123867a481226bad4da8292fc6db4003472e8"
+        },
+        {
+          "path": "docs/results/shared-target-message-content-v1/model-request-ledger-sanitized.json",
+          "sha256": "4581087e7e9a1ced9269ec80e56e45d69a7801590eb7e395087a906484b847c2"
+        }
+      ],
+      "experiment_id": "shared-target-message-content-v1",
+      "outcome": "SUPPORTED",
+      "remaining_alternatives": "Generic recommendation or instruction following remains compatible with the output pattern. Peer-specific social influence, autonomous sender behavior, negotiated agreement, intent, welfare effects, provider-wide behavior, and population generalization were not tested.",
+      "scientific_outcome": "SUPPORTED",
+      "statement": "A controlled message mapping changed recipient allocation ballots under a fixed hidden-target shared incentive in all three preregistered contexts.",
+      "what_changed": "The hidden-target true-message and counterfactual-decoy-message arms each produced 6/6 mapping-aligned ballots, while the hidden/no-message arm produced 0/6 target and 0/6 decoy ballots; all three contexts repeated the pattern twice."
+    },
+    {
+      "claim_id": "shared-target-message-transmission-v1",
+      "evidence_refs": [
+        {
+          "path": "docs/results/shared-target-message-visibility-v1/analysis.json",
+          "sha256": "180c1b537ce132ec555daab1c9b9bef89f2c9b84a303c81a8e52aa5240c2a617"
+        },
+        {
+          "path": "docs/results/shared-target-message-visibility-v1/independent-interpretation.md",
+          "sha256": "44d3a307d0701a389799f9ab092a6e1655a3d5e85abd1e02c65d9994674f184d"
+        }
+      ],
+      "experiment_id": "shared-target-message-visibility-v1",
+      "outcome": "INCONCLUSIVE",
+      "remaining_alternatives": "Independent target convergence, a message-content response, target-choice ceiling, insufficient sender disclosure, neutral-message length/salience mismatch, and serving variability remain compatible with the incomplete observations.",
+      "scientific_outcome": "INCONCLUSIVE",
+      "statement": "Whether an actual sender message changes recipient target choice beyond a neutral message under the frozen shared-target contexts remains unresolved.",
+      "what_changed": "The only complete context yielded 2/2 target choices in each of four arms; 23 requests remained unattempted after the first schema-invalid response."
     }
   ],
   "historical_scope": "The 628-request DeepSeek-first run and the separate 856-row Monitor run use different schedules and must never be pooled.",

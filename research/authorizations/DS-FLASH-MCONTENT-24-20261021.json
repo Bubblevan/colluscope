@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "approval_id": "DS-FLASH-MCONTENT-24-20261021",
+  "scope": "One fresh, separately registered controlled recipient message-content study using three frozen allocation contexts, four recipient arms, and 24 maximum physical inference requests; official DeepSeek deepseek-flash alias only through the documented https://api.deepseek.com/beta/chat/completions strict function-calling endpoint; temperature 0, thinking disabled, maximum 128 output tokens; no Qwen, provider fallback, Monitor calls, training, custom transport, retries, replacements, resumption, or resampling; USD 0.05 peak-rate cost cap; 90-minute wall-clock cap; stop on transport, model/fingerprint, source/prompt hash, privacy, project-budget, expiry, or wall-clock failure; expires 2026-10-22T18:00:00Z.",
+  "authorized_experiment_ids": [
+    "shared-target-message-content-v1"
+  ],
+  "max_model_calls": 24,
+  "max_external_cost_usd": 0.05,
+  "approved_at_utc": "2026-10-21T06:53:00Z",
+  "expires_at_utc": "2026-10-22T18:00:00Z",
+  "source": "The user explicitly instructed to begin model calls and start a new experimental cycle. This approval scopes that instruction to a fresh 24-request experiment and does not reuse any prior authorization."
+}

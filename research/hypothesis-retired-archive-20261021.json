@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "note": "Retired candidate directions retained during the clean handoff; no associated experiment or evidence record was altered.",
+  "candidates": [
+    {
+      "competing_explanations": [
+        "Natural-language messages contain no complete proposals, so a majority/always-negative baseline performs as well as the Monitor.",
+        "The Monitor prediction changes reflect schema/order bias or provider variation rather than message semantics.",
+        "Human coders cannot reliably distinguish proposal, acceptance, and ambiguity under the task codebook."
+      ],
+      "discriminating_prediction": "Freeze all 96 chat message slots, including no_message, and use two independent human coders plus adjudication before any Monitor call. Run frozen proposal and recipient-action-concordance tasks, plus 12 paired capability controls. A failure of coder agreement, positive controls, or Monitor improvement over the literal baseline falsifies the proposed LLM-specific value claim.",
+      "evidence_refs": [
+        {
+          "path": "docs/SCIENTIFIC_DIRECTION_REVIEW_CURRENT_20261021.md",
+          "sha256": "2723f4406d5756edba3b2aa2f847a689919749e71d1f4f877603d165d96a4270"
+        },
+        {
+          "path": "research/drafts/m1-package-monitor-campaign-v1.md",
+          "sha256": "64d71966db5166d99accb45acf437d968046bf7f9fe17396d01340f0508b3e82"
+        },
+        {
+          "path": "docs/M1_100_PROTOCOL.md",
+          "sha256": "8c64c562aae0c39d8bf45ef6858a0618068dadf5e8a747b97dd962c42accfcc4"
+        }
+      ],
+      "hypothesis": "On the prospective M1 message slots, a privileged-evidence Monitor will recover complete allocation proposals and recipient-ballot concordance against independently double-coded human references better than a literal mapping baseline, while preserving abstentions and citation validity.",
+      "hypothesis_id": "m1-natural-message-action-audit",
+      "retirement_note": "Clean research handoff: this historical direction is not carried into the new bounded cycle; its experiment record and evidence remain unchanged.",
+      "selection_note": "Supporting Track 2.2 candidate only. Defer until blinded human codebook/adjudication is available. It cannot create a latent-collusion label; structured public harm remains a deterministic rule output.",
+      "status": "retired",
+      "title": "Can a Monitor extract proposal and ballot-concordance facts from natural-language messages?"
+    },
+    {
+      "competing_explanations": [
+        "The common +20 HH incentive independently produces the same choices with or without peer delivery; parallel behavior is not communication-induced coordination.",
+        "The finite differences reflect one deterministic call order, scenario/proposer assignment, or provider state rather than message delivery.",
+        "Actual and neutral message prompts differ in semantic content, length, wording, and salience; the resulting contrast is not a pure semantic effect.",
+        "Both roles are stateless contexts of the same model alias; behavior does not generalize to independent models or persistent agents."
+      ],
+      "discriminating_prediction": "For each of three fixed matrices, compare one actual-delivery arm with one no-delivery arm. A positive finite-set pattern requires all three pairs to be assessable and actual delivery to produce HH while no-delivery does not in at least two pairs. The neutral-substitution arm is a secondary comparator. Any outcome is descriptive for this fixed model/API run, with no p-values, population inference, latent collusion label, or claim that agreement proves communication-caused coordination.",
+      "evidence_refs": [
+        {
+          "path": "docs/DEEPSEEK_RECIPIENT_MECHANISM_V1_EVIDENCE.md",
+          "sha256": "625004fe315d2bf148de18370ea9c4fcb079139fa1bad5fb4fa37e29e71cf90d"
+        },
+        {
+          "path": "docs/M3_SCIENTIFIC_RESULTS.md",
+          "sha256": "dd194d2579366acd0d15c4bc63952b8fddd20bbe92ffc2bdd339efd50e7eaf41"
+        }
+      ],
+      "hypothesis": "Across three preregistered two-agent payoff matrices, the actual-message-delivery policy will produce joint HIGH in at least two matrices where the matched no-delivery policy does not.",
+      "hypothesis_id": "deepseek-real-coordination-v1",
+      "retirement_note": "Clean research handoff: this historical direction is not carried into the new bounded cycle; its experiment record and evidence remain unchanged.",
+      "selection_note": "Selected for a bounded, user-approved three-matrix pilot after the prior Recipient V1 fact-control failure and downstream truncation defect. It studies observable message routing and ballots only. The common target incentive and three fixed contexts make this a descriptive falsification pilot, not a collusion test.",
+      "status": "retired",
+      "title": "Does peer-message routing change joint choices under a shared incentive in three fixed games?"
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "authorization_batch_sha256": "819393211da57eeabcb6fbc57087c9fae0912d86300bffe52313c12e69e4adb5",
+  "closed_at_utc": "2026-10-21T06:58:47+00:00",
+  "closed_git_head": "66a159169d341014087a6cb4ebb8f876ce48fc8a",
+  "closure_sha256": "99bf0743157a7e50dbb89409c99475bbe04650aef96e0a72a4ab2fa418ad85dd",
+  "evaluator_v2_sha256": "e7b563b1a149a8c770a56728a4d13abcc53e8a12080866a1adfad03b2d234f6d",
+  "experiment_id": "shared-target-message-content-v1",
+  "preregistration_sha256": "f37392f9eec280dd5052c2afd75e9a8d630e5947421df20e23c57cc40987268b",
+  "registered_at_utc": "2026-10-21T06:53:19+00:00",
+  "registered_git_head": "66a159169d341014087a6cb4ebb8f876ce48fc8a",
+  "schema_version": 1
+}

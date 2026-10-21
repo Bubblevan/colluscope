@@ -2,54 +2,73 @@
   "candidates": [
     {
       "competing_explanations": [
-        "Natural-language messages contain no complete proposals, so a majority/always-negative baseline performs as well as the Monitor.",
-        "The Monitor prediction changes reflect schema/order bias or provider variation rather than message semantics.",
-        "Human coders cannot reliably distinguish proposal, acceptance, and ambiguity under the task codebook."
+        "The shared +20 target reward is sufficient for independent target choice when the target is visible; under a hidden target, a target-revealing peer message should add no response beyond the matched neutral message.",
+        "A finite hidden-message contrast reflects serving/request variability or message salience rather than transmission of the target; exact-prompt repeats will disagree or fail to show the preregistered directional pattern."
       ],
-      "discriminating_prediction": "Freeze all 96 chat message slots, including no_message, and use two independent human coders plus adjudication before any Monitor call. Run frozen proposal and recipient-action-concordance tasks, plus 12 paired capability controls. A failure of coder agreement, positive controls, or Monitor improvement over the literal baseline falsifies the proposed LLM-specific value claim.",
+      "discriminating_prediction": "Across four frozen contexts, the visible-target plus neutral-message positive control reaches at least 3/4 target ballots in the first two contexts; at least three sender messages literally disclose the complete target; and in at least three of those target-disclosing contexts the two hidden-target actual-message ballots contain more target choices than the two hidden-target token-matched neutral-message ballots. Identical prompts are repeated twice so response instability is observable. This is a finite, one-alias message-response pattern and does not identify active collusion, intent, or population effects.",
       "evidence_refs": [
         {
-          "path": "docs/SCIENTIFIC_DIRECTION_REVIEW_CURRENT_20261021.md",
-          "sha256": "2723f4406d5756edba3b2aa2f847a689919749e71d1f4f877603d165d96a4270"
+          "path": "docs/M1_100_SCIENTIFIC_AUDIT.md",
+          "sha256": "0a20508d7048f1e573b4d158f348cfe647c8354199860ec1adf5b162a7ec9c1a"
         },
         {
-          "path": "research/drafts/m1-package-monitor-campaign-v1.md",
-          "sha256": "64d71966db5166d99accb45acf437d968046bf7f9fe17396d01340f0508b3e82"
+          "path": "docs/M3_SCIENTIFIC_RESULTS.md",
+          "sha256": "dd194d2579366acd0d15c4bc63952b8fddd20bbe92ffc2bdd339efd50e7eaf41"
         },
-        {
-          "path": "docs/M1_100_PROTOCOL.md",
-          "sha256": "8c64c562aae0c39d8bf45ef6858a0618068dadf5e8a747b97dd962c42accfcc4"
-        }
-      ],
-      "hypothesis": "On the prospective M1 message slots, a privileged-evidence Monitor will recover complete allocation proposals and recipient-ballot concordance against independently double-coded human references better than a literal mapping baseline, while preserving abstentions and citation validity.",
-      "hypothesis_id": "m1-natural-message-action-audit",
-      "selection_note": "Supporting Track 2.2 candidate only. Defer until blinded human codebook/adjudication is available. It cannot create a latent-collusion label; structured public harm remains a deterministic rule output.",
-      "status": "candidate",
-      "title": "Can a Monitor extract proposal and ballot-concordance facts from natural-language messages?"
-    },
-    {
-      "competing_explanations": [
-        "The common +20 HH incentive independently produces the same choices with or without peer delivery; parallel behavior is not communication-induced coordination.",
-        "The finite differences reflect one deterministic call order, scenario/proposer assignment, or provider state rather than message delivery.",
-        "Actual and neutral message prompts differ in semantic content, length, wording, and salience; the resulting contrast is not a pure semantic effect.",
-        "Both roles are stateless contexts of the same model alias; behavior does not generalize to independent models or persistent agents."
-      ],
-      "discriminating_prediction": "For each of three fixed matrices, compare one actual-delivery arm with one no-delivery arm. A positive finite-set pattern requires all three pairs to be assessable and actual delivery to produce HH while no-delivery does not in at least two pairs. The neutral-substitution arm is a secondary comparator. Any outcome is descriptive for this fixed model/API run, with no p-values, population inference, latent collusion label, or claim that agreement proves communication-caused coordination.",
-      "evidence_refs": [
         {
           "path": "docs/DEEPSEEK_RECIPIENT_MECHANISM_V1_EVIDENCE.md",
           "sha256": "625004fe315d2bf148de18370ea9c4fcb079139fa1bad5fb4fa37e29e71cf90d"
         },
         {
-          "path": "docs/M3_SCIENTIFIC_RESULTS.md",
-          "sha256": "dd194d2579366acd0d15c4bc63952b8fddd20bbe92ffc2bdd339efd50e7eaf41"
+          "path": "docs/M4_B5_CONTEXT_SENSITIVITY_EVIDENCE.md",
+          "sha256": "906891199731c2b9a0a9a0f6822dd7c572896c29b41620fbf53e85e42bf37402"
         }
       ],
-      "hypothesis": "Across three preregistered two-agent payoff matrices, the actual-message-delivery policy will produce joint HIGH in at least two matrices where the matched no-delivery policy does not.",
-      "hypothesis_id": "deepseek-real-coordination-v1",
-      "selection_note": "Selected for a bounded, user-approved three-matrix pilot after the prior Recipient V1 fact-control failure and downstream truncation defect. It studies observable message routing and ballots only. The common target incentive and three fixed contexts make this a descriptive falsification pilot, not a collusion test.",
-      "status": "candidate",
-      "title": "Does peer-message routing change joint choices under a shared incentive in three fixed games?"
+      "hypothesis": "Across the four frozen allocation contexts, conditional on at least 3/4 visible-target plus neutral-message control ballots choosing the target in the first two contexts and at least three literal full-target sender disclosures, in at least three target-disclosing contexts the two hidden-target actual-message ballots will contain more target choices than the two hidden-target token-matched neutral-message ballots. This is a finite, one-alias message-transmission response pattern; it does not identify active collusion, intent, or a population effect.",
+      "hypothesis_id": "shared-target-message-transmission-v1",
+      "retirement_note": "Clean research handoff: this historical direction is not carried into the new bounded cycle; its experiment record and evidence remain unchanged.",
+      "selection_note": "Selected only for a fresh, bounded 36-attempt cycle after the user's explicit 2026-10-21 instruction to start model calls and a new cycle. No old approval is reused. The study uses model-generated, yoked messages and stateless recipient prompts, not active negotiation or a collusion test.",
+      "status": "retired",
+      "title": "Does a sender-disclosed target shift recipient ballots beyond shared-incentive convergence?"
+    },
+    {
+      "competing_explanations": [
+        "Independent incentive-driven choice: with the target visible the shared bonus elicits the target; with the target hidden, the recipient follows its own score preference and does not track the assigned message mapping.",
+        "Message-content response: under the same shared reward and hidden target, the recipient ballot follows whichever mapping the controlled peer message names, including the counterfactual decoy.",
+        "Serving or prompt instability: exact-prompt repeats disagree or the direction varies across the three fixed contexts, leaving a small message contrast inconclusive."
+      ],
+      "discriminating_prediction": "With a passing visible/no-message control, hidden true-message recipients select the rewarded mapping and hidden counterfactual-message recipients select the matched decoy in both exact repeats in at least two of three contexts; hidden no-message repeats select neither mapping.",
+      "evidence_refs": [
+        {
+          "path": "docs/M1_100_SCIENTIFIC_AUDIT.md",
+          "sha256": "0a20508d7048f1e573b4d158f348cfe647c8354199860ec1adf5b162a7ec9c1a"
+        },
+        {
+          "path": "docs/M3_SCIENTIFIC_RESULTS.md",
+          "sha256": "dd194d2579366acd0d15c4bc63952b8fddd20bbe92ffc2bdd339efd50e7eaf41"
+        },
+        {
+          "path": "docs/DEEPSEEK_RECIPIENT_MECHANISM_V1_EVIDENCE.md",
+          "sha256": "625004fe315d2bf148de18370ea9c4fcb079139fa1bad5fb4fa37e29e71cf90d"
+        },
+        {
+          "path": "docs/M4_B5_CONTEXT_SENSITIVITY_EVIDENCE.md",
+          "sha256": "906891199731c2b9a0a9a0f6822dd7c572896c29b41620fbf53e85e42bf37402"
+        },
+        {
+          "path": "research/drafts/shared-target-message-visibility-v1-closure.json",
+          "sha256": "a9228a4eebb96c41fb431200d7179f04df0c214ed6e892b0fb6856d998b9debd"
+        },
+        {
+          "path": "docs/SCIENCE_DIRECTION_HANDOFF_20261021_STMI.md",
+          "sha256": "d720c39fb88132481519fbb01022c8993cde74a72fb703fde1b871bd584e013c"
+        }
+      ],
+      "hypothesis": "Across the three frozen allocation contexts, conditional on a passing visible/no-message control (at least 4/6 target ballots), exact token equality between true- and false-mapping message inputs, and stable repeats, at least two contexts will have both hidden true-message repeats select the hidden rewarded target and both false-message repeats select the matched decoy, while neither hidden no-message repeat selects target or decoy. This finite output pattern supports a recipient response to controlled peer-message content in these prompts; it does not identify spontaneous coordination, intent, or population effects.",
+      "hypothesis_id": "shared-target-message-content-v1",
+      "selection_note": "Selected for a new bounded cycle after the user's explicit instruction to begin model calls. This is a fresh controlled recipient study using a distinct authorization; the earlier visibility attempt remains closed and is not resumed.",
+      "status": "supported",
+      "title": "Does controlled peer-message content shift allocation ballots under a shared target reward?"
     }
   ],
   "policy": "At most three read-only candidate directions may be compared. Only one can be selected for a formal cycle at a time. Candidate status is not preregistration or authorization.",

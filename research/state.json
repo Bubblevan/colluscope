@@ -2,8 +2,7 @@
   "active_experiment_id": null,
   "active_hypothesis_id": null,
   "candidate_hypotheses": [
-    "m1-natural-message-action-audit",
-    "deepseek-real-coordination-v1"
+    "shared-target-message-content-v1"
   ],
   "claim_level_status": {
     "B4_B5_superiority": "INCONCLUSIVE",
@@ -11,7 +10,7 @@
     "cross_model_generalization": "INCONCLUSIVE",
     "latent_collusion_or_intent": "NOT_IDENTIFIED"
   },
-  "consecutive_cycles_without_new_uncertainty_reduction": 6,
+  "consecutive_cycles_without_new_uncertainty_reduction": 8,
   "current_branch": "codex/deepseek-real-coordination-v4-20261021",
   "current_round": {
     "authorization_status": "consumed_and_never_reusable",
@@ -31,8 +30,8 @@
     "terminal_artifact": "research/handoffs/DEEPSEEK-FIRST-RESEARCH-01.json"
   },
   "historical_approvals_reusable": false,
-  "latest_closed_experiment_id": "deepseek-real-coordination-40-v5",
-  "latest_decision": "BLOCKED",
+  "latest_closed_experiment_id": "shared-target-message-content-v1",
+  "latest_decision": "PIVOT",
   "latest_decision_type": "operational",
   "latest_integrity_followup": {
     "frozen_audit_path": "docs/results/research-sprint-20261021/m4-b5-context-sensitivity-independent-audit.json",
@@ -108,7 +107,7 @@
     "status": "m1_v3_raw_response_ballot_review_complete"
   },
   "latest_review_id": "m1-v3-raw-response-ballot-audit-20261021",
-  "latest_scientific_outcome": "EXECUTION_BLOCKED",
+  "latest_scientific_outcome": "SUPPORTED",
   "latest_user_decision": {
     "date": "2026-10-21",
     "decision": "DECLINED_QWEN_SCOPE",
@@ -129,7 +128,7 @@
       "runtime_inputs_verified": 23
     }
   },
-  "next_action": "Use offline fake-server tests to validate a versioned direct no-proxy transport that resolves api.deepseek.com once and connects to that resolved address while retaining TLS SNI and hostname verification; do not reopen V5 or resend its failed request.",
+  "next_action": "Preregister one new 30-request, three-context follow-up that crosses target versus near-equal-score decoy mappings with peer-proposal versus content-matched non-social task-aide recommendation frames, adds a hidden/no-message baseline, and uses two exact-prompt repeats per cell. A peer-specific advantage would support source-sensitive social influence; equivalent mapping-following under both sources would favor generic recommendation following. This requires fresh authorization and has not been dispatched.",
   "preexisting_untracked_paths_preserved": [
     "docs/COLOSSEUM_LOCAL_REPRO_PROTOCOL.md (pre-existing untracked; preserved, not part of this review)",
     "docs/results/colosseum-local-audit-20261020/ (pre-existing untracked; preserved, not part of this review)",
@@ -147,6 +146,6 @@
   "program_status": "active",
   "schema_version": 2,
   "state_recorded_at_head": "2dcca164235cf2254dba65b2307a75edb973d292",
-  "status": "continuing_after_execution_boundary",
+  "status": "ready_for_next_cycle",
   "updated_at": "2026-10-21"
 }
