@@ -265,6 +265,32 @@
         }
       ],
       "review_mode": "adversarial_self_review; not an independent critic confirmation"
+    },
+    {
+      "claim_id": "m4-b5-repeatability-source-reconstruction-20261021",
+      "claim": "An independent implementation rebuilt all 144 prepared repeatability request bodies from the frozen M4 source projections and matched their stored bytes.",
+      "outcome": "SUPPORTED",
+      "scope": "Finite offline source-to-request reconstruction for the unregistered m4-b5-view-repeatability-v2 candidate; source T/B/E mapping reused the frozen M4 source loader; no provider inference or new behavior observed.",
+      "interpretation": "The public-profile collision is not an artifact of the prepared manifest: 23 Public-only bodies include one profile linked to two source-unit hashes, while 24 Privileged-original bodies remain distinct. This supports clustering the shared public input once. It does not establish response stability, intent, or a general impossibility result.",
+      "evidence_refs": [
+        {
+          "path": "docs/M4_B5_REPEATABILITY_RECONSTRUCTION_FOLLOWUP_20261021.md",
+          "sha256": "4e8807a98f4bfedd3ae620b8e21086d136ebb06d8293b53f18bf5625294ae261"
+        },
+        {
+          "path": "docs/results/research-sprint-20261021/m4-b5-profile-collision-audit-20261021/source-reconstruction-audit.json",
+          "sha256": "b04421fcc054423fa07987b3572d3286bee5d845b16c4062c08f817277faefcb"
+        },
+        {
+          "path": "scripts/audit_m4_b5_repeatability_profiles_from_source.py",
+          "sha256": "12fdc9e47653e519b466b677506b6ccd6acbcf4c7db8aa0990e40d9769e8d935"
+        },
+        {
+          "path": "docs/results/research-sprint-20261021/m4-b5-profile-collision-audit-20261021/source-reconstruction-initial-import-failure.log",
+          "sha256": "ecc1cfef4214f534b6cbb6ab74a98dcd71bd77bde8efcfc2cf4285c33cab06f7"
+        }
+      ],
+      "review_mode": "independent projection/body reconstruction; source loader reused; not a separate scientific critic"
     }
   ],
   "cycle_updates": [

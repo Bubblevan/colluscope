@@ -1,0 +1,37 @@
+{
+  "status": "PASS_INDEPENDENT_SOURCE_TO_BODY_RECONSTRUCTION",
+  "evidence_class": "offline_reanalysis",
+  "model_api_calls": 0,
+  "independent_projection_implementation": true,
+  "production_projector_used": false,
+  "source_loader_reused_for_TBE_mapping": true,
+  "source_contexts": 24,
+  "assignments_rebuilt": 144,
+  "prepared_body_hashes_matched": 144,
+  "context_view_projection_profiles": 48,
+  "unique_body_profiles_by_view": {
+    "public_only": 23,
+    "privileged_original": 24
+  },
+  "cross_context_duplicate_profiles_by_view": {
+    "public_only": 1,
+    "privileged_original": 0
+  },
+  "shared_body_profiles_across_views": 0,
+  "duplicate_public_body_sha256": "442d8fe48a4ea09656cb42664046b8cdaa5120d00d59518374a57006f1725d3e",
+  "linked_source_unit_sha256": [
+    "d2b4511c1adfdd9b343c210e823e887e1807b04de26ddd4d84e232bbba3a34ca",
+    "f242a230cbf8fc3918ae2bada5220c004330cc08c6652417411c181340dd829c"
+  ],
+  "linked_public_projection_sha256_equal": true,
+  "assignments_per_unique_body_profile": {
+    "3": 46,
+    "6": 1
+  },
+  "source_episodes_sha256": "e243adae992ae222bb12bd707e55980fff70a08a38f77603d5ebdbea45fc2765",
+  "source_run_manifest_sha256": "9ab42c327b5f915337480628c42e99620b57513e00e8771dafeef1d6cb56554f",
+  "schedule_file_sha256": "08e9b6d72862629f1e3e2fa3f02f3dcaee41a6356ad874cdd7cecc6d9ac93f3e",
+  "prepared_request_manifest_sha256": "6d26f48244bd06d93b29d58d02d69f03fe49d6db967b74cae0618ccfdfaf760a",
+  "private_message_text_emitted": false,
+  "output_path": "docs\\results\\research-sprint-20261021\\m4-b5-profile-collision-audit-20261021\\source-reconstruction-audit.json"
+}

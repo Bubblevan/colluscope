@@ -1,0 +1,15 @@
+Preserved initial failure from `python scripts/audit_m4_b5_repeatability_profiles_from_source.py`.
+
+The first run exited 1 before reading source data because executing a script under `scripts/` did not add the repository root to `sys.path`:
+
+```text
+Traceback (most recent call last):
+  File "D:\\MyLab\\colluscope\\scripts\\audit_m4_b5_repeatability_profiles_from_source.py", line 253, in <module>
+    result = audit()
+             ^^^^^^^
+  File "D:\\MyLab\\colluscope\\scripts\\audit_m4_b5_repeatability_profiles_from_source.py", line 167, in audit
+    from scripts import prepare_full_research_monitor as source_loader
+ImportError: cannot import name 'prepare_full_research_monitor' from 'scripts' (unknown location)
+```
+
+Correction: explicitly add the repository root to `sys.path`. This was an audit-script import failure; it made no model/API calls and read no private payload content.
