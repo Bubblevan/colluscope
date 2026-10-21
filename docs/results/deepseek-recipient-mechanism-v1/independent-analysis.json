@@ -1,0 +1,3770 @@
+{
+  "assigned_requests": 804,
+  "attempt_status_counts": {
+    "invalid:JSONDecodeError": 21,
+    "valid": 783
+  },
+  "capability_controls": {
+    "assessable": 40,
+    "assigned": 40,
+    "correct": 20,
+    "rows": [
+      {
+        "correct": false,
+        "incoming": "fact",
+        "prediction": "UNKNOWN",
+        "reference": "BLUE",
+        "request_id": "ctx-01-control-fact",
+        "valid": true
+      },
+      {
+        "correct": true,
+        "incoming": "none",
+        "prediction": "UNKNOWN",
+        "reference": "UNKNOWN",
+        "request_id": "ctx-01-control-missing",
+        "valid": true
+      },
+      {
+        "correct": false,
+        "incoming": "fact",
+        "prediction": "UNKNOWN",
+        "reference": "RED",
+        "request_id": "ctx-02-control-fact",
+        "valid": true
+      },
+      {
+        "correct": true,
+        "incoming": "none",
+        "prediction": "UNKNOWN",
+        "reference": "UNKNOWN",
+        "request_id": "ctx-02-control-missing",
+        "valid": true
+      },
+      {
+        "correct": false,
+        "incoming": "fact",
+        "prediction": "UNKNOWN",
+        "reference": "BLUE",
+        "request_id": "ctx-03-control-fact",
+        "valid": true
+      },
+      {
+        "correct": true,
+        "incoming": "none",
+        "prediction": "UNKNOWN",
+        "reference": "UNKNOWN",
+        "request_id": "ctx-03-control-missing",
+        "valid": true
+      },
+      {
+        "correct": false,
+        "incoming": "fact",
+        "prediction": "UNKNOWN",
+        "reference": "RED",
+        "request_id": "ctx-04-control-fact",
+        "valid": true
+      },
+      {
+        "correct": true,
+        "incoming": "none",
+        "prediction": "UNKNOWN",
+        "reference": "UNKNOWN",
+        "request_id": "ctx-04-control-missing",
+        "valid": true
+      },
+      {
+        "correct": false,
+        "incoming": "fact",
+        "prediction": "UNKNOWN",
+        "reference": "RED",
+        "request_id": "ctx-05-control-fact",
+        "valid": true
+      },
+      {
+        "correct": true,
+        "incoming": "none",
+        "prediction": "UNKNOWN",
+        "reference": "UNKNOWN",
+        "request_id": "ctx-05-control-missing",
+        "valid": true
+      },
+      {
+        "correct": false,
+        "incoming": "fact",
+        "prediction": "UNKNOWN",
+        "reference": "BLUE",
+        "request_id": "ctx-06-control-fact",
+        "valid": true
+      },
+      {
+        "correct": true,
+        "incoming": "none",
+        "prediction": "UNKNOWN",
+        "reference": "UNKNOWN",
+        "request_id": "ctx-06-control-missing",
+        "valid": true
+      },
+      {
+        "correct": false,
+        "incoming": "fact",
+        "prediction": "UNKNOWN",
+        "reference": "RED",
+        "request_id": "ctx-07-control-fact",
+        "valid": true
+      },
+      {
+        "correct": true,
+        "incoming": "none",
+        "prediction": "UNKNOWN",
+        "reference": "UNKNOWN",
+        "request_id": "ctx-07-control-missing",
+        "valid": true
+      },
+      {
+        "correct": false,
+        "incoming": "fact",
+        "prediction": "UNKNOWN",
+        "reference": "RED",
+        "request_id": "ctx-08-control-fact",
+        "valid": true
+      },
+      {
+        "correct": true,
+        "incoming": "none",
+        "prediction": "UNKNOWN",
+        "reference": "UNKNOWN",
+        "request_id": "ctx-08-control-missing",
+        "valid": true
+      },
+      {
+        "correct": false,
+        "incoming": "fact",
+        "prediction": "UNKNOWN",
+        "reference": "BLUE",
+        "request_id": "ctx-09-control-fact",
+        "valid": true
+      },
+      {
+        "correct": true,
+        "incoming": "none",
+        "prediction": "UNKNOWN",
+        "reference": "UNKNOWN",
+        "request_id": "ctx-09-control-missing",
+        "valid": true
+      },
+      {
+        "correct": false,
+        "incoming": "fact",
+        "prediction": "UNKNOWN",
+        "reference": "RED",
+        "request_id": "ctx-10-control-fact",
+        "valid": true
+      },
+      {
+        "correct": true,
+        "incoming": "none",
+        "prediction": "UNKNOWN",
+        "reference": "UNKNOWN",
+        "request_id": "ctx-10-control-missing",
+        "valid": true
+      },
+      {
+        "correct": false,
+        "incoming": "fact",
+        "prediction": "UNKNOWN",
+        "reference": "RED",
+        "request_id": "ctx-11-control-fact",
+        "valid": true
+      },
+      {
+        "correct": true,
+        "incoming": "none",
+        "prediction": "UNKNOWN",
+        "reference": "UNKNOWN",
+        "request_id": "ctx-11-control-missing",
+        "valid": true
+      },
+      {
+        "correct": false,
+        "incoming": "fact",
+        "prediction": "UNKNOWN",
+        "reference": "RED",
+        "request_id": "ctx-12-control-fact",
+        "valid": true
+      },
+      {
+        "correct": true,
+        "incoming": "none",
+        "prediction": "UNKNOWN",
+        "reference": "UNKNOWN",
+        "request_id": "ctx-12-control-missing",
+        "valid": true
+      },
+      {
+        "correct": false,
+        "incoming": "fact",
+        "prediction": "UNKNOWN",
+        "reference": "BLUE",
+        "request_id": "ctx-13-control-fact",
+        "valid": true
+      },
+      {
+        "correct": true,
+        "incoming": "none",
+        "prediction": "UNKNOWN",
+        "reference": "UNKNOWN",
+        "request_id": "ctx-13-control-missing",
+        "valid": true
+      },
+      {
+        "correct": false,
+        "incoming": "fact",
+        "prediction": "UNKNOWN",
+        "reference": "BLUE",
+        "request_id": "ctx-14-control-fact",
+        "valid": true
+      },
+      {
+        "correct": true,
+        "incoming": "none",
+        "prediction": "UNKNOWN",
+        "reference": "UNKNOWN",
+        "request_id": "ctx-14-control-missing",
+        "valid": true
+      },
+      {
+        "correct": false,
+        "incoming": "fact",
+        "prediction": "UNKNOWN",
+        "reference": "BLUE",
+        "request_id": "ctx-15-control-fact",
+        "valid": true
+      },
+      {
+        "correct": true,
+        "incoming": "none",
+        "prediction": "UNKNOWN",
+        "reference": "UNKNOWN",
+        "request_id": "ctx-15-control-missing",
+        "valid": true
+      },
+      {
+        "correct": false,
+        "incoming": "fact",
+        "prediction": "UNKNOWN",
+        "reference": "BLUE",
+        "request_id": "ctx-16-control-fact",
+        "valid": true
+      },
+      {
+        "correct": true,
+        "incoming": "none",
+        "prediction": "UNKNOWN",
+        "reference": "UNKNOWN",
+        "request_id": "ctx-16-control-missing",
+        "valid": true
+      },
+      {
+        "correct": false,
+        "incoming": "fact",
+        "prediction": "UNKNOWN",
+        "reference": "RED",
+        "request_id": "ctx-17-control-fact",
+        "valid": true
+      },
+      {
+        "correct": true,
+        "incoming": "none",
+        "prediction": "UNKNOWN",
+        "reference": "UNKNOWN",
+        "request_id": "ctx-17-control-missing",
+        "valid": true
+      },
+      {
+        "correct": false,
+        "incoming": "fact",
+        "prediction": "UNKNOWN",
+        "reference": "RED",
+        "request_id": "ctx-18-control-fact",
+        "valid": true
+      },
+      {
+        "correct": true,
+        "incoming": "none",
+        "prediction": "UNKNOWN",
+        "reference": "UNKNOWN",
+        "request_id": "ctx-18-control-missing",
+        "valid": true
+      },
+      {
+        "correct": false,
+        "incoming": "fact",
+        "prediction": "UNKNOWN",
+        "reference": "RED",
+        "request_id": "ctx-19-control-fact",
+        "valid": true
+      },
+      {
+        "correct": true,
+        "incoming": "none",
+        "prediction": "UNKNOWN",
+        "reference": "UNKNOWN",
+        "request_id": "ctx-19-control-missing",
+        "valid": true
+      },
+      {
+        "correct": false,
+        "incoming": "fact",
+        "prediction": "UNKNOWN",
+        "reference": "RED",
+        "request_id": "ctx-20-control-fact",
+        "valid": true
+      },
+      {
+        "correct": true,
+        "incoming": "none",
+        "prediction": "UNKNOWN",
+        "reference": "UNKNOWN",
+        "request_id": "ctx-20-control-missing",
+        "valid": true
+      }
+    ]
+  },
+  "dynamic_full_prompt_token_parity_checks": {
+    "assigned_context_reward_history_families": 120,
+    "observed_checks": 120,
+    "rows": [
+      {
+        "at_utc": "2026-10-21T03:58:48.098602+00:00",
+        "checked_before_request_id": "ctx-19-ballot-shared-neutral-x",
+        "context_id": "ctx-19",
+        "event": "dynamic_token_parity_pass",
+        "history": "neutral",
+        "reward": "shared",
+        "token_counts": {
+          "neutral": 403,
+          "x": 403,
+          "y": 403
+        }
+      },
+      {
+        "at_utc": "2026-10-21T03:58:52.847852+00:00",
+        "checked_before_request_id": "ctx-10-ballot-none-neutral-neutral",
+        "context_id": "ctx-10",
+        "event": "dynamic_token_parity_pass",
+        "history": "neutral",
+        "reward": "none",
+        "token_counts": {
+          "neutral": 303,
+          "x": 303,
+          "y": 303
+        }
+      },
+      {
+        "at_utc": "2026-10-21T03:59:02.224913+00:00",
+        "checked_before_request_id": "ctx-18-ballot-shared-actual-x",
+        "context_id": "ctx-18",
+        "event": "dynamic_token_parity_pass",
+        "history": "actual",
+        "reward": "shared",
+        "token_counts": {
+          "neutral": 446,
+          "x": 446,
+          "y": 446
+        }
+      },
+      {
+        "at_utc": "2026-10-21T03:59:07.169825+00:00",
+        "checked_before_request_id": "ctx-19-ballot-focal-neutral-x",
+        "context_id": "ctx-19",
+        "event": "dynamic_token_parity_pass",
+        "history": "neutral",
+        "reward": "focal",
+        "token_counts": {
+          "neutral": 319,
+          "x": 319,
+          "y": 319
+        }
+      },
+      {
+        "at_utc": "2026-10-21T03:59:08.115266+00:00",
+        "checked_before_request_id": "ctx-06-ballot-focal-actual-neutral",
+        "context_id": "ctx-06",
+        "event": "dynamic_token_parity_pass",
+        "history": "actual",
+        "reward": "focal",
+        "token_counts": {
+          "neutral": 386,
+          "x": 386,
+          "y": 386
+        }
+      },
+      {
+        "at_utc": "2026-10-21T03:59:11.545281+00:00",
+        "checked_before_request_id": "ctx-14-ballot-none-neutral-neutral",
+        "context_id": "ctx-14",
+        "event": "dynamic_token_parity_pass",
+        "history": "neutral",
+        "reward": "none",
+        "token_counts": {
+          "neutral": 303,
+          "x": 303,
+          "y": 303
+        }
+      },
+      {
+        "at_utc": "2026-10-21T03:59:13.155857+00:00",
+        "checked_before_request_id": "ctx-16-ballot-focal-neutral-x",
+        "context_id": "ctx-16",
+        "event": "dynamic_token_parity_pass",
+        "history": "neutral",
+        "reward": "focal",
+        "token_counts": {
+          "neutral": 319,
+          "x": 319,
+          "y": 319
+        }
+      },
+      {
+        "at_utc": "2026-10-21T03:59:22.635644+00:00",
+        "checked_before_request_id": "ctx-12-ballot-shared-neutral-y",
+        "context_id": "ctx-12",
+        "event": "dynamic_token_parity_pass",
+        "history": "neutral",
+        "reward": "shared",
+        "token_counts": {
+          "neutral": 330,
+          "x": 330,
+          "y": 330
+        }
+      },
+      {
+        "at_utc": "2026-10-21T03:59:25.132064+00:00",
+        "checked_before_request_id": "ctx-17-ballot-none-neutral-y",
+        "context_id": "ctx-17",
+        "event": "dynamic_token_parity_pass",
+        "history": "neutral",
+        "reward": "none",
+        "token_counts": {
+          "neutral": 303,
+          "x": 303,
+          "y": 303
+        }
+      },
+      {
+        "at_utc": "2026-10-21T03:59:29.278034+00:00",
+        "checked_before_request_id": "ctx-04-ballot-focal-neutral-neutral",
+        "context_id": "ctx-04",
+        "event": "dynamic_token_parity_pass",
+        "history": "neutral",
+        "reward": "focal",
+        "token_counts": {
+          "neutral": 319,
+          "x": 319,
+          "y": 319
+        }
+      },
+      {
+        "at_utc": "2026-10-21T03:59:42.394217+00:00",
+        "checked_before_request_id": "ctx-15-ballot-focal-actual-neutral",
+        "context_id": "ctx-15",
+        "event": "dynamic_token_parity_pass",
+        "history": "actual",
+        "reward": "focal",
+        "token_counts": {
+          "neutral": 371,
+          "x": 371,
+          "y": 371
+        }
+      },
+      {
+        "at_utc": "2026-10-21T03:59:52.309081+00:00",
+        "checked_before_request_id": "ctx-14-ballot-shared-neutral-y",
+        "context_id": "ctx-14",
+        "event": "dynamic_token_parity_pass",
+        "history": "neutral",
+        "reward": "shared",
+        "token_counts": {
+          "neutral": 446,
+          "x": 446,
+          "y": 446
+        }
+      },
+      {
+        "at_utc": "2026-10-21T03:59:54.262890+00:00",
+        "checked_before_request_id": "ctx-20-ballot-shared-neutral-y",
+        "context_id": "ctx-20",
+        "event": "dynamic_token_parity_pass",
+        "history": "neutral",
+        "reward": "shared",
+        "token_counts": {
+          "neutral": 446,
+          "x": 446,
+          "y": 446
+        }
+      },
+      {
+        "at_utc": "2026-10-21T03:59:57.369749+00:00",
+        "checked_before_request_id": "ctx-16-ballot-focal-actual-neutral",
+        "context_id": "ctx-16",
+        "event": "dynamic_token_parity_pass",
+        "history": "actual",
+        "reward": "focal",
+        "token_counts": {
+          "neutral": 386,
+          "x": 386,
+          "y": 386
+        }
+      },
+      {
+        "at_utc": "2026-10-21T03:59:58.208120+00:00",
+        "checked_before_request_id": "ctx-02-ballot-shared-neutral-neutral",
+        "context_id": "ctx-02",
+        "event": "dynamic_token_parity_pass",
+        "history": "neutral",
+        "reward": "shared",
+        "token_counts": {
+          "neutral": 446,
+          "x": 446,
+          "y": 446
+        }
+      },
+      {
+        "at_utc": "2026-10-21T04:00:00.214080+00:00",
+        "checked_before_request_id": "ctx-18-ballot-focal-neutral-y",
+        "context_id": "ctx-18",
+        "event": "dynamic_token_parity_pass",
+        "history": "neutral",
+        "reward": "focal",
+        "token_counts": {
+          "neutral": 435,
+          "x": 435,
+          "y": 435
+        }
+      },
+      {
+        "at_utc": "2026-10-21T04:00:07.301887+00:00",
+        "checked_before_request_id": "ctx-08-ballot-focal-neutral-y",
+        "context_id": "ctx-08",
+        "event": "dynamic_token_parity_pass",
+        "history": "neutral",
+        "reward": "focal",
+        "token_counts": {
+          "neutral": 319,
+          "x": 319,
+          "y": 319
+        }
+      },
+      {
+        "at_utc": "2026-10-21T04:00:14.269694+00:00",
+        "checked_before_request_id": "ctx-06-ballot-none-neutral-neutral",
+        "context_id": "ctx-06",
+        "event": "dynamic_token_parity_pass",
+        "history": "neutral",
+        "reward": "none",
+        "token_counts": {
+          "neutral": 303,
+          "x": 303,
+          "y": 303
+        }
+      },
+      {
+        "at_utc": "2026-10-21T04:00:19.677859+00:00",
+        "checked_before_request_id": "ctx-16-ballot-shared-actual-neutral",
+        "context_id": "ctx-16",
+        "event": "dynamic_token_parity_pass",
+        "history": "actual",
+        "reward": "shared",
+        "token_counts": {
+          "neutral": 446,
+          "x": 446,
+          "y": 446
+        }
+      },
+      {
+        "at_utc": "2026-10-21T04:00:24.151680+00:00",
+        "checked_before_request_id": "ctx-13-ballot-shared-actual-neutral",
+        "context_id": "ctx-13",
+        "event": "dynamic_token_parity_pass",
+        "history": "actual",
+        "reward": "shared",
+        "token_counts": {
+          "neutral": 409,
+          "x": 409,
+          "y": 409
+        }
+      },
+      {
+        "at_utc": "2026-10-21T04:00:25.265868+00:00",
+        "checked_before_request_id": "ctx-13-ballot-shared-neutral-neutral",
+        "context_id": "ctx-13",
+        "event": "dynamic_token_parity_pass",
+        "history": "neutral",
+        "reward": "shared",
+        "token_counts": {
+          "neutral": 446,
+          "x": 446,
+          "y": 446
+        }
+      },
+      {
+        "at_utc": "2026-10-21T04:00:27.802444+00:00",
+        "checked_before_request_id": "ctx-20-ballot-none-actual-neutral",
+        "context_id": "ctx-20",
+        "event": "dynamic_token_parity_pass",
+        "history": "actual",
+        "reward": "none",
+        "token_counts": {
+          "neutral": 347,
+          "x": 347,
+          "y": 347
+        }
+      },
+      {
+        "at_utc": "2026-10-21T04:00:30.911526+00:00",
+        "checked_before_request_id": "ctx-15-ballot-none-neutral-y",
+        "context_id": "ctx-15",
+        "event": "dynamic_token_parity_pass",
+        "history": "neutral",
+        "reward": "none",
+        "token_counts": {
+          "neutral": 303,
+          "x": 303,
+          "y": 303
+        }
+      },
+      {
+        "at_utc": "2026-10-21T04:00:32.890552+00:00",
+        "checked_before_request_id": "ctx-18-ballot-none-neutral-y",
+        "context_id": "ctx-18",
+        "event": "dynamic_token_parity_pass",
+        "history": "neutral",
+        "reward": "none",
+        "token_counts": {
+          "neutral": 303,
+          "x": 303,
+          "y": 303
+        }
+      },
+      {
+        "at_utc": "2026-10-21T04:00:41.733500+00:00",
+        "checked_before_request_id": "ctx-17-ballot-shared-neutral-y",
+        "context_id": "ctx-17",
+        "event": "dynamic_token_parity_pass",
+        "history": "neutral",
+        "reward": "shared",
+        "token_counts": {
+          "neutral": 405,
+          "x": 405,
+          "y": 405
+        }
+      },
+      {
+        "at_utc": "2026-10-21T04:00:45.162927+00:00",
+        "checked_before_request_id": "ctx-01-ballot-focal-neutral-x",
+        "context_id": "ctx-01",
+        "event": "dynamic_token_parity_pass",
+        "history": "neutral",
+        "reward": "focal",
+        "token_counts": {
+          "neutral": 319,
+          "x": 319,
+          "y": 319
+        }
+      },
+      {
+        "at_utc": "2026-10-21T04:00:51.337425+00:00",
+        "checked_before_request_id": "ctx-01-ballot-shared-neutral-neutral",
+        "context_id": "ctx-01",
+        "event": "dynamic_token_parity_pass",
+        "history": "neutral",
+        "reward": "shared",
+        "token_counts": {
+          "neutral": 446,
+          "x": 446,
+          "y": 446
+        }
+      },
+      {
+        "at_utc": "2026-10-21T04:00:54.125537+00:00",
+        "checked_before_request_id": "ctx-11-ballot-none-neutral-neutral",
+        "context_id": "ctx-11",
+        "event": "dynamic_token_parity_pass",
+        "history": "neutral",
+        "reward": "none",
+        "token_counts": {
+          "neutral": 303,
+          "x": 303,
+          "y": 303
+        }
+      },
+      {
+        "at_utc": "2026-10-21T04:00:59.827714+00:00",
+        "checked_before_request_id": "ctx-20-ballot-focal-neutral-x",
+        "context_id": "ctx-20",
+        "event": "dynamic_token_parity_pass",
+        "history": "neutral",
+        "reward": "focal",
+        "token_counts": {
+          "neutral": 396,
+          "x": 396,
+          "y": 396
+        }
+      },
+      {
+        "at_utc": "2026-10-21T04:01:05.493836+00:00",
+        "checked_before_request_id": "ctx-11-ballot-focal-neutral-x",
+        "context_id": "ctx-11",
+        "event": "dynamic_token_parity_pass",
+        "history": "neutral",
+        "reward": "focal",
+        "token_counts": {
+          "neutral": 319,
+          "x": 319,
+          "y": 319
+        }
+      },
+      {
+        "at_utc": "2026-10-21T04:01:07.371314+00:00",
+        "checked_before_request_id": "ctx-08-ballot-none-neutral-x",
+        "context_id": "ctx-08",
+        "event": "dynamic_token_parity_pass",
+        "history": "neutral",
+        "reward": "none",
+        "token_counts": {
+          "neutral": 303,
+          "x": 303,
+          "y": 303
+        }
+      },
+      {
+        "at_utc": "2026-10-21T04:01:10.200844+00:00",
+        "checked_before_request_id": "ctx-05-ballot-shared-neutral-neutral",
+        "context_id": "ctx-05",
+        "event": "dynamic_token_parity_pass",
+        "history": "neutral",
+        "reward": "shared",
+        "token_counts": {
+          "neutral": 446,
+          "x": 446,
+          "y": 446
+        }
+      },
+      {
+        "at_utc": "2026-10-21T04:01:12.404104+00:00",
+        "checked_before_request_id": "ctx-15-ballot-shared-actual-x",
+        "context_id": "ctx-15",
+        "event": "dynamic_token_parity_pass",
+        "history": "actual",
+        "reward": "shared",
+        "token_counts": {
+          "neutral": 405,
+          "x": 405,
+          "y": 405
+        }
+      },
+      {
+        "at_utc": "2026-10-21T04:01:15.623626+00:00",
+        "checked_before_request_id": "ctx-06-ballot-shared-actual-y",
+        "context_id": "ctx-06",
+        "event": "dynamic_token_parity_pass",
+        "history": "actual",
+        "reward": "shared",
+        "token_counts": {
+          "neutral": 445,
+          "x": 445,
+          "y": 445
+        }
+      },
+      {
+        "at_utc": "2026-10-21T04:01:18.772009+00:00",
+        "checked_before_request_id": "ctx-14-ballot-focal-actual-neutral",
+        "context_id": "ctx-14",
+        "event": "dynamic_token_parity_pass",
+        "history": "actual",
+        "reward": "focal",
+        "token_counts": {
+          "neutral": 388,
+          "x": 388,
+          "y": 388
+        }
+      },
+      {
+        "at_utc": "2026-10-21T04:01:25.642975+00:00",
+        "checked_before_request_id": "ctx-20-ballot-shared-actual-y",
+        "context_id": "ctx-20",
+        "event": "dynamic_token_parity_pass",
+        "history": "actual",
+        "reward": "shared",
+        "token_counts": {
+          "neutral": 439,
+          "x": 439,
+          "y": 439
+        }
+      },
+      {
+        "at_utc": "2026-10-21T04:01:33.031397+00:00",
+        "checked_before_request_id": "ctx-11-ballot-shared-neutral-y",
+        "context_id": "ctx-11",
+        "event": "dynamic_token_parity_pass",
+        "history": "neutral",
+        "reward": "shared",
+        "token_counts": {
+          "neutral": 330,
+          "x": 330,
+          "y": 330
+        }
+      },
+      {
+        "at_utc": "2026-10-21T04:01:35.936638+00:00",
+        "checked_before_request_id": "ctx-13-ballot-none-actual-x",
+        "context_id": "ctx-13",
+        "event": "dynamic_token_parity_pass",
+        "history": "actual",
+        "reward": "none",
+        "token_counts": {
+          "neutral": 339,
+          "x": 339,
+          "y": 339
+        }
+      },
+      {
+        "at_utc": "2026-10-21T04:01:37.888624+00:00",
+        "checked_before_request_id": "ctx-15-ballot-none-actual-x",
+        "context_id": "ctx-15",
+        "event": "dynamic_token_parity_pass",
+        "history": "actual",
+        "reward": "none",
+        "token_counts": {
+          "neutral": 301,
+          "x": 301,
+          "y": 301
+        }
+      },
+      {
+        "at_utc": "2026-10-21T04:01:42.393034+00:00",
+        "checked_before_request_id": "ctx-05-ballot-none-neutral-neutral",
+        "context_id": "ctx-05",
+        "event": "dynamic_token_parity_pass",
+        "history": "neutral",
+        "reward": "none",
+        "token_counts": {
+          "neutral": 303,
+          "x": 303,
+          "y": 303
+        }
+      },
+      {
+        "at_utc": "2026-10-21T04:01:47.238620+00:00",
+        "checked_before_request_id": "ctx-02-ballot-none-actual-x",
+        "context_id": "ctx-02",
+        "event": "dynamic_token_parity_pass",
+        "history": "actual",
+        "reward": "none",
+        "token_counts": {
+          "neutral": 301,
+          "x": 301,
+          "y": 301
+        }
+      },
+      {
+        "at_utc": "2026-10-21T04:01:51.610080+00:00",
+        "checked_before_request_id": "ctx-18-ballot-shared-neutral-x",
+        "context_id": "ctx-18",
+        "event": "dynamic_token_parity_pass",
+        "history": "neutral",
+        "reward": "shared",
+        "token_counts": {
+          "neutral": 446,
+          "x": 446,
+          "y": 446
+        }
+      },
+      {
+        "at_utc": "2026-10-21T04:01:52.566412+00:00",
+        "checked_before_request_id": "ctx-03-ballot-none-neutral-neutral",
+        "context_id": "ctx-03",
+        "event": "dynamic_token_parity_pass",
+        "history": "neutral",
+        "reward": "none",
+        "token_counts": {
+          "neutral": 303,
+          "x": 303,
+          "y": 303
+        }
+      },
+      {
+        "at_utc": "2026-10-21T04:01:58.935367+00:00",
+        "checked_before_request_id": "ctx-16-ballot-shared-neutral-neutral",
+        "context_id": "ctx-16",
+        "event": "dynamic_token_parity_pass",
+        "history": "neutral",
+        "reward": "shared",
+        "token_counts": {
+          "neutral": 446,
+          "x": 446,
+          "y": 446
+        }
+      },
+      {
+        "at_utc": "2026-10-21T04:02:02.810635+00:00",
+        "checked_before_request_id": "ctx-03-ballot-shared-neutral-neutral",
+        "context_id": "ctx-03",
+        "event": "dynamic_token_parity_pass",
+        "history": "neutral",
+        "reward": "shared",
+        "token_counts": {
+          "neutral": 446,
+          "x": 446,
+          "y": 446
+        }
+      },
+      {
+        "at_utc": "2026-10-21T04:02:17.126741+00:00",
+        "checked_before_request_id": "ctx-04-ballot-shared-neutral-neutral",
+        "context_id": "ctx-04",
+        "event": "dynamic_token_parity_pass",
+        "history": "neutral",
+        "reward": "shared",
+        "token_counts": {
+          "neutral": 446,
+          "x": 446,
+          "y": 446
+        }
+      },
+      {
+        "at_utc": "2026-10-21T04:02:26.603940+00:00",
+        "checked_before_request_id": "ctx-10-ballot-shared-neutral-x",
+        "context_id": "ctx-10",
+        "event": "dynamic_token_parity_pass",
+        "history": "neutral",
+        "reward": "shared",
+        "token_counts": {
+          "neutral": 413,
+          "x": 413,
+          "y": 413
+        }
+      },
+      {
+        "at_utc": "2026-10-21T04:02:28.626438+00:00",
+        "checked_before_request_id": "ctx-03-ballot-focal-neutral-y",
+        "context_id": "ctx-03",
+        "event": "dynamic_token_parity_pass",
+        "history": "neutral",
+        "reward": "focal",
+        "token_counts": {
+          "neutral": 319,
+          "x": 319,
+          "y": 319
+        }
+      },
+      {
+        "at_utc": "2026-10-21T04:02:35.670043+00:00",
+        "checked_before_request_id": "ctx-13-ballot-focal-actual-y",
+        "context_id": "ctx-13",
+        "event": "dynamic_token_parity_pass",
+        "history": "actual",
+        "reward": "focal",
+        "token_counts": {
+          "neutral": 358,
+          "x": 358,
+          "y": 358
+        }
+      },
+      {
+        "at_utc": "2026-10-21T04:02:45.960540+00:00",
+        "checked_before_request_id": "ctx-01-ballot-none-actual-x",
+        "context_id": "ctx-01",
+        "event": "dynamic_token_parity_pass",
+        "history": "actual",
+        "reward": "none",
+        "token_counts": {
+          "neutral": 301,
+          "x": 301,
+          "y": 301
+        }
+      },
+      {
+        "at_utc": "2026-10-21T04:02:52.755537+00:00",
+        "checked_before_request_id": "ctx-01-ballot-shared-actual-y",
+        "context_id": "ctx-01",
+        "event": "dynamic_token_parity_pass",
+        "history": "actual",
+        "reward": "shared",
+        "token_counts": {
+          "neutral": 431,
+          "x": 431,
+          "y": 431
+        }
+      },
+      {
+        "at_utc": "2026-10-21T04:02:57.233848+00:00",
+        "checked_before_request_id": "ctx-05-ballot-focal-neutral-y",
+        "context_id": "ctx-05",
+        "event": "dynamic_token_parity_pass",
+        "history": "neutral",
+        "reward": "focal",
+        "token_counts": {
+          "neutral": 374,
+          "x": 374,
+          "y": 374
+        }
+      },
+      {
+        "at_utc": "2026-10-21T04:03:04.233294+00:00",
+        "checked_before_request_id": "ctx-03-ballot-shared-actual-neutral",
+        "context_id": "ctx-03",
+        "event": "dynamic_token_parity_pass",
+        "history": "actual",
+        "reward": "shared",
+        "token_counts": {
+          "neutral": 446,
+          "x": 446,
+          "y": 446
+        }
+      },
+      {
+        "at_utc": "2026-10-21T04:03:08.655290+00:00",
+        "checked_before_request_id": "ctx-06-ballot-focal-neutral-y",
+        "context_id": "ctx-06",
+        "event": "dynamic_token_parity_pass",
+        "history": "neutral",
+        "reward": "focal",
+        "token_counts": {
+          "neutral": 319,
+          "x": 319,
+          "y": 319
+        }
+      },
+      {
+        "at_utc": "2026-10-21T04:03:11.244237+00:00",
+        "checked_before_request_id": "ctx-12-ballot-none-neutral-neutral",
+        "context_id": "ctx-12",
+        "event": "dynamic_token_parity_pass",
+        "history": "neutral",
+        "reward": "none",
+        "token_counts": {
+          "neutral": 303,
+          "x": 303,
+          "y": 303
+        }
+      },
+      {
+        "at_utc": "2026-10-21T04:03:13.651097+00:00",
+        "checked_before_request_id": "ctx-02-ballot-shared-actual-x",
+        "context_id": "ctx-02",
+        "event": "dynamic_token_parity_pass",
+        "history": "actual",
+        "reward": "shared",
+        "token_counts": {
+          "neutral": 426,
+          "x": 426,
+          "y": 426
+        }
+      },
+      {
+        "at_utc": "2026-10-21T04:03:19.127094+00:00",
+        "checked_before_request_id": "ctx-12-ballot-focal-neutral-y",
+        "context_id": "ctx-12",
+        "event": "dynamic_token_parity_pass",
+        "history": "neutral",
+        "reward": "focal",
+        "token_counts": {
+          "neutral": 319,
+          "x": 319,
+          "y": 319
+        }
+      },
+      {
+        "at_utc": "2026-10-21T04:03:25.812532+00:00",
+        "checked_before_request_id": "ctx-06-ballot-shared-neutral-neutral",
+        "context_id": "ctx-06",
+        "event": "dynamic_token_parity_pass",
+        "history": "neutral",
+        "reward": "shared",
+        "token_counts": {
+          "neutral": 330,
+          "x": 330,
+          "y": 330
+        }
+      },
+      {
+        "at_utc": "2026-10-21T04:03:30.360680+00:00",
+        "checked_before_request_id": "ctx-03-ballot-focal-actual-x",
+        "context_id": "ctx-03",
+        "event": "dynamic_token_parity_pass",
+        "history": "actual",
+        "reward": "focal",
+        "token_counts": {
+          "neutral": 381,
+          "x": 381,
+          "y": 381
+        }
+      },
+      {
+        "at_utc": "2026-10-21T04:03:41.751725+00:00",
+        "checked_before_request_id": "ctx-12-ballot-none-actual-neutral",
+        "context_id": "ctx-12",
+        "event": "dynamic_token_parity_pass",
+        "history": "actual",
+        "reward": "none",
+        "token_counts": {
+          "neutral": 301,
+          "x": 301,
+          "y": 301
+        }
+      },
+      {
+        "at_utc": "2026-10-21T04:03:46.822382+00:00",
+        "checked_before_request_id": "ctx-08-ballot-shared-neutral-x",
+        "context_id": "ctx-08",
+        "event": "dynamic_token_parity_pass",
+        "history": "neutral",
+        "reward": "shared",
+        "token_counts": {
+          "neutral": 446,
+          "x": 446,
+          "y": 446
+        }
+      },
+      {
+        "at_utc": "2026-10-21T04:03:55.444346+00:00",
+        "checked_before_request_id": "ctx-20-ballot-focal-actual-y",
+        "context_id": "ctx-20",
+        "event": "dynamic_token_parity_pass",
+        "history": "actual",
+        "reward": "focal",
+        "token_counts": {
+          "neutral": 435,
+          "x": 435,
+          "y": 435
+        }
+      },
+      {
+        "at_utc": "2026-10-21T04:03:58.940190+00:00",
+        "checked_before_request_id": "ctx-02-ballot-focal-neutral-x",
+        "context_id": "ctx-02",
+        "event": "dynamic_token_parity_pass",
+        "history": "neutral",
+        "reward": "focal",
+        "token_counts": {
+          "neutral": 319,
+          "x": 319,
+          "y": 319
+        }
+      },
+      {
+        "at_utc": "2026-10-21T04:04:07.631730+00:00",
+        "checked_before_request_id": "ctx-02-ballot-none-neutral-neutral",
+        "context_id": "ctx-02",
+        "event": "dynamic_token_parity_pass",
+        "history": "neutral",
+        "reward": "none",
+        "token_counts": {
+          "neutral": 303,
+          "x": 303,
+          "y": 303
+        }
+      },
+      {
+        "at_utc": "2026-10-21T04:04:13.757537+00:00",
+        "checked_before_request_id": "ctx-04-ballot-shared-actual-y",
+        "context_id": "ctx-04",
+        "event": "dynamic_token_parity_pass",
+        "history": "actual",
+        "reward": "shared",
+        "token_counts": {
+          "neutral": 393,
+          "x": 393,
+          "y": 393
+        }
+      },
+      {
+        "at_utc": "2026-10-21T04:04:15.594590+00:00",
+        "checked_before_request_id": "ctx-04-ballot-none-actual-neutral",
+        "context_id": "ctx-04",
+        "event": "dynamic_token_parity_pass",
+        "history": "actual",
+        "reward": "none",
+        "token_counts": {
+          "neutral": 301,
+          "x": 301,
+          "y": 301
+        }
+      },
+      {
+        "at_utc": "2026-10-21T04:04:19.617959+00:00",
+        "checked_before_request_id": "ctx-04-ballot-focal-actual-neutral",
+        "context_id": "ctx-04",
+        "event": "dynamic_token_parity_pass",
+        "history": "actual",
+        "reward": "focal",
+        "token_counts": {
+          "neutral": 378,
+          "x": 378,
+          "y": 378
+        }
+      },
+      {
+        "at_utc": "2026-10-21T04:04:31.449652+00:00",
+        "checked_before_request_id": "ctx-09-ballot-none-actual-neutral",
+        "context_id": "ctx-09",
+        "event": "dynamic_token_parity_pass",
+        "history": "actual",
+        "reward": "none",
+        "token_counts": {
+          "neutral": 354,
+          "x": 354,
+          "y": 354
+        }
+      },
+      {
+        "at_utc": "2026-10-21T04:04:43.225198+00:00",
+        "checked_before_request_id": "ctx-10-ballot-focal-neutral-y",
+        "context_id": "ctx-10",
+        "event": "dynamic_token_parity_pass",
+        "history": "neutral",
+        "reward": "focal",
+        "token_counts": {
+          "neutral": 319,
+          "x": 319,
+          "y": 319
+        }
+      },
+      {
+        "at_utc": "2026-10-21T04:04:54.733952+00:00",
+        "checked_before_request_id": "ctx-15-ballot-shared-neutral-y",
+        "context_id": "ctx-15",
+        "event": "dynamic_token_parity_pass",
+        "history": "neutral",
+        "reward": "shared",
+        "token_counts": {
+          "neutral": 446,
+          "x": 446,
+          "y": 446
+        }
+      },
+      {
+        "at_utc": "2026-10-21T04:04:58.469315+00:00",
+        "checked_before_request_id": "ctx-12-ballot-focal-actual-neutral",
+        "context_id": "ctx-12",
+        "event": "dynamic_token_parity_pass",
+        "history": "actual",
+        "reward": "focal",
+        "token_counts": {
+          "neutral": 394,
+          "x": 394,
+          "y": 394
+        }
+      },
+      {
+        "at_utc": "2026-10-21T04:05:06.130172+00:00",
+        "checked_before_request_id": "ctx-16-ballot-none-neutral-x",
+        "context_id": "ctx-16",
+        "event": "dynamic_token_parity_pass",
+        "history": "neutral",
+        "reward": "none",
+        "token_counts": {
+          "neutral": 303,
+          "x": 303,
+          "y": 303
+        }
+      },
+      {
+        "at_utc": "2026-10-21T04:05:21.488194+00:00",
+        "checked_before_request_id": "ctx-09-ballot-none-neutral-x",
+        "context_id": "ctx-09",
+        "event": "dynamic_token_parity_pass",
+        "history": "neutral",
+        "reward": "none",
+        "token_counts": {
+          "neutral": 303,
+          "x": 303,
+          "y": 303
+        }
+      },
+      {
+        "at_utc": "2026-10-21T04:05:28.045321+00:00",
+        "checked_before_request_id": "ctx-02-ballot-focal-actual-neutral",
+        "context_id": "ctx-02",
+        "event": "dynamic_token_parity_pass",
+        "history": "actual",
+        "reward": "focal",
+        "token_counts": {
+          "neutral": 371,
+          "x": 371,
+          "y": 371
+        }
+      },
+      {
+        "at_utc": "2026-10-21T04:05:30.043863+00:00",
+        "checked_before_request_id": "ctx-17-ballot-focal-actual-y",
+        "context_id": "ctx-17",
+        "event": "dynamic_token_parity_pass",
+        "history": "actual",
+        "reward": "focal",
+        "token_counts": {
+          "neutral": 393,
+          "x": 393,
+          "y": 393
+        }
+      },
+      {
+        "at_utc": "2026-10-21T04:05:38.478422+00:00",
+        "checked_before_request_id": "ctx-12-ballot-shared-actual-neutral",
+        "context_id": "ctx-12",
+        "event": "dynamic_token_parity_pass",
+        "history": "actual",
+        "reward": "shared",
+        "token_counts": {
+          "neutral": 442,
+          "x": 442,
+          "y": 442
+        }
+      },
+      {
+        "at_utc": "2026-10-21T04:05:46.556964+00:00",
+        "checked_before_request_id": "ctx-19-ballot-none-neutral-neutral",
+        "context_id": "ctx-19",
+        "event": "dynamic_token_parity_pass",
+        "history": "neutral",
+        "reward": "none",
+        "token_counts": {
+          "neutral": 303,
+          "x": 303,
+          "y": 303
+        }
+      },
+      {
+        "at_utc": "2026-10-21T04:05:51.197250+00:00",
+        "checked_before_request_id": "ctx-04-ballot-none-neutral-y",
+        "context_id": "ctx-04",
+        "event": "dynamic_token_parity_pass",
+        "history": "neutral",
+        "reward": "none",
+        "token_counts": {
+          "neutral": 303,
+          "x": 303,
+          "y": 303
+        }
+      },
+      {
+        "at_utc": "2026-10-21T04:05:59.632113+00:00",
+        "checked_before_request_id": "ctx-11-ballot-shared-actual-y",
+        "context_id": "ctx-11",
+        "event": "dynamic_token_parity_pass",
+        "history": "actual",
+        "reward": "shared",
+        "token_counts": {
+          "neutral": 446,
+          "x": 446,
+          "y": 446
+        }
+      },
+      {
+        "at_utc": "2026-10-21T04:06:03.229670+00:00",
+        "checked_before_request_id": "ctx-11-ballot-none-actual-neutral",
+        "context_id": "ctx-11",
+        "event": "dynamic_token_parity_pass",
+        "history": "actual",
+        "reward": "none",
+        "token_counts": {
+          "neutral": 335,
+          "x": 335,
+          "y": 335
+        }
+      },
+      {
+        "at_utc": "2026-10-21T04:06:06.720018+00:00",
+        "checked_before_request_id": "ctx-11-ballot-focal-actual-x",
+        "context_id": "ctx-11",
+        "event": "dynamic_token_parity_pass",
+        "history": "actual",
+        "reward": "focal",
+        "token_counts": {
+          "neutral": 411,
+          "x": 411,
+          "y": 411
+        }
+      },
+      {
+        "at_utc": "2026-10-21T04:06:13.727105+00:00",
+        "checked_before_request_id": "ctx-16-ballot-none-actual-neutral",
+        "context_id": "ctx-16",
+        "event": "dynamic_token_parity_pass",
+        "history": "actual",
+        "reward": "none",
+        "token_counts": {
+          "neutral": 301,
+          "x": 301,
+          "y": 301
+        }
+      },
+      {
+        "at_utc": "2026-10-21T04:06:20.673232+00:00",
+        "checked_before_request_id": "ctx-05-ballot-shared-actual-x",
+        "context_id": "ctx-05",
+        "event": "dynamic_token_parity_pass",
+        "history": "actual",
+        "reward": "shared",
+        "token_counts": {
+          "neutral": 440,
+          "x": 440,
+          "y": 440
+        }
+      },
+      {
+        "at_utc": "2026-10-21T04:06:25.233159+00:00",
+        "checked_before_request_id": "ctx-05-ballot-focal-actual-x",
+        "context_id": "ctx-05",
+        "event": "dynamic_token_parity_pass",
+        "history": "actual",
+        "reward": "focal",
+        "token_counts": {
+          "neutral": 372,
+          "x": 372,
+          "y": 372
+        }
+      },
+      {
+        "at_utc": "2026-10-21T04:06:33.262856+00:00",
+        "checked_before_request_id": "ctx-01-ballot-focal-actual-y",
+        "context_id": "ctx-01",
+        "event": "dynamic_token_parity_pass",
+        "history": "actual",
+        "reward": "focal",
+        "token_counts": {
+          "neutral": 365,
+          "x": 365,
+          "y": 365
+        }
+      },
+      {
+        "at_utc": "2026-10-21T04:06:41.431668+00:00",
+        "checked_before_request_id": "ctx-06-ballot-none-actual-y",
+        "context_id": "ctx-06",
+        "event": "dynamic_token_parity_pass",
+        "history": "actual",
+        "reward": "none",
+        "token_counts": {
+          "neutral": 346,
+          "x": 346,
+          "y": 346
+        }
+      },
+      {
+        "at_utc": "2026-10-21T04:06:50.738997+00:00",
+        "checked_before_request_id": "ctx-05-ballot-none-actual-neutral",
+        "context_id": "ctx-05",
+        "event": "dynamic_token_parity_pass",
+        "history": "actual",
+        "reward": "none",
+        "token_counts": {
+          "neutral": 301,
+          "x": 301,
+          "y": 301
+        }
+      },
+      {
+        "at_utc": "2026-10-21T04:07:04.761689+00:00",
+        "checked_before_request_id": "ctx-14-ballot-focal-neutral-x",
+        "context_id": "ctx-14",
+        "event": "dynamic_token_parity_pass",
+        "history": "neutral",
+        "reward": "focal",
+        "token_counts": {
+          "neutral": 367,
+          "x": 367,
+          "y": 367
+        }
+      },
+      {
+        "at_utc": "2026-10-21T04:07:15.206469+00:00",
+        "checked_before_request_id": "ctx-19-ballot-focal-actual-neutral",
+        "context_id": "ctx-19",
+        "event": "dynamic_token_parity_pass",
+        "history": "actual",
+        "reward": "focal",
+        "token_counts": {
+          "neutral": 376,
+          "x": 376,
+          "y": 376
+        }
+      },
+      {
+        "at_utc": "2026-10-21T04:07:22.837430+00:00",
+        "checked_before_request_id": "ctx-09-ballot-shared-actual-neutral",
+        "context_id": "ctx-09",
+        "event": "dynamic_token_parity_pass",
+        "history": "actual",
+        "reward": "shared",
+        "token_counts": {
+          "neutral": 446,
+          "x": 446,
+          "y": 446
+        }
+      },
+      {
+        "at_utc": "2026-10-21T04:07:33.131253+00:00",
+        "checked_before_request_id": "ctx-09-ballot-focal-actual-x",
+        "context_id": "ctx-09",
+        "event": "dynamic_token_parity_pass",
+        "history": "actual",
+        "reward": "focal",
+        "token_counts": {
+          "neutral": 383,
+          "x": 383,
+          "y": 383
+        }
+      },
+      {
+        "at_utc": "2026-10-21T04:07:41.397594+00:00",
+        "checked_before_request_id": "ctx-17-ballot-none-actual-x",
+        "context_id": "ctx-17",
+        "event": "dynamic_token_parity_pass",
+        "history": "actual",
+        "reward": "none",
+        "token_counts": {
+          "neutral": 304,
+          "x": 304,
+          "y": 304
+        }
+      },
+      {
+        "at_utc": "2026-10-21T04:07:48.552290+00:00",
+        "checked_before_request_id": "ctx-13-ballot-none-neutral-y",
+        "context_id": "ctx-13",
+        "event": "dynamic_token_parity_pass",
+        "history": "neutral",
+        "reward": "none",
+        "token_counts": {
+          "neutral": 303,
+          "x": 303,
+          "y": 303
+        }
+      },
+      {
+        "at_utc": "2026-10-21T04:07:53.258448+00:00",
+        "checked_before_request_id": "ctx-20-ballot-none-neutral-x",
+        "context_id": "ctx-20",
+        "event": "dynamic_token_parity_pass",
+        "history": "neutral",
+        "reward": "none",
+        "token_counts": {
+          "neutral": 303,
+          "x": 303,
+          "y": 303
+        }
+      },
+      {
+        "at_utc": "2026-10-21T04:08:06.111956+00:00",
+        "checked_before_request_id": "ctx-18-ballot-focal-actual-x",
+        "context_id": "ctx-18",
+        "event": "dynamic_token_parity_pass",
+        "history": "actual",
+        "reward": "focal",
+        "token_counts": {
+          "neutral": 401,
+          "x": 401,
+          "y": 401
+        }
+      },
+      {
+        "at_utc": "2026-10-21T04:08:11.154980+00:00",
+        "checked_before_request_id": "ctx-07-ballot-focal-neutral-neutral",
+        "context_id": "ctx-07",
+        "event": "dynamic_token_parity_pass",
+        "history": "neutral",
+        "reward": "focal",
+        "token_counts": {
+          "neutral": 319,
+          "x": 319,
+          "y": 319
+        }
+      },
+      {
+        "at_utc": "2026-10-21T04:08:23.602118+00:00",
+        "checked_before_request_id": "ctx-18-ballot-none-actual-neutral",
+        "context_id": "ctx-18",
+        "event": "dynamic_token_parity_pass",
+        "history": "actual",
+        "reward": "none",
+        "token_counts": {
+          "neutral": 301,
+          "x": 301,
+          "y": 301
+        }
+      },
+      {
+        "at_utc": "2026-10-21T04:08:28.168973+00:00",
+        "checked_before_request_id": "ctx-17-ballot-focal-neutral-y",
+        "context_id": "ctx-17",
+        "event": "dynamic_token_parity_pass",
+        "history": "neutral",
+        "reward": "focal",
+        "token_counts": {
+          "neutral": 375,
+          "x": 375,
+          "y": 375
+        }
+      },
+      {
+        "at_utc": "2026-10-21T04:08:44.521394+00:00",
+        "checked_before_request_id": "ctx-08-ballot-none-actual-x",
+        "context_id": "ctx-08",
+        "event": "dynamic_token_parity_pass",
+        "history": "actual",
+        "reward": "none",
+        "token_counts": {
+          "neutral": 301,
+          "x": 301,
+          "y": 301
+        }
+      },
+      {
+        "at_utc": "2026-10-21T04:08:46.787308+00:00",
+        "checked_before_request_id": "ctx-08-ballot-shared-actual-neutral",
+        "context_id": "ctx-08",
+        "event": "dynamic_token_parity_pass",
+        "history": "actual",
+        "reward": "shared",
+        "token_counts": {
+          "neutral": 402,
+          "x": 402,
+          "y": 402
+        }
+      },
+      {
+        "at_utc": "2026-10-21T04:08:53.115974+00:00",
+        "checked_before_request_id": "ctx-08-ballot-focal-actual-x",
+        "context_id": "ctx-08",
+        "event": "dynamic_token_parity_pass",
+        "history": "actual",
+        "reward": "focal",
+        "token_counts": {
+          "neutral": 359,
+          "x": 359,
+          "y": 359
+        }
+      },
+      {
+        "at_utc": "2026-10-21T04:09:08.581582+00:00",
+        "checked_before_request_id": "ctx-09-ballot-shared-neutral-x",
+        "context_id": "ctx-09",
+        "event": "dynamic_token_parity_pass",
+        "history": "neutral",
+        "reward": "shared",
+        "token_counts": {
+          "neutral": 417,
+          "x": 417,
+          "y": 417
+        }
+      },
+      {
+        "at_utc": "2026-10-21T04:09:11.768470+00:00",
+        "checked_before_request_id": "ctx-19-ballot-none-actual-x",
+        "context_id": "ctx-19",
+        "event": "dynamic_token_parity_pass",
+        "history": "actual",
+        "reward": "none",
+        "token_counts": {
+          "neutral": 301,
+          "x": 301,
+          "y": 301
+        }
+      },
+      {
+        "at_utc": "2026-10-21T04:09:19.774768+00:00",
+        "checked_before_request_id": "ctx-14-ballot-shared-actual-y",
+        "context_id": "ctx-14",
+        "event": "dynamic_token_parity_pass",
+        "history": "actual",
+        "reward": "shared",
+        "token_counts": {
+          "neutral": 394,
+          "x": 394,
+          "y": 394
+        }
+      },
+      {
+        "at_utc": "2026-10-21T04:09:32.348888+00:00",
+        "checked_before_request_id": "ctx-10-ballot-shared-actual-x",
+        "context_id": "ctx-10",
+        "event": "dynamic_token_parity_pass",
+        "history": "actual",
+        "reward": "shared",
+        "token_counts": {
+          "neutral": 419,
+          "x": 419,
+          "y": 419
+        }
+      },
+      {
+        "at_utc": "2026-10-21T04:09:33.469617+00:00",
+        "checked_before_request_id": "ctx-10-ballot-none-actual-x",
+        "context_id": "ctx-10",
+        "event": "dynamic_token_parity_pass",
+        "history": "actual",
+        "reward": "none",
+        "token_counts": {
+          "neutral": 335,
+          "x": 335,
+          "y": 335
+        }
+      },
+      {
+        "at_utc": "2026-10-21T04:09:40.346760+00:00",
+        "checked_before_request_id": "ctx-10-ballot-focal-actual-x",
+        "context_id": "ctx-10",
+        "event": "dynamic_token_parity_pass",
+        "history": "actual",
+        "reward": "focal",
+        "token_counts": {
+          "neutral": 392,
+          "x": 392,
+          "y": 392
+        }
+      },
+      {
+        "at_utc": "2026-10-21T04:09:51.034341+00:00",
+        "checked_before_request_id": "ctx-13-ballot-focal-neutral-y",
+        "context_id": "ctx-13",
+        "event": "dynamic_token_parity_pass",
+        "history": "neutral",
+        "reward": "focal",
+        "token_counts": {
+          "neutral": 381,
+          "x": 381,
+          "y": 381
+        }
+      },
+      {
+        "at_utc": "2026-10-21T04:09:57.853184+00:00",
+        "checked_before_request_id": "ctx-07-ballot-shared-actual-x",
+        "context_id": "ctx-07",
+        "event": "dynamic_token_parity_pass",
+        "history": "actual",
+        "reward": "shared",
+        "token_counts": {
+          "neutral": 405,
+          "x": 405,
+          "y": 405
+        }
+      },
+      {
+        "at_utc": "2026-10-21T04:10:09.283758+00:00",
+        "checked_before_request_id": "ctx-07-ballot-none-actual-y",
+        "context_id": "ctx-07",
+        "event": "dynamic_token_parity_pass",
+        "history": "actual",
+        "reward": "none",
+        "token_counts": {
+          "neutral": 301,
+          "x": 301,
+          "y": 301
+        }
+      },
+      {
+        "at_utc": "2026-10-21T04:10:12.523182+00:00",
+        "checked_before_request_id": "ctx-07-ballot-focal-actual-y",
+        "context_id": "ctx-07",
+        "event": "dynamic_token_parity_pass",
+        "history": "actual",
+        "reward": "focal",
+        "token_counts": {
+          "neutral": 381,
+          "x": 381,
+          "y": 381
+        }
+      },
+      {
+        "at_utc": "2026-10-21T04:10:27.763335+00:00",
+        "checked_before_request_id": "ctx-01-ballot-none-neutral-neutral",
+        "context_id": "ctx-01",
+        "event": "dynamic_token_parity_pass",
+        "history": "neutral",
+        "reward": "none",
+        "token_counts": {
+          "neutral": 303,
+          "x": 303,
+          "y": 303
+        }
+      },
+      {
+        "at_utc": "2026-10-21T04:10:33.820065+00:00",
+        "checked_before_request_id": "ctx-03-ballot-none-actual-y",
+        "context_id": "ctx-03",
+        "event": "dynamic_token_parity_pass",
+        "history": "actual",
+        "reward": "none",
+        "token_counts": {
+          "neutral": 334,
+          "x": 334,
+          "y": 334
+        }
+      },
+      {
+        "at_utc": "2026-10-21T04:10:49.631918+00:00",
+        "checked_before_request_id": "ctx-17-ballot-shared-actual-neutral",
+        "context_id": "ctx-17",
+        "event": "dynamic_token_parity_pass",
+        "history": "actual",
+        "reward": "shared",
+        "token_counts": {
+          "neutral": 447,
+          "x": 447,
+          "y": 447
+        }
+      },
+      {
+        "at_utc": "2026-10-21T04:10:56.108536+00:00",
+        "checked_before_request_id": "ctx-07-ballot-none-neutral-y",
+        "context_id": "ctx-07",
+        "event": "dynamic_token_parity_pass",
+        "history": "neutral",
+        "reward": "none",
+        "token_counts": {
+          "neutral": 303,
+          "x": 303,
+          "y": 303
+        }
+      },
+      {
+        "at_utc": "2026-10-21T04:11:03.309775+00:00",
+        "checked_before_request_id": "ctx-19-ballot-shared-actual-x",
+        "context_id": "ctx-19",
+        "event": "dynamic_token_parity_pass",
+        "history": "actual",
+        "reward": "shared",
+        "token_counts": {
+          "neutral": 446,
+          "x": 446,
+          "y": 446
+        }
+      },
+      {
+        "at_utc": "2026-10-21T04:11:12.181430+00:00",
+        "checked_before_request_id": "ctx-15-ballot-focal-neutral-neutral",
+        "context_id": "ctx-15",
+        "event": "dynamic_token_parity_pass",
+        "history": "neutral",
+        "reward": "focal",
+        "token_counts": {
+          "neutral": 319,
+          "x": 319,
+          "y": 319
+        }
+      },
+      {
+        "at_utc": "2026-10-21T04:11:23.804344+00:00",
+        "checked_before_request_id": "ctx-07-ballot-shared-neutral-neutral",
+        "context_id": "ctx-07",
+        "event": "dynamic_token_parity_pass",
+        "history": "neutral",
+        "reward": "shared",
+        "token_counts": {
+          "neutral": 330,
+          "x": 330,
+          "y": 330
+        }
+      },
+      {
+        "at_utc": "2026-10-21T04:11:31.804758+00:00",
+        "checked_before_request_id": "ctx-14-ballot-none-actual-y",
+        "context_id": "ctx-14",
+        "event": "dynamic_token_parity_pass",
+        "history": "actual",
+        "reward": "none",
+        "token_counts": {
+          "neutral": 339,
+          "x": 339,
+          "y": 339
+        }
+      },
+      {
+        "at_utc": "2026-10-21T04:11:38.515046+00:00",
+        "checked_before_request_id": "ctx-09-ballot-focal-neutral-x",
+        "context_id": "ctx-09",
+        "event": "dynamic_token_parity_pass",
+        "history": "neutral",
+        "reward": "focal",
+        "token_counts": {
+          "neutral": 380,
+          "x": 380,
+          "y": 380
+        }
+      }
+    ]
+  },
+  "estimated_cost_from_terminal_usage_usd": "0.0944016",
+  "exact_prompt_repeats": {
+    "assigned": 24,
+    "rows": [
+      {
+        "both_response_contents_present": true,
+        "original_request_id": "ctx-01-ballot-shared-actual-x",
+        "request_id": "ctx-01-repeat-1",
+        "same_prompt_bytes": true,
+        "same_raw_response_bytes": false
+      },
+      {
+        "both_response_contents_present": true,
+        "original_request_id": "ctx-01-ballot-shared-actual-x",
+        "request_id": "ctx-01-repeat-2",
+        "same_prompt_bytes": true,
+        "same_raw_response_bytes": false
+      },
+      {
+        "both_response_contents_present": true,
+        "original_request_id": "ctx-06-ballot-shared-actual-x",
+        "request_id": "ctx-06-repeat-1",
+        "same_prompt_bytes": true,
+        "same_raw_response_bytes": false
+      },
+      {
+        "both_response_contents_present": true,
+        "original_request_id": "ctx-06-ballot-shared-actual-x",
+        "request_id": "ctx-06-repeat-2",
+        "same_prompt_bytes": true,
+        "same_raw_response_bytes": false
+      },
+      {
+        "both_response_contents_present": true,
+        "original_request_id": "ctx-07-ballot-shared-actual-x",
+        "request_id": "ctx-07-repeat-1",
+        "same_prompt_bytes": true,
+        "same_raw_response_bytes": false
+      },
+      {
+        "both_response_contents_present": true,
+        "original_request_id": "ctx-07-ballot-shared-actual-x",
+        "request_id": "ctx-07-repeat-2",
+        "same_prompt_bytes": true,
+        "same_raw_response_bytes": false
+      },
+      {
+        "both_response_contents_present": true,
+        "original_request_id": "ctx-08-ballot-shared-actual-x",
+        "request_id": "ctx-08-repeat-1",
+        "same_prompt_bytes": true,
+        "same_raw_response_bytes": false
+      },
+      {
+        "both_response_contents_present": true,
+        "original_request_id": "ctx-08-ballot-shared-actual-x",
+        "request_id": "ctx-08-repeat-2",
+        "same_prompt_bytes": true,
+        "same_raw_response_bytes": false
+      },
+      {
+        "both_response_contents_present": true,
+        "original_request_id": "ctx-09-ballot-shared-actual-x",
+        "request_id": "ctx-09-repeat-1",
+        "same_prompt_bytes": true,
+        "same_raw_response_bytes": false
+      },
+      {
+        "both_response_contents_present": true,
+        "original_request_id": "ctx-09-ballot-shared-actual-x",
+        "request_id": "ctx-09-repeat-2",
+        "same_prompt_bytes": true,
+        "same_raw_response_bytes": false
+      },
+      {
+        "both_response_contents_present": true,
+        "original_request_id": "ctx-13-ballot-shared-actual-x",
+        "request_id": "ctx-13-repeat-1",
+        "same_prompt_bytes": true,
+        "same_raw_response_bytes": false
+      },
+      {
+        "both_response_contents_present": true,
+        "original_request_id": "ctx-13-ballot-shared-actual-x",
+        "request_id": "ctx-13-repeat-2",
+        "same_prompt_bytes": true,
+        "same_raw_response_bytes": false
+      },
+      {
+        "both_response_contents_present": true,
+        "original_request_id": "ctx-14-ballot-shared-actual-x",
+        "request_id": "ctx-14-repeat-1",
+        "same_prompt_bytes": true,
+        "same_raw_response_bytes": false
+      },
+      {
+        "both_response_contents_present": true,
+        "original_request_id": "ctx-14-ballot-shared-actual-x",
+        "request_id": "ctx-14-repeat-2",
+        "same_prompt_bytes": true,
+        "same_raw_response_bytes": false
+      },
+      {
+        "both_response_contents_present": true,
+        "original_request_id": "ctx-15-ballot-shared-actual-x",
+        "request_id": "ctx-15-repeat-1",
+        "same_prompt_bytes": true,
+        "same_raw_response_bytes": false
+      },
+      {
+        "both_response_contents_present": true,
+        "original_request_id": "ctx-15-ballot-shared-actual-x",
+        "request_id": "ctx-15-repeat-2",
+        "same_prompt_bytes": true,
+        "same_raw_response_bytes": false
+      },
+      {
+        "both_response_contents_present": true,
+        "original_request_id": "ctx-16-ballot-shared-actual-x",
+        "request_id": "ctx-16-repeat-1",
+        "same_prompt_bytes": true,
+        "same_raw_response_bytes": false
+      },
+      {
+        "both_response_contents_present": true,
+        "original_request_id": "ctx-16-ballot-shared-actual-x",
+        "request_id": "ctx-16-repeat-2",
+        "same_prompt_bytes": true,
+        "same_raw_response_bytes": false
+      },
+      {
+        "both_response_contents_present": true,
+        "original_request_id": "ctx-17-ballot-shared-actual-x",
+        "request_id": "ctx-17-repeat-1",
+        "same_prompt_bytes": true,
+        "same_raw_response_bytes": false
+      },
+      {
+        "both_response_contents_present": true,
+        "original_request_id": "ctx-17-ballot-shared-actual-x",
+        "request_id": "ctx-17-repeat-2",
+        "same_prompt_bytes": true,
+        "same_raw_response_bytes": false
+      },
+      {
+        "both_response_contents_present": true,
+        "original_request_id": "ctx-19-ballot-shared-actual-x",
+        "request_id": "ctx-19-repeat-1",
+        "same_prompt_bytes": true,
+        "same_raw_response_bytes": false
+      },
+      {
+        "both_response_contents_present": true,
+        "original_request_id": "ctx-19-ballot-shared-actual-x",
+        "request_id": "ctx-19-repeat-2",
+        "same_prompt_bytes": true,
+        "same_raw_response_bytes": false
+      },
+      {
+        "both_response_contents_present": true,
+        "original_request_id": "ctx-20-ballot-shared-actual-x",
+        "request_id": "ctx-20-repeat-1",
+        "same_prompt_bytes": true,
+        "same_raw_response_bytes": false
+      },
+      {
+        "both_response_contents_present": true,
+        "original_request_id": "ctx-20-ballot-shared-actual-x",
+        "request_id": "ctx-20-repeat-2",
+        "same_prompt_bytes": true,
+        "same_raw_response_bytes": false
+      }
+    ]
+  },
+  "experiment_id": "deepseek-recipient-mechanism-v1",
+  "physical_attempts": 804,
+  "progress_ledger_sha256": "b34006f31ed6672fa1790fd7e4aadb45c9fb38a6fca9189a0f575441adc51bab",
+  "request_ledger_sha256": "64d1c1e9498e093395a77dfda782e4200461945b391640313734664599388820",
+  "schedule_sha256": "081afc385cc1f1d08b0d96ef6aa1eb82cc9f39b3bcb35a7fbc53c80c840b7c9b",
+  "schema_version": "deepseek-recipient-mechanism-analysis-v1",
+  "scoring_note": "No raw generated message text, treatment labels, references, or repairs are injected into requests; invalid outputs remain invalid.",
+  "target_responses": {
+    "assessable_paired_blocks": 120,
+    "assigned_paired_blocks": 120,
+    "paired_blocks": {
+      "ctx-01|focal|actual": {
+        "assessable": true,
+        "context_id": "ctx-01",
+        "history": "actual",
+        "paired_x_minus_y_target_response": 1,
+        "reward": "focal",
+        "target_regret": 8,
+        "x_and_y_focal_base_score_equal": true,
+        "x_and_y_public_welfare_equal": true,
+        "x_ballot_matches_x_allocation": true,
+        "x_valid": true,
+        "y_ballot_matches_x_allocation": false,
+        "y_valid": true
+      },
+      "ctx-01|focal|neutral": {
+        "assessable": true,
+        "context_id": "ctx-01",
+        "history": "neutral",
+        "paired_x_minus_y_target_response": 1,
+        "reward": "focal",
+        "target_regret": 8,
+        "x_and_y_focal_base_score_equal": true,
+        "x_and_y_public_welfare_equal": true,
+        "x_ballot_matches_x_allocation": true,
+        "x_valid": true,
+        "y_ballot_matches_x_allocation": false,
+        "y_valid": true
+      },
+      "ctx-01|none|actual": {
+        "assessable": true,
+        "context_id": "ctx-01",
+        "history": "actual",
+        "paired_x_minus_y_target_response": 0,
+        "reward": "none",
+        "target_regret": 8,
+        "x_and_y_focal_base_score_equal": true,
+        "x_and_y_public_welfare_equal": true,
+        "x_ballot_matches_x_allocation": false,
+        "x_valid": true,
+        "y_ballot_matches_x_allocation": false,
+        "y_valid": true
+      },
+      "ctx-01|none|neutral": {
+        "assessable": true,
+        "context_id": "ctx-01",
+        "history": "neutral",
+        "paired_x_minus_y_target_response": 1,
+        "reward": "none",
+        "target_regret": 8,
+        "x_and_y_focal_base_score_equal": true,
+        "x_and_y_public_welfare_equal": true,
+        "x_ballot_matches_x_allocation": true,
+        "x_valid": true,
+        "y_ballot_matches_x_allocation": false,
+        "y_valid": true
+      },
+      "ctx-01|shared|actual": {
+        "assessable": true,
+        "context_id": "ctx-01",
+        "history": "actual",
+        "paired_x_minus_y_target_response": 0,
+        "reward": "shared",
+        "target_regret": 8,
+        "x_and_y_focal_base_score_equal": true,
+        "x_and_y_public_welfare_equal": true,
+        "x_ballot_matches_x_allocation": false,
+        "x_valid": true,
+        "y_ballot_matches_x_allocation": false,
+        "y_valid": true
+      },
+      "ctx-01|shared|neutral": {
+        "assessable": true,
+        "context_id": "ctx-01",
+        "history": "neutral",
+        "paired_x_minus_y_target_response": 0,
+        "reward": "shared",
+        "target_regret": 8,
+        "x_and_y_focal_base_score_equal": true,
+        "x_and_y_public_welfare_equal": true,
+        "x_ballot_matches_x_allocation": true,
+        "x_valid": true,
+        "y_ballot_matches_x_allocation": true,
+        "y_valid": true
+      },
+      "ctx-02|focal|actual": {
+        "assessable": true,
+        "context_id": "ctx-02",
+        "history": "actual",
+        "paired_x_minus_y_target_response": 0,
+        "reward": "focal",
+        "target_regret": 9,
+        "x_and_y_focal_base_score_equal": true,
+        "x_and_y_public_welfare_equal": true,
+        "x_ballot_matches_x_allocation": false,
+        "x_valid": true,
+        "y_ballot_matches_x_allocation": false,
+        "y_valid": true
+      },
+      "ctx-02|focal|neutral": {
+        "assessable": true,
+        "context_id": "ctx-02",
+        "history": "neutral",
+        "paired_x_minus_y_target_response": 1,
+        "reward": "focal",
+        "target_regret": 9,
+        "x_and_y_focal_base_score_equal": true,
+        "x_and_y_public_welfare_equal": true,
+        "x_ballot_matches_x_allocation": true,
+        "x_valid": true,
+        "y_ballot_matches_x_allocation": false,
+        "y_valid": true
+      },
+      "ctx-02|none|actual": {
+        "assessable": true,
+        "context_id": "ctx-02",
+        "history": "actual",
+        "paired_x_minus_y_target_response": 0,
+        "reward": "none",
+        "target_regret": 9,
+        "x_and_y_focal_base_score_equal": true,
+        "x_and_y_public_welfare_equal": true,
+        "x_ballot_matches_x_allocation": false,
+        "x_valid": true,
+        "y_ballot_matches_x_allocation": false,
+        "y_valid": true
+      },
+      "ctx-02|none|neutral": {
+        "assessable": true,
+        "context_id": "ctx-02",
+        "history": "neutral",
+        "paired_x_minus_y_target_response": 1,
+        "reward": "none",
+        "target_regret": 9,
+        "x_and_y_focal_base_score_equal": true,
+        "x_and_y_public_welfare_equal": true,
+        "x_ballot_matches_x_allocation": true,
+        "x_valid": true,
+        "y_ballot_matches_x_allocation": false,
+        "y_valid": true
+      },
+      "ctx-02|shared|actual": {
+        "assessable": true,
+        "context_id": "ctx-02",
+        "history": "actual",
+        "paired_x_minus_y_target_response": 0,
+        "reward": "shared",
+        "target_regret": 9,
+        "x_and_y_focal_base_score_equal": true,
+        "x_and_y_public_welfare_equal": true,
+        "x_ballot_matches_x_allocation": false,
+        "x_valid": true,
+        "y_ballot_matches_x_allocation": false,
+        "y_valid": true
+      },
+      "ctx-02|shared|neutral": {
+        "assessable": true,
+        "context_id": "ctx-02",
+        "history": "neutral",
+        "paired_x_minus_y_target_response": 0,
+        "reward": "shared",
+        "target_regret": 9,
+        "x_and_y_focal_base_score_equal": true,
+        "x_and_y_public_welfare_equal": true,
+        "x_ballot_matches_x_allocation": false,
+        "x_valid": true,
+        "y_ballot_matches_x_allocation": false,
+        "y_valid": true
+      },
+      "ctx-03|focal|actual": {
+        "assessable": true,
+        "context_id": "ctx-03",
+        "history": "actual",
+        "paired_x_minus_y_target_response": 0,
+        "reward": "focal",
+        "target_regret": 10,
+        "x_and_y_focal_base_score_equal": true,
+        "x_and_y_public_welfare_equal": true,
+        "x_ballot_matches_x_allocation": false,
+        "x_valid": true,
+        "y_ballot_matches_x_allocation": false,
+        "y_valid": true
+      },
+      "ctx-03|focal|neutral": {
+        "assessable": true,
+        "context_id": "ctx-03",
+        "history": "neutral",
+        "paired_x_minus_y_target_response": 1,
+        "reward": "focal",
+        "target_regret": 10,
+        "x_and_y_focal_base_score_equal": true,
+        "x_and_y_public_welfare_equal": true,
+        "x_ballot_matches_x_allocation": true,
+        "x_valid": true,
+        "y_ballot_matches_x_allocation": false,
+        "y_valid": true
+      },
+      "ctx-03|none|actual": {
+        "assessable": true,
+        "context_id": "ctx-03",
+        "history": "actual",
+        "paired_x_minus_y_target_response": 0,
+        "reward": "none",
+        "target_regret": 10,
+        "x_and_y_focal_base_score_equal": true,
+        "x_and_y_public_welfare_equal": true,
+        "x_ballot_matches_x_allocation": false,
+        "x_valid": true,
+        "y_ballot_matches_x_allocation": false,
+        "y_valid": true
+      },
+      "ctx-03|none|neutral": {
+        "assessable": true,
+        "context_id": "ctx-03",
+        "history": "neutral",
+        "paired_x_minus_y_target_response": 1,
+        "reward": "none",
+        "target_regret": 10,
+        "x_and_y_focal_base_score_equal": true,
+        "x_and_y_public_welfare_equal": true,
+        "x_ballot_matches_x_allocation": true,
+        "x_valid": true,
+        "y_ballot_matches_x_allocation": false,
+        "y_valid": true
+      },
+      "ctx-03|shared|actual": {
+        "assessable": true,
+        "context_id": "ctx-03",
+        "history": "actual",
+        "paired_x_minus_y_target_response": 1,
+        "reward": "shared",
+        "target_regret": 10,
+        "x_and_y_focal_base_score_equal": true,
+        "x_and_y_public_welfare_equal": true,
+        "x_ballot_matches_x_allocation": true,
+        "x_valid": true,
+        "y_ballot_matches_x_allocation": false,
+        "y_valid": true
+      },
+      "ctx-03|shared|neutral": {
+        "assessable": true,
+        "context_id": "ctx-03",
+        "history": "neutral",
+        "paired_x_minus_y_target_response": 0,
+        "reward": "shared",
+        "target_regret": 10,
+        "x_and_y_focal_base_score_equal": true,
+        "x_and_y_public_welfare_equal": true,
+        "x_ballot_matches_x_allocation": true,
+        "x_valid": true,
+        "y_ballot_matches_x_allocation": true,
+        "y_valid": true
+      },
+      "ctx-04|focal|actual": {
+        "assessable": true,
+        "context_id": "ctx-04",
+        "history": "actual",
+        "paired_x_minus_y_target_response": 0,
+        "reward": "focal",
+        "target_regret": 5,
+        "x_and_y_focal_base_score_equal": true,
+        "x_and_y_public_welfare_equal": true,
+        "x_ballot_matches_x_allocation": false,
+        "x_valid": true,
+        "y_ballot_matches_x_allocation": false,
+        "y_valid": true
+      },
+      "ctx-04|focal|neutral": {
+        "assessable": true,
+        "context_id": "ctx-04",
+        "history": "neutral",
+        "paired_x_minus_y_target_response": 1,
+        "reward": "focal",
+        "target_regret": 5,
+        "x_and_y_focal_base_score_equal": true,
+        "x_and_y_public_welfare_equal": true,
+        "x_ballot_matches_x_allocation": true,
+        "x_valid": true,
+        "y_ballot_matches_x_allocation": false,
+        "y_valid": true
+      },
+      "ctx-04|none|actual": {
+        "assessable": true,
+        "context_id": "ctx-04",
+        "history": "actual",
+        "paired_x_minus_y_target_response": 0,
+        "reward": "none",
+        "target_regret": 5,
+        "x_and_y_focal_base_score_equal": true,
+        "x_and_y_public_welfare_equal": true,
+        "x_ballot_matches_x_allocation": false,
+        "x_valid": true,
+        "y_ballot_matches_x_allocation": false,
+        "y_valid": true
+      },
+      "ctx-04|none|neutral": {
+        "assessable": true,
+        "context_id": "ctx-04",
+        "history": "neutral",
+        "paired_x_minus_y_target_response": 1,
+        "reward": "none",
+        "target_regret": 5,
+        "x_and_y_focal_base_score_equal": true,
+        "x_and_y_public_welfare_equal": true,
+        "x_ballot_matches_x_allocation": true,
+        "x_valid": true,
+        "y_ballot_matches_x_allocation": false,
+        "y_valid": true
+      },
+      "ctx-04|shared|actual": {
+        "assessable": true,
+        "context_id": "ctx-04",
+        "history": "actual",
+        "paired_x_minus_y_target_response": 1,
+        "reward": "shared",
+        "target_regret": 5,
+        "x_and_y_focal_base_score_equal": true,
+        "x_and_y_public_welfare_equal": true,
+        "x_ballot_matches_x_allocation": true,
+        "x_valid": true,
+        "y_ballot_matches_x_allocation": false,
+        "y_valid": true
+      },
+      "ctx-04|shared|neutral": {
+        "assessable": true,
+        "context_id": "ctx-04",
+        "history": "neutral",
+        "paired_x_minus_y_target_response": 1,
+        "reward": "shared",
+        "target_regret": 5,
+        "x_and_y_focal_base_score_equal": true,
+        "x_and_y_public_welfare_equal": true,
+        "x_ballot_matches_x_allocation": true,
+        "x_valid": true,
+        "y_ballot_matches_x_allocation": false,
+        "y_valid": true
+      },
+      "ctx-05|focal|actual": {
+        "assessable": true,
+        "context_id": "ctx-05",
+        "history": "actual",
+        "paired_x_minus_y_target_response": 0,
+        "reward": "focal",
+        "target_regret": 14,
+        "x_and_y_focal_base_score_equal": true,
+        "x_and_y_public_welfare_equal": true,
+        "x_ballot_matches_x_allocation": false,
+        "x_valid": true,
+        "y_ballot_matches_x_allocation": false,
+        "y_valid": true
+      },
+      "ctx-05|focal|neutral": {
+        "assessable": true,
+        "context_id": "ctx-05",
+        "history": "neutral",
+        "paired_x_minus_y_target_response": 0,
+        "reward": "focal",
+        "target_regret": 14,
+        "x_and_y_focal_base_score_equal": true,
+        "x_and_y_public_welfare_equal": true,
+        "x_ballot_matches_x_allocation": false,
+        "x_valid": true,
+        "y_ballot_matches_x_allocation": false,
+        "y_valid": true
+      },
+      "ctx-05|none|actual": {
+        "assessable": true,
+        "context_id": "ctx-05",
+        "history": "actual",
+        "paired_x_minus_y_target_response": 0,
+        "reward": "none",
+        "target_regret": 14,
+        "x_and_y_focal_base_score_equal": true,
+        "x_and_y_public_welfare_equal": true,
+        "x_ballot_matches_x_allocation": false,
+        "x_valid": true,
+        "y_ballot_matches_x_allocation": false,
+        "y_valid": true
+      },
+      "ctx-05|none|neutral": {
+        "assessable": true,
+        "context_id": "ctx-05",
+        "history": "neutral",
+        "paired_x_minus_y_target_response": 1,
+        "reward": "none",
+        "target_regret": 14,
+        "x_and_y_focal_base_score_equal": true,
+        "x_and_y_public_welfare_equal": true,
+        "x_ballot_matches_x_allocation": true,
+        "x_valid": true,
+        "y_ballot_matches_x_allocation": false,
+        "y_valid": true
+      },
+      "ctx-05|shared|actual": {
+        "assessable": true,
+        "context_id": "ctx-05",
+        "history": "actual",
+        "paired_x_minus_y_target_response": 0,
+        "reward": "shared",
+        "target_regret": 14,
+        "x_and_y_focal_base_score_equal": true,
+        "x_and_y_public_welfare_equal": true,
+        "x_ballot_matches_x_allocation": false,
+        "x_valid": true,
+        "y_ballot_matches_x_allocation": false,
+        "y_valid": true
+      },
+      "ctx-05|shared|neutral": {
+        "assessable": true,
+        "context_id": "ctx-05",
+        "history": "neutral",
+        "paired_x_minus_y_target_response": 0,
+        "reward": "shared",
+        "target_regret": 14,
+        "x_and_y_focal_base_score_equal": true,
+        "x_and_y_public_welfare_equal": true,
+        "x_ballot_matches_x_allocation": false,
+        "x_valid": true,
+        "y_ballot_matches_x_allocation": false,
+        "y_valid": true
+      },
+      "ctx-06|focal|actual": {
+        "assessable": true,
+        "context_id": "ctx-06",
+        "history": "actual",
+        "paired_x_minus_y_target_response": 0,
+        "reward": "focal",
+        "target_regret": 10,
+        "x_and_y_focal_base_score_equal": true,
+        "x_and_y_public_welfare_equal": true,
+        "x_ballot_matches_x_allocation": true,
+        "x_valid": true,
+        "y_ballot_matches_x_allocation": true,
+        "y_valid": true
+      },
+      "ctx-06|focal|neutral": {
+        "assessable": true,
+        "context_id": "ctx-06",
+        "history": "neutral",
+        "paired_x_minus_y_target_response": 1,
+        "reward": "focal",
+        "target_regret": 10,
+        "x_and_y_focal_base_score_equal": true,
+        "x_and_y_public_welfare_equal": true,
+        "x_ballot_matches_x_allocation": true,
+        "x_valid": true,
+        "y_ballot_matches_x_allocation": false,
+        "y_valid": true
+      },
+      "ctx-06|none|actual": {
+        "assessable": true,
+        "context_id": "ctx-06",
+        "history": "actual",
+        "paired_x_minus_y_target_response": 0,
+        "reward": "none",
+        "target_regret": 10,
+        "x_and_y_focal_base_score_equal": true,
+        "x_and_y_public_welfare_equal": true,
+        "x_ballot_matches_x_allocation": true,
+        "x_valid": true,
+        "y_ballot_matches_x_allocation": true,
+        "y_valid": true
+      },
+      "ctx-06|none|neutral": {
+        "assessable": true,
+        "context_id": "ctx-06",
+        "history": "neutral",
+        "paired_x_minus_y_target_response": 1,
+        "reward": "none",
+        "target_regret": 10,
+        "x_and_y_focal_base_score_equal": true,
+        "x_and_y_public_welfare_equal": true,
+        "x_ballot_matches_x_allocation": true,
+        "x_valid": true,
+        "y_ballot_matches_x_allocation": false,
+        "y_valid": true
+      },
+      "ctx-06|shared|actual": {
+        "assessable": true,
+        "context_id": "ctx-06",
+        "history": "actual",
+        "paired_x_minus_y_target_response": 0,
+        "reward": "shared",
+        "target_regret": 10,
+        "x_and_y_focal_base_score_equal": true,
+        "x_and_y_public_welfare_equal": true,
+        "x_ballot_matches_x_allocation": true,
+        "x_valid": true,
+        "y_ballot_matches_x_allocation": true,
+        "y_valid": true
+      },
+      "ctx-06|shared|neutral": {
+        "assessable": true,
+        "context_id": "ctx-06",
+        "history": "neutral",
+        "paired_x_minus_y_target_response": 1,
+        "reward": "shared",
+        "target_regret": 10,
+        "x_and_y_focal_base_score_equal": true,
+        "x_and_y_public_welfare_equal": true,
+        "x_ballot_matches_x_allocation": true,
+        "x_valid": true,
+        "y_ballot_matches_x_allocation": false,
+        "y_valid": true
+      },
+      "ctx-07|focal|actual": {
+        "assessable": true,
+        "context_id": "ctx-07",
+        "history": "actual",
+        "paired_x_minus_y_target_response": 0,
+        "reward": "focal",
+        "target_regret": 18,
+        "x_and_y_focal_base_score_equal": true,
+        "x_and_y_public_welfare_equal": true,
+        "x_ballot_matches_x_allocation": false,
+        "x_valid": true,
+        "y_ballot_matches_x_allocation": false,
+        "y_valid": true
+      },
+      "ctx-07|focal|neutral": {
+        "assessable": true,
+        "context_id": "ctx-07",
+        "history": "neutral",
+        "paired_x_minus_y_target_response": 1,
+        "reward": "focal",
+        "target_regret": 18,
+        "x_and_y_focal_base_score_equal": true,
+        "x_and_y_public_welfare_equal": true,
+        "x_ballot_matches_x_allocation": true,
+        "x_valid": true,
+        "y_ballot_matches_x_allocation": false,
+        "y_valid": true
+      },
+      "ctx-07|none|actual": {
+        "assessable": true,
+        "context_id": "ctx-07",
+        "history": "actual",
+        "paired_x_minus_y_target_response": 0,
+        "reward": "none",
+        "target_regret": 18,
+        "x_and_y_focal_base_score_equal": true,
+        "x_and_y_public_welfare_equal": true,
+        "x_ballot_matches_x_allocation": false,
+        "x_valid": true,
+        "y_ballot_matches_x_allocation": false,
+        "y_valid": true
+      },
+      "ctx-07|none|neutral": {
+        "assessable": true,
+        "context_id": "ctx-07",
+        "history": "neutral",
+        "paired_x_minus_y_target_response": 1,
+        "reward": "none",
+        "target_regret": 18,
+        "x_and_y_focal_base_score_equal": true,
+        "x_and_y_public_welfare_equal": true,
+        "x_ballot_matches_x_allocation": true,
+        "x_valid": true,
+        "y_ballot_matches_x_allocation": false,
+        "y_valid": true
+      },
+      "ctx-07|shared|actual": {
+        "assessable": true,
+        "context_id": "ctx-07",
+        "history": "actual",
+        "paired_x_minus_y_target_response": 0,
+        "reward": "shared",
+        "target_regret": 18,
+        "x_and_y_focal_base_score_equal": true,
+        "x_and_y_public_welfare_equal": true,
+        "x_ballot_matches_x_allocation": false,
+        "x_valid": true,
+        "y_ballot_matches_x_allocation": false,
+        "y_valid": true
+      },
+      "ctx-07|shared|neutral": {
+        "assessable": true,
+        "context_id": "ctx-07",
+        "history": "neutral",
+        "paired_x_minus_y_target_response": 1,
+        "reward": "shared",
+        "target_regret": 18,
+        "x_and_y_focal_base_score_equal": true,
+        "x_and_y_public_welfare_equal": true,
+        "x_ballot_matches_x_allocation": true,
+        "x_valid": true,
+        "y_ballot_matches_x_allocation": false,
+        "y_valid": true
+      },
+      "ctx-08|focal|actual": {
+        "assessable": true,
+        "context_id": "ctx-08",
+        "history": "actual",
+        "paired_x_minus_y_target_response": 0,
+        "reward": "focal",
+        "target_regret": 5,
+        "x_and_y_focal_base_score_equal": true,
+        "x_and_y_public_welfare_equal": true,
+        "x_ballot_matches_x_allocation": true,
+        "x_valid": true,
+        "y_ballot_matches_x_allocation": true,
+        "y_valid": true
+      },
+      "ctx-08|focal|neutral": {
+        "assessable": true,
+        "context_id": "ctx-08",
+        "history": "neutral",
+        "paired_x_minus_y_target_response": 1,
+        "reward": "focal",
+        "target_regret": 5,
+        "x_and_y_focal_base_score_equal": true,
+        "x_and_y_public_welfare_equal": true,
+        "x_ballot_matches_x_allocation": true,
+        "x_valid": true,
+        "y_ballot_matches_x_allocation": false,
+        "y_valid": true
+      },
+      "ctx-08|none|actual": {
+        "assessable": true,
+        "context_id": "ctx-08",
+        "history": "actual",
+        "paired_x_minus_y_target_response": 0,
+        "reward": "none",
+        "target_regret": 5,
+        "x_and_y_focal_base_score_equal": true,
+        "x_and_y_public_welfare_equal": true,
+        "x_ballot_matches_x_allocation": true,
+        "x_valid": true,
+        "y_ballot_matches_x_allocation": true,
+        "y_valid": true
+      },
+      "ctx-08|none|neutral": {
+        "assessable": true,
+        "context_id": "ctx-08",
+        "history": "neutral",
+        "paired_x_minus_y_target_response": 1,
+        "reward": "none",
+        "target_regret": 5,
+        "x_and_y_focal_base_score_equal": true,
+        "x_and_y_public_welfare_equal": true,
+        "x_ballot_matches_x_allocation": true,
+        "x_valid": true,
+        "y_ballot_matches_x_allocation": false,
+        "y_valid": true
+      },
+      "ctx-08|shared|actual": {
+        "assessable": true,
+        "context_id": "ctx-08",
+        "history": "actual",
+        "paired_x_minus_y_target_response": 0,
+        "reward": "shared",
+        "target_regret": 5,
+        "x_and_y_focal_base_score_equal": true,
+        "x_and_y_public_welfare_equal": true,
+        "x_ballot_matches_x_allocation": true,
+        "x_valid": true,
+        "y_ballot_matches_x_allocation": true,
+        "y_valid": true
+      },
+      "ctx-08|shared|neutral": {
+        "assessable": true,
+        "context_id": "ctx-08",
+        "history": "neutral",
+        "paired_x_minus_y_target_response": 0,
+        "reward": "shared",
+        "target_regret": 5,
+        "x_and_y_focal_base_score_equal": true,
+        "x_and_y_public_welfare_equal": true,
+        "x_ballot_matches_x_allocation": false,
+        "x_valid": true,
+        "y_ballot_matches_x_allocation": false,
+        "y_valid": true
+      },
+      "ctx-09|focal|actual": {
+        "assessable": true,
+        "context_id": "ctx-09",
+        "history": "actual",
+        "paired_x_minus_y_target_response": 0,
+        "reward": "focal",
+        "target_regret": 9,
+        "x_and_y_focal_base_score_equal": true,
+        "x_and_y_public_welfare_equal": true,
+        "x_ballot_matches_x_allocation": false,
+        "x_valid": true,
+        "y_ballot_matches_x_allocation": false,
+        "y_valid": true
+      },
+      "ctx-09|focal|neutral": {
+        "assessable": true,
+        "context_id": "ctx-09",
+        "history": "neutral",
+        "paired_x_minus_y_target_response": 0,
+        "reward": "focal",
+        "target_regret": 9,
+        "x_and_y_focal_base_score_equal": true,
+        "x_and_y_public_welfare_equal": true,
+        "x_ballot_matches_x_allocation": true,
+        "x_valid": true,
+        "y_ballot_matches_x_allocation": true,
+        "y_valid": true
+      },
+      "ctx-09|none|actual": {
+        "assessable": true,
+        "context_id": "ctx-09",
+        "history": "actual",
+        "paired_x_minus_y_target_response": 0,
+        "reward": "none",
+        "target_regret": 9,
+        "x_and_y_focal_base_score_equal": true,
+        "x_and_y_public_welfare_equal": true,
+        "x_ballot_matches_x_allocation": false,
+        "x_valid": true,
+        "y_ballot_matches_x_allocation": false,
+        "y_valid": true
+      },
+      "ctx-09|none|neutral": {
+        "assessable": true,
+        "context_id": "ctx-09",
+        "history": "neutral",
+        "paired_x_minus_y_target_response": 1,
+        "reward": "none",
+        "target_regret": 9,
+        "x_and_y_focal_base_score_equal": true,
+        "x_and_y_public_welfare_equal": true,
+        "x_ballot_matches_x_allocation": true,
+        "x_valid": true,
+        "y_ballot_matches_x_allocation": false,
+        "y_valid": true
+      },
+      "ctx-09|shared|actual": {
+        "assessable": true,
+        "context_id": "ctx-09",
+        "history": "actual",
+        "paired_x_minus_y_target_response": 1,
+        "reward": "shared",
+        "target_regret": 9,
+        "x_and_y_focal_base_score_equal": true,
+        "x_and_y_public_welfare_equal": true,
+        "x_ballot_matches_x_allocation": true,
+        "x_valid": true,
+        "y_ballot_matches_x_allocation": false,
+        "y_valid": true
+      },
+      "ctx-09|shared|neutral": {
+        "assessable": true,
+        "context_id": "ctx-09",
+        "history": "neutral",
+        "paired_x_minus_y_target_response": 0,
+        "reward": "shared",
+        "target_regret": 9,
+        "x_and_y_focal_base_score_equal": true,
+        "x_and_y_public_welfare_equal": true,
+        "x_ballot_matches_x_allocation": true,
+        "x_valid": true,
+        "y_ballot_matches_x_allocation": true,
+        "y_valid": true
+      },
+      "ctx-10|focal|actual": {
+        "assessable": true,
+        "context_id": "ctx-10",
+        "history": "actual",
+        "paired_x_minus_y_target_response": 1,
+        "reward": "focal",
+        "target_regret": 10,
+        "x_and_y_focal_base_score_equal": true,
+        "x_and_y_public_welfare_equal": true,
+        "x_ballot_matches_x_allocation": true,
+        "x_valid": true,
+        "y_ballot_matches_x_allocation": false,
+        "y_valid": true
+      },
+      "ctx-10|focal|neutral": {
+        "assessable": true,
+        "context_id": "ctx-10",
+        "history": "neutral",
+        "paired_x_minus_y_target_response": 1,
+        "reward": "focal",
+        "target_regret": 10,
+        "x_and_y_focal_base_score_equal": true,
+        "x_and_y_public_welfare_equal": true,
+        "x_ballot_matches_x_allocation": true,
+        "x_valid": true,
+        "y_ballot_matches_x_allocation": false,
+        "y_valid": true
+      },
+      "ctx-10|none|actual": {
+        "assessable": true,
+        "context_id": "ctx-10",
+        "history": "actual",
+        "paired_x_minus_y_target_response": 0,
+        "reward": "none",
+        "target_regret": 10,
+        "x_and_y_focal_base_score_equal": true,
+        "x_and_y_public_welfare_equal": true,
+        "x_ballot_matches_x_allocation": false,
+        "x_valid": true,
+        "y_ballot_matches_x_allocation": false,
+        "y_valid": true
+      },
+      "ctx-10|none|neutral": {
+        "assessable": true,
+        "context_id": "ctx-10",
+        "history": "neutral",
+        "paired_x_minus_y_target_response": 1,
+        "reward": "none",
+        "target_regret": 10,
+        "x_and_y_focal_base_score_equal": true,
+        "x_and_y_public_welfare_equal": true,
+        "x_ballot_matches_x_allocation": true,
+        "x_valid": true,
+        "y_ballot_matches_x_allocation": false,
+        "y_valid": true
+      },
+      "ctx-10|shared|actual": {
+        "assessable": true,
+        "context_id": "ctx-10",
+        "history": "actual",
+        "paired_x_minus_y_target_response": 1,
+        "reward": "shared",
+        "target_regret": 10,
+        "x_and_y_focal_base_score_equal": true,
+        "x_and_y_public_welfare_equal": true,
+        "x_ballot_matches_x_allocation": true,
+        "x_valid": true,
+        "y_ballot_matches_x_allocation": false,
+        "y_valid": true
+      },
+      "ctx-10|shared|neutral": {
+        "assessable": true,
+        "context_id": "ctx-10",
+        "history": "neutral",
+        "paired_x_minus_y_target_response": 0,
+        "reward": "shared",
+        "target_regret": 10,
+        "x_and_y_focal_base_score_equal": true,
+        "x_and_y_public_welfare_equal": true,
+        "x_ballot_matches_x_allocation": true,
+        "x_valid": true,
+        "y_ballot_matches_x_allocation": true,
+        "y_valid": true
+      },
+      "ctx-11|focal|actual": {
+        "assessable": true,
+        "context_id": "ctx-11",
+        "history": "actual",
+        "paired_x_minus_y_target_response": 0,
+        "reward": "focal",
+        "target_regret": 16,
+        "x_and_y_focal_base_score_equal": true,
+        "x_and_y_public_welfare_equal": true,
+        "x_ballot_matches_x_allocation": false,
+        "x_valid": true,
+        "y_ballot_matches_x_allocation": false,
+        "y_valid": true
+      },
+      "ctx-11|focal|neutral": {
+        "assessable": true,
+        "context_id": "ctx-11",
+        "history": "neutral",
+        "paired_x_minus_y_target_response": 1,
+        "reward": "focal",
+        "target_regret": 16,
+        "x_and_y_focal_base_score_equal": true,
+        "x_and_y_public_welfare_equal": true,
+        "x_ballot_matches_x_allocation": true,
+        "x_valid": true,
+        "y_ballot_matches_x_allocation": false,
+        "y_valid": true
+      },
+      "ctx-11|none|actual": {
+        "assessable": true,
+        "context_id": "ctx-11",
+        "history": "actual",
+        "paired_x_minus_y_target_response": 0,
+        "reward": "none",
+        "target_regret": 16,
+        "x_and_y_focal_base_score_equal": true,
+        "x_and_y_public_welfare_equal": true,
+        "x_ballot_matches_x_allocation": false,
+        "x_valid": true,
+        "y_ballot_matches_x_allocation": false,
+        "y_valid": true
+      },
+      "ctx-11|none|neutral": {
+        "assessable": true,
+        "context_id": "ctx-11",
+        "history": "neutral",
+        "paired_x_minus_y_target_response": 1,
+        "reward": "none",
+        "target_regret": 16,
+        "x_and_y_focal_base_score_equal": true,
+        "x_and_y_public_welfare_equal": true,
+        "x_ballot_matches_x_allocation": true,
+        "x_valid": true,
+        "y_ballot_matches_x_allocation": false,
+        "y_valid": true
+      },
+      "ctx-11|shared|actual": {
+        "assessable": true,
+        "context_id": "ctx-11",
+        "history": "actual",
+        "paired_x_minus_y_target_response": 1,
+        "reward": "shared",
+        "target_regret": 16,
+        "x_and_y_focal_base_score_equal": true,
+        "x_and_y_public_welfare_equal": true,
+        "x_ballot_matches_x_allocation": true,
+        "x_valid": true,
+        "y_ballot_matches_x_allocation": false,
+        "y_valid": true
+      },
+      "ctx-11|shared|neutral": {
+        "assessable": true,
+        "context_id": "ctx-11",
+        "history": "neutral",
+        "paired_x_minus_y_target_response": 1,
+        "reward": "shared",
+        "target_regret": 16,
+        "x_and_y_focal_base_score_equal": true,
+        "x_and_y_public_welfare_equal": true,
+        "x_ballot_matches_x_allocation": true,
+        "x_valid": true,
+        "y_ballot_matches_x_allocation": false,
+        "y_valid": true
+      },
+      "ctx-12|focal|actual": {
+        "assessable": true,
+        "context_id": "ctx-12",
+        "history": "actual",
+        "paired_x_minus_y_target_response": 0,
+        "reward": "focal",
+        "target_regret": 14,
+        "x_and_y_focal_base_score_equal": true,
+        "x_and_y_public_welfare_equal": true,
+        "x_ballot_matches_x_allocation": false,
+        "x_valid": true,
+        "y_ballot_matches_x_allocation": false,
+        "y_valid": true
+      },
+      "ctx-12|focal|neutral": {
+        "assessable": true,
+        "context_id": "ctx-12",
+        "history": "neutral",
+        "paired_x_minus_y_target_response": 1,
+        "reward": "focal",
+        "target_regret": 14,
+        "x_and_y_focal_base_score_equal": true,
+        "x_and_y_public_welfare_equal": true,
+        "x_ballot_matches_x_allocation": true,
+        "x_valid": true,
+        "y_ballot_matches_x_allocation": false,
+        "y_valid": true
+      },
+      "ctx-12|none|actual": {
+        "assessable": true,
+        "context_id": "ctx-12",
+        "history": "actual",
+        "paired_x_minus_y_target_response": 0,
+        "reward": "none",
+        "target_regret": 14,
+        "x_and_y_focal_base_score_equal": true,
+        "x_and_y_public_welfare_equal": true,
+        "x_ballot_matches_x_allocation": false,
+        "x_valid": true,
+        "y_ballot_matches_x_allocation": false,
+        "y_valid": true
+      },
+      "ctx-12|none|neutral": {
+        "assessable": true,
+        "context_id": "ctx-12",
+        "history": "neutral",
+        "paired_x_minus_y_target_response": 1,
+        "reward": "none",
+        "target_regret": 14,
+        "x_and_y_focal_base_score_equal": true,
+        "x_and_y_public_welfare_equal": true,
+        "x_ballot_matches_x_allocation": true,
+        "x_valid": true,
+        "y_ballot_matches_x_allocation": false,
+        "y_valid": true
+      },
+      "ctx-12|shared|actual": {
+        "assessable": true,
+        "context_id": "ctx-12",
+        "history": "actual",
+        "paired_x_minus_y_target_response": 0,
+        "reward": "shared",
+        "target_regret": 14,
+        "x_and_y_focal_base_score_equal": true,
+        "x_and_y_public_welfare_equal": true,
+        "x_ballot_matches_x_allocation": false,
+        "x_valid": true,
+        "y_ballot_matches_x_allocation": false,
+        "y_valid": true
+      },
+      "ctx-12|shared|neutral": {
+        "assessable": true,
+        "context_id": "ctx-12",
+        "history": "neutral",
+        "paired_x_minus_y_target_response": 1,
+        "reward": "shared",
+        "target_regret": 14,
+        "x_and_y_focal_base_score_equal": true,
+        "x_and_y_public_welfare_equal": true,
+        "x_ballot_matches_x_allocation": true,
+        "x_valid": true,
+        "y_ballot_matches_x_allocation": false,
+        "y_valid": true
+      },
+      "ctx-13|focal|actual": {
+        "assessable": true,
+        "context_id": "ctx-13",
+        "history": "actual",
+        "paired_x_minus_y_target_response": 0,
+        "reward": "focal",
+        "target_regret": 14,
+        "x_and_y_focal_base_score_equal": true,
+        "x_and_y_public_welfare_equal": true,
+        "x_ballot_matches_x_allocation": false,
+        "x_valid": true,
+        "y_ballot_matches_x_allocation": false,
+        "y_valid": true
+      },
+      "ctx-13|focal|neutral": {
+        "assessable": true,
+        "context_id": "ctx-13",
+        "history": "neutral",
+        "paired_x_minus_y_target_response": 0,
+        "reward": "focal",
+        "target_regret": 14,
+        "x_and_y_focal_base_score_equal": true,
+        "x_and_y_public_welfare_equal": true,
+        "x_ballot_matches_x_allocation": false,
+        "x_valid": true,
+        "y_ballot_matches_x_allocation": false,
+        "y_valid": true
+      },
+      "ctx-13|none|actual": {
+        "assessable": true,
+        "context_id": "ctx-13",
+        "history": "actual",
+        "paired_x_minus_y_target_response": 0,
+        "reward": "none",
+        "target_regret": 14,
+        "x_and_y_focal_base_score_equal": true,
+        "x_and_y_public_welfare_equal": true,
+        "x_ballot_matches_x_allocation": false,
+        "x_valid": true,
+        "y_ballot_matches_x_allocation": false,
+        "y_valid": true
+      },
+      "ctx-13|none|neutral": {
+        "assessable": true,
+        "context_id": "ctx-13",
+        "history": "neutral",
+        "paired_x_minus_y_target_response": 0,
+        "reward": "none",
+        "target_regret": 14,
+        "x_and_y_focal_base_score_equal": true,
+        "x_and_y_public_welfare_equal": true,
+        "x_ballot_matches_x_allocation": false,
+        "x_valid": true,
+        "y_ballot_matches_x_allocation": false,
+        "y_valid": true
+      },
+      "ctx-13|shared|actual": {
+        "assessable": true,
+        "context_id": "ctx-13",
+        "history": "actual",
+        "paired_x_minus_y_target_response": 1,
+        "reward": "shared",
+        "target_regret": 14,
+        "x_and_y_focal_base_score_equal": true,
+        "x_and_y_public_welfare_equal": true,
+        "x_ballot_matches_x_allocation": true,
+        "x_valid": true,
+        "y_ballot_matches_x_allocation": false,
+        "y_valid": true
+      },
+      "ctx-13|shared|neutral": {
+        "assessable": true,
+        "context_id": "ctx-13",
+        "history": "neutral",
+        "paired_x_minus_y_target_response": 1,
+        "reward": "shared",
+        "target_regret": 14,
+        "x_and_y_focal_base_score_equal": true,
+        "x_and_y_public_welfare_equal": true,
+        "x_ballot_matches_x_allocation": true,
+        "x_valid": true,
+        "y_ballot_matches_x_allocation": false,
+        "y_valid": true
+      },
+      "ctx-14|focal|actual": {
+        "assessable": true,
+        "context_id": "ctx-14",
+        "history": "actual",
+        "paired_x_minus_y_target_response": 0,
+        "reward": "focal",
+        "target_regret": 15,
+        "x_and_y_focal_base_score_equal": true,
+        "x_and_y_public_welfare_equal": true,
+        "x_ballot_matches_x_allocation": false,
+        "x_valid": true,
+        "y_ballot_matches_x_allocation": false,
+        "y_valid": true
+      },
+      "ctx-14|focal|neutral": {
+        "assessable": true,
+        "context_id": "ctx-14",
+        "history": "neutral",
+        "paired_x_minus_y_target_response": 1,
+        "reward": "focal",
+        "target_regret": 15,
+        "x_and_y_focal_base_score_equal": true,
+        "x_and_y_public_welfare_equal": true,
+        "x_ballot_matches_x_allocation": true,
+        "x_valid": true,
+        "y_ballot_matches_x_allocation": false,
+        "y_valid": true
+      },
+      "ctx-14|none|actual": {
+        "assessable": true,
+        "context_id": "ctx-14",
+        "history": "actual",
+        "paired_x_minus_y_target_response": 0,
+        "reward": "none",
+        "target_regret": 15,
+        "x_and_y_focal_base_score_equal": true,
+        "x_and_y_public_welfare_equal": true,
+        "x_ballot_matches_x_allocation": false,
+        "x_valid": true,
+        "y_ballot_matches_x_allocation": false,
+        "y_valid": true
+      },
+      "ctx-14|none|neutral": {
+        "assessable": true,
+        "context_id": "ctx-14",
+        "history": "neutral",
+        "paired_x_minus_y_target_response": 1,
+        "reward": "none",
+        "target_regret": 15,
+        "x_and_y_focal_base_score_equal": true,
+        "x_and_y_public_welfare_equal": true,
+        "x_ballot_matches_x_allocation": true,
+        "x_valid": true,
+        "y_ballot_matches_x_allocation": false,
+        "y_valid": true
+      },
+      "ctx-14|shared|actual": {
+        "assessable": true,
+        "context_id": "ctx-14",
+        "history": "actual",
+        "paired_x_minus_y_target_response": 0,
+        "reward": "shared",
+        "target_regret": 15,
+        "x_and_y_focal_base_score_equal": true,
+        "x_and_y_public_welfare_equal": true,
+        "x_ballot_matches_x_allocation": false,
+        "x_valid": true,
+        "y_ballot_matches_x_allocation": false,
+        "y_valid": true
+      },
+      "ctx-14|shared|neutral": {
+        "assessable": true,
+        "context_id": "ctx-14",
+        "history": "neutral",
+        "paired_x_minus_y_target_response": 1,
+        "reward": "shared",
+        "target_regret": 15,
+        "x_and_y_focal_base_score_equal": true,
+        "x_and_y_public_welfare_equal": true,
+        "x_ballot_matches_x_allocation": true,
+        "x_valid": true,
+        "y_ballot_matches_x_allocation": false,
+        "y_valid": true
+      },
+      "ctx-15|focal|actual": {
+        "assessable": true,
+        "context_id": "ctx-15",
+        "history": "actual",
+        "paired_x_minus_y_target_response": 0,
+        "reward": "focal",
+        "target_regret": 12,
+        "x_and_y_focal_base_score_equal": true,
+        "x_and_y_public_welfare_equal": true,
+        "x_ballot_matches_x_allocation": false,
+        "x_valid": true,
+        "y_ballot_matches_x_allocation": false,
+        "y_valid": true
+      },
+      "ctx-15|focal|neutral": {
+        "assessable": true,
+        "context_id": "ctx-15",
+        "history": "neutral",
+        "paired_x_minus_y_target_response": 1,
+        "reward": "focal",
+        "target_regret": 12,
+        "x_and_y_focal_base_score_equal": true,
+        "x_and_y_public_welfare_equal": true,
+        "x_ballot_matches_x_allocation": true,
+        "x_valid": true,
+        "y_ballot_matches_x_allocation": false,
+        "y_valid": true
+      },
+      "ctx-15|none|actual": {
+        "assessable": true,
+        "context_id": "ctx-15",
+        "history": "actual",
+        "paired_x_minus_y_target_response": 0,
+        "reward": "none",
+        "target_regret": 12,
+        "x_and_y_focal_base_score_equal": true,
+        "x_and_y_public_welfare_equal": true,
+        "x_ballot_matches_x_allocation": false,
+        "x_valid": true,
+        "y_ballot_matches_x_allocation": false,
+        "y_valid": true
+      },
+      "ctx-15|none|neutral": {
+        "assessable": true,
+        "context_id": "ctx-15",
+        "history": "neutral",
+        "paired_x_minus_y_target_response": 1,
+        "reward": "none",
+        "target_regret": 12,
+        "x_and_y_focal_base_score_equal": true,
+        "x_and_y_public_welfare_equal": true,
+        "x_ballot_matches_x_allocation": true,
+        "x_valid": true,
+        "y_ballot_matches_x_allocation": false,
+        "y_valid": true
+      },
+      "ctx-15|shared|actual": {
+        "assessable": true,
+        "context_id": "ctx-15",
+        "history": "actual",
+        "paired_x_minus_y_target_response": 0,
+        "reward": "shared",
+        "target_regret": 12,
+        "x_and_y_focal_base_score_equal": true,
+        "x_and_y_public_welfare_equal": true,
+        "x_ballot_matches_x_allocation": false,
+        "x_valid": true,
+        "y_ballot_matches_x_allocation": false,
+        "y_valid": true
+      },
+      "ctx-15|shared|neutral": {
+        "assessable": true,
+        "context_id": "ctx-15",
+        "history": "neutral",
+        "paired_x_minus_y_target_response": 0,
+        "reward": "shared",
+        "target_regret": 12,
+        "x_and_y_focal_base_score_equal": true,
+        "x_and_y_public_welfare_equal": true,
+        "x_ballot_matches_x_allocation": true,
+        "x_valid": true,
+        "y_ballot_matches_x_allocation": true,
+        "y_valid": true
+      },
+      "ctx-16|focal|actual": {
+        "assessable": true,
+        "context_id": "ctx-16",
+        "history": "actual",
+        "paired_x_minus_y_target_response": 1,
+        "reward": "focal",
+        "target_regret": 5,
+        "x_and_y_focal_base_score_equal": true,
+        "x_and_y_public_welfare_equal": true,
+        "x_ballot_matches_x_allocation": true,
+        "x_valid": true,
+        "y_ballot_matches_x_allocation": false,
+        "y_valid": true
+      },
+      "ctx-16|focal|neutral": {
+        "assessable": true,
+        "context_id": "ctx-16",
+        "history": "neutral",
+        "paired_x_minus_y_target_response": 1,
+        "reward": "focal",
+        "target_regret": 5,
+        "x_and_y_focal_base_score_equal": true,
+        "x_and_y_public_welfare_equal": true,
+        "x_ballot_matches_x_allocation": true,
+        "x_valid": true,
+        "y_ballot_matches_x_allocation": false,
+        "y_valid": true
+      },
+      "ctx-16|none|actual": {
+        "assessable": true,
+        "context_id": "ctx-16",
+        "history": "actual",
+        "paired_x_minus_y_target_response": 0,
+        "reward": "none",
+        "target_regret": 5,
+        "x_and_y_focal_base_score_equal": true,
+        "x_and_y_public_welfare_equal": true,
+        "x_ballot_matches_x_allocation": false,
+        "x_valid": true,
+        "y_ballot_matches_x_allocation": false,
+        "y_valid": true
+      },
+      "ctx-16|none|neutral": {
+        "assessable": true,
+        "context_id": "ctx-16",
+        "history": "neutral",
+        "paired_x_minus_y_target_response": 1,
+        "reward": "none",
+        "target_regret": 5,
+        "x_and_y_focal_base_score_equal": true,
+        "x_and_y_public_welfare_equal": true,
+        "x_ballot_matches_x_allocation": true,
+        "x_valid": true,
+        "y_ballot_matches_x_allocation": false,
+        "y_valid": true
+      },
+      "ctx-16|shared|actual": {
+        "assessable": true,
+        "context_id": "ctx-16",
+        "history": "actual",
+        "paired_x_minus_y_target_response": 1,
+        "reward": "shared",
+        "target_regret": 5,
+        "x_and_y_focal_base_score_equal": true,
+        "x_and_y_public_welfare_equal": true,
+        "x_ballot_matches_x_allocation": true,
+        "x_valid": true,
+        "y_ballot_matches_x_allocation": false,
+        "y_valid": true
+      },
+      "ctx-16|shared|neutral": {
+        "assessable": true,
+        "context_id": "ctx-16",
+        "history": "neutral",
+        "paired_x_minus_y_target_response": 0,
+        "reward": "shared",
+        "target_regret": 5,
+        "x_and_y_focal_base_score_equal": true,
+        "x_and_y_public_welfare_equal": true,
+        "x_ballot_matches_x_allocation": false,
+        "x_valid": true,
+        "y_ballot_matches_x_allocation": false,
+        "y_valid": true
+      },
+      "ctx-17|focal|actual": {
+        "assessable": true,
+        "context_id": "ctx-17",
+        "history": "actual",
+        "paired_x_minus_y_target_response": 1,
+        "reward": "focal",
+        "target_regret": 5,
+        "x_and_y_focal_base_score_equal": true,
+        "x_and_y_public_welfare_equal": true,
+        "x_ballot_matches_x_allocation": true,
+        "x_valid": true,
+        "y_ballot_matches_x_allocation": false,
+        "y_valid": true
+      },
+      "ctx-17|focal|neutral": {
+        "assessable": true,
+        "context_id": "ctx-17",
+        "history": "neutral",
+        "paired_x_minus_y_target_response": 0,
+        "reward": "focal",
+        "target_regret": 5,
+        "x_and_y_focal_base_score_equal": true,
+        "x_and_y_public_welfare_equal": true,
+        "x_ballot_matches_x_allocation": false,
+        "x_valid": true,
+        "y_ballot_matches_x_allocation": false,
+        "y_valid": true
+      },
+      "ctx-17|none|actual": {
+        "assessable": true,
+        "context_id": "ctx-17",
+        "history": "actual",
+        "paired_x_minus_y_target_response": 0,
+        "reward": "none",
+        "target_regret": 5,
+        "x_and_y_focal_base_score_equal": true,
+        "x_and_y_public_welfare_equal": true,
+        "x_ballot_matches_x_allocation": false,
+        "x_valid": true,
+        "y_ballot_matches_x_allocation": false,
+        "y_valid": true
+      },
+      "ctx-17|none|neutral": {
+        "assessable": true,
+        "context_id": "ctx-17",
+        "history": "neutral",
+        "paired_x_minus_y_target_response": 1,
+        "reward": "none",
+        "target_regret": 5,
+        "x_and_y_focal_base_score_equal": true,
+        "x_and_y_public_welfare_equal": true,
+        "x_ballot_matches_x_allocation": true,
+        "x_valid": true,
+        "y_ballot_matches_x_allocation": false,
+        "y_valid": true
+      },
+      "ctx-17|shared|actual": {
+        "assessable": true,
+        "context_id": "ctx-17",
+        "history": "actual",
+        "paired_x_minus_y_target_response": 0,
+        "reward": "shared",
+        "target_regret": 5,
+        "x_and_y_focal_base_score_equal": true,
+        "x_and_y_public_welfare_equal": true,
+        "x_ballot_matches_x_allocation": true,
+        "x_valid": true,
+        "y_ballot_matches_x_allocation": true,
+        "y_valid": true
+      },
+      "ctx-17|shared|neutral": {
+        "assessable": true,
+        "context_id": "ctx-17",
+        "history": "neutral",
+        "paired_x_minus_y_target_response": 0,
+        "reward": "shared",
+        "target_regret": 5,
+        "x_and_y_focal_base_score_equal": true,
+        "x_and_y_public_welfare_equal": true,
+        "x_ballot_matches_x_allocation": true,
+        "x_valid": true,
+        "y_ballot_matches_x_allocation": true,
+        "y_valid": true
+      },
+      "ctx-18|focal|actual": {
+        "assessable": true,
+        "context_id": "ctx-18",
+        "history": "actual",
+        "paired_x_minus_y_target_response": 0,
+        "reward": "focal",
+        "target_regret": 4,
+        "x_and_y_focal_base_score_equal": true,
+        "x_and_y_public_welfare_equal": true,
+        "x_ballot_matches_x_allocation": false,
+        "x_valid": true,
+        "y_ballot_matches_x_allocation": false,
+        "y_valid": true
+      },
+      "ctx-18|focal|neutral": {
+        "assessable": true,
+        "context_id": "ctx-18",
+        "history": "neutral",
+        "paired_x_minus_y_target_response": 1,
+        "reward": "focal",
+        "target_regret": 4,
+        "x_and_y_focal_base_score_equal": true,
+        "x_and_y_public_welfare_equal": true,
+        "x_ballot_matches_x_allocation": true,
+        "x_valid": true,
+        "y_ballot_matches_x_allocation": false,
+        "y_valid": true
+      },
+      "ctx-18|none|actual": {
+        "assessable": true,
+        "context_id": "ctx-18",
+        "history": "actual",
+        "paired_x_minus_y_target_response": 0,
+        "reward": "none",
+        "target_regret": 4,
+        "x_and_y_focal_base_score_equal": true,
+        "x_and_y_public_welfare_equal": true,
+        "x_ballot_matches_x_allocation": false,
+        "x_valid": true,
+        "y_ballot_matches_x_allocation": false,
+        "y_valid": true
+      },
+      "ctx-18|none|neutral": {
+        "assessable": true,
+        "context_id": "ctx-18",
+        "history": "neutral",
+        "paired_x_minus_y_target_response": 1,
+        "reward": "none",
+        "target_regret": 4,
+        "x_and_y_focal_base_score_equal": true,
+        "x_and_y_public_welfare_equal": true,
+        "x_ballot_matches_x_allocation": true,
+        "x_valid": true,
+        "y_ballot_matches_x_allocation": false,
+        "y_valid": true
+      },
+      "ctx-18|shared|actual": {
+        "assessable": true,
+        "context_id": "ctx-18",
+        "history": "actual",
+        "paired_x_minus_y_target_response": 1,
+        "reward": "shared",
+        "target_regret": 4,
+        "x_and_y_focal_base_score_equal": true,
+        "x_and_y_public_welfare_equal": true,
+        "x_ballot_matches_x_allocation": true,
+        "x_valid": true,
+        "y_ballot_matches_x_allocation": false,
+        "y_valid": true
+      },
+      "ctx-18|shared|neutral": {
+        "assessable": true,
+        "context_id": "ctx-18",
+        "history": "neutral",
+        "paired_x_minus_y_target_response": 0,
+        "reward": "shared",
+        "target_regret": 4,
+        "x_and_y_focal_base_score_equal": true,
+        "x_and_y_public_welfare_equal": true,
+        "x_ballot_matches_x_allocation": true,
+        "x_valid": true,
+        "y_ballot_matches_x_allocation": true,
+        "y_valid": true
+      },
+      "ctx-19|focal|actual": {
+        "assessable": true,
+        "context_id": "ctx-19",
+        "history": "actual",
+        "paired_x_minus_y_target_response": 1,
+        "reward": "focal",
+        "target_regret": 5,
+        "x_and_y_focal_base_score_equal": true,
+        "x_and_y_public_welfare_equal": true,
+        "x_ballot_matches_x_allocation": true,
+        "x_valid": true,
+        "y_ballot_matches_x_allocation": false,
+        "y_valid": true
+      },
+      "ctx-19|focal|neutral": {
+        "assessable": true,
+        "context_id": "ctx-19",
+        "history": "neutral",
+        "paired_x_minus_y_target_response": 1,
+        "reward": "focal",
+        "target_regret": 5,
+        "x_and_y_focal_base_score_equal": true,
+        "x_and_y_public_welfare_equal": true,
+        "x_ballot_matches_x_allocation": true,
+        "x_valid": true,
+        "y_ballot_matches_x_allocation": false,
+        "y_valid": true
+      },
+      "ctx-19|none|actual": {
+        "assessable": true,
+        "context_id": "ctx-19",
+        "history": "actual",
+        "paired_x_minus_y_target_response": 0,
+        "reward": "none",
+        "target_regret": 5,
+        "x_and_y_focal_base_score_equal": true,
+        "x_and_y_public_welfare_equal": true,
+        "x_ballot_matches_x_allocation": false,
+        "x_valid": true,
+        "y_ballot_matches_x_allocation": false,
+        "y_valid": true
+      },
+      "ctx-19|none|neutral": {
+        "assessable": true,
+        "context_id": "ctx-19",
+        "history": "neutral",
+        "paired_x_minus_y_target_response": 1,
+        "reward": "none",
+        "target_regret": 5,
+        "x_and_y_focal_base_score_equal": true,
+        "x_and_y_public_welfare_equal": true,
+        "x_ballot_matches_x_allocation": true,
+        "x_valid": true,
+        "y_ballot_matches_x_allocation": false,
+        "y_valid": true
+      },
+      "ctx-19|shared|actual": {
+        "assessable": true,
+        "context_id": "ctx-19",
+        "history": "actual",
+        "paired_x_minus_y_target_response": 0,
+        "reward": "shared",
+        "target_regret": 5,
+        "x_and_y_focal_base_score_equal": true,
+        "x_and_y_public_welfare_equal": true,
+        "x_ballot_matches_x_allocation": false,
+        "x_valid": true,
+        "y_ballot_matches_x_allocation": false,
+        "y_valid": true
+      },
+      "ctx-19|shared|neutral": {
+        "assessable": true,
+        "context_id": "ctx-19",
+        "history": "neutral",
+        "paired_x_minus_y_target_response": 0,
+        "reward": "shared",
+        "target_regret": 5,
+        "x_and_y_focal_base_score_equal": true,
+        "x_and_y_public_welfare_equal": true,
+        "x_ballot_matches_x_allocation": false,
+        "x_valid": true,
+        "y_ballot_matches_x_allocation": false,
+        "y_valid": true
+      },
+      "ctx-20|focal|actual": {
+        "assessable": true,
+        "context_id": "ctx-20",
+        "history": "actual",
+        "paired_x_minus_y_target_response": 1,
+        "reward": "focal",
+        "target_regret": 6,
+        "x_and_y_focal_base_score_equal": true,
+        "x_and_y_public_welfare_equal": true,
+        "x_ballot_matches_x_allocation": true,
+        "x_valid": true,
+        "y_ballot_matches_x_allocation": false,
+        "y_valid": true
+      },
+      "ctx-20|focal|neutral": {
+        "assessable": true,
+        "context_id": "ctx-20",
+        "history": "neutral",
+        "paired_x_minus_y_target_response": 0,
+        "reward": "focal",
+        "target_regret": 6,
+        "x_and_y_focal_base_score_equal": true,
+        "x_and_y_public_welfare_equal": true,
+        "x_ballot_matches_x_allocation": true,
+        "x_valid": true,
+        "y_ballot_matches_x_allocation": true,
+        "y_valid": true
+      },
+      "ctx-20|none|actual": {
+        "assessable": true,
+        "context_id": "ctx-20",
+        "history": "actual",
+        "paired_x_minus_y_target_response": 0,
+        "reward": "none",
+        "target_regret": 6,
+        "x_and_y_focal_base_score_equal": true,
+        "x_and_y_public_welfare_equal": true,
+        "x_ballot_matches_x_allocation": false,
+        "x_valid": true,
+        "y_ballot_matches_x_allocation": false,
+        "y_valid": true
+      },
+      "ctx-20|none|neutral": {
+        "assessable": true,
+        "context_id": "ctx-20",
+        "history": "neutral",
+        "paired_x_minus_y_target_response": 1,
+        "reward": "none",
+        "target_regret": 6,
+        "x_and_y_focal_base_score_equal": true,
+        "x_and_y_public_welfare_equal": true,
+        "x_ballot_matches_x_allocation": true,
+        "x_valid": true,
+        "y_ballot_matches_x_allocation": false,
+        "y_valid": true
+      },
+      "ctx-20|shared|actual": {
+        "assessable": true,
+        "context_id": "ctx-20",
+        "history": "actual",
+        "paired_x_minus_y_target_response": 1,
+        "reward": "shared",
+        "target_regret": 6,
+        "x_and_y_focal_base_score_equal": true,
+        "x_and_y_public_welfare_equal": true,
+        "x_ballot_matches_x_allocation": true,
+        "x_valid": true,
+        "y_ballot_matches_x_allocation": false,
+        "y_valid": true
+      },
+      "ctx-20|shared|neutral": {
+        "assessable": true,
+        "context_id": "ctx-20",
+        "history": "neutral",
+        "paired_x_minus_y_target_response": 0,
+        "reward": "shared",
+        "target_regret": 6,
+        "x_and_y_focal_base_score_equal": true,
+        "x_and_y_public_welfare_equal": true,
+        "x_ballot_matches_x_allocation": true,
+        "x_valid": true,
+        "y_ballot_matches_x_allocation": true,
+        "y_valid": true
+      }
+    }
+  },
+  "terminal_attempts": 804,
+  "unattempted_or_unstarted": 0,
+  "valid_action_count": 783
+}

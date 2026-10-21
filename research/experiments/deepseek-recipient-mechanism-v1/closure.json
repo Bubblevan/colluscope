@@ -1,0 +1,181 @@
+{
+  "actual_external_cost_usd": 0.0944016,
+  "actual_model_calls": 804,
+  "actual_wallclock_minutes": 14,
+  "approval_required_for_next_action": true,
+  "authorization_id": "DS-FLASH-RECIPIENT-804-20261021",
+  "belief_updates": [
+    {
+      "claim_id": "deepseek-recipient-cue-following-v1",
+      "evidence_refs": [
+        {
+          "path": "docs/DEEPSEEK_RECIPIENT_MECHANISM_V1_EVIDENCE.md",
+          "sha256": "625004fe315d2bf148de18370ea9c4fcb079139fa1bad5fb4fa37e29e71cf90d"
+        },
+        {
+          "path": "docs/DEEPSEEK_RECIPIENT_MECHANISM_V1_DECISION.md",
+          "sha256": "44ea1fe82d48e49ae4e571e0addfd892653aeae18bb751b2b85ee3347dde634a"
+        },
+        {
+          "path": "docs/RESEARCH_RISK_REGISTER_FOLLOWUP_20261021_DEEPSEEK_RECIPIENT.md",
+          "sha256": "d9d1c9e3f0bd8ccde1ccf48c1cdc71445253894bee77b12357594aa210965403"
+        },
+        {
+          "path": "docs/results/deepseek-recipient-mechanism-v1/independent-analysis.json",
+          "sha256": "be84b7883b6bad5b968feff53108826ed114d2d766fa587da53ad7d0b4349d50"
+        },
+        {
+          "path": "docs/results/deepseek-recipient-mechanism-v1/independent-audit.json",
+          "sha256": "e87d524bebf6627d52e10e05f45049bf07f2a4f30a74da0e040d51b6095c415d"
+        },
+        {
+          "path": "docs/results/deepseek-recipient-mechanism-v1/model-request-ledger-sanitized.json",
+          "sha256": "8e660eb08233bd4386447b566a20c19c6941d080a86a96352411dc1bf29d29cc"
+        }
+      ],
+      "outcome": "INCONCLUSIVE",
+      "remaining_alternatives": "Cue anchoring or salience, reward wording, own-history interaction, model inability to use the factual cue, malformed stage-history contamination, and provider-side model drift remain plausible; the experiment did not contain active peers.",
+      "statement": "The frozen primary directional cue-response gate was not met for this fixed 20-context set.",
+      "what_changed": "All primary pairs were assessable, but positive paired signs were 9/20 and the delivered-fact positive control was 0/20."
+    }
+  ],
+  "closed_at_utc": "2026-10-21T04:17:15+00:00",
+  "closed_git_head": "919ef5e1a88e7712e74aeacfdd0bf9d12e2a5c08",
+  "decision": "AMBIGUOUS",
+  "denominator_summary": "All 20 frozen contexts and all 804 assigned physical requests are retained. The primary cell has 20 assigned pairs; all 120 X/Y context×reward×history pairs are reported. The 40 positive controls, 24 repeats, 120 stage generations, all 21 invalid generations, and all 84 dependent ballots are included. No rows were replaced or removed.",
+  "evidence_class": "real_llm_behavior",
+  "experiment_id": "deepseek-recipient-mechanism-v1",
+  "failures_retained": true,
+  "material_update": {
+    "claim_id": "deepseek-recipient-cue-following-v1",
+    "evidence_refs": [
+      {
+        "path": "docs/DEEPSEEK_RECIPIENT_MECHANISM_V1_EVIDENCE.md",
+        "sha256": "625004fe315d2bf148de18370ea9c4fcb079139fa1bad5fb4fa37e29e71cf90d"
+      },
+      {
+        "path": "docs/DEEPSEEK_RECIPIENT_MECHANISM_V1_DECISION.md",
+        "sha256": "44ea1fe82d48e49ae4e571e0addfd892653aeae18bb751b2b85ee3347dde634a"
+      },
+      {
+        "path": "docs/RESEARCH_RISK_REGISTER_FOLLOWUP_20261021_DEEPSEEK_RECIPIENT.md",
+        "sha256": "d9d1c9e3f0bd8ccde1ccf48c1cdc71445253894bee77b12357594aa210965403"
+      },
+      {
+        "path": "docs/results/deepseek-recipient-mechanism-v1/independent-analysis.json",
+        "sha256": "be84b7883b6bad5b968feff53108826ed114d2d766fa587da53ad7d0b4349d50"
+      },
+      {
+        "path": "docs/results/deepseek-recipient-mechanism-v1/independent-audit.json",
+        "sha256": "e87d524bebf6627d52e10e05f45049bf07f2a4f30a74da0e040d51b6095c415d"
+      },
+      {
+        "path": "docs/results/deepseek-recipient-mechanism-v1/model-request-ledger-sanitized.json",
+        "sha256": "8e660eb08233bd4386447b566a20c19c6941d080a86a96352411dc1bf29d29cc"
+      }
+    ],
+    "independent_critic_confirmed": false,
+    "remaining_alternatives": "The run does not distinguish cue semantics from anchoring/salience or model capability limits, and no active peer interaction or collusion mechanism was tested.",
+    "what_changed": "The full authorized batch produced a reproducible fixed-set response table and exposed a failed delivered-fact control plus invalid-stage dependency propagation."
+  },
+  "model_request_ledger": {
+    "path": "docs/results/deepseek-recipient-mechanism-v1/model-request-ledger-sanitized.json",
+    "sha256": "8e660eb08233bd4386447b566a20c19c6941d080a86a96352411dc1bf29d29cc"
+  },
+  "new_uncertainty_reduced": false,
+  "next_action": "Stop inference for this cycle. If future work is proposed, first fix and test invalid dependency terminalization, then freeze a new positive-control-qualified protocol and obtain fresh scope-specific approval.",
+  "next_action_evidence_class": "offline_reanalysis",
+  "next_action_kind": "continue_offline",
+  "next_action_max_external_cost_usd": 0,
+  "next_action_max_model_calls": 0,
+  "outcome_rationale": "The frozen primary assessability gate passed (20/20), but only 9/20 paired signs were positive, so the preregistered more-than-half directional gate was not met. Delivered-fact accuracy was 0/20. In addition, 21 stage generations were truncated and 84 dependent ballots carried malformed stage history. These observations do not establish absence of a cue effect, semantic comprehension, communication, collusion, or intent.",
+  "outputs": [
+    {
+      "path": "docs/DEEPSEEK_RECIPIENT_MECHANISM_V1_EVIDENCE.md",
+      "sha256": "625004fe315d2bf148de18370ea9c4fcb079139fa1bad5fb4fa37e29e71cf90d"
+    },
+    {
+      "path": "docs/DEEPSEEK_RECIPIENT_MECHANISM_V1_DECISION.md",
+      "sha256": "44ea1fe82d48e49ae4e571e0addfd892653aeae18bb751b2b85ee3347dde634a"
+    },
+    {
+      "path": "docs/RESEARCH_RISK_REGISTER_FOLLOWUP_20261021_DEEPSEEK_RECIPIENT.md",
+      "sha256": "d9d1c9e3f0bd8ccde1ccf48c1cdc71445253894bee77b12357594aa210965403"
+    },
+    {
+      "path": "docs/results/deepseek-recipient-mechanism-v1/independent-analysis.json",
+      "sha256": "be84b7883b6bad5b968feff53108826ed114d2d766fa587da53ad7d0b4349d50"
+    },
+    {
+      "path": "docs/results/deepseek-recipient-mechanism-v1/independent-audit.json",
+      "sha256": "e87d524bebf6627d52e10e05f45049bf07f2a4f30a74da0e040d51b6095c415d"
+    },
+    {
+      "path": "docs/results/deepseek-recipient-mechanism-v1/model-request-ledger-sanitized.json",
+      "sha256": "8e660eb08233bd4386447b566a20c19c6941d080a86a96352411dc1bf29d29cc"
+    },
+    {
+      "path": "docs/DEEPSEEK_RECIPIENT_MECHANISM_V1_PROTOCOL.md",
+      "sha256": "58104c5b2f7dea6daf16ca0537b53e46aa424da2208104e3ca3cc3b3497ce315"
+    },
+    {
+      "path": "docs/DEEPSEEK_RECIPIENT_MECHANISM_V1_RUNTIME_AMENDMENT_1.md",
+      "sha256": "575ccd23b34464db188be15292519b89cfbd8097a13b0e86ae58b37002ec7d98"
+    },
+    {
+      "path": "docs/ITERATION_LOG_FOLLOWUP_20261021_DEEPSEEK_RECIPIENT.md",
+      "sha256": "3edcac9001986b2e9834c436a4fc4e65440b8cea30c31693c84ef06b15ac0776"
+    },
+    {
+      "path": "docs/results/deepseek-recipient-mechanism-v1/launcher-first-failure.log",
+      "sha256": "72f6427e806fff060e1e2b3419ba0baa024c1f646b1d7b24d0a6dbed7c742f30"
+    },
+    {
+      "path": "docs/results/deepseek-recipient-mechanism-v1/offline-preflight.json",
+      "sha256": "f355f2bf021e56ca24bb5e15e91a7b3ed083534ba81d9ee5692f25674ae1d75e"
+    },
+    {
+      "path": "docs/results/deepseek-recipient-mechanism-v1/offline-tests.log",
+      "sha256": "8cfdc3df69124019a3d3b8bc1a7ac8d8e3a12308a7034433fef3c06eb0170253"
+    },
+    {
+      "path": "scripts/analyze_deepseek_recipient_mechanism_v1.py",
+      "sha256": "183183c4c2e86dc407abfce1f940b20c9a0c55e6c20cdfc3d6e76266e2bbc8f6"
+    },
+    {
+      "path": "scripts/audit_deepseek_recipient_mechanism_v1.py",
+      "sha256": "e5b8f0974e9fad30cbaeac1a91337233dc7360db922bb1d4cda4c0d05f854827"
+    },
+    {
+      "path": "scripts/build_deepseek_recipient_closeout_v1.py",
+      "sha256": "a6232ed093c9ce028d03ee48b832db0059b26d532e84187759c8a78d5ef471b7"
+    },
+    {
+      "path": "scripts/run_deepseek_recipient_mechanism_v1_hotfix.py",
+      "sha256": "b7ff1963512d1f22c5a8c12c79578059dad877be492ca62fb5e83485db3ba046"
+    },
+    {
+      "path": "scripts/run_deepseek_recipient_mechanism_v1.py",
+      "sha256": "62312eef400980e2f0ffaf8020fd3f850c671c188ba7ee9e24030b5786d09592"
+    },
+    {
+      "path": "src/colluscope/deepseek_recipient_mechanism_v1.py",
+      "sha256": "aecfd3ded2f2bb4967a0f683af26958468c77a1a02ad8b9f7a571706998a2978"
+    },
+    {
+      "path": "research/schedules/deepseek-recipient-mechanism-v1.json",
+      "sha256": "f741d58b36061c399d527dba33ff33b3fc481813825290e8f68e9c66d4b6a789"
+    },
+    {
+      "path": "configs/deepseek-recipient-mechanism-v1.json",
+      "sha256": "ec9f5850b107b31f9cb9bcdf3a5fbf5a6d119192fd954cec44e1be4f1c175d43"
+    }
+  ],
+  "results_summary": "804 assigned physical requests; 804 terminal HTTP 200 responses; 783 valid outputs and 21 invalid truncated stage outputs; zero retries, replacements, or unattempted requests. Usage-derived peak-rate cost estimate USD 0.0944016. Primary shared-reward/actual-history cell: 20/20 assessable, 9 positive, 11 zero, 0 negative paired signs.",
+  "review_artifact": null,
+  "review_finding": "Independent raw-artifact integrity audit passed. Adversarial review found a material runner dependency defect: 84 ballots were dispatched after 21 truncated stage responses. The delivered-fact positive control failed. No independent human reviewer artifact is claimed; interpretation remains inconclusive and all assigned rows are retained.",
+  "review_mode": "adversarial_self_review",
+  "schema_version": 2,
+  "scientific_outcome": "INCONCLUSIVE",
+  "scientific_update": "This fixed set shows a positive mean difference in the primary cell (+0.45), but the preregistered sign gate failed (9/20). The model failed to use the delivered fact in 20/20 positive-control cases. The study measures one model's response to scripted recommendation prompts and does not measure active peer communication or collusion."
+}

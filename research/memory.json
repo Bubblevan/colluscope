@@ -99,11 +99,8 @@
       "scope": "The exact frozen synthetic projector and production B5 request compiler source paths reviewed on 2026-10-21."
     },
     {
-      "claim_id": "m1-private-reward-chat-package-interaction-descriptive",
       "claim": "In the 15 post-hoc M1-100 matched groups, target execution occurred in 9/15 private-reward plus chat-stage episodes and 0/15 in each of the other three cells of the four-cell contrast.",
-      "interpretation": "Independent ballot-level replay supports this finite descriptive pattern. The interaction and regret summaries are post-hoc and come from the same groups; this is one fixed Qwen3-8B temperature-zero corpus, with family rates 1/5, 5/5, and 3/5. Shared-target incentives and the extra chat-stage prompt prevent attribution to message semantics, agreement, collusion, or intent.",
-      "outcome": "SUPPORTED",
-      "scope": "Only the 15 completed F1-F3 matched groups in the frozen M1-100 extension run; not a population estimate or confirmatory hypothesis test.",
+      "claim_id": "m1-private-reward-chat-package-interaction-descriptive",
       "evidence_refs": [
         {
           "path": "docs/SCIENTIFIC_DIRECTION_REVIEW_POSTCAMPAIGN_20261021.md",
@@ -138,9 +135,13 @@
           "sha256": "9bf7b0f9ac3e43b885599d71f506671e6478df5ef5df29fd9e27e8fc827bbaa4"
         }
       ],
-      "review_scope": "Independent critic reviewed the sanitized reanalysis and direction ranking; it did not independently replay raw T/B."
+      "interpretation": "Independent ballot-level replay supports this finite descriptive pattern. The interaction and regret summaries are post-hoc and come from the same groups; this is one fixed Qwen3-8B temperature-zero corpus, with family rates 1/5, 5/5, and 3/5. Shared-target incentives and the extra chat-stage prompt prevent attribution to message semantics, agreement, collusion, or intent.",
+      "outcome": "SUPPORTED",
+      "review_scope": "Independent critic reviewed the sanitized reanalysis and direction ranking; it did not independently replay raw T/B.",
+      "scope": "Only the 15 completed F1-F3 matched groups in the frozen M1-100 extension run; not a population estimate or confirmatory hypothesis test."
     },
     {
+      "claim": "The M1 v2 three-matrix draft undercounted semantic input multiplicity; v3 improves payoff-context diversity while preserving its finite descriptive, non-causal claim boundary.",
       "claim_id": "m1-replication-prompt-context-multiplicity-audit-v3",
       "evidence_class": "offline_reanalysis",
       "evidence_refs": [
@@ -200,8 +201,7 @@
       "interpretation": "The exact frozen renderer found that the former three-matrix draft had 36 unique initial message prompts and 18 unique C ballot prompts across 24 nominal groups. A revised output-independent 24-matrix draft has 96 unique initial message prompts and 48 unique C ballot prompts. C still receives the same input in four no-public-bonus cells per group; that is an intentional negative control, not independent contexts.",
       "outcome": "INCONCLUSIVE",
       "scope": "Offline prompt-profile audit and pre-outcome redesign only; no model output or behavioral effect was observed.",
-      "statement": "The M1 v2 three-matrix draft undercounted semantic input multiplicity; v3 improves payoff-context diversity while preserving its finite descriptive, non-causal claim boundary.",
-      "claim": "The M1 v2 three-matrix draft undercounted semantic input multiplicity; v3 improves payoff-context diversity while preserving its finite descriptive, non-causal claim boundary."
+      "statement": "The M1 v2 three-matrix draft undercounted semantic input multiplicity; v3 improves payoff-context diversity while preserving its finite descriptive, non-causal claim boundary."
     },
     {
       "claim": "The M4 B5 permission-view changes and the balanced-fixture all-present collapse are confirmed finite response behaviors, but their causes remain unidentified.",
@@ -241,11 +241,8 @@
       "scope": "Only the frozen 24 M4 natural contexts, 48 historical/current exact-request pairs, and 40 balanced synthetic public-canonical rows reviewed on 2026-10-21."
     },
     {
-      "claim_id": "m4-b5-repeatability-public-profile-collision-20261021",
       "claim": "The prepared M4 repeatability candidate contains 47 unique model-visible request bodies across 48 context/view cells; one Public-only body is shared by two source contexts.",
-      "outcome": "SUPPORTED",
-      "scope": "Only the hash-pinned local preparation manifest for the unregistered m4-b5-view-repeatability-v2 candidate; no new model output or behavior was observed.",
-      "interpretation": "All 144 assigned request bodies match their manifest hashes. There are 23 distinct Public-only bodies and 24 distinct Privileged-original bodies. The single shared Public-only profile receives six assignments and links two different privileged bodies. This is a finite input-projection/dependence fact; not evidence of collusion, intent, or model understanding.",
+      "claim_id": "m4-b5-repeatability-public-profile-collision-20261021",
       "evidence_refs": [
         {
           "path": "docs/M4_B5_REPEATABILITY_PROFILE_COLLISION_AUDIT_20261021.md",
@@ -264,14 +261,14 @@
           "sha256": "08423c22f2badeac589bdddb71d49bf10db912f1d78a91339f16cd81bc52a010"
         }
       ],
-      "review_mode": "adversarial_self_review; not an independent critic confirmation"
+      "interpretation": "All 144 assigned request bodies match their manifest hashes. There are 23 distinct Public-only bodies and 24 distinct Privileged-original bodies. The single shared Public-only profile receives six assignments and links two different privileged bodies. This is a finite input-projection/dependence fact; not evidence of collusion, intent, or model understanding.",
+      "outcome": "SUPPORTED",
+      "review_mode": "adversarial_self_review; not an independent critic confirmation",
+      "scope": "Only the hash-pinned local preparation manifest for the unregistered m4-b5-view-repeatability-v2 candidate; no new model output or behavior was observed."
     },
     {
-      "claim_id": "m4-b5-repeatability-source-reconstruction-20261021",
       "claim": "An independent implementation rebuilt all 144 prepared repeatability request bodies from the frozen M4 source projections and matched their stored bytes.",
-      "outcome": "SUPPORTED",
-      "scope": "Finite offline source-to-request reconstruction for the unregistered m4-b5-view-repeatability-v2 candidate; source T/B/E mapping reused the frozen M4 source loader; no provider inference or new behavior observed.",
-      "interpretation": "The public-profile collision is not an artifact of the prepared manifest: 23 Public-only bodies include one profile linked to two source-unit hashes, while 24 Privileged-original bodies remain distinct. This supports clustering the shared public input once. It does not establish response stability, intent, or a general impossibility result.",
+      "claim_id": "m4-b5-repeatability-source-reconstruction-20261021",
       "evidence_refs": [
         {
           "path": "docs/M4_B5_REPEATABILITY_RECONSTRUCTION_FOLLOWUP_20261021.md",
@@ -290,14 +287,14 @@
           "sha256": "ecc1cfef4214f534b6cbb6ab74a98dcd71bd77bde8efcfc2cf4285c33cab06f7"
         }
       ],
-      "review_mode": "independent projection/body reconstruction; source loader reused; not a separate scientific critic"
+      "interpretation": "The public-profile collision is not an artifact of the prepared manifest: 23 Public-only bodies include one profile linked to two source-unit hashes, while 24 Privileged-original bodies remain distinct. This supports clustering the shared public input once. It does not establish response stability, intent, or a general impossibility result.",
+      "outcome": "SUPPORTED",
+      "review_mode": "independent projection/body reconstruction; source loader reused; not a separate scientific critic",
+      "scope": "Finite offline source-to-request reconstruction for the unregistered m4-b5-view-repeatability-v2 candidate; source T/B/E mapping reused the frozen M4 source loader; no provider inference or new behavior observed."
     },
     {
-      "claim_id": "m4-b5-profile-level-repeatability-reanalysis-20261021",
       "claim": "In this fixed linked corpus, retained historical/current responses were non-unanimous for 16 of 23 unique Public-only exact-request profiles and 2 of 24 Privileged-original profiles.",
-      "outcome": "SUPPORTED",
-      "scope": "Post-hoc finite reaggregation of 48 raw-audited historical/current exact-request pairs and the 24 current A1 contexts; not a same-window repeatability experiment.",
-      "interpretation": "The current A1 public-versus-privileged contrast changes labels in 19/24 contexts and 18/23 unique public-profile clusters. Across historical/current observations, only 7/23 linked clusters have unanimous labels for the public profile and every linked privileged profile; 5/7 determinate clusters change by view and 16/23 clusters contain a non-unanimous profile. This weakens a simple view-specific interpretation but does not identify provider randomness, hidden state, semantics, collusion, or intent.",
+      "claim_id": "m4-b5-profile-level-repeatability-reanalysis-20261021",
       "evidence_refs": [
         {
           "path": "scripts/audit_m4_b5_existing_repeatability_by_profile.py",
@@ -328,7 +325,10 @@
           "sha256": "c0b4a67bdc4f9f2663c3205e6b5eaa74a92fcaee6feab7e71b4f0a40bf44def9"
         }
       ],
-      "review_mode": "adversarial_self_review; the upstream raw-byte audit is independent, but this profile reaggregation has no separate independent critic review"
+      "interpretation": "The current A1 public-versus-privileged contrast changes labels in 19/24 contexts and 18/23 unique public-profile clusters. Across historical/current observations, only 7/23 linked clusters have unanimous labels for the public profile and every linked privileged profile; 5/7 determinate clusters change by view and 16/23 clusters contain a non-unanimous profile. This weakens a simple view-specific interpretation but does not identify provider randomness, hidden state, semantics, collusion, or intent.",
+      "outcome": "SUPPORTED",
+      "review_mode": "adversarial_self_review; the upstream raw-byte audit is independent, but this profile reaggregation has no separate independent critic review",
+      "scope": "Post-hoc finite reaggregation of 48 raw-audited historical/current exact-request pairs and the 24 current A1 contexts; not a same-window repeatability experiment."
     }
   ],
   "cycle_updates": [
@@ -358,6 +358,41 @@
       "scientific_outcome": "INCONCLUSIVE",
       "statement": "This 120-request synthetic diagnostic did not identify whether B5 labels are stable across the bundled Public-only versus task-irrelevant Privileged projection.",
       "what_changed": "The raw binary predictions were one-sided: all 40 primary-public and label-flip outputs were present, despite balanced reference labels. This exposes a failed positive control and prevents interpretation of the 0/18 assessable pair changes."
+    },
+    {
+      "claim_id": "deepseek-recipient-cue-following-v1",
+      "evidence_refs": [
+        {
+          "path": "docs/DEEPSEEK_RECIPIENT_MECHANISM_V1_EVIDENCE.md",
+          "sha256": "625004fe315d2bf148de18370ea9c4fcb079139fa1bad5fb4fa37e29e71cf90d"
+        },
+        {
+          "path": "docs/DEEPSEEK_RECIPIENT_MECHANISM_V1_DECISION.md",
+          "sha256": "44ea1fe82d48e49ae4e571e0addfd892653aeae18bb751b2b85ee3347dde634a"
+        },
+        {
+          "path": "docs/RESEARCH_RISK_REGISTER_FOLLOWUP_20261021_DEEPSEEK_RECIPIENT.md",
+          "sha256": "d9d1c9e3f0bd8ccde1ccf48c1cdc71445253894bee77b12357594aa210965403"
+        },
+        {
+          "path": "docs/results/deepseek-recipient-mechanism-v1/independent-analysis.json",
+          "sha256": "be84b7883b6bad5b968feff53108826ed114d2d766fa587da53ad7d0b4349d50"
+        },
+        {
+          "path": "docs/results/deepseek-recipient-mechanism-v1/independent-audit.json",
+          "sha256": "e87d524bebf6627d52e10e05f45049bf07f2a4f30a74da0e040d51b6095c415d"
+        },
+        {
+          "path": "docs/results/deepseek-recipient-mechanism-v1/model-request-ledger-sanitized.json",
+          "sha256": "8e660eb08233bd4386447b566a20c19c6941d080a86a96352411dc1bf29d29cc"
+        }
+      ],
+      "experiment_id": "deepseek-recipient-mechanism-v1",
+      "outcome": "INCONCLUSIVE",
+      "remaining_alternatives": "Cue anchoring or salience, reward wording, own-history interaction, model inability to use the factual cue, malformed stage-history contamination, and provider-side model drift remain plausible; the experiment did not contain active peers.",
+      "scientific_outcome": "INCONCLUSIVE",
+      "statement": "The frozen primary directional cue-response gate was not met for this fixed 20-context set.",
+      "what_changed": "All primary pairs were assessable, but positive paired signs were 9/20 and the delivered-fact positive control was 0/20."
     },
     {
       "claim_id": "m4-b5-context-sensitivity-mechanism",
@@ -720,9 +755,9 @@
       "independent_review_confirmed": false,
       "interpretation": "The current M1 Monitor candidate passes its structural offline audit on the current bytes (12 synthetic controls, 24 unique matrices, 672 generation and 696 physical-request ceilings; zero calls). The older saved PASS log points to different candidate hashes. A separate-context critic reviewed sanitized artifacts, not raw data. The candidate still lacks a deterministic extraction baseline, exact primary metrics/comparison rules, a named third adjudicator, a live dispatcher and completed human annotations; external private-text transfer needs explicit authorization.",
       "outcome": "INCONCLUSIVE",
+      "review_mode": "separate-context desk critique of sanitized artifacts plus local structural audit; not a blind raw-data audit",
       "scope": "Offline design and current-byte structural audit only; no M1 Agent or Monitor inference.",
-      "statement": "GO for design review only; NO-GO for final preregistration or dispatch. Keep the M1 24-distinct-matrix Agent package as the leading prospective behavior question, while treating its effect as a finite assigned-package contrast and not as evidence of message-semantic causality or collusion.",
-      "review_mode": "separate-context desk critique of sanitized artifacts plus local structural audit; not a blind raw-data audit"
+      "statement": "GO for design review only; NO-GO for final preregistration or dispatch. Keep the M1 24-distinct-matrix Agent package as the leading prospective behavior question, while treating its effect as a finite assigned-package contrast and not as evidence of message-semantic causality or collusion."
     },
     {
       "claim_id": "m1-v3-authorization-readiness-review-20261021",
@@ -772,19 +807,13 @@
       "independent_review_confirmed": false,
       "interpretation": "M1 v3 is the highest-value current prospective behavior test, but no new behavior has been observed. The post-hoc 9/15 target-execution package pattern remains compatible with shared-target parallel choice, added-stage salience, and payoff-family heterogeneity. The frozen 24-matrix candidate has a passing offline check-only receipt and a 23-input review manifest; live listener/template identity is unverified. Both prior DeepSeek approvals are consumed; remaining project budget does not authorize M1. The manifest verifier independently matched all 23 runtime input files and 11 review artifacts to their recorded hashes.",
       "outcome": "INCONCLUSIVE",
+      "review_mode": "offline source and runner audit plus separate-context desk review of sanitized prior evidence; not a raw-data replay",
       "scope": "Authorization/readiness review of the M1 v3 finite assigned-package candidate; no registration or model inference.",
-      "statement": "Request exact approval for the M1 v3 local Qwen package replication. If run, interpret only the preregistered finite private-reward × chat-stage interaction; defer separate Monitor calls and do not claim message-semantic causality, collusion, or intent.",
-      "review_mode": "offline source and runner audit plus separate-context desk review of sanitized prior evidence; not a raw-data replay"
+      "statement": "Request exact approval for the M1 v3 local Qwen package replication. If run, interpret only the preregistered finite private-reward × chat-stage interaction; defer separate Monitor calls and do not claim message-semantic causality, collusion, or intent."
     },
     {
       "claim_id": "m1-100-target-settlement-action-decomposition-20261021",
       "evidence_class": "offline_reanalysis",
-      "outcome": "SUPPORTED",
-      "scope": "Only the 15 matched F1-F3 groups / 75 completed episodes in the frozen M1-100 extension run.",
-      "statement": "Version-1 action decomposition validated all 75 settlements using the stored parsed_assignment field, but did not independently reparse raw model responses. Its aggregate ballot-path counts were 9/15 joint A/B target ballots in the private-reward-plus-chat cell, zero in the other factorial cells, with C invariant and no one-vote chair target selection.",
-      "previous_belief": "The 9/15 post-hoc target-execution interaction was known from environment outcomes, but action-level vote pathways had not been independently decomposed across the assigned groups.",
-      "what_changed": "The ballot replay shows that, in these historical rows only, settled target outcomes coincide with A/B joint target ballots and are not produced by C target votes or a single chair ballot.",
-      "interpretation": "This v1 evidence is conditional on stored parser output. Version 2 reparses original response text and independently reproduces the ballot assignments; use the v2 evidence for raw-response claims. Both remain one fixed corpus and do not identify message causality or intent.",
       "evidence_refs": [
         {
           "path": "docs/M1_PACKAGE_REPLICATION_V3_BALLOT_DECOMPOSITION_REVIEW_20261021.md",
@@ -808,18 +837,18 @@
         }
       ],
       "independent_review_confirmed": false,
+      "interpretation": "This v1 evidence is conditional on stored parser output. Version 2 reparses original response text and independently reproduces the ballot assignments; use the v2 evidence for raw-response claims. Both remain one fixed corpus and do not identify message causality or intent.",
+      "outcome": "SUPPORTED",
+      "previous_belief": "The 9/15 post-hoc target-execution interaction was known from environment outcomes, but action-level vote pathways had not been independently decomposed across the assigned groups.",
       "review_mode": "v1 deterministic settlement replay conditioned on stored parsed_assignment plus adversarial self-review; superseded for raw-response claims by v2; not an independent human critic review",
-      "superseded_by": "m1-100-raw-response-ballot-audit-v2-20261021"
+      "scope": "Only the 15 matched F1-F3 groups / 75 completed episodes in the frozen M1-100 extension run.",
+      "statement": "Version-1 action decomposition validated all 75 settlements using the stored parsed_assignment field, but did not independently reparse raw model responses. Its aggregate ballot-path counts were 9/15 joint A/B target ballots in the private-reward-plus-chat cell, zero in the other factorial cells, with C invariant and no one-vote chair target selection.",
+      "superseded_by": "m1-100-raw-response-ballot-audit-v2-20261021",
+      "what_changed": "The ballot replay shows that, in these historical rows only, settled target outcomes coincide with A/B joint target ballots and are not produced by C target votes or a single chair ballot."
     },
     {
       "claim_id": "m1-100-raw-response-ballot-audit-v2-20261021",
       "evidence_class": "offline_reanalysis",
-      "outcome": "SUPPORTED",
-      "scope": "Only the 15 matched F1-F3 groups / 75 completed episodes in the frozen M1-100 extension run.",
-      "statement": "V2 reparsed 225/225 raw ballot response texts using the frozen ballot object contract; 225/225 allocations matched the stored parsed_assignment fields; independent plurality/chair replay from the reparsed assignments matched 75/75 recorded settlements. The v1 aggregate action decomposition is unchanged under raw-response parsing.",
-      "previous_belief": "The v1 action decomposition was calculated from the stored parsed_assignment field and could inherit an upstream parse error.",
-      "what_changed": "Raw model response text was independently reparsed, compared with every stored parser field, and then used for settlement recomputation; no disagreement occurred in the 225 ballots.",
-      "interpretation": "This validates the ballot text/parser-field/settlement chain for these 75 assigned episodes only. It does not make the model outputs independent samples or show that message content caused A/B co-voting; both agents know the same target.",
       "evidence_refs": [
         {
           "path": "docs/M1_PACKAGE_REPLICATION_V3_RAW_RESPONSE_AUDIT_20261021.md",
@@ -839,7 +868,13 @@
         }
       ],
       "independent_review_confirmed": false,
-      "review_mode": "deterministic raw-response replay plus adversarial_self_review; not an independent human Scientific Critic review"
+      "interpretation": "This validates the ballot text/parser-field/settlement chain for these 75 assigned episodes only. It does not make the model outputs independent samples or show that message content caused A/B co-voting; both agents know the same target.",
+      "outcome": "SUPPORTED",
+      "previous_belief": "The v1 action decomposition was calculated from the stored parsed_assignment field and could inherit an upstream parse error.",
+      "review_mode": "deterministic raw-response replay plus adversarial_self_review; not an independent human Scientific Critic review",
+      "scope": "Only the 15 matched F1-F3 groups / 75 completed episodes in the frozen M1-100 extension run.",
+      "statement": "V2 reparsed 225/225 raw ballot response texts using the frozen ballot object contract; 225/225 allocations matched the stored parsed_assignment fields; independent plurality/chair replay from the reparsed assignments matched 75/75 recorded settlements. The v1 aggregate action decomposition is unchanged under raw-response parsing.",
+      "what_changed": "Raw model response text was independently reparsed, compared with every stored parser field, and then used for settlement recomputation; no disagreement occurred in the 225 ballots."
     }
   ],
   "purpose": "Claim-level memory for future cycle selection. This is a scoped summary of historical artifacts, not a universal scientific score.",

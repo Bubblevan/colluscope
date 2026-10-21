@@ -25,7 +25,7 @@
       "hypothesis": "Across the frozen 20 payoff contexts, the focal DeepSeek model will select allocation X more often after an X recommendation than after a token-matched Y recommendation, with the paired response varying across the assigned bonus and own-history prompt conditions. This tests response to scripted cues in one model; it does not identify active peer communication, collusion, or intent.",
       "hypothesis_id": "deepseek-recipient-cue-following-v1",
       "selection_note": "Selected only after the user clarified approval covers the whole proposed DeepSeek batch and rejected Qwen. It directly tests the prospective cue-response mechanism raised by prior M3/M1 evidence, while controlling X/Y public welfare and focal base score. It is not an active multi-agent coordination experiment.",
-      "status": "selected",
+      "status": "candidate",
       "title": "Does a single model's allocation choice respond to matched scripted recommendations?"
     },
     {
@@ -94,6 +94,6 @@
   ],
   "policy": "At most three read-only candidate directions may be compared. Only one can be selected for a formal cycle at a time. Candidate status is not preregistration or authorization.",
   "schema_version": 1,
-  "selected_hypothesis_id": "deepseek-recipient-cue-following-v1",
+  "selected_hypothesis_id": null,
   "updated_at": "2026-10-21"
 }

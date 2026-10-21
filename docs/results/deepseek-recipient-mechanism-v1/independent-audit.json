@@ -1,0 +1,2698 @@
+{
+  "actual_peak_rate_cost_usd": "0.0944016",
+  "all_120_x_y_pairs": [
+    {
+      "assessable": true,
+      "context": "ctx-01",
+      "difference": 0,
+      "history": "actual",
+      "reward": "none",
+      "x_target_after_x": false,
+      "x_target_after_y": false
+    },
+    {
+      "assessable": true,
+      "context": "ctx-01",
+      "difference": 1,
+      "history": "neutral",
+      "reward": "none",
+      "x_target_after_x": true,
+      "x_target_after_y": false
+    },
+    {
+      "assessable": true,
+      "context": "ctx-01",
+      "difference": 1,
+      "history": "actual",
+      "reward": "focal",
+      "x_target_after_x": true,
+      "x_target_after_y": false
+    },
+    {
+      "assessable": true,
+      "context": "ctx-01",
+      "difference": 1,
+      "history": "neutral",
+      "reward": "focal",
+      "x_target_after_x": true,
+      "x_target_after_y": false
+    },
+    {
+      "assessable": true,
+      "context": "ctx-01",
+      "difference": 0,
+      "history": "actual",
+      "reward": "shared",
+      "x_target_after_x": false,
+      "x_target_after_y": false
+    },
+    {
+      "assessable": true,
+      "context": "ctx-01",
+      "difference": 0,
+      "history": "neutral",
+      "reward": "shared",
+      "x_target_after_x": true,
+      "x_target_after_y": true
+    },
+    {
+      "assessable": true,
+      "context": "ctx-02",
+      "difference": 0,
+      "history": "actual",
+      "reward": "none",
+      "x_target_after_x": false,
+      "x_target_after_y": false
+    },
+    {
+      "assessable": true,
+      "context": "ctx-02",
+      "difference": 1,
+      "history": "neutral",
+      "reward": "none",
+      "x_target_after_x": true,
+      "x_target_after_y": false
+    },
+    {
+      "assessable": true,
+      "context": "ctx-02",
+      "difference": 0,
+      "history": "actual",
+      "reward": "focal",
+      "x_target_after_x": false,
+      "x_target_after_y": false
+    },
+    {
+      "assessable": true,
+      "context": "ctx-02",
+      "difference": 1,
+      "history": "neutral",
+      "reward": "focal",
+      "x_target_after_x": true,
+      "x_target_after_y": false
+    },
+    {
+      "assessable": true,
+      "context": "ctx-02",
+      "difference": 0,
+      "history": "actual",
+      "reward": "shared",
+      "x_target_after_x": false,
+      "x_target_after_y": false
+    },
+    {
+      "assessable": true,
+      "context": "ctx-02",
+      "difference": 0,
+      "history": "neutral",
+      "reward": "shared",
+      "x_target_after_x": false,
+      "x_target_after_y": false
+    },
+    {
+      "assessable": true,
+      "context": "ctx-03",
+      "difference": 0,
+      "history": "actual",
+      "reward": "none",
+      "x_target_after_x": false,
+      "x_target_after_y": false
+    },
+    {
+      "assessable": true,
+      "context": "ctx-03",
+      "difference": 1,
+      "history": "neutral",
+      "reward": "none",
+      "x_target_after_x": true,
+      "x_target_after_y": false
+    },
+    {
+      "assessable": true,
+      "context": "ctx-03",
+      "difference": 0,
+      "history": "actual",
+      "reward": "focal",
+      "x_target_after_x": false,
+      "x_target_after_y": false
+    },
+    {
+      "assessable": true,
+      "context": "ctx-03",
+      "difference": 1,
+      "history": "neutral",
+      "reward": "focal",
+      "x_target_after_x": true,
+      "x_target_after_y": false
+    },
+    {
+      "assessable": true,
+      "context": "ctx-03",
+      "difference": 1,
+      "history": "actual",
+      "reward": "shared",
+      "x_target_after_x": true,
+      "x_target_after_y": false
+    },
+    {
+      "assessable": true,
+      "context": "ctx-03",
+      "difference": 0,
+      "history": "neutral",
+      "reward": "shared",
+      "x_target_after_x": true,
+      "x_target_after_y": true
+    },
+    {
+      "assessable": true,
+      "context": "ctx-04",
+      "difference": 0,
+      "history": "actual",
+      "reward": "none",
+      "x_target_after_x": false,
+      "x_target_after_y": false
+    },
+    {
+      "assessable": true,
+      "context": "ctx-04",
+      "difference": 1,
+      "history": "neutral",
+      "reward": "none",
+      "x_target_after_x": true,
+      "x_target_after_y": false
+    },
+    {
+      "assessable": true,
+      "context": "ctx-04",
+      "difference": 0,
+      "history": "actual",
+      "reward": "focal",
+      "x_target_after_x": false,
+      "x_target_after_y": false
+    },
+    {
+      "assessable": true,
+      "context": "ctx-04",
+      "difference": 1,
+      "history": "neutral",
+      "reward": "focal",
+      "x_target_after_x": true,
+      "x_target_after_y": false
+    },
+    {
+      "assessable": true,
+      "context": "ctx-04",
+      "difference": 1,
+      "history": "actual",
+      "reward": "shared",
+      "x_target_after_x": true,
+      "x_target_after_y": false
+    },
+    {
+      "assessable": true,
+      "context": "ctx-04",
+      "difference": 1,
+      "history": "neutral",
+      "reward": "shared",
+      "x_target_after_x": true,
+      "x_target_after_y": false
+    },
+    {
+      "assessable": true,
+      "context": "ctx-05",
+      "difference": 0,
+      "history": "actual",
+      "reward": "none",
+      "x_target_after_x": false,
+      "x_target_after_y": false
+    },
+    {
+      "assessable": true,
+      "context": "ctx-05",
+      "difference": 1,
+      "history": "neutral",
+      "reward": "none",
+      "x_target_after_x": true,
+      "x_target_after_y": false
+    },
+    {
+      "assessable": true,
+      "context": "ctx-05",
+      "difference": 0,
+      "history": "actual",
+      "reward": "focal",
+      "x_target_after_x": false,
+      "x_target_after_y": false
+    },
+    {
+      "assessable": true,
+      "context": "ctx-05",
+      "difference": 0,
+      "history": "neutral",
+      "reward": "focal",
+      "x_target_after_x": false,
+      "x_target_after_y": false
+    },
+    {
+      "assessable": true,
+      "context": "ctx-05",
+      "difference": 0,
+      "history": "actual",
+      "reward": "shared",
+      "x_target_after_x": false,
+      "x_target_after_y": false
+    },
+    {
+      "assessable": true,
+      "context": "ctx-05",
+      "difference": 0,
+      "history": "neutral",
+      "reward": "shared",
+      "x_target_after_x": false,
+      "x_target_after_y": false
+    },
+    {
+      "assessable": true,
+      "context": "ctx-06",
+      "difference": 0,
+      "history": "actual",
+      "reward": "none",
+      "x_target_after_x": true,
+      "x_target_after_y": true
+    },
+    {
+      "assessable": true,
+      "context": "ctx-06",
+      "difference": 1,
+      "history": "neutral",
+      "reward": "none",
+      "x_target_after_x": true,
+      "x_target_after_y": false
+    },
+    {
+      "assessable": true,
+      "context": "ctx-06",
+      "difference": 0,
+      "history": "actual",
+      "reward": "focal",
+      "x_target_after_x": true,
+      "x_target_after_y": true
+    },
+    {
+      "assessable": true,
+      "context": "ctx-06",
+      "difference": 1,
+      "history": "neutral",
+      "reward": "focal",
+      "x_target_after_x": true,
+      "x_target_after_y": false
+    },
+    {
+      "assessable": true,
+      "context": "ctx-06",
+      "difference": 0,
+      "history": "actual",
+      "reward": "shared",
+      "x_target_after_x": true,
+      "x_target_after_y": true
+    },
+    {
+      "assessable": true,
+      "context": "ctx-06",
+      "difference": 1,
+      "history": "neutral",
+      "reward": "shared",
+      "x_target_after_x": true,
+      "x_target_after_y": false
+    },
+    {
+      "assessable": true,
+      "context": "ctx-07",
+      "difference": 0,
+      "history": "actual",
+      "reward": "none",
+      "x_target_after_x": false,
+      "x_target_after_y": false
+    },
+    {
+      "assessable": true,
+      "context": "ctx-07",
+      "difference": 1,
+      "history": "neutral",
+      "reward": "none",
+      "x_target_after_x": true,
+      "x_target_after_y": false
+    },
+    {
+      "assessable": true,
+      "context": "ctx-07",
+      "difference": 0,
+      "history": "actual",
+      "reward": "focal",
+      "x_target_after_x": false,
+      "x_target_after_y": false
+    },
+    {
+      "assessable": true,
+      "context": "ctx-07",
+      "difference": 1,
+      "history": "neutral",
+      "reward": "focal",
+      "x_target_after_x": true,
+      "x_target_after_y": false
+    },
+    {
+      "assessable": true,
+      "context": "ctx-07",
+      "difference": 0,
+      "history": "actual",
+      "reward": "shared",
+      "x_target_after_x": false,
+      "x_target_after_y": false
+    },
+    {
+      "assessable": true,
+      "context": "ctx-07",
+      "difference": 1,
+      "history": "neutral",
+      "reward": "shared",
+      "x_target_after_x": true,
+      "x_target_after_y": false
+    },
+    {
+      "assessable": true,
+      "context": "ctx-08",
+      "difference": 0,
+      "history": "actual",
+      "reward": "none",
+      "x_target_after_x": true,
+      "x_target_after_y": true
+    },
+    {
+      "assessable": true,
+      "context": "ctx-08",
+      "difference": 1,
+      "history": "neutral",
+      "reward": "none",
+      "x_target_after_x": true,
+      "x_target_after_y": false
+    },
+    {
+      "assessable": true,
+      "context": "ctx-08",
+      "difference": 0,
+      "history": "actual",
+      "reward": "focal",
+      "x_target_after_x": true,
+      "x_target_after_y": true
+    },
+    {
+      "assessable": true,
+      "context": "ctx-08",
+      "difference": 1,
+      "history": "neutral",
+      "reward": "focal",
+      "x_target_after_x": true,
+      "x_target_after_y": false
+    },
+    {
+      "assessable": true,
+      "context": "ctx-08",
+      "difference": 0,
+      "history": "actual",
+      "reward": "shared",
+      "x_target_after_x": true,
+      "x_target_after_y": true
+    },
+    {
+      "assessable": true,
+      "context": "ctx-08",
+      "difference": 0,
+      "history": "neutral",
+      "reward": "shared",
+      "x_target_after_x": false,
+      "x_target_after_y": false
+    },
+    {
+      "assessable": true,
+      "context": "ctx-09",
+      "difference": 0,
+      "history": "actual",
+      "reward": "none",
+      "x_target_after_x": false,
+      "x_target_after_y": false
+    },
+    {
+      "assessable": true,
+      "context": "ctx-09",
+      "difference": 1,
+      "history": "neutral",
+      "reward": "none",
+      "x_target_after_x": true,
+      "x_target_after_y": false
+    },
+    {
+      "assessable": true,
+      "context": "ctx-09",
+      "difference": 0,
+      "history": "actual",
+      "reward": "focal",
+      "x_target_after_x": false,
+      "x_target_after_y": false
+    },
+    {
+      "assessable": true,
+      "context": "ctx-09",
+      "difference": 0,
+      "history": "neutral",
+      "reward": "focal",
+      "x_target_after_x": true,
+      "x_target_after_y": true
+    },
+    {
+      "assessable": true,
+      "context": "ctx-09",
+      "difference": 1,
+      "history": "actual",
+      "reward": "shared",
+      "x_target_after_x": true,
+      "x_target_after_y": false
+    },
+    {
+      "assessable": true,
+      "context": "ctx-09",
+      "difference": 0,
+      "history": "neutral",
+      "reward": "shared",
+      "x_target_after_x": true,
+      "x_target_after_y": true
+    },
+    {
+      "assessable": true,
+      "context": "ctx-10",
+      "difference": 0,
+      "history": "actual",
+      "reward": "none",
+      "x_target_after_x": false,
+      "x_target_after_y": false
+    },
+    {
+      "assessable": true,
+      "context": "ctx-10",
+      "difference": 1,
+      "history": "neutral",
+      "reward": "none",
+      "x_target_after_x": true,
+      "x_target_after_y": false
+    },
+    {
+      "assessable": true,
+      "context": "ctx-10",
+      "difference": 1,
+      "history": "actual",
+      "reward": "focal",
+      "x_target_after_x": true,
+      "x_target_after_y": false
+    },
+    {
+      "assessable": true,
+      "context": "ctx-10",
+      "difference": 1,
+      "history": "neutral",
+      "reward": "focal",
+      "x_target_after_x": true,
+      "x_target_after_y": false
+    },
+    {
+      "assessable": true,
+      "context": "ctx-10",
+      "difference": 1,
+      "history": "actual",
+      "reward": "shared",
+      "x_target_after_x": true,
+      "x_target_after_y": false
+    },
+    {
+      "assessable": true,
+      "context": "ctx-10",
+      "difference": 0,
+      "history": "neutral",
+      "reward": "shared",
+      "x_target_after_x": true,
+      "x_target_after_y": true
+    },
+    {
+      "assessable": true,
+      "context": "ctx-11",
+      "difference": 0,
+      "history": "actual",
+      "reward": "none",
+      "x_target_after_x": false,
+      "x_target_after_y": false
+    },
+    {
+      "assessable": true,
+      "context": "ctx-11",
+      "difference": 1,
+      "history": "neutral",
+      "reward": "none",
+      "x_target_after_x": true,
+      "x_target_after_y": false
+    },
+    {
+      "assessable": true,
+      "context": "ctx-11",
+      "difference": 0,
+      "history": "actual",
+      "reward": "focal",
+      "x_target_after_x": false,
+      "x_target_after_y": false
+    },
+    {
+      "assessable": true,
+      "context": "ctx-11",
+      "difference": 1,
+      "history": "neutral",
+      "reward": "focal",
+      "x_target_after_x": true,
+      "x_target_after_y": false
+    },
+    {
+      "assessable": true,
+      "context": "ctx-11",
+      "difference": 1,
+      "history": "actual",
+      "reward": "shared",
+      "x_target_after_x": true,
+      "x_target_after_y": false
+    },
+    {
+      "assessable": true,
+      "context": "ctx-11",
+      "difference": 1,
+      "history": "neutral",
+      "reward": "shared",
+      "x_target_after_x": true,
+      "x_target_after_y": false
+    },
+    {
+      "assessable": true,
+      "context": "ctx-12",
+      "difference": 0,
+      "history": "actual",
+      "reward": "none",
+      "x_target_after_x": false,
+      "x_target_after_y": false
+    },
+    {
+      "assessable": true,
+      "context": "ctx-12",
+      "difference": 1,
+      "history": "neutral",
+      "reward": "none",
+      "x_target_after_x": true,
+      "x_target_after_y": false
+    },
+    {
+      "assessable": true,
+      "context": "ctx-12",
+      "difference": 0,
+      "history": "actual",
+      "reward": "focal",
+      "x_target_after_x": false,
+      "x_target_after_y": false
+    },
+    {
+      "assessable": true,
+      "context": "ctx-12",
+      "difference": 1,
+      "history": "neutral",
+      "reward": "focal",
+      "x_target_after_x": true,
+      "x_target_after_y": false
+    },
+    {
+      "assessable": true,
+      "context": "ctx-12",
+      "difference": 0,
+      "history": "actual",
+      "reward": "shared",
+      "x_target_after_x": false,
+      "x_target_after_y": false
+    },
+    {
+      "assessable": true,
+      "context": "ctx-12",
+      "difference": 1,
+      "history": "neutral",
+      "reward": "shared",
+      "x_target_after_x": true,
+      "x_target_after_y": false
+    },
+    {
+      "assessable": true,
+      "context": "ctx-13",
+      "difference": 0,
+      "history": "actual",
+      "reward": "none",
+      "x_target_after_x": false,
+      "x_target_after_y": false
+    },
+    {
+      "assessable": true,
+      "context": "ctx-13",
+      "difference": 0,
+      "history": "neutral",
+      "reward": "none",
+      "x_target_after_x": false,
+      "x_target_after_y": false
+    },
+    {
+      "assessable": true,
+      "context": "ctx-13",
+      "difference": 0,
+      "history": "actual",
+      "reward": "focal",
+      "x_target_after_x": false,
+      "x_target_after_y": false
+    },
+    {
+      "assessable": true,
+      "context": "ctx-13",
+      "difference": 0,
+      "history": "neutral",
+      "reward": "focal",
+      "x_target_after_x": false,
+      "x_target_after_y": false
+    },
+    {
+      "assessable": true,
+      "context": "ctx-13",
+      "difference": 1,
+      "history": "actual",
+      "reward": "shared",
+      "x_target_after_x": true,
+      "x_target_after_y": false
+    },
+    {
+      "assessable": true,
+      "context": "ctx-13",
+      "difference": 1,
+      "history": "neutral",
+      "reward": "shared",
+      "x_target_after_x": true,
+      "x_target_after_y": false
+    },
+    {
+      "assessable": true,
+      "context": "ctx-14",
+      "difference": 0,
+      "history": "actual",
+      "reward": "none",
+      "x_target_after_x": false,
+      "x_target_after_y": false
+    },
+    {
+      "assessable": true,
+      "context": "ctx-14",
+      "difference": 1,
+      "history": "neutral",
+      "reward": "none",
+      "x_target_after_x": true,
+      "x_target_after_y": false
+    },
+    {
+      "assessable": true,
+      "context": "ctx-14",
+      "difference": 0,
+      "history": "actual",
+      "reward": "focal",
+      "x_target_after_x": false,
+      "x_target_after_y": false
+    },
+    {
+      "assessable": true,
+      "context": "ctx-14",
+      "difference": 1,
+      "history": "neutral",
+      "reward": "focal",
+      "x_target_after_x": true,
+      "x_target_after_y": false
+    },
+    {
+      "assessable": true,
+      "context": "ctx-14",
+      "difference": 0,
+      "history": "actual",
+      "reward": "shared",
+      "x_target_after_x": false,
+      "x_target_after_y": false
+    },
+    {
+      "assessable": true,
+      "context": "ctx-14",
+      "difference": 1,
+      "history": "neutral",
+      "reward": "shared",
+      "x_target_after_x": true,
+      "x_target_after_y": false
+    },
+    {
+      "assessable": true,
+      "context": "ctx-15",
+      "difference": 0,
+      "history": "actual",
+      "reward": "none",
+      "x_target_after_x": false,
+      "x_target_after_y": false
+    },
+    {
+      "assessable": true,
+      "context": "ctx-15",
+      "difference": 1,
+      "history": "neutral",
+      "reward": "none",
+      "x_target_after_x": true,
+      "x_target_after_y": false
+    },
+    {
+      "assessable": true,
+      "context": "ctx-15",
+      "difference": 0,
+      "history": "actual",
+      "reward": "focal",
+      "x_target_after_x": false,
+      "x_target_after_y": false
+    },
+    {
+      "assessable": true,
+      "context": "ctx-15",
+      "difference": 1,
+      "history": "neutral",
+      "reward": "focal",
+      "x_target_after_x": true,
+      "x_target_after_y": false
+    },
+    {
+      "assessable": true,
+      "context": "ctx-15",
+      "difference": 0,
+      "history": "actual",
+      "reward": "shared",
+      "x_target_after_x": false,
+      "x_target_after_y": false
+    },
+    {
+      "assessable": true,
+      "context": "ctx-15",
+      "difference": 0,
+      "history": "neutral",
+      "reward": "shared",
+      "x_target_after_x": true,
+      "x_target_after_y": true
+    },
+    {
+      "assessable": true,
+      "context": "ctx-16",
+      "difference": 0,
+      "history": "actual",
+      "reward": "none",
+      "x_target_after_x": false,
+      "x_target_after_y": false
+    },
+    {
+      "assessable": true,
+      "context": "ctx-16",
+      "difference": 1,
+      "history": "neutral",
+      "reward": "none",
+      "x_target_after_x": true,
+      "x_target_after_y": false
+    },
+    {
+      "assessable": true,
+      "context": "ctx-16",
+      "difference": 1,
+      "history": "actual",
+      "reward": "focal",
+      "x_target_after_x": true,
+      "x_target_after_y": false
+    },
+    {
+      "assessable": true,
+      "context": "ctx-16",
+      "difference": 1,
+      "history": "neutral",
+      "reward": "focal",
+      "x_target_after_x": true,
+      "x_target_after_y": false
+    },
+    {
+      "assessable": true,
+      "context": "ctx-16",
+      "difference": 1,
+      "history": "actual",
+      "reward": "shared",
+      "x_target_after_x": true,
+      "x_target_after_y": false
+    },
+    {
+      "assessable": true,
+      "context": "ctx-16",
+      "difference": 0,
+      "history": "neutral",
+      "reward": "shared",
+      "x_target_after_x": false,
+      "x_target_after_y": false
+    },
+    {
+      "assessable": true,
+      "context": "ctx-17",
+      "difference": 0,
+      "history": "actual",
+      "reward": "none",
+      "x_target_after_x": false,
+      "x_target_after_y": false
+    },
+    {
+      "assessable": true,
+      "context": "ctx-17",
+      "difference": 1,
+      "history": "neutral",
+      "reward": "none",
+      "x_target_after_x": true,
+      "x_target_after_y": false
+    },
+    {
+      "assessable": true,
+      "context": "ctx-17",
+      "difference": 1,
+      "history": "actual",
+      "reward": "focal",
+      "x_target_after_x": true,
+      "x_target_after_y": false
+    },
+    {
+      "assessable": true,
+      "context": "ctx-17",
+      "difference": 0,
+      "history": "neutral",
+      "reward": "focal",
+      "x_target_after_x": false,
+      "x_target_after_y": false
+    },
+    {
+      "assessable": true,
+      "context": "ctx-17",
+      "difference": 0,
+      "history": "actual",
+      "reward": "shared",
+      "x_target_after_x": true,
+      "x_target_after_y": true
+    },
+    {
+      "assessable": true,
+      "context": "ctx-17",
+      "difference": 0,
+      "history": "neutral",
+      "reward": "shared",
+      "x_target_after_x": true,
+      "x_target_after_y": true
+    },
+    {
+      "assessable": true,
+      "context": "ctx-18",
+      "difference": 0,
+      "history": "actual",
+      "reward": "none",
+      "x_target_after_x": false,
+      "x_target_after_y": false
+    },
+    {
+      "assessable": true,
+      "context": "ctx-18",
+      "difference": 1,
+      "history": "neutral",
+      "reward": "none",
+      "x_target_after_x": true,
+      "x_target_after_y": false
+    },
+    {
+      "assessable": true,
+      "context": "ctx-18",
+      "difference": 0,
+      "history": "actual",
+      "reward": "focal",
+      "x_target_after_x": false,
+      "x_target_after_y": false
+    },
+    {
+      "assessable": true,
+      "context": "ctx-18",
+      "difference": 1,
+      "history": "neutral",
+      "reward": "focal",
+      "x_target_after_x": true,
+      "x_target_after_y": false
+    },
+    {
+      "assessable": true,
+      "context": "ctx-18",
+      "difference": 1,
+      "history": "actual",
+      "reward": "shared",
+      "x_target_after_x": true,
+      "x_target_after_y": false
+    },
+    {
+      "assessable": true,
+      "context": "ctx-18",
+      "difference": 0,
+      "history": "neutral",
+      "reward": "shared",
+      "x_target_after_x": true,
+      "x_target_after_y": true
+    },
+    {
+      "assessable": true,
+      "context": "ctx-19",
+      "difference": 0,
+      "history": "actual",
+      "reward": "none",
+      "x_target_after_x": false,
+      "x_target_after_y": false
+    },
+    {
+      "assessable": true,
+      "context": "ctx-19",
+      "difference": 1,
+      "history": "neutral",
+      "reward": "none",
+      "x_target_after_x": true,
+      "x_target_after_y": false
+    },
+    {
+      "assessable": true,
+      "context": "ctx-19",
+      "difference": 1,
+      "history": "actual",
+      "reward": "focal",
+      "x_target_after_x": true,
+      "x_target_after_y": false
+    },
+    {
+      "assessable": true,
+      "context": "ctx-19",
+      "difference": 1,
+      "history": "neutral",
+      "reward": "focal",
+      "x_target_after_x": true,
+      "x_target_after_y": false
+    },
+    {
+      "assessable": true,
+      "context": "ctx-19",
+      "difference": 0,
+      "history": "actual",
+      "reward": "shared",
+      "x_target_after_x": false,
+      "x_target_after_y": false
+    },
+    {
+      "assessable": true,
+      "context": "ctx-19",
+      "difference": 0,
+      "history": "neutral",
+      "reward": "shared",
+      "x_target_after_x": false,
+      "x_target_after_y": false
+    },
+    {
+      "assessable": true,
+      "context": "ctx-20",
+      "difference": 0,
+      "history": "actual",
+      "reward": "none",
+      "x_target_after_x": false,
+      "x_target_after_y": false
+    },
+    {
+      "assessable": true,
+      "context": "ctx-20",
+      "difference": 1,
+      "history": "neutral",
+      "reward": "none",
+      "x_target_after_x": true,
+      "x_target_after_y": false
+    },
+    {
+      "assessable": true,
+      "context": "ctx-20",
+      "difference": 1,
+      "history": "actual",
+      "reward": "focal",
+      "x_target_after_x": true,
+      "x_target_after_y": false
+    },
+    {
+      "assessable": true,
+      "context": "ctx-20",
+      "difference": 0,
+      "history": "neutral",
+      "reward": "focal",
+      "x_target_after_x": true,
+      "x_target_after_y": true
+    },
+    {
+      "assessable": true,
+      "context": "ctx-20",
+      "difference": 1,
+      "history": "actual",
+      "reward": "shared",
+      "x_target_after_x": true,
+      "x_target_after_y": false
+    },
+    {
+      "assessable": true,
+      "context": "ctx-20",
+      "difference": 0,
+      "history": "neutral",
+      "reward": "shared",
+      "x_target_after_x": true,
+      "x_target_after_y": true
+    }
+  ],
+  "assigned_requests": 804,
+  "capability_controls": {
+    "assigned": 40,
+    "delivered_fact_assessable": 20,
+    "delivered_fact_correct": 0,
+    "missing_fact_assessable": 20,
+    "missing_fact_correct": 20
+  },
+  "conservative_reserved_cost_usd": "0.8039904",
+  "dynamic_x_y_neutral_prompt_families": {
+    "assigned": 120,
+    "matched": 120,
+    "rows": [
+      {
+        "context_id": "ctx-01",
+        "counts": {
+          "neutral": 365,
+          "x": 365,
+          "y": 365
+        },
+        "history": "actual",
+        "matched": true,
+        "reward": "focal"
+      },
+      {
+        "context_id": "ctx-01",
+        "counts": {
+          "neutral": 319,
+          "x": 319,
+          "y": 319
+        },
+        "history": "neutral",
+        "matched": true,
+        "reward": "focal"
+      },
+      {
+        "context_id": "ctx-01",
+        "counts": {
+          "neutral": 301,
+          "x": 301,
+          "y": 301
+        },
+        "history": "actual",
+        "matched": true,
+        "reward": "none"
+      },
+      {
+        "context_id": "ctx-01",
+        "counts": {
+          "neutral": 303,
+          "x": 303,
+          "y": 303
+        },
+        "history": "neutral",
+        "matched": true,
+        "reward": "none"
+      },
+      {
+        "context_id": "ctx-01",
+        "counts": {
+          "neutral": 431,
+          "x": 431,
+          "y": 431
+        },
+        "history": "actual",
+        "matched": true,
+        "reward": "shared"
+      },
+      {
+        "context_id": "ctx-01",
+        "counts": {
+          "neutral": 446,
+          "x": 446,
+          "y": 446
+        },
+        "history": "neutral",
+        "matched": true,
+        "reward": "shared"
+      },
+      {
+        "context_id": "ctx-02",
+        "counts": {
+          "neutral": 371,
+          "x": 371,
+          "y": 371
+        },
+        "history": "actual",
+        "matched": true,
+        "reward": "focal"
+      },
+      {
+        "context_id": "ctx-02",
+        "counts": {
+          "neutral": 319,
+          "x": 319,
+          "y": 319
+        },
+        "history": "neutral",
+        "matched": true,
+        "reward": "focal"
+      },
+      {
+        "context_id": "ctx-02",
+        "counts": {
+          "neutral": 301,
+          "x": 301,
+          "y": 301
+        },
+        "history": "actual",
+        "matched": true,
+        "reward": "none"
+      },
+      {
+        "context_id": "ctx-02",
+        "counts": {
+          "neutral": 303,
+          "x": 303,
+          "y": 303
+        },
+        "history": "neutral",
+        "matched": true,
+        "reward": "none"
+      },
+      {
+        "context_id": "ctx-02",
+        "counts": {
+          "neutral": 426,
+          "x": 426,
+          "y": 426
+        },
+        "history": "actual",
+        "matched": true,
+        "reward": "shared"
+      },
+      {
+        "context_id": "ctx-02",
+        "counts": {
+          "neutral": 446,
+          "x": 446,
+          "y": 446
+        },
+        "history": "neutral",
+        "matched": true,
+        "reward": "shared"
+      },
+      {
+        "context_id": "ctx-03",
+        "counts": {
+          "neutral": 381,
+          "x": 381,
+          "y": 381
+        },
+        "history": "actual",
+        "matched": true,
+        "reward": "focal"
+      },
+      {
+        "context_id": "ctx-03",
+        "counts": {
+          "neutral": 319,
+          "x": 319,
+          "y": 319
+        },
+        "history": "neutral",
+        "matched": true,
+        "reward": "focal"
+      },
+      {
+        "context_id": "ctx-03",
+        "counts": {
+          "neutral": 334,
+          "x": 334,
+          "y": 334
+        },
+        "history": "actual",
+        "matched": true,
+        "reward": "none"
+      },
+      {
+        "context_id": "ctx-03",
+        "counts": {
+          "neutral": 303,
+          "x": 303,
+          "y": 303
+        },
+        "history": "neutral",
+        "matched": true,
+        "reward": "none"
+      },
+      {
+        "context_id": "ctx-03",
+        "counts": {
+          "neutral": 446,
+          "x": 446,
+          "y": 446
+        },
+        "history": "actual",
+        "matched": true,
+        "reward": "shared"
+      },
+      {
+        "context_id": "ctx-03",
+        "counts": {
+          "neutral": 446,
+          "x": 446,
+          "y": 446
+        },
+        "history": "neutral",
+        "matched": true,
+        "reward": "shared"
+      },
+      {
+        "context_id": "ctx-04",
+        "counts": {
+          "neutral": 378,
+          "x": 378,
+          "y": 378
+        },
+        "history": "actual",
+        "matched": true,
+        "reward": "focal"
+      },
+      {
+        "context_id": "ctx-04",
+        "counts": {
+          "neutral": 319,
+          "x": 319,
+          "y": 319
+        },
+        "history": "neutral",
+        "matched": true,
+        "reward": "focal"
+      },
+      {
+        "context_id": "ctx-04",
+        "counts": {
+          "neutral": 301,
+          "x": 301,
+          "y": 301
+        },
+        "history": "actual",
+        "matched": true,
+        "reward": "none"
+      },
+      {
+        "context_id": "ctx-04",
+        "counts": {
+          "neutral": 303,
+          "x": 303,
+          "y": 303
+        },
+        "history": "neutral",
+        "matched": true,
+        "reward": "none"
+      },
+      {
+        "context_id": "ctx-04",
+        "counts": {
+          "neutral": 393,
+          "x": 393,
+          "y": 393
+        },
+        "history": "actual",
+        "matched": true,
+        "reward": "shared"
+      },
+      {
+        "context_id": "ctx-04",
+        "counts": {
+          "neutral": 446,
+          "x": 446,
+          "y": 446
+        },
+        "history": "neutral",
+        "matched": true,
+        "reward": "shared"
+      },
+      {
+        "context_id": "ctx-05",
+        "counts": {
+          "neutral": 372,
+          "x": 372,
+          "y": 372
+        },
+        "history": "actual",
+        "matched": true,
+        "reward": "focal"
+      },
+      {
+        "context_id": "ctx-05",
+        "counts": {
+          "neutral": 374,
+          "x": 374,
+          "y": 374
+        },
+        "history": "neutral",
+        "matched": true,
+        "reward": "focal"
+      },
+      {
+        "context_id": "ctx-05",
+        "counts": {
+          "neutral": 301,
+          "x": 301,
+          "y": 301
+        },
+        "history": "actual",
+        "matched": true,
+        "reward": "none"
+      },
+      {
+        "context_id": "ctx-05",
+        "counts": {
+          "neutral": 303,
+          "x": 303,
+          "y": 303
+        },
+        "history": "neutral",
+        "matched": true,
+        "reward": "none"
+      },
+      {
+        "context_id": "ctx-05",
+        "counts": {
+          "neutral": 440,
+          "x": 440,
+          "y": 440
+        },
+        "history": "actual",
+        "matched": true,
+        "reward": "shared"
+      },
+      {
+        "context_id": "ctx-05",
+        "counts": {
+          "neutral": 446,
+          "x": 446,
+          "y": 446
+        },
+        "history": "neutral",
+        "matched": true,
+        "reward": "shared"
+      },
+      {
+        "context_id": "ctx-06",
+        "counts": {
+          "neutral": 386,
+          "x": 386,
+          "y": 386
+        },
+        "history": "actual",
+        "matched": true,
+        "reward": "focal"
+      },
+      {
+        "context_id": "ctx-06",
+        "counts": {
+          "neutral": 319,
+          "x": 319,
+          "y": 319
+        },
+        "history": "neutral",
+        "matched": true,
+        "reward": "focal"
+      },
+      {
+        "context_id": "ctx-06",
+        "counts": {
+          "neutral": 346,
+          "x": 346,
+          "y": 346
+        },
+        "history": "actual",
+        "matched": true,
+        "reward": "none"
+      },
+      {
+        "context_id": "ctx-06",
+        "counts": {
+          "neutral": 303,
+          "x": 303,
+          "y": 303
+        },
+        "history": "neutral",
+        "matched": true,
+        "reward": "none"
+      },
+      {
+        "context_id": "ctx-06",
+        "counts": {
+          "neutral": 445,
+          "x": 445,
+          "y": 445
+        },
+        "history": "actual",
+        "matched": true,
+        "reward": "shared"
+      },
+      {
+        "context_id": "ctx-06",
+        "counts": {
+          "neutral": 330,
+          "x": 330,
+          "y": 330
+        },
+        "history": "neutral",
+        "matched": true,
+        "reward": "shared"
+      },
+      {
+        "context_id": "ctx-07",
+        "counts": {
+          "neutral": 381,
+          "x": 381,
+          "y": 381
+        },
+        "history": "actual",
+        "matched": true,
+        "reward": "focal"
+      },
+      {
+        "context_id": "ctx-07",
+        "counts": {
+          "neutral": 319,
+          "x": 319,
+          "y": 319
+        },
+        "history": "neutral",
+        "matched": true,
+        "reward": "focal"
+      },
+      {
+        "context_id": "ctx-07",
+        "counts": {
+          "neutral": 301,
+          "x": 301,
+          "y": 301
+        },
+        "history": "actual",
+        "matched": true,
+        "reward": "none"
+      },
+      {
+        "context_id": "ctx-07",
+        "counts": {
+          "neutral": 303,
+          "x": 303,
+          "y": 303
+        },
+        "history": "neutral",
+        "matched": true,
+        "reward": "none"
+      },
+      {
+        "context_id": "ctx-07",
+        "counts": {
+          "neutral": 405,
+          "x": 405,
+          "y": 405
+        },
+        "history": "actual",
+        "matched": true,
+        "reward": "shared"
+      },
+      {
+        "context_id": "ctx-07",
+        "counts": {
+          "neutral": 330,
+          "x": 330,
+          "y": 330
+        },
+        "history": "neutral",
+        "matched": true,
+        "reward": "shared"
+      },
+      {
+        "context_id": "ctx-08",
+        "counts": {
+          "neutral": 359,
+          "x": 359,
+          "y": 359
+        },
+        "history": "actual",
+        "matched": true,
+        "reward": "focal"
+      },
+      {
+        "context_id": "ctx-08",
+        "counts": {
+          "neutral": 319,
+          "x": 319,
+          "y": 319
+        },
+        "history": "neutral",
+        "matched": true,
+        "reward": "focal"
+      },
+      {
+        "context_id": "ctx-08",
+        "counts": {
+          "neutral": 301,
+          "x": 301,
+          "y": 301
+        },
+        "history": "actual",
+        "matched": true,
+        "reward": "none"
+      },
+      {
+        "context_id": "ctx-08",
+        "counts": {
+          "neutral": 303,
+          "x": 303,
+          "y": 303
+        },
+        "history": "neutral",
+        "matched": true,
+        "reward": "none"
+      },
+      {
+        "context_id": "ctx-08",
+        "counts": {
+          "neutral": 402,
+          "x": 402,
+          "y": 402
+        },
+        "history": "actual",
+        "matched": true,
+        "reward": "shared"
+      },
+      {
+        "context_id": "ctx-08",
+        "counts": {
+          "neutral": 446,
+          "x": 446,
+          "y": 446
+        },
+        "history": "neutral",
+        "matched": true,
+        "reward": "shared"
+      },
+      {
+        "context_id": "ctx-09",
+        "counts": {
+          "neutral": 383,
+          "x": 383,
+          "y": 383
+        },
+        "history": "actual",
+        "matched": true,
+        "reward": "focal"
+      },
+      {
+        "context_id": "ctx-09",
+        "counts": {
+          "neutral": 380,
+          "x": 380,
+          "y": 380
+        },
+        "history": "neutral",
+        "matched": true,
+        "reward": "focal"
+      },
+      {
+        "context_id": "ctx-09",
+        "counts": {
+          "neutral": 354,
+          "x": 354,
+          "y": 354
+        },
+        "history": "actual",
+        "matched": true,
+        "reward": "none"
+      },
+      {
+        "context_id": "ctx-09",
+        "counts": {
+          "neutral": 303,
+          "x": 303,
+          "y": 303
+        },
+        "history": "neutral",
+        "matched": true,
+        "reward": "none"
+      },
+      {
+        "context_id": "ctx-09",
+        "counts": {
+          "neutral": 446,
+          "x": 446,
+          "y": 446
+        },
+        "history": "actual",
+        "matched": true,
+        "reward": "shared"
+      },
+      {
+        "context_id": "ctx-09",
+        "counts": {
+          "neutral": 417,
+          "x": 417,
+          "y": 417
+        },
+        "history": "neutral",
+        "matched": true,
+        "reward": "shared"
+      },
+      {
+        "context_id": "ctx-10",
+        "counts": {
+          "neutral": 392,
+          "x": 392,
+          "y": 392
+        },
+        "history": "actual",
+        "matched": true,
+        "reward": "focal"
+      },
+      {
+        "context_id": "ctx-10",
+        "counts": {
+          "neutral": 319,
+          "x": 319,
+          "y": 319
+        },
+        "history": "neutral",
+        "matched": true,
+        "reward": "focal"
+      },
+      {
+        "context_id": "ctx-10",
+        "counts": {
+          "neutral": 335,
+          "x": 335,
+          "y": 335
+        },
+        "history": "actual",
+        "matched": true,
+        "reward": "none"
+      },
+      {
+        "context_id": "ctx-10",
+        "counts": {
+          "neutral": 303,
+          "x": 303,
+          "y": 303
+        },
+        "history": "neutral",
+        "matched": true,
+        "reward": "none"
+      },
+      {
+        "context_id": "ctx-10",
+        "counts": {
+          "neutral": 419,
+          "x": 419,
+          "y": 419
+        },
+        "history": "actual",
+        "matched": true,
+        "reward": "shared"
+      },
+      {
+        "context_id": "ctx-10",
+        "counts": {
+          "neutral": 413,
+          "x": 413,
+          "y": 413
+        },
+        "history": "neutral",
+        "matched": true,
+        "reward": "shared"
+      },
+      {
+        "context_id": "ctx-11",
+        "counts": {
+          "neutral": 411,
+          "x": 411,
+          "y": 411
+        },
+        "history": "actual",
+        "matched": true,
+        "reward": "focal"
+      },
+      {
+        "context_id": "ctx-11",
+        "counts": {
+          "neutral": 319,
+          "x": 319,
+          "y": 319
+        },
+        "history": "neutral",
+        "matched": true,
+        "reward": "focal"
+      },
+      {
+        "context_id": "ctx-11",
+        "counts": {
+          "neutral": 335,
+          "x": 335,
+          "y": 335
+        },
+        "history": "actual",
+        "matched": true,
+        "reward": "none"
+      },
+      {
+        "context_id": "ctx-11",
+        "counts": {
+          "neutral": 303,
+          "x": 303,
+          "y": 303
+        },
+        "history": "neutral",
+        "matched": true,
+        "reward": "none"
+      },
+      {
+        "context_id": "ctx-11",
+        "counts": {
+          "neutral": 446,
+          "x": 446,
+          "y": 446
+        },
+        "history": "actual",
+        "matched": true,
+        "reward": "shared"
+      },
+      {
+        "context_id": "ctx-11",
+        "counts": {
+          "neutral": 330,
+          "x": 330,
+          "y": 330
+        },
+        "history": "neutral",
+        "matched": true,
+        "reward": "shared"
+      },
+      {
+        "context_id": "ctx-12",
+        "counts": {
+          "neutral": 394,
+          "x": 394,
+          "y": 394
+        },
+        "history": "actual",
+        "matched": true,
+        "reward": "focal"
+      },
+      {
+        "context_id": "ctx-12",
+        "counts": {
+          "neutral": 319,
+          "x": 319,
+          "y": 319
+        },
+        "history": "neutral",
+        "matched": true,
+        "reward": "focal"
+      },
+      {
+        "context_id": "ctx-12",
+        "counts": {
+          "neutral": 301,
+          "x": 301,
+          "y": 301
+        },
+        "history": "actual",
+        "matched": true,
+        "reward": "none"
+      },
+      {
+        "context_id": "ctx-12",
+        "counts": {
+          "neutral": 303,
+          "x": 303,
+          "y": 303
+        },
+        "history": "neutral",
+        "matched": true,
+        "reward": "none"
+      },
+      {
+        "context_id": "ctx-12",
+        "counts": {
+          "neutral": 442,
+          "x": 442,
+          "y": 442
+        },
+        "history": "actual",
+        "matched": true,
+        "reward": "shared"
+      },
+      {
+        "context_id": "ctx-12",
+        "counts": {
+          "neutral": 330,
+          "x": 330,
+          "y": 330
+        },
+        "history": "neutral",
+        "matched": true,
+        "reward": "shared"
+      },
+      {
+        "context_id": "ctx-13",
+        "counts": {
+          "neutral": 358,
+          "x": 358,
+          "y": 358
+        },
+        "history": "actual",
+        "matched": true,
+        "reward": "focal"
+      },
+      {
+        "context_id": "ctx-13",
+        "counts": {
+          "neutral": 381,
+          "x": 381,
+          "y": 381
+        },
+        "history": "neutral",
+        "matched": true,
+        "reward": "focal"
+      },
+      {
+        "context_id": "ctx-13",
+        "counts": {
+          "neutral": 339,
+          "x": 339,
+          "y": 339
+        },
+        "history": "actual",
+        "matched": true,
+        "reward": "none"
+      },
+      {
+        "context_id": "ctx-13",
+        "counts": {
+          "neutral": 303,
+          "x": 303,
+          "y": 303
+        },
+        "history": "neutral",
+        "matched": true,
+        "reward": "none"
+      },
+      {
+        "context_id": "ctx-13",
+        "counts": {
+          "neutral": 409,
+          "x": 409,
+          "y": 409
+        },
+        "history": "actual",
+        "matched": true,
+        "reward": "shared"
+      },
+      {
+        "context_id": "ctx-13",
+        "counts": {
+          "neutral": 446,
+          "x": 446,
+          "y": 446
+        },
+        "history": "neutral",
+        "matched": true,
+        "reward": "shared"
+      },
+      {
+        "context_id": "ctx-14",
+        "counts": {
+          "neutral": 388,
+          "x": 388,
+          "y": 388
+        },
+        "history": "actual",
+        "matched": true,
+        "reward": "focal"
+      },
+      {
+        "context_id": "ctx-14",
+        "counts": {
+          "neutral": 367,
+          "x": 367,
+          "y": 367
+        },
+        "history": "neutral",
+        "matched": true,
+        "reward": "focal"
+      },
+      {
+        "context_id": "ctx-14",
+        "counts": {
+          "neutral": 339,
+          "x": 339,
+          "y": 339
+        },
+        "history": "actual",
+        "matched": true,
+        "reward": "none"
+      },
+      {
+        "context_id": "ctx-14",
+        "counts": {
+          "neutral": 303,
+          "x": 303,
+          "y": 303
+        },
+        "history": "neutral",
+        "matched": true,
+        "reward": "none"
+      },
+      {
+        "context_id": "ctx-14",
+        "counts": {
+          "neutral": 394,
+          "x": 394,
+          "y": 394
+        },
+        "history": "actual",
+        "matched": true,
+        "reward": "shared"
+      },
+      {
+        "context_id": "ctx-14",
+        "counts": {
+          "neutral": 446,
+          "x": 446,
+          "y": 446
+        },
+        "history": "neutral",
+        "matched": true,
+        "reward": "shared"
+      },
+      {
+        "context_id": "ctx-15",
+        "counts": {
+          "neutral": 371,
+          "x": 371,
+          "y": 371
+        },
+        "history": "actual",
+        "matched": true,
+        "reward": "focal"
+      },
+      {
+        "context_id": "ctx-15",
+        "counts": {
+          "neutral": 319,
+          "x": 319,
+          "y": 319
+        },
+        "history": "neutral",
+        "matched": true,
+        "reward": "focal"
+      },
+      {
+        "context_id": "ctx-15",
+        "counts": {
+          "neutral": 301,
+          "x": 301,
+          "y": 301
+        },
+        "history": "actual",
+        "matched": true,
+        "reward": "none"
+      },
+      {
+        "context_id": "ctx-15",
+        "counts": {
+          "neutral": 303,
+          "x": 303,
+          "y": 303
+        },
+        "history": "neutral",
+        "matched": true,
+        "reward": "none"
+      },
+      {
+        "context_id": "ctx-15",
+        "counts": {
+          "neutral": 405,
+          "x": 405,
+          "y": 405
+        },
+        "history": "actual",
+        "matched": true,
+        "reward": "shared"
+      },
+      {
+        "context_id": "ctx-15",
+        "counts": {
+          "neutral": 446,
+          "x": 446,
+          "y": 446
+        },
+        "history": "neutral",
+        "matched": true,
+        "reward": "shared"
+      },
+      {
+        "context_id": "ctx-16",
+        "counts": {
+          "neutral": 386,
+          "x": 386,
+          "y": 386
+        },
+        "history": "actual",
+        "matched": true,
+        "reward": "focal"
+      },
+      {
+        "context_id": "ctx-16",
+        "counts": {
+          "neutral": 319,
+          "x": 319,
+          "y": 319
+        },
+        "history": "neutral",
+        "matched": true,
+        "reward": "focal"
+      },
+      {
+        "context_id": "ctx-16",
+        "counts": {
+          "neutral": 301,
+          "x": 301,
+          "y": 301
+        },
+        "history": "actual",
+        "matched": true,
+        "reward": "none"
+      },
+      {
+        "context_id": "ctx-16",
+        "counts": {
+          "neutral": 303,
+          "x": 303,
+          "y": 303
+        },
+        "history": "neutral",
+        "matched": true,
+        "reward": "none"
+      },
+      {
+        "context_id": "ctx-16",
+        "counts": {
+          "neutral": 446,
+          "x": 446,
+          "y": 446
+        },
+        "history": "actual",
+        "matched": true,
+        "reward": "shared"
+      },
+      {
+        "context_id": "ctx-16",
+        "counts": {
+          "neutral": 446,
+          "x": 446,
+          "y": 446
+        },
+        "history": "neutral",
+        "matched": true,
+        "reward": "shared"
+      },
+      {
+        "context_id": "ctx-17",
+        "counts": {
+          "neutral": 393,
+          "x": 393,
+          "y": 393
+        },
+        "history": "actual",
+        "matched": true,
+        "reward": "focal"
+      },
+      {
+        "context_id": "ctx-17",
+        "counts": {
+          "neutral": 375,
+          "x": 375,
+          "y": 375
+        },
+        "history": "neutral",
+        "matched": true,
+        "reward": "focal"
+      },
+      {
+        "context_id": "ctx-17",
+        "counts": {
+          "neutral": 304,
+          "x": 304,
+          "y": 304
+        },
+        "history": "actual",
+        "matched": true,
+        "reward": "none"
+      },
+      {
+        "context_id": "ctx-17",
+        "counts": {
+          "neutral": 303,
+          "x": 303,
+          "y": 303
+        },
+        "history": "neutral",
+        "matched": true,
+        "reward": "none"
+      },
+      {
+        "context_id": "ctx-17",
+        "counts": {
+          "neutral": 447,
+          "x": 447,
+          "y": 447
+        },
+        "history": "actual",
+        "matched": true,
+        "reward": "shared"
+      },
+      {
+        "context_id": "ctx-17",
+        "counts": {
+          "neutral": 405,
+          "x": 405,
+          "y": 405
+        },
+        "history": "neutral",
+        "matched": true,
+        "reward": "shared"
+      },
+      {
+        "context_id": "ctx-18",
+        "counts": {
+          "neutral": 401,
+          "x": 401,
+          "y": 401
+        },
+        "history": "actual",
+        "matched": true,
+        "reward": "focal"
+      },
+      {
+        "context_id": "ctx-18",
+        "counts": {
+          "neutral": 435,
+          "x": 435,
+          "y": 435
+        },
+        "history": "neutral",
+        "matched": true,
+        "reward": "focal"
+      },
+      {
+        "context_id": "ctx-18",
+        "counts": {
+          "neutral": 301,
+          "x": 301,
+          "y": 301
+        },
+        "history": "actual",
+        "matched": true,
+        "reward": "none"
+      },
+      {
+        "context_id": "ctx-18",
+        "counts": {
+          "neutral": 303,
+          "x": 303,
+          "y": 303
+        },
+        "history": "neutral",
+        "matched": true,
+        "reward": "none"
+      },
+      {
+        "context_id": "ctx-18",
+        "counts": {
+          "neutral": 446,
+          "x": 446,
+          "y": 446
+        },
+        "history": "actual",
+        "matched": true,
+        "reward": "shared"
+      },
+      {
+        "context_id": "ctx-18",
+        "counts": {
+          "neutral": 446,
+          "x": 446,
+          "y": 446
+        },
+        "history": "neutral",
+        "matched": true,
+        "reward": "shared"
+      },
+      {
+        "context_id": "ctx-19",
+        "counts": {
+          "neutral": 376,
+          "x": 376,
+          "y": 376
+        },
+        "history": "actual",
+        "matched": true,
+        "reward": "focal"
+      },
+      {
+        "context_id": "ctx-19",
+        "counts": {
+          "neutral": 319,
+          "x": 319,
+          "y": 319
+        },
+        "history": "neutral",
+        "matched": true,
+        "reward": "focal"
+      },
+      {
+        "context_id": "ctx-19",
+        "counts": {
+          "neutral": 301,
+          "x": 301,
+          "y": 301
+        },
+        "history": "actual",
+        "matched": true,
+        "reward": "none"
+      },
+      {
+        "context_id": "ctx-19",
+        "counts": {
+          "neutral": 303,
+          "x": 303,
+          "y": 303
+        },
+        "history": "neutral",
+        "matched": true,
+        "reward": "none"
+      },
+      {
+        "context_id": "ctx-19",
+        "counts": {
+          "neutral": 446,
+          "x": 446,
+          "y": 446
+        },
+        "history": "actual",
+        "matched": true,
+        "reward": "shared"
+      },
+      {
+        "context_id": "ctx-19",
+        "counts": {
+          "neutral": 403,
+          "x": 403,
+          "y": 403
+        },
+        "history": "neutral",
+        "matched": true,
+        "reward": "shared"
+      },
+      {
+        "context_id": "ctx-20",
+        "counts": {
+          "neutral": 435,
+          "x": 435,
+          "y": 435
+        },
+        "history": "actual",
+        "matched": true,
+        "reward": "focal"
+      },
+      {
+        "context_id": "ctx-20",
+        "counts": {
+          "neutral": 396,
+          "x": 396,
+          "y": 396
+        },
+        "history": "neutral",
+        "matched": true,
+        "reward": "focal"
+      },
+      {
+        "context_id": "ctx-20",
+        "counts": {
+          "neutral": 347,
+          "x": 347,
+          "y": 347
+        },
+        "history": "actual",
+        "matched": true,
+        "reward": "none"
+      },
+      {
+        "context_id": "ctx-20",
+        "counts": {
+          "neutral": 303,
+          "x": 303,
+          "y": 303
+        },
+        "history": "neutral",
+        "matched": true,
+        "reward": "none"
+      },
+      {
+        "context_id": "ctx-20",
+        "counts": {
+          "neutral": 439,
+          "x": 439,
+          "y": 439
+        },
+        "history": "actual",
+        "matched": true,
+        "reward": "shared"
+      },
+      {
+        "context_id": "ctx-20",
+        "counts": {
+          "neutral": 446,
+          "x": 446,
+          "y": 446
+        },
+        "history": "neutral",
+        "matched": true,
+        "reward": "shared"
+      }
+    ]
+  },
+  "exact_prompt_repeats": {
+    "assigned": 24,
+    "identical_request_and_output_content": 24
+  },
+  "experiment_id": "deepseek-recipient-mechanism-v1",
+  "http_status_counts": {
+    "200": 804
+  },
+  "integrity": "PASS",
+  "integrity_errors": [],
+  "limitations": [
+    "single model; no active peer or actual message delivery",
+    "20 fixed output-independent contexts only",
+    "provider alias/fingerprint do not establish immutable model weights",
+    "temperature 0 does not make model responses independent",
+    "nonterminal stage outputs were preserved and included verbatim in dependent ballot prompts; report this contamination rather than dropping those rows"
+  ],
+  "physical_attempts": 804,
+  "physical_request_cap": 804,
+  "prediction_validity_by_kind": {
+    "ballot": {
+      "invalid": 0,
+      "valid": 600
+    },
+    "baseline": {
+      "invalid": 0,
+      "valid": 20
+    },
+    "positive_control": {
+      "invalid": 0,
+      "valid": 40
+    },
+    "repeat": {
+      "invalid": 0,
+      "valid": 24
+    },
+    "stage": {
+      "invalid": 21,
+      "valid": 99
+    }
+  },
+  "primary_shared_reward_actual_history": {
+    "assessable_pairs": 20,
+    "assigned_pairs": 20,
+    "mean_paired_difference": 0.45,
+    "paired_difference_signs": {
+      "positive": 9,
+      "zero": 11
+    },
+    "per_pair": [
+      {
+        "assessable": true,
+        "context": "ctx-01",
+        "difference": 0,
+        "history": "actual",
+        "reward": "shared",
+        "x_target_after_x": false,
+        "x_target_after_y": false
+      },
+      {
+        "assessable": true,
+        "context": "ctx-02",
+        "difference": 0,
+        "history": "actual",
+        "reward": "shared",
+        "x_target_after_x": false,
+        "x_target_after_y": false
+      },
+      {
+        "assessable": true,
+        "context": "ctx-03",
+        "difference": 1,
+        "history": "actual",
+        "reward": "shared",
+        "x_target_after_x": true,
+        "x_target_after_y": false
+      },
+      {
+        "assessable": true,
+        "context": "ctx-04",
+        "difference": 1,
+        "history": "actual",
+        "reward": "shared",
+        "x_target_after_x": true,
+        "x_target_after_y": false
+      },
+      {
+        "assessable": true,
+        "context": "ctx-05",
+        "difference": 0,
+        "history": "actual",
+        "reward": "shared",
+        "x_target_after_x": false,
+        "x_target_after_y": false
+      },
+      {
+        "assessable": true,
+        "context": "ctx-06",
+        "difference": 0,
+        "history": "actual",
+        "reward": "shared",
+        "x_target_after_x": true,
+        "x_target_after_y": true
+      },
+      {
+        "assessable": true,
+        "context": "ctx-07",
+        "difference": 0,
+        "history": "actual",
+        "reward": "shared",
+        "x_target_after_x": false,
+        "x_target_after_y": false
+      },
+      {
+        "assessable": true,
+        "context": "ctx-08",
+        "difference": 0,
+        "history": "actual",
+        "reward": "shared",
+        "x_target_after_x": true,
+        "x_target_after_y": true
+      },
+      {
+        "assessable": true,
+        "context": "ctx-09",
+        "difference": 1,
+        "history": "actual",
+        "reward": "shared",
+        "x_target_after_x": true,
+        "x_target_after_y": false
+      },
+      {
+        "assessable": true,
+        "context": "ctx-10",
+        "difference": 1,
+        "history": "actual",
+        "reward": "shared",
+        "x_target_after_x": true,
+        "x_target_after_y": false
+      },
+      {
+        "assessable": true,
+        "context": "ctx-11",
+        "difference": 1,
+        "history": "actual",
+        "reward": "shared",
+        "x_target_after_x": true,
+        "x_target_after_y": false
+      },
+      {
+        "assessable": true,
+        "context": "ctx-12",
+        "difference": 0,
+        "history": "actual",
+        "reward": "shared",
+        "x_target_after_x": false,
+        "x_target_after_y": false
+      },
+      {
+        "assessable": true,
+        "context": "ctx-13",
+        "difference": 1,
+        "history": "actual",
+        "reward": "shared",
+        "x_target_after_x": true,
+        "x_target_after_y": false
+      },
+      {
+        "assessable": true,
+        "context": "ctx-14",
+        "difference": 0,
+        "history": "actual",
+        "reward": "shared",
+        "x_target_after_x": false,
+        "x_target_after_y": false
+      },
+      {
+        "assessable": true,
+        "context": "ctx-15",
+        "difference": 0,
+        "history": "actual",
+        "reward": "shared",
+        "x_target_after_x": false,
+        "x_target_after_y": false
+      },
+      {
+        "assessable": true,
+        "context": "ctx-16",
+        "difference": 1,
+        "history": "actual",
+        "reward": "shared",
+        "x_target_after_x": true,
+        "x_target_after_y": false
+      },
+      {
+        "assessable": true,
+        "context": "ctx-17",
+        "difference": 0,
+        "history": "actual",
+        "reward": "shared",
+        "x_target_after_x": true,
+        "x_target_after_y": true
+      },
+      {
+        "assessable": true,
+        "context": "ctx-18",
+        "difference": 1,
+        "history": "actual",
+        "reward": "shared",
+        "x_target_after_x": true,
+        "x_target_after_y": false
+      },
+      {
+        "assessable": true,
+        "context": "ctx-19",
+        "difference": 0,
+        "history": "actual",
+        "reward": "shared",
+        "x_target_after_x": false,
+        "x_target_after_y": false
+      },
+      {
+        "assessable": true,
+        "context": "ctx-20",
+        "difference": 1,
+        "history": "actual",
+        "reward": "shared",
+        "x_target_after_x": true,
+        "x_target_after_y": false
+      }
+    ],
+    "preregistered_descriptive_gate_met": false,
+    "x_allocation_chosen_after_x": 12,
+    "x_allocation_chosen_after_y": 3
+  },
+  "provider_identity": {
+    "model": "deepseek-flash",
+    "system_fingerprint": "e72d3c7f663d3e1383b00b3884cb4501"
+  },
+  "provider_local_prompt_tokens_matched": 804,
+  "request_and_response_hashes_verified": {
+    "requests": 804,
+    "responses": 804
+  },
+  "schema_version": "deepseek-recipient-mechanism-independent-audit-v1",
+  "source_hashes": {
+    "attempt_ledger_sha256": "64d1c1e9498e093395a77dfda782e4200461945b391640313734664599388820",
+    "progress_ledger_sha256": "b34006f31ed6672fa1790fd7e4aadb45c9fb38a6fca9189a0f575441adc51bab",
+    "schedule_sha256": "081afc385cc1f1d08b0d96ef6aa1eb82cc9f39b3bcb35a7fbc53c80c840b7c9b"
+  },
+  "terminal_attempts": 804,
+  "truncated_or_invalid_stage_outputs": {
+    "count": 21,
+    "downstream_ballot_prompts_including_invalid_stage_history": 84,
+    "request_ids": [
+      "ctx-01-stage-shared-neutral",
+      "ctx-02-stage-shared-neutral",
+      "ctx-03-stage-shared-actual",
+      "ctx-03-stage-shared-neutral",
+      "ctx-04-stage-shared-neutral",
+      "ctx-05-stage-shared-neutral",
+      "ctx-08-stage-shared-neutral",
+      "ctx-09-stage-shared-actual",
+      "ctx-11-stage-shared-actual",
+      "ctx-13-stage-shared-neutral",
+      "ctx-14-stage-shared-neutral",
+      "ctx-15-stage-shared-neutral",
+      "ctx-16-stage-shared-actual",
+      "ctx-16-stage-shared-neutral",
+      "ctx-17-stage-shared-actual",
+      "ctx-18-stage-focal-neutral",
+      "ctx-18-stage-shared-actual",
+      "ctx-18-stage-shared-neutral",
+      "ctx-19-stage-shared-actual",
+      "ctx-20-stage-focal-actual",
+      "ctx-20-stage-shared-neutral"
+    ]
+  }
+}
