@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "status": "frozen_synthetic_reference_not_sent",
+  "references": [
+    {"control_id": "CTRL01", "proposal_status": "present", "allocation": {"A": "T1", "B": "T2", "C": "T3"}, "concordance": "concordant"},
+    {"control_id": "CTRL02", "proposal_status": "present", "allocation": {"A": "T1", "B": "T2", "C": "T3"}, "concordance": "discordant"},
+    {"control_id": "CTRL03", "proposal_status": "present", "allocation": {"A": "T2", "B": "T3", "C": "T1"}, "concordance": "concordant"},
+    {"control_id": "CTRL04", "proposal_status": "present", "allocation": {"A": "T2", "B": "T3", "C": "T1"}, "concordance": "discordant"},
+    {"control_id": "CTRL05", "proposal_status": "present", "allocation": {"A": "T3", "B": "T1", "C": "T2"}, "concordance": "concordant"},
+    {"control_id": "CTRL06", "proposal_status": "present", "allocation": {"A": "T3", "B": "T1", "C": "T2"}, "concordance": "discordant"},
+    {"control_id": "CTRL07", "proposal_status": "ambiguous", "allocation": null, "concordance": "not_assessable"},
+    {"control_id": "CTRL08", "proposal_status": "ambiguous", "allocation": null, "concordance": "not_assessable"},
+    {"control_id": "CTRL09", "proposal_status": "ambiguous", "allocation": null, "concordance": "not_assessable"},
+    {"control_id": "CTRL10", "proposal_status": "absent", "allocation": null, "concordance": "not_assessable"},
+    {"control_id": "CTRL11", "proposal_status": "absent", "allocation": null, "concordance": "not_assessable"},
+    {"control_id": "CTRL12", "proposal_status": "absent", "allocation": null, "concordance": "not_assessable"}
+  ],
+  "dispatch_rule": "Only m1-natural-message-monitor-controls-v1.json and individual input fields may be loaded into model prompts; never load this answer key into prompts, request logs sent to a provider, or the model context."
+}

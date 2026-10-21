@@ -1,0 +1,12 @@
+{
+  "evidence_class": "offline_file_identity_check",
+  "model_calls": 0,
+  "api_calls": 0,
+  "local_checkpoint_sha256": "d98cdcbd03e17ce47681435b5150e34c1417f50b5c0019dd560e4882c5745785",
+  "local_checkpoint_sha256_matches_frozen": true,
+  "llama_server_sha256": "3a8aea5f889c4b4c2ec41c98f4e1ed484bb7a40c4096883acb23d3cfe26b59fb",
+  "llama_server_sha256_matches_frozen": true,
+  "server_endpoint": "127.0.0.1:8081",
+  "tokenizer_template_parity": "not checked; live gate required",
+  "model_generation_performed": false
+}

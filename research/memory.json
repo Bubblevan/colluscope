@@ -291,6 +291,44 @@
         }
       ],
       "review_mode": "independent projection/body reconstruction; source loader reused; not a separate scientific critic"
+    },
+    {
+      "claim_id": "m4-b5-profile-level-repeatability-reanalysis-20261021",
+      "claim": "In this fixed linked corpus, retained historical/current responses were non-unanimous for 16 of 23 unique Public-only exact-request profiles and 2 of 24 Privileged-original profiles.",
+      "outcome": "SUPPORTED",
+      "scope": "Post-hoc finite reaggregation of 48 raw-audited historical/current exact-request pairs and the 24 current A1 contexts; not a same-window repeatability experiment.",
+      "interpretation": "The current A1 public-versus-privileged contrast changes labels in 19/24 contexts and 18/23 unique public-profile clusters. Across historical/current observations, only 7/23 linked clusters have unanimous labels for the public profile and every linked privileged profile; 5/7 determinate clusters change by view and 16/23 clusters contain a non-unanimous profile. This weakens a simple view-specific interpretation but does not identify provider randomness, hidden state, semantics, collusion, or intent.",
+      "evidence_refs": [
+        {
+          "path": "scripts/audit_m4_b5_existing_repeatability_by_profile.py",
+          "sha256": "47415b02d1c0eae458e006952b9c683983eca58138946ad8035090e74a8b9976"
+        },
+        {
+          "path": "docs/results/research-sprint-20261021/m4-b5-existing-profile-repeatability-20261021.json",
+          "sha256": "43f3b87375d8e0592de3879a54f9b58856edd73ac5e7f0ebe3c79328c8a9b012"
+        },
+        {
+          "path": "docs/M4_B5_EXISTING_PROFILE_REPEATABILITY_FOLLOWUP_20261021.md",
+          "sha256": "ebd1c32865934fb4c7f7b1177c2d51c0a9c63d0f2fe4b17af8e7e00b1111fec3"
+        },
+        {
+          "path": "docs/results/research-sprint-20261021/raw-response-repeatability-v5/m4-b5-raw-response-repeatability-audit.json",
+          "sha256": "1926e9c60f565ef6b18ab1c3df7cd17326694b0e6cb88899fa7b500b67d7f62d"
+        },
+        {
+          "path": "docs/results/research-sprint-20261021/raw-response-repeatability-v5/m4-b5-raw-response-repeatability-rows.csv",
+          "sha256": "2ca94b277f71dafb0d81534e9cb7b83b31ba9ab4cb99b2d4f16b2ecb44efcc62"
+        },
+        {
+          "path": "docs/results/research-sprint-20261021/m4-b5-context-sensitivity-independent-audit.json",
+          "sha256": "6e5278737d9550d547ef4895ef9ed9bc6aa85fafdb1a26087fdbc4011a11041c"
+        },
+        {
+          "path": "docs/results/research-sprint-20261021/m4-b5-existing-profile-repeatability-self-critique.md",
+          "sha256": "c0b4a67bdc4f9f2663c3205e6b5eaa74a92fcaee6feab7e71b4f0a40bf44def9"
+        }
+      ],
+      "review_mode": "adversarial_self_review; the upstream raw-byte audit is independent, but this profile reaggregation has no separate independent critic review"
     }
   ],
   "cycle_updates": [
@@ -610,6 +648,77 @@
       "outcome": "INCONCLUSIVE",
       "scope": "No-call replay/reanalysis and candidate design only; no new model behavior observed.",
       "statement": "For the frozen M4 B5 evidence views, prediction changes are verified and reference labels remain invariant; for the frozen 40-row synthetic public-canonical set, B5 answered present 40/40 while the public-harm rule matched 40/40. The mechanism, LLM-specific value, and paper-level novelty remain unresolved."
+    },
+    {
+      "claim_id": "m4-b5-profile-level-repeatability-reanalysis-20261021",
+      "evidence_class": "offline_reanalysis",
+      "evidence_refs": [
+        {
+          "path": "scripts/audit_m4_b5_existing_repeatability_by_profile.py",
+          "sha256": "47415b02d1c0eae458e006952b9c683983eca58138946ad8035090e74a8b9976"
+        },
+        {
+          "path": "docs/results/research-sprint-20261021/m4-b5-existing-profile-repeatability-20261021.json",
+          "sha256": "43f3b87375d8e0592de3879a54f9b58856edd73ac5e7f0ebe3c79328c8a9b012"
+        },
+        {
+          "path": "docs/M4_B5_EXISTING_PROFILE_REPEATABILITY_FOLLOWUP_20261021.md",
+          "sha256": "ebd1c32865934fb4c7f7b1177c2d51c0a9c63d0f2fe4b17af8e7e00b1111fec3"
+        },
+        {
+          "path": "docs/results/research-sprint-20261021/raw-response-repeatability-v5/m4-b5-raw-response-repeatability-audit.json",
+          "sha256": "1926e9c60f565ef6b18ab1c3df7cd17326694b0e6cb88899fa7b500b67d7f62d"
+        },
+        {
+          "path": "docs/results/research-sprint-20261021/raw-response-repeatability-v5/m4-b5-raw-response-repeatability-rows.csv",
+          "sha256": "2ca94b277f71dafb0d81534e9cb7b83b31ba9ab4cb99b2d4f16b2ecb44efcc62"
+        },
+        {
+          "path": "docs/results/research-sprint-20261021/m4-b5-context-sensitivity-independent-audit.json",
+          "sha256": "6e5278737d9550d547ef4895ef9ed9bc6aa85fafdb1a26087fdbc4011a11041c"
+        },
+        {
+          "path": "docs/results/research-sprint-20261021/m4-b5-existing-profile-repeatability-self-critique.md",
+          "sha256": "c0b4a67bdc4f9f2663c3205e6b5eaa74a92fcaee6feab7e71b4f0a40bf44def9"
+        }
+      ],
+      "independent_review_confirmed": false,
+      "interpretation": "An exploratory profile-level join found that retained exact-input Public-only outputs are frequently non-unanimous across historical/current campaigns. This makes another 144-call B5 repeatability screen less decision-relevant, while not reproducing its planned within-window repeat estimand. Public-harm remains rule-computable, so prioritize a prospective real-agent package test over more B5 calls.",
+      "outcome": "INCONCLUSIVE",
+      "scope": "Post-hoc reaggregation of existing raw-audited B5 outcomes only; no new inference.",
+      "statement": "For the fixed 23 unique Public-only profiles, only 7 have unanimous historical/current labels; 16 are non-unanimous. After collapsing the shared public body, 18/23 current clusters have a linked view change, but only 5/7 cross-time determinate clusters have differing view modes."
+    },
+    {
+      "claim_id": "m1-monitor-candidate-current-hash-review-20261021",
+      "evidence_class": "offline_reanalysis",
+      "evidence_refs": [
+        {
+          "path": "docs/M1_PACKAGE_MONITOR_CURRENT_AUDIT_REVIEW_20261021.md",
+          "sha256": "2369f62b99e81211bc6eb8f21edf112cbd57102b09a3ddcb50f58664c82bf8f3"
+        },
+        {
+          "path": "docs/results/research-sprint-20261021/direction-review-final/m1-monitor-candidate-audit-current-20261021.json",
+          "sha256": "ef6cd883bf9ca111fff9f57811f9a1ad6b1f8fad95a0c7021a9644859d413ea7"
+        },
+        {
+          "path": "docs/results/research-sprint-20261021/direction-review-final/fresh-independent-critic-review.md",
+          "sha256": "9f5b4f5152eb89b65465079e6ecea2f1709919307a1b5f47c23722912d3e9dd3"
+        },
+        {
+          "path": "research/drafts/m1-natural-message-action-codebook-v1.md",
+          "sha256": "486a523df9fc66f4b9008cac6618f69d46447c9e220548efe11974b461206399"
+        },
+        {
+          "path": "research/drafts/m1-package-monitor-campaign-v2.md",
+          "sha256": "92ee7a7fd5571c95a7166e2a963b2ef0c6cc93630c5a1b2f0ea7aecddf077291"
+        }
+      ],
+      "independent_review_confirmed": false,
+      "interpretation": "The current M1 Monitor candidate passes its structural offline audit on the current bytes (12 synthetic controls, 24 unique matrices, 672 generation and 696 physical-request ceilings; zero calls). The older saved PASS log points to different candidate hashes. A separate-context critic reviewed sanitized artifacts, not raw data. The candidate still lacks a deterministic extraction baseline, exact primary metrics/comparison rules, a named third adjudicator, a live dispatcher and completed human annotations; external private-text transfer needs explicit authorization.",
+      "outcome": "INCONCLUSIVE",
+      "scope": "Offline design and current-byte structural audit only; no M1 Agent or Monitor inference.",
+      "statement": "GO for design review only; NO-GO for final preregistration or dispatch. Keep the M1 24-distinct-matrix Agent package as the leading prospective behavior question, while treating its effect as a finite assigned-package contrast and not as evidence of message-semantic causality or collusion.",
+      "review_mode": "separate-context desk critique of sanitized artifacts plus local structural audit; not a blind raw-data audit"
     }
   ],
   "purpose": "Claim-level memory for future cycle selection. This is a scoped summary of historical artifacts, not a universal scientific score.",

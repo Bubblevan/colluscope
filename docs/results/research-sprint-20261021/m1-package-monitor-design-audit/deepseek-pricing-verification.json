@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "source_title": "DeepSeek API Models & Pricing",
+  "source_url": "https://api-docs.deepseek.com/quick_start/pricing/",
+  "verified_at_utc": "2026-10-21T00:01:13Z",
+  "model_alias": "deepseek-flash",
+  "provider_listed_model_version": "DeepSeek-V4.1-Flash-1017",
+  "prices_usd_per_million_tokens": {
+    "off_peak_cache_hit_input": 0.003,
+    "peak_cache_hit_input": 0.006,
+    "off_peak_cache_miss_input": 0.15,
+    "peak_cache_miss_input": 0.3,
+    "off_peak_output": 0.6,
+    "peak_output": 1.2
+  },
+  "off_peak_hours_utc": "All hours other than 01:00-04:00 and 06:00-10:00 UTC Monday-Friday, excluding Chinese public holidays; weekends and Chinese public holidays are off-peak for the full day.",
+  "candidate_worst_case": {
+    "monitor_generation_requests": 216,
+    "input_tokens_per_request_cap": 10000,
+    "output_tokens_per_request_cap": 512,
+    "estimated_off_peak_max_usd": 0.3903552,
+    "estimated_peak_max_usd": 0.7807104,
+    "proposed_hard_cost_cap_usd": 0.45,
+    "dispatch_rule": "off-peak only; stop before a request if its worst-case remaining-cost reserve would exceed the approved hard cap"
+  },
+  "callouts": [
+    "Price page says the stable model name is deepseek-flash; the listed backend version is mutable.",
+    "Provider says prices may change; refresh model identity and pricing immediately before any future dispatch.",
+    "This is a cost estimate from frozen caps, not an invoice or a model-call authorization."
+  ],
+  "external_requests_sent": 0
+}

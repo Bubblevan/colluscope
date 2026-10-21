@@ -1,0 +1,263 @@
+{
+  "analysis_script_sha256": "a6b2fe87b1525527e8a2619b03d6de765ff1f851d29ca71094075e66645df9ad",
+  "environment": {
+    "platform": "Windows-11-10.0.26200-SP0",
+    "python": "3.12.4"
+  },
+  "evidence_class": "offline_reanalysis",
+  "limits": [
+    "M4 rows and synthetic rows are different fixed corpora, not a matched population comparison.",
+    "Matrix and regret summaries test scale/separation differences, not the model's internal calculation path.",
+    "A2 arm differences remain request-form interventions; enum order and prompt order were bundled in the reversed arm.",
+    "No result identifies hidden serving-state variation or latent intent."
+  ],
+  "m4_b5_public_only": {
+    "absent": {
+      "best_vs_second_best_margin": {
+        "max": 7.0,
+        "mean": 3.785714,
+        "median": 3.0,
+        "min": 1.0,
+        "n": 14
+      },
+      "cell_range": {
+        "max": 17.0,
+        "mean": 16.214286,
+        "median": 16.5,
+        "min": 12.0,
+        "n": 14
+      },
+      "optimal_welfare": {
+        "max": 42.0,
+        "mean": 37.714286,
+        "median": 39.0,
+        "min": 30.0,
+        "n": 14
+      },
+      "realized_welfare": {
+        "max": 42.0,
+        "mean": 37.714286,
+        "median": 39.0,
+        "min": 30.0,
+        "n": 14
+      },
+      "regret": {
+        "max": 0.0,
+        "mean": 0.0,
+        "median": 0.0,
+        "min": 0.0,
+        "n": 14
+      },
+      "relative_regret": {
+        "max": 0.0,
+        "mean": 0.0,
+        "median": 0.0,
+        "min": 0.0,
+        "n": 14
+      }
+    },
+    "assigned": 24,
+    "present": {
+      "best_vs_second_best_margin": {
+        "max": 7.0,
+        "mean": 3.5,
+        "median": 4.0,
+        "min": 1.0,
+        "n": 10
+      },
+      "cell_range": {
+        "max": 19.0,
+        "mean": 16.1,
+        "median": 16.5,
+        "min": 12.0,
+        "n": 10
+      },
+      "optimal_welfare": {
+        "max": 49.0,
+        "mean": 40.8,
+        "median": 41.5,
+        "min": 30.0,
+        "n": 10
+      },
+      "realized_welfare": {
+        "max": 45.0,
+        "mean": 36.1,
+        "median": 36.0,
+        "min": 26.0,
+        "n": 10
+      },
+      "regret": {
+        "max": 7.0,
+        "mean": 4.7,
+        "median": 4.5,
+        "min": 2.0,
+        "n": 10
+      },
+      "relative_regret": {
+        "max": 0.170732,
+        "mean": 0.112474,
+        "median": 0.11768700000000001,
+        "min": 0.051282,
+        "n": 10
+      }
+    },
+    "reference_counts": {
+      "absent": 14,
+      "present": 10
+    }
+  },
+  "m4_context_campaign_a2": {
+    "A2-PRODUCTION-ARITHMETIC": {
+      "exact": 39,
+      "n": 40,
+      "prediction": {
+        "absent": 19,
+        "present": 21
+      },
+      "reference": {
+        "absent": 20,
+        "present": 20
+      }
+    },
+    "A2-PRODUCTION-B5": {
+      "exact": 20,
+      "n": 40,
+      "prediction": {
+        "insufficient_evidence": 5,
+        "present": 35
+      },
+      "reference": {
+        "absent": 20,
+        "present": 20
+      }
+    },
+    "A2-REVERSED-LABEL-ORDER": {
+      "exact": 10,
+      "n": 40,
+      "prediction": {
+        "absent": 15,
+        "insufficient_evidence": 23,
+        "present": 2
+      },
+      "reference": {
+        "absent": 20,
+        "present": 20
+      }
+    },
+    "A2-V2-DIRECT": {
+      "exact": 20,
+      "n": 40,
+      "prediction": {
+        "present": 40
+      },
+      "reference": {
+        "absent": 20,
+        "present": 20
+      }
+    }
+  },
+  "model_calls": 0,
+  "raw_private_text_exported": false,
+  "schema_version": "b5-difficulty-distribution-audit-v1",
+  "sources": {
+    "campaign_rows_sha256": "5ddcf4704fe8e7e68391384d2c3701254424d7e2be0f2dbeecfa6b57b877a1f4",
+    "m4_request_body_set_sha256": "449048ed72620bb5c498d44521ab02242eb3679489d39dcfaafe3ec8605a46ba",
+    "m4_score_csv_sha256": "ebfc472cb615fc351d35099e2f61469396a3f1d08d82534fe3daf4ebd9cc48a7",
+    "synthetic_manifest_sha256": "0cc0dd9fd543761d0369e68eb7f151f1223aefec614e415046de8b8c019b8d20"
+  },
+  "synthetic_balanced_control": {
+    "absent": {
+      "best_vs_second_best_margin": {
+        "max": 105.0,
+        "mean": 25.2,
+        "median": 23.0,
+        "min": 3.0,
+        "n": 20
+      },
+      "cell_range": {
+        "max": 92.0,
+        "mean": 79.95,
+        "median": 84.5,
+        "min": 46.0,
+        "n": 20
+      },
+      "optimal_welfare": {
+        "max": 259.0,
+        "mean": 211.45,
+        "median": 212.0,
+        "min": 133.0,
+        "n": 20
+      },
+      "realized_welfare": {
+        "max": 259.0,
+        "mean": 211.45,
+        "median": 212.0,
+        "min": 133.0,
+        "n": 20
+      },
+      "regret": {
+        "max": 0.0,
+        "mean": 0.0,
+        "median": 0.0,
+        "min": 0.0,
+        "n": 20
+      },
+      "relative_regret": {
+        "max": 0.0,
+        "mean": 0.0,
+        "median": 0.0,
+        "min": 0.0,
+        "n": 20
+      }
+    },
+    "assigned": 40,
+    "present": {
+      "best_vs_second_best_margin": {
+        "max": 105.0,
+        "mean": 25.2,
+        "median": 23.0,
+        "min": 3.0,
+        "n": 20
+      },
+      "cell_range": {
+        "max": 92.0,
+        "mean": 79.95,
+        "median": 84.5,
+        "min": 46.0,
+        "n": 20
+      },
+      "optimal_welfare": {
+        "max": 259.0,
+        "mean": 211.45,
+        "median": 212.0,
+        "min": 133.0,
+        "n": 20
+      },
+      "realized_welfare": {
+        "max": 154.0,
+        "mean": 95.55,
+        "median": 98.0,
+        "min": 45.0,
+        "n": 20
+      },
+      "regret": {
+        "max": 200.0,
+        "mean": 115.9,
+        "median": 113.0,
+        "min": 53.0,
+        "n": 20
+      },
+      "relative_regret": {
+        "max": 0.790514,
+        "mean": 0.550201,
+        "median": 0.545324,
+        "min": 0.33125,
+        "n": 20
+      }
+    },
+    "reference_counts": {
+      "absent": 20,
+      "present": 20
+    }
+  }
+}

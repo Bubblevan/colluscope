@@ -1,0 +1,13 @@
+# Preserved first implementation failure for the post-hoc profile join
+# Recorded from the original command output before correction; no request was sent.
+
+Command: python scripts/audit_m4_b5_existing_repeatability_by_profile.py
+Exit code: 1
+Observed error: the frozen campaign denominator is incomplete
+
+Diagnosis: the guard initially expected 232 rows in request_ledger.jsonl. The
+append-only journal correctly contains 232 attempt_started plus 232
+attempt_terminal rows (464 total), while the schedule and result ledger each
+contain 232 rows. The guard was corrected to validate all three denominators
+without discarding either event type. The corrected run passed and retained
+this full ledger hash: 882e7f00b1e99a515eb352ab4828b071ccf3b763e212d095af16f6e1cc5c1715.

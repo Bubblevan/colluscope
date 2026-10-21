@@ -1,0 +1,66 @@
+{
+  "analysis_timing": "post_hoc_exploratory_after_campaign_and_profile_collision_audits",
+  "combined_historical_current_profile_comparison": {
+    "candidate_v2_gate_context": "The candidate's 18/23 determinate-cluster rule is not met by these retained cross-run observations. This is not a substitute for its planned within-campaign interleaved repeats.",
+    "clusters_with_any_nonunanimous_exact_body_profile": 16,
+    "clusters_with_unanimous_labels_for_public_and_all_linked_privileged_profiles": 7,
+    "unanimous_clusters_with_public_privileged_mode_change": 5,
+    "unique_public_profile_clusters": 23
+  },
+  "current_campaign_a1_view_contrast": {
+    "assigned_contexts": 24,
+    "current_assignment_level_public_to_privileged_original_label_changes": 19,
+    "current_unique_public_profile_clusters_with_any_linked_change": 18,
+    "unique_public_profiles": 23
+  },
+  "decision": "DEPRIORITIZE_NEW_REPEATABILITY_CALLS_PENDING_A_MORE_DECISIVE_QUESTION",
+  "evidence_class": "offline_reanalysis",
+  "interpretation": "The retained exact-request comparisons show frequent label variation within the same Public-only body profile across historical/current observations. This weakens a simple view-only reading of the finite current contrast and reduces the expected information value of another repeat campaign. Because repeats span separate runs, they do not identify same-window stochasticity, hidden provider-state changes, or the cause of view differences.",
+  "model_api_calls": 0,
+  "raw_request_response_bodies_or_private_text_emitted": false,
+  "repeated_exact_request_profiles": {
+    "historical_current_discordant_assigned_pairs": {
+      "privileged_audit": 2,
+      "public_only": 17
+    },
+    "profiles_by_permission": {
+      "privileged_audit": 24,
+      "public_only": 23
+    },
+    "reported_fingerprint_equal_for_all_pairs": true,
+    "unique_profile_stability": {
+      "privileged_audit": {
+        "nonunanimous_across_retained_historical_and_current_observations": 2,
+        "observation_count_distribution": {
+          "2": 24
+        },
+        "unanimous_across_retained_historical_and_current_observations": 22,
+        "unique_profiles": 24
+      },
+      "public_only": {
+        "nonunanimous_across_retained_historical_and_current_observations": 16,
+        "observation_count_distribution": {
+          "2": 22,
+          "4": 1
+        },
+        "unanimous_across_retained_historical_and_current_observations": 7,
+        "unique_profiles": 23
+      }
+    }
+  },
+  "source_hashes": {
+    "campaign_attempt_ledger": "882e7f00b1e99a515eb352ab4828b071ccf3b763e212d095af16f6e1cc5c1715",
+    "campaign_result_ledger": "25f5436374657a991d55cf2cc58af84623d2233c2d12fb3d004608079824bade",
+    "campaign_schedule": "c44585532b18e8def0488c4f3de42be1c4a04009566b396251c3da2659043c3c",
+    "repeat_audit": "1926e9c60f565ef6b18ab1c3df7cd17326694b0e6cb88899fa7b500b67d7f62d",
+    "repeat_rows": "2ca94b277f71dafb0d81534e9cb7b83b31ba9ab4cb99b2d4f16b2ecb44efcc62"
+  },
+  "status": "PASS_POSTHOC_EXISTING_DATA_PROFILE_REANALYSIS",
+  "upstream_audit": {
+    "integrity_failures": 0,
+    "pairs": 48,
+    "status": "PASS_INDEPENDENT_RAW_RESPONSE_REPLAY",
+    "stored_mapping_mismatches": 0,
+    "strict_parse_failures": 0
+  }
+}

@@ -95,8 +95,8 @@
       ],
       "hypothesis": "In a prospective matched replication, the assigned private-target-reward plus chat-stage package will produce a positive target-execution interaction relative to private reward without chat and chat without private reward. This hypothesis concerns the treatment package only; it does not predict that message semantics, agreement, collusion, or intent are identified.",
       "hypothesis_id": "communication-content-choice-effect",
-      "selection_note": "Retained as the leading alternative behavior question. The 9/15 M1 package pattern is post-hoc and does not isolate delivered message semantics; revisit after the B5 mechanism diagnostic rather than using it to divert attention from the verified monitor anomaly.",
-      "status": "candidate",
+      "selection_note": "Selected as the next prospective empirical direction after existing M4 public-harm labels proved rule-computable and the cross-time B5 profile analysis showed substantial same-input output variation. The M1 24-matrix candidate has an offline-validated 456-generation local runtime. Its primary claim is only the finite private-reward × chat-stage package interaction; shared-target knowledge and the extra chat stage prevent a message-semantic or collusion interpretation. Fresh exact-scope authorization and formal registration remain required.",
+      "status": "selected",
       "title": "Does a private target reward interact with chat-stage availability in allocation choices?"
     },
     {
@@ -129,7 +129,7 @@
     {
       "hypothesis_id": "m4-b5-view-repeatability-v2",
       "title": "Do evidence-view differences exceed within-profile variation after clustering repeated public inputs?",
-      "status": "selected",
+      "status": "candidate",
       "hypothesis": "For this fixed corpus, the number of unique Public-only input-profile clusters whose mode differs from at least one linked Privileged-original profile will exceed the number of clusters containing any within-profile response disagreement.",
       "competing_explanations": [
         "The historical view changes are mostly within-profile response variation; unique profile clusters will not show a stable package contrast.",
@@ -160,11 +160,11 @@
           "sha256": "888005921123c0607e11dbc82e10699972ac6e2c6d98902377efa360ea8d4e34"
         }
       ],
-      "selection_note": "Selected candidate, revised before any output after profile-aware auditing found 47 unique request bodies across 48 context/view cells (23 public, 24 privileged), including one public input shared by two contexts and assigned six repeats. Primary analysis now clusters by the 23 unique Public-only profiles and counts that shared control once; all 24 context pairs remain visible as secondary descriptives. The 144 request schedule is unchanged. The candidate remains unregistered and unauthorized; the prior 232-call approval is consumed."
+      "selection_note": "Deprioritized after the post-hoc existing-profile reanalysis: 16/23 Public-only profiles are non-unanimous across the already retained historical/current exact-input observations, while the proposed 144-call campaign targets within-campaign repeats. It remains unregistered and unauthorized; retain it only if same-window repeatability becomes a central claim and a fresh design has clear decision value."
     }
   ],
   "policy": "At most three read-only candidate directions may be compared. Only one can be selected for a formal cycle at a time. Candidate status is not preregistration or authorization.",
   "schema_version": 1,
-  "selected_hypothesis_id": "m4-b5-view-repeatability-v2",
+  "selected_hypothesis_id": "communication-content-choice-effect",
   "updated_at": "2026-10-21"
 }

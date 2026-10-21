@@ -1,0 +1,429 @@
+M1 package/Monitor design offline audit
+created_at_utc=2026-10-20T23:48:46.899499+00:00
+python=3.12.4 | packaged by Anaconda, Inc. | (main, Jun 18 2024, 15:03:56) [MSC v.1929 64 bit (AMD64)]
+platform=Windows-11-10.0.26200-SP0
+
+$ D:\Anaconda\python.exe scripts/audit_m1_monitor_candidate_v1.py
+exit_code=0
+stdout:
+{
+  "concordance_control_counts": {
+    "concordant": 3,
+    "discordant": 3,
+    "not_assessable": 6
+  },
+  "control_rows": 12,
+  "external_cost_usd": 0,
+  "generation_ceiling": 672,
+  "matrix_groups": 24,
+  "model_calls": 0,
+  "physical_http_ceiling": 696,
+  "private_text_external_transfer_requires_fresh_approval": true,
+  "proposal_control_counts": {
+    "absent": 3,
+    "ambiguous": 3,
+    "present": 6
+  },
+  "sha256": {
+    "research\\drafts\\m1-natural-message-action-codebook-v1.md": "c62b9919aefd132f493761202026994da7d12a1df41eecb75c8a2b322d26bc55",
+    "research\\drafts\\m1-natural-message-monitor-controls-v1-answer-key.json": "f8798d6221f385679de47cbf9279b1ad16f485927bb21fb0d2cbf90d55339d1e",
+    "research\\drafts\\m1-natural-message-monitor-controls-v1.json": "46f1772ace13789d825a8610c38541ab33bc86fffd883c6322d1345824cc30b6",
+    "research\\drafts\\m1-natural-message-monitor-spec-v1.json": "b5cfa1a37a174cd302d74bc14ac2c9ea928d63055535983c923205dd00554ce1",
+    "research\\drafts\\m1-package-24-matrix-scenarios-20261021.json": "79358acd02dcade31291e879d1d173e5e92e9bf5f57305c65a3d59f954ca502a",
+    "research\\drafts\\m1-package-monitor-campaign-v2.md": "9c975ad19568461f42815fe8c712efdfc05507ef516b4720e25d21920b7812a4"
+  },
+  "status": "PASS_OFFLINE_M1_MONITOR_CANDIDATE_AUDIT",
+  "unique_matrix_hashes": 24
+}
+stderr:
+
+
+$ D:\Anaconda\python.exe scripts/freeze_m1_package_24_matrix_design.py --check
+exit_code=0
+stdout:
+{"episodes": 120, "generations": 456, "groups": 24, "matrices": 24, "model_outputs_consulted": false, "status": "PASS_FROZEN_24_MATRIX_DESIGN"}
+stderr:
+
+
+$ D:\Anaconda\python.exe scripts/audit_m1_package_24_matrix_design.py --check
+exit_code=0
+stdout:
+{"matrices": 24, "model_calls": 0, "permutations": 144, "status": "PASS_INDEPENDENT_M1_24_MATRIX_AUDIT"}
+stderr:
+
+
+$ D:\Anaconda\python.exe scripts/audit_m1_replication_prompt_profiles.py --check
+exit_code=0
+stdout:
+{"designs": 2, "model_calls": 0, "status": "PASS_PROMPT_PROFILE_RECOMPUTE"}
+stderr:
+
+
+$ D:\Anaconda\python.exe scripts/run_m1_package_replication_v3.py --check-only
+exit_code=0
+stdout:
+{"assigned_episodes": 120, "ballot_generations": 360, "config_sha256": "f88bf37f21b9760e1d2c560ef9a59ada80bcd1042f30653c3cb4c03ea8d748cd", "experiment_id": "m1-reward-chat-24group-replication-v1", "external_calls": 0, "external_cost_usd": 0.0, "generation_ceiling": 456, "identity_http_max": 24, "message_generations": 96, "model_calls_disabled_by_default": true, "monitor_can_see_private_messages": false, "offline_source_gates": [{"command": ["python.exe", "D:\\MyLab\\colluscope\\scripts\\freeze_m1_package_24_matrix_design.py", "--check"], "returncode": 0, "stderr": "", "stdout": "{\"episodes\": 120, \"generations\": 456, \"groups\": 24, \"matrices\": 24, \"model_outputs_consulted\": false, \"status\": \"PASS_FROZEN_24_MATRIX_DESIGN\"}"}, {"command": ["python.exe", "D:\\MyLab\\colluscope\\scripts\\audit_m1_package_24_matrix_design.py", "--check"], "returncode": 0, "stderr": "", "stdout": "{\"matrices\": 24, \"model_calls\": 0, \"permutations\": 144, \"status\": \"PASS_INDEPENDENT_M1_24_MATRIX_AUDIT\"}"}, {"command": ["python.exe", "D:\\MyLab\\colluscope\\scripts\\audit_m1_replication_prompt_profiles.py", "--check"], "returncode": 0, "stderr": "", "stdout": "{\"designs\": 2, \"model_calls\": 0, \"status\": \"PASS_PROMPT_PROFILE_RECOMPUTE\"}"}, {"command": ["python.exe", "D:\\MyLab\\colluscope\\scripts\\researchctl.py", "audit"], "returncode": 0, "stderr": "", "stdout": "{\n  \"integrity_check\": \"PASS\",\n  \"scientific_validity\": \"NOT_EVALUATED\",\n  \"registered_cycles\": 4,\n  \"open_experiments\": [],\n  \"new_iteration_usage\": {\n    \"model_calls\": 352,\n    \"external_cost_usd\": 0.039167058\n  },\n  \"usage_by_approval_id\": {\n    \"DS-FLASH-1200-2P50-20261020\": {\n      \"model_calls\": 120,\n      \"external_cost_usd\": 0.01178532\n    },\n    \"DS-FLASH-M4B5-CONTEXT-232-20261021\": {\n      \"model_calls\": 232,\n      \"external_cost_usd\": 0.027381738\n    }\n  },\n  \"project_limits\": {\n    \"max_model_calls\": 1200,\n    \"max_external_cost_usd\": 2.5\n  },\n  \"errors\": []\n}"}], "physical_http_max": 480, "runtime_config_sha256": "e2c780de0e8c5ecf4b43f47acf5565a0ee1808e103e420365d27d4ce32647fd3", "schedule_sha256": "79358acd02dcade31291e879d1d173e5e92e9bf5f57305c65a3d59f954ca502a", "status": "PASS_OFFLINE_CANDIDATE"}
+stderr:
+
+
+$ D:\Anaconda\python.exe scripts/researchctl.py audit
+exit_code=0
+stdout:
+{
+  "integrity_check": "PASS",
+  "scientific_validity": "NOT_EVALUATED",
+  "registered_cycles": 4,
+  "open_experiments": [],
+  "new_iteration_usage": {
+    "model_calls": 352,
+    "external_cost_usd": 0.039167058
+  },
+  "usage_by_approval_id": {
+    "DS-FLASH-1200-2P50-20261020": {
+      "model_calls": 120,
+      "external_cost_usd": 0.01178532
+    },
+    "DS-FLASH-M4B5-CONTEXT-232-20261021": {
+      "model_calls": 232,
+      "external_cost_usd": 0.027381738
+    }
+  },
+  "project_limits": {
+    "max_model_calls": 1200,
+    "max_external_cost_usd": 2.5
+  },
+  "errors": []
+}
+stderr:
+
+
+
+## Post-state-update registry audit
+$ D:\Anaconda\python.exe scripts/researchctl.py audit
+exit_code=0
+stdout:
+{
+  "integrity_check": "PASS",
+  "scientific_validity": "NOT_EVALUATED",
+  "registered_cycles": 4,
+  "open_experiments": [],
+  "new_iteration_usage": {
+    "model_calls": 352,
+    "external_cost_usd": 0.039167058
+  },
+  "usage_by_approval_id": {
+    "DS-FLASH-1200-2P50-20261020": {
+      "model_calls": 120,
+      "external_cost_usd": 0.01178532
+    },
+    "DS-FLASH-M4B5-CONTEXT-232-20261021": {
+      "model_calls": 232,
+      "external_cost_usd": 0.027381738
+    }
+  },
+  "project_limits": {
+    "max_model_calls": 1200,
+    "max_external_cost_usd": 2.5
+  },
+  "errors": []
+}
+stderr:
+
+
+
+## Final post-documentation registry audit
+$ D:\Anaconda\python.exe scripts/researchctl.py audit
+exit_code=0
+stdout:
+{
+  "integrity_check": "PASS",
+  "scientific_validity": "NOT_EVALUATED",
+  "registered_cycles": 4,
+  "open_experiments": [],
+  "new_iteration_usage": {
+    "model_calls": 352,
+    "external_cost_usd": 0.039167058
+  },
+  "usage_by_approval_id": {
+    "DS-FLASH-1200-2P50-20261020": {
+      "model_calls": 120,
+      "external_cost_usd": 0.01178532
+    },
+    "DS-FLASH-M4B5-CONTEXT-232-20261021": {
+      "model_calls": 232,
+      "external_cost_usd": 0.027381738
+    }
+  },
+  "project_limits": {
+    "max_model_calls": 1200,
+    "max_external_cost_usd": 2.5
+  },
+  "errors": []
+}
+stderr:
+
+
+
+## Projection compiler and freeze-guard verification
+
+$ D:\Anaconda\python.exe -m pytest -q tests/test_m1_monitor_projection.py
+exit_code=0
+stdout:
+.......                                                                  [100%]
+7 passed in 0.03s
+stderr:
+
+
+$ D:\Anaconda\python.exe scripts/project_m1_monitor_inputs.py --help
+exit_code=0
+stdout:
+usage: project_m1_monitor_inputs.py [-h] --run-dir RUN_DIR [--write-local]
+
+Compile a local, restricted M1 privileged-audit projection; never dispatches.
+
+options:
+  -h, --help         show this help message and exit
+  --run-dir RUN_DIR
+  --write-local      write a Git-ignored, ACL-restricted projection under the
+                     run's private/ directory
+stderr:
+
+
+$ D:\Anaconda\python.exe scripts/audit_m1_monitor_candidate_v1.py
+exit_code=0
+stdout:
+{
+  "concordance_control_counts": {
+    "concordant": 3,
+    "discordant": 3,
+    "not_assessable": 6
+  },
+  "control_rows": 12,
+  "external_cost_usd": 0,
+  "generation_ceiling": 672,
+  "matrix_groups": 24,
+  "model_calls": 0,
+  "physical_http_ceiling": 696,
+  "private_text_external_transfer_requires_fresh_approval": true,
+  "proposal_control_counts": {
+    "absent": 3,
+    "ambiguous": 3,
+    "present": 6
+  },
+  "sha256": {
+    "research\\drafts\\m1-natural-message-action-codebook-v1.md": "bf54c1de13cced5a43692ac661ad4186fa9c649108239a2029abe214d20de8b8",
+    "research\\drafts\\m1-natural-message-monitor-controls-v1-answer-key.json": "f8798d6221f385679de47cbf9279b1ad16f485927bb21fb0d2cbf90d55339d1e",
+    "research\\drafts\\m1-natural-message-monitor-controls-v1.json": "46f1772ace13789d825a8610c38541ab33bc86fffd883c6322d1345824cc30b6",
+    "research\\drafts\\m1-natural-message-monitor-spec-v1.json": "b5cfa1a37a174cd302d74bc14ac2c9ea928d63055535983c923205dd00554ce1",
+    "research\\drafts\\m1-package-24-matrix-scenarios-20261021.json": "79358acd02dcade31291e879d1d173e5e92e9bf5f57305c65a3d59f954ca502a",
+    "research\\drafts\\m1-package-monitor-campaign-v2.md": "28e8095536cd6c1ee524e79872efc362090994a32ada717961313a2191646a3d"
+  },
+  "status": "PASS_OFFLINE_M1_MONITOR_CANDIDATE_AUDIT",
+  "unique_matrix_hashes": 24
+}
+stderr:
+
+
+$ D:\Anaconda\python.exe scripts/freeze_m1_package_24_matrix_design.py --check
+exit_code=0
+stdout:
+{"episodes": 120, "generations": 456, "groups": 24, "matrices": 24, "model_outputs_consulted": false, "status": "PASS_FROZEN_24_MATRIX_DESIGN"}
+stderr:
+
+
+$ D:\Anaconda\python.exe scripts/audit_m1_package_24_matrix_design.py --check
+exit_code=0
+stdout:
+{"matrices": 24, "model_calls": 0, "permutations": 144, "status": "PASS_INDEPENDENT_M1_24_MATRIX_AUDIT"}
+stderr:
+
+
+$ D:\Anaconda\python.exe scripts/audit_m1_replication_prompt_profiles.py --check
+exit_code=0
+stdout:
+{"designs": 2, "model_calls": 0, "status": "PASS_PROMPT_PROFILE_RECOMPUTE"}
+stderr:
+
+
+$ D:\Anaconda\python.exe scripts/run_m1_package_replication_v3.py --check-only
+exit_code=1
+stdout:
+
+stderr:
+Traceback (most recent call last):
+  File "D:\MyLab\colluscope\scripts\run_m1_package_replication_v3.py", line 15, in <module>
+    raise SystemExit(_main())
+                     ^^^^^^^
+  File "D:\MyLab\colluscope\src\colluscope\m1_package_replication_v3_runtime.py", line 833, in _main
+    print(json.dumps(validate_offline_candidate(), ensure_ascii=False, sort_keys=True))
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\MyLab\colluscope\src\colluscope\m1_package_replication_v3_runtime.py", line 354, in validate_offline_candidate
+    raise RuntimeError("offline source gate failed: " + " ".join(command[1:]))
+RuntimeError: offline source gate failed: D:\MyLab\colluscope\scripts\researchctl.py audit
+
+$ git diff --quiet -- docs/RESEARCH_RISK_REGISTER.md
+exit_code=1
+stdout:
+
+stderr:
+
+
+$ D:\Anaconda\python.exe scripts/researchctl.py audit
+exit_code=1
+stdout:
+{
+  "integrity_check": "FAIL",
+  "scientific_validity": "NOT_EVALUATED",
+  "registered_cycles": 4,
+  "open_experiments": [],
+  "new_iteration_usage": {
+    "model_calls": 352,
+    "external_cost_usd": 0.039167058
+  },
+  "usage_by_approval_id": {
+    "DS-FLASH-1200-2P50-20261020": {
+      "model_calls": 120,
+      "external_cost_usd": 0.01178532
+    },
+    "DS-FLASH-M4B5-CONTEXT-232-20261021": {
+      "model_calls": 232,
+      "external_cost_usd": 0.027381738
+    }
+  },
+  "project_limits": {
+    "max_model_calls": 1200,
+    "max_external_cost_usd": 2.5
+  },
+  "errors": [
+    "m4-b5-context-sensitivity-campaign-v1: outputs[10] hash mismatch: docs/RESEARCH_RISK_REGISTER.md"
+  ]
+}
+stderr:
+
+
+
+## Final all-offline verification after restoring frozen register
+
+$ D:\Anaconda\python.exe -m pytest -q tests/test_m1_monitor_projection.py
+exit_code=0
+stdout:
+.......                                                                  [100%]
+7 passed in 0.03s
+stderr:
+
+
+$ D:\Anaconda\python.exe scripts/project_m1_monitor_inputs.py --help
+exit_code=0
+stdout:
+usage: project_m1_monitor_inputs.py [-h] --run-dir RUN_DIR [--write-local]
+
+Compile a local, restricted M1 privileged-audit projection; never dispatches.
+
+options:
+  -h, --help         show this help message and exit
+  --run-dir RUN_DIR
+  --write-local      write a Git-ignored, ACL-restricted projection under the
+                     run's private/ directory
+stderr:
+
+
+$ D:\Anaconda\python.exe scripts/audit_m1_monitor_candidate_v1.py
+exit_code=0
+stdout:
+{
+  "concordance_control_counts": {
+    "concordant": 3,
+    "discordant": 3,
+    "not_assessable": 6
+  },
+  "control_rows": 12,
+  "external_cost_usd": 0,
+  "generation_ceiling": 672,
+  "matrix_groups": 24,
+  "model_calls": 0,
+  "physical_http_ceiling": 696,
+  "private_text_external_transfer_requires_fresh_approval": true,
+  "proposal_control_counts": {
+    "absent": 3,
+    "ambiguous": 3,
+    "present": 6
+  },
+  "sha256": {
+    "research\\drafts\\m1-natural-message-action-codebook-v1.md": "bf54c1de13cced5a43692ac661ad4186fa9c649108239a2029abe214d20de8b8",
+    "research\\drafts\\m1-natural-message-monitor-controls-v1-answer-key.json": "f8798d6221f385679de47cbf9279b1ad16f485927bb21fb0d2cbf90d55339d1e",
+    "research\\drafts\\m1-natural-message-monitor-controls-v1.json": "46f1772ace13789d825a8610c38541ab33bc86fffd883c6322d1345824cc30b6",
+    "research\\drafts\\m1-natural-message-monitor-spec-v1.json": "b5cfa1a37a174cd302d74bc14ac2c9ea928d63055535983c923205dd00554ce1",
+    "research\\drafts\\m1-package-24-matrix-scenarios-20261021.json": "79358acd02dcade31291e879d1d173e5e92e9bf5f57305c65a3d59f954ca502a",
+    "research\\drafts\\m1-package-monitor-campaign-v2.md": "28e8095536cd6c1ee524e79872efc362090994a32ada717961313a2191646a3d"
+  },
+  "status": "PASS_OFFLINE_M1_MONITOR_CANDIDATE_AUDIT",
+  "unique_matrix_hashes": 24
+}
+stderr:
+
+
+$ D:\Anaconda\python.exe scripts/freeze_m1_package_24_matrix_design.py --check
+exit_code=0
+stdout:
+{"episodes": 120, "generations": 456, "groups": 24, "matrices": 24, "model_outputs_consulted": false, "status": "PASS_FROZEN_24_MATRIX_DESIGN"}
+stderr:
+
+
+$ D:\Anaconda\python.exe scripts/audit_m1_package_24_matrix_design.py --check
+exit_code=0
+stdout:
+{"matrices": 24, "model_calls": 0, "permutations": 144, "status": "PASS_INDEPENDENT_M1_24_MATRIX_AUDIT"}
+stderr:
+
+
+$ D:\Anaconda\python.exe scripts/audit_m1_replication_prompt_profiles.py --check
+exit_code=0
+stdout:
+{"designs": 2, "model_calls": 0, "status": "PASS_PROMPT_PROFILE_RECOMPUTE"}
+stderr:
+
+
+$ D:\Anaconda\python.exe scripts/run_m1_package_replication_v3.py --check-only
+exit_code=0
+stdout:
+{"assigned_episodes": 120, "ballot_generations": 360, "config_sha256": "f88bf37f21b9760e1d2c560ef9a59ada80bcd1042f30653c3cb4c03ea8d748cd", "experiment_id": "m1-reward-chat-24group-replication-v1", "external_calls": 0, "external_cost_usd": 0.0, "generation_ceiling": 456, "identity_http_max": 24, "message_generations": 96, "model_calls_disabled_by_default": true, "monitor_can_see_private_messages": false, "offline_source_gates": [{"command": ["python.exe", "D:\\MyLab\\colluscope\\scripts\\freeze_m1_package_24_matrix_design.py", "--check"], "returncode": 0, "stderr": "", "stdout": "{\"episodes\": 120, \"generations\": 456, \"groups\": 24, \"matrices\": 24, \"model_outputs_consulted\": false, \"status\": \"PASS_FROZEN_24_MATRIX_DESIGN\"}"}, {"command": ["python.exe", "D:\\MyLab\\colluscope\\scripts\\audit_m1_package_24_matrix_design.py", "--check"], "returncode": 0, "stderr": "", "stdout": "{\"matrices\": 24, \"model_calls\": 0, \"permutations\": 144, \"status\": \"PASS_INDEPENDENT_M1_24_MATRIX_AUDIT\"}"}, {"command": ["python.exe", "D:\\MyLab\\colluscope\\scripts\\audit_m1_replication_prompt_profiles.py", "--check"], "returncode": 0, "stderr": "", "stdout": "{\"designs\": 2, \"model_calls\": 0, \"status\": \"PASS_PROMPT_PROFILE_RECOMPUTE\"}"}, {"command": ["python.exe", "D:\\MyLab\\colluscope\\scripts\\researchctl.py", "audit"], "returncode": 0, "stderr": "", "stdout": "{\n  \"integrity_check\": \"PASS\",\n  \"scientific_validity\": \"NOT_EVALUATED\",\n  \"registered_cycles\": 4,\n  \"open_experiments\": [],\n  \"new_iteration_usage\": {\n    \"model_calls\": 352,\n    \"external_cost_usd\": 0.039167058\n  },\n  \"usage_by_approval_id\": {\n    \"DS-FLASH-1200-2P50-20261020\": {\n      \"model_calls\": 120,\n      \"external_cost_usd\": 0.01178532\n    },\n    \"DS-FLASH-M4B5-CONTEXT-232-20261021\": {\n      \"model_calls\": 232,\n      \"external_cost_usd\": 0.027381738\n    }\n  },\n  \"project_limits\": {\n    \"max_model_calls\": 1200,\n    \"max_external_cost_usd\": 2.5\n  },\n  \"errors\": []\n}"}], "physical_http_max": 480, "runtime_config_sha256": "e2c780de0e8c5ecf4b43f47acf5565a0ee1808e103e420365d27d4ce32647fd3", "schedule_sha256": "79358acd02dcade31291e879d1d173e5e92e9bf5f57305c65a3d59f954ca502a", "status": "PASS_OFFLINE_CANDIDATE"}
+stderr:
+
+
+$ git diff --quiet -- docs/RESEARCH_RISK_REGISTER.md
+exit_code=0
+stdout:
+
+stderr:
+
+
+$ D:\Anaconda\python.exe scripts/researchctl.py audit
+exit_code=0
+stdout:
+{
+  "integrity_check": "PASS",
+  "scientific_validity": "NOT_EVALUATED",
+  "registered_cycles": 4,
+  "open_experiments": [],
+  "new_iteration_usage": {
+    "model_calls": 352,
+    "external_cost_usd": 0.039167058
+  },
+  "usage_by_approval_id": {
+    "DS-FLASH-1200-2P50-20261020": {
+      "model_calls": 120,
+      "external_cost_usd": 0.01178532
+    },
+    "DS-FLASH-M4B5-CONTEXT-232-20261021": {
+      "model_calls": 232,
+      "external_cost_usd": 0.027381738
+    }
+  },
+  "project_limits": {
+    "max_model_calls": 1200,
+    "max_external_cost_usd": 2.5
+  },
+  "errors": []
+}
+stderr:
+

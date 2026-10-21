@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "status": "PASS_OFFLINE_ONLY_NO_MODEL_CALLS",
+  "model_calls": 0,
+  "external_cost_usd": 0,
+  "created_at_utc": "2026-10-20T23:48:47.090897+00:00",
+  "branch_head": "a4123b73523f7528fb1e06ccd6236159cadf98f4",
+  "log_path": "docs/results/research-sprint-20261021/m1-package-monitor-design-audit/offline-validation.log",
+  "log_sha256": "d18d735b2610aaf87bbc600a9bc0660320939e38a96d667c59ba144c3dbcd1f4",
+  "gates": [
+    {
+      "command": [
+        "D:\\Anaconda\\python.exe",
+        "scripts/audit_m1_monitor_candidate_v1.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "D:\\Anaconda\\python.exe",
+        "scripts/freeze_m1_package_24_matrix_design.py",
+        "--check"
+      ],
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "D:\\Anaconda\\python.exe",
+        "scripts/audit_m1_package_24_matrix_design.py",
+        "--check"
+      ],
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "D:\\Anaconda\\python.exe",
+        "scripts/audit_m1_replication_prompt_profiles.py",
+        "--check"
+      ],
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "D:\\Anaconda\\python.exe",
+        "scripts/run_m1_package_replication_v3.py",
+        "--check-only"
+      ],
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "D:\\Anaconda\\python.exe",
+        "scripts/researchctl.py",
+        "audit"
+      ],
+      "exit_code": 0
+    }
+  ],
+  "failure_history_path": "docs/results/research-sprint-20261021/m1-package-monitor-design-audit/state-update-failure.log",
+  "post_update_registry_audit": "PASS",
+  "worktree_changes_included": true,
+  "prior_state_update_failure_preserved": true,
+  "failure_history_paths": [
+    "docs/results/research-sprint-20261021/m1-package-monitor-design-audit/state-update-failure.log",
+    "docs/results/research-sprint-20261021/m1-package-monitor-design-audit/registry-hash-guard-failure.log"
+  ],
+  "projection_test_result": "7 passed; synthetic T/B/E fixtures only; no real M1 run exists yet",
+  "freeze_guard": "PASS: docs/RESEARCH_RISK_REGISTER.md matches HEAD byte-for-byte",
+  "projector": "local-only compiler implemented; CLI and synthetic projection tests pass; real run path/ACL integration remains unexecuted pending M1 generation"
+}
