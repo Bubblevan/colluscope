@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "approval_id": "DS-FLASH-TRACK23-900-20261021",
+  "scope": "One bounded Track 2.3 counterfactual-delivery cycle: an 8-context pilot (three sealed baseline ballots plus four matched recipient branches per context; 56 assigned model requests), followed only if frozen gates pass by a 40-new-context main study (280 assigned agent requests), four LLM audit methods on 20 preselected held-out researcher bundles (80 requests), four LLM audit methods on a preselected 19-context ordinary-observer subset covering four branches (304 requests), and four LLM audit methods on 30 eligible local non-Qwen SALT-NLP trajectories (120 requests, skipped if the read-only admission audit fails or data are absent); maximum frozen schedule 840 physical attempts and authorization ceiling 900. DeepSeek deepseek-flash alias only through https://api.deepseek.com/beta/chat/completions strict function calling; temperature 0, thinking disabled, output maximum 64 tokens, pinned-tokenizer input upper bound 1,200 tokens including framing; no Qwen, provider fallback, custom transport, retries, replacements, resumption, or resampling. USD 1.80 peak-rate cap at official weekday peak rates ($1.32/M uncached input, $3.96/M output); 180-minute wall-clock cap with a 60-minute pilot gate. Stop on transport/HTTP, model/fingerprint, source/prompt hash, privacy, budget, expiry, delivery, parsing, or wall-clock failure; expires 2026-10-23T00:00:00Z.",
+  "authorized_experiment_ids": [
+    "track23-counterfactual-delivery-v1"
+  ],
+  "max_model_calls": 900,
+  "max_external_cost_usd": 1.8,
+  "approved_at_utc": "2026-10-21T09:00:30Z",
+  "expires_at_utc": "2026-10-23T00:00:00Z",
+  "source": "The user explicitly approved a new Track 2.3 research cycle and a 4,800 lifetime project model-call ceiling on 2026-10-21. This fresh DeepSeek-only grant is one experiment, capped at 900 physical requests, while the frozen schedule contains at most 840 and stops at preregistered gates. Historical approvals are not reused."
+}

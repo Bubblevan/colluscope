@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "experiment_id": "track23-counterfactual-delivery-v1",
+  "model_calls": 0,
+  "network_calls": 0,
+  "events": [
+    {
+      "event": "freeze_script_failure",
+      "status": "FAILED_BEFORE_SCHEDULE_WRITE",
+      "cause": "The schedule hash helper received a dictionary instead of canonical JSON bytes.",
+      "repair": "Hash the canonical serialized schedule in both freeze and verification paths.",
+      "model_calls": 0,
+      "network_calls": 0
+    },
+    {
+      "event": "initial_exhaustive_preflight",
+      "status": "COMPLETED_WITHOUT_CAPTURED_OUTPUT",
+      "cause": "The first offline preflight enumerated 41,000+ recipient prompt variants and exceeded the shell's initial wait window; its asynchronous output was not retained by the caller.",
+      "model_calls": 0,
+      "network_calls": 0
+    },
+    {
+      "event": "final_offline_preflight",
+      "status": "PASS_OFFLINE_PREFLIGHT",
+      "artifact": "docs/results/track23-counterfactual-delivery-v1/offline-preflight.json",
+      "schedule_sha256": "398379bb396126c1e92683dfc42d4861a4a8fd48bb41e72c9d908794b4cc7645",
+      "prompt_variants_checked": 8016,
+      "max_tokenizer_tokens_plus_256_framing": 969,
+      "maximum_schedule_peak_rate_reserve_usd": 1.2873168,
+      "N_P_MINUS_byte_parity": "PASS",
+      "hidden_target_message_leak_check": "PASS",
+      "model_calls": 0,
+      "network_calls": 0
+    },
+    {
+      "event": "registered_runner_preflight",
+      "status": "PASS_PILOT_PRE_DISPATCH",
+      "credential_present": true,
+      "schedule_sha256": "398379bb396126c1e92683dfc42d4861a4a8fd48bb41e72c9d908794b4cc7645",
+      "model_calls": 0,
+      "network_calls": 0
+    }
+  ]
+}

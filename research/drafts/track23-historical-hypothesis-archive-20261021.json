@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "archived_hypothesis": {
+    "competing_explanations": [
+      "The shared +20 target reward is sufficient for independent target choice when the target is visible; under a hidden target, a target-revealing peer message should add no response beyond the matched neutral message.",
+      "A finite hidden-message contrast reflects serving/request variability or message salience rather than transmission of the target; exact-prompt repeats will disagree or fail to show the preregistered directional pattern."
+    ],
+    "discriminating_prediction": "Across four frozen contexts, the visible-target plus neutral-message positive control reaches at least 3/4 target ballots in the first two contexts; at least three sender messages literally disclose the complete target; and in at least three of those target-disclosing contexts the two hidden-target actual-message ballots contain more target choices than the two hidden-target token-matched neutral-message ballots. Identical prompts are repeated twice so response instability is observable. This is a finite, one-alias message-response pattern and does not identify active collusion, intent, or population effects.",
+    "evidence_refs": [
+      {
+        "path": "docs/M1_100_SCIENTIFIC_AUDIT.md",
+        "sha256": "0a20508d7048f1e573b4d158f348cfe647c8354199860ec1adf5b162a7ec9c1a"
+      },
+      {
+        "path": "docs/M3_SCIENTIFIC_RESULTS.md",
+        "sha256": "dd194d2579366acd0d15c4bc63952b8fddd20bbe92ffc2bdd339efd50e7eaf41"
+      },
+      {
+        "path": "docs/DEEPSEEK_RECIPIENT_MECHANISM_V1_EVIDENCE.md",
+        "sha256": "625004fe315d2bf148de18370ea9c4fcb079139fa1bad5fb4fa37e29e71cf90d"
+      },
+      {
+        "path": "docs/M4_B5_CONTEXT_SENSITIVITY_EVIDENCE.md",
+        "sha256": "906891199731c2b9a0a9a0f6822dd7c572896c29b41620fbf53e85e42bf37402"
+      }
+    ],
+    "hypothesis": "Across the four frozen allocation contexts, conditional on at least 3/4 visible-target plus neutral-message control ballots choosing the target in the first two contexts and at least three literal full-target sender disclosures, in at least three target-disclosing contexts the two hidden-target actual-message ballots will contain more target choices than the two hidden-target token-matched neutral-message ballots. This is a finite, one-alias message-transmission response pattern; it does not identify active collusion, intent, or a population effect.",
+    "hypothesis_id": "shared-target-message-transmission-v1",
+    "retirement_note": "Clean research handoff: this historical direction is not carried into the new bounded cycle; its experiment record and evidence remain unchanged.",
+    "selection_note": "Selected only for a fresh, bounded 36-attempt cycle after the user's explicit 2026-10-21 instruction to start model calls and a new cycle. No old approval is reused. The study uses model-generated, yoked messages and stateless recipient prompts, not active negotiation or a collusion test.",
+    "status": "retired",
+    "title": "Does a sender-disclosed target shift recipient ballots beyond shared-incentive convergence?"
+  }
+}

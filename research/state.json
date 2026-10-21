@@ -1,8 +1,8 @@
 {
-  "active_experiment_id": null,
-  "active_hypothesis_id": null,
+  "active_experiment_id": "track23-counterfactual-delivery-v1",
+  "active_hypothesis_id": "track23-counterfactual-delivery-v1",
   "candidate_hypotheses": [
-    "shared-target-message-source-v1"
+    "track23-counterfactual-delivery-v1"
   ],
   "claim_level_status": {
     "B4_B5_superiority": "INCONCLUSIVE",
@@ -31,7 +31,7 @@
   },
   "historical_approvals_reusable": false,
   "latest_closed_experiment_id": "shared-target-message-source-v1",
-  "latest_decision": "PIVOT",
+  "latest_decision": "PREREGISTERED",
   "latest_decision_type": "operational",
   "latest_integrity_followup": {
     "frozen_audit_path": "docs/results/research-sprint-20261021/m4-b5-context-sensitivity-independent-audit.json",
@@ -124,11 +124,11 @@
       "runtime_inputs_verified": 23
     }
   },
-  "next_action": "Complete offline manuscript integration and critical review of this source-framing result alongside the M1 and M3 evidence; no further model calls are proposed by this closure.",
+  "next_action": "Execute only the registered 56-request Track 2.3 pilot through scripts/run_track23_counterfactual_v1.py --pilot, then apply the frozen pilot gate; do not begin the 40-context main phase unless every gate passes.",
   "next_action_evidence_class": "real_llm_behavior",
-  "next_action_kind": "register_then_run_authorized_experiment",
-  "next_action_max_external_cost_usd": 0.75,
-  "next_action_max_model_calls": 576,
+  "next_action_kind": "resume_or_close_registered_cycle",
+  "next_action_max_external_cost_usd": 1.8,
+  "next_action_max_model_calls": 900,
   "preexisting_untracked_paths_preserved": [
     "docs/COLOSSEUM_LOCAL_REPRO_PROTOCOL.md (pre-existing untracked; preserved, not part of this review)",
     "docs/results/colosseum-local-audit-20261020/ (pre-existing untracked; preserved, not part of this review)",
@@ -146,6 +146,6 @@
   "program_status": "active",
   "schema_version": 2,
   "state_recorded_at_head": "2dcca164235cf2254dba65b2307a75edb973d292",
-  "status": "ready_for_next_cycle",
+  "status": "iteration_preregistered",
   "updated_at": "2026-10-21"
 }

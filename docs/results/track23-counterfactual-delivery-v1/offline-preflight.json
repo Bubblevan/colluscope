@@ -1,0 +1,16 @@
+{
+  "status": "PASS_OFFLINE_PREFLIGHT",
+  "experiment_id": "track23-counterfactual-delivery-v1",
+  "prompt_variants_checked": 8016,
+  "max_tokenizer_tokens_plus_256_framing": 969,
+  "max_serialized_request_bytes": 2242,
+  "max_output_tokens": 64,
+  "maximum_schedule_peak_rate_reserve_usd": 1.2873168,
+  "pilot_assigned_requests": 56,
+  "main_assigned_requests": 280,
+  "N_P_MINUS_byte_parity": "PASS",
+  "hidden_target_message_leak_check": "PASS",
+  "model_calls": 0,
+  "network_calls": 0,
+  "schedule_sha256": "398379bb396126c1e92683dfc42d4861a4a8fd48bb41e72c9d908794b4cc7645"
+}
