@@ -1,0 +1,10 @@
+{
+  "authorization_batch_sha256": "d0f90695787db816f056f61f8dd8354daa8c5ac701ce3b3b93b96df3f218d251",
+  "closure_sha256": null,
+  "evaluator_v2_sha256": "e7b563b1a149a8c770a56728a4d13abcc53e8a12080866a1adfad03b2d234f6d",
+  "experiment_id": "track23-counterfactual-delivery-v2",
+  "preregistration_sha256": "1018175d9f5f04e37633f503c63cc867ddf1dec5a4f0d8a5f8c9c65f3a08944e",
+  "registered_at_utc": "2026-10-21T10:35:03+00:00",
+  "registered_git_head": "222c97427607794ff4f9cc30d4d69d5dd3aa0d71",
+  "schema_version": 1
+}

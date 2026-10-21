@@ -1,6 +1,6 @@
 {
-  "active_experiment_id": null,
-  "active_hypothesis_id": null,
+  "active_experiment_id": "track23-counterfactual-delivery-v2",
+  "active_hypothesis_id": "track23-counterfactual-delivery-v2",
   "candidate_hypotheses": [
     "track23-counterfactual-delivery-v1"
   ],
@@ -31,7 +31,7 @@
   },
   "historical_approvals_reusable": false,
   "latest_closed_experiment_id": "track23-counterfactual-delivery-v1",
-  "latest_decision": "BLOCKED",
+  "latest_decision": "PREREGISTERED",
   "latest_decision_type": "operational",
   "latest_integrity_followup": {
     "frozen_audit_path": "docs/results/research-sprint-20261021/m4-b5-context-sensitivity-independent-audit.json",
@@ -124,7 +124,7 @@
       "runtime_inputs_verified": 23
     }
   },
-  "next_action": "Continue offline Track 2.3 paper integration using the existing M1/M3/M4 and source-framing evidence, explicitly recording this blocked pilot. Do not retry this assigned request. Any future live experiment requires the default Python resolver to work and a fresh exact-scope approval.",
+  "next_action": "Implement the frozen protocol and proceed only through an existing entry point within current authorization; the CLI does not dispatch.",
   "next_action_evidence_class": "offline_reanalysis",
   "next_action_kind": "continue_offline",
   "next_action_max_external_cost_usd": 0.0,
@@ -146,6 +146,6 @@
   "program_status": "active",
   "schema_version": 2,
   "state_recorded_at_head": "2dcca164235cf2254dba65b2307a75edb973d292",
-  "status": "continuing_after_execution_boundary",
+  "status": "iteration_preregistered",
   "updated_at": "2026-10-21"
 }
