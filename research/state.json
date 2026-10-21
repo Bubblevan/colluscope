@@ -31,8 +31,8 @@
   "latest_decision": "INCONCLUSIVE",
   "latest_decision_type": "scientific",
   "latest_review": {
-    "status": "offline_scope_refocus_complete_waiting_runner",
-    "authorization_status": "DS-FLASH-M4B5-CONTEXT-232-20261021 is consumed by the completed context-sensitivity campaign; no authorization for the new candidate",
+    "status": "offline_runner_canary_pass_waiting_new_scope_authorization",
+    "authorization_status": "The 232-attempt context-sensitivity approval is consumed. No authorization exists for m4-b5-view-repeatability-v2.",
     "experiment_registered": false,
     "new_model_api_attempts": 0,
     "new_model_calls": 0,
@@ -44,45 +44,54 @@
       "retries": 0,
       "replacements": 0
     },
-    "external_private_text_transfer": "The Privileged-original arm would send 144 historical private-message event appearances; explicit new approval is required.",
-    "paper_direction_candidate": "communication-content-choice-effect",
-    "review_mode": "offline_scope_review_and_adversarial_self_review; no independent critic review of this new draft",
-    "parent_head_reviewed": "c312bbfafe04d77ce684f3234ef9b71056e60739",
-    "evidence": "docs/M4_B5_REPEATABILITY_SCOPE_REFOCUS_20261021.md",
-    "evidence_sha256": "e0a80da6046b6cb1caa1c89dd7ce6470fb6804e2ee9930c795579748bd1575e0",
-    "schedule_sha256": "37cce3e98a0493cb26e6610cdc823aa5cc7a1303086f7943ed269b895441e099",
-    "schedule_builder_sha256": "cf5dccf2814084027ca1de60cba3d5961e50435467fbdd0e52a6a73ca0675103",
+    "external_private_text_transfer": "72 privileged requests contain two historical private messages each: 144 message-event appearances sent to DeepSeek if later approved and dispatched.",
+    "offline_canary_tests": "6 passed; final log docs/results/research-sprint-20261021/m4-b5-view-repeatability-v2-offline-canary/pytest-final.log",
+    "offline_prepare": {
+      "assigned": 144,
+      "context_view_profiles": 48,
+      "max_input_token_bound": 12104,
+      "offpeak_cost_reserve_usd": "0.26585640",
+      "request_manifest_sha256": "6d26f48244bd06d93b29d58d02d69f03fe49d6db967b74cae0618ccfdfaf760a"
+    },
+    "loopback_fake_responses": 431,
+    "review_mode": "adversarial_offline_canary; no independent scientific critic review; no provider inference",
+    "parent_head_reviewed": "e1c51f9a8c561f3320a99345ea54974c95a1e10c",
+    "evidence": "docs/M4_B5_VIEW_REPEATABILITY_V2_DECISION.md",
+    "evidence_sha256": "5c9e1639eb0929b1eead5407b63c0ed993db061b7183b31b4252c78d04b66a62",
     "evidence_refs": [
       {
-        "path": "docs/M4_B5_REPEATABILITY_SCOPE_REFOCUS_20261021.md",
-        "sha256": "e0a80da6046b6cb1caa1c89dd7ce6470fb6804e2ee9930c795579748bd1575e0",
-        "claim": "Scope reduction and frozen candidate protocol."
+        "path": "docs/M4_B5_VIEW_REPEATABILITY_V2_DECISION.md",
+        "sha256": "5c9e1639eb0929b1eead5407b63c0ed993db061b7183b31b4252c78d04b66a62"
       },
       {
-        "path": "docs/M4_B5_CONTEXT_SENSITIVITY_DECISION.md",
-        "sha256": "cd9ab94ad8756013e952f2a06d89d0e8a0a6975dc4e3e3f7e511cc661d6dcbb6",
-        "claim": "Completed 232-call campaign and inconclusive decision."
+        "path": "docs/ITERATION_LOG_FOLLOWUP_20261021_B5_REPEATABILITY_RUNNER.md",
+        "sha256": "0a2ad011b835872c76123c2fc8f7afa31498a5becd7fe4007259803f177ccf85"
       },
       {
-        "path": "docs/M4_B5_RAW_RESPONSE_REPEATABILITY_EVIDENCE.md",
-        "sha256": "f61e7c2b1cd702f671029b250651f52175ef1441f3f36f67351678761b8f13aa",
-        "claim": "Finite exact-request label disagreement audit."
+        "path": "docs/RESEARCH_RISK_REGISTER_ADDENDUM_20261021_B5_REPEATABILITY_RUNNER.md",
+        "sha256": "22d688ec1291c34f3141230c8406d06bb5881efb38fd813453e8383b74b8ec2b"
+      },
+      {
+        "path": "docs/results/research-sprint-20261021/m4-b5-view-repeatability-v2-offline-canary/offline-canary-summary.json",
+        "sha256": "687e94313fb76f5d0759eaedb4a89f931575c99f185f24b41a3a58040ca692d1"
       },
       {
         "path": "research/drafts/m4-b5-view-repeatability-v2-schedule.json",
-        "sha256": "08e9b6d72862629f1e3e2fa3f02f3dcaee41a6356ad874cdd7cecc6d9ac93f3e",
-        "claim": "Hash-only candidate schedule."
+        "sha256": "08e9b6d72862629f1e3e2fa3f02f3dcaee41a6356ad874cdd7cecc6d9ac93f3e"
       },
       {
-        "path": "scripts/freeze_m4_b5_view_repeatability_v2.py",
-        "sha256": "cf5dccf2814084027ca1de60cba3d5961e50435467fbdd0e52a6a73ca0675103",
-        "claim": "Deterministic hash-only schedule builder."
+        "path": "scripts/run_m4_b5_view_repeatability_v2.py",
+        "sha256": "4a1caafd3c4d5c1f17c4255c27c18ee6c6a5e0b5f9b5b682c78504078c01c092"
+      },
+      {
+        "path": "tests/test_m4_b5_view_repeatability_v2.py",
+        "sha256": "0eee5b8e5dbce29bbc781909c89db8e4cab990c49ecc9dee7a258e5ce6ebabd6"
       }
     ]
   },
-  "latest_review_id": "m4-b5-repeatability-scope-refocus-20261021",
+  "latest_review_id": "m4-b5-view-repeatability-v2-offline-runner-20261021",
   "latest_scientific_outcome": "INCONCLUSIVE",
-  "next_action": "Implement and offline-audit the append-only 144-attempt repeatability runner against the frozen hash-only schedule. Do not register or dispatch until the runner, request-byte equality, privacy boundary, identity gates, price/window checks, and a new scope-specific approval are in place.",
+  "next_action": "Obtain a new explicit authorization naming m4-b5-view-repeatability-v2, 144 physical attempts, USD 0.35, official DeepSeek Flash off-peak only, zero retries/replacements, expiry, and transfer of 144 private-message event appearances. Do not reuse the consumed 232-call approval.",
   "preexisting_untracked_paths_preserved": [
     "docs/COLOSSEUM_LOCAL_REPRO_PROTOCOL.md (pre-existing untracked; preserved, not part of this review)",
     "docs/results/colosseum-local-audit-20261020/ (pre-existing untracked; preserved, not part of this review)",
@@ -100,7 +109,7 @@
   "program": "ColluScope Autoresearch",
   "program_status": "active",
   "schema_version": 2,
-  "state_recorded_at_head": "c312bbfafe04d77ce684f3234ef9b71056e60739",
-  "status": "candidate_refined_waiting_offline_runner",
+  "state_recorded_at_head": "e1c51f9a8c561f3320a99345ea54974c95a1e10c",
+  "status": "offline_candidate_ready_waiting_scope_authorization",
   "updated_at": "2026-10-21"
 }

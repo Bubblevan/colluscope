@@ -25,11 +25,11 @@ The prior 464-request proposal combined two different questions. The 320-call pr
 - The schedule contains only hashes, view IDs, repeat indices, and assignment hashes. It contains no raw case IDs, prompt payloads, references, or private-message text.
 - The Privileged-original arm sends two historical private-message events per request. Across 72 privileged requests this is **144 private-message event appearances** sent to the provider. Any new approval must explicitly cover this transfer.
 - Hard ceiling: 144 physical attempts, zero retries, zero replacements. Every failed, malformed, timed-out, or unstarted assignment remains accounted for.
-- At the presently documented DeepSeek off-peak rates, 12,500 input tokens plus 512 output tokens per attempt bounds estimated usage at USD 0.3142368. Candidate hard cost ceiling: **USD 0.35**, subject to a fresh official price/window check and pre-dispatch token-size verification.
+- Offline preparation compiled 48 exact context/view bodies and confirmed all three repeats per body are byte-identical. Maximum conservative input bound is 12,104 tokens; at the presently documented off-peak rates and 512 output tokens, the exact full-schedule reserve is USD 0.26585640. Candidate hard cost ceiling remains **USD 0.35**, subject to a fresh official price/window check and pre-dispatch token-size verification.
 
 ## Frozen schedule and scoring plan
 
-The hash-only schedule is generated from the completed campaign's frozen A1 Public-only and Privileged-original context assignments. It has 24 paired context hashes, 144 unique assignment hashes, and no model-visible metadata. Schedule SHA-256: `37cce3e98a0493cb26e6610cdc823aa5cc7a1303086f7943ed269b895441e099`. The builder is `scripts/freeze_m4_b5_view_repeatability_v2.py`; source schedule SHA-256 is `c44585532b18e8def0488c4f3de42be1c4a04009566b396251c3da2659043c3c`.
+The hash-only schedule is generated from the completed campaign's frozen A1 Public-only and Privileged-original context assignments. It has 24 paired context hashes, 144 unique assignment hashes, and no model-visible metadata. Schedule SHA-256: `37cce3e98a0493cb26e6610cdc823aa5cc7a1303086f7943ed269b895441e099`; serialized schedule file SHA-256: `08e9b6d72862629f1e3e2fa3f02f3dcaee41a6356ad874cdd7cecc6d9ac93f3e`. The builder is `scripts/freeze_m4_b5_view_repeatability_v2.py`; source schedule SHA-256 is `c44585532b18e8def0488c4f3de42be1c4a04009566b396251c3da2659043c3c`. The offline compiled request manifest is SHA-256 `6d26f48244bd06d93b29d58d02d69f03fe49d6db967b74cae0618ccfdfaf760a`; it contains no raw payload.
 
 Primary reporting uses all 24 contexts. For each view report the three raw outcomes, the number of canonical labels, whether all three agree, whether there is a unique canonical mode, and within-view pairwise disagreements. Invalid or failed outputs remain explicit outcomes; a view/context has a unique mode only if at least two canonical labels agree. For each context with a unique mode in both views, report the Public-only/Privileged-original mode transition. Also report all invalid, failed, and unstarted requests by assigned slot. Do not treat the three pairwise comparisons within one context as independent samples; no significance test or population estimate is planned.
 
@@ -50,10 +50,11 @@ The current authorization reply does not cover this new ID. A future approval wo
 
 ## Reproduction
 
-Offline schedule regeneration (no private source payload and no network):
+Offline schedule and request preparation (zero model/API calls; request bodies containing historical private messages are stored only in the restricted Git-ignored run directory):
 
 ```powershell
 python scripts/freeze_m4_b5_view_repeatability_v2.py
+python scripts/run_m4_b5_view_repeatability_v2.py --prepare
 ```
 
-The schedule builder refuses a different overwrite and prints only aggregate counts and hashes. The live runner is intentionally not yet implemented or enabled; this candidate is not ready to execute.
+The schedule builder refuses a different overwrite and prints only aggregate counts and hashes. The live runner is implemented with a hard registration/approval gate and was exercised only through an offline loopback fake server. This candidate is not registered or authorized for provider requests.

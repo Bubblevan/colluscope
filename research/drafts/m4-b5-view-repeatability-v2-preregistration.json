@@ -40,16 +40,19 @@
     "failure_gate": "Historical contrast not reproduced if at least 18/24 contexts have a unique mode in both views, at most 1/24 cross-view mode changes, and at most 6/24 contexts have any within-view disagreement. This does not establish general invariance.",
     "ambiguous_gate": "Inconclusive for all other outcome patterns, including fewer than 18 contexts with unique modes in both views or cross-view changes that do not exceed within-view instability. Any model/endpoint identity drift or request-byte mismatch invalidates the intended repeatability contrast; stop and retain all assigned rows and failures.",
     "failure_policy": "Zero retries and zero replacements. Every attempt is durably ledgered before transport. Invalid output, timeout, HTTP error, interruption, or unstarted slot remains recorded and is never repaired or resampled.",
-    "reproduction_command": "Offline schedule only: python scripts/freeze_m4_b5_view_repeatability_v2.py. A live runner is not yet implemented; registration and separate explicit authorization are required before any dispatch.",
-    "runtime_identity": "Candidate only: official DeepSeek endpoint and deepseek-flash alias; temperature 0; thinking disabled; max output tokens 512; current system prompt/compiler hashes are in the adjacent refocus report. Recheck model version, price, off-peak window, endpoint identity, tokenizer/token usage, and every source hash before registration. Do not claim immutable model weights from the alias.",
+    "reproduction_command": "Offline preparation: python scripts/freeze_m4_b5_view_repeatability_v2.py ; python scripts/run_m4_b5_view_repeatability_v2.py --prepare. Offline fake-server canary: python -m pytest -q tests/test_m4_b5_view_repeatability_v2.py. Dispatch command after final registration and separate explicit approval only: python scripts/run_m4_b5_view_repeatability_v2.py --dispatch; production dispatch fails closed unless authorization, preregistration, manifest, runtime hashes, time window, and endpoint checks pass.",
+    "runtime_identity": "Candidate: official DeepSeek endpoint and deepseek-flash alias, historically listed as DeepSeek-V4.1-Flash-1017 on 2026-10-21. The alias is mutable; recheck official version, exact pricing, and off-peak schedule immediately before registration and every dispatch window. Temperature 0, thinking disabled, max output 512, strict report_evidence tool. Provider token usage is recorded per response; the 12,104 figure is a conservative preflight input-token bound, not tokenizer output.",
     "private_data_boundary": "Privileged-original requests contain the two historical private-message events for each context. Across 72 privileged requests this is 144 event appearances sent to the provider; explicit scope-specific user approval is required. Raw request/response content remains local in a restricted Git-ignored directory.",
     "analysis_plan": "Use context as the paired unit. Do not treat three repeats or their pairwise combinations as independent samples. Do not calculate significance tests or population estimates. Public-harm deterministic references are a separate rule baseline; neither the reference nor treatment/collusion metadata enters model prompts. No collusion or intent label is created.",
-    "schedule_sha256": "37cce3e98a0493cb26e6610cdc823aa5cc7a1303086f7943ed269b895441e099"
+    "schedule_sha256": "37cce3e98a0493cb26e6610cdc823aa5cc7a1303086f7943ed269b895441e099",
+    "request_manifest_sha256": "6d26f48244bd06d93b29d58d02d69f03fe49d6db967b74cae0618ccfdfaf760a",
+    "max_input_token_bound": 12104,
+    "offpeak_cost_reserve_usd": "0.26585640"
   },
   "frozen_inputs": [
     {
       "path": "docs/M4_B5_REPEATABILITY_SCOPE_REFOCUS_20261021.md",
-      "sha256": "e0a80da6046b6cb1caa1c89dd7ce6470fb6804e2ee9930c795579748bd1575e0"
+      "sha256": "f5b2c4061fd41a17dacd102a197fc79a7c0c2603a717099d8413a656889bf8c9"
     },
     {
       "path": "research/drafts/m4-b5-view-repeatability-v2-schedule.json",
@@ -74,6 +77,46 @@
     {
       "path": "scripts/project_monitor_http_request_v2.py",
       "sha256": "76b03a02efdf0cc04152ed108d17d49320fffeae4cd7f5052da115c431b01a82"
+    },
+    {
+      "path": "docs/M4_B5_VIEW_REPEATABILITY_V2_DECISION.md",
+      "sha256": "5c9e1639eb0929b1eead5407b63c0ed993db061b7183b31b4252c78d04b66a62"
+    },
+    {
+      "path": "docs/results/research-sprint-20261021/m4-b5-view-repeatability-v2-offline-canary/offline-canary-summary.json",
+      "sha256": "687e94313fb76f5d0759eaedb4a89f931575c99f185f24b41a3a58040ca692d1"
+    },
+    {
+      "path": "scripts/run_m4_b5_view_repeatability_v2.py",
+      "sha256": "4a1caafd3c4d5c1f17c4255c27c18ee6c6a5e0b5f9b5b682c78504078c01c092"
+    },
+    {
+      "path": "tests/test_m4_b5_view_repeatability_v2.py",
+      "sha256": "0eee5b8e5dbce29bbc781909c89db8e4cab990c49ecc9dee7a258e5ce6ebabd6"
+    },
+    {
+      "path": "scripts/run_m4_b5_context_sensitivity.py",
+      "sha256": "03bd18651b1acdf39713c5dad058a25e6e0b2f8851d48babbe072af85c168311"
+    },
+    {
+      "path": "scripts/prepare_full_research_monitor.py",
+      "sha256": "db4966d4a7b4e48be8a2070942035e0b4f0861512f08b85ba4f06b5ad632db08"
+    },
+    {
+      "path": "src/colluscope/deepseek_monitor_v1.py",
+      "sha256": "e29fede57ce8c2edadccdcef3545bc6a51d02f5185f4007763be0b8516637975"
+    },
+    {
+      "path": "src/colluscope/sprint_baselines.py",
+      "sha256": "e5e24b749f2303d5bbf5feb6b925311f8b5970d4eba535bdf509f6189d960c90"
+    },
+    {
+      "path": "scripts/local_llama_security.py",
+      "sha256": "bedb520633ea167a227d19c5f6a0357f59577652d7fd1e7b7d5cfffb84920675"
+    },
+    {
+      "path": "research/frozen_eval/evaluate_cycle_v2.py",
+      "sha256": "e7b563b1a149a8c770a56728a4d13abcc53e8a12080866a1adfad03b2d234f6d"
     }
   ],
   "budget": {
@@ -89,7 +132,7 @@
   "authorization": {
     "approval_required": true,
     "approval_id": null,
-    "approval_scope": "Not authorized. Requires separate explicit approval for m4-b5-view-repeatability-v2, 144 physical attempts, USD 0.35, official DeepSeek Flash only, off-peak only, zero retries/replacements, stated expiry, and transmission of 144 private-message event appearances."
+    "scope": "Not authorized. A new explicit approval must name m4-b5-view-repeatability-v2, at most 144 physical attempts and USD 0.35, official DeepSeek Flash only, off-peak only, zero retries/replacements, an expiry, and external transmission of 144 private-message event appearances."
   },
   "status": "candidate_unregistered_unapproved"
 }

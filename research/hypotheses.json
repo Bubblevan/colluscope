@@ -140,32 +140,32 @@
       "discriminating_prediction": "On all 24 fixed M4 contexts, issue three byte-identical Public-only and three byte-identical Privileged-original requests per context in a frozen interleaved schedule. A descriptive stable-package pattern requires at least 18/24 contexts with unique modes in both views, at least 6 cross-view mode changes, and more cross-view changes than contexts with any within-view disagreement. No inference about semantic comprehension, intent, or population effects.",
       "evidence_refs": [
         {
+          "path": "docs/M4_B5_VIEW_REPEATABILITY_V2_DECISION.md",
+          "sha256": "5c9e1639eb0929b1eead5407b63c0ed993db061b7183b31b4252c78d04b66a62",
+          "claim": "Offline canary decision and no-live-dispatch boundary."
+        },
+        {
+          "path": "docs/results/research-sprint-20261021/m4-b5-view-repeatability-v2-offline-canary/offline-canary-summary.json",
+          "sha256": "687e94313fb76f5d0759eaedb4a89f931575c99f185f24b41a3a58040ca692d1",
+          "claim": "Sanitized local canary counts and failure history."
+        },
+        {
+          "path": "scripts/run_m4_b5_view_repeatability_v2.py",
+          "sha256": "4a1caafd3c4d5c1f17c4255c27c18ee6c6a5e0b5f9b5b682c78504078c01c092",
+          "claim": "Versioned repeatability runner."
+        },
+        {
+          "path": "tests/test_m4_b5_view_repeatability_v2.py",
+          "sha256": "0eee5b8e5dbce29bbc781909c89db8e4cab990c49ecc9dee7a258e5ce6ebabd6",
+          "claim": "Six offline transport and lifecycle checks."
+        },
+        {
           "path": "docs/M4_B5_REPEATABILITY_SCOPE_REFOCUS_20261021.md",
-          "sha256": "e0a80da6046b6cb1caa1c89dd7ce6470fb6804e2ee9930c795579748bd1575e0",
-          "claim": "Scope reduction and frozen candidate protocol."
-        },
-        {
-          "path": "docs/M4_B5_CONTEXT_SENSITIVITY_DECISION.md",
-          "sha256": "cd9ab94ad8756013e952f2a06d89d0e8a0a6975dc4e3e3f7e511cc661d6dcbb6",
-          "claim": "Completed 232-call campaign and inconclusive decision."
-        },
-        {
-          "path": "docs/M4_B5_RAW_RESPONSE_REPEATABILITY_EVIDENCE.md",
-          "sha256": "f61e7c2b1cd702f671029b250651f52175ef1441f3f36f67351678761b8f13aa",
-          "claim": "Finite exact-request label disagreement audit."
-        },
-        {
-          "path": "research/drafts/m4-b5-view-repeatability-v2-schedule.json",
-          "sha256": "08e9b6d72862629f1e3e2fa3f02f3dcaee41a6356ad874cdd7cecc6d9ac93f3e",
-          "claim": "Hash-only candidate schedule."
-        },
-        {
-          "path": "scripts/freeze_m4_b5_view_repeatability_v2.py",
-          "sha256": "cf5dccf2814084027ca1de60cba3d5961e50435467fbdd0e52a6a73ca0675103",
-          "claim": "Deterministic hash-only schedule builder."
+          "sha256": "f5b2c4061fd41a17dacd102a197fc79a7c0c2603a717099d8413a656889bf8c9",
+          "claim": "Frozen scope, schedule, and claim boundary."
         }
       ],
-      "selection_note": "Selected as a bounded B5 validity diagnostic only. The prior 464-call proposal included a separate 320-call synthetic prompt/schema-order factorial; that question is deferred. The 144-call candidate is unregistered and unauthorized. The previous 232-call approval is consumed. Before any dispatch, implement and offline-audit the runner and obtain a new scope-specific approval, including explicit approval for 144 private-message event appearances sent to DeepSeek."
+      "selection_note": "Selected as a bounded B5 validity diagnostic only. The versioned runner passed six offline loopback canary checks and offline request preparation. The candidate remains unregistered and unauthorized; the prior 232-call approval is consumed. Before any provider request, obtain new explicit approval for 144 attempts / USD 0.35, off-peak DeepSeek Flash only, zero retries/replacements, expiry, and 144 private-message event appearances."
     }
   ],
   "policy": "At most three read-only candidate directions may be compared. Only one can be selected for a formal cycle at a time. Candidate status is not preregistration or authorization.",

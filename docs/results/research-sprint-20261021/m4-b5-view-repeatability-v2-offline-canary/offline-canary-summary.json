@@ -1,0 +1,135 @@
+{
+  "schema_version": 1,
+  "experiment_id": "m4-b5-view-repeatability-v2",
+  "evidence_class": "offline_engineering_preflight",
+  "status": "OFFLINE_CANARY_PASS; NOT_REGISTERED; NOT_AUTHORIZED; NO_PROVIDER_DISPATCH",
+  "model_or_provider_calls": 0,
+  "external_requests": 0,
+  "localhost_fake_http_responses": 431,
+  "assigned_schedule_slots": 144,
+  "compiled_exact_request_profiles": 48,
+  "all_three_repeats_byte_identical": true,
+  "max_prepared_input_token_upper_bound": 12104,
+  "offpeak_full_schedule_reserve_usd": "0.26585640",
+  "hard_candidate_budget": {
+    "physical_attempts": 144,
+    "cost_usd": "0.35",
+    "retries": 0,
+    "replacements": 0
+  },
+  "protected_run_acl": {
+    "verified": true,
+    "current_user_only": true,
+    "verified_object_count": 292
+  },
+  "authorization_headers_saved": false,
+  "mock_canary_response_status_counts": {
+    "HTTP_400": 1,
+    "INTERRUPTED_UNKNOWN_OUTCOME": 2,
+    "HTTP_200_VALID": 429,
+    "HTTP_200_INVALID_OUTPUT": 1
+  },
+  "attempt_start_ledger_rows_across_local_canary_folders": 434,
+  "duplicate_start_rows_in_one_stale_test_fixture": 1,
+  "stale_fixture_disposition": "The runner rejected the duplicated start ID before sending another request. The contaminated local fixture was retained; a fresh versioned fixture then verified interruption recovery without resending.",
+  "final_tests": {
+    "command": "python -m pytest -q tests/test_m4_b5_view_repeatability_v2.py",
+    "passed": 6,
+    "failed": 0,
+    "duration_seconds": 77.28,
+    "log_sha256": "db74e19b064ac0c8eba57e6213af2573ad963cc5b33ab2da39146917dc84b099",
+    "published_copy_sha256": "76c8c093cdd40581f8ee10064db52c15c0e75aab5787c0da039b88f1a10543b5"
+  },
+  "initial_failures_preserved": {
+    "pytest-initial-failure.log": "0d98e2081e08de6736a63f9b73b767853d40ee41677c9970628f32f872b9dfa4",
+    "pytest-second-failure.log": "58297600dd68183529bffaf078437114b57c6e3f39a1b5fb3932e2f09d0a92b6",
+    "pytest-third-failure.log": "675ac1d4fe0f6d73684140d3e9fb8bbeddd473db1152375fbb8ac54ebc28c0c1",
+    "pytest-pre-production-gate.log": "64f05e42d0167ced28f326eb2fef981cd27ba4e080ee6c1923a11a45ac34d708",
+    "pytest-final.log": "db74e19b064ac0c8eba57e6213af2573ad963cc5b33ab2da39146917dc84b099"
+  },
+  "per_canary_case_aggregates": [
+    {
+      "canary_case": "http-400-first-response",
+      "attempt_start_rows": 1,
+      "duplicate_start_rows": 0,
+      "result_rows": 1,
+      "response_files": 1
+    },
+    {
+      "canary_case": "interrupted-before-response",
+      "attempt_start_rows": 145,
+      "duplicate_start_rows": 1,
+      "result_rows": 144,
+      "response_files": 143
+    },
+    {
+      "canary_case": "interrupted-before-response-v3",
+      "attempt_start_rows": 144,
+      "duplicate_start_rows": 0,
+      "result_rows": 144,
+      "response_files": 143
+    },
+    {
+      "canary_case": "malformed-first-response",
+      "attempt_start_rows": 144,
+      "duplicate_start_rows": 0,
+      "result_rows": 144,
+      "response_files": 144
+    },
+    {
+      "canary_case": "prepare-only",
+      "attempt_start_rows": 0,
+      "duplicate_start_rows": 0,
+      "result_rows": 0,
+      "response_files": 0
+    },
+    {
+      "canary_case": "wrong-endpoint",
+      "attempt_start_rows": 0,
+      "duplicate_start_rows": 0,
+      "result_rows": 0,
+      "response_files": 0
+    }
+  ],
+  "important_scope_limit": "All HTTP responses in this report came from a loopback fake server with canned outputs. These are not model performance data and are not included in any research denominator.",
+  "hashes": {
+    "schedule_sha256": "37cce3e98a0493cb26e6610cdc823aa5cc7a1303086f7943ed269b895441e099",
+    "schedule_file_sha256": "08e9b6d72862629f1e3e2fa3f02f3dcaee41a6356ad874cdd7cecc6d9ac93f3e",
+    "request_manifest_sha256": "6d26f48244bd06d93b29d58d02d69f03fe49d6db967b74cae0618ccfdfaf760a",
+    "runner_sha256": "4a1caafd3c4d5c1f17c4255c27c18ee6c6a5e0b5f9b5b682c78504078c01c092",
+    "test_sha256": "0eee5b8e5dbce29bbc781909c89db8e4cab990c49ecc9dee7a258e5ce6ebabd6"
+  },
+  "raw_logs_preserved_local": {
+    "path": "runs/sprint-monitor/m4-b5-view-repeatability-v2-run/private-evidence/raw-test-logs/",
+    "git_ignored": true,
+    "acl_owner_only": true,
+    "sha256_by_file": {
+      "pytest-before-auth-check.log": "decdf24d7adf8819c31ee6130f54cb9f590df808321c3dae618cb0689dbc6ed5",
+      "pytest-final.log": "db74e19b064ac0c8eba57e6213af2573ad963cc5b33ab2da39146917dc84b099",
+      "pytest-initial-failure.log": "0d98e2081e08de6736a63f9b73b767853d40ee41677c9970628f32f872b9dfa4",
+      "pytest-initial-run.log": "0d98e2081e08de6736a63f9b73b767853d40ee41677c9970628f32f872b9dfa4",
+      "pytest-pre-gate-run.log": "64f05e42d0167ced28f326eb2fef981cd27ba4e080ee6c1923a11a45ac34d708",
+      "pytest-pre-production-gate.log": "64f05e42d0167ced28f326eb2fef981cd27ba4e080ee6c1923a11a45ac34d708",
+      "pytest-second-failure.log": "58297600dd68183529bffaf078437114b57c6e3f39a1b5fb3932e2f09d0a92b6",
+      "pytest-second-run.log": "58297600dd68183529bffaf078437114b57c6e3f39a1b5fb3932e2f09d0a92b6",
+      "pytest-third-failure.log": "675ac1d4fe0f6d73684140d3e9fb8bbeddd473db1152375fbb8ac54ebc28c0c1",
+      "pytest-third-run.log": "675ac1d4fe0f6d73684140d3e9fb8bbeddd473db1152375fbb8ac54ebc28c0c1"
+    }
+  },
+  "public_log_copies": {
+    "path": "docs/results/research-sprint-20261021/m4-b5-view-repeatability-v2-offline-canary/",
+    "transformation": "Text captures normalized to LF and trailing spaces/tabs removed; no prompt or response content was present in the copied test logs.",
+    "sha256_by_file": {
+      "pytest-before-auth-check.log": "70b0390689d9582484a4b6877ca06fb0f925cbc27791b48b503499a441bf2103",
+      "pytest-final.log": "76c8c093cdd40581f8ee10064db52c15c0e75aab5787c0da039b88f1a10543b5",
+      "pytest-initial-failure.log": "7ed6baa5f868886db00842537b81dea1cfba2aa33d39483153fa125a789018d0",
+      "pytest-initial-run.log": "7ed6baa5f868886db00842537b81dea1cfba2aa33d39483153fa125a789018d0",
+      "pytest-pre-gate-run.log": "0d4cbe9ad82401d451afc328d5317cc6166dde5d11de59a518a0048752f5641c",
+      "pytest-pre-production-gate.log": "0d4cbe9ad82401d451afc328d5317cc6166dde5d11de59a518a0048752f5641c",
+      "pytest-second-failure.log": "e018ae3981a1fbf24b55c587c9a14bea19e834f76a31abd38ddb2f9cbd0be047",
+      "pytest-second-run.log": "e018ae3981a1fbf24b55c587c9a14bea19e834f76a31abd38ddb2f9cbd0be047",
+      "pytest-third-failure.log": "a6dfe01988142c1a4ba894d761b82a4d9c0750bf0689f6a0cff940fbb7638241",
+      "pytest-third-run.log": "a6dfe01988142c1a4ba894d761b82a4d9c0750bf0689f6a0cff940fbb7638241"
+    }
+  }
+}

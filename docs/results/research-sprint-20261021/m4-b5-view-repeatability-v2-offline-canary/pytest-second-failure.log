@@ -1,0 +1,59 @@
+.F.F.                                                                    [100%]
+================================== FAILURES ===================================
+___ test_loopback_fake_server_keeps_invalid_output_and_resume_never_resends ___
+
+    def test_loopback_fake_server_keeps_invalid_output_and_resume_never_resends():
+        out = _run_dir("malformed-first-response")
+        with _Server(first_malformed=True) as server:
+            summary = runner.dispatch(out, test_mode=True, endpoint=server.url, transport=_transport)
+            assert summary["status"] in {"COMPLETE", "ALREADY_COMPLETE"}
+            assert summary["assigned"] == summary["attempts_total"] == 144
+            assert summary["new_attempts"] in {0, 144}
+>           assert summary["unattempted"] == 0
+                   ^^^^^^^^^^^^^^^^^^^^^^
+E           KeyError: 'unattempted'
+
+tests\test_m4_b5_view_repeatability_v2.py:115: KeyError
+______ test_interrupted_started_slot_is_terminalized_and_not_resubmitted ______
+
+    def test_interrupted_started_slot_is_terminalized_and_not_resubmitted():
+        out = _run_dir("interrupted-before-response")
+        manifest = json.loads((out / "request_manifest.json").read_bytes())
+        first = manifest["request_rows"][0]
+        runner.append_jsonl(out / "request_ledger.jsonl", {
+            "event": "attempt_started", "request_id": first["request_id"],
+            "body_sha256": first["body_sha256"], "at_utc": runner.iso_now(),
+            "retry": False,
+        })
+        with _Server() as server:
+>           summary = runner.dispatch(out, test_mode=True, endpoint=server.url, transport=_transport)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_m4_b5_view_repeatability_v2.py:160:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+scripts\run_m4_b5_view_repeatability_v2.py:501: in dispatch
+    state = _verify_resume(out, schedule_raw, compiled, manifest_hash)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+out = WindowsPath('D:/MyLab/colluscope/runs/sprint-monitor/m4-b5-view-repeatability-v2-offline-canaries/interrupted-before-response')
+schedule_raw = b'{\n  "schema_version": 1,\n  "status": "draft_not_registered_not_authorized",\n  "experiment_id": "m4-b5-view-repeat...4044bcd09b"\n    }\n  ],\n  "schedule_sha256": "37cce3e98a0493cb26e6610cdc823aa5cc7a1303086f7943ed269b895441e099"\n}\n'
+compiled = [{'request_id': 'm4b5v2_adb8382d44bc77fa05536017', 'assignment_id': 'adb8382d44bc77fa05536017536a39b43d77fbe75529ab601..._sha256': 'd022143568e6d3c921ad4b0e4d6cf677493fd48a132381f1e5d9adead8b24897', 'view': 'privileged_original', ...}, ...]
+manifest_hash = '6d26f48244bd06d93b29d58d02d69f03fe49d6db967b74cae0618ccfdfaf760a'
+
+    def _verify_resume(out: Path, schedule_raw: bytes,
+                       compiled: list[dict[str, Any]], manifest_hash: str) -> dict[str, Any]:
+        saved = out / "schedule.json"
+        if not saved.is_file() or saved.read_bytes() != schedule_raw:
+            raise RunnerError("RESUMED_SCHEDULE_MISMATCH")
+        starts = [r for r in read_jsonl(out / "request_ledger.jsonl") if r.get("event") == "attempt_started"]
+        start_ids = [r.get("request_id") for r in starts]
+        if len(start_ids) != len(set(start_ids)) or len(start_ids) > MAX_ATTEMPTS:
+>           raise RunnerError("DUPLICATE_OR_OVER_CAP_ATTEMPT_START")
+E           scripts.run_m4_b5_view_repeatability_v2.RunnerError: DUPLICATE_OR_OVER_CAP_ATTEMPT_START
+
+scripts\run_m4_b5_view_repeatability_v2.py:358: RunnerError
+=========================== short test summary info ===========================
+FAILED tests/test_m4_b5_view_repeatability_v2.py::test_loopback_fake_server_keeps_invalid_output_and_resume_never_resends
+FAILED tests/test_m4_b5_view_repeatability_v2.py::test_interrupted_started_slot_is_terminalized_and_not_resubmitted
+2 failed, 3 passed in 65.77s (0:01:05)

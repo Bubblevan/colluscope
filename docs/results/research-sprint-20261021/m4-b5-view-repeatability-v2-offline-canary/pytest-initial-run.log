@@ -1,0 +1,21 @@
+..F..                                                                    [100%]
+================================== FAILURES ===================================
+________________ test_http_error_is_terminal_and_never_retried ________________
+
+    def test_http_error_is_terminal_and_never_retried():
+        out = _run_dir("http-400-first-response")
+        with _Server(first_status=400) as server:
+            summary = runner.dispatch(out, test_mode=True, endpoint=server.url, transport=_transport)
+            assert summary["status"] == "STOPPED_WITH_UNATTEMPTED_ROWS"
+            assert summary["attempts_total"] == summary["new_attempts"] == 1
+            assert summary["unattempted"] == 143
+>           assert summary["stop_reason"] == "TRANSPORT_OR_HTTP_FAILURE"
+E           AssertionError: assert 'USAGE_MISSING_OR_INVALID' == 'TRANSPORT_OR_HTTP_FAILURE'
+E
+E             - TRANSPORT_OR_HTTP_FAILURE
+E             + USAGE_MISSING_OR_INVALID
+
+tests\test_m4_b5_view_repeatability_v2.py:140: AssertionError
+=========================== short test summary info ===========================
+FAILED tests/test_m4_b5_view_repeatability_v2.py::test_http_error_is_terminal_and_never_retried
+1 failed, 4 passed in 73.75s (0:01:13)
