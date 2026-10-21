@@ -8,7 +8,7 @@
     "latent_collusion_or_intent": "NOT_IDENTIFIED"
   },
   "consecutive_cycles_without_new_uncertainty_reduction": 0,
-  "current_branch": "codex/deepseek-first-m4-research-20261020",
+  "current_branch": "codex/deepseek-agent-mechanism-pivot-20261021",
   "current_round": {
     "authorization_status": "consumed_and_never_reusable",
     "evidence_classes": [
@@ -79,7 +79,7 @@
   },
   "latest_review_id": "m1-v3-raw-response-ballot-audit-20261021",
   "latest_scientific_outcome": "SUPPORTED",
-  "next_action": "Continue no-call synthesis. Do not dispatch Qwen or reuse closed DeepSeek approvals. If a replacement-model experiment is justified, prepare, commit, push, and report its exact scope before requesting fresh authorization.",
+  "next_action": "Offline pivot proposal is prepared in docs/SCIENTIFIC_PIVOT_AND_DEEPSEEK_MECHANISM_DESIGN_20261021.md. Do not dispatch or register it until a fresh exact user authorization is received; do not use Qwen or reuse closed DeepSeek approvals. After approval, freeze the matrix/context schedule, rendered prompts, tokenizer parity, runtime identity, and scorer, then execute only within the newly approved scope.",
   "preexisting_untracked_paths_preserved": [
     "docs/COLOSSEUM_LOCAL_REPRO_PROTOCOL.md (pre-existing untracked; preserved, not part of this review)",
     "docs/results/colosseum-local-audit-20261020/ (pre-existing untracked; preserved, not part of this review)",
@@ -97,7 +97,7 @@
   "program_status": "active",
   "schema_version": 2,
   "state_recorded_at_head": "2dcca164235cf2254dba65b2307a75edb973d292",
-  "status": "awaiting-new-model-specific-scope-after-qwen-decline",
+  "status": "awaiting-deepseek-recipient-mechanism-authorization",
   "updated_at": "2026-10-21",
   "latest_integrity_followup": {
     "status": "RESTORED_HASH_PINNED_AUDIT; REGISTRY_PASS",
@@ -109,6 +109,21 @@
     "frozen_audit_sha256": "6e5278737d9550d547ef4895ef9ed9bc6aa85fafdb1a26087fdbc4011a11041c",
     "transient_regeneration_sha256": "cec9057abfc78a6cb26cb9c338fd8c0ce93dd59cbc2a9d18fb5ede395ef9d818",
     "model_calls": 0
+  },
+  "latest_offline_pivot": {
+    "date": "2026-10-21",
+    "status": "PROPOSED_NOT_REGISTERED_NOT_AUTHORIZED_NOT_RUN",
+    "experiment_id": "deepseek-recipient-mechanism-v1",
+    "topic_branch": "codex/deepseek-agent-mechanism-pivot-20261021",
+    "decision_artifact": "docs/SCIENTIFIC_PIVOT_AND_DEEPSEEK_MECHANISM_DESIGN_20261021.md",
+    "decision_artifact_sha256": "75931ef94974e1a0261e8824a22b90b4bc480869f0433897d12c62472409c575",
+    "model_calls": 0,
+    "proposed_physical_request_ceiling": 804,
+    "proposed_incremental_cost_ceiling_usd": 1.40,
+    "proposed_model": "official DeepSeek Flash alias; recheck served model identity before any authorization/run",
+    "qwen_authorized_or_used": false,
+    "approval_required": true,
+    "note": "This new proposal is separate from and cannot inherit any prior experiment-specific call approval. The remaining ledger capacity is not authorization."
   },
   "latest_user_decision": {
     "date": "2026-10-21",
