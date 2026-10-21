@@ -1,8 +1,8 @@
 {
-  "active_experiment_id": null,
-  "active_hypothesis_id": null,
+  "active_experiment_id": "shared-target-message-source-v1",
+  "active_hypothesis_id": "shared-target-message-source-v1",
   "candidate_hypotheses": [
-    "shared-target-message-content-v1"
+    "shared-target-message-source-v1"
   ],
   "claim_level_status": {
     "B4_B5_superiority": "INCONCLUSIVE",
@@ -11,7 +11,7 @@
     "latent_collusion_or_intent": "NOT_IDENTIFIED"
   },
   "consecutive_cycles_without_new_uncertainty_reduction": 8,
-  "current_branch": "codex/deepseek-real-coordination-v4-20261021",
+  "current_branch": "codex/deepseek-real-coordination-v5-20261021",
   "current_round": {
     "authorization_status": "consumed_and_never_reusable",
     "evidence_classes": [
@@ -31,7 +31,7 @@
   },
   "historical_approvals_reusable": false,
   "latest_closed_experiment_id": "shared-target-message-content-v1",
-  "latest_decision": "PIVOT",
+  "latest_decision": "PREREGISTERED",
   "latest_decision_type": "operational",
   "latest_integrity_followup": {
     "frozen_audit_path": "docs/results/research-sprint-20261021/m4-b5-context-sensitivity-independent-audit.json",
@@ -45,19 +45,15 @@
     "transient_regeneration_sha256": "cec9057abfc78a6cb26cb9c338fd8c0ce93dd59cbc2a9d18fb5ede395ef9d818"
   },
   "latest_offline_pivot": {
-    "approval_required": true,
+    "approval_batch_sha256": "96e11840fef2b7f5c9f76c1430d1dd8a60ef1bf266e76cbefe4bb4db1ad43e11",
+    "approval_id": "DS-FLASH-PEER-SOURCE-576-20261021",
     "date": "2026-10-21",
-    "decision_artifact": "docs/SCIENTIFIC_PIVOT_AND_DEEPSEEK_MECHANISM_DESIGN_20261021.md",
-    "decision_artifact_sha256": "75931ef94974e1a0261e8824a22b90b4bc480869f0433897d12c62472409c575",
-    "experiment_id": "deepseek-recipient-mechanism-v1",
+    "experiment_id": "shared-target-message-source-v1",
     "model_calls": 0,
-    "note": "This new proposal is separate from and cannot inherit any prior experiment-specific call approval. The remaining ledger capacity is not authorization.",
-    "proposed_incremental_cost_ceiling_usd": 1.4,
-    "proposed_model": "official DeepSeek Flash alias; recheck served model identity before any authorization/run",
-    "proposed_physical_request_ceiling": 804,
-    "qwen_authorized_or_used": false,
-    "status": "PROPOSED_NOT_REGISTERED_NOT_AUTHORIZED_NOT_RUN",
-    "topic_branch": "codex/deepseek-agent-mechanism-pivot-20261021"
+    "note": "Fresh study selected after clean handoff; no prior experiment authorization or pending experiment is reused.",
+    "peak_cost_reserve_usd": "0.6730992",
+    "schedule_sha256": "ccfd1d3401df11ed8d5e7c11d3184b706aff5c0333f56cfa6cae17dc678b32d5",
+    "status": "FROZEN_OFFLINE_NOT_REGISTERED"
   },
   "latest_review": {
     "amendment": "docs/M1_PACKAGE_REPLICATION_V3_BALLOT_OUTCOME_AMENDMENT_20261021.md",
@@ -128,7 +124,11 @@
       "runtime_inputs_verified": 23
     }
   },
-  "next_action": "Preregister one new 30-request, three-context follow-up that crosses target versus near-equal-score decoy mappings with peer-proposal versus content-matched non-social task-aide recommendation frames, adds a hidden/no-message baseline, and uses two exact-prompt repeats per cell. A peer-specific advantage would support source-sensitive social influence; equivalent mapping-following under both sources would favor generic recommendation following. This requires fresh authorization and has not been dispatched.",
+  "next_action": "Implement the frozen protocol and proceed only through an existing entry point within current authorization; the CLI does not dispatch.",
+  "next_action_evidence_class": "real_llm_behavior",
+  "next_action_kind": "register_then_run_authorized_experiment",
+  "next_action_max_external_cost_usd": 0.75,
+  "next_action_max_model_calls": 576,
   "preexisting_untracked_paths_preserved": [
     "docs/COLOSSEUM_LOCAL_REPRO_PROTOCOL.md (pre-existing untracked; preserved, not part of this review)",
     "docs/results/colosseum-local-audit-20261020/ (pre-existing untracked; preserved, not part of this review)",
@@ -146,6 +146,6 @@
   "program_status": "active",
   "schema_version": 2,
   "state_recorded_at_head": "2dcca164235cf2254dba65b2307a75edb973d292",
-  "status": "ready_for_next_cycle",
+  "status": "iteration_preregistered",
   "updated_at": "2026-10-21"
 }

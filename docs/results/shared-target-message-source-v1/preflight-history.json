@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "experiment_id": "shared-target-message-source-v1",
+  "attempts": [
+    {
+      "attempt": 1,
+      "phase": "offline_canned_response_preflight",
+      "status": "BLOCKED_BEFORE_ANY_MODEL_OR_NETWORK_REQUEST",
+      "failure": "Windows sandbox denied creation of tempfile under the default system temp directory outside writable roots.",
+      "model_requests_sent": 0,
+      "network_requests_sent": 0,
+      "resolution": "Constrained the temporary fixture directory to the existing workspace tmp/ directory; did not relax sandbox permissions."
+    },
+    {
+      "attempt": 2,
+      "phase": "offline_canned_response_preflight",
+      "status": "PASS",
+      "model_requests_sent": 0,
+      "network_requests_sent": 0,
+      "checks": [
+        "24 distinct frozen contexts and 576 assigned request rows",
+        "four exact repeats per context-arm cell",
+        "peer/aide token parity and only-source-label text difference",
+        "target/decoy token parity and only-mapping text difference",
+        "hidden-target wording and balanced analyst-only shadow mappings",
+        "official-client canned-response replay and complete peak-cost reserve"
+      ],
+      "peak_cost_reserve_usd": "0.6730992"
+    },
+    {
+      "attempt": 3,
+      "phase": "registry_validation",
+      "status": "REJECTED_BEFORE_REGISTRATION_AND_BEFORE_ANY_MODEL_OR_NETWORK_REQUEST",
+      "failure": "The first preregistration draft used schema_version 1 and omitted hypothesis_id; current policy requires schema_version 2 and a registered hypothesis ID.",
+      "model_requests_sent": 0,
+      "network_requests_sent": 0,
+      "resolution": "Updated the draft metadata to the current schema; no protocol, schedule, prompt, budget, authorization, or outcome gate changed."
+    }
+  ]
+}

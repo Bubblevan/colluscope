@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "approval_id": "DS-FLASH-PEER-SOURCE-576-20261021",
+  "scope": "One fresh controlled recipient study of recommendation-source framing in 24 frozen allocation contexts: six arms with four exact repeats per context (576 maximum physical model requests); official DeepSeek deepseek-flash alias only through https://api.deepseek.com/beta/chat/completions strict function calling; temperature 0, thinking disabled, maximum 128 output tokens; no Qwen, provider fallback, monitor calls, training, custom transport, retries, replacements, resumption, or resampling; USD 0.75 peak-rate cost cap; 180-minute wall-clock cap; stop on transport/HTTP, model/fingerprint, source/prompt hash, privacy, budget, expiry, or wall-clock failure; expires 2026-10-23T00:00:00Z.",
+  "authorized_experiment_ids": [
+    "shared-target-message-source-v1"
+  ],
+  "max_model_calls": 576,
+  "max_external_cost_usd": 0.75,
+  "approved_at_utc": "2026-10-21T07:30:04Z",
+  "expires_at_utc": "2026-10-23T00:00:00Z",
+  "source": "The user explicitly authorized an additional ceiling of 1,200 requests on 2026-10-21 to strengthen the existing scientific evidence. This separate new batch reserves 576 requests for this single preregistered study, below that ceiling; unused requests are not dispatched by this protocol. No earlier experiment-specific authorization is reused."
+}

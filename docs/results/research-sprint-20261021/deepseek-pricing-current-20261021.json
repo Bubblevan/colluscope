@@ -1,0 +1,24 @@
+{
+  "source_url": "https://api-docs.deepseek.com/quick_start/pricing/",
+  "evidence_type": "official_documentation_page_read_only",
+  "model_alias": "deepseek-flash",
+  "model_version_reported": "DeepSeek-V4.1-Flash-1017",
+  "units": "USD per one million tokens",
+  "flash_cache_miss_input": {
+    "off_peak": 0.15,
+    "peak": 0.3
+  },
+  "flash_output": {
+    "off_peak": 0.6,
+    "peak": 1.2
+  },
+  "peak_hours_utc": [
+    "01:00-04:00",
+    "06:00-10:00"
+  ],
+  "peak_days": "Monday-Friday, excluding Chinese public holidays",
+  "source_note": "Read directly from the official DeepSeek pricing page in the connected browser. This snapshot does not claim an invoice or balance deduction.",
+  "model_calls_made": 0,
+  "checked_on": "2026-10-21",
+  "time_precision": "date only; page was directly observed during this research session"
+}

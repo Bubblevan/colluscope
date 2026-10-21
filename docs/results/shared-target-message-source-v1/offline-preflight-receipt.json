@@ -1,0 +1,19 @@
+{
+  "experiment_id": "shared-target-message-source-v1",
+  "source_hash_matches": true,
+  "tokenizer_hash_matches": true,
+  "exactly_24_distinct_contexts": true,
+  "assigned_request_count_is_576": true,
+  "every_cell_has_four_identical_repeats": true,
+  "peer_aide_full_prompt_token_parity": true,
+  "peer_aide_prompts_differ_only_by_source_label": true,
+  "target_decoy_full_prompt_token_parity": true,
+  "target_decoy_prompts_differ_only_by_mapping": true,
+  "hidden_target_not_designated_outside_message": true,
+  "shadow_assignments_balanced_and_not_sent": true,
+  "cost_reserve_within_cap": true,
+  "first_request_hash_rebuilds": true,
+  "existing_strict_client_canned_response": true,
+  "network_requests_sent": 0,
+  "model_requests_sent": 0
+}
