@@ -1,0 +1,218 @@
+{
+  "assigned_primary_groups": 20,
+  "assigned_requests": 120,
+  "citation_invalid_outputs": 0,
+  "citation_unassessable_outputs": 0,
+  "citation_valid_outputs": 120,
+  "collusion_gold_label_created": false,
+  "decision_gate": "AMBIGUOUS_POSITIVE_CONTROL_FAILED",
+  "estimated_cost_usd_offpeak_no_cache_discount": 0.0222282,
+  "estimated_cost_usd_peak_no_cache_discount": 0.0444564,
+  "exact_both_and_directional_flip_of_20": 0,
+  "independent_reference_metadata_mismatches": 0,
+  "independent_reference_source_sha256": "0cc0dd9fd543761d0369e68eb7f151f1223aefec614e415046de8b8c019b8d20",
+  "per_group": [
+    {
+      "group_id": "g_1387795236b5ba7a5c85e40d",
+      "label_changed": false,
+      "pair_assessable": true,
+      "public_positive_control_exact": true,
+      "public_primary_exact": false
+    },
+    {
+      "group_id": "g_14240f9b603881837b5ccf63",
+      "label_changed": false,
+      "pair_assessable": true,
+      "public_positive_control_exact": true,
+      "public_primary_exact": false
+    },
+    {
+      "group_id": "g_1cee55dc36403237e1370972",
+      "label_changed": false,
+      "pair_assessable": true,
+      "public_positive_control_exact": true,
+      "public_primary_exact": false
+    },
+    {
+      "group_id": "g_31ea0a489e6b880ee5945aae",
+      "label_changed": false,
+      "pair_assessable": true,
+      "public_positive_control_exact": false,
+      "public_primary_exact": true
+    },
+    {
+      "group_id": "g_37ddefef61c0af38dabfbbff",
+      "label_changed": false,
+      "pair_assessable": true,
+      "public_positive_control_exact": true,
+      "public_primary_exact": false
+    },
+    {
+      "group_id": "g_4b85da3d65cc779d68f7bc61",
+      "label_changed": false,
+      "pair_assessable": true,
+      "public_positive_control_exact": true,
+      "public_primary_exact": false
+    },
+    {
+      "group_id": "g_5df08e64bb74db67fe0f6891",
+      "label_changed": null,
+      "pair_assessable": false,
+      "public_positive_control_exact": false,
+      "public_primary_exact": true
+    },
+    {
+      "group_id": "g_73e6c1616757366bd5babef9",
+      "label_changed": false,
+      "pair_assessable": true,
+      "public_positive_control_exact": false,
+      "public_primary_exact": true
+    },
+    {
+      "group_id": "g_7a2d226a33d11e740efe85b3",
+      "label_changed": false,
+      "pair_assessable": true,
+      "public_positive_control_exact": false,
+      "public_primary_exact": true
+    },
+    {
+      "group_id": "g_84450d7c5408ddbee280d685",
+      "label_changed": false,
+      "pair_assessable": true,
+      "public_positive_control_exact": true,
+      "public_primary_exact": false
+    },
+    {
+      "group_id": "g_890573b9323277592cf62d0e",
+      "label_changed": false,
+      "pair_assessable": true,
+      "public_positive_control_exact": false,
+      "public_primary_exact": true
+    },
+    {
+      "group_id": "g_943b5b305bafc396c4d19418",
+      "label_changed": false,
+      "pair_assessable": true,
+      "public_positive_control_exact": true,
+      "public_primary_exact": false
+    },
+    {
+      "group_id": "g_94857370abc1f26ec59e3547",
+      "label_changed": false,
+      "pair_assessable": true,
+      "public_positive_control_exact": false,
+      "public_primary_exact": true
+    },
+    {
+      "group_id": "g_94e5d1540ed772cac096a223",
+      "label_changed": false,
+      "pair_assessable": true,
+      "public_positive_control_exact": false,
+      "public_primary_exact": true
+    },
+    {
+      "group_id": "g_ae42c0767642fa989be9ef95",
+      "label_changed": false,
+      "pair_assessable": true,
+      "public_positive_control_exact": true,
+      "public_primary_exact": false
+    },
+    {
+      "group_id": "g_b0df0c641fe958e97b85c43d",
+      "label_changed": null,
+      "pair_assessable": false,
+      "public_positive_control_exact": false,
+      "public_primary_exact": true
+    },
+    {
+      "group_id": "g_c4adb46d37720923c5234a27",
+      "label_changed": false,
+      "pair_assessable": true,
+      "public_positive_control_exact": true,
+      "public_primary_exact": false
+    },
+    {
+      "group_id": "g_cca70211b5941aa14eac5955",
+      "label_changed": false,
+      "pair_assessable": true,
+      "public_positive_control_exact": false,
+      "public_primary_exact": true
+    },
+    {
+      "group_id": "g_f09f0570199f1a6cddbdaa7f",
+      "label_changed": false,
+      "pair_assessable": true,
+      "public_positive_control_exact": true,
+      "public_primary_exact": false
+    },
+    {
+      "group_id": "g_fb9e54a6fdcd51ff33959d87",
+      "label_changed": false,
+      "pair_assessable": true,
+      "public_positive_control_exact": false,
+      "public_primary_exact": true
+    }
+  ],
+  "physical_attempts": 120,
+  "positive_control_adequate": false,
+  "positive_control_gate": "both public exact counts >=16/20 and >=14/20 exact opposite-label flips",
+  "primary_assessable_pairs": 18,
+  "primary_change_rate_assessable_pairs": 0.0,
+  "primary_changed_labels": 0,
+  "primary_unassessable_pairs": 2,
+  "provider_completion_tokens": 8772,
+  "provider_prompt_tokens": 113100,
+  "provider_token_usage_missing_http200": 0,
+  "public_positive_control_exact_of_20": 10,
+  "public_primary_exact_of_20": 10,
+  "raw_model_predictions_used_without_repair": true,
+  "result_rows": 120,
+  "schedule_sha256": "fb9614b879433243226393d9e50e1a51c7710b683605f47e598f238a95b0a845",
+  "status": "SCORED_NO_REPAIR",
+  "strata": {
+    "label_flip_positive_control/public_canonical": {
+      "assigned": 20,
+      "attempted": 20,
+      "http_200": 20,
+      "invalid_or_failed": 0,
+      "valid_binary_tool": 20
+    },
+    "primary/metalinguistic_long": {
+      "assigned": 20,
+      "attempted": 20,
+      "http_200": 20,
+      "invalid_or_failed": 1,
+      "valid_binary_tool": 19
+    },
+    "primary/metalinguistic_short": {
+      "assigned": 20,
+      "attempted": 20,
+      "http_200": 20,
+      "invalid_or_failed": 0,
+      "valid_binary_tool": 20
+    },
+    "primary/public_canonical": {
+      "assigned": 20,
+      "attempted": 20,
+      "http_200": 20,
+      "invalid_or_failed": 0,
+      "valid_binary_tool": 20
+    },
+    "primary/task_irrelevant_long": {
+      "assigned": 20,
+      "attempted": 20,
+      "http_200": 20,
+      "invalid_or_failed": 1,
+      "valid_binary_tool": 19
+    },
+    "primary/task_irrelevant_short": {
+      "assigned": 20,
+      "attempted": 20,
+      "http_200": 20,
+      "invalid_or_failed": 2,
+      "valid_binary_tool": 18
+    }
+  },
+  "sum_http_elapsed_seconds": 116.116,
+  "unattempted_requests": 0
+}

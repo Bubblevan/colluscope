@@ -27,45 +27,74 @@
     "terminal_artifact": "research/handoffs/DEEPSEEK-FIRST-RESEARCH-01.json"
   },
   "historical_approvals_reusable": false,
-  "latest_closed_experiment_id": "m4-b5-raw-response-repeatability-v1",
-  "latest_decision": "PASS",
-  "latest_decision_type": "operational",
+  "latest_closed_experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+  "latest_decision": "INCONCLUSIVE",
+  "latest_decision_type": "scientific",
   "latest_review": {
-    "status": "offline_prompt_context_audit_corrected_M1_candidate_v3",
-    "authorization_status": "M4_232_scope_consumed_no_new_inference_scope",
+    "status": "offline_scientific_direction_review_complete",
+    "authorization_status": "M4_232_scope_consumed; no new inference authorized",
     "experiment_registered": false,
     "new_model_api_attempts": 0,
     "new_model_calls": 0,
-    "selected_next_hypothesis_id": "communication-content-choice-effect",
-    "candidate_mechanism_hypothesis_id": "m3-self-history-message-content-interaction",
-    "evidence": "docs/results/research-sprint-20261021/direction-review-followup/m1-prompt-profile-audit.json",
-    "evidence_sha256": "f6d2c4d19f525c685dd25493cfe1319cbb72e491b3704ab490b27af28b1c7b2f",
-    "review": "docs/M1_PACKAGE_REPLICATION_CONTEXT_AUDIT_20261021.md",
-    "review_sha256": "73b61a88fe6e229439cc4a271424daa4cf3cb5ea1579ff4bca0e42f13dd9e7a4",
-    "direction_review": "docs/SCIENTIFIC_DIRECTION_REVIEW_FOLLOWUP_20261021.md",
-    "direction_review_sha256": "e9b7475788981cd47256949bfacbb0ba5c53d1b8a87961f6c6092fbdbfe96113",
-    "draft_scope": "research/drafts/m1-reward-chat-24group-replication-v3.md",
-    "draft_scope_sha256": "fef87f169a4ae830eddde457fed0192b80c8dbfd7d23e735db2bd35363be9f57",
-    "matrix_schedule": "research/drafts/m1-package-24-matrix-scenarios-20261021.json",
-    "matrix_schedule_sha256": "79358acd02dcade31291e879d1d173e5e92e9bf5f57305c65a3d59f954ca502a",
-    "review_mode": "adversarial_self_review_not_independent",
-    "failure_notes": "docs/results/research-sprint-20261021/direction-review-followup/design-preflight-failure-notes.log",
-    "failure_notes_sha256": "9adb6bc6626e40b8de75d28a3929cd8f0e94c61467a46e55b0b1e68ec1ceed4e",
-    "matrix_generator_sha256": "182cb9182a8b6269914570666510320fcc47af2d0bc5ba447b30a5ab8d949661",
-    "prompt_auditor_sha256": "5c7ed0b78f76dfb0685488e1f9dd352a1c6dad2d2200dc187d88fa4d7323a44b",
-    "offline_validation_log": "docs/results/research-sprint-20261021/direction-review-followup/offline-validation.log",
-    "offline_validation_log_sha256": "c8419c972bc6a3af16e790cf1b65b3e467665e3525b340298d45a1c52e55f306",
-    "matrix_audit": "docs/results/research-sprint-20261021/direction-review-followup/m1-24-matrix-independent-audit.json",
-    "matrix_audit_sha256": "e8e7def5f6621681a15bf648e8ef1fa228cb4cd872c7bcc4a23a17a7ecb8849f",
-    "matrix_auditor_sha256": "652b85cd04940dbaa4d60eaad51f2ac18cf8408cb195511aba6c43894e951c5e"
+    "selected_next_hypothesis_id": "m4-b5-response-repeatability-and-presentation",
+    "paper_direction_candidate": "communication-content-choice-effect",
+    "evidence": "docs/SCIENTIFIC_DIRECTION_REVIEW_REFOCUS_20261021.md",
+    "evidence_sha256": "29b8bacb06072a08119273c7f529bbdb7bc383b74477f968da7e81ee5d079f64",
+    "critic_review": "docs/results/research-sprint-20261021/b5-direction-review/independent-scientific-critic-review.md",
+    "critic_review_sha256": "382fd0b0769ba87594676f0fcb01a3ff12c250a099f0d001b8190b5ffbd7f403",
+    "campaign_proposal": "m4-b5-presentation-order-factorial-v1 + m4-b5-interleaved-view-repeatability-v1",
+    "campaign_ceiling": {
+      "physical_attempts": 464,
+      "external_cost_usd": 1.1,
+      "retries": 0,
+      "replacements": 0
+    },
+    "external_private_text_transfer": "A2 proposes 144 DeepSeek message-event appearances; requires explicit approval",
+    "review_mode": "offline_replay_literature_and_separate_context_critic",
+    "parent_head_reviewed": "a4123b73523f7528fb1e06ccd6236159cadf98f4",
+    "evidence_refs": [
+      {
+        "path": "docs/SCIENTIFIC_DIRECTION_REVIEW_REFOCUS_20261021.md",
+        "sha256": "29b8bacb06072a08119273c7f529bbdb7bc383b74477f968da7e81ee5d079f64"
+      },
+      {
+        "path": "docs/results/research-sprint-20261021/b5-direction-review/independent-scientific-critic-review.md",
+        "sha256": "382fd0b0769ba87594676f0fcb01a3ff12c250a099f0d001b8190b5ffbd7f403"
+      },
+      {
+        "path": "docs/results/research-sprint-20261021/b5-direction-review/branch-a-independent-recheck-final.json",
+        "sha256": "f65e54718bd7bdb5b8b3341267a0cdbfa33415ed60b79c6d371186958cfcf75b"
+      },
+      {
+        "path": "docs/results/research-sprint-20261021/b5-direction-review/b5-120-score-independent-recheck-final.json",
+        "sha256": "e8d00fa8d4d9b9ea716eaef822ca81c2715f8e3bef16d999695f2b6a5e0565d1"
+      },
+      {
+        "path": "docs/results/research-sprint-20261021/b5-direction-review/b5-rule-baseline-independent-recheck-final.json",
+        "sha256": "e2538cfb2b8711de054964151993a6340a40c55804d569d8455c8cdfb7e53ce6"
+      },
+      {
+        "path": "docs/results/research-sprint-20261021/m4-b5-context-sensitivity-independent-audit.json",
+        "sha256": "6e5278737d9550d547ef4895ef9ed9bc6aa85fafdb1a26087fdbc4011a11041c"
+      },
+      {
+        "path": "docs/results/research-sprint-20261021/m4-b5-raw-response-repeatability-audit.json",
+        "sha256": "98b1d781d693f27e7d20801b79a259ecfbf5b1c7302f852b441a1e9687e42951"
+      },
+      {
+        "path": "docs/results/research-sprint-20261021/b5-direction-review/m1-100-independent-recheck/m1_100_factorial_interaction.json",
+        "sha256": "ec79311bcd835f7960df147adfa0fb71aa1dcf8a0369bc8d291ea5c521315498"
+      }
+    ]
   },
-  "latest_review_id": "m1-prompt-context-audit-20261021",
+  "latest_review_id": "b5-scientific-direction-refocus-20261021",
   "latest_scientific_outcome": "INCONCLUSIVE",
-  "next_action": "Complete and offline-validate the v3 experiment-specific runtime, append-only request ledger and fake-server canaries; then formally register the frozen v3 protocol and request a fresh exact user authorization before any Qwen generation.",
+  "next_action": "Await explicit approval for the two-cycle 464-attempt/$1.10 DeepSeek campaign. Before dispatch, freeze exact request bytes/schedule, recheck official alias/version/pricing/off-peak status, validate local private-data boundary, and pass offline runner gates; otherwise continue no-call work.",
   "preexisting_untracked_paths_preserved": [
-    "docs/COLOSSEUM_LOCAL_REPRO_PROTOCOL.md",
-    "docs/results/colosseum-local-audit-20261020/",
-    "docs/results/colosseum-runtime-hardening-20261020/"
+    "docs/COLOSSEUM_LOCAL_REPRO_PROTOCOL.md (pre-existing untracked; preserved, not part of this review)",
+    "docs/results/colosseum-local-audit-20261020/ (pre-existing untracked; preserved, not part of this review)",
+    "docs/results/colosseum-runtime-hardening-20261020/ (pre-existing untracked; preserved, not part of this review)",
+    "M1 package Monitor candidate docs, drafts, scripts, source, tests, and audit outputs (pre-existing untracked; preserved, not part of this review)"
   ],
   "prior_runs_kept_separate": [
     {
@@ -78,7 +107,7 @@
   "program": "ColluScope Autoresearch",
   "program_status": "active",
   "schema_version": 2,
-  "state_recorded_at_head": "d451c1068e34987c6b521f511c377546d89c4da0",
-  "status": "ready_for_v3_offline_runtime_implementation",
+  "state_recorded_at_head": "a4123b73523f7528fb1e06ccd6236159cadf98f4",
+  "status": "direction_review_complete_waiting_scope_approval",
   "updated_at": "2026-10-21"
 }

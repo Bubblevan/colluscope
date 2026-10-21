@@ -1,0 +1,11 @@
+{
+  "reviewed_at_utc": "2026-10-21T00:18:28.331296Z",
+  "branch": "codex/deepseek-first-m4-research-20261020",
+  "baseline_head": "a4123b73523f7528fb1e06ccd6236159cadf98f4",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "python": "3.12.4",
+  "offline_rechecks": 5,
+  "new_model_or_api_calls": 0,
+  "raw_private_payloads_exported": false,
+  "raw_run_storage": "Git-ignored local runs/ directories; unchanged"
+}

@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "baseline_head": "a4123b73523f7528fb1e06ccd6236159cadf98f4",
+  "new_model_api_calls": 0,
+  "commands": [
+    {
+      "id": "branch_a_replay",
+      "command": "python scripts/audit_public_harm_invariance.py --monitor-run runs/deepseek-first-m4/monitor --output docs/results/research-sprint-20261021/b5-direction-review/branch-a-independent-recheck-final.json",
+      "exit_code": 0,
+      "stdout": "docs/results/research-sprint-20261021/b5-direction-review/branchA-final.stdout.log",
+      "artifact": "docs/results/research-sprint-20261021/b5-direction-review/branch-a-independent-recheck-final.json"
+    },
+    {
+      "id": "b5_120_replay",
+      "command": "python scripts/score_b5_invariance_run.py --run runs/sprint-monitor/b5-evidence-view-stability-v1 --out docs/results/research-sprint-20261021/b5-direction-review/b5-120-score-independent-recheck-final.json",
+      "exit_code": 0,
+      "stdout": "docs/results/research-sprint-20261021/b5-direction-review/b5score-final.stdout.log",
+      "artifact": "docs/results/research-sprint-20261021/b5-direction-review/b5-120-score-independent-recheck-final.json"
+    },
+    {
+      "id": "deterministic_rule_replay",
+      "command": "python scripts/audit_b5_deterministic_rule_baseline.py --out docs/results/research-sprint-20261021/b5-direction-review/b5-rule-baseline-independent-recheck-final.json",
+      "exit_code": 0,
+      "stdout": "docs/results/research-sprint-20261021/b5-direction-review/rule-final.stdout.log",
+      "artifact": "docs/results/research-sprint-20261021/b5-direction-review/b5-rule-baseline-independent-recheck-final.json"
+    },
+    {
+      "id": "m1_100_raw_ballot_recheck",
+      "command": "python scripts/analyze_m1_100_factorial_interaction.py --out-dir docs/results/research-sprint-20261021/b5-direction-review/m1-100-independent-recheck",
+      "exit_code": 0,
+      "stdout": "docs/results/research-sprint-20261021/b5-direction-review/m1-100-independent-recheck.stdout.log",
+      "artifact": "docs/results/research-sprint-20261021/b5-direction-review/m1-100-independent-recheck/m1_100_factorial_interaction.json"
+    },
+    {
+      "id": "research_registry_audit",
+      "command": "python scripts/researchctl.py audit",
+      "exit_code": 0,
+      "stdout": "docs/results/research-sprint-20261021/b5-direction-review/registry-final.stdout.log",
+      "artifact": null
+    }
+  ],
+  "privacy": "Only aggregate JSON/CSV and command logs were saved; raw request/response data and private message text remain in ignored local runs/."
+}

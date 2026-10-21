@@ -1,0 +1,137 @@
+{
+  "schema_version": 1,
+  "baseline_head": "a4123b73523f7528fb1e06ccd6236159cadf98f4",
+  "evidence_class": "offline_reanalysis",
+  "model_api_calls": 0,
+  "raw_private_payloads_included": false,
+  "official_sources": [
+    "https://apartresearch.com/sprints/ai-collusion-research-sprint-2026-10-23-to-2026-10-25",
+    "https://arxiv.org/abs/2601.21112",
+    "https://arxiv.org/abs/2602.15198",
+    "https://arxiv.org/abs/2507.01413",
+    "https://arxiv.org/abs/2609.24967",
+    "https://api-docs.deepseek.com/quick_start/pricing/"
+  ],
+  "artifacts": [
+    {
+      "path": "docs/SCIENTIFIC_DIRECTION_REVIEW_REFOCUS_20261021.md",
+      "sha256": "29b8bacb06072a08119273c7f529bbdb7bc383b74477f968da7e81ee5d079f64"
+    },
+    {
+      "path": "docs/results/research-sprint-20261021/b5-direction-review/independent-scientific-critic-review.md",
+      "sha256": "382fd0b0769ba87594676f0fcb01a3ff12c250a099f0d001b8190b5ffbd7f403"
+    },
+    {
+      "path": "docs/results/research-sprint-20261021/b5-direction-review/review-environment.json",
+      "sha256": "f4340c0a33b65e07c864dfd8a6c23e370df8555a9c5cbcd6fa060b079f8323f3"
+    },
+    {
+      "path": "docs/results/research-sprint-20261021/b5-direction-review/offline-rerun-index.json",
+      "sha256": "744bafabce092a4d12d82b4276d3bc242ddfcffdeb59585f30f684de0a7d436c"
+    },
+    {
+      "path": "docs/results/research-sprint-20261021/b5-direction-review/branch-a-independent-recheck-final.json",
+      "sha256": "f65e54718bd7bdb5b8b3341267a0cdbfa33415ed60b79c6d371186958cfcf75b"
+    },
+    {
+      "path": "docs/results/research-sprint-20261021/b5-direction-review/b5-120-score-independent-recheck-final.json",
+      "sha256": "e8d00fa8d4d9b9ea716eaef822ca81c2715f8e3bef16d999695f2b6a5e0565d1"
+    },
+    {
+      "path": "docs/results/research-sprint-20261021/b5-direction-review/b5-rule-baseline-independent-recheck-final.json",
+      "sha256": "e2538cfb2b8711de054964151993a6340a40c55804d569d8455c8cdfb7e53ce6"
+    },
+    {
+      "path": "docs/results/research-sprint-20261021/b5-direction-review/branchA-final.stdout.log",
+      "sha256": "ce35c80e8deb1ff69f74781657511d463f6677f04484c6c7251d6385fb2b6ea2"
+    },
+    {
+      "path": "docs/results/research-sprint-20261021/b5-direction-review/b5score-final.stdout.log",
+      "sha256": "e8d00fa8d4d9b9ea716eaef822ca81c2715f8e3bef16d999695f2b6a5e0565d1"
+    },
+    {
+      "path": "docs/results/research-sprint-20261021/b5-direction-review/rule-final.stdout.log",
+      "sha256": "e2538cfb2b8711de054964151993a6340a40c55804d569d8455c8cdfb7e53ce6"
+    },
+    {
+      "path": "docs/results/research-sprint-20261021/b5-direction-review/m1-100-independent-recheck.stdout.log",
+      "sha256": "09a36118108d2b8d035911107dde3bcbbaee965d625c2d3191bd3b5f1341ba69"
+    },
+    {
+      "path": "docs/results/research-sprint-20261021/b5-direction-review/registry-final.stdout.log",
+      "sha256": "6579ebb2c9c55e443cd53ebe98e731a61fc72781d39677af167da38a694d0ec6"
+    },
+    {
+      "path": "docs/results/research-sprint-20261021/b5-direction-review/m1-100-independent-recheck/m1_100_factorial_interaction.json",
+      "sha256": "ec79311bcd835f7960df147adfa0fb71aa1dcf8a0369bc8d291ea5c521315498"
+    },
+    {
+      "path": "docs/results/research-sprint-20261021/b5-direction-review/m1-100-independent-recheck/matched_group_interactions.csv",
+      "sha256": "218f126943634496740c19dd3442d6a0e4eabee624a553d48acda041d94fc35f"
+    },
+    {
+      "path": "docs/results/research-sprint-20261021/b5-direction-review/m1-100-independent-recheck/episode_outcomes.csv",
+      "sha256": "3a2e1da298c5885fd667946e66f9e1281f9a44119d44f0af26321a93213c1730"
+    },
+    {
+      "path": "scripts/audit_public_harm_invariance.py",
+      "sha256": "e79e8cd82bad7eb8a0df06bb23094556523e6c117832c524640eb3ea1d94c7ea"
+    },
+    {
+      "path": "scripts/score_b5_invariance_run.py",
+      "sha256": "7d0bae8dbc5bef998d9a4b6678af948920e651b5d4a16d7bdabdb3f7984e61ac"
+    },
+    {
+      "path": "scripts/audit_b5_deterministic_rule_baseline.py",
+      "sha256": "f94b6e0971ab3029354f3f948d6ab1fcb9fab3897c47abf8170098ec34797384"
+    },
+    {
+      "path": "scripts/analyze_m1_100_factorial_interaction.py",
+      "sha256": "eb2982beefc8517751494376aa9871a5ed4fa08aa1f94132b17f091486355ea4"
+    },
+    {
+      "path": "docs/results/deepseek-first-m4/audit/monitor_per_reference_scores.csv",
+      "sha256": "ebfc472cb615fc351d35099e2f61469396a3f1d08d82534fe3daf4ebd9cc48a7"
+    },
+    {
+      "path": "docs/M4_B5_CONTEXT_SENSITIVITY_EVIDENCE.md",
+      "sha256": "906891199731c2b9a0a9a0f6822dd7c572896c29b41620fbf53e85e42bf37402"
+    },
+    {
+      "path": "docs/M4_B5_CONTEXT_SENSITIVITY_DECISION.md",
+      "sha256": "cd9ab94ad8756013e952f2a06d89d0e8a0a6975dc4e3e3f7e511cc661d6dcbb6"
+    },
+    {
+      "path": "docs/M4_B5_RAW_RESPONSE_REPEATABILITY_EVIDENCE.md",
+      "sha256": "f61e7c2b1cd702f671029b250651f52175ef1441f3f36f67351678761b8f13aa"
+    },
+    {
+      "path": "docs/results/research-sprint-20261021/m4-b5-raw-response-repeatability-audit.json",
+      "sha256": "98b1d781d693f27e7d20801b79a259ecfbf5b1c7302f852b441a1e9687e42951"
+    },
+    {
+      "path": "docs/results/research-sprint-20261021/m4-b5-context-sensitivity-independent-audit.json",
+      "sha256": "6e5278737d9550d547ef4895ef9ed9bc6aa85fafdb1a26087fdbc4011a11041c"
+    },
+    {
+      "path": "docs/results/m1-100-factorial-interaction-20261021/m1_100_factorial_interaction.json",
+      "sha256": "ec79311bcd835f7960df147adfa0fb71aa1dcf8a0369bc8d291ea5c521315498"
+    },
+    {
+      "path": "research/budget.json",
+      "sha256": "f835d11c18630c93944ffcb7cca978e58d368767b7167da85a7b2b0c2583cbf6"
+    },
+    {
+      "path": "research/hypotheses.json",
+      "sha256": "dc04099fad84c7962b1efc74882b36f95ff3404f3b65251be9d27ac0fb756757"
+    },
+    {
+      "path": "research/memory.json",
+      "sha256": "c0aacf42896607e65255902efd81860b2080a9367e23fc3b4ff2946abf94239b"
+    },
+    {
+      "path": "research/state.json",
+      "sha256": "3f1b6ce23a5770b576c4eb0d9825b70dcd7da91bebb7a6eaa4a2590ac12e0aca"
+    }
+  ]
+}
