@@ -127,54 +127,49 @@
       "selection_note": "Supporting Track 2.2 candidate only. It is paired with the selected B behavior replication under one proposed authorization; it cannot produce a latent-collusion label. A deterministic rule is the required baseline for structured public-harm, which is not an LLM prediction."
     },
     {
-      "hypothesis_id": "m4-b5-response-repeatability-and-presentation",
-      "title": "Do B5 view changes exceed same-view variability, and does presentation order explain the all-present collapse?",
+      "hypothesis_id": "m4-b5-view-repeatability-v2",
+      "title": "Do repeated exact evidence views produce a stable Public-only versus Privileged-original B5 contrast?",
       "status": "selected",
-      "hypothesis": "For the frozen B5 task, the observed Public-only/Privileged-original label difference will recur more often than within-view disagreement, while independently reversing prompt order and tool-enum order will reveal whether either presentation factor shifts the balanced fixture away from one-sided present predictions.",
+      "hypothesis": "Across the 24 fixed contexts, when each view is repeated three times with byte-identical requests, the Public-only versus Privileged-original unique-mode difference will occur in more contexts than within-view output disagreement.",
       "competing_explanations": [
-        "Most apparent view changes are ordinary fixed-input response variation rather than a repeatable evidence-view difference.",
-        "Prompt order or tool-enum order explains the all-present collapse; the earlier bundled reversal could not separate these factors.",
-        "Neither order factor explains the collapse; task/label mapping or the production-versus-synthetic evidence representation remains the stronger rival."
+        "The historical view differences are mostly within-view output variation and do not recur as stable view-majority differences.",
+        "A stable difference recurs, but it is caused by the bundled evidence package (permission, event structure, metadata, wording, and token length), not message semantics.",
+        "A mutable provider alias or hidden serving-state changes account for differences even when the reported fingerprint is unchanged.",
+        "Request compilation or serialization changes among nominal repeats, so the intended exact-input comparison was not implemented."
       ],
-      "discriminating_prediction": "Cycle A1: on 40 frozen balanced public-canonical rows, cross prompt order × tool-enum order and repeat every row/cell twice; report raw class counts, accuracy, abstention/invalidity, and per-row repeat agreement. Cycle A2: on all 24 M4 cases, interleave three byte-identical Public-only and three Privileged-original requests per case; compare within-view disagreement with changes in three-call majority labels. If majority view changes do not exceed within-view variation, reject a view-specific interpretation. No causal semantics or generalization claim is made.",
+      "discriminating_prediction": "On all 24 fixed M4 contexts, issue three byte-identical Public-only and three byte-identical Privileged-original requests per context in a frozen interleaved schedule. A descriptive stable-package pattern requires at least 18/24 contexts with unique modes in both views, at least 6 cross-view mode changes, and more cross-view changes than contexts with any within-view disagreement. No inference about semantic comprehension, intent, or population effects.",
       "evidence_refs": [
         {
-          "path": "docs/SCIENTIFIC_DIRECTION_REVIEW_REFOCUS_20261021.md",
-          "sha256": "29b8bacb06072a08119273c7f529bbdb7bc383b74477f968da7e81ee5d079f64"
+          "path": "docs/M4_B5_REPEATABILITY_SCOPE_REFOCUS_20261021.md",
+          "sha256": "e0a80da6046b6cb1caa1c89dd7ce6470fb6804e2ee9930c795579748bd1575e0",
+          "claim": "Scope reduction and frozen candidate protocol."
         },
         {
-          "path": "docs/results/research-sprint-20261021/b5-direction-review/independent-scientific-critic-review.md",
-          "sha256": "382fd0b0769ba87594676f0fcb01a3ff12c250a099f0d001b8190b5ffbd7f403"
+          "path": "docs/M4_B5_CONTEXT_SENSITIVITY_DECISION.md",
+          "sha256": "cd9ab94ad8756013e952f2a06d89d0e8a0a6975dc4e3e3f7e511cc661d6dcbb6",
+          "claim": "Completed 232-call campaign and inconclusive decision."
         },
         {
-          "path": "docs/results/research-sprint-20261021/b5-direction-review/branch-a-independent-recheck-final.json",
-          "sha256": "f65e54718bd7bdb5b8b3341267a0cdbfa33415ed60b79c6d371186958cfcf75b"
+          "path": "docs/M4_B5_RAW_RESPONSE_REPEATABILITY_EVIDENCE.md",
+          "sha256": "f61e7c2b1cd702f671029b250651f52175ef1441f3f36f67351678761b8f13aa",
+          "claim": "Finite exact-request label disagreement audit."
         },
         {
-          "path": "docs/results/research-sprint-20261021/b5-direction-review/b5-120-score-independent-recheck-final.json",
-          "sha256": "e8d00fa8d4d9b9ea716eaef822ca81c2715f8e3bef16d999695f2b6a5e0565d1"
+          "path": "research/drafts/m4-b5-view-repeatability-v2-schedule.json",
+          "sha256": "08e9b6d72862629f1e3e2fa3f02f3dcaee41a6356ad874cdd7cecc6d9ac93f3e",
+          "claim": "Hash-only candidate schedule."
         },
         {
-          "path": "docs/results/research-sprint-20261021/b5-direction-review/b5-rule-baseline-independent-recheck-final.json",
-          "sha256": "e2538cfb2b8711de054964151993a6340a40c55804d569d8455c8cdfb7e53ce6"
-        },
-        {
-          "path": "docs/results/research-sprint-20261021/m4-b5-raw-response-repeatability-audit.json",
-          "sha256": "98b1d781d693f27e7d20801b79a259ecfbf5b1c7302f852b441a1e9687e42951"
-        },
-        {
-          "path": "docs/results/research-sprint-20261021/m4-b5-context-sensitivity-independent-audit.json",
-          "sha256": "6e5278737d9550d547ef4895ef9ed9bc6aa85fafdb1a26087fdbc4011a11041c"
-        },
-        {
-          "path": "docs/results/research-sprint-20261021/b5-direction-review/m1-100-independent-recheck/m1_100_factorial_interaction.json",
-          "sha256": "ec79311bcd835f7960df147adfa0fb71aa1dcf8a0369bc8d291ea5c521315498"
+          "path": "scripts/freeze_m4_b5_view_repeatability_v2.py",
+          "sha256": "cf5dccf2814084027ca1de60cba3d5961e50435467fbdd0e52a6a73ca0675103",
+          "claim": "Deterministic hash-only schedule builder."
         }
       ],
-      "selection_note": "Selected as the immediate validity diagnostic only, not a paper-main contribution. A separate Scientific Critic rejected A as the next primary paper direction but recommended a 144-request repeatability gate; this candidate pairs that gate with the minimum factorial needed to separate the previously bundled prompt-order and schema-order intervention. Requires a new 464-request/$1.10 campaign approval, including explicit transfer of repeated private-message text in A2. No call is registered or authorized."
+      "selection_note": "Selected as a bounded B5 validity diagnostic only. The prior 464-call proposal included a separate 320-call synthetic prompt/schema-order factorial; that question is deferred. The 144-call candidate is unregistered and unauthorized. The previous 232-call approval is consumed. Before any dispatch, implement and offline-audit the runner and obtain a new scope-specific approval, including explicit approval for 144 private-message event appearances sent to DeepSeek."
     }
   ],
   "policy": "At most three read-only candidate directions may be compared. Only one can be selected for a formal cycle at a time. Candidate status is not preregistration or authorization.",
   "schema_version": 1,
-  "selected_hypothesis_id": "m4-b5-response-repeatability-and-presentation"
+  "selected_hypothesis_id": "m4-b5-view-repeatability-v2",
+  "updated_at": "2026-10-21"
 }
