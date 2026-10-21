@@ -105,6 +105,11 @@ def audit() -> dict[str, Any]:
     require(len(expected_ids) == 144 and set(by_assignment) == expected_ids, "SCHEDULE_MANIFEST_ASSIGNMENT_MISMATCH")
 
     profiles: dict[tuple[str, str], list[dict[str, Any]]] = defaultdict(list)
+    body_profiles_by_view: dict[str, dict[str, set[str]]] = {
+        "public_only": defaultdict(set),
+        "privileged_original": defaultdict(set),
+    }
+    body_profile_assignment_counts: dict[str, int] = defaultdict(int)
     view_counts = {"public_only": 0, "privileged_original": 0}
     cost_reserve = Decimal("0")
     maximum_input_upper_bound = 0
@@ -137,6 +142,8 @@ def audit() -> dict[str, Any]:
         require(view in view_counts, "UNKNOWN_VIEW")
         view_counts[view] += 1
         profiles[(row["unit_sha256"], view)].append({"repeat": row["repeat"], "body_sha256": body_hash})
+        body_profiles_by_view[view][body_hash].add(row["unit_sha256"])
+        body_profile_assignment_counts[body_hash] += 1
         maximum_input_upper_bound = max(maximum_input_upper_bound, upper)
         cost_reserve += (Decimal(upper) * INPUT_RATE + Decimal(MAX_OUTPUT) * OUTPUT_RATE) / Decimal(1_000_000)
         body_hash_count += 1
@@ -153,8 +160,36 @@ def audit() -> dict[str, Any]:
     }
     require(units_by_view["public_only"] == units_by_view["privileged_original"] == {row["unit_sha256"] for row in assignments}, "PAIRED_CONTEXT_SET_MISMATCH")
 
+    unique_body_profiles_by_view = {
+        view: len(values) for view, values in body_profiles_by_view.items()
+    }
+    cross_context_duplicate_profiles_by_view = {
+        view: sum(len(units) > 1 for units in values.values())
+        for view, values in body_profiles_by_view.items()
+    }
+    duplicated_context_links_by_view = {
+        view: sum(max(0, len(units) - 1) for units in values.values())
+        for view, values in body_profiles_by_view.items()
+    }
+    body_profiles_across_views = {
+        view: set(values) for view, values in body_profiles_by_view.items()
+    }
+    shared_body_profiles_across_views = len(
+        body_profiles_across_views["public_only"]
+        & body_profiles_across_views["privileged_original"]
+    )
+    assignment_count_distribution = {
+        str(count): sum(value == count for value in body_profile_assignment_counts.values())
+        for count in sorted(set(body_profile_assignment_counts.values()))
+    }
+    require(unique_body_profiles_by_view == {"public_only": 23, "privileged_original": 24}, "UNIQUE_BODY_PROFILE_COUNTS_CHANGED")
+    require(cross_context_duplicate_profiles_by_view == {"public_only": 1, "privileged_original": 0}, "CROSS_CONTEXT_DUPLICATE_PROFILE_COUNTS_CHANGED")
+    require(duplicated_context_links_by_view == {"public_only": 1, "privileged_original": 0}, "DUPLICATED_CONTEXT_LINK_COUNTS_CHANGED")
+    require(shared_body_profiles_across_views == 0, "REQUEST_BODY_SHARED_ACROSS_VIEWS")
+    require(assignment_count_distribution == {"3": 46, "6": 1}, "UNIQUE_BODY_PROFILE_REPEAT_COUNTS_CHANGED")
+
     return {
-        "status": "PASS_OFFLINE_PREPARATION_INDEPENDENT_AUDIT",
+        "status": "PASS_OFFLINE_PREPARATION_PROFILE_AWARE_AUDIT",
         "experiment_id": manifest["experiment_id"],
         "evidence_class": "offline_reanalysis",
         "model_calls": 0,
@@ -162,6 +197,12 @@ def audit() -> dict[str, Any]:
         "request_bodies_hash_checked": body_hash_count,
         "context_view_profiles": len(profiles),
         "identical_repeat_profiles": len(profiles),
+        "unique_model_visible_body_profiles": sum(unique_body_profiles_by_view.values()),
+        "unique_body_profiles_by_view": unique_body_profiles_by_view,
+        "cross_context_duplicate_body_profiles_by_view": cross_context_duplicate_profiles_by_view,
+        "additional_context_links_from_duplicate_profiles_by_view": duplicated_context_links_by_view,
+        "shared_body_profiles_across_views": shared_body_profiles_across_views,
+        "assignments_per_unique_body_profile": assignment_count_distribution,
         "view_counts": view_counts,
         "maximum_conservative_input_upper_bound": maximum_input_upper_bound,
         "input_bound_definition": "2 * serialized UTF-8 request bytes + 256 framing tokens; not provider tokenizer output",

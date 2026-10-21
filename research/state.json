@@ -31,13 +31,15 @@
   "latest_decision": "INCONCLUSIVE",
   "latest_decision_type": "scientific",
   "latest_review": {
-    "status": "offline_prepared_waiting_new_scope_authorization",
-    "authorization_status": "The DS-FLASH-M4B5-CONTEXT-232-20261021 approval is consumed and cannot be reused. No authorization exists for m4-b5-view-repeatability-v2.",
+    "status": "profile_aware_offline_candidate_waiting_new_scope_authorization",
+    "authorization_status": "No authorization exists for m4-b5-view-repeatability-v2. The prior DS-FLASH-M4B5-CONTEXT-232-20261021 batch names only the completed, fully consumed context-sensitivity campaign.",
     "experiment_registered": false,
     "new_model_api_attempts": 0,
     "new_model_calls": 0,
     "selected_next_hypothesis_id": "m4-b5-view-repeatability-v2",
     "candidate_experiment_id": "m4-b5-view-repeatability-v2",
+    "candidate_revision": "research/drafts/m4-b5-view-repeatability-v2-preregistration-r1.json",
+    "candidate_revision_sha256": "08423c22f2badeac589bdddb71d49bf10db912f1d78a91339f16cd81bc52a010",
     "candidate_ceiling": {
       "physical_attempts": 144,
       "external_cost_usd": 0.35,
@@ -46,6 +48,28 @@
       "model": "official DeepSeek Flash only; off-peak only",
       "expires_at_utc_proposed": "2026-10-25T23:59:00Z",
       "private_message_event_appearances": 144
+    },
+    "offline_prepare": {
+      "assigned": 144,
+      "context_view_cells": 48,
+      "unique_body_profiles": 47,
+      "public_only_body_profiles": 23,
+      "privileged_original_body_profiles": 24,
+      "shared_public_body_profiles": 1,
+      "context_links_on_shared_profile": 2,
+      "assignments_per_unique_profile": {
+        "3": 46,
+        "6": 1
+      },
+      "request_manifest_sha256": "6d26f48244bd06d93b29d58d02d69f03fe49d6db967b74cae0618ccfdfaf760a",
+      "schedule_file_sha256": "08e9b6d72862629f1e3e2fa3f02f3dcaee41a6356ad874cdd7cecc6d9ac93f3e",
+      "schedule_object_sha256": "37cce3e98a0493cb26e6610cdc823aa5cc7a1303086f7943ed269b895441e099",
+      "max_conservative_input_bound_units": 12104,
+      "input_bound_is_provider_tokenizer_count": false,
+      "max_output_tokens_per_request": 512,
+      "offpeak_worst_case_cost_usd": "0.2658564",
+      "model_calls": 0,
+      "raw_run_directory_git_ignored": true
     },
     "remaining_project_budget_before_candidate": {
       "physical_attempts": 848,
@@ -56,49 +80,38 @@
       "external_cost_usd": 2.110832942,
       "reservation_status": "planning_only_not_reserved"
     },
-    "offline_prepare": {
-      "assigned": 144,
-      "request_profiles": 48,
-      "repeats_per_profile": 3,
-      "request_manifest_sha256": "6d26f48244bd06d93b29d58d02d69f03fe49d6db967b74cae0618ccfdfaf760a",
-      "schedule_file_sha256": "08e9b6d72862629f1e3e2fa3f02f3dcaee41a6356ad874cdd7cecc6d9ac93f3e",
-      "schedule_object_sha256": "37cce3e98a0493cb26e6610cdc823aa5cc7a1303086f7943ed269b895441e099",
-      "max_conservative_input_bound_units": 12104,
-      "input_bound_is_provider_tokenizer_count": false,
-      "max_output_tokens_per_request": 512,
-      "offpeak_worst_case_cost_usd": "0.2658564",
-      "model_calls": 0,
-      "local_acl_verified_objects": 304,
-      "raw_run_directory_git_ignored": true
-    },
-    "review_mode": "offline B5 evidence review plus sanitized independent preparation audit; no provider inference",
-    "parent_head_reviewed": "2dd1f45288f059b583372659ab7536f68e0dcf92",
-    "evidence": "docs/AUTORESEARCH_CONTINUATION_20261021.md",
-    "evidence_sha256": "94255f7091d978552db2475c3a9b3f93d6febec0d76677810248aa6b438d2257",
+    "review_mode": "offline profile-aware manifest audit plus adversarial self-review; no provider inference",
+    "parent_head_reviewed": "c29960b96a506ecf1cd94415a16637f0cb0e6d3b",
+    "evidence": "docs/M4_B5_REPEATABILITY_PROFILE_COLLISION_AUDIT_20261021.md",
+    "evidence_sha256": "84a0afdd90d69599a60cc881ca910580239af3b488db8daebccf8fc1f578e032",
     "evidence_refs": [
       {
-        "path": "docs/AUTORESEARCH_CONTINUATION_20261021.md",
-        "sha256": "94255f7091d978552db2475c3a9b3f93d6febec0d76677810248aa6b438d2257"
+        "path": "docs/M4_B5_REPEATABILITY_PROFILE_COLLISION_AUDIT_20261021.md",
+        "sha256": "84a0afdd90d69599a60cc881ca910580239af3b488db8daebccf8fc1f578e032"
       },
       {
-        "path": "docs/ITERATION_LOG_FOLLOWUP_20261021_AUTORESEARCH.md",
-        "sha256": "c31426f3572896f1ebfe304d6e7d205cbc526fca54095dad60f456e122bbbdcb"
+        "path": "research/drafts/m4-b5-view-repeatability-v2-preregistration-r1.json",
+        "sha256": "08423c22f2badeac589bdddb71d49bf10db912f1d78a91339f16cd81bc52a010"
       },
       {
-        "path": "docs/RESEARCH_RISK_REGISTER_FOLLOWUP_20261021_AUTORESEARCH.md",
-        "sha256": "ffacbd30bc29b4fc32c755b7b481fb4c42f4a3a042407808f001ce46911868b6"
+        "path": "docs/results/research-sprint-20261021/m4-b5-autoresearch-continuation-20261021/repeatability-preparation-audit-v4.json",
+        "sha256": "1bcba95c415a3d6ba0acc5a9615cdac3c6fd7d9c271d02c74f9119edefd6cdef"
       },
       {
-        "path": "docs/results/research-sprint-20261021/m4-b5-autoresearch-continuation-20261021/repeatability-preparation-audit-v3.json",
-        "sha256": "b172ebb606583fa504847df5e9e6fe84b057c5f935b68516dbebd4dca9304374"
+        "path": "docs/ITERATION_LOG_FOLLOWUP_20261021_PROFILE_AUDIT.md",
+        "sha256": "e75b0d01a2aa2281c6ec06883652db39b56141b0df864ef048ccf1b7e39e0949"
+      },
+      {
+        "path": "docs/RESEARCH_RISK_REGISTER_FOLLOWUP_20261021_PROFILE_AUDIT.md",
+        "sha256": "888005921123c0607e11dbc82e10699972ac6e2c6d98902377efa360ea8d4e34"
       }
     ],
-    "next_gate": "Obtain one new named approval for at most 144 physical attempts and USD 0.35, official DeepSeek Flash off-peak only, zero retries/replacements, expiry 2026-10-25T23:59:00Z, and external transfer of 144 private-message event appearances. Only then register the exact protocol and rerun all dispatch gates.",
+    "next_gate": "Obtain a new scope-specific approval for at most 144 physical attempts and USD 0.35, official DeepSeek Flash off-peak only, zero retries/replacements, proposed expiry 2026-10-25T23:59:00Z, and transfer of 144 private-message event appearances. Only then formally register the revised profile-cluster protocol and rerun all dispatch gates.",
     "private_evidence_transfer": "72 Privileged-original requests, each with two historical private-message events; 144 event appearances total if separately approved."
   },
-  "latest_review_id": "m4-b5-view-repeatability-v2-offline-preparation-20261021",
+  "latest_review_id": "m4-b5-view-repeatability-profile-cluster-r1-20261021",
   "latest_scientific_outcome": "INCONCLUSIVE",
-  "next_action": "Seek explicit scope-specific approval for m4-b5-view-repeatability-v2 at no more than 144 physical attempts and USD 0.35, official DeepSeek Flash off-peak only, zero retries/replacements, expiry 2026-10-25T23:59:00Z, and 144 private-message event appearances transferred to the provider. Do not register or dispatch before approval; after approval, register the frozen protocol and recheck model/price/window/token/identity/privacy/budget gates immediately before any call.",
+  "next_action": "Obtain a new, named scope authorization for the revised m4-b5-view-repeatability-v2 profile-cluster protocol (≤144 physical attempts, ≤USD 0.35, official DeepSeek Flash off-peak only, zero retries/replacements, proposed expiry 2026-10-25T23:59:00Z, and explicit transfer of 144 private-message event appearances). The campaign remains unregistered and undispatched.",
   "preexisting_untracked_paths_preserved": [
     "docs/COLOSSEUM_LOCAL_REPRO_PROTOCOL.md (pre-existing untracked; preserved, not part of this review)",
     "docs/results/colosseum-local-audit-20261020/ (pre-existing untracked; preserved, not part of this review)",
@@ -116,7 +129,7 @@
   "program": "ColluScope Autoresearch",
   "program_status": "active",
   "schema_version": 2,
-  "state_recorded_at_head": "2dd1f45288f059b583372659ab7536f68e0dcf92",
-  "status": "repeatability_candidate_waiting_scope_authorization",
+  "state_recorded_at_head": "c29960b96a506ecf1cd94415a16637f0cb0e6d3b",
+  "status": "profile_cluster_revision_waiting_scope_authorization",
   "updated_at": "2026-10-21"
 }

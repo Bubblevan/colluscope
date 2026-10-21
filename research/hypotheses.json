@@ -128,39 +128,39 @@
     },
     {
       "hypothesis_id": "m4-b5-view-repeatability-v2",
-      "title": "Do evidence-view differences exceed short-window repeat variation on the fixed M4 contexts?",
+      "title": "Do evidence-view differences exceed within-profile variation after clustering repeated public inputs?",
       "status": "selected",
-      "hypothesis": "Across the 24 fixed contexts, when each view is repeated three times with byte-identical requests, the Public-only versus Privileged-original unique-mode difference will occur in more contexts than within-view output disagreement.",
+      "hypothesis": "For this fixed corpus, the number of unique Public-only input-profile clusters whose mode differs from at least one linked Privileged-original profile will exceed the number of clusters containing any within-profile response disagreement.",
       "competing_explanations": [
-        "The historical view differences are mostly within-view output variation and do not recur as stable view-majority differences.",
-        "A stable difference recurs, but it is caused by the bundled evidence package (permissions, event structure, metadata, wording, and token length), not message semantics.",
-        "A mutable provider alias, hidden serving-state changes, or reported-fingerprint drift accounts for differences across requests.",
-        "Request compilation or serialization changes among nominal repeats, so the intended exact-input comparison was not implemented."
+        "The historical view changes are mostly within-profile response variation; unique profile clusters will not show a stable package contrast.",
+        "A stable finite contrast recurs, but it reflects the bundled permissions, event structure, completeness cues, wording, salience, or token length rather than message semantics.",
+        "A shared Public-only request profile linked to two different privileged contexts creates dependence that can exaggerate context-level change counts if not clustered.",
+        "Mutable provider aliases or hidden serving-state changes account for repeated-response differences despite matching request bytes and reported fingerprints."
       ],
-      "discriminating_prediction": "On all 24 frozen contexts, issue three byte-identical requests for each of Public-only and Privileged-original. Use context as the paired unit. A finite package contrast is supported only if at least 18 contexts have unique modes in both views, at least 6 change modes across views, and the number changing modes exceeds the number with any within-view disagreement. At most 1 cross-view change with at most 6 contexts showing within-view disagreement weakens reproduction of the historical contrast; all other patterns are inconclusive. No p-values, population claim, message-semantic effect, or intent inference.",
+      "discriminating_prediction": "Across the 23 unique Public-only body-profile clusters, a determinate package contrast is supported only if at least 18 clusters have unique modes for the public profile and every linked privileged profile, at least 6 clusters change, and changed clusters exceed clusters with any within-profile disagreement. The one public profile shared by two contexts is counted once. At most 1 changed cluster with at most 6 unstable clusters weakens reproduction; all other outcomes are inconclusive. Fixed corpus only, no population inference or intent label.",
       "evidence_refs": [
         {
-          "path": "docs/AUTORESEARCH_CONTINUATION_20261021.md",
-          "sha256": "94255f7091d978552db2475c3a9b3f93d6febec0d76677810248aa6b438d2257"
+          "path": "docs/M4_B5_REPEATABILITY_PROFILE_COLLISION_AUDIT_20261021.md",
+          "sha256": "84a0afdd90d69599a60cc881ca910580239af3b488db8daebccf8fc1f578e032"
         },
         {
-          "path": "research/drafts/m4-b5-view-repeatability-v2-preregistration.json",
-          "sha256": "6eeb97e793edac63d67401e1e491ebf00b804febefac49e37bdaa1b170edfa75"
+          "path": "research/drafts/m4-b5-view-repeatability-v2-preregistration-r1.json",
+          "sha256": "08423c22f2badeac589bdddb71d49bf10db912f1d78a91339f16cd81bc52a010"
         },
         {
-          "path": "docs/results/research-sprint-20261021/m4-b5-autoresearch-continuation-20261021/repeatability-preparation-audit-v3.json",
-          "sha256": "b172ebb606583fa504847df5e9e6fe84b057c5f935b68516dbebd4dca9304374"
+          "path": "docs/results/research-sprint-20261021/m4-b5-autoresearch-continuation-20261021/repeatability-preparation-audit-v4.json",
+          "sha256": "1bcba95c415a3d6ba0acc5a9615cdac3c6fd7d9c271d02c74f9119edefd6cdef"
         },
         {
-          "path": "docs/ITERATION_LOG_FOLLOWUP_20261021_AUTORESEARCH.md",
-          "sha256": "c31426f3572896f1ebfe304d6e7d205cbc526fca54095dad60f456e122bbbdcb"
+          "path": "docs/ITERATION_LOG_FOLLOWUP_20261021_PROFILE_AUDIT.md",
+          "sha256": "e75b0d01a2aa2281c6ec06883652db39b56141b0df864ef048ccf1b7e39e0949"
         },
         {
-          "path": "docs/RESEARCH_RISK_REGISTER_FOLLOWUP_20261021_AUTORESEARCH.md",
-          "sha256": "ffacbd30bc29b4fc32c755b7b481fb4c42f4a3a042407808f001ce46911868b6"
+          "path": "docs/RESEARCH_RISK_REGISTER_FOLLOWUP_20261021_PROFILE_AUDIT.md",
+          "sha256": "888005921123c0607e11dbc82e10699972ac6e2c6d98902377efa360ea8d4e34"
         }
       ],
-      "selection_note": "Selected as the narrowest test of whether the fixed 24-context evidence-package contrast exceeds short-window within-view variation. This is a finite repeatability screen, not a mechanism or semantic-content experiment. The earlier 728-call factorial remains archived as a deferred draft. The latest A2 production-form result is 35 present, 5 abstentions, 0 absent (20/40 exact); “40/40 present” applies only to the earlier public-canonical and V2-direct forms. The 144-slot candidate is prepared but not registered or authorized. The previous 232-call approval is consumed."
+      "selection_note": "Selected candidate, revised before any output after profile-aware auditing found 47 unique request bodies across 48 context/view cells (23 public, 24 privileged), including one public input shared by two contexts and assigned six repeats. Primary analysis now clusters by the 23 unique Public-only profiles and counts that shared control once; all 24 context pairs remain visible as secondary descriptives. The 144 request schedule is unchanged. The candidate remains unregistered and unauthorized; the prior 232-call approval is consumed."
     }
   ],
   "policy": "At most three read-only candidate directions may be compared. Only one can be selected for a formal cycle at a time. Candidate status is not preregistration or authorization.",

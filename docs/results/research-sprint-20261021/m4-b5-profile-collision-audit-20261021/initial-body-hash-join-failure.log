@@ -1,0 +1,2 @@
+Exploratory join failure, preserved before repair:
+The first join indexed request body SHA-256 to one source unit, overwriting the earlier unit when a public-only body hash occurred in two distinct source contexts. It then reported 47 linked context/view rows and falsely flagged an incomplete 24-context table. No raw request, message text, identifiers, or response content were emitted. Corrected audit uses one-to-many body-hash mappings and separately reports 47 unique request-body profiles across 48 context/view profiles.

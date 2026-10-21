@@ -1,0 +1,1 @@
+Initial revision schema check found missing protocol.frozen_inputs and the expected missing approval_id. The candidate was corrected to include protocol.frozen_inputs; the remaining registration block is the required experiment-specific approval_id. No registration or model call occurred.

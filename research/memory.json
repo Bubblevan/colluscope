@@ -239,6 +239,32 @@
       "interpretation": "Independent replay found 20/24 B5 view-pair prediction changes with 0/24 reference changes; 15 changes were abstention-to-absent. Exact-request historical/current labels disagreed in 19/48 pairs. The earlier 120-call balanced fixture returned present on all 40 rows (20/40 exact), while the deterministic rule was 40/40; the later production-form B5 campaign returned 35 present and 5 insufficient_evidence (20/40 exact). A separate no-call M1 reanalysis reproduced 75/75 completion and 9 positive, 6 zero, 0 negative package interactions. These facts justify a bounded repeatability/presentation diagnosis but do not show message semantics, an LLM advantage, collusion, or provider nondeterminism.",
       "outcome": "INCONCLUSIVE",
       "scope": "Only the frozen 24 M4 natural contexts, 48 historical/current exact-request pairs, and 40 balanced synthetic public-canonical rows reviewed on 2026-10-21."
+    },
+    {
+      "claim_id": "m4-b5-repeatability-public-profile-collision-20261021",
+      "claim": "The prepared M4 repeatability candidate contains 47 unique model-visible request bodies across 48 context/view cells; one Public-only body is shared by two source contexts.",
+      "outcome": "SUPPORTED",
+      "scope": "Only the hash-pinned local preparation manifest for the unregistered m4-b5-view-repeatability-v2 candidate; no new model output or behavior was observed.",
+      "interpretation": "All 144 assigned request bodies match their manifest hashes. There are 23 distinct Public-only bodies and 24 distinct Privileged-original bodies. The single shared Public-only profile receives six assignments and links two different privileged bodies. This is a finite input-projection/dependence fact; not evidence of collusion, intent, or model understanding.",
+      "evidence_refs": [
+        {
+          "path": "docs/M4_B5_REPEATABILITY_PROFILE_COLLISION_AUDIT_20261021.md",
+          "sha256": "84a0afdd90d69599a60cc881ca910580239af3b488db8daebccf8fc1f578e032"
+        },
+        {
+          "path": "docs/results/research-sprint-20261021/m4-b5-autoresearch-continuation-20261021/repeatability-preparation-audit-v4.json",
+          "sha256": "1bcba95c415a3d6ba0acc5a9615cdac3c6fd7d9c271d02c74f9119edefd6cdef"
+        },
+        {
+          "path": "scripts/audit_m4_b5_view_repeatability_preparation.py",
+          "sha256": "87c4aa4fc8204e6433b989545df7345c32da5aaa2f27d6e159593b2720832322"
+        },
+        {
+          "path": "research/drafts/m4-b5-view-repeatability-v2-preregistration-r1.json",
+          "sha256": "08423c22f2badeac589bdddb71d49bf10db912f1d78a91339f16cd81bc52a010"
+        }
+      ],
+      "review_mode": "adversarial_self_review; not an independent critic confirmation"
     }
   ],
   "cycle_updates": [

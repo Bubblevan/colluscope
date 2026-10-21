@@ -1,0 +1,13 @@
+{
+  "revision": {
+    "revision_id": "profile-cluster-r1",
+    "supersedes": "m4-b5-view-repeatability-v2-preregistration.json",
+    "status": "unregistered_candidate_revision",
+    "reason": "Corrects duplicated Public-only request-body profile as a shared cluster; no treatment or request bytes changed."
+  },
+  "protocol_frozen_inputs": 21,
+  "validation_errors": [
+    "a non-zero model/cost ceiling requires an explicit approval_id"
+  ],
+  "registration_status": "BLOCKED_EXPECTED_MISSING_APPROVAL_ID"
+}
