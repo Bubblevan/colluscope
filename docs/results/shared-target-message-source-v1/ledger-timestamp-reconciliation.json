@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "experiment_id": "shared-target-message-source-v1",
+  "reconciliation": "Added started_at_utc to each sanitized ledger row by unique attempt_id_sha256 = SHA256(raw attempt_started.request_id) join. No request, response, status, or cost fields changed.",
+  "rows_joined": 576,
+  "unique_raw_attempt_ids": 576,
+  "all_rows_matched_exactly_once": true,
+  "raw_attempt_log_sha256": "e8efd1bb1096a4c54ff627fcac0135b4b7ebe704048d6aab4a4f096b7dc6feee",
+  "ledger_sha256_before": "119b2081efdf442e6ff78a5680cd54df40943bbff718e3de372a0f4998c812c7",
+  "ledger_sha256_after": "8a254e5b26b3301a1b54f359f617f510549db0f6c68fe4ff4bbba79589040524"
+}

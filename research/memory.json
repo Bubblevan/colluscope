@@ -577,6 +577,60 @@
       "what_changed": "The hidden-target true-message and counterfactual-decoy-message arms each produced 6/6 mapping-aligned ballots, while the hidden/no-message arm produced 0/6 target and 0/6 decoy ballots; all three contexts repeated the pattern twice."
     },
     {
+      "claim_id": "shared-target-message-source-v1",
+      "evidence_refs": [
+        {
+          "path": "docs/results/shared-target-message-source-v1/analysis.json",
+          "sha256": "75eb525c648ee7573ca583d38748de3ba226a4c4570ac960f4fadd802cafce42"
+        },
+        {
+          "path": "docs/results/shared-target-message-source-v1/independent-audit.json",
+          "sha256": "65344c35e5baa0c1c1551d7c6360c414fa27b1fc41fdc795ea556e4e4c1691af"
+        },
+        {
+          "path": "docs/results/shared-target-message-source-v1/ledger-timestamp-reconciliation.json",
+          "sha256": "515aaff189b26d83fa0bda27d12e832d633e68ddf6246478d678f20047c1c7db"
+        },
+        {
+          "path": "docs/results/shared-target-message-source-v1/interpretation.md",
+          "sha256": "688a751b84ec5806da59526b379d72a76cc6a0a817f2bb15820f1c6700bd64e5"
+        }
+      ],
+      "experiment_id": "shared-target-message-source-v1",
+      "outcome": "REFUTED",
+      "remaining_alternatives": "Generic recommendation or instruction following, prompt-level pragmatics, source-label effects smaller than the registered descriptive margin, and effects in other contexts or provider versions remain possible. The design did not instantiate a real peer channel, endogenous sender, negotiation, agreement, intent, or collusion.",
+      "scientific_outcome": "REFUTED",
+      "statement": "The preregistered peer-source advantage pattern was not observed in the frozen 24-context study.",
+      "what_changed": "The peer-minus-aide equal-context mean was -3.65 percentage points; peer adherence was higher in 0/24 contexts, while the preregistered source-insensitive recommendation gate passed."
+    },
+    {
+      "claim_id": "shared-target-message-source-v1-finite-mapping-response",
+      "evidence_refs": [
+        {
+          "path": "docs/results/shared-target-message-source-v1/analysis.json",
+          "sha256": "75eb525c648ee7573ca583d38748de3ba226a4c4570ac960f4fadd802cafce42"
+        },
+        {
+          "path": "docs/results/shared-target-message-source-v1/independent-audit.json",
+          "sha256": "65344c35e5baa0c1c1551d7c6360c414fa27b1fc41fdc795ea556e4e4c1691af"
+        },
+        {
+          "path": "docs/results/shared-target-message-source-v1/ledger-timestamp-reconciliation.json",
+          "sha256": "515aaff189b26d83fa0bda27d12e832d633e68ddf6246478d678f20047c1c7db"
+        },
+        {
+          "path": "docs/results/shared-target-message-source-v1/interpretation.md",
+          "sha256": "688a751b84ec5806da59526b379d72a76cc6a0a817f2bb15820f1c6700bd64e5"
+        }
+      ],
+      "experiment_id": "shared-target-message-source-v1",
+      "outcome": "SUPPORTED",
+      "remaining_alternatives": "The result is bounded to 24 fixed synthetic contexts and one observed provider-served identity. It does not establish a population response probability, social influence, natural communication, collusion, intent, or welfare effects.",
+      "scientific_outcome": "REFUTED",
+      "statement": "In the fixed contexts and prompts, allocation ballots strongly tracked supplied target/decoy recommendation mappings under both source labels.",
+      "what_changed": "Peer mapping adherence was 161/192 and task-aide mapping adherence was 168/192; the corresponding hidden/no-message shadow match count was 14/96. Independent raw replay reproduced these counts."
+    },
+    {
       "claim_id": "shared-target-message-transmission-v1",
       "evidence_refs": [
         {

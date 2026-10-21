@@ -1,0 +1,146 @@
+{
+  "actual_external_cost_usd": 0.146736,
+  "actual_model_calls": 576,
+  "actual_wallclock_minutes": 10,
+  "approval_required_for_next_action": false,
+  "authorization_id": "DS-FLASH-PEER-SOURCE-576-20261021",
+  "belief_updates": [
+    {
+      "claim_id": "shared-target-message-source-v1",
+      "evidence_refs": [
+        {
+          "path": "docs/results/shared-target-message-source-v1/analysis.json",
+          "sha256": "75eb525c648ee7573ca583d38748de3ba226a4c4570ac960f4fadd802cafce42"
+        },
+        {
+          "path": "docs/results/shared-target-message-source-v1/independent-audit.json",
+          "sha256": "65344c35e5baa0c1c1551d7c6360c414fa27b1fc41fdc795ea556e4e4c1691af"
+        },
+        {
+          "path": "docs/results/shared-target-message-source-v1/ledger-timestamp-reconciliation.json",
+          "sha256": "515aaff189b26d83fa0bda27d12e832d633e68ddf6246478d678f20047c1c7db"
+        },
+        {
+          "path": "docs/results/shared-target-message-source-v1/interpretation.md",
+          "sha256": "688a751b84ec5806da59526b379d72a76cc6a0a817f2bb15820f1c6700bd64e5"
+        }
+      ],
+      "outcome": "REFUTED",
+      "remaining_alternatives": "Generic recommendation or instruction following, prompt-level pragmatics, source-label effects smaller than the registered descriptive margin, and effects in other contexts or provider versions remain possible. The design did not instantiate a real peer channel, endogenous sender, negotiation, agreement, intent, or collusion.",
+      "statement": "The preregistered peer-source advantage pattern was not observed in the frozen 24-context study.",
+      "what_changed": "The peer-minus-aide equal-context mean was -3.65 percentage points; peer adherence was higher in 0/24 contexts, while the preregistered source-insensitive recommendation gate passed."
+    },
+    {
+      "claim_id": "shared-target-message-source-v1-finite-mapping-response",
+      "evidence_refs": [
+        {
+          "path": "docs/results/shared-target-message-source-v1/analysis.json",
+          "sha256": "75eb525c648ee7573ca583d38748de3ba226a4c4570ac960f4fadd802cafce42"
+        },
+        {
+          "path": "docs/results/shared-target-message-source-v1/independent-audit.json",
+          "sha256": "65344c35e5baa0c1c1551d7c6360c414fa27b1fc41fdc795ea556e4e4c1691af"
+        },
+        {
+          "path": "docs/results/shared-target-message-source-v1/ledger-timestamp-reconciliation.json",
+          "sha256": "515aaff189b26d83fa0bda27d12e832d633e68ddf6246478d678f20047c1c7db"
+        },
+        {
+          "path": "docs/results/shared-target-message-source-v1/interpretation.md",
+          "sha256": "688a751b84ec5806da59526b379d72a76cc6a0a817f2bb15820f1c6700bd64e5"
+        }
+      ],
+      "outcome": "SUPPORTED",
+      "remaining_alternatives": "The result is bounded to 24 fixed synthetic contexts and one observed provider-served identity. It does not establish a population response probability, social influence, natural communication, collusion, intent, or welfare effects.",
+      "statement": "In the fixed contexts and prompts, allocation ballots strongly tracked supplied target/decoy recommendation mappings under both source labels.",
+      "what_changed": "Peer mapping adherence was 161/192 and task-aide mapping adherence was 168/192; the corresponding hidden/no-message shadow match count was 14/96. Independent raw replay reproduced these counts."
+    }
+  ],
+  "closed_at_utc": "2026-10-21T07:50:06+00:00",
+  "closed_git_head": "817dda4cfe69729d1d676a0919b98392221d76a4",
+  "decision": "PIVOT",
+  "denominator_summary": "The frozen schedule assigned 576 physical requests: 24 contexts × 6 arms × 4 repeats. All 576 were attempted once and completed/assessable; failed/invalid/unattempted = 0/0/0. The 24 contexts, rather than repeated calls, are the source-contrast comparison units. No retry, replacement, or resumption occurred.",
+  "evidence_class": "real_llm_behavior",
+  "experiment_id": "shared-target-message-source-v1",
+  "failures_retained": true,
+  "material_update": {
+    "claim_id": "shared-target-message-source-v1",
+    "evidence_refs": [
+      {
+        "path": "docs/results/shared-target-message-source-v1/analysis.json",
+        "sha256": "75eb525c648ee7573ca583d38748de3ba226a4c4570ac960f4fadd802cafce42"
+      },
+      {
+        "path": "docs/results/shared-target-message-source-v1/independent-audit.json",
+        "sha256": "65344c35e5baa0c1c1551d7c6360c414fa27b1fc41fdc795ea556e4e4c1691af"
+      },
+      {
+        "path": "docs/results/shared-target-message-source-v1/ledger-timestamp-reconciliation.json",
+        "sha256": "515aaff189b26d83fa0bda27d12e832d633e68ddf6246478d678f20047c1c7db"
+      },
+      {
+        "path": "docs/results/shared-target-message-source-v1/interpretation.md",
+        "sha256": "688a751b84ec5806da59526b379d72a76cc6a0a817f2bb15820f1c6700bd64e5"
+      }
+    ],
+    "independent_critic_confirmed": false,
+    "remaining_alternatives": "The task-aide is only a prompt label; generic instruction following remains compatible. Contexts and model identity are fixed, repeats include eight disagreement cells, and decoys are not uniformly welfare-near-equal.",
+    "what_changed": "A preregistered 576-request source-framing study and independent raw replay show a strong finite mapping-response pattern under peer and task-aide labels, while the preregistered peer-advantage gate is refuted."
+  },
+  "model_request_ledger": {
+    "path": "docs/results/shared-target-message-source-v1/model-request-ledger-sanitized.json",
+    "sha256": "8a254e5b26b3301a1b54f359f617f510549db0f6c68fe4ff4bbba79589040524"
+  },
+  "new_uncertainty_reduced": false,
+  "next_action": "Complete offline manuscript integration and critical review of this source-framing result alongside the M1 and M3 evidence; no further model calls are proposed by this closure.",
+  "next_action_evidence_class": "offline_reanalysis",
+  "next_action_kind": "continue_offline",
+  "next_action_max_external_cost_usd": 0.0,
+  "next_action_max_model_calls": 0,
+  "outcome_rationale": "The preregistered peer-source advantage gate required an equal-context peer-minus-aide difference of at least +0.15 and peer-favoring differences in at least 18/24 contexts. The observed difference was -0.03646, with peer greater in 0/24 contexts. Coverage and controls passed, and the separately preregistered source-insensitive recommendation-pattern gate passed. REFUTED applies to the peer-source advantage hypothesis; it does not mean source effects are statistically equivalent or absent in other settings.",
+  "outputs": [
+    {
+      "path": "docs/results/shared-target-message-source-v1/analysis.json",
+      "sha256": "75eb525c648ee7573ca583d38748de3ba226a4c4570ac960f4fadd802cafce42"
+    },
+    {
+      "path": "docs/results/shared-target-message-source-v1/independent-audit.json",
+      "sha256": "65344c35e5baa0c1c1551d7c6360c414fa27b1fc41fdc795ea556e4e4c1691af"
+    },
+    {
+      "path": "docs/results/shared-target-message-source-v1/ledger-timestamp-reconciliation.json",
+      "sha256": "515aaff189b26d83fa0bda27d12e832d633e68ddf6246478d678f20047c1c7db"
+    },
+    {
+      "path": "docs/results/shared-target-message-source-v1/model-request-ledger-sanitized.json",
+      "sha256": "8a254e5b26b3301a1b54f359f617f510549db0f6c68fe4ff4bbba79589040524"
+    },
+    {
+      "path": "docs/results/shared-target-message-source-v1/context-rows-sanitized.json",
+      "sha256": "299ff5b4108ccea0ed347509d40cfeb8bb71b53e26aea5a8e350dca1017b3522"
+    },
+    {
+      "path": "docs/results/shared-target-message-source-v1/interpretation.md",
+      "sha256": "688a751b84ec5806da59526b379d72a76cc6a0a817f2bb15820f1c6700bd64e5"
+    },
+    {
+      "path": "docs/results/shared-target-message-source-v1/adversarial-review.md",
+      "sha256": "49d3c3568a0063bd01a1ef6c2b40a6097ca7ff68bb949c44130ad04fd9329a60"
+    },
+    {
+      "path": "docs/ITERATION_LOG_SHARED_TARGET_MESSAGE_SOURCE_V1.md",
+      "sha256": "de6a1683e163f2fe6d4d948e8db0cb57eb65d2f28af61f16db5795c1525aa72b"
+    },
+    {
+      "path": "scripts/audit_shared_target_message_source_v1.py",
+      "sha256": "4df66a6e44af7a1d1a7802937815495e1dfb3101450d77ef376e9f8b0970f317"
+    }
+  ],
+  "results_summary": "All 576/576 assigned requests were attempted once and completed/assessable; 0 failed, invalid, or unattempted. Visible/no-message target hits were 96/96. Peer mapping adherence was 161/192 (83.85%); task-aide adherence was 168/192 (87.50%). Hidden/no-message shadow matches were 14/96. The equal-context peer-minus-aide difference was -3.65 percentage points (peer higher in 0/24 contexts, aide higher in 2/24, 22 ties). Eight of 144 context-arm cells had repeat disagreement. The preregistered source-insensitive descriptive gate passed; statistical equivalence, peer social influence, and collusion were not established.",
+  "review_artifact": null,
+  "review_finding": "Adversarial self-review retained the mutable alias/single fingerprint, fixed-context scope, non-independent repeats, 8/144 disagreement cells, only 6/24 welfare-gap-at-most-1 decoys, source-label construct limits, finite non-inferential shadow baseline, and restricted raw-response accessibility. The review is not independent; no separate-context reviewer or human critic verified the central claim.",
+  "review_mode": "adversarial_self_review",
+  "schema_version": 2,
+  "scientific_outcome": "REFUTED",
+  "scientific_update": "Controlled recommendation mapping was followed in this fixed prompt set under both source labels and substantially more often than the analyst-only hidden/no-message shadow mapping. The peer-source advantage criterion was not met; this weakens the peer-specific explanation while supporting a finite source-insensitive recommendation-response pattern. No inference to natural communication, collusion, intent, or a model population follows."
+}
