@@ -1,0 +1,115 @@
+{
+  "schema_version": 2,
+  "experiment_id": "track23-counterfactual-delivery-v2",
+  "evidence_class": "real_llm_behavior",
+  "decision": "PIVOT",
+  "scientific_outcome": "INCONCLUSIVE",
+  "outcome_rationale": "The raw evidence is technically complete, but all 8 sender proposals equal B’s initial ballot. The preregistered minimum of five distinct-proposal contexts failed, so the message-to-action contrast has no treatment opportunities and no effect estimate. This is a behavior-feasibility stop, not evidence that delivery has no effect.",
+  "results_summary": "Pilot: 64/64 requests completed; all 8 contexts and 32 final ballots are complete and legal; visible-target control 8/8; raw request/response hashes, prompt reconstruction, response reparse, delivery/withholding receipts, provider identity, and independent settlement replay pass. A’s proposal differed from B’s initial ballot in 0/8 contexts. Expansion gate NO_GO; main and monitor phases were not started.",
+  "denominator_summary": "Assigned 64; started 64; terminal 64; completed 64; valid final ballots 32/32; complete contexts 8/8; proposal-opportunity contexts 0/8; failed 0; unstarted 0. Provider-reported usage: 42,824 prompt and 3,496 completion tokens; cache counters reconcile (18,688 hit, 24,136 miss). Rate-based peak estimate with cache $0.011548128; uncached peak estimate $0.0170424. Neither is an invoice. User cost floor >$1 was not reached; no proof/refutation is issued.",
+  "scientific_update": "No evidence about the causal effect of a delivered proposal was obtained because each generated proposal matched the recipient’s baseline. The pilot does establish a finite prompt-feasibility observation and leaves the communication-effect hypothesis inconclusive.",
+  "actual_model_calls": 64,
+  "actual_external_cost_usd": 0.011548128,
+  "actual_wallclock_minutes": 1,
+  "failures_retained": true,
+  "review_mode": "adversarial_self_review",
+  "review_finding": "A hash-checked raw trace audit passed all 64 requests. The frozen analyzer initially failed on a missing prompt constant and, after a hash-verified analysis-only adapter supplied it, misclassified the behavioral opportunity gate as integrity. Both initial artifacts are preserved; a separate correction applies the protocol’s inconclusive rule without editing the registered analyzer or outcomes. This is not an independent critic review.",
+  "review_artifact": {},
+  "outputs": [
+    {
+      "path": "docs/results/track23-counterfactual-delivery-v2/pilot-result.md",
+      "sha256": "cc7ba1ee41a881a34b625e8aabe61dba6f7fc3daff326256fc23d11dc9e06684"
+    },
+    {
+      "path": "docs/results/track23-counterfactual-delivery-v2/pilot-summary.json",
+      "sha256": "77eac4e8c7e539eb4e70fec0396d6ffe408613626cc6194200801b9c1118c51c"
+    },
+    {
+      "path": "docs/results/track23-counterfactual-delivery-v2/pilot-summary-initial-classification.json",
+      "sha256": "81ae4ad8e67871d60de00e34dc916a73769a824613041245589e2ad75a4e68a6"
+    },
+    {
+      "path": "docs/results/track23-counterfactual-delivery-v2/pilot-analysis-amendment-v1.md",
+      "sha256": "b94361476736db028e03179047e3edf128ca96b1e8c97e3b6a61717cde83908d"
+    },
+    {
+      "path": "docs/results/track23-counterfactual-delivery-v2/pilot-cost-summary.json",
+      "sha256": "65863607bf58f592a2d521b353030d075150ce4696bb26b566649c7daabe8b48"
+    },
+    {
+      "path": "docs/results/track23-counterfactual-delivery-v2/model-request-ledger.json",
+      "sha256": "96ffea8e3317b83791e255dbf9023c703b006540abac6f9842ce90c1d830a182"
+    }
+  ],
+  "belief_updates": [
+    {
+      "claim_id": "track23-counterfactual-delivery-v2",
+      "outcome": "INCONCLUSIVE",
+      "statement": "The current pilot does not estimate whether delivery changes B’s action beyond controls.",
+      "what_changed": "All eight A-generated proposals exactly matched B’s pre-message ballot, so the pilot had no proposal-opportunity contexts and expansion stopped.",
+      "remaining_alternatives": "The pattern is consistent with common-incentive convergence, prompt-induced convergence, or deterministic behavior under the shared model alias. A delivery effect remains untested when the sender proposal differs from the recipient baseline.",
+      "evidence_refs": [
+        {
+          "path": "docs/results/track23-counterfactual-delivery-v2/pilot-result.md",
+          "sha256": "cc7ba1ee41a881a34b625e8aabe61dba6f7fc3daff326256fc23d11dc9e06684"
+        },
+        {
+          "path": "docs/results/track23-counterfactual-delivery-v2/pilot-summary.json",
+          "sha256": "77eac4e8c7e539eb4e70fec0396d6ffe408613626cc6194200801b9c1118c51c"
+        },
+        {
+          "path": "docs/results/track23-counterfactual-delivery-v2/pilot-summary-initial-classification.json",
+          "sha256": "81ae4ad8e67871d60de00e34dc916a73769a824613041245589e2ad75a4e68a6"
+        },
+        {
+          "path": "docs/results/track23-counterfactual-delivery-v2/pilot-analysis-amendment-v1.md",
+          "sha256": "b94361476736db028e03179047e3edf128ca96b1e8c97e3b6a61717cde83908d"
+        },
+        {
+          "path": "docs/results/track23-counterfactual-delivery-v2/pilot-cost-summary.json",
+          "sha256": "65863607bf58f592a2d521b353030d075150ce4696bb26b566649c7daabe8b48"
+        }
+      ]
+    }
+  ],
+  "material_update": {
+    "claim_id": "track23-counterfactual-delivery-v2",
+    "what_changed": "The sender/recipient prompt pairing produced no treatment variation in 8/8 pilot contexts; this is a finite feasibility result, not a message-effect result.",
+    "remaining_alternatives": "The result cannot distinguish independent convergence from prompt/serving determinism and does not test action response to a distinct proposal.",
+    "evidence_refs": [
+      {
+        "path": "docs/results/track23-counterfactual-delivery-v2/pilot-result.md",
+        "sha256": "cc7ba1ee41a881a34b625e8aabe61dba6f7fc3daff326256fc23d11dc9e06684"
+      },
+      {
+        "path": "docs/results/track23-counterfactual-delivery-v2/pilot-summary.json",
+        "sha256": "77eac4e8c7e539eb4e70fec0396d6ffe408613626cc6194200801b9c1118c51c"
+      },
+      {
+        "path": "docs/results/track23-counterfactual-delivery-v2/pilot-summary-initial-classification.json",
+        "sha256": "81ae4ad8e67871d60de00e34dc916a73769a824613041245589e2ad75a4e68a6"
+      },
+      {
+        "path": "docs/results/track23-counterfactual-delivery-v2/pilot-analysis-amendment-v1.md",
+        "sha256": "b94361476736db028e03179047e3edf128ca96b1e8c97e3b6a61717cde83908d"
+      },
+      {
+        "path": "docs/results/track23-counterfactual-delivery-v2/pilot-cost-summary.json",
+        "sha256": "65863607bf58f592a2d521b353030d075150ce4696bb26b566649c7daabe8b48"
+      }
+    ],
+    "independent_critic_confirmed": false
+  },
+  "next_action_kind": "continue_offline",
+  "next_action": "Perform one offline audit of the frozen payoff contexts and pilot ballots to identify whether a new authorized context design can produce sender proposals that differ from recipient baselines while preserving the causal question; do not dispatch more requests under this closed cycle.",
+  "next_action_evidence_class": "offline_reanalysis",
+  "next_action_max_model_calls": 0,
+  "next_action_max_external_cost_usd": 0.0,
+  "authorization_id": "DS-FLASH-TRACK23-YOKED-4500-20261021",
+  "model_request_ledger": {
+    "path": "docs/results/track23-counterfactual-delivery-v2/model-request-ledger.json",
+    "sha256": "96ffea8e3317b83791e255dbf9023c703b006540abac6f9842ce90c1d830a182"
+  },
+  "new_uncertainty_reduced": false,
+  "approval_required_for_next_action": false
+}
