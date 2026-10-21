@@ -1,0 +1,1 @@
+python scripts/run_deepseek_real_coordination_v2.py --check-only returned process exit code 2 even though its JSON payload reports PASS_OFFLINE_PREFLIGHT. Cause: main() treats absent stop_status as a non-exhausted run. This is a CLI exit-status defect; no model call occurred.

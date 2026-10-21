@@ -1,0 +1,63 @@
+{
+  "schema_version": 2,
+  "experiment_id": "deepseek-real-coordination-40-v1",
+  "evidence_class": "real_llm_behavior",
+  "decision": "BLOCKED",
+  "scientific_outcome": "EXECUTION_BLOCKED",
+  "results_summary": "No model/API requests were made. Offline registration preflight failed because the runtime preregistration path omitted the experiment ID suffix -40. Historical registry files were restored and registry audit is clean.",
+  "denominator_summary": "0/40 physical requests attempted; 40 assigned requests remain unattempted. No behavioral denominator is assessable.",
+  "scientific_update": "No behavior evidence was generated; the hypothesis remains unchanged. This is an execution-path failure, not evidence for or against communication effects.",
+  "outcome_rationale": "The first registered runner command failed before client construction because the preregistration file path did not match the registered experiment directory. Continuing with an alias path would make the exact reproduction command and evidence provenance misleading. Preserve the frozen V1 registration and create a correctly versioned V2.",
+  "actual_model_calls": 0,
+  "actual_external_cost_usd": 0.0,
+  "actual_wallclock_minutes": 1,
+  "failures_retained": true,
+  "review_mode": "adversarial_self_review",
+  "review_finding": "A path mismatch was reproduced by the exact offline preflight command. No transport/client was constructed and no request attempt ledger exists. The source and experiment ID mismatch is explicit; zero behavior claims are made.",
+  "review_artifact": null,
+  "outputs": [
+    {
+      "path": "docs/results/deepseek-real-coordination-v1/PREFLIGHT_PATH_MISMATCH.md",
+      "sha256": "fa95a1cd45bdbf9ccb05b74ec0ed3361ff8c9c166930a44778cd43451a2a72c2"
+    },
+    {
+      "path": "docs/ITERATION_LOG_FOLLOWUP_20261021_REAL_COORDINATION.md",
+      "sha256": "08aa7cab734b41823e97efd88ca4ccd3993d19d1aed5268d539ac7b04baea4ed"
+    }
+  ],
+  "next_action": "Continue offline by building a new versioned runtime whose experiment ID, schedule, config, preregistration path and registration manifest agree. Rerun the full targeted suite and check-only preflight, register and push the corrected freeze, then execute only within the already approved 40-request DeepSeek batch and stop on any failed fact control.",
+  "next_action_evidence_class": "offline_reanalysis",
+  "next_action_kind": "continue_offline",
+  "next_action_max_model_calls": 0,
+  "next_action_max_external_cost_usd": 0.0,
+  "new_uncertainty_reduced": false,
+  "approval_required_for_next_action": false,
+  "authorization_id": "DS-FLASH-REAL-COORD-40-20261021",
+  "belief_updates": [
+    {
+      "claim_id": "deepseek-real-coordination-v1",
+      "outcome": "UNCHANGED",
+      "statement": "Whether message routing affects observed allocation behavior remains untested.",
+      "what_changed": "The registered runtime path mismatch blocks execution before model requests.",
+      "remaining_alternatives": "No behavioral data were generated; shared incentive, message content, and model behavior remain unobserved in this pilot.",
+      "evidence_refs": []
+    }
+  ],
+  "material_update": {
+    "claim_id": "deepseek-real-coordination-runtime-path",
+    "what_changed": "Preflight identified a mismatch between the registered experiment directory and the runner path before any model call.",
+    "remaining_alternatives": "No behavioral inference is available; a corrected versioned freeze is required.",
+    "evidence_refs": [
+      {
+        "path": "docs/results/deepseek-real-coordination-v1/PREFLIGHT_PATH_MISMATCH.md",
+        "sha256": "fa95a1cd45bdbf9ccb05b74ec0ed3361ff8c9c166930a44778cd43451a2a72c2"
+      },
+      {
+        "path": "docs/ITERATION_LOG_FOLLOWUP_20261021_REAL_COORDINATION.md",
+        "sha256": "08aa7cab734b41823e97efd88ca4ccd3993d19d1aed5268d539ac7b04baea4ed"
+      }
+    ],
+    "independent_critic_confirmed": false
+  },
+  "model_request_ledger": null
+}

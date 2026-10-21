@@ -2,34 +2,6 @@
   "candidates": [
     {
       "competing_explanations": [
-        "The displayed recommendation is only an anchor or salient label; the model does not process it as peer communication.",
-        "Reward wording, own-history transcript, assistant-stage content, or model serving variation explains response changes rather than the recommendation direction.",
-        "The deterministic model responds consistently to an instruction-shaped cue only in these payoff matrices; this does not generalize to interacting agents or other models.",
-        "Invalid outputs or token-matching failures reduce assessability; complete-case patterns differ from the assigned 804-row schedule."
-      ],
-      "discriminating_prediction": "Before any response, freeze 20 output-independent 3-agent/3-task contexts with X/Y equal public welfare and equal focal base payoff; assign X/Y/neutral/no-delivery/no-stage packages across three reward and two history conditions. Primary paired outcome is whether the final choice equals X after X versus Y. Report all 120 matched context×reward×history pairs, all failures and unattempted requests. A positive finite-set pattern requires at least 16/20 assessable blocks in shared-bonus/actual-history and positive paired differences in more than half of those blocks. This is descriptive only; no p-values or intent label.",
-      "evidence_refs": [
-        {
-          "path": "docs/SCIENTIFIC_PIVOT_AND_DEEPSEEK_MECHANISM_DESIGN_20261021.md",
-          "sha256": "75931ef94974e1a0261e8824a22b90b4bc480869f0433897d12c62472409c575"
-        },
-        {
-          "path": "docs/M1_PACKAGE_REPLICATION_V3_BALLOT_DECOMPOSITION_REVIEW_20261021.md",
-          "sha256": "89b66529aa582c851f83777a63a915382081c697d3f8e3c1793d8efd2df562e3"
-        },
-        {
-          "path": "docs/M3_SCIENTIFIC_RESULTS.md",
-          "sha256": "dd194d2579366acd0d15c4bc63952b8fddd20bbe92ffc2bdd339efd50e7eaf41"
-        }
-      ],
-      "hypothesis": "Across the frozen 20 payoff contexts, the focal DeepSeek model will select allocation X more often after an X recommendation than after a token-matched Y recommendation, with the paired response varying across the assigned bonus and own-history prompt conditions. This tests response to scripted cues in one model; it does not identify active peer communication, collusion, or intent.",
-      "hypothesis_id": "deepseek-recipient-cue-following-v1",
-      "selection_note": "Selected only after the user clarified approval covers the whole proposed DeepSeek batch and rejected Qwen. It directly tests the prospective cue-response mechanism raised by prior M3/M1 evidence, while controlling X/Y public welfare and focal base score. It is not an active multi-agent coordination experiment.",
-      "status": "candidate",
-      "title": "Does a single model's allocation choice respond to matched scripted recommendations?"
-    },
-    {
-      "competing_explanations": [
         "Natural-language messages contain no complete proposals, so a majority/always-negative baseline performs as well as the Monitor.",
         "The Monitor prediction changes reflect schema/order bias or provider variation rather than message semantics.",
         "Human coders cannot reliably distinguish proposal, acceptance, and ambiguity under the task codebook."
@@ -57,43 +29,31 @@
     },
     {
       "competing_explanations": [
-        "The historical view changes are mostly within-profile response variation; unique profile clusters will not show a stable package contrast.",
-        "A stable finite contrast recurs, but it reflects the bundled permissions, event structure, completeness cues, wording, salience, or token length rather than message semantics.",
-        "A shared Public-only request profile linked to two different privileged contexts creates dependence that can exaggerate context-level change counts if not clustered.",
-        "Mutable provider aliases or hidden serving-state changes account for repeated-response differences despite matching request bytes and reported fingerprints."
+        "The common +20 HH incentive independently produces the same choices with or without peer delivery; parallel behavior is not communication-induced coordination.",
+        "The finite differences reflect one deterministic call order, scenario/proposer assignment, or provider state rather than message delivery.",
+        "Actual and neutral message prompts differ in semantic content, length, wording, and salience; the resulting contrast is not a pure semantic effect.",
+        "Both roles are stateless contexts of the same model alias; behavior does not generalize to independent models or persistent agents."
       ],
-      "discriminating_prediction": "Across the 23 unique Public-only body-profile clusters, a determinate package contrast is supported only if at least 18 clusters have unique modes for the public profile and every linked privileged profile, at least 6 clusters change, and changed clusters exceed clusters with any within-profile disagreement. The one public profile shared by two contexts is counted once. At most 1 changed cluster with at most 6 unstable clusters weakens reproduction; all other outcomes are inconclusive. Fixed corpus only, no population inference or intent label.",
+      "discriminating_prediction": "For each of three fixed matrices, compare one actual-delivery arm with one no-delivery arm. A positive finite-set pattern requires all three pairs to be assessable and actual delivery to produce HH while no-delivery does not in at least two pairs. The neutral-substitution arm is a secondary comparator. Any outcome is descriptive for this fixed model/API run, with no p-values, population inference, latent collusion label, or claim that agreement proves communication-caused coordination.",
       "evidence_refs": [
         {
-          "path": "docs/M4_B5_REPEATABILITY_PROFILE_COLLISION_AUDIT_20261021.md",
-          "sha256": "84a0afdd90d69599a60cc881ca910580239af3b488db8daebccf8fc1f578e032"
+          "path": "docs/DEEPSEEK_RECIPIENT_MECHANISM_V1_EVIDENCE.md",
+          "sha256": "625004fe315d2bf148de18370ea9c4fcb079139fa1bad5fb4fa37e29e71cf90d"
         },
         {
-          "path": "research/drafts/m4-b5-view-repeatability-v2-preregistration-r1.json",
-          "sha256": "08423c22f2badeac589bdddb71d49bf10db912f1d78a91339f16cd81bc52a010"
-        },
-        {
-          "path": "docs/results/research-sprint-20261021/m4-b5-autoresearch-continuation-20261021/repeatability-preparation-audit-v4.json",
-          "sha256": "1bcba95c415a3d6ba0acc5a9615cdac3c6fd7d9c271d02c74f9119edefd6cdef"
-        },
-        {
-          "path": "docs/ITERATION_LOG_FOLLOWUP_20261021_PROFILE_AUDIT.md",
-          "sha256": "e75b0d01a2aa2281c6ec06883652db39b56141b0df864ef048ccf1b7e39e0949"
-        },
-        {
-          "path": "docs/RESEARCH_RISK_REGISTER_FOLLOWUP_20261021_PROFILE_AUDIT.md",
-          "sha256": "888005921123c0607e11dbc82e10699972ac6e2c6d98902377efa360ea8d4e34"
+          "path": "docs/M3_SCIENTIFIC_RESULTS.md",
+          "sha256": "dd194d2579366acd0d15c4bc63952b8fddd20bbe92ffc2bdd339efd50e7eaf41"
         }
       ],
-      "hypothesis": "For this fixed corpus, the number of unique Public-only input-profile clusters whose mode differs from at least one linked Privileged-original profile will exceed the number of clusters containing any within-profile response disagreement.",
-      "hypothesis_id": "m4-b5-view-repeatability-v2",
-      "selection_note": "Deprioritized after the post-hoc existing-profile reanalysis: 16/23 Public-only profiles are non-unanimous across the already retained historical/current exact-input observations, while the proposed 144-call campaign targets within-campaign repeats. It remains unregistered and unauthorized; retain it only if same-window repeatability becomes a central claim and a fresh design has clear decision value.",
-      "status": "candidate",
-      "title": "Do evidence-view differences exceed within-profile variation after clustering repeated public inputs?"
+      "hypothesis": "Across three preregistered two-agent payoff matrices, the actual-message-delivery policy will produce joint HIGH in at least two matrices where the matched no-delivery policy does not.",
+      "hypothesis_id": "deepseek-real-coordination-v1",
+      "selection_note": "Selected for a bounded, user-approved three-matrix pilot after the prior Recipient V1 fact-control failure and downstream truncation defect. It studies observable message routing and ballots only. The common target incentive and three fixed contexts make this a descriptive falsification pilot, not a collusion test.",
+      "status": "selected",
+      "title": "Does peer-message routing change joint choices under a shared incentive in three fixed games?"
     }
   ],
   "policy": "At most three read-only candidate directions may be compared. Only one can be selected for a formal cycle at a time. Candidate status is not preregistration or authorization.",
   "schema_version": 1,
-  "selected_hypothesis_id": null,
+  "selected_hypothesis_id": "deepseek-real-coordination-v1",
   "updated_at": "2026-10-21"
 }

@@ -1,13 +1,17 @@
 {
-  "active_experiment_id": null,
-  "active_hypothesis_id": null,
+  "active_experiment_id": "deepseek-real-coordination-40-v2",
+  "active_hypothesis_id": "deepseek-real-coordination-v1",
+  "candidate_hypotheses": [
+    "m1-natural-message-action-audit",
+    "deepseek-real-coordination-v1"
+  ],
   "claim_level_status": {
     "B4_B5_superiority": "INCONCLUSIVE",
     "causal_communication_effect": "INCONCLUSIVE",
     "cross_model_generalization": "INCONCLUSIVE",
     "latent_collusion_or_intent": "NOT_IDENTIFIED"
   },
-  "consecutive_cycles_without_new_uncertainty_reduction": 1,
+  "consecutive_cycles_without_new_uncertainty_reduction": 2,
   "current_branch": "codex/deepseek-agent-mechanism-pivot-20261021",
   "current_round": {
     "authorization_status": "consumed_and_never_reusable",
@@ -27,8 +31,8 @@
     "terminal_artifact": "research/handoffs/DEEPSEEK-FIRST-RESEARCH-01.json"
   },
   "historical_approvals_reusable": false,
-  "latest_closed_experiment_id": "deepseek-recipient-mechanism-v1",
-  "latest_decision": "AMBIGUOUS",
+  "latest_closed_experiment_id": "deepseek-real-coordination-40-v1",
+  "latest_decision": "PREREGISTERED",
   "latest_decision_type": "operational",
   "latest_integrity_followup": {
     "frozen_audit_path": "docs/results/research-sprint-20261021/m4-b5-context-sensitivity-independent-audit.json",
@@ -104,7 +108,7 @@
     "status": "m1_v3_raw_response_ballot_review_complete"
   },
   "latest_review_id": "m1-v3-raw-response-ballot-audit-20261021",
-  "latest_scientific_outcome": "INCONCLUSIVE",
+  "latest_scientific_outcome": "EXECUTION_BLOCKED",
   "latest_user_decision": {
     "date": "2026-10-21",
     "decision": "DECLINED_QWEN_SCOPE",
@@ -125,7 +129,7 @@
       "runtime_inputs_verified": 23
     }
   },
-  "next_action": "Stop inference for this cycle. If future work is proposed, first fix and test invalid dependency terminalization, then freeze a new positive-control-qualified protocol and obtain fresh scope-specific approval.",
+  "next_action": "Implement the frozen protocol and proceed only through an existing entry point within current authorization; the CLI does not dispatch.",
   "preexisting_untracked_paths_preserved": [
     "docs/COLOSSEUM_LOCAL_REPRO_PROTOCOL.md (pre-existing untracked; preserved, not part of this review)",
     "docs/results/colosseum-local-audit-20261020/ (pre-existing untracked; preserved, not part of this review)",
@@ -143,6 +147,6 @@
   "program_status": "active",
   "schema_version": 2,
   "state_recorded_at_head": "2dcca164235cf2254dba65b2307a75edb973d292",
-  "status": "ready_for_next_cycle",
+  "status": "iteration_preregistered",
   "updated_at": "2026-10-21"
 }

@@ -1,0 +1,37 @@
+# DeepSeek Real Coordination Pilot V2 — Evidence
+
+**State:** pre-run evidence package; no V2 model/API request has been sent. Update this file from the independent replay after the bounded run.
+
+## Frozen registration
+
+- Branch: `codex/deepseek-real-coordination-40-20261021` (push this freeze before dispatch).
+- Corrected experiment ID/path: `deepseek-real-coordination-40-v2`.
+- V1 is retained and closed `EXECUTION_BLOCKED`; its path mismatch caused **0 requests**. See `docs/results/deepseek-real-coordination-v1/PREFLIGHT_PATH_MISMATCH.md`.
+- Registered V2 preregistration SHA-256: `5ee25c260849579e9dfc037b583e4d3d66f37d9317ff1e148550742566f2ce65`.
+- Schedule SHA-256: `755e857840bab9ddf74ba6a9197fbd71d579228ca83bc579d8441d1e82c66092`.
+- Configuration SHA-256: `aac32166ca21b41790654f6f97be615475df9bc49da89788a44572dc5b75bb77`.
+- Protocol SHA-256: `a172cafe61760d085b624467e354ab3ee03f773783c0e4b57ffb9099560c72d3`.
+- Authorization batch: `DS-FLASH-REAL-COORD-V2-40-20261021`; SHA-256 `05ac7ab9dce3b6dd569b50210ac7da358e5316fb7627ffc5ade3d817585db858`.
+- Model: DeepSeek Flash only, official `api.deepseek.com`; temperature 0, thinking disabled, strict function calling, 256 output-token cap, 90-second timeout, zero retries/replacements.
+- Tokenizer SHA-256: `81f64d1248a68ce3663e07ab3ee48b851e5df0e32d27cb98e4c9a268151e8d99` (source commit `935817c66f5d6e64838f419692545f06787e485f`).
+- Environment: Python 3.12.4; `tokenizers 0.19.1`, `jsonschema 4.19.2`, `pytest 9.1.1`.
+
+## Offline checks
+
+| Check | Result | Evidence |
+|---|---|---|
+| Python compile | Pass | `docs/results/deepseek-real-coordination-v2/pycompile.log` |
+| Targeted adversarial tests | **17 passed** | `docs/results/deepseek-real-coordination-v2/targeted-pytest.log` |
+| Schedule/config freeze | Pass | `docs/results/deepseek-real-coordination-v2/freeze-check.log` |
+| Runner check-only payload | `PASS_OFFLINE_PREFLIGHT`, 0 calls, 40 cap, $0.50 cap | `docs/results/deepseek-real-coordination-v2/runner-check-only.log` |
+| Runner check-only process status | **Exit code 2 despite PASS payload**; known CLI mapping defect: `main()` treats an absent `stop_status` as a stop. It does not affect the live call path or any experiment input. Preserved in `runner-check-only-exit.txt`; not represented as a clean command exit. |
+| Registry audit | Pass, no integrity errors | `docs/results/deepseek-real-coordination-v2/registry-audit.log` |
+| Raw-storage boundary | `logs/deepseek-real-coordination-v2/` is ignored by the repository's existing `/logs/` rule; directory did not exist at preflight. |
+
+All local source/model/control checks were completed without a model request. `researchctl audit` reports **1,156** previously used project requests and **$0.133568658** cumulative cost. V2 is capped at 40 requests / $0.50, leaving four requests unused under the 1,200 project ceiling. Even the batch reservation keeps the cumulative cost well below the $2.50 ceiling.
+
+## Dispatch gate
+
+The run schedule starts with four authoritative delivered/absent fact controls. Any incorrect answer, invalid or truncated output, HTTP/transport failure, provider identity mismatch or interrupted request stops all remaining calls. A valid control is not evidence of game-task capability; it only allows the frozen 36 game requests to proceed. Raw prompts, responses and private messages stay local in the ignored ACL-restricted logs directory.
+
+The CLI exit-code defect is operationally misleading but does not change the preflight result or the live execution path. It is disclosed here and in the preserved log. The live batch is ready for the already authorized dispatch after the exact freeze is pushed. No result may be described as proof of collusion, intent, or a general causal effect.

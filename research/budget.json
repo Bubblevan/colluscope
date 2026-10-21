@@ -1,15 +1,16 @@
 {
   "authorization": {
-    "approval_id": "DS-FLASH-RECIPIENT-804-20261021",
-    "approved_at_utc": "2026-10-21T03:53:20Z",
-    "authorized_experiment_ids": [
-      "deepseek-recipient-mechanism-v1"
-    ],
+    "schema_version": 1,
+    "approval_id": "DS-FLASH-REAL-COORD-V2-40-20261021",
+    "approved_at_utc": "2026-10-21T04:48:54Z",
     "expires_at_utc": "2026-10-26T10:00:00Z",
-    "max_external_cost_usd": 1.4,
-    "max_model_calls": 804,
-    "scope": "One DeepSeek recipient-side cue-response experiment using the frozen 20-context schedule; official DeepSeek Flash only; maximum 804 physical requests and USD 1.40 at peak rates; zero retries and replacements; no off-peak waiting requirement; no Qwen, third-party API, fine-tuning, Monitor inference, or external fallback; expires 2026-10-26T10:00:00Z.",
-    "source": "The user explicitly clarified that approval covered the proposed batch, not one request: “不是只能做一次模型调用，是批准你这一批方案的模型调用。” The approved batch is the preceding frozen proposal: up to 804 physical DeepSeek Flash requests and USD 1.40 peak-safe cost, zero retries/replacements. The user rejected Qwen and directed DeepSeek use. approved_at_utc is when this authorization was materialized in the registry, not the exact UI reply time.",
+    "authorized_experiment_ids": [
+      "deepseek-real-coordination-40-v2"
+    ],
+    "max_model_calls": 40,
+    "max_external_cost_usd": 0.5,
+    "scope": "One corrected V2 frozen DeepSeek Flash real two-agent message-routing pilot: four fact-delivery controls first, then at most 36 requests across three fixed matrices and three matched routing arms; 40 physical requests maximum, zero retries and replacements, USD 0.50 peak-safe hard cost cap. Official DeepSeek endpoint only; no Qwen, third-party API, Monitor inference, training, probes, external fallback, or additional model calls. Stop all game dispatch if any control fails. Expires 2026-10-26T10:00:00Z.",
+    "source": "The user explicitly authorized the DeepSeek batch, clarified that authorization covered the proposed batch rather than one request, rejected Qwen, and directed continuation of the 40-request DeepSeek real two-agent pilot. The approved scope is this frozen 40-request batch only. approved_at_utc records authorization materialization in the registry, not an assertion about exact UI reply time. V1 registration closed before dispatch with zero requests because its preregistration path did not match the experiment ID. This versioned batch re-materializes the same user-approved 40-request scope for the corrected V2 registration; it does not add budget or request count.",
     "status": "active"
   },
   "authorization_records_directory": "research/authorizations",

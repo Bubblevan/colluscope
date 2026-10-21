@@ -360,6 +360,16 @@
       "what_changed": "The raw binary predictions were one-sided: all 40 primary-public and label-flip outputs were present, despite balanced reference labels. This exposes a failed positive control and prevents interpretation of the 0/18 assessable pair changes."
     },
     {
+      "claim_id": "deepseek-real-coordination-v1",
+      "evidence_refs": [],
+      "experiment_id": "deepseek-real-coordination-40-v1",
+      "outcome": "UNCHANGED",
+      "remaining_alternatives": "No behavioral data were generated; shared incentive, message content, and model behavior remain unobserved in this pilot.",
+      "scientific_outcome": "EXECUTION_BLOCKED",
+      "statement": "Whether message routing affects observed allocation behavior remains untested.",
+      "what_changed": "The registered runtime path mismatch blocks execution before model requests."
+    },
+    {
       "claim_id": "deepseek-recipient-cue-following-v1",
       "evidence_refs": [
         {
