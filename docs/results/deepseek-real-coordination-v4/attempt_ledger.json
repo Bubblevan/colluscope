@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "experiment_id": "deepseek-real-coordination-40-v4",
+  "requests": [
+    {
+      "experiment_id": "deepseek-real-coordination-40-v4",
+      "attempt_id_sha256": "4bbb4e1007433ec67b107bbceb636e6df2c2ad4daa330d91e527f27f3359c851",
+      "started_at_utc": "2026-10-21T05:23:25.304912+00:00",
+      "terminal_status": "TRANSPORT_ERROR",
+      "external_cost_usd": 0.0
+    }
+  ]
+}

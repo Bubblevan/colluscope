@@ -1,0 +1,14 @@
+{
+  "experiment_id": "deepseek-real-coordination-40-v4",
+  "assigned_requests": 40,
+  "physical_attempts": 1,
+  "new_model_calls": 1,
+  "actions_reconstructed": 0,
+  "terminal_requests": 1,
+  "unattempted_assigned": 39,
+  "stop_status": "v4-C1-delivered:TRANSPORT_ERROR",
+  "attempt_statuses": {
+    "v4-C1-delivered": "TRANSPORT_ERROR"
+  },
+  "raw_dir": "Git-ignored local logs/deepseek-real-coordination-v4"
+}

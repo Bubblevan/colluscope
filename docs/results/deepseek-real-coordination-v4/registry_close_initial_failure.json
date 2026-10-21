@@ -1,0 +1,10 @@
+{
+  "operation": "researchctl close research/drafts/deepseek-real-coordination-v4-closure.json",
+  "result": "RECORD REJECTED",
+  "validation_errors": [
+    "missing closure field: next_action_kind",
+    "next_action_kind is not a registered continuation action",
+    "blocked outcomes must preserve a permitted offline step or name the exact boundary to await"
+  ],
+  "resolution": "Added next_action_kind=await_authorization to the closure draft; no experiment request was made during this correction."
+}

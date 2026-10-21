@@ -390,6 +390,16 @@
       "what_changed": "V3 was invalidated before dispatch by an unsupported strict JSON schema and inaccurate endpoint metadata; no behavior was observed."
     },
     {
+      "claim_id": "deepseek-real-coordination-v1",
+      "evidence_refs": [],
+      "experiment_id": "deepseek-real-coordination-40-v4",
+      "outcome": "UNCHANGED",
+      "remaining_alternatives": "Model capability, shared incentives, message use, task framing, and communication-mediated behavior remain unmeasured.",
+      "scientific_outcome": "EXECUTION_BLOCKED",
+      "statement": "Whether actual peer-message delivery changes joint ballots remains untested.",
+      "what_changed": "No behavioral observation was made; the first local transport attempt failed before an HTTP response and the preregistered stop rule prevented further requests."
+    },
+    {
       "claim_id": "deepseek-recipient-cue-following-v1",
       "evidence_refs": [
         {

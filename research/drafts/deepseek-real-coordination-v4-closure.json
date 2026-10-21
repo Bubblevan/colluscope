@@ -1,0 +1,70 @@
+{
+  "schema_version": 2,
+  "experiment_id": "deepseek-real-coordination-40-v4",
+  "evidence_class": "real_llm_behavior",
+  "decision": "BLOCKED",
+  "scientific_outcome": "EXECUTION_BLOCKED",
+  "outcome_rationale": "The valid frozen experiment was blocked at its first assigned capability-control attempt by a local DNS getaddrinfo failure before any HTTP response. The runner stopped as preregistered. This is an execution/transport failure, not a model behavior result or a failed answer. One physical attempt is retained; 39 assigned requests remain unattempted.",
+  "results_summary": "1/40 physical attempts; 0 HTTP responses; 0 valid model completions; 39/40 requests unattempted; 0 retries/replacements. DNS later resolved on a DNS-only check, but the failed model request was not retried. No behavioral outcome is assessable.",
+  "denominator_summary": "All 40 assigned request rows retained: the first control has one terminal TRANSPORT_ERROR attempt; the other 39 are unattempted. No capability control produced a model response and no game request was sent.",
+  "scientific_update": "UNCHANGED. The experiment produced no evidence about fact use, message delivery, shared incentives, ballots, coordination, or latent intent.",
+  "belief_updates": [
+    {
+      "claim_id": "deepseek-real-coordination-v1",
+      "outcome": "UNCHANGED",
+      "statement": "Whether actual peer-message delivery changes joint ballots remains untested.",
+      "what_changed": "No behavioral observation was made; the first local transport attempt failed before an HTTP response and the preregistered stop rule prevented further requests.",
+      "remaining_alternatives": "Model capability, shared incentives, message use, task framing, and communication-mediated behavior remain unmeasured.",
+      "evidence_refs": []
+    }
+  ],
+  "material_update": {
+    "claim_id": "deepseek-v4-local-dns-availability",
+    "what_changed": "The first request failed at local DNS resolution, while a later DNS-only lookup resolved the host; this is consistent with transient resolver availability, not a confirmed provider outage.",
+    "remaining_alternatives": "The precise local DNS resolver/network cause is unknown; a later successful lookup cannot establish API reachability or model behavior.",
+    "evidence_refs": [
+      {
+        "path": "docs/results/deepseek-real-coordination-v4/transport_failure_audit.json",
+        "sha256": "67e76defdf97ed9e53b87f578d580759ec7f73e735c5ec0469039d8e66e67076"
+      }
+    ],
+    "independent_critic_confirmed": false
+  },
+  "actual_model_calls": 1,
+  "actual_external_cost_usd": 0.0,
+  "actual_wallclock_minutes": 0,
+  "failures_retained": true,
+  "review_mode": "adversarial_self_review",
+  "review_finding": "The runtime stopped after the first DNS transport failure, made no retry, and terminalized the other 39 rows as unattempted. Independent recomputation confirms the raw request bytes match the attempt-start and request-metadata hashes. The frozen analyzer reports a false-positive request-hash issue because the shared client omits the terminal hash on transport exceptions; this is documented rather than silently corrected after preregistration.",
+  "review_artifact": null,
+  "outputs": [
+    {
+      "path": "docs/results/deepseek-real-coordination-v4/transport_failure_audit.json",
+      "sha256": "67e76defdf97ed9e53b87f578d580759ec7f73e735c5ec0469039d8e66e67076"
+    },
+    {
+      "path": "docs/results/deepseek-real-coordination-v4/attempt_ledger.json",
+      "sha256": "35ccd9b07abbf8588c4f098d85957e14c972c596204bd0fe173d3397cab8af55"
+    },
+    {
+      "path": "docs/DEEPSEEK_REAL_COORDINATION_V4_EVIDENCE.md",
+      "sha256": "e1006ad1e622a17d88940c91e75c5ebf009c07fb9969f5fec74320b6b9356bfe"
+    },
+    {
+      "path": "docs/DEEPSEEK_REAL_COORDINATION_V4_DECISION.md",
+      "sha256": "f96d461811e7def60c92e58dc997b7af489533003e21463b9c091780d5ac3972"
+    }
+  ],
+  "next_action": "Keep this V4 cycle closed and do not retry or replace the request. If another real-model batch is proposed, first diagnose the local DNS path, then create a new preregistration and obtain fresh authorization; no further call is scheduled here.",
+  "next_action_evidence_class": "live_engineering_preflight",
+  "next_action_max_model_calls": 0,
+  "next_action_max_external_cost_usd": 0.0,
+  "new_uncertainty_reduced": false,
+  "approval_required_for_next_action": true,
+  "authorization_id": "DS-FLASH-REAL-COORD-V4-40-20261021",
+  "model_request_ledger": {
+    "path": "docs/results/deepseek-real-coordination-v4/attempt_ledger.json",
+    "sha256": "35ccd9b07abbf8588c4f098d85957e14c972c596204bd0fe173d3397cab8af55"
+  },
+  "next_action_kind": "await_authorization"
+}
