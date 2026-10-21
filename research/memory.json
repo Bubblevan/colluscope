@@ -723,6 +723,58 @@
       "scope": "Offline design and current-byte structural audit only; no M1 Agent or Monitor inference.",
       "statement": "GO for design review only; NO-GO for final preregistration or dispatch. Keep the M1 24-distinct-matrix Agent package as the leading prospective behavior question, while treating its effect as a finite assigned-package contrast and not as evidence of message-semantic causality or collusion.",
       "review_mode": "separate-context desk critique of sanitized artifacts plus local structural audit; not a blind raw-data audit"
+    },
+    {
+      "claim_id": "m1-v3-authorization-readiness-review-20261021",
+      "evidence_class": "offline_reanalysis",
+      "evidence_refs": [
+        {
+          "path": "docs/AUTORESEARCH_CURRENT_STATE_ADDENDUM_20261021.md",
+          "sha256": "b4ecfe96def39f2b23b79cc0a4b0a6bf528d783b14c6c1bd9b04639f070ba3f3"
+        },
+        {
+          "path": "docs/M1_PACKAGE_REPLICATION_AUTHORIZATION_REQUEST_20261021.md",
+          "sha256": "22c5130b7ee9e07667856088f01dd8dc3f601fccaa0a0acb5cc0c1338c86ecda"
+        },
+        {
+          "path": "research/drafts/m1-package-replication-v3-review-manifest-20261021.json",
+          "sha256": "ecbf79dd1cabb60f69d832831e6d6c1c49b043fc24c2471f85dc7dd9cf1b9a15"
+        },
+        {
+          "path": "docs/results/research-sprint-20261021/m1-package-replication-offline-refresh/m1v3-check-only-current-20261021.json",
+          "sha256": "2d1642ae85c962a92fd051538637b404bbe1c3906562571e0b60fedb184088dd"
+        },
+        {
+          "path": "docs/ITERATION_LOG_FOLLOWUP_20261021_AUTORESEARCH_CONTINUATION.md",
+          "sha256": "9276c2ad9349913c9643b22792b331d7099e5c6a52a813374e59bb29ff756e56"
+        },
+        {
+          "path": "docs/RESEARCH_RISK_REGISTER_FOLLOWUP_20261021_AUTORESEARCH_CONTINUATION.md",
+          "sha256": "a9ee19fab951864f643a3565dd8788b311e66c16eeac38f240ca568bbd636b0e"
+        },
+        {
+          "path": "docs/results/research-sprint-20261021/direction-review-postcampaign/independent-critic-review.md",
+          "sha256": "a3abfe9ec64eac004394acbeadad9a3f1f805dfa3f99b43e3d63dbaaa7a029f8"
+        },
+        {
+          "path": "docs/M1_PACKAGE_REPLICATION_V3_PROTOCOL.md",
+          "sha256": "57a1e748eece306364c09f3b1b1b1ff6af608785c23ae98dd7cecc36f83df8b3"
+        },
+        {
+          "path": "research/drafts/m1-reward-chat-24group-replication-v3.md",
+          "sha256": "fef87f169a4ae830eddde457fed0192b80c8dbfd7d23e735db2bd35363be9f57"
+        },
+        {
+          "path": "docs/results/research-sprint-20261021/m1-package-replication-offline-refresh/m1v3-review-manifest-verification-20261021.json",
+          "sha256": "4e1c1bd9f14ce41fd665d5cfb1f68f2700f1073795d593520d2135f4ca1248e6"
+        }
+      ],
+      "independent_review_confirmed": false,
+      "interpretation": "M1 v3 is the highest-value current prospective behavior test, but no new behavior has been observed. The post-hoc 9/15 target-execution package pattern remains compatible with shared-target parallel choice, added-stage salience, and payoff-family heterogeneity. The frozen 24-matrix candidate has a passing offline check-only receipt and a 23-input review manifest; live listener/template identity is unverified. Both prior DeepSeek approvals are consumed; remaining project budget does not authorize M1. The manifest verifier independently matched all 23 runtime input files and 11 review artifacts to their recorded hashes.",
+      "outcome": "INCONCLUSIVE",
+      "scope": "Authorization/readiness review of the M1 v3 finite assigned-package candidate; no registration or model inference.",
+      "statement": "Request exact approval for the M1 v3 local Qwen package replication. If run, interpret only the preregistered finite private-reward × chat-stage interaction; defer separate Monitor calls and do not claim message-semantic causality, collusion, or intent.",
+      "review_mode": "offline source and runner audit plus separate-context desk review of sanitized prior evidence; not a raw-data replay"
     }
   ],
   "purpose": "Claim-level memory for future cycle selection. This is a scoped summary of historical artifacts, not a universal scientific score.",

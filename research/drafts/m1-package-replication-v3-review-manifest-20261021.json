@@ -1,0 +1,206 @@
+{
+  "schema_version": 1,
+  "status": "review_snapshot_only_not_preregistration_or_authorization",
+  "captured_at_utc": "2026-10-21T02:30:20.896304Z",
+  "captured_from_git_head": "32c7111dac25ac63819fbea7a81a75cf761b9a89",
+  "experiment_id": "m1-reward-chat-24group-replication-v1",
+  "candidate_protocol": "M1 Package Replication v3",
+  "scientific_scope": "finite assigned private-target-reward plus chat-stage package interaction across 24 frozen distinct matrices; no message-semantic causal or latent-collusion claim",
+  "runtime_frozen_input_paths": [
+    "configs/m1-package-replication-v3.toml",
+    "configs/m1-r-offline-v2.toml",
+    "research/drafts/m1-package-24-matrix-scenarios-20261021.json",
+    "scripts/freeze_m1_package_24_matrix_design.py",
+    "scripts/audit_m1_package_24_matrix_design.py",
+    "scripts/audit_m1_replication_prompt_profiles.py",
+    "scripts/run_m1_package_replication_v3.py",
+    "scripts/local_llama_security.py",
+    "scripts/run_m1_p0_local_preflight.py",
+    "scripts/researchctl.py",
+    "tests/test_m1_package_replication_v3_runtime.py",
+    "tests/test_openai_compat_llamacpp.py",
+    "docs/M1_PACKAGE_REPLICATION_V3_PROTOCOL.md",
+    "docs/M1_PACKAGE_REPLICATION_V3_RUNTIME_TRD.md",
+    "src/colluscope/m1_package_replication_v3_runtime.py",
+    "src/colluscope/openai_compat_llamacpp.py",
+    "src/colluscope/m1_runtime.py",
+    "src/colluscope/gguf_tokenizer.py",
+    "prompts/m1-p0-v2/system.txt",
+    "prompts/m1-p0-v2/message.txt",
+    "prompts/m1-p0-v2/ballot.txt",
+    "prompts/m1-p0-v2/communication.schema.json",
+    "prompts/m1-p0-v2/ballot.schema.json"
+  ],
+  "runtime_frozen_input_hashes": [
+    {
+      "path": "configs/m1-package-replication-v3.toml",
+      "sha256": "f88bf37f21b9760e1d2c560ef9a59ada80bcd1042f30653c3cb4c03ea8d748cd"
+    },
+    {
+      "path": "configs/m1-r-offline-v2.toml",
+      "sha256": "e2c780de0e8c5ecf4b43f47acf5565a0ee1808e103e420365d27d4ce32647fd3"
+    },
+    {
+      "path": "research/drafts/m1-package-24-matrix-scenarios-20261021.json",
+      "sha256": "79358acd02dcade31291e879d1d173e5e92e9bf5f57305c65a3d59f954ca502a"
+    },
+    {
+      "path": "scripts/freeze_m1_package_24_matrix_design.py",
+      "sha256": "182cb9182a8b6269914570666510320fcc47af2d0bc5ba447b30a5ab8d949661"
+    },
+    {
+      "path": "scripts/audit_m1_package_24_matrix_design.py",
+      "sha256": "652b85cd04940dbaa4d60eaad51f2ac18cf8408cb195511aba6c43894e951c5e"
+    },
+    {
+      "path": "scripts/audit_m1_replication_prompt_profiles.py",
+      "sha256": "5c7ed0b78f76dfb0685488e1f9dd352a1c6dad2d2200dc187d88fa4d7323a44b"
+    },
+    {
+      "path": "scripts/run_m1_package_replication_v3.py",
+      "sha256": "1408b03fcf6826b24c55bea2777dd1381872be323a6cab5d96512b2cd5dfec17"
+    },
+    {
+      "path": "scripts/local_llama_security.py",
+      "sha256": "bedb520633ea167a227d19c5f6a0357f59577652d7fd1e7b7d5cfffb84920675"
+    },
+    {
+      "path": "scripts/run_m1_p0_local_preflight.py",
+      "sha256": "e9daefc7030ceee78a08a4f0a864466eee0378592856be9254809a11fa476c8d"
+    },
+    {
+      "path": "scripts/researchctl.py",
+      "sha256": "2cba586274c4e6381a627abba237e46b38a1a5bf7ebcdf95d8ea2af4e6a88980"
+    },
+    {
+      "path": "tests/test_m1_package_replication_v3_runtime.py",
+      "sha256": "b96ae3c69e985a482d3f56dded2c72ff9d5f9e9f0099f50b282e0efc9356d87a"
+    },
+    {
+      "path": "tests/test_openai_compat_llamacpp.py",
+      "sha256": "0f125a3eb0784787e1a7fb87de832c59e38ca3cf14ac977272c9f3a6c1bc9796"
+    },
+    {
+      "path": "docs/M1_PACKAGE_REPLICATION_V3_PROTOCOL.md",
+      "sha256": "57a1e748eece306364c09f3b1b1b1ff6af608785c23ae98dd7cecc36f83df8b3"
+    },
+    {
+      "path": "docs/M1_PACKAGE_REPLICATION_V3_RUNTIME_TRD.md",
+      "sha256": "465fff4241495efe53743470c492226a7756770cc80b5751e181d472fc390ee0"
+    },
+    {
+      "path": "src/colluscope/m1_package_replication_v3_runtime.py",
+      "sha256": "b28c992cd220b534946ecf66190c9c46d8b519719eaeb69e4966fbb7b0625f47"
+    },
+    {
+      "path": "src/colluscope/openai_compat_llamacpp.py",
+      "sha256": "a46d9f2900ad80537f304e826c0a3c38c00dc397c267839d969ae8d89b979c92"
+    },
+    {
+      "path": "src/colluscope/m1_runtime.py",
+      "sha256": "b6d2096c0e649c69a356af6496c7f3f1be4d819a30a0cae675e3bd3af4e8f8f0"
+    },
+    {
+      "path": "src/colluscope/gguf_tokenizer.py",
+      "sha256": "59be6474802ebc7375c88ef54ca130984ae5700f02c9f54acf6aecbc81659162"
+    },
+    {
+      "path": "prompts/m1-p0-v2/system.txt",
+      "sha256": "6dc1d0daaf2625e0f326f20ac854c190bc748e71ed8401b330dc79e90e86cf70"
+    },
+    {
+      "path": "prompts/m1-p0-v2/message.txt",
+      "sha256": "f70dff7dacec165d26354c60cbe331916f127770ae2b9549fe813009d3324d66"
+    },
+    {
+      "path": "prompts/m1-p0-v2/ballot.txt",
+      "sha256": "c80c0091f4e8d27d08acf6a1cf1ae4f84267230a1639ed06dc58f292cf9bbd0d"
+    },
+    {
+      "path": "prompts/m1-p0-v2/communication.schema.json",
+      "sha256": "8c0c6744aa14c7e12578183782120949e3d65242d15ba6edf8b76a223d51b63f"
+    },
+    {
+      "path": "prompts/m1-p0-v2/ballot.schema.json",
+      "sha256": "0bb4b7e14beda8b88fd955148f4bd485f922ab2fb329c9ad1e7ce38b9339c406"
+    }
+  ],
+  "runtime_frozen_input_set_sha256": "8e9e7f663cbe20307aa09008513e2bee50ae2951607b3e69105a495486beb4e6",
+  "review_artifact_hashes": [
+    {
+      "path": "research/drafts/m1-reward-chat-24group-replication-v3.md",
+      "sha256": "fef87f169a4ae830eddde457fed0192b80c8dbfd7d23e735db2bd35363be9f57"
+    },
+    {
+      "path": "docs/M1_PACKAGE_REPLICATION_V3_RUNTIME_EVIDENCE.md",
+      "sha256": "66ee91f2e40e72933c318b3026f0017a9ff5e5d47b2562e47e4ce423ca27a93e"
+    },
+    {
+      "path": "docs/M1_PACKAGE_REPLICATION_V3_RUNTIME_DECISION.md",
+      "sha256": "2a19ef7dbd72a7b9a4fb6a9ce7615668a7afa59aafd5f28c8de044e8e0050ed2"
+    },
+    {
+      "path": "docs/M1_PACKAGE_REPLICATION_V3_RUNTIME_TRD.md",
+      "sha256": "465fff4241495efe53743470c492226a7756770cc80b5751e181d472fc390ee0"
+    },
+    {
+      "path": "docs/M1_PACKAGE_REPLICATION_OFFLINE_REFRESH_20261021.md",
+      "sha256": "feff1ae51d30459baeb06dd35bf0ae7b35fa8c2150f72766e8697063abae69c1"
+    },
+    {
+      "path": "docs/SCIENTIFIC_DIRECTION_REVIEW_POSTCAMPAIGN_20261021.md",
+      "sha256": "f464b9a1efc3c156a607d4a0a4da2f2993ea0ff050c53eb4c2bc6de3c8529eb8"
+    },
+    {
+      "path": "docs/results/research-sprint-20261021/direction-review-postcampaign/independent-critic-review.md",
+      "sha256": "a3abfe9ec64eac004394acbeadad9a3f1f805dfa3f99b43e3d63dbaaa7a029f8"
+    },
+    {
+      "path": "docs/results/research-sprint-20261021/m1-package-replication-offline-refresh/m1v3-check-only-current-20261021.json",
+      "sha256": "bc19fe9ab436e40bc03431a25928165045fb373434ac4e79a054e15b5dd9b886"
+    },
+    {
+      "path": "research/frozen_eval/evaluate_cycle_v2.py",
+      "sha256": "e7b563b1a149a8c770a56728a4d13abcc53e8a12080866a1adfad03b2d234f6d"
+    },
+    {
+      "path": "research/authorizations/DS-FLASH-1200-2P50-20261020.json",
+      "sha256": "b9fc196271e75a0deed56b6d8134778ae563b9b24a60642f5c3f826dee87a5b2"
+    },
+    {
+      "path": "research/authorizations/DS-FLASH-M4B5-CONTEXT-232-20261021.json",
+      "sha256": "f6adea7f8c748aa639b44ecceb5e421553da4ed04a776781d685c9f826e792b8"
+    }
+  ],
+  "review_artifact_set_sha256": "f111f65c87b46c8443ec4b60b95caf73b1e9a1c2e2e02a55f429523df26e5570",
+  "candidate_call_envelope": {
+    "assigned_episodes": 120,
+    "logical_generations_max": 456,
+    "physical_http_attempts_max": 480,
+    "identity_http_attempts_max": 24,
+    "attempts_per_logical_request": 1,
+    "retries": 0,
+    "replacements": 0,
+    "external_inference": false,
+    "external_cost_usd": 0.0,
+    "endpoint": "http://127.0.0.1:8081/v1"
+  },
+  "candidate_model": {
+    "name": "Qwen3-8B-Q4_K_M.gguf",
+    "sha256": "d98cdcbd03e17ce47681435b5150e34c1417f50b5c0019dd560e4882c5745785"
+  },
+  "candidate_runtime": {
+    "llama_cpp_build": "b10068",
+    "commit": "571d0d540",
+    "binary_sha256": "3a8aea5f889c4b4c2ec41c98f4e1ed484bb7a40c4096883acb23d3cfe26b59fb"
+  },
+  "candidate_matrix_schedule_sha256": "79358acd02dcade31291e879d1d173e5e92e9bf5f57305c65a3d59f954ca502a",
+  "authorization_state": {
+    "m1_approval_exists": false,
+    "m1_registered": false,
+    "active_experiment_id": null,
+    "prior_m4_approvals_consumed": true,
+    "new_model_calls_in_this_review": 0
+  },
+  "interpretation": "All hashes describe review candidates. Runtime check-only passed, but live listener/process/tokenizer identity remains unverified. This manifest does not freeze scientific claims, register an experiment, or grant execution permission."
+}
