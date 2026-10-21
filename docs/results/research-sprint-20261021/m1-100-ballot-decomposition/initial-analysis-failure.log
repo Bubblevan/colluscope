@@ -1,0 +1,6 @@
+Attempt 1
+Command: python scripts/analyze_m1_100_ballot_decomposition.py
+Outcome: failed before output creation
+Error: ValueError: T record not completed for m1-100-episode-005
+Cause: the analyst assumed T records carried an episode status field; inspection showed T.jsonl is a treatment/assignment delivery ledger and status is represented in B.jsonl.
+Disposition: retained as a schema-assumption failure; corrected the analyzer to validate T assignment/group identity and incentive-delivery structure instead of an absent status field. No source data changed; no model calls occurred.

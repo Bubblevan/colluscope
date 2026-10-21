@@ -1,0 +1,170 @@
+{
+  "candidates": [
+    {
+      "competing_explanations": [
+        "The extra chat-stage prompt or target salience, rather than delivered message meaning, causes the finite package contrast.",
+        "Shared-target knowledge allows parallel choices; the observed interaction may depend on matrix features or target-regret strata rather than communication.",
+        "The post-hoc pattern is specific to the current Qwen3 checkpoint or this deterministic finite matrix set and will not reproduce in other tasks or models."
+      ],
+      "discriminating_prediction": "Before any new response, freeze 24 matched groups, each with one distinct output-independent payoff matrix, eight matrices per target-regret stratum (6, 12, 18), all five original conditions, and the counterbalanced order. Recompute target-execution difference-in-differences from all assigned ballots. A non-positive overall mean or positive means in fewer than two of the three regret strata weakens the finite package-replication claim. Report all 24 group values, exact prompt-profile multiplicity, and failures; do not claim population significance, message-semantic effects, collusion, or intent.",
+      "evidence_refs": [
+        {
+          "path": "docs/results/m3-mechanism-audit-final/m3_group_results.csv",
+          "sha256": "c2aa043d8aef430ff28ce3bbc3592e09ad817c4cf82681785bff287af94b3c0a"
+        },
+        {
+          "path": "docs/results/deepseek-first-m4/audit/postrun_analysis_v2.md",
+          "sha256": "ab8882db0c1381e39f87f5ff3519ad2b5faaef625c63ab2bac8991c388fb4cba"
+        },
+        {
+          "path": "docs/M1_100_PROTOCOL.md",
+          "sha256": "8c64c562aae0c39d8bf45ef6858a0618068dadf5e8a747b97dd962c42accfcc4"
+        },
+        {
+          "path": "scripts/analyze_m1_100_factorial_interaction.py",
+          "sha256": "eb2982beefc8517751494376aa9871a5ed4fa08aa1f94132b17f091486355ea4"
+        },
+        {
+          "path": "docs/results/m1-100-factorial-interaction-20261021/m1_100_factorial_interaction.json",
+          "sha256": "ec79311bcd835f7960df147adfa0fb71aa1dcf8a0369bc8d291ea5c521315498"
+        },
+        {
+          "path": "docs/results/m1-100-factorial-interaction-20261021/matched_group_interactions.csv",
+          "sha256": "218f126943634496740c19dd3442d6a0e4eabee624a553d48acda041d94fc35f"
+        },
+        {
+          "path": "docs/M1_100_SCIENTIFIC_AUDIT.md",
+          "sha256": "0a20508d7048f1e573b4d158f348cfe647c8354199860ec1adf5b162a7ec9c1a"
+        },
+        {
+          "path": "docs/SCIENTIFIC_DIRECTION_REVIEW_POSTCAMPAIGN_20261021.md",
+          "sha256": "f464b9a1efc3c156a607d4a0a4da2f2993ea0ff050c53eb4c2bc6de3c8529eb8"
+        },
+        {
+          "path": "docs/results/research-sprint-20261021/direction-review-postcampaign/independent-critic-review.md",
+          "sha256": "a3abfe9ec64eac004394acbeadad9a3f1f805dfa3f99b43e3d63dbaaa7a029f8"
+        },
+        {
+          "path": "docs/results/m1-100-factorial-interaction-20261021/analysis_manifest.json",
+          "sha256": "9bf7b0f9ac3e43b885599d71f506671e6478df5ef5df29fd9e27e8fc827bbaa4"
+        },
+        {
+          "path": "docs/SCIENTIFIC_DIRECTION_REVIEW_CURRENT_20261021.md",
+          "sha256": "2723f4406d5756edba3b2aa2f847a689919749e71d1f4f877603d165d96a4270"
+        },
+        {
+          "path": "research/drafts/m1-package-monitor-campaign-v1.md",
+          "sha256": "64d71966db5166d99accb45acf437d968046bf7f9fe17396d01340f0508b3e82"
+        },
+        {
+          "path": "research/drafts/m1-replication-candidate-matrices-20261021.json",
+          "sha256": "3265366003173c97477d51ef0c670e1486fa6fb5fd9538cd1c919ffd3aa2d150"
+        },
+        {
+          "path": "research/drafts/m1-reward-chat-24group-replication-v3.md",
+          "sha256": "fef87f169a4ae830eddde457fed0192b80c8dbfd7d23e735db2bd35363be9f57"
+        },
+        {
+          "path": "research/drafts/m1-package-24-matrix-scenarios-20261021.json",
+          "sha256": "79358acd02dcade31291e879d1d173e5e92e9bf5f57305c65a3d59f954ca502a"
+        },
+        {
+          "path": "scripts/freeze_m1_package_24_matrix_design.py",
+          "sha256": "182cb9182a8b6269914570666510320fcc47af2d0bc5ba447b30a5ab8d949661"
+        },
+        {
+          "path": "scripts/audit_m1_replication_prompt_profiles.py",
+          "sha256": "5c7ed0b78f76dfb0685488e1f9dd352a1c6dad2d2200dc187d88fa4d7323a44b"
+        },
+        {
+          "path": "docs/results/research-sprint-20261021/direction-review-followup/m1-prompt-profile-audit.json",
+          "sha256": "f6d2c4d19f525c685dd25493cfe1319cbb72e491b3704ab490b27af28b1c7b2f"
+        },
+        {
+          "path": "docs/M1_PACKAGE_REPLICATION_CONTEXT_AUDIT_20261021.md",
+          "sha256": "73b61a88fe6e229439cc4a271424daa4cf3cb5ea1579ff4bca0e42f13dd9e7a4"
+        },
+        {
+          "path": "docs/results/research-sprint-20261021/direction-review-followup/m1-24-matrix-independent-audit.json",
+          "sha256": "e8e7def5f6621681a15bf648e8ef1fa228cb4cd872c7bcc4a23a17a7ecb8849f"
+        },
+        {
+          "path": "scripts/audit_m1_package_24_matrix_design.py",
+          "sha256": "652b85cd04940dbaa4d60eaad51f2ac18cf8408cb195511aba6c43894e951c5e"
+        }
+      ],
+      "hypothesis": "In a prospective matched replication, the assigned private-target-reward plus chat-stage package will produce a positive target-execution interaction relative to private reward without chat and chat without private reward. This hypothesis concerns the treatment package only; it does not predict that message semantics, agreement, collusion, or intent are identified.",
+      "hypothesis_id": "communication-content-choice-effect",
+      "selection_note": "Retained as the leading alternative behavior question. The 9/15 M1 package pattern is post-hoc and does not isolate delivered message semantics; revisit after the B5 mechanism diagnostic rather than using it to divert attention from the verified monitor anomaly.",
+      "status": "candidate",
+      "title": "Does a private target reward interact with chat-stage availability in allocation choices?"
+    },
+    {
+      "hypothesis_id": "m1-natural-message-action-audit",
+      "title": "Can a Monitor extract proposal and ballot-concordance facts from natural-language messages?",
+      "status": "candidate",
+      "hypothesis": "On the prospective M1 message slots, a privileged-evidence Monitor will recover complete allocation proposals and recipient-ballot concordance against independently double-coded human references better than a literal mapping baseline, while preserving abstentions and citation validity.",
+      "competing_explanations": [
+        "Natural-language messages contain no complete proposals, so a majority/always-negative baseline performs as well as the Monitor.",
+        "The Monitor prediction changes reflect schema/order bias or provider variation rather than message semantics.",
+        "Human coders cannot reliably distinguish proposal, acceptance, and ambiguity under the task codebook."
+      ],
+      "discriminating_prediction": "Freeze all 96 chat message slots, including no_message, and use two independent human coders plus adjudication before any Monitor call. Run frozen proposal and recipient-action-concordance tasks, plus 12 paired capability controls. A failure of coder agreement, positive controls, or Monitor improvement over the literal baseline falsifies the proposed LLM-specific value claim.",
+      "evidence_refs": [
+        {
+          "path": "docs/SCIENTIFIC_DIRECTION_REVIEW_CURRENT_20261021.md",
+          "sha256": "2723f4406d5756edba3b2aa2f847a689919749e71d1f4f877603d165d96a4270"
+        },
+        {
+          "path": "research/drafts/m1-package-monitor-campaign-v1.md",
+          "sha256": "64d71966db5166d99accb45acf437d968046bf7f9fe17396d01340f0508b3e82"
+        },
+        {
+          "path": "docs/M1_100_PROTOCOL.md",
+          "sha256": "8c64c562aae0c39d8bf45ef6858a0618068dadf5e8a747b97dd962c42accfcc4"
+        }
+      ],
+      "selection_note": "Supporting Track 2.2 candidate only. Defer until blinded human codebook/adjudication is available. It cannot create a latent-collusion label; structured public harm remains a deterministic rule output."
+    },
+    {
+      "hypothesis_id": "m4-b5-view-repeatability-v2",
+      "title": "Do evidence-view differences exceed within-profile variation after clustering repeated public inputs?",
+      "status": "selected",
+      "hypothesis": "For this fixed corpus, the number of unique Public-only input-profile clusters whose mode differs from at least one linked Privileged-original profile will exceed the number of clusters containing any within-profile response disagreement.",
+      "competing_explanations": [
+        "The historical view changes are mostly within-profile response variation; unique profile clusters will not show a stable package contrast.",
+        "A stable finite contrast recurs, but it reflects the bundled permissions, event structure, completeness cues, wording, salience, or token length rather than message semantics.",
+        "A shared Public-only request profile linked to two different privileged contexts creates dependence that can exaggerate context-level change counts if not clustered.",
+        "Mutable provider aliases or hidden serving-state changes account for repeated-response differences despite matching request bytes and reported fingerprints."
+      ],
+      "discriminating_prediction": "Across the 23 unique Public-only body-profile clusters, a determinate package contrast is supported only if at least 18 clusters have unique modes for the public profile and every linked privileged profile, at least 6 clusters change, and changed clusters exceed clusters with any within-profile disagreement. The one public profile shared by two contexts is counted once. At most 1 changed cluster with at most 6 unstable clusters weakens reproduction; all other outcomes are inconclusive. Fixed corpus only, no population inference or intent label.",
+      "evidence_refs": [
+        {
+          "path": "docs/M4_B5_REPEATABILITY_PROFILE_COLLISION_AUDIT_20261021.md",
+          "sha256": "84a0afdd90d69599a60cc881ca910580239af3b488db8daebccf8fc1f578e032"
+        },
+        {
+          "path": "research/drafts/m4-b5-view-repeatability-v2-preregistration-r1.json",
+          "sha256": "08423c22f2badeac589bdddb71d49bf10db912f1d78a91339f16cd81bc52a010"
+        },
+        {
+          "path": "docs/results/research-sprint-20261021/m4-b5-autoresearch-continuation-20261021/repeatability-preparation-audit-v4.json",
+          "sha256": "1bcba95c415a3d6ba0acc5a9615cdac3c6fd7d9c271d02c74f9119edefd6cdef"
+        },
+        {
+          "path": "docs/ITERATION_LOG_FOLLOWUP_20261021_PROFILE_AUDIT.md",
+          "sha256": "e75b0d01a2aa2281c6ec06883652db39b56141b0df864ef048ccf1b7e39e0949"
+        },
+        {
+          "path": "docs/RESEARCH_RISK_REGISTER_FOLLOWUP_20261021_PROFILE_AUDIT.md",
+          "sha256": "888005921123c0607e11dbc82e10699972ac6e2c6d98902377efa360ea8d4e34"
+        }
+      ],
+      "selection_note": "Selected candidate, revised before any output after profile-aware auditing found 47 unique request bodies across 48 context/view cells (23 public, 24 privileged), including one public input shared by two contexts and assigned six repeats. Primary analysis now clusters by the 23 unique Public-only profiles and counts that shared control once; all 24 context pairs remain visible as secondary descriptives. The 144 request schedule is unchanged. The candidate remains unregistered and unauthorized; the prior 232-call approval is consumed."
+    }
+  ],
+  "policy": "At most three read-only candidate directions may be compared. Only one can be selected for a formal cycle at a time. Candidate status is not preregistration or authorization.",
+  "schema_version": 1,
+  "selected_hypothesis_id": "m4-b5-view-repeatability-v2",
+  "updated_at": "2026-10-21"
+}

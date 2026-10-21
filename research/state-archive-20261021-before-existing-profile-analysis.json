@@ -1,0 +1,155 @@
+{
+  "active_experiment_id": null,
+  "active_hypothesis_id": null,
+  "claim_level_status": {
+    "B4_B5_superiority": "INCONCLUSIVE",
+    "causal_communication_effect": "INCONCLUSIVE",
+    "cross_model_generalization": "INCONCLUSIVE",
+    "latent_collusion_or_intent": "NOT_IDENTIFIED"
+  },
+  "consecutive_cycles_without_new_uncertainty_reduction": 0,
+  "current_branch": "codex/deepseek-first-m4-research-20261020",
+  "current_round": {
+    "authorization_status": "consumed_and_never_reusable",
+    "evidence_classes": [
+      "live_engineering_preflight",
+      "real_llm_behavior",
+      "monitor_evaluation",
+      "scripted_mock",
+      "offline_reanalysis"
+    ],
+    "historical_external_cost_usd": 0.2488836,
+    "historical_model_calls": 628,
+    "integrity_decision": "PASS",
+    "note": "This imported historical run is separate from all later experiments and from new cycles. It is not a preregistration or authorization.",
+    "owner": "DEEPSEEK-FIRST-RESEARCH-01",
+    "status": "terminal_historical_closeout_reconciled",
+    "terminal_artifact": "research/handoffs/DEEPSEEK-FIRST-RESEARCH-01.json"
+  },
+  "historical_approvals_reusable": false,
+  "latest_closed_experiment_id": "m4-b5-context-sensitivity-campaign-v1",
+  "latest_decision": "INCONCLUSIVE",
+  "latest_decision_type": "scientific",
+  "latest_review": {
+    "status": "source_reconstruction_pass_candidate_waiting_new_scope_authorization",
+    "authorization_status": "The user reply approves m4-b5-context-sensitivity-campaign-v1, whose DS-FLASH-M4B5-CONTEXT-232-20261021 grant is fully consumed at 232/232. It does not authorize m4-b5-view-repeatability-v2.",
+    "experiment_registered": false,
+    "new_model_api_attempts": 0,
+    "new_model_calls": 0,
+    "selected_next_hypothesis_id": "m4-b5-view-repeatability-v2",
+    "candidate_experiment_id": "m4-b5-view-repeatability-v2",
+    "candidate_revision": "research/drafts/m4-b5-view-repeatability-v2-preregistration-r1.json",
+    "candidate_revision_sha256": "08423c22f2badeac589bdddb71d49bf10db912f1d78a91339f16cd81bc52a010",
+    "candidate_ceiling": {
+      "physical_attempts": 144,
+      "external_cost_usd": 0.35,
+      "retries": 0,
+      "replacements": 0,
+      "model": "official DeepSeek Flash only; off-peak only",
+      "expires_at_utc_proposed": "2026-10-25T23:59:00Z",
+      "private_message_event_appearances": 144
+    },
+    "offline_prepare": {
+      "assigned": 144,
+      "context_view_cells": 48,
+      "unique_body_profiles": 47,
+      "public_only_body_profiles": 23,
+      "privileged_original_body_profiles": 24,
+      "shared_public_body_profiles": 1,
+      "context_links_on_shared_profile": 2,
+      "assignments_per_unique_profile": {
+        "3": 46,
+        "6": 1
+      },
+      "request_manifest_sha256": "6d26f48244bd06d93b29d58d02d69f03fe49d6db967b74cae0618ccfdfaf760a",
+      "schedule_file_sha256": "08e9b6d72862629f1e3e2fa3f02f3dcaee41a6356ad874cdd7cecc6d9ac93f3e",
+      "schedule_object_sha256": "37cce3e98a0493cb26e6610cdc823aa5cc7a1303086f7943ed269b895441e099",
+      "max_conservative_input_bound_units": 12104,
+      "input_bound_is_provider_tokenizer_count": false,
+      "max_output_tokens_per_request": 512,
+      "offpeak_worst_case_cost_usd": "0.2658564",
+      "model_calls": 0,
+      "raw_run_directory_git_ignored": true
+    },
+    "remaining_project_budget_before_candidate": {
+      "physical_attempts": 848,
+      "external_cost_usd": 2.460832942
+    },
+    "remaining_project_budget_if_candidate_ceiling_reserved": {
+      "physical_attempts": 704,
+      "external_cost_usd": 2.110832942,
+      "reservation_status": "planning_only_not_reserved"
+    },
+    "review_mode": "offline source-to-body reconstruction plus profile-aware audit and prior separate-context critique; no provider inference",
+    "parent_head_reviewed": "df5f3b81f94f6578d48b2ad74dff8eadb78db0ed",
+    "evidence": "docs/M4_B5_REPEATABILITY_PROFILE_COLLISION_AUDIT_20261021.md",
+    "evidence_sha256": "84a0afdd90d69599a60cc881ca910580239af3b488db8daebccf8fc1f578e032",
+    "evidence_refs": [
+      {
+        "path": "docs/M4_B5_REPEATABILITY_PROFILE_COLLISION_AUDIT_20261021.md",
+        "sha256": "84a0afdd90d69599a60cc881ca910580239af3b488db8daebccf8fc1f578e032"
+      },
+      {
+        "path": "research/drafts/m4-b5-view-repeatability-v2-preregistration-r1.json",
+        "sha256": "08423c22f2badeac589bdddb71d49bf10db912f1d78a91339f16cd81bc52a010"
+      },
+      {
+        "path": "docs/results/research-sprint-20261021/m4-b5-autoresearch-continuation-20261021/repeatability-preparation-audit-v4.json",
+        "sha256": "1bcba95c415a3d6ba0acc5a9615cdac3c6fd7d9c271d02c74f9119edefd6cdef"
+      },
+      {
+        "path": "docs/ITERATION_LOG_FOLLOWUP_20261021_PROFILE_AUDIT.md",
+        "sha256": "e75b0d01a2aa2281c6ec06883652db39b56141b0df864ef048ccf1b7e39e0949"
+      },
+      {
+        "path": "docs/RESEARCH_RISK_REGISTER_FOLLOWUP_20261021_PROFILE_AUDIT.md",
+        "sha256": "888005921123c0607e11dbc82e10699972ac6e2c6d98902377efa360ea8d4e34"
+      },
+      {
+        "path": "docs/M4_B5_REPEATABILITY_RECONSTRUCTION_FOLLOWUP_20261021.md",
+        "sha256": "4e8807a98f4bfedd3ae620b8e21086d136ebb06d8293b53f18bf5625294ae261"
+      },
+      {
+        "path": "docs/ITERATION_LOG_FOLLOWUP_20261021_SOURCE_RECONSTRUCTION.md",
+        "sha256": "0d7495322a5b1fc29c8836e62bb50f4d5c9088432d0f667f7f435e9e796831b6"
+      },
+      {
+        "path": "docs/RESEARCH_RISK_REGISTER_FOLLOWUP_20261021_SOURCE_RECONSTRUCTION.md",
+        "sha256": "afb32d54a78f6d9bca2caa15c4f9d61a19f338a179b44f683c9b6c3358d8bf73"
+      },
+      {
+        "path": "docs/results/research-sprint-20261021/m4-b5-profile-collision-audit-20261021/source-reconstruction-audit.json",
+        "sha256": "b04421fcc054423fa07987b3572d3286bee5d845b16c4062c08f817277faefcb"
+      },
+      {
+        "path": "scripts/audit_m4_b5_repeatability_profiles_from_source.py",
+        "sha256": "12fdc9e47653e519b466b677506b6ccd6acbcf4c7db8aa0990e40d9769e8d935"
+      }
+    ],
+    "next_gate": "Obtain a new scope-specific approval for at most 144 physical attempts and USD 0.35, official DeepSeek Flash off-peak only, zero retries/replacements, proposed expiry 2026-10-25T23:59:00Z, and transfer of 144 private-message event appearances. Only then formally register the revised profile-cluster protocol and rerun all dispatch gates.",
+    "private_evidence_transfer": "72 Privileged-original requests, each with two historical private-message events; 144 event appearances total if separately approved."
+  },
+  "latest_review_id": "m4-b5-view-repeatability-source-reconstruction-20261021",
+  "latest_scientific_outcome": "INCONCLUSIVE",
+  "next_action": "Obtain a new, named scope authorization for the revised m4-b5-view-repeatability-v2 profile-cluster protocol (≤144 physical attempts, ≤USD 0.35, official DeepSeek Flash off-peak only, zero retries/replacements, proposed expiry 2026-10-25T23:59:00Z, and explicit transfer of 144 private-message event appearances). The campaign remains unregistered and undispatched.",
+  "preexisting_untracked_paths_preserved": [
+    "docs/COLOSSEUM_LOCAL_REPRO_PROTOCOL.md (pre-existing untracked; preserved, not part of this review)",
+    "docs/results/colosseum-local-audit-20261020/ (pre-existing untracked; preserved, not part of this review)",
+    "docs/results/colosseum-runtime-hardening-20261020/ (pre-existing untracked; preserved, not part of this review)",
+    "M1 package Monitor candidate docs, drafts, scripts, source, tests, and audit outputs (pre-existing untracked; preserved, not part of this review)"
+  ],
+  "prior_runs_kept_separate": [
+    {
+      "note": "Separate 856-row Monitor schedule and 24-group local M4 run; never pool its denominators with the 628-request DeepSeek-first run.",
+      "run_id": "FULL-RESEARCH-EXECUTION-20261020",
+      "summary_artifact": "docs/results/full-research-execution-20261020/full_research_results_summary.json",
+      "summary_sha256": "7995b048ec160759a833dfbf2dc4b8f0e668ca8c1861d8566f596056118c029b"
+    }
+  ],
+  "program": "ColluScope Autoresearch",
+  "program_status": "active",
+  "schema_version": 2,
+  "state_recorded_at_head": "c29960b96a506ecf1cd94415a16637f0cb0e6d3b",
+  "status": "profile_cluster_revision_waiting_scope_authorization",
+  "updated_at": "2026-10-21"
+}

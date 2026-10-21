@@ -775,6 +775,71 @@
       "scope": "Authorization/readiness review of the M1 v3 finite assigned-package candidate; no registration or model inference.",
       "statement": "Request exact approval for the M1 v3 local Qwen package replication. If run, interpret only the preregistered finite private-reward × chat-stage interaction; defer separate Monitor calls and do not claim message-semantic causality, collusion, or intent.",
       "review_mode": "offline source and runner audit plus separate-context desk review of sanitized prior evidence; not a raw-data replay"
+    },
+    {
+      "claim_id": "m1-100-target-settlement-action-decomposition-20261021",
+      "evidence_class": "offline_reanalysis",
+      "outcome": "SUPPORTED",
+      "scope": "Only the 15 matched F1-F3 groups / 75 completed episodes in the frozen M1-100 extension run.",
+      "statement": "Version-1 action decomposition validated all 75 settlements using the stored parsed_assignment field, but did not independently reparse raw model responses. Its aggregate ballot-path counts were 9/15 joint A/B target ballots in the private-reward-plus-chat cell, zero in the other factorial cells, with C invariant and no one-vote chair target selection.",
+      "previous_belief": "The 9/15 post-hoc target-execution interaction was known from environment outcomes, but action-level vote pathways had not been independently decomposed across the assigned groups.",
+      "what_changed": "The ballot replay shows that, in these historical rows only, settled target outcomes coincide with A/B joint target ballots and are not produced by C target votes or a single chair ballot.",
+      "interpretation": "This v1 evidence is conditional on stored parser output. Version 2 reparses original response text and independently reproduces the ballot assignments; use the v2 evidence for raw-response claims. Both remain one fixed corpus and do not identify message causality or intent.",
+      "evidence_refs": [
+        {
+          "path": "docs/M1_PACKAGE_REPLICATION_V3_BALLOT_DECOMPOSITION_REVIEW_20261021.md",
+          "sha256": "89b66529aa582c851f83777a63a915382081c697d3f8e3c1793d8efd2df562e3"
+        },
+        {
+          "path": "docs/M1_PACKAGE_REPLICATION_V3_BALLOT_OUTCOME_AMENDMENT_20261021.md",
+          "sha256": "a779df27e84cb7fffd71d331014365dcca354686160594b65563dc53bb066e7e"
+        },
+        {
+          "path": "scripts/analyze_m1_100_ballot_decomposition.py",
+          "sha256": "144b106cec51526c0bf86df6cd9fed5811f48aff2fbb4bb5db87a7df35c68c63"
+        },
+        {
+          "path": "docs/results/research-sprint-20261021/m1-100-ballot-decomposition/summary.json",
+          "sha256": "87141fbd7a17e173224215a9230b45a05ebf2ef21b3529a84ee4c6fc5d20378d"
+        },
+        {
+          "path": "docs/results/research-sprint-20261021/m1-100-ballot-decomposition/condition_ballot_decomposition.csv",
+          "sha256": "cf5379d118f1bfc468dcc38a77a0a608d7b922fdd2873c05d6626a0260765879"
+        }
+      ],
+      "independent_review_confirmed": false,
+      "review_mode": "v1 deterministic settlement replay conditioned on stored parsed_assignment plus adversarial self-review; superseded for raw-response claims by v2; not an independent human critic review",
+      "superseded_by": "m1-100-raw-response-ballot-audit-v2-20261021"
+    },
+    {
+      "claim_id": "m1-100-raw-response-ballot-audit-v2-20261021",
+      "evidence_class": "offline_reanalysis",
+      "outcome": "SUPPORTED",
+      "scope": "Only the 15 matched F1-F3 groups / 75 completed episodes in the frozen M1-100 extension run.",
+      "statement": "V2 reparsed 225/225 raw ballot response texts using the frozen ballot object contract; 225/225 allocations matched the stored parsed_assignment fields; independent plurality/chair replay from the reparsed assignments matched 75/75 recorded settlements. The v1 aggregate action decomposition is unchanged under raw-response parsing.",
+      "previous_belief": "The v1 action decomposition was calculated from the stored parsed_assignment field and could inherit an upstream parse error.",
+      "what_changed": "Raw model response text was independently reparsed, compared with every stored parser field, and then used for settlement recomputation; no disagreement occurred in the 225 ballots.",
+      "interpretation": "This validates the ballot text/parser-field/settlement chain for these 75 assigned episodes only. It does not make the model outputs independent samples or show that message content caused A/B co-voting; both agents know the same target.",
+      "evidence_refs": [
+        {
+          "path": "docs/M1_PACKAGE_REPLICATION_V3_RAW_RESPONSE_AUDIT_20261021.md",
+          "sha256": "fe921424e3b86021c4ea3dd22db5175407a4ac95bc428355bd34c728f03f676d"
+        },
+        {
+          "path": "scripts/analyze_m1_100_ballot_decomposition_v2.py",
+          "sha256": "23490398894f44cdf15d6a5ff2089b67969c26ef05d1207b6c300b87606fb3e0"
+        },
+        {
+          "path": "docs/results/research-sprint-20261021/m1-100-ballot-decomposition-raw-response-v2/summary.json",
+          "sha256": "1fcd5b0e380de9f1beacfd02d2116f434e5919841a8f33d81b0eb2796dcc9f01"
+        },
+        {
+          "path": "docs/results/research-sprint-20261021/m1-100-ballot-decomposition-raw-response-v2/condition_ballot_decomposition.csv",
+          "sha256": "cf5379d118f1bfc468dcc38a77a0a608d7b922fdd2873c05d6626a0260765879"
+        }
+      ],
+      "independent_review_confirmed": false,
+      "review_mode": "deterministic raw-response replay plus adversarial_self_review; not an independent human Scientific Critic review"
     }
   ],
   "purpose": "Claim-level memory for future cycle selection. This is a scoped summary of historical artifacts, not a universal scientific score.",

@@ -1,0 +1,5 @@
+Offline source-gate failure (preserved)
+Command: python scripts/run_m1_package_replication_v3.py --check-only
+Result: FAILED before any server, HTTP request, or model generation.
+Concurrent direct runs also recorded: freeze_m1_package_24_matrix_design.py --check = PASS_FROZEN_24_MATRIX_DESIGN (120 episodes, 24 groups/matrices, 456 generations, no model outputs); audit_m1_package_24_matrix_design.py --check = PASS_INDEPENDENT_M1_24_MATRIX_AUDIT (24 matrices, 144 permutation checks, zero calls); audit_m1_replication_prompt_profiles.py --check = PASS_PROMPT_PROFILE_RECOMPUTE (2 schedules, zero calls).
+Failure cause: the candidate hypotheses/memory and closed M4 registry pin SHA-256 values for research/drafts/m1-reward-chat-24group-replication-v3.md, docs/ITERATION_LOG.md, and docs/RESEARCH_RISK_REGISTER.md. The draft/log/risk register were modified in this review before the runtime check, so researchctl audit correctly rejected those changed bytes. They were restored byte-for-byte from HEAD; the ballot decomposition is moved to append-only/versioned addenda. No frozen source evidence or model output was altered.
