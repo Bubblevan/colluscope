@@ -663,6 +663,37 @@
       "scientific_outcome": "EXECUTION_BLOCKED",
       "statement": "Prior evidence about communication causality remains inconclusive; this run observed no model action.",
       "what_changed": "No scientific evidence changed. The registered DeepSeek execution path is blocked by a Python resolver failure in the current environment."
+    },
+    {
+      "claim_id": "track23-counterfactual-delivery-v2",
+      "evidence_refs": [
+        {
+          "path": "docs/results/track23-counterfactual-delivery-v2/pilot-result.md",
+          "sha256": "cc7ba1ee41a881a34b625e8aabe61dba6f7fc3daff326256fc23d11dc9e06684"
+        },
+        {
+          "path": "docs/results/track23-counterfactual-delivery-v2/pilot-summary.json",
+          "sha256": "77eac4e8c7e539eb4e70fec0396d6ffe408613626cc6194200801b9c1118c51c"
+        },
+        {
+          "path": "docs/results/track23-counterfactual-delivery-v2/pilot-summary-initial-classification.json",
+          "sha256": "81ae4ad8e67871d60de00e34dc916a73769a824613041245589e2ad75a4e68a6"
+        },
+        {
+          "path": "docs/results/track23-counterfactual-delivery-v2/pilot-analysis-amendment-v1.md",
+          "sha256": "03a0a043edb79c446129b509cdf80bf8d051dca73bf921555f227aad2c4ff832"
+        },
+        {
+          "path": "docs/results/track23-counterfactual-delivery-v2/pilot-cost-summary.json",
+          "sha256": "65863607bf58f592a2d521b353030d075150ce4696bb26b566649c7daabe8b48"
+        }
+      ],
+      "experiment_id": "track23-counterfactual-delivery-v2",
+      "outcome": "INCONCLUSIVE",
+      "remaining_alternatives": "The pattern is consistent with common-incentive convergence, prompt-induced convergence, or deterministic behavior under the shared model alias. A delivery effect remains untested when the sender proposal differs from the recipient baseline.",
+      "scientific_outcome": "INCONCLUSIVE",
+      "statement": "The current pilot does not estimate whether delivery changes B’s action beyond controls.",
+      "what_changed": "All eight A-generated proposals exactly matched B’s pre-message ballot, so the pilot had no proposal-opportunity contexts and expansion stopped."
     }
   ],
   "historical_scope": "The 628-request DeepSeek-first run and the separate 856-row Monitor run use different schedules and must never be pooled.",

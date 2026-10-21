@@ -1,6 +1,6 @@
 {
-  "active_experiment_id": "track23-counterfactual-delivery-v2",
-  "active_hypothesis_id": "track23-counterfactual-delivery-v2",
+  "active_experiment_id": null,
+  "active_hypothesis_id": null,
   "candidate_hypotheses": [
     "track23-counterfactual-delivery-v1"
   ],
@@ -10,7 +10,7 @@
     "cross_model_generalization": "INCONCLUSIVE",
     "latent_collusion_or_intent": "NOT_IDENTIFIED"
   },
-  "consecutive_cycles_without_new_uncertainty_reduction": 10,
+  "consecutive_cycles_without_new_uncertainty_reduction": 11,
   "current_branch": "codex/deepseek-real-coordination-v5-20261021",
   "current_round": {
     "authorization_status": "consumed_and_never_reusable",
@@ -30,8 +30,8 @@
     "terminal_artifact": "research/handoffs/DEEPSEEK-FIRST-RESEARCH-01.json"
   },
   "historical_approvals_reusable": false,
-  "latest_closed_experiment_id": "track23-counterfactual-delivery-v1",
-  "latest_decision": "PREREGISTERED",
+  "latest_closed_experiment_id": "track23-counterfactual-delivery-v2",
+  "latest_decision": "PIVOT",
   "latest_decision_type": "operational",
   "latest_integrity_followup": {
     "frozen_audit_path": "docs/results/research-sprint-20261021/m4-b5-context-sensitivity-independent-audit.json",
@@ -103,7 +103,7 @@
     "status": "m1_v3_raw_response_ballot_review_complete"
   },
   "latest_review_id": "m1-v3-raw-response-ballot-audit-20261021",
-  "latest_scientific_outcome": "EXECUTION_BLOCKED",
+  "latest_scientific_outcome": "INCONCLUSIVE",
   "latest_user_decision": {
     "date": "2026-10-21",
     "decision": "DECLINED_QWEN_SCOPE",
@@ -124,7 +124,7 @@
       "runtime_inputs_verified": 23
     }
   },
-  "next_action": "Implement the frozen protocol and proceed only through an existing entry point within current authorization; the CLI does not dispatch.",
+  "next_action": "Perform one offline audit of the frozen payoff contexts and pilot ballots to identify whether a new authorized context design can produce sender proposals that differ from recipient baselines while preserving the causal question; do not dispatch more requests under this closed cycle.",
   "next_action_evidence_class": "offline_reanalysis",
   "next_action_kind": "continue_offline",
   "next_action_max_external_cost_usd": 0.0,
@@ -146,6 +146,6 @@
   "program_status": "active",
   "schema_version": 2,
   "state_recorded_at_head": "2dcca164235cf2254dba65b2307a75edb973d292",
-  "status": "iteration_preregistered",
+  "status": "ready_for_next_cycle",
   "updated_at": "2026-10-21"
 }

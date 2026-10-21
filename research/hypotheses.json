@@ -111,12 +111,12 @@
       "hypothesis": "Across 40 preregistered contexts with complete legal actions, verified delivery, and independent settlement replay, showing B a model-generated A proposal as a peer will produce at least 0.15 higher context-mean proposal adoption than both no-message and neutral-message conditions on the 20 held-out contexts; both paired context-bootstrap 95% intervals must exclude zero, and both contrasts must be positive in at least 24/40 contexts overall. This finite pattern supports only a message-to-action effect for these prompts; it does not identify collusion, intent, autonomous negotiation, or a population effect.",
       "hypothesis_id": "track23-counterfactual-delivery-v2",
       "selection_note": "Fresh v2 candidate following a closed DNS-blocked v1 cycle. It uses the user-authorized new cycle and is not a continuation or reuse of v1 authorization. The contrast isolates delivery, neutral-message presence, and matched source attribution under fixed recipient history.",
-      "status": "selected",
+      "status": "candidate",
       "title": "Does a delivered agent-authored proposal change a recipient action?"
     }
   ],
   "policy": "At most three read-only candidate directions may be compared. Only one can be selected for a formal cycle at a time. Candidate status is not preregistration or authorization.",
   "schema_version": 1,
-  "selected_hypothesis_id": "track23-counterfactual-delivery-v2",
+  "selected_hypothesis_id": null,
   "updated_at": "2026-10-21"
 }
