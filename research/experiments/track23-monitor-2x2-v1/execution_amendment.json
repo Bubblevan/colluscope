@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "experiment_id": "track23-monitor-2x2-v1",
+  "amendment_id": "monitor-json-optional-claim-echo-compat-v1",
+  "recorded_at_utc": "2026-10-22T18:23:58Z",
+  "status": "execution-parser-correction-before-held-out-dispatch",
+  "reason": "The frozen runner rejected the first HTTP 200 C1 response because each claim object echoed its input text as an extra field. The registered success gate requires the required claim/status/citation fields and valid JSON, but did not prohibit additional properties. The echo exactly matched the claim text in the frozen request. This was a local validator false failure, not a provider or model-output failure.",
+  "preserved_evidence": {
+    "original_attempt_log": "runs/sprint-monitor/track23-monitor-2x2-v1/run/pilot_attempts.jsonl",
+    "failed_local_validation_row_retained": true,
+    "request_id": "pilot-31-C1",
+    "request_sha256": "3f31269b6f9ea4bccc2bf565cf20f21b66818af6323a1d5f891d45d50f620293",
+    "raw_response_sha256": "ee3fb111b82a63da5b4dd4f2bd2f69c30db9941c5abb0111344912c87e3bd746",
+    "provider_attempt_count_for_request": 1,
+    "provider_retry": false
+  },
+  "compatibility_rule": "Require claim_id, status, citations, and short_reason; allow only an optional text field when it exactly matches that claim's frozen input text; strip that echo only from the scoring projection; retain the original raw response unchanged.",
+  "scientific_changes": {
+    "request_schedule_changed": false,
+    "request_payloads_changed": false,
+    "claims_or_labels_changed": false,
+    "test_split_changed": false,
+    "scoring_metrics_changed": false,
+    "method_or_model_settings_changed": false
+  },
+  "budget": {
+    "max_provider_calls": 36,
+    "max_external_cost_usd": 2.0,
+    "peak_bound_usd": 0.91758876,
+    "calls_received_before_amendment": 4,
+    "peak_cost_estimate_before_amendment_usd": 0.017359104
+  },
+  "original_registered_runner_sha256": "614d254a492caa3d525df78f1959bf988f4012943681ea2f5625c4a14f3bfc3c",
+  "compatibility_runner": {
+    "path": "scripts/continue_track23_monitor_v2_compat.py",
+    "sha256": "ee6e18ae44a51f4aa203b7cf1169ce0313faa8c9e11888a75929dba0d8b4f0ff",
+    "preflight_status": "PASS_COMPAT_NO_CALL_PREFLIGHT"
+  },
+  "interpretation": "The parser change is applied uniformly to any arm and stage. It does not change claim scoring. Continue only the not-yet-sent frozen pilot rows; the already received C1 response is reclassified from the preserved raw body without a new API request. Held-out dispatch remains conditional on 12/12 technical completion and independent of pilot effect direction."
+}

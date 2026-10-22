@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "experiment_id": "track23-monitor-2x2-v1",
+  "phase": "pilot",
+  "schedule_sha256": "f22d4456e406267b2b6f6124972d8d59f372c1fffcec70acda0cd1ad623ba32d",
+  "provider_attempts_started": 12,
+  "http_200_responses": 12,
+  "valid_responses_after_recorded_compatibility_review": 11,
+  "invalid_outputs": 1,
+  "retries": 0,
+  "replacements": 0,
+  "system_fingerprint": "e72d3c7f663d3e1383b00b3884cb4501",
+  "returned_model_alias": "deepseek-flash",
+  "heldout_attempts_started": 0,
+  "peak_rate_cost_estimate_usd": "0.054851448",
+  "earlier_summary_cost_usd": "0.053343096",
+  "cost_understatement_usd": "0.001508352",
+  "cost_reconciliation": "The earlier compatibility summary omitted the final invalid response cost. The runner assigns total_cost only after normalize_compatible_response succeeds; pilot-32-D1 raised before that increment. Its failed-attempt log retains usage-based cost 0.001508352. The corrected total sums all 12 physical provider attempts without modifying the original summary.",
+  "response_artifact_sha256_pilot_32_D1": "a1fdb50be0b29884ea4c3cbea83c5e12392abb8af8f0a2ee81a5afdefd075678",
+  "valid_responses_by_pair": {
+    "31": 4,
+    "20": 4,
+    "32": 3
+  },
+  "heldout_pairs_unstarted": [
+    4,
+    5,
+    12,
+    17,
+    23,
+    28
+  ]
+}

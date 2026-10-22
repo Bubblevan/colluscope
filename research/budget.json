@@ -1,16 +1,16 @@
 {
   "authorization": {
-    "schema_version": 1,
-    "approval_id": "DS-FLASH-TRACK23-YOKED-4500-20261021",
-    "scope": "One fresh Track 2.3 v2 counterfactual-delivery cycle using DeepSeek Flash only: first an 8-context/64-request pilot; only if all preregistered validity and behavior-feasibility gates pass, then a 40-context/4,000-request main stage; only after complete integrity-passing main data, then 384 frozen monitor calls (80 researcher bundles and 304 ordinary single-branch views). Maximum frozen schedule 4,448 physical requests and grant ceiling 4,500; cost ceiling $1.95 at official weekday peak uncached prices. Official DeepSeek API endpoint and the existing standard resolver/TLS client only; no Qwen, provider fallback, custom DNS/HTTPS/SNI, retries, replacements, resumption, or resampling. Temperature 0, thinking disabled, output maximum 64 tokens; pinned tokenizer bounds input to 1,200 tokens including framing. Stop immediately on the frozen failure gates; six-hour cycle cap and 60-minute pilot cap. Authorization expires 2026-10-23T00:00:00Z.",
+    "approval_id": "DS-FLASH-TRACK23-MONITOR-2X2-36-20261023",
+    "approved_at_utc": "2026-10-22T18:14:12Z",
     "authorized_experiment_ids": [
-      "track23-counterfactual-delivery-v2"
+      "track23-monitor-2x2-v1"
     ],
-    "max_model_calls": 4500,
-    "max_external_cost_usd": 1.95,
-    "approved_at_utc": "2026-10-21T10:20:54Z",
-    "expires_at_utc": "2026-10-23T00:00:00Z",
-    "source": "Explicit user authorization in this conversation: start a new bounded DeepSeek research cycle, raise the cumulative project cap to about 6,500 calls, retain the user-set $1 minimum/$3 maximum, and continue the already approved Track 2.3 study after preregistration. This is a new immutable approval batch, not reuse of any historical authorization.",
+    "expires_at_utc": "2026-10-25T15:59:00Z",
+    "max_external_cost_usd": 2.0,
+    "max_model_calls": 36,
+    "schema_version": 1,
+    "scope": "Run only the registered Track 2.3 Evidence Representation & Verification Ablation on saved Colosseum seed-1 trajectories. Use DeepSeek Flash at the official DeepSeek Chat Completions endpoint, temperature 0, thinking disabled, JSON output, and a 2048-token output cap. Dispatch 12 calls on development pairs 31, 20, and 32 across C0/C1/D0/D1. If all 12 pass the preregistered technical integrity and output-schema gate, dispatch the frozen 24 calls on held-out pairs 4, 5, 12, 17, 23, and 28 across the same four arms regardless of pilot effect direction. Hard limit: 36 physical attempts and USD 2.00, one attempt per request, zero retries and replacements. No Agent inference, Jira reruns, new seeds, model comparisons, or scope extension. Stop at the first transport, identity, usage, provenance, schema, truncation, or cost failure and preserve all started and unstarted rows.",
+    "source": "Fresh explicit user authorization in this conversation: \"允许Deepseek 2美元的调用，记得使用\" (allow up to $2 in DeepSeek calls and remember to use it), applied only to the current Track 2.3 Monitor ablation after its offline freeze. This does not reuse or extend any historical Colosseum approval.",
     "status": "active"
   },
   "authorization_records_directory": "research/authorizations",
@@ -27,8 +27,8 @@
     "retries_or_replacements": 0
   },
   "project_limits": {
-    "max_external_cost_usd": 3.0,
-    "max_model_calls": 6500
+    "max_external_cost_usd": 10.0,
+    "max_model_calls": 10523
   },
   "schema_version": 2,
   "scope": "new autoresearch cycles only; historical usage is preserved in source run records and never re-authorized here"

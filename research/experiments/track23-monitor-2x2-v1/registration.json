@@ -1,0 +1,12 @@
+{
+  "authorization_batch_sha256": "0e00134b98fa5670b994ad7c074f3a5371864e6fdbdcd0416655e75f043dacfd",
+  "closed_at_utc": "2026-10-22T18:31:39+00:00",
+  "closed_git_head": "33b28964a2bf85eeb85d89ef19a9fd5e6cf77faa",
+  "closure_sha256": "2fa440347c00cd01188a55c67a7192d2f27df5b6f7ca2b38afd1ebf0bb16ea93",
+  "evaluator_v2_sha256": "e7b563b1a149a8c770a56728a4d13abcc53e8a12080866a1adfad03b2d234f6d",
+  "experiment_id": "track23-monitor-2x2-v1",
+  "preregistration_sha256": "44ad62b8dea4f08b42f3b11cf31d6f255b64cd871ac461e78b49862a9ab4a391",
+  "registered_at_utc": "2026-10-22T18:17:10+00:00",
+  "registered_git_head": "33b28964a2bf85eeb85d89ef19a9fd5e6cf77faa",
+  "schema_version": 1
+}

@@ -1,0 +1,126 @@
+{
+  "answer_key_sha256": "c8191b5a0034d918573219b47baf7ebbedaad3f3b92b32fc2631d76cf9b58d66",
+  "api_calls_made": 0,
+  "arms": {
+    "C0": "flat events, no checklist",
+    "C1": "flat events, checklist",
+    "D0": "ledger, no checklist",
+    "D1": "ledger, checklist"
+  },
+  "builder_sha256": "3ba11ef096631cb37db8615baeba3862e30f0de6eb524d979aca390c0df2c491",
+  "claim_labels_per_pair": {
+    "CONTRADICTED": 4,
+    "NOT_IDENTIFIABLE": 1,
+    "SUPPORTED": 4
+  },
+  "claims_per_pair": 9,
+  "endpoint": "https://api.deepseek.com/chat/completions",
+  "evidence_record_counts_by_pair": {
+    "12": {
+      "actions": 12,
+      "communications": 75,
+      "settlements": 2
+    },
+    "17": {
+      "actions": 12,
+      "communications": 77,
+      "settlements": 2
+    },
+    "20": {
+      "actions": 12,
+      "communications": 77,
+      "settlements": 2
+    },
+    "23": {
+      "actions": 12,
+      "communications": 81,
+      "settlements": 2
+    },
+    "28": {
+      "actions": 12,
+      "communications": 71,
+      "settlements": 2
+    },
+    "31": {
+      "actions": 12,
+      "communications": 74,
+      "settlements": 2
+    },
+    "32": {
+      "actions": 12,
+      "communications": 71,
+      "settlements": 2
+    },
+    "4": {
+      "actions": 12,
+      "communications": 73,
+      "settlements": 2
+    },
+    "5": {
+      "actions": 12,
+      "communications": 75,
+      "settlements": 2
+    }
+  },
+  "experiment_id": "track23-monitor-2x2-v1",
+  "fact_multiset_sha256_by_pair": {
+    "12": "1d1d7dea15d48eb50c71958cd4adc35e6e5e2446d209f62b89b9068edb8ccd90",
+    "17": "09a1ae1d92e51571e37c4e9e2323532867ec87288e1ee13aa3399c3087a4ffeb",
+    "20": "236c7d26a233ff8352b8d52c2b2e3b7ddde0450203f5897a3b1e1eb74dc26bfd",
+    "23": "37e909bfddcaaed828ce070bf2e876a79b71ea155202f6916c82490a6b182a3e",
+    "28": "17a44cd06799807d7dd9e3bc89d7456c75911380d04bb8ae64083ba39ac42e62",
+    "31": "32bf315a9898c25c493163312884697ea33bcc5af33633ea62cb31ada877ef78",
+    "32": "9115c93092eb65e3138953a315b7c821223ed6800601fadd31b4060c709e5127",
+    "4": "21f1e3ab1af62e711798b8a4b9018310727aac88577928f4ea6767e303ae1109",
+    "5": "0b33b0b115158cd3efa3f996509fdb9c13fbd20f85b216c7a828c39838fb590e"
+  },
+  "human_commitment_review": "245 messages remain unreviewed; commitment semantics and coordination claims are excluded from this evaluation",
+  "input_price_peak_cache_miss_usd_per_million": "0.30",
+  "input_token_upper_bound": 2734226,
+  "input_upper_bound_cost_usd": "0.8202678",
+  "max_output_tokens": 2048,
+  "maximum_serialized_request_bytes": 78041,
+  "model": "deepseek-flash",
+  "model_visible_fact_projection": "All four arms receive the same messages, actions, settlement facts, official regret formula, and claims. Raw IDs/hashes, pair/condition/split labels, Judge scores, and answer key are excluded.",
+  "no_retry_no_replacement": true,
+  "output_cap_cost_usd": "0.09732096",
+  "output_price_peak_usd_per_million": "1.32",
+  "pair_answer_key_rows": 9,
+  "peak_all_cache_miss_cost_upper_bound_usd": "0.91758876",
+  "phase_pairs": {
+    "heldout_test": [
+      4,
+      5,
+      12,
+      17,
+      23,
+      28
+    ],
+    "pilot_development": [
+      31,
+      20,
+      32
+    ]
+  },
+  "phase_serialized_bytes": {
+    "heldout": 1825216,
+    "pilot": 899794
+  },
+  "physical_attempts": 36,
+  "primary_comparison": "Pair-clustered D1 minus C0 on contradicted-claim false-SUPPORTED rate, q9 causal false-SUPPORTED rate, and supported-claim recognition; factorial arm effects are secondary and descriptive.",
+  "private_directory_acl_verified": true,
+  "request_count": 36,
+  "schedule_sha256": "f22d4456e406267b2b6f6124972d8d59f372c1fffcec70acda0cd1ad623ba32d",
+  "source_dataset_manifest_sha256": "3871a531a42e4d1db0a81e24566a5e3c12bb1b6eca0bc3243df45955ef556534",
+  "source_private_file_hashes": {
+    "actions.jsonl": "2cf3b60d4f40959456f01358a285d87bf408f93db0ee4547f7b807e7e1021de6",
+    "episodes.jsonl": "f0c8cf859554bca545786a14193523df24bf9cfd09747b9dd9de63dd2b1501e9",
+    "messages.jsonl": "2229f11ea5aefafcb5891cfec9fd2102fa4a5b74b95d6797e9df3a6070354a4b",
+    "settlements.jsonl": "2af482837eb47c5c8ea1411be156ee7e1308ffdc1ab56461dfaa37eb8bde33d9"
+  },
+  "source_split_manifest_sha256": "51cbef3d9794c3ee63cb4449ec83fc6723fae651fb4796fdf6442637584a78a4",
+  "status": "FROZEN_OFFLINE_NOT_DISPATCHED",
+  "temperature": 0.0,
+  "thinking": "disabled",
+  "total_serialized_request_bytes": 2725010
+}

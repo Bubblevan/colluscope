@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "approval_id": "DS-FLASH-TRACK23-MONITOR-2X2-36-20261023",
+  "scope": "Run only the registered Track 2.3 Evidence Representation & Verification Ablation on saved Colosseum seed-1 trajectories. Use DeepSeek Flash at the official DeepSeek Chat Completions endpoint, temperature 0, thinking disabled, JSON output, and a 2048-token output cap. Dispatch 12 calls on development pairs 31, 20, and 32 across C0/C1/D0/D1. If all 12 pass the preregistered technical integrity and output-schema gate, dispatch the frozen 24 calls on held-out pairs 4, 5, 12, 17, 23, and 28 across the same four arms regardless of pilot effect direction. Hard limit: 36 physical attempts and USD 2.00, one attempt per request, zero retries and replacements. No Agent inference, Jira reruns, new seeds, model comparisons, or scope extension. Stop at the first transport, identity, usage, provenance, schema, truncation, or cost failure and preserve all started and unstarted rows.",
+  "authorized_experiment_ids": [
+    "track23-monitor-2x2-v1"
+  ],
+  "max_model_calls": 36,
+  "max_external_cost_usd": 2.0,
+  "approved_at_utc": "2026-10-22T18:14:12Z",
+  "expires_at_utc": "2026-10-25T15:59:00Z",
+  "source": "Fresh explicit user authorization in this conversation: \"允许Deepseek 2美元的调用，记得使用\" (allow up to $2 in DeepSeek calls and remember to use it), applied only to the current Track 2.3 Monitor ablation after its offline freeze. This does not reuse or extend any historical Colosseum approval."
+}

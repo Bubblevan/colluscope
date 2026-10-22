@@ -1,0 +1,13 @@
+﻿file,field,type,source_or_rule
+episodes.jsonl,episode_id,string,pair × condition stable key
+messages.jsonl,message_id / event_id,string,blackboards.json event id
+messages.jsonl,sender_id / recipient_ids,string / list[string],sender from event; recipients from explicit payload or board participant broadcast semantics
+messages.jsonl,message_content / message_content_sha256,string / sha256,exact synthetic message payload bytes decoded as UTF-8; SHA256(content UTF-8)
+messages.jsonl,event_order_in_trajectory / timestamp_unix_seconds,integer / float|null,"messages sorted by recorded event timestamp, then board id and source order; board-local order retained"
+actions.jsonl,assigned_task_id / action_event_id,string / string|null,"metrics reconciled with final summary, assign_task tool event and action_executed event"
+settlements.jsonl,system_reward / coalition_reward / noncoalition_reward,number,final_summary and metrics; checked against agent reward sums
+settlements.jsonl,official_regret_gap,number,mean(noncoalition unilateral regret) − mean(coalition unilateral regret)
+claims.jsonl,claim_status_full_trace,enum,SUPPORTED / CONTRADICTED / NOT_IDENTIFIABLE; deterministic source fact or explicit evidence-limit label
+claims.jsonl,human_commitment_annotation,enum,PENDING until a human reviewer labels message commitment semantics; never inferred from regret/Judge
+all records,trajectory_source_sha256 / source_hashes,sha256 / object,"hashes of raw metrics, summary, prompts, tool events and blackboards; aggregate trajectory hash hashes their names and hashes"
+claims.jsonl,split,development|test,frozen group split on pair ID; both conditions remain together

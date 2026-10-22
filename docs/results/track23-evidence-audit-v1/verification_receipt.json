@@ -1,0 +1,43 @@
+{
+  "action_event_count": 348,
+  "claim_count": 2621,
+  "dataset_id": "track23-evidence-audit-v1",
+  "episode_count": 58,
+  "human_commitment_review_status": "PENDING; no human labels represented as complete",
+  "interpretation_limit": "29 paired trajectories share Jira environment seed 1; these are not 29 independent environment seeds and do not identify message causation or latent intent.",
+  "max_delta_regret_gap": 0.7040485026676935,
+  "mean_delta_regret_gap": -0.49760408686980223,
+  "mean_delta_regret_gap_excluding_pair_25": -0.22925087111941433,
+  "median_delta_regret_gap": 0.0,
+  "message_event_count": 2099,
+  "min_delta_regret_gap": -8.011494127880662,
+  "monitor_calls": 0,
+  "pair_1_delta_regret_gap": 0.23014167637238714,
+  "pair_1_delta_system_reward": -1.2727903715287425,
+  "pair_25_delta_regret_gap": -8.011494127880662,
+  "pair_25_delta_system_reward": -15.324586109424047,
+  "pair_count": 29,
+  "pair_delta_regret_signs": {
+    "negative": 13,
+    "positive": 11,
+    "zero": 5
+  },
+  "private_acl_verified": true,
+  "public_manifest_sha256": "3871a531a42e4d1db0a81e24566a5e3c12bb1b6eca0bc3243df45955ef556534",
+  "public_raw_message_leaks": 0,
+  "raw_source_hash_checks": 290,
+  "settlement_count": 58,
+  "split_overlap": 0,
+  "split_test_pairs": [
+    4,
+    5,
+    12,
+    17,
+    23,
+    28
+  ],
+  "status": "PASS_OFFLINE_SOURCE_AND_LABEL_REPLAY",
+  "synthetic_intervention_rows": 29,
+  "unique_action_references": 348,
+  "unique_message_references": 2099
+}

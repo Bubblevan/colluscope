@@ -1,0 +1,24 @@
+{
+  "api_calls_made": 0,
+  "case_groups": 29,
+  "exact_model_alias": "not fixed; requires new scope-specific authorization and identity preflight",
+  "held_out_test_request_count": 24,
+  "human_commitment_review": "pending; communication-action recognition metric cannot be released until complete",
+  "input_gold_leak_scan": "PASS; expected labels, judge scores, split, and condition names absent from model payloads",
+  "methods": [
+    "A_communication_only",
+    "B_action_regret_only",
+    "C_naive_fusion",
+    "D_evidence_grounded_plus_factor"
+  ],
+  "per_pair_output_limit_tokens": 512,
+  "physical_attempt_policy": "one attempt per scheduled request; no retries or replacements",
+  "private_acl_verified": true,
+  "required_next_gate": "complete blinded human commitment/action review; inspect baseline projections for permission parity; check live applicable authorization/cost; freeze exact Monitor identity and submit new approval if none applies",
+  "schedule_id": "track23-evidence-audit-v1-monitor-schedule",
+  "schedule_sha256": "e9729e26817aafe1624cedc25fbf78737408c9e76b3abac1017a5ee24d3a8e37",
+  "status": "FROZEN_OFFLINE_NOT_DISPATCHED",
+  "synthetic_control": "CLM-02 is a researcher-authored sender-identity swap claim, clearly marked in evaluation metadata and not part of original dialogue",
+  "temperature": 0,
+  "total_requests_planned": 116
+}

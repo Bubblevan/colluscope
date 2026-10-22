@@ -1,0 +1,90 @@
+{
+  "schema_version": 1,
+  "experiment_id": "track23-monitor-2x2-v1",
+  "requests": [
+    {
+      "experiment_id": "track23-monitor-2x2-v1",
+      "attempt_id_sha256": "3f31269b6f9ea4bccc2bf565cf20f21b66818af6323a1d5f891d45d50f620293",
+      "started_at_utc": "2026-10-22T18:20:37Z",
+      "terminal_status": "VALID_RESPONSE",
+      "external_cost_usd": "0.00736056"
+    },
+    {
+      "experiment_id": "track23-monitor-2x2-v1",
+      "attempt_id_sha256": "261f7444520e105bae5854a9769f2afe89dbd2c211dca2906b498a500f766d20",
+      "started_at_utc": "2026-10-22T18:20:41Z",
+      "terminal_status": "VALID_RESPONSE",
+      "external_cost_usd": "0.007260624"
+    },
+    {
+      "experiment_id": "track23-monitor-2x2-v1",
+      "attempt_id_sha256": "0cb45950fd6e7b64719b4f47574a8b912b8e879b28df414a20694ba547ca72f8",
+      "started_at_utc": "2026-10-22T18:20:45Z",
+      "terminal_status": "VALID_RESPONSE",
+      "external_cost_usd": "0.00115476"
+    },
+    {
+      "experiment_id": "track23-monitor-2x2-v1",
+      "attempt_id_sha256": "e23612add95cbc5179b1c0b3c86cfee64358d6b6fe8bf429fe9bf67a62879d42",
+      "started_at_utc": "2026-10-22T18:20:49Z",
+      "terminal_status": "VALID_AFTER_REVIEW",
+      "external_cost_usd": "0.00158316"
+    },
+    {
+      "experiment_id": "track23-monitor-2x2-v1",
+      "attempt_id_sha256": "e4b5561d0b3ffc2b0b5a8cdfee8c0037c16b3ab01d971fbbb9b5f0e6821300da",
+      "started_at_utc": "2026-10-22T18:24:33Z",
+      "terminal_status": "VALID_RESPONSE",
+      "external_cost_usd": "0.00812574"
+    },
+    {
+      "experiment_id": "track23-monitor-2x2-v1",
+      "attempt_id_sha256": "2fc73e359702ebd7858d715835194380f6adb898919620c5baa117ea316a6236",
+      "started_at_utc": "2026-10-22T18:24:38Z",
+      "terminal_status": "VALID_RESPONSE",
+      "external_cost_usd": "0.007917396"
+    },
+    {
+      "experiment_id": "track23-monitor-2x2-v1",
+      "attempt_id_sha256": "bf87fe79415732ae70241c79f1ac3747158e5efcf05b0cec08791eba38b8afdc",
+      "started_at_utc": "2026-10-22T18:24:43Z",
+      "terminal_status": "VALID_RESPONSE",
+      "external_cost_usd": "0.001720116"
+    },
+    {
+      "experiment_id": "track23-monitor-2x2-v1",
+      "attempt_id_sha256": "cec5c530f77b313d734ed0cad1795ae32dde463c59755f70856029f6ec3742a6",
+      "started_at_utc": "2026-10-22T18:24:48Z",
+      "terminal_status": "VALID_RESPONSE",
+      "external_cost_usd": "0.001210644"
+    },
+    {
+      "experiment_id": "track23-monitor-2x2-v1",
+      "attempt_id_sha256": "97034ad298d3be27a177549a5dd012963e38a01e172affa3dbed51bf5c1b8648",
+      "started_at_utc": "2026-10-22T18:24:52Z",
+      "terminal_status": "VALID_RESPONSE",
+      "external_cost_usd": "0.0083298"
+    },
+    {
+      "experiment_id": "track23-monitor-2x2-v1",
+      "attempt_id_sha256": "8782eb6f6239926450830fe4cdd1c33df2759aa6e55418399e74d2758b9f6156",
+      "started_at_utc": "2026-10-22T18:24:57Z",
+      "terminal_status": "VALID_RESPONSE",
+      "external_cost_usd": "0.007662744"
+    },
+    {
+      "experiment_id": "track23-monitor-2x2-v1",
+      "attempt_id_sha256": "f4fdaa9195de20bf05aa585739e48d3148f192245a98f2305e25bbf249751be5",
+      "started_at_utc": "2026-10-22T18:25:00Z",
+      "terminal_status": "VALID_RESPONSE",
+      "external_cost_usd": "0.001017552"
+    },
+    {
+      "experiment_id": "track23-monitor-2x2-v1",
+      "attempt_id_sha256": "d27fbd02427aa206551657fac75c5c849b2e5de20f755e46545b4c3244443c3f",
+      "started_at_utc": "2026-10-22T18:25:03Z",
+      "terminal_status": "HTTP_200_INVALID_SCHEMA",
+      "external_cost_usd": "0.001508352"
+    }
+  ]
+}

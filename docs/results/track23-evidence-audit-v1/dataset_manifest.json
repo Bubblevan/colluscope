@@ -1,0 +1,85 @@
+{
+  "action_events": 348,
+  "all_monitor_calls_made": 0,
+  "assigned_pairs": 33,
+  "build_status": "OFFLINE_DATASET_BUILT; HUMAN_COMMITMENT_REVIEW_PENDING; NO_MONITOR_CALLS",
+  "claim_records": 2621,
+  "condition_episodes": 58,
+  "dataset_id": "track23-evidence-audit-v1",
+  "evidence_cutoff_date": "2026-10-23",
+  "figure_sha256": {
+    "evidence_audit_overview.png": "f707ea8522bd8c35285318eeae853d1af98ed3a70fd2a4a9906f1027b0c1d333",
+    "four_baseline_permissions.png": "e2b11bf6f0423e45f76047424a1fce6c1a6c46c9047f53fe36a8aa4776e8d94e",
+    "pair16_pair25_audit_cases.png": "bd1ec146c35dcc51432c940366a99f3f6f019c59dab8d29f5177e37274d22f19",
+    "regret_gap_change_distribution.png": "d53abdff034702320aa728fd447fa241176ab248d678f67a994e1a57906a8966",
+    "regret_gap_paired_scatter.png": "fb262d3aa2099556de7ad8ea99f5e003c94e8399e645dfd5f6c4b3d3fbe7a355",
+    "regret_vs_system_reward_change.png": "72317f8a0c1d8a56e5dd176a516607a11e51a8840080249cc36bb2587f330f7f"
+  },
+  "figures": [
+    "regret_gap_paired_scatter.png",
+    "regret_gap_change_distribution.png",
+    "regret_vs_system_reward_change.png",
+    "evidence_audit_overview.png",
+    "four_baseline_permissions.png",
+    "pair16_pair25_audit_cases.png"
+  ],
+  "held_out_test_pairs": [
+    4,
+    5,
+    12,
+    17,
+    23,
+    28
+  ],
+  "invalid_assigned_pairs_preserved": [
+    7,
+    9,
+    13,
+    18
+  ],
+  "known_public_development_pairs": [
+    1,
+    16,
+    25
+  ],
+  "label_source_policy": {
+    "causal_and_intent": "NOT_IDENTIFIABLE; no latent intent ground truth is asserted",
+    "deterministic_labels": "message provenance, assignment, reward and regret are reconciled to raw source files",
+    "human_labels": "semantic task commitments and commitment/action agreement remain PENDING in the review queue",
+    "replacement_judges": "kept outside gold labels and excluded from monitor input projections"
+  },
+  "manual_secret_message_review_rows": 245,
+  "message_events": 2099,
+  "monitor_evaluation_gate": "STOP_UNTIL_HUMAN_COMMITMENT_REVIEW_AND_METHOD_INPUT_AUDIT_PASS",
+  "private_acl": {
+    "acl_output_sha256": "8ba45f3553c327f25bf1b44547124e1338210082e597d4198900d8c3468b5a49",
+    "policy": "only the current Windows user has explicit full control; child files inherit this ACL",
+    "verified": true,
+    "verified_object_count": 9
+  },
+  "private_directory": "runs/sprint-monitor/track23-evidence-audit-v1/ (Git-ignored)",
+  "private_file_sha256": {
+    "actions.jsonl": "2cf3b60d4f40959456f01358a285d87bf408f93db0ee4547f7b807e7e1021de6",
+    "claims.jsonl": "92e0e8cf32e3efa66b2068e9cf32328df88ee1f8a569158e52dbcda2b35c4666",
+    "episodes.jsonl": "f0c8cf859554bca545786a14193523df24bf9cfd09747b9dd9de63dd2b1501e9",
+    "manual_commitment_review.csv": "aa359940940c1323a7c387395a7e685a4c083dc00af71c01adbb9a99fa6c595a",
+    "messages.jsonl": "2229f11ea5aefafcb5891cfec9fd2102fa4a5b74b95d6797e9df3a6070354a4b",
+    "privacy_receipt.json": "61256bd4b47c8a4c1ab42a7b797dda2bbfe4ba654443ae3345712b8169e463d3",
+    "settlements.jsonl": "2af482837eb47c5c8ea1411be156ee7e1308ffdc1ab56461dfaa37eb8bde33d9"
+  },
+  "public_file_sha256": {
+    "field_dictionary.csv": "e73af37d26fe0b036e23e461fb314d36bac3e0d397ffe35274d18283f01bfe0a",
+    "pair_behavior_metrics.csv": "b564116ef708d1a7291a8f3d46418c4e2b5a1ea5eb827985fece6068f43308c8",
+    "split_manifest.json": "51cbef3d9794c3ee63cb4449ec83fc6723fae651fb4796fdf6442637584a78a4"
+  },
+  "reproduction": "python scripts/build_track23_evidence_dataset_v1.py",
+  "same_environment_seed_for_all_pairs": true,
+  "schema_version": 1,
+  "script_sha256": "4a65f3a2afcf27f017c30d5f66effbb699cdbbf6ba2c03377ea903f46ae620fc",
+  "settlement_records": 58,
+  "source_analysis_sha256": "88f206214b3b8960fe15e1d3d2af021a7b82fafc9d088c49bb86b014ab56ab49",
+  "source_commit": "b077fe7e2f10566e92156cc12e06ffb2aac54790",
+  "source_experiment_id": "colosseum-deepseek-flash-staged-smoke-v3",
+  "stage_analysis_sha256": "22d1046e71f8329c6475226833efa3b0cfb13fb3515d72c75247aecd239ed4c5",
+  "valid_pairs": 29
+}

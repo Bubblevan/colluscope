@@ -1,0 +1,114 @@
+{
+  "actual_external_cost_usd": 0.054851448,
+  "actual_model_calls": 12,
+  "actual_wallclock_minutes": 1,
+  "approval_required_for_next_action": true,
+  "authorization_id": "DS-FLASH-TRACK23-MONITOR-2X2-36-20261023",
+  "authorization_required_for_next_action": "New registered scope and explicit user approval before any future Monitor API call.",
+  "belief_updates": [
+    {
+      "claim_id": "track23-monitor-2x2-v1",
+      "evidence_refs": [
+        {
+          "path": "docs/results/track23-monitor-2x2-v1/pilot_failure_analysis.md",
+          "sha256": "84675a495f786e66c4e7dae3e5560931b6885e1cc541e028cab33b5b664ec2ce"
+        },
+        {
+          "path": "docs/results/track23-monitor-2x2-v1/pilot_examples.md",
+          "sha256": "80143e5c7e5b6b832a450d19bb73313373b01fa9cc63d98ddb14dae05d7f3620"
+        },
+        {
+          "path": "docs/results/track23-monitor-2x2-v1/model_request_ledger.json",
+          "sha256": "4c82be18ac1ea3dc1d135faf364c583d7516fde642652311aa912ce6e5de3497"
+        },
+        {
+          "path": "docs/results/track23-monitor-2x2-v1/pilot_phase_summary_reconciled.json",
+          "sha256": "5d970959714fc19414b333b21f2421d5f668c37764a121f618a03d4fad384a2c"
+        }
+      ],
+      "outcome": "INCONCLUSIVE",
+      "remaining_alternatives": "A future corrected, newly preregistered audit may find no difference, improvement, or degradation. Current development examples do not discriminate these outcomes.",
+      "statement": "Whether structured evidence layout and a verification checklist improve claim-audit outcomes over flat fusion on the frozen held-out pairs remains unmeasured.",
+      "what_changed": "The development Pilot stopped at 11/12 valid outputs after one internally contradictory q7 answer; no held-out calls were made. The run exposed q7/q9 measurement-design risks and a cost-summary undercount, but no method-effect result."
+    }
+  ],
+  "closed_at_utc": "2026-10-22T18:31:39+00:00",
+  "closed_git_head": "33b28964a2bf85eeb85d89ef19a9fd5e6cf77faa",
+  "decision": "BLOCKED",
+  "denominator_summary": "Development pairs assigned/started: 3/3 (31, 20, 32); provider attempts 12/12; valid responses 11/12; invalid outputs 1/12; retries/replacements 0. Pair 31 had 4 valid, pair 20 had 4 valid, and pair 32 had 3 valid plus 1 invalid. Held-out pairs 4, 5, 12, 17, 23, 28 assigned: 6; requests started: 0/24. Original source dataset remains 29 valid Colosseum pairs; no raw trace or frozen label was changed.",
+  "evidence_class": "monitor_evaluation",
+  "experiment_id": "track23-monitor-2x2-v1",
+  "failures_retained": true,
+  "material_update": {
+    "claim_id": "track23-monitor-2x2-v1",
+    "evidence_refs": [
+      {
+        "path": "docs/results/track23-monitor-2x2-v1/pilot_failure_analysis.md",
+        "sha256": "84675a495f786e66c4e7dae3e5560931b6885e1cc541e028cab33b5b664ec2ce"
+      },
+      {
+        "path": "docs/results/track23-monitor-2x2-v1/model_request_ledger.json",
+        "sha256": "4c82be18ac1ea3dc1d135faf364c583d7516fde642652311aa912ce6e5de3497"
+      },
+      {
+        "path": "docs/results/track23-monitor-2x2-v1/pilot_phase_summary_reconciled.json",
+        "sha256": "5d970959714fc19414b333b21f2421d5f668c37764a121f618a03d4fad384a2c"
+      },
+      {
+        "path": "docs/RESEARCH_RISK_REGISTER_TRACK23_MONITOR_2X2_20261023.md",
+        "sha256": "4b9ba96a8469d110b665920d60925890109e6ca15914de6ee1e3ed1997e455b3"
+      }
+    ],
+    "independent_critic_confirmed": false,
+    "remaining_alternatives": "No held-out comparison exists. Future method effects remain unknown until a versioned protocol is corrected and separately approved.",
+    "what_changed": "The pilot failure, two claim-design risks, and a cost-accounting defect are documented; the primary efficacy belief is unchanged."
+  },
+  "model_request_ledger": {
+    "path": "docs/results/track23-monitor-2x2-v1/model_request_ledger.json",
+    "sha256": "4c82be18ac1ea3dc1d135faf364c583d7516fde642652311aa912ce6e5de3497"
+  },
+  "new_uncertainty_reduced": false,
+  "next_action": "Conduct a zero-call, versioned audit of q7 rounding, q9 instruction cue, contradictory-output policy, and cost aggregation while preserving v1 unchanged. Any later Monitor calls require a new registered scope and explicit approval.",
+  "next_action_evidence_class": "offline_reanalysis",
+  "next_action_kind": "continue_offline",
+  "next_action_max_external_cost_usd": 0.0,
+  "next_action_max_model_calls": 0,
+  "outcome_rationale": "The development Pilot did not meet its frozen 12/12 technical gate: 11 outputs were valid and pilot-32-D1 contained conflicting q7 status and rationale. The 24 frozen held-out requests were therefore not started and no method contrast was assessed. Zero-call review also found an unstated q7 rounding convention, a q9 instruction cue, and a cost summary undercount for the invalid response.",
+  "outputs": [
+    {
+      "path": "docs/results/track23-monitor-2x2-v1/pilot_failure_analysis.md",
+      "sha256": "84675a495f786e66c4e7dae3e5560931b6885e1cc541e028cab33b5b664ec2ce"
+    },
+    {
+      "path": "docs/results/track23-monitor-2x2-v1/pilot_examples.md",
+      "sha256": "80143e5c7e5b6b832a450d19bb73313373b01fa9cc63d98ddb14dae05d7f3620"
+    },
+    {
+      "path": "docs/results/track23-monitor-2x2-v1/model_request_ledger.json",
+      "sha256": "4c82be18ac1ea3dc1d135faf364c583d7516fde642652311aa912ce6e5de3497"
+    },
+    {
+      "path": "docs/results/track23-monitor-2x2-v1/pilot_phase_summary_reconciled.json",
+      "sha256": "5d970959714fc19414b333b21f2421d5f668c37764a121f618a03d4fad384a2c"
+    },
+    {
+      "path": "docs/ITERATION_LOG_TRACK23_MONITOR_2X2_20261023.md",
+      "sha256": "ed565f8ec70a7e6282467aca5a220ce680417e9dd3b152511f7c47709f570874"
+    },
+    {
+      "path": "docs/RESEARCH_RISK_REGISTER_TRACK23_MONITOR_2X2_20261023.md",
+      "sha256": "4b9ba96a8469d110b665920d60925890109e6ca15914de6ee1e3ed1997e455b3"
+    },
+    {
+      "path": "research/experiments/track23-monitor-2x2-v1/execution_amendment.json",
+      "sha256": "0bb8d11e3abfc42e6d5cf689602f6c9a98e482d442a17a1722836c1b81d62230"
+    }
+  ],
+  "results_summary": "12 DeepSeek provider calls were made with no retries. Eleven responses were valid after the recorded exact-echo parser correction; one Pair 32 D1 response is invalid for scoring because q7 status contradicts its reason and status_note. Returned model alias/fingerprint were stable; all calls returned HTTP 200 with usage. Reconciled peak-rate cost estimate was USD 0.054851448. No efficacy score or held-out result is reported.",
+  "review_artifact": null,
+  "review_finding": "Self-review found no basis for an efficacy estimate: the 12/12 gate failed, the held-out set is untouched, q7 has an implicit rounding convention, q9 is cued by shared instructions, and the run summary omitted the cost of its invalid final response. The original response and summaries are preserved; the reconciled ledger includes every call. No independent critic reviewed this closure.",
+  "review_mode": "adversarial_self_review",
+  "schema_version": 2,
+  "scientific_outcome": "EXECUTION_BLOCKED",
+  "scientific_update": "No scientific belief about the structured-audit hypothesis changes: the held-out comparison was not run. The pilot provides operational failure evidence and exposes q7 precision, q9 cueing, and cost accounting risks."
+}
